@@ -1,0 +1,1339 @@
+{
+  "generated_at": "2026-10-14T21:09:13.896705",
+  "total_overrides_applied": 109,
+  "dropped_from_call_list_count": 109,
+  "dropped_leads": [
+    {
+      "parcel_id": "DCAD-PARCEL-00000660934000000",
+      "address": "11909 Preston Rd",
+      "stored_date": "1978-04-03",
+      "stored_permit_no": "7800140376",
+      "newer_date": "2026-07-07",
+      "newer_permit_no": "COM-ROOF-26-000178",
+      "description": "Commercial Roofing Permit: Remove existing roof down to metal deck. Install 2 layers of rigid insulation achieving R25 insulation and 1/2\" gypsum coverboard and new built up roofing.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-000519000A0020000",
+      "address": "1807 ROSS AVE",
+      "stored_date": "1981-09-16",
+      "stored_permit_no": "8100053609",
+      "newer_date": "2021-10-29",
+      "newer_permit_no": "2110291108_168545828-001",
+      "description": "Commercial Alteration Addition Permit: Commercial Remodel:Clean and repair exisiting roof system with NO alterations to it.Recover exisiting roof system with Polyflex Torch Modified Bitumen with white ceramic granule surfacing roof system.",
+      "source": "DALLASNOW_ALTERATIONS"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000520723000000",
+      "address": "10422 HARRY HINES BLVD",
+      "stored_date": "1985-02-19",
+      "stored_permit_no": "8502191161",
+      "newer_date": "2026-09-30",
+      "newer_permit_no": "COM-ROOF-26-000294",
+      "description": "Commercial Roofing Permit: SWEEP GRAVEL, INSTALL 1\" ISO COVER BOARD OVER ENTIRE ROOF AREA, INSTALL 60 MIL TPO OVERLAY",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000537286000000",
+      "address": "4756 S BUCKNER BLVD",
+      "stored_date": "1995-04-21",
+      "stored_permit_no": "9504212005",
+      "newer_date": "2024-06-11",
+      "newer_permit_no": "2406111165_190057177-002",
+      "description": "Commercial Roofing Permit: RE-ROOF NO STRUCTURAL CHANGES",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000767319000000",
+      "address": "12750 MERIT DR",
+      "stored_date": "1996-04-17",
+      "stored_permit_no": "9604171011",
+      "newer_date": "2025-10-15",
+      "newer_permit_no": "COM-ROOF-25-000149",
+      "description": "Commercial Roofing Permit: Remove/install 110 sq's total with waste 60 mil TPO roofing systemTear off Existing roof layers down to concrete deckinstall 1/2 cover board, insulation/r-25 fully adhered with part a&b adhesiveadd new coping cap, new drain assemblies, and flashing detailsinstall taper ISO with crickets to move water to drainsremove/replace entire section of TPO above elevator roofaccess upper roof areas with service elevators and take trash down to dumpsterstage materials on roof and roof load by service elevatorsuse service elevator to remove all roof debrisremove existing wall flashing and take new TPO up and over wall-terminate of backside for double layer protection and apply TPO glue to wallsincluding 100LF of fully adhered walk pads around maintenance areas",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000122440000000",
+      "address": "4101 BRYAN ST",
+      "stored_date": "1996-08-14",
+      "stored_permit_no": "9608145013",
+      "newer_date": "2024-07-01",
+      "newer_permit_no": "2407015004_190413085-001",
+      "description": "Commercial Roofing Permit: ROOF REPLACEMENT - 6400 SF TEAR OFF EXISTING ROOF DOWN TO EXISTING DECK. INSTALL R-25 VALUE POLYISOCYANURATE (ISO) INSULATION SYSTEM. INSTALL ONE LAYER OF SMOOTH SELF ADHERING MODIFIED BASE SHEET. INSTALL WHITE GRANULATED MODIFIED BITUMEN CAP SHEET OVER SA BASE- NO STRUCTURAL CHANGES - BLDG IS OCCUPIED",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000601462100000",
+      "address": "10741 KING WILLIAM DR",
+      "stored_date": "1997-02-14",
+      "stored_permit_no": "9702141081",
+      "newer_date": "2025-11-13",
+      "newer_permit_no": "COM-ROOF-25-000176",
+      "description": "Commercial Roofing Permit: Tear off existing roof and install new insulation cover board and TPO roof.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000618851000000",
+      "address": "220 W CAMP WISDOM RD",
+      "stored_date": "1997-04-08",
+      "stored_permit_no": "9704081056",
+      "newer_date": "2025-10-09",
+      "newer_permit_no": "COM-ROOF-25-000143",
+      "description": "Commercial Roofing Permit: Tear off entire roof of the office, install new shingles on the office roof",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000820319300000",
+      "address": "13340 AUDELIA RD",
+      "stored_date": "1997-05-16",
+      "stored_permit_no": "9705161056",
+      "newer_date": "2024-09-26",
+      "newer_permit_no": "2409261008_193410949-002",
+      "description": "Commercial Roofing Permit: REROOF OVERLAY",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000751010030000",
+      "address": "7340 S HAMPTON RD",
+      "stored_date": "1997-05-20",
+      "stored_permit_no": "9705204003",
+      "newer_date": "2025-07-21",
+      "newer_permit_no": "COM-ROOF-25-000065",
+      "description": "Commercial Roofing Permit: Complete re-roof, shingles only",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00614200000030000",
+      "address": "10400 HARRY HINES BLVD",
+      "stored_date": "1999-06-09",
+      "stored_permit_no": "9906092009",
+      "newer_date": "2026-09-30",
+      "newer_permit_no": "COM-ROOF-26-000294",
+      "description": "Commercial Roofing Permit: SWEEP GRAVEL, INSTALL 1\" ISO COVER BOARD OVER ENTIRE ROOF AREA, INSTALL 60 MIL TPO OVERLAY",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000787139300000",
+      "address": "11500 Hillguard Rd",
+      "stored_date": "2000-04-24",
+      "stored_permit_no": "4241013",
+      "newer_date": "2024-08-29",
+      "newer_permit_no": "2408295005_192919532-001",
+      "description": "Commercial Roofing Permit: ROOF RECOVER - 117,300 SF - SWEEP ROOF FREE OF GRAVEL, DIRT AND DEBRIS. OVER PREPARED ROOF SURFACE, MECHANICALLY FASTEN A WHITE JM 115 MIL FLEECEBACK TO ENTIRE ROOF SURFACE. INSTALL NEW TPO CLAD GALVANIZED OVERFLOW SCUPPERS. INSTALL NEW METAL COPING CAP ON TOPOF THE PARAPET WALL - NO STRUCTURAL CHANGES; BLDG IS OCCUPIED",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000100144000000",
+      "address": "1701 N MARKET ST",
+      "stored_date": "2003-06-17",
+      "stored_permit_no": "306171077",
+      "newer_date": "2025-03-12",
+      "newer_permit_no": "2503125004_198932311-001",
+      "description": "Commercial Roofing Permit: ROOF REPLACEMENT - 10000 SF- REMOVE EXISTING ROOF DOWN TO EXISTING CONCRETE DECK. ADHERE NEW ENERGY CODE ISO. FULLY ADHERE PVC MEMBRAND NO STRUCTURAL CHANGES BLDG IS OCCUPIED",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-008207000001A0000",
+      "address": "17101 PRESTON RD",
+      "stored_date": "2003-10-01",
+      "stored_permit_no": "310011062",
+      "newer_date": "2026-07-07",
+      "newer_permit_no": "COM-ROOF-26-000178",
+      "description": "Commercial Roofing Permit: Remove existing roof down to metal deck. Install 2 layers of rigid insulation achieving R25 insulation and 1/2\" gypsum coverboard and new built up roofing.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000001707996",
+      "address": "18333 PRESTON RD",
+      "stored_date": "2004-01-14",
+      "stored_permit_no": "401145003",
+      "newer_date": "2026-07-07",
+      "newer_permit_no": "COM-ROOF-26-000178",
+      "description": "Commercial Roofing Permit: Remove existing roof down to metal deck. Install 2 layers of rigid insulation achieving R25 insulation and 1/2\" gypsum coverboard and new built up roofing.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000000212317",
+      "address": "18806 PRESTON RD",
+      "stored_date": "2004-03-09",
+      "stored_permit_no": "403091116",
+      "newer_date": "2026-07-07",
+      "newer_permit_no": "COM-ROOF-26-000178",
+      "description": "Commercial Roofing Permit: Remove existing roof down to metal deck. Install 2 layers of rigid insulation achieving R25 insulation and 1/2\" gypsum coverboard and new built up roofing.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00819000110010000",
+      "address": "16000 Preston Rd",
+      "stored_date": "2004-06-09",
+      "stored_permit_no": "406092014",
+      "newer_date": "2026-07-07",
+      "newer_permit_no": "COM-ROOF-26-000178",
+      "description": "Commercial Roofing Permit: Remove existing roof down to metal deck. Install 2 layers of rigid insulation achieving R25 insulation and 1/2\" gypsum coverboard and new built up roofing.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000734837000000",
+      "address": "12800 Hillcrest Rd",
+      "stored_date": "2005-01-07",
+      "stored_permit_no": "501071045",
+      "newer_date": "2024-05-14",
+      "newer_permit_no": "2405141078_189574304-002",
+      "description": "Commercial Roofing Permit: RE-ROOF NO STRUCTURAL CHANGES",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-000316000007A0000",
+      "address": "2323 BRYAN ST",
+      "stored_date": "2005-09-30",
+      "stored_permit_no": "509301092",
+      "newer_date": "2026-08-13",
+      "newer_permit_no": "COM-ROOF-26-000211",
+      "description": "Commercial Roofing Permit: Remove and dispose of the existing Skybridge roof down to the existing metal deck substrate for approximately [2300] square feet. a. KPost will provide a dumpster for the existing roof tear-off disposal.  2. Furnish and install two [2] layers of 2.2\u201d  Polyisocyanurate mechanically attached onto the existing cleaned metal deck. 3. Fully adhere a 60 mil Carlisle TPO membrane on top of the newly installed two layers of 2.2\u201d  Polyisocyanurate. 4. Provide and flash wall and curb assemblies with Carlisle TPO membrane.  5. Provide and install new penetration flashings. Penetration flashing type shall be determined by the type of penetration and the duration of the roof warranty.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000600559000000",
+      "address": "10717 HARRY HINES BLVD",
+      "stored_date": "2008-08-08",
+      "stored_permit_no": "808082005",
+      "newer_date": "2026-09-30",
+      "newer_permit_no": "COM-ROOF-26-000294",
+      "description": "Commercial Roofing Permit: SWEEP GRAVEL, INSTALL 1\" ISO COVER BOARD OVER ENTIRE ROOF AREA, INSTALL 60 MIL TPO OVERLAY",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000604672000000",
+      "address": "11390 HARRY HINES BLVD",
+      "stored_date": "2009-01-14",
+      "stored_permit_no": "901145011",
+      "newer_date": "2026-09-30",
+      "newer_permit_no": "COM-ROOF-26-000294",
+      "description": "Commercial Roofing Permit: SWEEP GRAVEL, INSTALL 1\" ISO COVER BOARD OVER ENTIRE ROOF AREA, INSTALL 60 MIL TPO OVERLAY",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000779221000000",
+      "address": "9029 DIRECTORS ROW",
+      "stored_date": "2009-04-02",
+      "stored_permit_no": "904021109",
+      "newer_date": "2026-08-17",
+      "newer_permit_no": "COM-ROOF-26-000214",
+      "description": "Commercial Roofing Permit: Remove existing wet or damaged concrete during membrane removal and fill voids with new material to match existingCut and remove the existing membrane and dispose of off-site. Existing concrete decking will be removed as determined to be deficient during membrane removal. Install new 60 mil FleeceBack TPO membrane roofing system, fully adhered to concrete deck with low-rise adhesive or manufacturer requirements.Remove flashing and seals around roof penetrations entirely and replace with new penetration seals Remove existing termination bars and counter flashings. Install new termination bars at base of wall flashingsRemove all waterproofing membrane wall flashings along perimeter walls. Remove and replace metal coping cap flashings or edge terminations and associated flashings (including existing cleats). Inspect and replace wood blocking identified to be deficient. Provide new waterproofing membrane flashings, fully adhered to wall, and wrap over the exterior side of the wood nailer, 1\u201d-2\u201d below the bottom edge. Provide new parapet metal terminationsExisting membrane flashings at all roof to wall transitions, equipment curbs, smoke hatches, skylights, etc. completely removed. Inspect insulation and seals and replace as required. Clean existing membrane surfaces and adhere new TPO base flashings.Edge metal will be removed entirely and replaced with new TPO clad edge metal, fastenedRemove existing gutter, downspouts, gravel stop/edge metal, and accessories. Provide new gutter, downspouts, edge metal and accessoriesRemove existing scuppers and face plates. Provide new TPO-clad metal scuppers and face plates to match existing, install new TPO flashings, heat welded to scupperRemove downspouts and leaders. Provide new downspouts and leaders to match existing. Provide new prefinished or paint to match existing",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000604648000000",
+      "address": "11444 HARRY HINES BLVD",
+      "stored_date": "2009-04-22",
+      "stored_permit_no": "904222005",
+      "newer_date": "2026-09-30",
+      "newer_permit_no": "COM-ROOF-26-000294",
+      "description": "Commercial Roofing Permit: SWEEP GRAVEL, INSTALL 1\" ISO COVER BOARD OVER ENTIRE ROOF AREA, INSTALL 60 MIL TPO OVERLAY",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000663085000000",
+      "address": "5350 ALPHA RD",
+      "stored_date": "2010-05-12",
+      "stored_permit_no": "1005121098",
+      "newer_date": "2026-05-13",
+      "newer_permit_no": "COM-ROOF-26-000122",
+      "description": "Commercial Roofing Permit: Re-Roof - Removal of exiting standing seam panels & top roofing membrane, replacing non-nailable decking, installing 26ga Metallic gray standing seam panels, installing new .60Mil TPO membrane & 2.2\" ISO boards Main building only, does not include carport area",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000810968000000",
+      "address": "11835 GREENVILLE AVE",
+      "stored_date": "2010-06-01",
+      "stored_permit_no": "1006016024",
+      "newer_date": "2025-12-02",
+      "newer_permit_no": "COM-ROOF-25-000185",
+      "description": "Commercial Roofing Permit: Building 1: Remove the existing TPO membrane as needed to replace insulation. Replace approximately 2,690 SF of wetted insulation found during the moisture survey with an average thickness of 4 inches, and install new Poly ISO as needed to fill.Install a 0.5 inch EPS fanfold cover board over the entire roof surface, which ensures a protective surface for the new membrane while adding additional insulation.Install new flashings on all penetrations.Install new 24-gauge drip edge along eaves. Detach and reset the existing parapet coping metal with the new termination bar.Adhere the new TPO to the front parapet wall.Install new 60-mil TPO membrane mechanically attached per manufacturer's specifications.Building 2:Clean the existing modified bitumen roof system of loose debris.Replace approximately 469 SF of wetted insulation found during the moisture survey with an average thickness of 2 inches.Install a 0.5\u201d EPS fanfold cover board over the entire roof surface, which ensures a protective surface for the new membrane while adding additional insulation.Install new flashings on all penetrations.Install new 24-gauge drip edge along eaves. Install tapered insulation 8 feet out from the front parapet wall to promote positive drainage.Remove XL abandoned satellite dish and dispose.Replace existing parapet coping metal due to poor condition - pre-finished.Install new 60-mil TPO membrane mechanically attached per manufacturer's specifications.Building 3:Clean the existing modified bitumen roof system of loose debris.Replace approximately 289 SF of wetted insulation found during the moisture survey with an average thickness of 2 inches, and install new Poly ISO insulation as needed to fillInstall a 0.5\u201d EPS fanfold cover board over the entire roof surface, which ensures a protective surface for the new membrane while adding additional insulation.Install new flashings on all penetrations.Install new 24-gauge drip edge along eaves. Replace existing parapet coping metal due to poor condition - pre-finished.Install new 60-mil TPO membrane mechanically attached per manufacturer's specifications.This scope does not include removing the roof to the deck - it is an overlay. The deck/substrate will not be removed during the overlay process, we are only removing and replacing specific areas of insulation that are saturated with moisture, as required by the manufacturer.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000259936000000",
+      "address": "1300 W DAVIS ST",
+      "stored_date": "2010-07-27",
+      "stored_permit_no": "1007271019",
+      "newer_date": "2024-02-09",
+      "newer_permit_no": "2402095004_187582117-001",
+      "description": "Commercial Roofing Permit: COMMERCIAL ROOF REPLACEMENT",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000600769000000",
+      "address": "10605 HARRY HINES BLVD",
+      "stored_date": "2010-11-11",
+      "stored_permit_no": "1011111001",
+      "newer_date": "2026-09-30",
+      "newer_permit_no": "COM-ROOF-26-000294",
+      "description": "Commercial Roofing Permit: SWEEP GRAVEL, INSTALL 1\" ISO COVER BOARD OVER ENTIRE ROOF AREA, INSTALL 60 MIL TPO OVERLAY",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000671077000000",
+      "address": "10464 E NORTHWEST HWY",
+      "stored_date": "2010-12-29",
+      "stored_permit_no": "1012296005",
+      "newer_date": "2026-02-18",
+      "newer_permit_no": "COM-ROOF-26-000026",
+      "description": "Commercial Roofing Permit: RE-ROOF ON PROPERTY AS PER INSURANCE. METAL ROOF AS EXISITING",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000373105000000",
+      "address": "9040 GARLAND RD",
+      "stored_date": "2011-01-11",
+      "stored_permit_no": "1101111025",
+      "newer_date": "2026-03-31",
+      "newer_permit_no": "COM-ROOF-26-000087",
+      "description": "Commercial Roofing Permit: No structural changes are being made to existing structure.Install 1/2'' high density iso board over entire existing roof with plates and screwsInstall new perimeter metal and cover with TPO cover tape.fully adhere 60 mill TPO over entire ISO board and use screws plates on seams and weld tight.haul off job related debris.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000767508200000",
+      "address": "11613 N CENTRAL EXPY",
+      "stored_date": "2011-06-02",
+      "stored_permit_no": "1106015010",
+      "newer_date": "2026-05-19",
+      "newer_permit_no": "COM-ROOF-26-000123",
+      "description": "Commercial Roofing Permit: Remove and replace existing shingle roofing system with like-kind and comparable materials, including underlayment, flashing, fascia, gutters, and associated drywall repairs as needed. No structural modifications are included in this scope of work.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000609034000000",
+      "address": "11010 GRISSOM LN",
+      "stored_date": "2011-08-11",
+      "stored_permit_no": "1108116016",
+      "newer_date": "2026-03-12",
+      "newer_permit_no": "COM-ROOF-26-000072",
+      "description": "Commercial Roofing Permit: No tear off of structural change will be made. We are laying over the existing roof systems, with new 60 mil mechanically TPO",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00638300070070000",
+      "address": "11611 PRESTON RD",
+      "stored_date": "2011-08-18",
+      "stored_permit_no": "1108181028",
+      "newer_date": "2026-07-07",
+      "newer_permit_no": "COM-ROOF-26-000178",
+      "description": "Commercial Roofing Permit: Remove existing roof down to metal deck. Install 2 layers of rigid insulation achieving R25 insulation and 1/2\" gypsum coverboard and new built up roofing.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-007745000A02A0000",
+      "address": "11632 N CENTRAL EXPY",
+      "stored_date": "2011-09-07",
+      "stored_permit_no": "1109071034",
+      "newer_date": "2026-05-19",
+      "newer_permit_no": "COM-ROOF-26-000123",
+      "description": "Commercial Roofing Permit: Remove and replace existing shingle roofing system with like-kind and comparable materials, including underlayment, flashing, fascia, gutters, and associated drywall repairs as needed. No structural modifications are included in this scope of work.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000778556050000",
+      "address": "8220 ELMBROOK DR",
+      "stored_date": "2011-09-23",
+      "stored_permit_no": "1109236008",
+      "newer_date": "2025-10-24",
+      "newer_permit_no": "COM-ROOF-25-000164",
+      "description": "Commercial Roofing Permit: Remove PVC membrane and install 3\" insulation board and install new 60 mil TPO roof membrane.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000778597000000",
+      "address": "904 REGAL ROW",
+      "stored_date": "2011-10-19",
+      "stored_permit_no": "1110191085",
+      "newer_date": "2024-08-22",
+      "newer_permit_no": "2408221057_192772495-002",
+      "description": "Commercial Roofing Permit: ROOF RECOVER",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000001680951",
+      "address": "17732 PRESTON RD",
+      "stored_date": "2011-11-09",
+      "stored_permit_no": "1111091125",
+      "newer_date": "2026-07-07",
+      "newer_permit_no": "COM-ROOF-26-000178",
+      "description": "Commercial Roofing Permit: Remove existing roof down to metal deck. Install 2 layers of rigid insulation achieving R25 insulation and 1/2\" gypsum coverboard and new built up roofing.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000002009168",
+      "address": "17606 PRESTON RD",
+      "stored_date": "2011-12-22",
+      "stored_permit_no": "1112221122",
+      "newer_date": "2026-07-07",
+      "newer_permit_no": "COM-ROOF-26-000178",
+      "description": "Commercial Roofing Permit: Remove existing roof down to metal deck. Install 2 layers of rigid insulation achieving R25 insulation and 1/2\" gypsum coverboard and new built up roofing.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000000203309",
+      "address": "17602 PRESTON RD",
+      "stored_date": "2012-01-05",
+      "stored_permit_no": "1201051063",
+      "newer_date": "2026-07-07",
+      "newer_permit_no": "COM-ROOF-26-000178",
+      "description": "Commercial Roofing Permit: Remove existing roof down to metal deck. Install 2 layers of rigid insulation achieving R25 insulation and 1/2\" gypsum coverboard and new built up roofing.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-DEN-000000215438",
+      "address": "18078 MARSH LN",
+      "stored_date": "2012-03-05",
+      "stored_permit_no": "1203056027",
+      "newer_date": "2025-12-08",
+      "newer_permit_no": "COM-ROOF-25-000190",
+      "description": "Commercial Roofing Permit: Commercial reroof",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000597842200000",
+      "address": "10031 MONROE DR",
+      "stored_date": "2012-03-06",
+      "stored_permit_no": "1203066011",
+      "newer_date": "2020-05-13",
+      "newer_permit_no": "2005131040_157613889-002",
+      "description": "Commercial Roofing Permit: Commercial Renovation: Reroof project; we are tearing off the existing roof and replacing it with a new one.No other changes are being made.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-0065090K000020000",
+      "address": "10969 SHADY TRL",
+      "stored_date": "2012-04-26",
+      "stored_permit_no": "1204256061",
+      "newer_date": "2025-12-17",
+      "newer_permit_no": "COM-ROOF-25-000207",
+      "description": "Commercial Roofing Permit: Existing stone to be removed from rooftop by way of industrial vacuum services. Access will be required next to building for vac truck to access site.Furnish and install 1 new layer of 1\u201d polyisocyanurate insulation, mechanically fastened through existing roof to the deck using #15 fasteners and induction weld plates.Furnish and install new 60 mil induction welded TPO roof system.Furnish and install 24-gauge galvanized counterflashing at rise walls.Furnish and install new TPO clad metal edge at existing gutter locations.Furnish and install new 24-gauge pre-finished metal edge at existing metal edge location without gutter.Furnish and install new 24-gauge pre-finished sheet metal coping at existing parapet walls.Furnish and install new 24-gauge pre-finished sheet metal gutter and downspouts at existing locations.Flash all curbs and penetrations per manufacturer\u2019s specifications.Furnish and install new TPO walk-pad at service side of mechanical curbs and roof access point.Upon completion of the roof project remove, all job-related materials and debris.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000787139550000",
+      "address": "11440 Hillguard Rd",
+      "stored_date": "2012-06-08",
+      "stored_permit_no": "1206081086",
+      "newer_date": "2024-08-29",
+      "newer_permit_no": "2408295005_192919532-001",
+      "description": "Commercial Roofing Permit: ROOF RECOVER - 117,300 SF - SWEEP ROOF FREE OF GRAVEL, DIRT AND DEBRIS. OVER PREPARED ROOF SURFACE, MECHANICALLY FASTEN A WHITE JM 115 MIL FLEECEBACK TO ENTIRE ROOF SURFACE. INSTALL NEW TPO CLAD GALVANIZED OVERFLOW SCUPPERS. INSTALL NEW METAL COPING CAP ON TOPOF THE PARAPET WALL - NO STRUCTURAL CHANGES; BLDG IS OCCUPIED",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-0072930C0002B0000",
+      "address": "10325 N CENTRAL EXPY",
+      "stored_date": "2012-09-13",
+      "stored_permit_no": "1209101210",
+      "newer_date": "2026-05-19",
+      "newer_permit_no": "COM-ROOF-26-000123",
+      "description": "Commercial Roofing Permit: Remove and replace existing shingle roofing system with like-kind and comparable materials, including underlayment, flashing, fascia, gutters, and associated drywall repairs as needed. No structural modifications are included in this scope of work.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-007731000A0030000",
+      "address": "12271 Coit Rd",
+      "stored_date": "2012-10-10",
+      "stored_permit_no": "1210091130",
+      "newer_date": "2025-09-23",
+      "newer_permit_no": "COM-ROOF-25-000131",
+      "description": "Commercial Roofing Permit: Cut and remove existing PVC Roof Membrane. Core cuts will be performed to identify potential areas of wet insulation. Remove existing wall flashings to a workable surface and dispose of debris. Remove existing perimeter metal edge and dispose of debris. Install a layer of 1/2\" HD ISO roof board. This layer of roof board will be mechanically attached to the prepared substrate utilizing FM Global (FM) approved fasteners and induction welding plates. Install new roof membrane.Install the new TPO membrane over the prepared surface. Secure the membrane in place by welding it to the platesutilizing induction methodology. The thermoplastic membrane seams will be overlapped a minimum of 5\", then hot air welded together. Weld width shall be a minimum of 1.5\" in width for automatic machine welding. Weld width shall be 2\" in width for hand welding. Upon completion of welding, each seam shall be probed to ensure proper securement. Install new wall flashings. Install new perimeter metal edge.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00729100000070000",
+      "address": "10670 N CENTRAL EXPY",
+      "stored_date": "2012-10-17",
+      "stored_permit_no": "1210171053",
+      "newer_date": "2026-05-19",
+      "newer_permit_no": "COM-ROOF-26-000123",
+      "description": "Commercial Roofing Permit: Remove and replace existing shingle roofing system with like-kind and comparable materials, including underlayment, flashing, fascia, gutters, and associated drywall repairs as needed. No structural modifications are included in this scope of work.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-007291000008A0000",
+      "address": "10740 N CENTRAL EXPY",
+      "stored_date": "2012-10-31",
+      "stored_permit_no": "1210311119",
+      "newer_date": "2026-05-19",
+      "newer_permit_no": "COM-ROOF-26-000123",
+      "description": "Commercial Roofing Permit: Remove and replace existing shingle roofing system with like-kind and comparable materials, including underlayment, flashing, fascia, gutters, and associated drywall repairs as needed. No structural modifications are included in this scope of work.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000787032250300",
+      "address": "10904 SANDEN DR",
+      "stored_date": "2012-11-08",
+      "stored_permit_no": "1211081048",
+      "newer_date": "2025-01-14",
+      "newer_permit_no": "2501141038_195140839-002",
+      "description": "Commercial Roofing Permit: REROOF ONLY - NO LAYOUT CHANGES NO PLAN REVIEW REQUIRED",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-0072890C0002A0000",
+      "address": "10455 N Central Expy",
+      "stored_date": "2012-11-09",
+      "stored_permit_no": "1211096018",
+      "newer_date": "2026-05-19",
+      "newer_permit_no": "COM-ROOF-26-000123",
+      "description": "Commercial Roofing Permit: Remove and replace existing shingle roofing system with like-kind and comparable materials, including underlayment, flashing, fascia, gutters, and associated drywall repairs as needed. No structural modifications are included in this scope of work.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-005201001018A0000",
+      "address": "6881 GREENVILLE AVE",
+      "stored_date": "2012-11-20",
+      "stored_permit_no": "1211206002",
+      "newer_date": "2024-05-28",
+      "newer_permit_no": "2405281119_189596674-002",
+      "description": "Commercial Roofing Permit: REROOF",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000706088000000",
+      "address": "11107 N CENTRAL EXPY",
+      "stored_date": "2012-11-28",
+      "stored_permit_no": "1211281025",
+      "newer_date": "2026-05-19",
+      "newer_permit_no": "COM-ROOF-26-000123",
+      "description": "Commercial Roofing Permit: Remove and replace existing shingle roofing system with like-kind and comparable materials, including underlayment, flashing, fascia, gutters, and associated drywall repairs as needed. No structural modifications are included in this scope of work.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000002084381",
+      "address": "18170 HILLCREST RD",
+      "stored_date": "2012-12-12",
+      "stored_permit_no": "1212121094",
+      "newer_date": "2024-05-14",
+      "newer_permit_no": "2405141078_189574304-002",
+      "description": "Commercial Roofing Permit: RE-ROOF NO STRUCTURAL CHANGES",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000367935001200",
+      "address": "8200 WALNUT HILL LN",
+      "stored_date": "2013-03-26",
+      "stored_permit_no": "1303261005",
+      "newer_date": "2024-11-04",
+      "newer_permit_no": "2411041003_194072475-001",
+      "description": "Commercial Alteration Addition Permit: Roof areas 11 -13: roofing re-cover Roof areas 26 and 34: full tear-off reroof",
+      "source": "DALLASNOW_ALTERATIONS"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-008411000005A0000",
+      "address": "11910 GREENVILLE AVE",
+      "stored_date": "2013-04-24",
+      "stored_permit_no": "1304246031",
+      "newer_date": "2025-12-02",
+      "newer_permit_no": "COM-ROOF-25-000185",
+      "description": "Commercial Roofing Permit: Building 1: Remove the existing TPO membrane as needed to replace insulation. Replace approximately 2,690 SF of wetted insulation found during the moisture survey with an average thickness of 4 inches, and install new Poly ISO as needed to fill.Install a 0.5 inch EPS fanfold cover board over the entire roof surface, which ensures a protective surface for the new membrane while adding additional insulation.Install new flashings on all penetrations.Install new 24-gauge drip edge along eaves. Detach and reset the existing parapet coping metal with the new termination bar.Adhere the new TPO to the front parapet wall.Install new 60-mil TPO membrane mechanically attached per manufacturer's specifications.Building 2:Clean the existing modified bitumen roof system of loose debris.Replace approximately 469 SF of wetted insulation found during the moisture survey with an average thickness of 2 inches.Install a 0.5\u201d EPS fanfold cover board over the entire roof surface, which ensures a protective surface for the new membrane while adding additional insulation.Install new flashings on all penetrations.Install new 24-gauge drip edge along eaves. Install tapered insulation 8 feet out from the front parapet wall to promote positive drainage.Remove XL abandoned satellite dish and dispose.Replace existing parapet coping metal due to poor condition - pre-finished.Install new 60-mil TPO membrane mechanically attached per manufacturer's specifications.Building 3:Clean the existing modified bitumen roof system of loose debris.Replace approximately 289 SF of wetted insulation found during the moisture survey with an average thickness of 2 inches, and install new Poly ISO insulation as needed to fillInstall a 0.5\u201d EPS fanfold cover board over the entire roof surface, which ensures a protective surface for the new membrane while adding additional insulation.Install new flashings on all penetrations.Install new 24-gauge drip edge along eaves. Replace existing parapet coping metal due to poor condition - pre-finished.Install new 60-mil TPO membrane mechanically attached per manufacturer's specifications.This scope does not include removing the roof to the deck - it is an overlay. The deck/substrate will not be removed during the overlay process, we are only removing and replacing specific areas of insulation that are saturated with moisture, as required by the manufacturer.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000810989200000",
+      "address": "12107 ABRAMS RD",
+      "stored_date": "2013-04-25",
+      "stored_permit_no": "1304251080",
+      "newer_date": "2026-01-09",
+      "newer_permit_no": "COM-ROOF-26-000003",
+      "description": "Commercial Roofing Permit: Reroof, no decking change. Tear off existing shingles replacing with new shingles",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000791120000000",
+      "address": "10201 Audelia Rd",
+      "stored_date": "2013-05-02",
+      "stored_permit_no": "1305026002",
+      "newer_date": "2024-09-26",
+      "newer_permit_no": "2409261008_193410949-002",
+      "description": "Commercial Roofing Permit: REROOF OVERLAY",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000412516000000",
+      "address": "10909 HILLCREST RD",
+      "stored_date": "2013-05-06",
+      "stored_permit_no": "1305066017",
+      "newer_date": "2024-05-14",
+      "newer_permit_no": "2405141078_189574304-002",
+      "description": "Commercial Roofing Permit: RE-ROOF NO STRUCTURAL CHANGES",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-0072930C0002A0000",
+      "address": "10333 N CENTRAL EXPY",
+      "stored_date": "2013-05-21",
+      "stored_permit_no": "1305211021",
+      "newer_date": "2026-05-19",
+      "newer_permit_no": "COM-ROOF-26-000123",
+      "description": "Commercial Roofing Permit: Remove and replace existing shingle roofing system with like-kind and comparable materials, including underlayment, flashing, fascia, gutters, and associated drywall repairs as needed. No structural modifications are included in this scope of work.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000601954400000",
+      "address": "10859 SHADY TRL",
+      "stored_date": "2013-05-22",
+      "stored_permit_no": "1305221112",
+      "newer_date": "2025-12-17",
+      "newer_permit_no": "COM-ROOF-25-000207",
+      "description": "Commercial Roofing Permit: Existing stone to be removed from rooftop by way of industrial vacuum services. Access will be required next to building for vac truck to access site.Furnish and install 1 new layer of 1\u201d polyisocyanurate insulation, mechanically fastened through existing roof to the deck using #15 fasteners and induction weld plates.Furnish and install new 60 mil induction welded TPO roof system.Furnish and install 24-gauge galvanized counterflashing at rise walls.Furnish and install new TPO clad metal edge at existing gutter locations.Furnish and install new 24-gauge pre-finished metal edge at existing metal edge location without gutter.Furnish and install new 24-gauge pre-finished sheet metal coping at existing parapet walls.Furnish and install new 24-gauge pre-finished sheet metal gutter and downspouts at existing locations.Flash all curbs and penetrations per manufacturer\u2019s specifications.Furnish and install new TPO walk-pad at service side of mechanical curbs and roof access point.Upon completion of the roof project remove, all job-related materials and debris.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000601954300000",
+      "address": "10875 SHADY TRL",
+      "stored_date": "2013-06-03",
+      "stored_permit_no": "1306031070",
+      "newer_date": "2025-12-17",
+      "newer_permit_no": "COM-ROOF-25-000207",
+      "description": "Commercial Roofing Permit: Existing stone to be removed from rooftop by way of industrial vacuum services. Access will be required next to building for vac truck to access site.Furnish and install 1 new layer of 1\u201d polyisocyanurate insulation, mechanically fastened through existing roof to the deck using #15 fasteners and induction weld plates.Furnish and install new 60 mil induction welded TPO roof system.Furnish and install 24-gauge galvanized counterflashing at rise walls.Furnish and install new TPO clad metal edge at existing gutter locations.Furnish and install new 24-gauge pre-finished metal edge at existing metal edge location without gutter.Furnish and install new 24-gauge pre-finished sheet metal coping at existing parapet walls.Furnish and install new 24-gauge pre-finished sheet metal gutter and downspouts at existing locations.Flash all curbs and penetrations per manufacturer\u2019s specifications.Furnish and install new TPO walk-pad at service side of mechanical curbs and roof access point.Upon completion of the roof project remove, all job-related materials and debris.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000378100000000",
+      "address": "10636 GARLAND RD",
+      "stored_date": "2013-06-05",
+      "stored_permit_no": "1306051143",
+      "newer_date": "2025-02-10",
+      "newer_permit_no": "2502101111_197654170-002",
+      "description": "Commercial Roofing Permit: Commercial Roof Overlay at Extra Space Storage. No Structural Changes.  Remove and haul away existing gravel. Retrofit 70,600 sq. ft. of existing roof system. Retrofit 1.5\" ISO, MF, 1/2\" HD ISO, MF white, 60-Mil TPO membrane.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000732605000000",
+      "address": "13302 PRESTON RD",
+      "stored_date": "2013-06-06",
+      "stored_permit_no": "1306051014",
+      "newer_date": "2026-07-07",
+      "newer_permit_no": "COM-ROOF-26-000178",
+      "description": "Commercial Roofing Permit: Remove existing roof down to metal deck. Install 2 layers of rigid insulation achieving R25 insulation and 1/2\" gypsum coverboard and new built up roofing.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000601954200000",
+      "address": "10889 SHADY TRL",
+      "stored_date": "2013-06-20",
+      "stored_permit_no": "1306201121",
+      "newer_date": "2025-12-17",
+      "newer_permit_no": "COM-ROOF-25-000207",
+      "description": "Commercial Roofing Permit: Existing stone to be removed from rooftop by way of industrial vacuum services. Access will be required next to building for vac truck to access site.Furnish and install 1 new layer of 1\u201d polyisocyanurate insulation, mechanically fastened through existing roof to the deck using #15 fasteners and induction weld plates.Furnish and install new 60 mil induction welded TPO roof system.Furnish and install 24-gauge galvanized counterflashing at rise walls.Furnish and install new TPO clad metal edge at existing gutter locations.Furnish and install new 24-gauge pre-finished metal edge at existing metal edge location without gutter.Furnish and install new 24-gauge pre-finished sheet metal coping at existing parapet walls.Furnish and install new 24-gauge pre-finished sheet metal gutter and downspouts at existing locations.Flash all curbs and penetrations per manufacturer\u2019s specifications.Furnish and install new TPO walk-pad at service side of mechanical curbs and roof access point.Upon completion of the roof project remove, all job-related materials and debris.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000601954100000",
+      "address": "10907 SHADY TRL",
+      "stored_date": "2013-06-20",
+      "stored_permit_no": "1306201124",
+      "newer_date": "2025-12-17",
+      "newer_permit_no": "COM-ROOF-25-000207",
+      "description": "Commercial Roofing Permit: Existing stone to be removed from rooftop by way of industrial vacuum services. Access will be required next to building for vac truck to access site.Furnish and install 1 new layer of 1\u201d polyisocyanurate insulation, mechanically fastened through existing roof to the deck using #15 fasteners and induction weld plates.Furnish and install new 60 mil induction welded TPO roof system.Furnish and install 24-gauge galvanized counterflashing at rise walls.Furnish and install new TPO clad metal edge at existing gutter locations.Furnish and install new 24-gauge pre-finished metal edge at existing metal edge location without gutter.Furnish and install new 24-gauge pre-finished sheet metal coping at existing parapet walls.Furnish and install new 24-gauge pre-finished sheet metal gutter and downspouts at existing locations.Flash all curbs and penetrations per manufacturer\u2019s specifications.Furnish and install new TPO walk-pad at service side of mechanical curbs and roof access point.Upon completion of the roof project remove, all job-related materials and debris.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000001965304",
+      "address": "18181 HILLCREST RD",
+      "stored_date": "2013-10-07",
+      "stored_permit_no": "1310071030",
+      "newer_date": "2024-05-14",
+      "newer_permit_no": "2405141078_189574304-002",
+      "description": "Commercial Roofing Permit: RE-ROOF NO STRUCTURAL CHANGES",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000605035000000",
+      "address": "12017 GARLAND RD",
+      "stored_date": "2013-10-17",
+      "stored_permit_no": "1310151096",
+      "newer_date": "2025-02-10",
+      "newer_permit_no": "2502101111_197654170-002",
+      "description": "Commercial Roofing Permit: Commercial Roof Overlay at Extra Space Storage. No Structural Changes.  Remove and haul away existing gravel. Retrofit 70,600 sq. ft. of existing roof system. Retrofit 1.5\" ISO, MF, 1/2\" HD ISO, MF white, 60-Mil TPO membrane.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000367900000000",
+      "address": "7557 RAMBLER RD",
+      "stored_date": "2013-11-25",
+      "stored_permit_no": "1311255003",
+      "newer_date": "2025-07-18",
+      "newer_permit_no": "COM-ROOF-25-000062",
+      "description": "Commercial Roofing Permit: ROOF REPLACEMENT 15,100 SF - 1. TEAR OFF EXISTING ROOFING DOWN TO THE EXISTING DECK. 2.  SWEEP DECKFREE OF GRAVEL, DIRT AND DEBRIS. 3. FULLY ADHERE (2) LAYERS OF 2.2\u201d ISO SET IN LOW-RISE FOAM TO THEEXISTING CONCRETE DECK. 4. INSTALL 1/4\" DEXCELL COVER BOARD OVER NEW INSULATION, SET IN LOW-RISEFOAM. 5. INSTALL 1 PLY WHITE 60 MIL FLEECEBACK TPO SINGLE PLY ROOFING MEMBRANE.*NO STRUCTRUAL CHANGES*BUILDING IS OCCUPIED*",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-0081740A0003B0000",
+      "address": "14785 Preston Rd",
+      "stored_date": "2013-12-04",
+      "stored_permit_no": "1312041046",
+      "newer_date": "2026-07-07",
+      "newer_permit_no": "COM-ROOF-26-000178",
+      "description": "Commercial Roofing Permit: Remove existing roof down to metal deck. Install 2 layers of rigid insulation achieving R25 insulation and 1/2\" gypsum coverboard and new built up roofing.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000002027257",
+      "address": "17977 PRESTON RD",
+      "stored_date": "2014-01-16",
+      "stored_permit_no": "1401161031",
+      "newer_date": "2026-07-07",
+      "newer_permit_no": "COM-ROOF-26-000178",
+      "description": "Commercial Roofing Permit: Remove existing roof down to metal deck. Install 2 layers of rigid insulation achieving R25 insulation and 1/2\" gypsum coverboard and new built up roofing.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000001571686",
+      "address": "17415 PRESTON RD",
+      "stored_date": "2014-02-18",
+      "stored_permit_no": "1402181150",
+      "newer_date": "2026-07-07",
+      "newer_permit_no": "COM-ROOF-26-000178",
+      "description": "Commercial Roofing Permit: Remove existing roof down to metal deck. Install 2 layers of rigid insulation achieving R25 insulation and 1/2\" gypsum coverboard and new built up roofing.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-007007000A0050000",
+      "address": "14120 Noel Rd",
+      "stored_date": "2014-04-08",
+      "stored_permit_no": "1404086005",
+      "newer_date": "2025-11-06",
+      "newer_permit_no": "COM-ROOF-25-000172",
+      "description": "Commercial Roofing Permit: Reroofing of original 5 buildings building 1-5 on the property. Tear-off and haul-off of existing roofing materials. Re-decking (as needed), underlayment replacement, shingle replacement, and all existing roofing components to be replaced with new.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-007736000B02B0000",
+      "address": "12221 MERIT DR",
+      "stored_date": "2014-05-01",
+      "stored_permit_no": "1404305004",
+      "newer_date": "2025-10-15",
+      "newer_permit_no": "COM-ROOF-25-000149",
+      "description": "Commercial Roofing Permit: Remove/install 110 sq's total with waste 60 mil TPO roofing systemTear off Existing roof layers down to concrete deckinstall 1/2 cover board, insulation/r-25 fully adhered with part a&b adhesiveadd new coping cap, new drain assemblies, and flashing detailsinstall taper ISO with crickets to move water to drainsremove/replace entire section of TPO above elevator roofaccess upper roof areas with service elevators and take trash down to dumpsterstage materials on roof and roof load by service elevatorsuse service elevator to remove all roof debrisremove existing wall flashing and take new TPO up and over wall-terminate of backside for double layer protection and apply TPO glue to wallsincluding 100LF of fully adhered walk pads around maintenance areas",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000769000800000",
+      "address": "13636 GOLDMARK DR",
+      "stored_date": "2014-05-07",
+      "stored_permit_no": "1405076001",
+      "newer_date": "2025-02-24",
+      "newer_permit_no": "2502241107_198626910-001",
+      "description": "Commercial Roofing Permit: BUILDINGS: OFFICE, #1-#3. REROOFING PROPERTY, REMOVING OLD FELT, SHINGLE, FLASHING FOR NEW.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-008408000C0050000",
+      "address": "12355 GREENVILLE AVE",
+      "stored_date": "2014-05-21",
+      "stored_permit_no": "1405216012",
+      "newer_date": "2025-12-02",
+      "newer_permit_no": "COM-ROOF-25-000185",
+      "description": "Commercial Roofing Permit: Building 1: Remove the existing TPO membrane as needed to replace insulation. Replace approximately 2,690 SF of wetted insulation found during the moisture survey with an average thickness of 4 inches, and install new Poly ISO as needed to fill.Install a 0.5 inch EPS fanfold cover board over the entire roof surface, which ensures a protective surface for the new membrane while adding additional insulation.Install new flashings on all penetrations.Install new 24-gauge drip edge along eaves. Detach and reset the existing parapet coping metal with the new termination bar.Adhere the new TPO to the front parapet wall.Install new 60-mil TPO membrane mechanically attached per manufacturer's specifications.Building 2:Clean the existing modified bitumen roof system of loose debris.Replace approximately 469 SF of wetted insulation found during the moisture survey with an average thickness of 2 inches.Install a 0.5\u201d EPS fanfold cover board over the entire roof surface, which ensures a protective surface for the new membrane while adding additional insulation.Install new flashings on all penetrations.Install new 24-gauge drip edge along eaves. Install tapered insulation 8 feet out from the front parapet wall to promote positive drainage.Remove XL abandoned satellite dish and dispose.Replace existing parapet coping metal due to poor condition - pre-finished.Install new 60-mil TPO membrane mechanically attached per manufacturer's specifications.Building 3:Clean the existing modified bitumen roof system of loose debris.Replace approximately 289 SF of wetted insulation found during the moisture survey with an average thickness of 2 inches, and install new Poly ISO insulation as needed to fillInstall a 0.5\u201d EPS fanfold cover board over the entire roof surface, which ensures a protective surface for the new membrane while adding additional insulation.Install new flashings on all penetrations.Install new 24-gauge drip edge along eaves. Replace existing parapet coping metal due to poor condition - pre-finished.Install new 60-mil TPO membrane mechanically attached per manufacturer's specifications.This scope does not include removing the roof to the deck - it is an overlay. The deck/substrate will not be removed during the overlay process, we are only removing and replacing specific areas of insulation that are saturated with moisture, as required by the manufacturer.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-007752000A0080000",
+      "address": "12400 COIT RD",
+      "stored_date": "2014-06-13",
+      "stored_permit_no": "1406131070",
+      "newer_date": "2025-09-23",
+      "newer_permit_no": "COM-ROOF-25-000131",
+      "description": "Commercial Roofing Permit: Cut and remove existing PVC Roof Membrane. Core cuts will be performed to identify potential areas of wet insulation. Remove existing wall flashings to a workable surface and dispose of debris. Remove existing perimeter metal edge and dispose of debris. Install a layer of 1/2\" HD ISO roof board. This layer of roof board will be mechanically attached to the prepared substrate utilizing FM Global (FM) approved fasteners and induction welding plates. Install new roof membrane.Install the new TPO membrane over the prepared surface. Secure the membrane in place by welding it to the platesutilizing induction methodology. The thermoplastic membrane seams will be overlapped a minimum of 5\", then hot air welded together. Weld width shall be a minimum of 1.5\" in width for automatic machine welding. Weld width shall be 2\" in width for hand welding. Upon completion of welding, each seam shall be probed to ensure proper securement. Install new wall flashings. Install new perimeter metal edge.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000520660000000",
+      "address": "10333 HARRY HINES BLVD",
+      "stored_date": "2014-07-28",
+      "stored_permit_no": "1407281119",
+      "newer_date": "2026-09-30",
+      "newer_permit_no": "COM-ROOF-26-000294",
+      "description": "Commercial Roofing Permit: SWEEP GRAVEL, INSTALL 1\" ISO COVER BOARD OVER ENTIRE ROOF AREA, INSTALL 60 MIL TPO OVERLAY",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-008059003A0010500",
+      "address": "10850 SANDEN DR",
+      "stored_date": "2014-09-03",
+      "stored_permit_no": "1409036006",
+      "newer_date": "2025-01-14",
+      "newer_permit_no": "2501141038_195140839-002",
+      "description": "Commercial Roofing Permit: REROOF ONLY - NO LAYOUT CHANGES NO PLAN REVIEW REQUIRED",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000601952000000",
+      "address": "10920 Composite Dr",
+      "stored_date": "2014-10-10",
+      "stored_permit_no": "1410106005",
+      "newer_date": "2026-10-07",
+      "newer_permit_no": "COM-ROOF-26-000301",
+      "description": "Commercial Roofing Permit: Re-roof: Mechanically attach 1/2\" Fanfold cover board and .60mil TPO membrane over existing built-up roof (1 layer). No tear off and no change to pitch.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000414684250000",
+      "address": "10703 PRESTON RD",
+      "stored_date": "2014-10-10",
+      "stored_permit_no": "1410106009",
+      "newer_date": "2026-07-07",
+      "newer_permit_no": "COM-ROOF-26-000178",
+      "description": "Commercial Roofing Permit: Remove existing roof down to metal deck. Install 2 layers of rigid insulation achieving R25 insulation and 1/2\" gypsum coverboard and new built up roofing.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000775243000000",
+      "address": "1201 OAK LAWN AVE",
+      "stored_date": "2014-11-06",
+      "stored_permit_no": "1411066008",
+      "newer_date": "2025-07-03",
+      "newer_permit_no": "COM-ALT-ADD-25-000600",
+      "description": "Commercial Alteration Addition Permit: QTEAM MEETING TBD - Demo & removal of all interior finishes, non-structural partitions and ceiling elements.  Partial demo of exterior walls, full demo of the roof.  Removal of exterior doors and windows.  New construction to expand the existing structure.  Construction of a new exterior patio, entry courtyard, extension of exterior wall height, mezzanine level, new roof and installation of skylights.Installation of new interior finishes, lighting and FF&E.  ADA compliance modifications throughout facility",
+      "source": "DALLASNOW_ALTERATIONS"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000001812765",
+      "address": "17950 Preston Rd",
+      "stored_date": "2014-12-09",
+      "stored_permit_no": "1412091036",
+      "newer_date": "2026-07-07",
+      "newer_permit_no": "COM-ROOF-26-000178",
+      "description": "Commercial Roofing Permit: Remove existing roof down to metal deck. Install 2 layers of rigid insulation achieving R25 insulation and 1/2\" gypsum coverboard and new built up roofing.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000609040000000",
+      "address": "11036 GRISSOM LN",
+      "stored_date": "2015-02-04",
+      "stored_permit_no": "1502046005",
+      "newer_date": "2026-03-12",
+      "newer_permit_no": "COM-ROOF-26-000072",
+      "description": "Commercial Roofing Permit: No tear off of structural change will be made. We are laying over the existing roof systems, with new 60 mil mechanically TPO",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000366839500000",
+      "address": "8420 PARK LN",
+      "stored_date": "2015-02-06",
+      "stored_permit_no": "1502066006",
+      "newer_date": "2024-07-29",
+      "newer_permit_no": "2407291013_190921226-001",
+      "description": "Commercial Roofing Permit: REMOVE EXISTING ROOF AND INSTALL NEW TPO ROOF.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-007292000106A0000",
+      "address": "10210 N CENTRAL EXPY",
+      "stored_date": "2015-04-07",
+      "stored_permit_no": "1504076008",
+      "newer_date": "2026-05-19",
+      "newer_permit_no": "COM-ROOF-26-000123",
+      "description": "Commercial Roofing Permit: Remove and replace existing shingle roofing system with like-kind and comparable materials, including underlayment, flashing, fascia, gutters, and associated drywall repairs as needed. No structural modifications are included in this scope of work.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-003130013501A0000",
+      "address": "106 E 10TH ST",
+      "stored_date": "2015-04-28",
+      "stored_permit_no": "1504281119",
+      "newer_date": "2026-06-04",
+      "newer_permit_no": "COM-ROOF-26-000133",
+      "description": "Commercial Roofing Permit: ROOF RECOVER - 6,625 SF - SWEEP EXISTING ROOF FREE OF DIRT AND DEBRIS IN PREPARATION FOR A ROOF RECOVER APPLICATION. MECHANICALLY FASTEN ONE LAYER OF 1-PLY 115 MIL FLEECEBACK TPO MEMBRANE OVER THE EXISTING ROOF. *NO STRUCTRUAL CHANGES*BUILDING IS OCCUPIED*",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000786969150000",
+      "address": "12770 PERIMETER DR",
+      "stored_date": "2015-05-07",
+      "stored_permit_no": "1504301008",
+      "newer_date": "2026-05-19",
+      "newer_permit_no": "COM-ROOF-26-000124",
+      "description": "Commercial Roofing Permit: This property has one roof in place.  Over existing roofing install a cover board and a new TPO roof system",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000609070000000",
+      "address": "10944 GRISSOM LN",
+      "stored_date": "2015-05-28",
+      "stored_permit_no": "1505281097",
+      "newer_date": "2026-03-12",
+      "newer_permit_no": "COM-ROOF-26-000072",
+      "description": "Commercial Roofing Permit: No tear off of structural change will be made. We are laying over the existing roof systems, with new 60 mil mechanically TPO",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000767539000000",
+      "address": "11648 N CENTRAL EXPY",
+      "stored_date": "2015-06-05",
+      "stored_permit_no": "1506051082",
+      "newer_date": "2026-05-19",
+      "newer_permit_no": "COM-ROOF-26-000123",
+      "description": "Commercial Roofing Permit: Remove and replace existing shingle roofing system with like-kind and comparable materials, including underlayment, flashing, fascia, gutters, and associated drywall repairs as needed. No structural modifications are included in this scope of work.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000001719901",
+      "address": "17762 PRESTON RD",
+      "stored_date": "2015-09-21",
+      "stored_permit_no": "1509211067",
+      "newer_date": "2026-07-07",
+      "newer_permit_no": "COM-ROOF-26-000178",
+      "description": "Commercial Roofing Permit: Remove existing roof down to metal deck. Install 2 layers of rigid insulation achieving R25 insulation and 1/2\" gypsum coverboard and new built up roofing.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000601515500000",
+      "address": "10465 SHADY TRL",
+      "stored_date": "2015-10-13",
+      "stored_permit_no": "1510131096",
+      "newer_date": "2025-12-17",
+      "newer_permit_no": "COM-ROOF-25-000207",
+      "description": "Commercial Roofing Permit: Existing stone to be removed from rooftop by way of industrial vacuum services. Access will be required next to building for vac truck to access site.Furnish and install 1 new layer of 1\u201d polyisocyanurate insulation, mechanically fastened through existing roof to the deck using #15 fasteners and induction weld plates.Furnish and install new 60 mil induction welded TPO roof system.Furnish and install 24-gauge galvanized counterflashing at rise walls.Furnish and install new TPO clad metal edge at existing gutter locations.Furnish and install new 24-gauge pre-finished metal edge at existing metal edge location without gutter.Furnish and install new 24-gauge pre-finished sheet metal coping at existing parapet walls.Furnish and install new 24-gauge pre-finished sheet metal gutter and downspouts at existing locations.Flash all curbs and penetrations per manufacturer\u2019s specifications.Furnish and install new TPO walk-pad at service side of mechanical curbs and roof access point.Upon completion of the roof project remove, all job-related materials and debris.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000376816000000",
+      "address": "11224 GARLAND RD",
+      "stored_date": "2016-02-16",
+      "stored_permit_no": "1602165025",
+      "newer_date": "2025-02-10",
+      "newer_permit_no": "2502101111_197654170-002",
+      "description": "Commercial Roofing Permit: Commercial Roof Overlay at Extra Space Storage. No Structural Changes.  Remove and haul away existing gravel. Retrofit 70,600 sq. ft. of existing roof system. Retrofit 1.5\" ISO, MF, 1/2\" HD ISO, MF white, 60-Mil TPO membrane.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000002092717",
+      "address": "18224 Preston Rd",
+      "stored_date": "2016-02-26",
+      "stored_permit_no": "1602051158",
+      "newer_date": "2026-07-07",
+      "newer_permit_no": "COM-ROOF-26-000178",
+      "description": "Commercial Roofing Permit: Remove existing roof down to metal deck. Install 2 layers of rigid insulation achieving R25 insulation and 1/2\" gypsum coverboard and new built up roofing.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000605029000000",
+      "address": "12000 E NORTHWEST HWY",
+      "stored_date": "2016-03-18",
+      "stored_permit_no": "1603186011",
+      "newer_date": "2026-02-18",
+      "newer_permit_no": "COM-ROOF-26-000026",
+      "description": "Commercial Roofing Permit: RE-ROOF ON PROPERTY AS PER INSURANCE. METAL ROOF AS EXISITING",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000002069509",
+      "address": "19177 PRESTON RD",
+      "stored_date": "2016-04-01",
+      "stored_permit_no": "1604016012",
+      "newer_date": "2026-07-07",
+      "newer_permit_no": "COM-ROOF-26-000178",
+      "description": "Commercial Roofing Permit: Remove existing roof down to metal deck. Install 2 layers of rigid insulation achieving R25 insulation and 1/2\" gypsum coverboard and new built up roofing.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-0084010A0002A0100",
+      "address": "12342 INWOOD RD",
+      "stored_date": "2016-04-15",
+      "stored_permit_no": "1604151099",
+      "newer_date": "2026-05-06",
+      "newer_permit_no": "COM-ROOF-26-000111",
+      "description": "Commercial Roofing Permit: Roof replacement of the apartment, office roof and drive up units.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000600292000000",
+      "address": "10520 HARRY HINES BLVD",
+      "stored_date": "2016-05-05",
+      "stored_permit_no": "1605051058",
+      "newer_date": "2026-09-30",
+      "newer_permit_no": "COM-ROOF-26-000294",
+      "description": "Commercial Roofing Permit: SWEEP GRAVEL, INSTALL 1\" ISO COVER BOARD OVER ENTIRE ROOF AREA, INSTALL 60 MIL TPO OVERLAY",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-0080900B000010200",
+      "address": "10510 Markison Rd",
+      "stored_date": "2016-05-06",
+      "stored_permit_no": "1605065005",
+      "newer_date": "2024-10-17",
+      "newer_permit_no": "2410171191_193599192-002",
+      "description": "Commercial Roofing Permit: Commercial Remodel:Single ply roof recover.Mechanically fastening 1\" GAF EnergyGuard PolyIso insulation, and covering insulation with white 60 mil EverGuard TPO.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000002053096",
+      "address": "19059 PRESTON RD",
+      "stored_date": "2016-05-20",
+      "stored_permit_no": "1605206006",
+      "newer_date": "2026-07-07",
+      "newer_permit_no": "COM-ROOF-26-000178",
+      "description": "Commercial Roofing Permit: Remove existing roof down to metal deck. Install 2 layers of rigid insulation achieving R25 insulation and 1/2\" gypsum coverboard and new built up roofing.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000002031588",
+      "address": "18770 PRESTON RD",
+      "stored_date": "2016-06-03",
+      "stored_permit_no": "1606031105",
+      "newer_date": "2026-07-07",
+      "newer_permit_no": "COM-ROOF-26-000178",
+      "description": "Commercial Roofing Permit: Remove existing roof down to metal deck. Install 2 layers of rigid insulation achieving R25 insulation and 1/2\" gypsum coverboard and new built up roofing.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-0087350A000020000",
+      "address": "17111 WATERVIEW PKWY",
+      "stored_date": "2016-06-07",
+      "stored_permit_no": "1606075013",
+      "newer_date": "2026-05-01",
+      "newer_permit_no": "COM-ROOF-26-000101",
+      "description": "Commercial Roofing Permit: ROOF OVERLAY OF TPO ON AN EXISTING BUR ROOF SYSTEM W/ PEA SIZE GRAVEL. REMOVING PEA GRAVEL, LEVEL ANY UNEVEN SPOTS OR SPUD AREAS IN NEED. REMOVE ALL FLASHING, CURBS, WALLS AND PENETRATIONS. MECHANICALLY FASTEN 1/2\" DENS DECK OVER EXISTING ROOF SURFACE AND MECHANICALLY ATTACH TPO. REMOVE SKYLIGHTS AND INSTALL NEW STEEL DECKING. ALL PITCH PANS WILL HAVE POURABLE SEALER APPLIED FOR WATERTIGHT SEAL. ALL BOOTS WILL BE HEAT WELDED FOR MAXIMUM SEAL. SUPPORT AND GAS OR ELECTRICAL LINES WITH CLAMPS.Certificate of Occupancy required prior to occupying space.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000002518442",
+      "address": "17509 COIT RD",
+      "stored_date": "2016-06-08",
+      "stored_permit_no": "1606081104",
+      "newer_date": "2025-09-23",
+      "newer_permit_no": "COM-ROOF-25-000131",
+      "description": "Commercial Roofing Permit: Cut and remove existing PVC Roof Membrane. Core cuts will be performed to identify potential areas of wet insulation. Remove existing wall flashings to a workable surface and dispose of debris. Remove existing perimeter metal edge and dispose of debris. Install a layer of 1/2\" HD ISO roof board. This layer of roof board will be mechanically attached to the prepared substrate utilizing FM Global (FM) approved fasteners and induction welding plates. Install new roof membrane.Install the new TPO membrane over the prepared surface. Secure the membrane in place by welding it to the platesutilizing induction methodology. The thermoplastic membrane seams will be overlapped a minimum of 5\", then hot air welded together. Weld width shall be a minimum of 1.5\" in width for automatic machine welding. Weld width shall be 2\" in width for hand welding. Upon completion of welding, each seam shall be probed to ensure proper securement. Install new wall flashings. Install new perimeter metal edge.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000606058000000",
+      "address": "11710 E NORTHWEST HWY",
+      "stored_date": "2016-06-10",
+      "stored_permit_no": "1606101135",
+      "newer_date": "2026-02-18",
+      "newer_permit_no": "COM-ROOF-26-000026",
+      "description": "Commercial Roofing Permit: RE-ROOF ON PROPERTY AS PER INSURANCE. METAL ROOF AS EXISITING",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-0077560E0016B0000",
+      "address": "13131 N CENTRAL EXPY",
+      "stored_date": "2016-06-22",
+      "stored_permit_no": "1606221082",
+      "newer_date": "2026-05-19",
+      "newer_permit_no": "COM-ROOF-26-000123",
+      "description": "Commercial Roofing Permit: Remove and replace existing shingle roofing system with like-kind and comparable materials, including underlayment, flashing, fascia, gutters, and associated drywall repairs as needed. No structural modifications are included in this scope of work.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000001502957",
+      "address": "17330 Preston Rd",
+      "stored_date": "2016-07-13",
+      "stored_permit_no": "1607135004",
+      "newer_date": "2026-07-07",
+      "newer_permit_no": "COM-ROOF-26-000178",
+      "description": "Commercial Roofing Permit: Remove existing roof down to metal deck. Install 2 layers of rigid insulation achieving R25 insulation and 1/2\" gypsum coverboard and new built up roofing.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000002073832",
+      "address": "18093 COIT RD",
+      "stored_date": "2016-08-12",
+      "stored_permit_no": "1608126013",
+      "newer_date": "2025-09-23",
+      "newer_permit_no": "COM-ROOF-25-000131",
+      "description": "Commercial Roofing Permit: Cut and remove existing PVC Roof Membrane. Core cuts will be performed to identify potential areas of wet insulation. Remove existing wall flashings to a workable surface and dispose of debris. Remove existing perimeter metal edge and dispose of debris. Install a layer of 1/2\" HD ISO roof board. This layer of roof board will be mechanically attached to the prepared substrate utilizing FM Global (FM) approved fasteners and induction welding plates. Install new roof membrane.Install the new TPO membrane over the prepared surface. Secure the membrane in place by welding it to the platesutilizing induction methodology. The thermoplastic membrane seams will be overlapped a minimum of 5\", then hot air welded together. Weld width shall be a minimum of 1.5\" in width for automatic machine welding. Weld width shall be 2\" in width for hand welding. Upon completion of welding, each seam shall be probed to ensure proper securement. Install new wall flashings. Install new perimeter metal edge.",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-007736000B02A0000",
+      "address": "12201 MERIT DR",
+      "stored_date": "2016-09-06",
+      "stored_permit_no": "1609061047",
+      "newer_date": "2025-10-15",
+      "newer_permit_no": "COM-ROOF-25-000149",
+      "description": "Commercial Roofing Permit: Remove/install 110 sq's total with waste 60 mil TPO roofing systemTear off Existing roof layers down to concrete deckinstall 1/2 cover board, insulation/r-25 fully adhered with part a&b adhesiveadd new coping cap, new drain assemblies, and flashing detailsinstall taper ISO with crickets to move water to drainsremove/replace entire section of TPO above elevator roofaccess upper roof areas with service elevators and take trash down to dumpsterstage materials on roof and roof load by service elevatorsuse service elevator to remove all roof debrisremove existing wall flashing and take new TPO up and over wall-terminate of backside for double layer protection and apply TPO glue to wallsincluding 100LF of fully adhered walk pads around maintenance areas",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-0070110A0002B0000",
+      "address": "14010 MONTFORT DR",
+      "stored_date": "2016-09-09",
+      "stored_permit_no": "1609091070",
+      "newer_date": "2025-11-19",
+      "newer_permit_no": "COM-ROOF-25-000181",
+      "description": "Commercial Roofing Permit: Commercial reroof",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000680884000000",
+      "address": "4030 DARIEN ST",
+      "stored_date": "2016-09-29",
+      "stored_permit_no": "1609291133",
+      "newer_date": "2024-11-19",
+      "newer_permit_no": "2411191161_194351400-001",
+      "description": "Commercial Roofing Permit: REROOF 20 SQ",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000600332000000",
+      "address": "10850 Harry Hines Blvd",
+      "stored_date": "2016-10-04",
+      "stored_permit_no": "1610041018",
+      "newer_date": "2026-09-30",
+      "newer_permit_no": "COM-ROOF-26-000294",
+      "description": "Commercial Roofing Permit: SWEEP GRAVEL, INSTALL 1\" ISO COVER BOARD OVER ENTIRE ROOF AREA, INSTALL 60 MIL TPO OVERLAY",
+      "source": "DALLASNOW_ROOFING"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000002112865",
+      "address": "17931 PRESTON RD",
+      "stored_date": "2016-10-04",
+      "stored_permit_no": "1610046009",
+      "newer_date": "2026-07-07",
+      "newer_permit_no": "COM-ROOF-26-000178",
+      "description": "Commercial Roofing Permit: Remove existing roof down to metal deck. Install 2 layers of rigid insulation achieving R25 insulation and 1/2\" gypsum coverboard and new built up roofing.",
+      "source": "DALLASNOW_ROOFING"
+    }
+  ],
+  "non_roof_hits_sample": [
+    {
+      "parcel_id": "DCAD-PARCEL-0070110A0002B0000",
+      "address": "14010 MONTFORT DR",
+      "stored_date": "2016-09-09",
+      "permit_no": "COM-ROOF-26-000205",
+      "date": "2026-08-06",
+      "description": "Commercial Roofing Permit: Rooftop work"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000660934000000",
+      "address": "11909 Preston Rd",
+      "stored_date": "1978-04-03",
+      "permit_no": "COM-ROOF-26-000140",
+      "date": "2026-06-08",
+      "description": "Commercial Roofing Permit: We will be loose laying new membrane on roof surface and replacing pavers on top."
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-008207000001A0000",
+      "address": "17101 PRESTON RD",
+      "stored_date": "2003-10-01",
+      "permit_no": "COM-ROOF-26-000140",
+      "date": "2026-06-08",
+      "description": "Commercial Roofing Permit: We will be loose laying new membrane on roof surface and replacing pavers on top."
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000001707996",
+      "address": "18333 PRESTON RD",
+      "stored_date": "2004-01-14",
+      "permit_no": "COM-ROOF-26-000140",
+      "date": "2026-06-08",
+      "description": "Commercial Roofing Permit: We will be loose laying new membrane on roof surface and replacing pavers on top."
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000000212317",
+      "address": "18806 PRESTON RD",
+      "stored_date": "2004-03-09",
+      "permit_no": "COM-ROOF-26-000140",
+      "date": "2026-06-08",
+      "description": "Commercial Roofing Permit: We will be loose laying new membrane on roof surface and replacing pavers on top."
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00819000110010000",
+      "address": "16000 Preston Rd",
+      "stored_date": "2004-06-09",
+      "permit_no": "COM-ROOF-26-000140",
+      "date": "2026-06-08",
+      "description": "Commercial Roofing Permit: We will be loose laying new membrane on roof surface and replacing pavers on top."
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00638300070070000",
+      "address": "11611 PRESTON RD",
+      "stored_date": "2011-08-18",
+      "permit_no": "COM-ROOF-26-000140",
+      "date": "2026-06-08",
+      "description": "Commercial Roofing Permit: We will be loose laying new membrane on roof surface and replacing pavers on top."
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000001680951",
+      "address": "17732 PRESTON RD",
+      "stored_date": "2011-11-09",
+      "permit_no": "COM-ROOF-26-000140",
+      "date": "2026-06-08",
+      "description": "Commercial Roofing Permit: We will be loose laying new membrane on roof surface and replacing pavers on top."
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000002009168",
+      "address": "17606 PRESTON RD",
+      "stored_date": "2011-12-22",
+      "permit_no": "COM-ROOF-26-000140",
+      "date": "2026-06-08",
+      "description": "Commercial Roofing Permit: We will be loose laying new membrane on roof surface and replacing pavers on top."
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000000203309",
+      "address": "17602 PRESTON RD",
+      "stored_date": "2012-01-05",
+      "permit_no": "COM-ROOF-26-000140",
+      "date": "2026-06-08",
+      "description": "Commercial Roofing Permit: We will be loose laying new membrane on roof surface and replacing pavers on top."
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000732605000000",
+      "address": "13302 PRESTON RD",
+      "stored_date": "2013-06-06",
+      "permit_no": "COM-ROOF-26-000140",
+      "date": "2026-06-08",
+      "description": "Commercial Roofing Permit: We will be loose laying new membrane on roof surface and replacing pavers on top."
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-0081740A0003B0000",
+      "address": "14785 Preston Rd",
+      "stored_date": "2013-12-04",
+      "permit_no": "COM-ROOF-26-000140",
+      "date": "2026-06-08",
+      "description": "Commercial Roofing Permit: We will be loose laying new membrane on roof surface and replacing pavers on top."
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000002027257",
+      "address": "17977 PRESTON RD",
+      "stored_date": "2014-01-16",
+      "permit_no": "COM-ROOF-26-000140",
+      "date": "2026-06-08",
+      "description": "Commercial Roofing Permit: We will be loose laying new membrane on roof surface and replacing pavers on top."
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000001571686",
+      "address": "17415 PRESTON RD",
+      "stored_date": "2014-02-18",
+      "permit_no": "COM-ROOF-26-000140",
+      "date": "2026-06-08",
+      "description": "Commercial Roofing Permit: We will be loose laying new membrane on roof surface and replacing pavers on top."
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000414684250000",
+      "address": "10703 PRESTON RD",
+      "stored_date": "2014-10-10",
+      "permit_no": "COM-ROOF-26-000140",
+      "date": "2026-06-08",
+      "description": "Commercial Roofing Permit: We will be loose laying new membrane on roof surface and replacing pavers on top."
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000001812765",
+      "address": "17950 Preston Rd",
+      "stored_date": "2014-12-09",
+      "permit_no": "COM-ROOF-26-000140",
+      "date": "2026-06-08",
+      "description": "Commercial Roofing Permit: We will be loose laying new membrane on roof surface and replacing pavers on top."
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000001719901",
+      "address": "17762 PRESTON RD",
+      "stored_date": "2015-09-21",
+      "permit_no": "COM-ROOF-26-000140",
+      "date": "2026-06-08",
+      "description": "Commercial Roofing Permit: We will be loose laying new membrane on roof surface and replacing pavers on top."
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000002092717",
+      "address": "18224 Preston Rd",
+      "stored_date": "2016-02-26",
+      "permit_no": "COM-ROOF-26-000140",
+      "date": "2026-06-08",
+      "description": "Commercial Roofing Permit: We will be loose laying new membrane on roof surface and replacing pavers on top."
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000002069509",
+      "address": "19177 PRESTON RD",
+      "stored_date": "2016-04-01",
+      "permit_no": "COM-ROOF-26-000140",
+      "date": "2026-06-08",
+      "description": "Commercial Roofing Permit: We will be loose laying new membrane on roof surface and replacing pavers on top."
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000002053096",
+      "address": "19059 PRESTON RD",
+      "stored_date": "2016-05-20",
+      "permit_no": "COM-ROOF-26-000140",
+      "date": "2026-06-08",
+      "description": "Commercial Roofing Permit: We will be loose laying new membrane on roof surface and replacing pavers on top."
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000002031588",
+      "address": "18770 PRESTON RD",
+      "stored_date": "2016-06-03",
+      "permit_no": "COM-ROOF-26-000140",
+      "date": "2026-06-08",
+      "description": "Commercial Roofing Permit: We will be loose laying new membrane on roof surface and replacing pavers on top."
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000001502957",
+      "address": "17330 Preston Rd",
+      "stored_date": "2016-07-13",
+      "permit_no": "COM-ROOF-26-000140",
+      "date": "2026-06-08",
+      "description": "Commercial Roofing Permit: We will be loose laying new membrane on roof surface and replacing pavers on top."
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-COL-000002112865",
+      "address": "17931 PRESTON RD",
+      "stored_date": "2016-10-04",
+      "permit_no": "COM-ROOF-26-000140",
+      "date": "2026-06-08",
+      "description": "Commercial Roofing Permit: We will be loose laying new membrane on roof surface and replacing pavers on top."
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-008391000A0030000",
+      "address": "12801 MIDWAY RD",
+      "stored_date": "2003-03-17",
+      "permit_no": "COM-ROOF-26-000125",
+      "date": "2026-05-20",
+      "description": "Commercial Roofing Permit: RE ROOF LOWER SCHOOL"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000527566000000",
+      "address": "11001 MIDWAY RD",
+      "stored_date": "2014-07-23",
+      "permit_no": "COM-ROOF-26-000125",
+      "date": "2026-05-20",
+      "description": "Commercial Roofing Permit: RE ROOF LOWER SCHOOL"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000808902000000",
+      "address": "12920 MIDWAY RD",
+      "stored_date": "2014-12-03",
+      "permit_no": "COM-ROOF-26-000125",
+      "date": "2026-05-20",
+      "description": "Commercial Roofing Permit: RE ROOF LOWER SCHOOL"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-0073590B000020000",
+      "address": "8300 LA PRADA DR",
+      "stored_date": "2013-03-04",
+      "permit_no": "COM-ROOF-26-000118",
+      "date": "2026-05-11",
+      "description": "Commercial Roofing Permit: Roof installation due to hail damage."
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-008391000A0030000",
+      "address": "12801 MIDWAY RD",
+      "stored_date": "2003-03-17",
+      "permit_no": "COM-ROOF-26-000074",
+      "date": "2026-03-13",
+      "description": "Commercial Roofing Permit: TILE ROOF FULL REPLACEMENT TO SHINGLES"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000527566000000",
+      "address": "11001 MIDWAY RD",
+      "stored_date": "2014-07-23",
+      "permit_no": "COM-ROOF-26-000074",
+      "date": "2026-03-13",
+      "description": "Commercial Roofing Permit: TILE ROOF FULL REPLACEMENT TO SHINGLES"
+    },
+    {
+      "parcel_id": "DCAD-PARCEL-00000808902000000",
+      "address": "12920 MIDWAY RD",
+      "stored_date": "2014-12-03",
+      "permit_no": "COM-ROOF-26-000074",
+      "date": "2026-03-13",
+      "description": "Commercial Roofing Permit: TILE ROOF FULL REPLACEMENT TO SHINGLES"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+[
+  {
+    "rank": 1,
+    "address": "3015 Hansboro Ave",
+    "city": "Dallas",
+    "account_number": "00000513733000000",
+    "owner_name": "Rubicon Exploration Co",
+    "sqft": 83788,
+    "year_built": 1996,
+    "cad_source": "Dallas County Appraisal District (DCAD)",
+    "status": "PASS (Verified Zero Permits)",
+    "reason": "Clean address and 0 permits within 75m radius post-storm"
+  },
+  {
+    "rank": 2,
+    "address": "5801 Preston Oaks Rd",
+    "city": "Dallas",
+    "account_number": "00000794326750000",
+    "owner_name": "Frontline Oak Run Llc",
+    "sqft": 156944,
+    "year_built": 1996,
+    "cad_source": "Dallas County Appraisal District (DCAD)",
+    "status": "PASS (Verified Zero Permits)",
+    "reason": "Clean address and 0 permits within 75m radius post-storm"
+  },
+  {
+    "rank": 3,
+    "address": "17463 Davenport Rd",
+    "city": "Dallas",
+    "account_number": "008205000138A0000",
+    "owner_name": "Preston Highlands Bapt Ch",
+    "sqft": 110621,
+    "year_built": 1998,
+    "cad_source": "Dallas County Appraisal District (DCAD)",
+    "status": "PASS (Verified Zero Permits)",
+    "reason": "Clean address and 0 permits within 75m radius post-storm"
+  },
+  {
+    "rank": 4,
+    "address": "17250 Preston Rd",
+    "city": "Dallas",
+    "account_number": "0082080A0004A0000",
+    "owner_name": "Mcdonalds Corp 042 0468",
+    "sqft": 38388,
+    "year_built": 1996,
+    "cad_source": "Dallas County Appraisal District (DCAD)",
+    "status": "PASS (Verified Zero Permits)",
+    "reason": "Clean address and 0 permits within 75m radius post-storm"
+  },
+  {
+    "rank": 5,
+    "address": "14115 Hillcrest Rd",
+    "city": "Dallas",
+    "account_number": "0081840A000010000",
+    "owner_name": "Corporation Of Episcopal",
+    "sqft": 265633,
+    "year_built": 1996,
+    "cad_source": "Dallas County Appraisal District (DCAD)",
+    "status": "PASS (Verified Zero Permits)",
+    "reason": "Clean address and 0 permits within 75m radius post-storm"
+  },
+  {
+    "rank": 6,
+    "address": "200 N Manus Dr",
+    "city": "Dallas",
+    "account_number": "00000467140000000",
+    "owner_name": "Charles Juan &",
+    "sqft": 77387,
+    "year_built": 1996,
+    "cad_source": "Dallas County Appraisal District (DCAD)",
+    "status": "FAIL (Permit Found Post-Storm)",
+    "reason": "Permit BLD22-6779 on 2026-10-06: adding a 40kw enphase storage system to exist"
+  },
+  {
+    "rank": 7,
+    "address": "6069 Belt Line Rd",
+    "city": "Dallas",
+    "account_number": "00000796942080000",
+    "owner_name": "El Ad Grand Seasons Llc",
+    "sqft": 171578,
+    "year_built": 1996,
+    "cad_source": "Dallas County Appraisal District (DCAD)",
+    "status": "PASS (Verified Zero Permits)",
+    "reason": "Clean address and 0 permits within 75m radius post-storm"
+  }
+]

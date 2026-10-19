@@ -1,0 +1,116 @@
+import math
+from typing import List, Dict, Any, Optional
+from datetime import datetime, timezone
+from app.schemas.storm_schema import GeoJSONFeature, GeoJSONGeometry, GeoJSONFeatureCollection
+from app.core.logging import logger
+
+DENSITY_ICE_KG_M3 = 917.0  # Ice density kg/m³
+
+
+def calculate_hail_physics(diameter_inches: float) -> Dict[str, float]:
+    """
+    Computes physical impact parameters for spherical hailstone:
+    - Diameter in meters
+    - Mass in grams
+    - Terminal velocity in m/s & mph
+    - Kinetic energy in Joules: E_k = 0.5 * m * v_t^2
+    """
+    if diameter_inches <= 0:
+        return {"mass_grams": 0.0, "terminal_velocity_mph": 0.0, "kinetic_energy_joules": 0.0}
+
+    d_m = diameter_inches * 0.0254  # meters
+    d_cm = diameter_inches * 2.54    # centimeters
+    radius_m = d_m / 2.0
+    volume_m3 = (4.0 / 3.0) * math.pi * (radius_m ** 3)
+    mass_kg = volume_m3 * DENSITY_ICE_KG_M3
+    mass_grams = round(mass_kg * 1000.0, 1)
+
+    # Terminal velocity formula: v_t ≈ 14.02 * sqrt(d_cm) (m/s)
+    v_t_mps = 14.02 * math.sqrt(d_cm)
+    v_t_mph = round(v_t_mps * 2.23694, 1)
+
+    # Kinetic Energy (Joules): E_k = 0.5 * m * v_t^2
+    ke_joules = round(0.5 * mass_kg * (v_t_mps ** 2), 2)
+
+    return {
+        "mass_grams": mass_grams,
+        "terminal_velocity_mph": v_t_mph,
+        "kinetic_energy_joules": ke_joules,
+    }
+
+
+# Standardized DFW Severe Convective Swath (May 28, 2024)
+# Spanning Carrollton, Addison, Farmers Branch, Stemmons Corridor, Dallas
+DFW_MAY28_SWATH_POLYGON = [
+    [-96.9500, 32.9900],
+    [-96.7900, 33.0200],
+    [-96.7500, 32.9200],
+    [-96.8200, 32.8400],
+    [-96.8900, 32.8100],
+    [-96.9600, 32.9000],
+    [-96.9500, 32.9900],
+]
+
+
+class NOAAClient:
+    """
+    NOAA NEXRAD & Storm Prediction Center (SPC) Data Client.
+    Fetches severe convective storm reports and constructs GIS hail contours.
+    """
+    def __init__(self):
+        pass
+
+    def get_canonical_swaths(self) -> GeoJSONFeatureCollection:
+        """No hardcoded storm is served when the database has no swath."""
+        return GeoJSONFeatureCollection(features=[])
+
+    async def fetch_live_active_alerts(self, state: str = "TX") -> List[Dict[str, Any]]:
+        """
+        Fetches live real-time active severe weather alerts directly from the
+        National Weather Service / NOAA API (api.weather.gov).
+        """
+        import httpx
+        url = f"https://api.weather.gov/alerts/active?area={state.upper()[:2]}"
+        headers = {
+            "User-Agent": "DepoiiCommercialRoofing/2.0 (+https://depoii.com; ops@depoii.com)",
+            "Accept": "application/geo+json, application/json",
+        }
+        try:
+            async with httpx.AsyncClient(timeout=10.0) as client:
+                res = await client.get(url, headers=headers)
+                if res.status_code == 200:
+                    data = res.json()
+                    features = data.get("features", [])
+                    parsed_alerts = []
+                    for f in features:
+                        props = f.get("properties", {})
+                        geom = f.get("geometry")
+                        event = props.get("event") or ""
+                        headline = props.get("headline") or ""
+                        description = props.get("description") or ""
+                        area = props.get("areaDesc") or ""
+                        blob = f"{event} {headline} {description}".lower()
+                        hail_warning = event.lower() in {"severe thunderstorm warning", "tornado warning"} and "hail" in blob
+                        hail_statement = event.lower() == "special weather statement" and "hail" in blob
+                        if not (hail_warning or hail_statement):
+                            continue
+                        parsed_alerts.append({
+                            "id": props.get("id"),
+                            "event": event,
+                            "severity": props.get("severity"),
+                            "urgency": props.get("urgency"),
+                            "headline": headline,
+                            "areaDesc": area,
+                            "effective": props.get("effective"),
+                            "expires": props.get("expires"),
+                            "geometry": geom,
+                            "source": "NOAA / NWS Live",
+                        })
+                    logger.info(f"[NOAA] Fetched {len(parsed_alerts)} live active alerts for {state}")
+                    return parsed_alerts
+                else:
+                    logger.warning(f"[NOAA] Live alerts API returned status {res.status_code}")
+                    return []
+        except Exception as e:
+            logger.error(f"[NOAA] Error fetching live active alerts for {state}: {e}")
+            return []

@@ -45,6 +45,8 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
+!**/.env.example
 
 # vercel
 .vercel
@@ -60,3 +62,26 @@ next-env.d.ts
 
 # duplicate landing export (source of truth is src/ + netlify-landing/)
 depoii-landing-build/
+
+# Python / FastAPI engine
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+
+# Engine local caches & runtime DB sidecars (not source)
+**/warehouse_cache.json
+**/*_batch_state.json
+**/*_daemon_state.json
+**/*enrichment_state.json
+*.db-shm
+*.db-wal
+*.sqlite-shm
+*.sqlite-wal
+
+# Nested git metadata (monorepo owns history)
+Roofx/depoii-data-engine/.git/

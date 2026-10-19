@@ -1,0 +1,542 @@
+[
+  {
+    "rank": 1,
+    "lead_id": "TAD-PARCEL-04088050",
+    "address": "2500 Ridgmar Blvd",
+    "city": "Fort Worth",
+    "building_sqft": 321124,
+    "year_built": 1965,
+    "owner": "Av Xander Llc",
+    "tad_account": "04088050",
+    "verification_score": 95,
+    "hail_proximity": {
+      "distance_miles": 1.1,
+      "hail_size_inches": 2.25,
+      "strike_location": "2 SW Westover Hills (Hen egg size)"
+    },
+    "permit_audit": {
+      "status": "NO_POST_STORM_ROOF_PERMIT_FOUND",
+      "portal_source": "City of Fort Worth Open Data Permits FeatureServer",
+      "live_search_url": "https://services5.arcgis.com/3ddLCBXe1bRt7mzj/arcgis/rest/services/CFW_Open_Data_Development_Permits_View/FeatureServer/0/query?where=Full_Street_Address+LIKE+%27%252500%25Ridgmar%25%27&outFields=*&f=html"
+    },
+    "live_cad_url": "https://mapit.tarrantcounty.com/arcgis/rest/services/Dynamic/TADParcels/MapServer/0/query?where=ACCOUNT%3D%2704088050%27&outFields=*&f=html",
+    "aerial": {
+      "thumbnail_url": "/api/aerial/04088050",
+      "capture_source": "ESRI World Imagery (Satellite Capture)",
+      "roof_archetype": "Commercial Flat Low-Slope"
+    }
+  },
+  {
+    "rank": 2,
+    "lead_id": "TAD-PARCEL-00003123",
+    "address": "400 Jones St",
+    "city": "Fort Worth",
+    "building_sqft": 310968,
+    "year_built": 1981,
+    "owner": "Ddr/Dtc City Investments Lp",
+    "tad_account": "00003123",
+    "verification_score": 95,
+    "hail_proximity": {
+      "distance_miles": 1.5,
+      "hail_size_inches": 1.75,
+      "strike_location": "SE Fort Worth / Little Rd & I-20 (Golf ball size)"
+    },
+    "permit_audit": {
+      "status": "NO_POST_STORM_ROOF_PERMIT_FOUND",
+      "portal_source": "City of Fort Worth Open Data Permits FeatureServer",
+      "live_search_url": "https://services5.arcgis.com/3ddLCBXe1bRt7mzj/arcgis/rest/services/CFW_Open_Data_Development_Permits_View/FeatureServer/0/query?where=Full_Street_Address+LIKE+%27%25400%25Jones%25%27&outFields=*&f=html"
+    },
+    "live_cad_url": "https://mapit.tarrantcounty.com/arcgis/rest/services/Dynamic/TADParcels/MapServer/0/query?where=ACCOUNT%3D%2700003123%27&outFields=*&f=html",
+    "aerial": {
+      "thumbnail_url": "/api/aerial/00003123",
+      "capture_source": "ESRI World Imagery (Satellite Capture)",
+      "roof_archetype": "Commercial Flat Low-Slope"
+    }
+  },
+  {
+    "rank": 3,
+    "lead_id": "TAD-PARCEL-00005371",
+    "address": "501 W 6Th St",
+    "city": "Fort Worth",
+    "building_sqft": 309239,
+    "year_built": 1960,
+    "owner": "First National Bk Fort Worth",
+    "tad_account": "00005371",
+    "verification_score": 95,
+    "hail_proximity": {
+      "distance_miles": 1.88,
+      "hail_size_inches": 1.75,
+      "strike_location": "SE Fort Worth / Little Rd & I-20 (Golf ball size)"
+    },
+    "permit_audit": {
+      "status": "NO_POST_STORM_ROOF_PERMIT_FOUND",
+      "portal_source": "City of Fort Worth Open Data Permits FeatureServer",
+      "live_search_url": "https://services5.arcgis.com/3ddLCBXe1bRt7mzj/arcgis/rest/services/CFW_Open_Data_Development_Permits_View/FeatureServer/0/query?where=Full_Street_Address+LIKE+%27%25501%25W%25%27&outFields=*&f=html"
+    },
+    "live_cad_url": "https://mapit.tarrantcounty.com/arcgis/rest/services/Dynamic/TADParcels/MapServer/0/query?where=ACCOUNT%3D%2700005371%27&outFields=*&f=html",
+    "aerial": {
+      "thumbnail_url": "/api/aerial/00005371",
+      "capture_source": "ESRI World Imagery (Satellite Capture)",
+      "roof_archetype": "Commercial Flat Low-Slope"
+    }
+  },
+  {
+    "rank": 4,
+    "lead_id": "TAD-PARCEL-00685755",
+    "address": "1601 Commerce St",
+    "city": "Fort Worth",
+    "building_sqft": 284049,
+    "year_built": 1973,
+    "owner": "1701 Commerce Acquisition Llc",
+    "tad_account": "00685755",
+    "verification_score": 95,
+    "hail_proximity": {
+      "distance_miles": 1.79,
+      "hail_size_inches": 1.75,
+      "strike_location": "SE Fort Worth / Little Rd & I-20 (Golf ball size)"
+    },
+    "permit_audit": {
+      "status": "NO_POST_STORM_ROOF_PERMIT_FOUND",
+      "portal_source": "City of Fort Worth Open Data Permits FeatureServer",
+      "live_search_url": "https://services5.arcgis.com/3ddLCBXe1bRt7mzj/arcgis/rest/services/CFW_Open_Data_Development_Permits_View/FeatureServer/0/query?where=Full_Street_Address+LIKE+%27%251601%25Commerce%25%27&outFields=*&f=html"
+    },
+    "live_cad_url": "https://mapit.tarrantcounty.com/arcgis/rest/services/Dynamic/TADParcels/MapServer/0/query?where=ACCOUNT%3D%2700685755%27&outFields=*&f=html",
+    "aerial": {
+      "thumbnail_url": "/api/aerial/00685755",
+      "capture_source": "ESRI World Imagery (Satellite Capture)",
+      "roof_archetype": "Commercial Flat Low-Slope"
+    }
+  },
+  {
+    "rank": 5,
+    "lead_id": "TAD-PARCEL-00003506",
+    "address": "333 Throckmorton St",
+    "city": "Fort Worth",
+    "building_sqft": 242538,
+    "year_built": 1990,
+    "owner": "Sundance West Partners Lp",
+    "tad_account": "00003506",
+    "verification_score": 95,
+    "hail_proximity": {
+      "distance_miles": 1.69,
+      "hail_size_inches": 1.75,
+      "strike_location": "SE Fort Worth / Little Rd & I-20 (Golf ball size)"
+    },
+    "permit_audit": {
+      "status": "NO_POST_STORM_ROOF_PERMIT_FOUND",
+      "portal_source": "City of Fort Worth Open Data Permits FeatureServer",
+      "live_search_url": "https://services5.arcgis.com/3ddLCBXe1bRt7mzj/arcgis/rest/services/CFW_Open_Data_Development_Permits_View/FeatureServer/0/query?where=Full_Street_Address+LIKE+%27%25333%25Throckmorton%25%27&outFields=*&f=html"
+    },
+    "live_cad_url": "https://mapit.tarrantcounty.com/arcgis/rest/services/Dynamic/TADParcels/MapServer/0/query?where=ACCOUNT%3D%2700003506%27&outFields=*&f=html",
+    "aerial": {
+      "thumbnail_url": "/api/aerial/00003506",
+      "capture_source": "ESRI World Imagery (Satellite Capture)",
+      "roof_archetype": "Commercial Flat Low-Slope"
+    }
+  },
+  {
+    "rank": 6,
+    "lead_id": "TAD-PARCEL-00466379",
+    "address": "5200 E Loop 820 S",
+    "city": "Fort Worth",
+    "building_sqft": 238977,
+    "year_built": 1973,
+    "owner": "Black Branch Terminals Llc",
+    "tad_account": "00466379",
+    "verification_score": 95,
+    "hail_proximity": {
+      "distance_miles": 1.99,
+      "hail_size_inches": 2.0,
+      "strike_location": "3 N Kennedale / Lake Arlington (Hen egg size)"
+    },
+    "permit_audit": {
+      "status": "NO_POST_STORM_ROOF_PERMIT_FOUND",
+      "portal_source": "City of Fort Worth Open Data Permits FeatureServer",
+      "live_search_url": "https://services5.arcgis.com/3ddLCBXe1bRt7mzj/arcgis/rest/services/CFW_Open_Data_Development_Permits_View/FeatureServer/0/query?where=Full_Street_Address+LIKE+%27%255200%25E%25%27&outFields=*&f=html"
+    },
+    "live_cad_url": "https://mapit.tarrantcounty.com/arcgis/rest/services/Dynamic/TADParcels/MapServer/0/query?where=ACCOUNT%3D%2700466379%27&outFields=*&f=html",
+    "aerial": {
+      "thumbnail_url": "/api/aerial/00466379",
+      "capture_source": "ESRI World Imagery (Satellite Capture)",
+      "roof_archetype": "Commercial Flat Low-Slope"
+    }
+  },
+  {
+    "rank": 7,
+    "lead_id": "TAD-PARCEL-00005959",
+    "address": "1001 Commerce St",
+    "city": "Fort Worth",
+    "building_sqft": 215253,
+    "year_built": 2016,
+    "owner": "Fort Worth Downtown Lodging Ll",
+    "tad_account": "00005959",
+    "verification_score": 95,
+    "hail_proximity": {
+      "distance_miles": 1.63,
+      "hail_size_inches": 1.75,
+      "strike_location": "SE Fort Worth / Little Rd & I-20 (Golf ball size)"
+    },
+    "permit_audit": {
+      "status": "NO_POST_STORM_ROOF_PERMIT_FOUND",
+      "portal_source": "City of Fort Worth Open Data Permits FeatureServer",
+      "live_search_url": "https://services5.arcgis.com/3ddLCBXe1bRt7mzj/arcgis/rest/services/CFW_Open_Data_Development_Permits_View/FeatureServer/0/query?where=Full_Street_Address+LIKE+%27%251001%25Commerce%25%27&outFields=*&f=html"
+    },
+    "live_cad_url": "https://mapit.tarrantcounty.com/arcgis/rest/services/Dynamic/TADParcels/MapServer/0/query?where=ACCOUNT%3D%2700005959%27&outFields=*&f=html",
+    "aerial": {
+      "thumbnail_url": "/api/aerial/00005959",
+      "capture_source": "ESRI World Imagery (Satellite Capture)",
+      "roof_archetype": "Commercial Flat Low-Slope"
+    }
+  },
+  {
+    "rank": 8,
+    "lead_id": "TAD-PARCEL-07126220",
+    "address": "4001 Mark Iv Pkwy",
+    "city": "Fort Worth",
+    "building_sqft": 211063,
+    "year_built": 1999,
+    "owner": "Gg 99 Lp",
+    "tad_account": "07126220",
+    "verification_score": 95,
+    "hail_proximity": {
+      "distance_miles": 2.47,
+      "hail_size_inches": 2.75,
+      "strike_location": "3 NNW Fort Worth (Baseball size)"
+    },
+    "permit_audit": {
+      "status": "NO_POST_STORM_ROOF_PERMIT_FOUND",
+      "portal_source": "City of Fort Worth Open Data Permits FeatureServer",
+      "live_search_url": "https://services5.arcgis.com/3ddLCBXe1bRt7mzj/arcgis/rest/services/CFW_Open_Data_Development_Permits_View/FeatureServer/0/query?where=Full_Street_Address+LIKE+%27%254001%25Mark%25%27&outFields=*&f=html"
+    },
+    "live_cad_url": "https://mapit.tarrantcounty.com/arcgis/rest/services/Dynamic/TADParcels/MapServer/0/query?where=ACCOUNT%3D%2707126220%27&outFields=*&f=html",
+    "aerial": {
+      "thumbnail_url": "/api/aerial/07126220",
+      "capture_source": "ESRI World Imagery (Satellite Capture)",
+      "roof_archetype": "Commercial Flat Low-Slope"
+    }
+  },
+  {
+    "rank": 9,
+    "lead_id": "TAD-PARCEL-06350739",
+    "address": "6353 Camp Bowie Blvd",
+    "city": "Fort Worth",
+    "building_sqft": 203179,
+    "year_built": 1965,
+    "owner": "Brixmor Holdings 12 Spe Llc",
+    "tad_account": "06350739",
+    "verification_score": 95,
+    "hail_proximity": {
+      "distance_miles": 0.64,
+      "hail_size_inches": 2.25,
+      "strike_location": "2 SW Westover Hills (Hen egg size)"
+    },
+    "permit_audit": {
+      "status": "NO_POST_STORM_ROOF_PERMIT_FOUND",
+      "portal_source": "City of Fort Worth Open Data Permits FeatureServer",
+      "live_search_url": "https://services5.arcgis.com/3ddLCBXe1bRt7mzj/arcgis/rest/services/CFW_Open_Data_Development_Permits_View/FeatureServer/0/query?where=Full_Street_Address+LIKE+%27%256353%25Camp%25%27&outFields=*&f=html"
+    },
+    "live_cad_url": "https://mapit.tarrantcounty.com/arcgis/rest/services/Dynamic/TADParcels/MapServer/0/query?where=ACCOUNT%3D%2706350739%27&outFields=*&f=html",
+    "aerial": {
+      "thumbnail_url": "/api/aerial/06350739",
+      "capture_source": "ESRI World Imagery (Satellite Capture)",
+      "roof_archetype": "Commercial Flat Low-Slope"
+    }
+  },
+  {
+    "rank": 10,
+    "lead_id": "TAD-PARCEL-00004588",
+    "address": "525 Commerce St",
+    "city": "Fort Worth",
+    "building_sqft": 191890,
+    "year_built": 1995,
+    "owner": "Pafw Inc",
+    "tad_account": "00004588",
+    "verification_score": 95,
+    "hail_proximity": {
+      "distance_miles": 1.56,
+      "hail_size_inches": 1.75,
+      "strike_location": "SE Fort Worth / Little Rd & I-20 (Golf ball size)"
+    },
+    "permit_audit": {
+      "status": "NO_POST_STORM_ROOF_PERMIT_FOUND",
+      "portal_source": "City of Fort Worth Open Data Permits FeatureServer",
+      "live_search_url": "https://services5.arcgis.com/3ddLCBXe1bRt7mzj/arcgis/rest/services/CFW_Open_Data_Development_Permits_View/FeatureServer/0/query?where=Full_Street_Address+LIKE+%27%25525%25Commerce%25%27&outFields=*&f=html"
+    },
+    "live_cad_url": "https://mapit.tarrantcounty.com/arcgis/rest/services/Dynamic/TADParcels/MapServer/0/query?where=ACCOUNT%3D%2700004588%27&outFields=*&f=html",
+    "aerial": {
+      "thumbnail_url": "/api/aerial/00004588",
+      "capture_source": "ESRI World Imagery (Satellite Capture)",
+      "roof_archetype": "Commercial Flat Low-Slope"
+    }
+  },
+  {
+    "rank": 11,
+    "lead_id": "TAD-PARCEL-04981987",
+    "address": "6001 High Creek Dr",
+    "city": "Fort Worth",
+    "building_sqft": 171684,
+    "year_built": 1983,
+    "owner": "5920 Vermillion Lp",
+    "tad_account": "04981987",
+    "verification_score": 95,
+    "hail_proximity": {
+      "distance_miles": 2.77,
+      "hail_size_inches": 2.0,
+      "strike_location": "3 N Kennedale / Lake Arlington (Hen egg size)"
+    },
+    "permit_audit": {
+      "status": "NO_POST_STORM_ROOF_PERMIT_FOUND",
+      "portal_source": "City of Fort Worth Open Data Permits FeatureServer",
+      "live_search_url": "https://services5.arcgis.com/3ddLCBXe1bRt7mzj/arcgis/rest/services/CFW_Open_Data_Development_Permits_View/FeatureServer/0/query?where=Full_Street_Address+LIKE+%27%256001%25High%25%27&outFields=*&f=html"
+    },
+    "live_cad_url": "https://mapit.tarrantcounty.com/arcgis/rest/services/Dynamic/TADParcels/MapServer/0/query?where=ACCOUNT%3D%2704981987%27&outFields=*&f=html",
+    "aerial": {
+      "thumbnail_url": "/api/aerial/04981987",
+      "capture_source": "ESRI World Imagery (Satellite Capture)",
+      "roof_archetype": "Commercial Flat Low-Slope"
+    }
+  },
+  {
+    "rank": 12,
+    "lead_id": "TAD-PARCEL-01029134",
+    "address": "3209 Galvez Ave",
+    "city": "Fort Worth",
+    "building_sqft": 162798,
+    "year_built": 1978,
+    "owner": "Galvez Property Llc",
+    "tad_account": "01029134",
+    "verification_score": 95,
+    "hail_proximity": {
+      "distance_miles": 0.8,
+      "hail_size_inches": 1.75,
+      "strike_location": "SE Fort Worth / Little Rd & I-20 (Golf ball size)"
+    },
+    "permit_audit": {
+      "status": "NO_POST_STORM_ROOF_PERMIT_FOUND",
+      "portal_source": "City of Fort Worth Open Data Permits FeatureServer",
+      "live_search_url": "https://services5.arcgis.com/3ddLCBXe1bRt7mzj/arcgis/rest/services/CFW_Open_Data_Development_Permits_View/FeatureServer/0/query?where=Full_Street_Address+LIKE+%27%253209%25Galvez%25%27&outFields=*&f=html"
+    },
+    "live_cad_url": "https://mapit.tarrantcounty.com/arcgis/rest/services/Dynamic/TADParcels/MapServer/0/query?where=ACCOUNT%3D%2701029134%27&outFields=*&f=html",
+    "aerial": {
+      "thumbnail_url": "/api/aerial/01029134",
+      "capture_source": "ESRI World Imagery (Satellite Capture)",
+      "roof_archetype": "Commercial Flat Low-Slope"
+    }
+  },
+  {
+    "rank": 13,
+    "lead_id": "TAD-PARCEL-01864882",
+    "address": "2301 Blue Smoke Ct N",
+    "city": "Fort Worth",
+    "building_sqft": 140583,
+    "year_built": 1976,
+    "owner": "Wmgsa Blue Smoke Llc",
+    "tad_account": "01864882",
+    "verification_score": 95,
+    "hail_proximity": {
+      "distance_miles": 2.16,
+      "hail_size_inches": 1.75,
+      "strike_location": "SE Fort Worth / Little Rd & I-20 (Golf ball size)"
+    },
+    "permit_audit": {
+      "status": "NO_POST_STORM_ROOF_PERMIT_FOUND",
+      "portal_source": "City of Fort Worth Open Data Permits FeatureServer",
+      "live_search_url": "https://services5.arcgis.com/3ddLCBXe1bRt7mzj/arcgis/rest/services/CFW_Open_Data_Development_Permits_View/FeatureServer/0/query?where=Full_Street_Address+LIKE+%27%252301%25Blue%25%27&outFields=*&f=html"
+    },
+    "live_cad_url": "https://mapit.tarrantcounty.com/arcgis/rest/services/Dynamic/TADParcels/MapServer/0/query?where=ACCOUNT%3D%2701864882%27&outFields=*&f=html",
+    "aerial": {
+      "thumbnail_url": "/api/aerial/01864882",
+      "capture_source": "ESRI World Imagery (Satellite Capture)",
+      "roof_archetype": "Commercial Flat Low-Slope"
+    }
+  },
+  {
+    "rank": 14,
+    "lead_id": "TAD-PARCEL-01583492",
+    "address": "6400 Plaza Pkwy",
+    "city": "Fort Worth",
+    "building_sqft": 138557,
+    "year_built": 1970,
+    "owner": "R J D Associates Ltd",
+    "tad_account": "01583492",
+    "verification_score": 95,
+    "hail_proximity": {
+      "distance_miles": 1.26,
+      "hail_size_inches": 2.25,
+      "strike_location": "2 SW Westover Hills (Hen egg size)"
+    },
+    "permit_audit": {
+      "status": "NO_POST_STORM_ROOF_PERMIT_FOUND",
+      "portal_source": "City of Fort Worth Open Data Permits FeatureServer",
+      "live_search_url": "https://services5.arcgis.com/3ddLCBXe1bRt7mzj/arcgis/rest/services/CFW_Open_Data_Development_Permits_View/FeatureServer/0/query?where=Full_Street_Address+LIKE+%27%256400%25Plaza%25%27&outFields=*&f=html"
+    },
+    "live_cad_url": "https://mapit.tarrantcounty.com/arcgis/rest/services/Dynamic/TADParcels/MapServer/0/query?where=ACCOUNT%3D%2701583492%27&outFields=*&f=html",
+    "aerial": {
+      "thumbnail_url": "/api/aerial/01583492",
+      "capture_source": "ESRI World Imagery (Satellite Capture)",
+      "roof_archetype": "Commercial Flat Low-Slope"
+    }
+  },
+  {
+    "rank": 15,
+    "lead_id": "TAD-PARCEL-07899076",
+    "address": "1404 E Presidio St",
+    "city": "Fort Worth",
+    "building_sqft": 136272,
+    "year_built": 1990,
+    "owner": "Sprint Communications Co",
+    "tad_account": "07899076",
+    "verification_score": 95,
+    "hail_proximity": {
+      "distance_miles": 1.79,
+      "hail_size_inches": 1.75,
+      "strike_location": "SE Fort Worth / Little Rd & I-20 (Golf ball size)"
+    },
+    "permit_audit": {
+      "status": "NO_POST_STORM_ROOF_PERMIT_FOUND",
+      "portal_source": "City of Fort Worth Open Data Permits FeatureServer",
+      "live_search_url": "https://services5.arcgis.com/3ddLCBXe1bRt7mzj/arcgis/rest/services/CFW_Open_Data_Development_Permits_View/FeatureServer/0/query?where=Full_Street_Address+LIKE+%27%251404%25E%25%27&outFields=*&f=html"
+    },
+    "live_cad_url": "https://mapit.tarrantcounty.com/arcgis/rest/services/Dynamic/TADParcels/MapServer/0/query?where=ACCOUNT%3D%2707899076%27&outFields=*&f=html",
+    "aerial": {
+      "thumbnail_url": "/api/aerial/07899076",
+      "capture_source": "ESRI World Imagery (Satellite Capture)",
+      "roof_archetype": "Commercial Flat Low-Slope"
+    }
+  },
+  {
+    "rank": 16,
+    "lead_id": "TAD-PARCEL-07011709",
+    "address": "4305 Bryant Irvin Rd",
+    "city": "Fort Worth",
+    "building_sqft": 132836,
+    "year_built": 1998,
+    "owner": "Lowes Home Centers Inc",
+    "tad_account": "07011709",
+    "verification_score": 95,
+    "hail_proximity": {
+      "distance_miles": 2.59,
+      "hail_size_inches": 2.25,
+      "strike_location": "2 SW Westover Hills (Hen egg size)"
+    },
+    "permit_audit": {
+      "status": "NO_POST_STORM_ROOF_PERMIT_FOUND",
+      "portal_source": "City of Fort Worth Open Data Permits FeatureServer",
+      "live_search_url": "https://services5.arcgis.com/3ddLCBXe1bRt7mzj/arcgis/rest/services/CFW_Open_Data_Development_Permits_View/FeatureServer/0/query?where=Full_Street_Address+LIKE+%27%254305%25Bryant%25%27&outFields=*&f=html"
+    },
+    "live_cad_url": "https://mapit.tarrantcounty.com/arcgis/rest/services/Dynamic/TADParcels/MapServer/0/query?where=ACCOUNT%3D%2707011709%27&outFields=*&f=html",
+    "aerial": {
+      "thumbnail_url": "/api/aerial/07011709",
+      "capture_source": "ESRI World Imagery (Satellite Capture)",
+      "roof_archetype": "Commercial Flat Low-Slope"
+    }
+  },
+  {
+    "rank": 17,
+    "lead_id": "TAD-PARCEL-03082865",
+    "address": "401 Ne 38Th St",
+    "city": "Fort Worth",
+    "building_sqft": 132000,
+    "year_built": 1971,
+    "owner": "K W Martin Lumber Co",
+    "tad_account": "03082865",
+    "verification_score": 95,
+    "hail_proximity": {
+      "distance_miles": 1.75,
+      "hail_size_inches": 2.75,
+      "strike_location": "3 NNW Fort Worth (Baseball size)"
+    },
+    "permit_audit": {
+      "status": "NO_POST_STORM_ROOF_PERMIT_FOUND",
+      "portal_source": "City of Fort Worth Open Data Permits FeatureServer",
+      "live_search_url": "https://services5.arcgis.com/3ddLCBXe1bRt7mzj/arcgis/rest/services/CFW_Open_Data_Development_Permits_View/FeatureServer/0/query?where=Full_Street_Address+LIKE+%27%25401%25Ne%25%27&outFields=*&f=html"
+    },
+    "live_cad_url": "https://mapit.tarrantcounty.com/arcgis/rest/services/Dynamic/TADParcels/MapServer/0/query?where=ACCOUNT%3D%2703082865%27&outFields=*&f=html",
+    "aerial": {
+      "thumbnail_url": "/api/aerial/03082865",
+      "capture_source": "ESRI World Imagery (Satellite Capture)",
+      "roof_archetype": "Commercial Flat Low-Slope"
+    }
+  },
+  {
+    "rank": 18,
+    "lead_id": "TAD-PARCEL-06035957",
+    "address": "3501 Renzel Blvd",
+    "city": "Fort Worth",
+    "building_sqft": 128329,
+    "year_built": 1986,
+    "owner": "Maedc-Palm House Llc",
+    "tad_account": "06035957",
+    "verification_score": 95,
+    "hail_proximity": {
+      "distance_miles": 1.03,
+      "hail_size_inches": 2.5,
+      "strike_location": "2 S White Settlement (Tennis ball size)"
+    },
+    "permit_audit": {
+      "status": "NO_POST_STORM_ROOF_PERMIT_FOUND",
+      "portal_source": "City of Fort Worth Open Data Permits FeatureServer",
+      "live_search_url": "https://services5.arcgis.com/3ddLCBXe1bRt7mzj/arcgis/rest/services/CFW_Open_Data_Development_Permits_View/FeatureServer/0/query?where=Full_Street_Address+LIKE+%27%253501%25Renzel%25%27&outFields=*&f=html"
+    },
+    "live_cad_url": "https://mapit.tarrantcounty.com/arcgis/rest/services/Dynamic/TADParcels/MapServer/0/query?where=ACCOUNT%3D%2706035957%27&outFields=*&f=html",
+    "aerial": {
+      "thumbnail_url": "/api/aerial/06035957",
+      "capture_source": "ESRI World Imagery (Satellite Capture)",
+      "roof_archetype": "Commercial Flat Low-Slope"
+    }
+  },
+  {
+    "rank": 19,
+    "lead_id": "TAD-PARCEL-00825433",
+    "address": "2315 N Main St",
+    "city": "Fort Worth",
+    "building_sqft": 127761,
+    "year_built": 2018,
+    "owner": "Ogc Main Street Lp",
+    "tad_account": "00825433",
+    "verification_score": 95,
+    "hail_proximity": {
+      "distance_miles": 0.2,
+      "hail_size_inches": 2.75,
+      "strike_location": "3 NNW Fort Worth (Baseball size)"
+    },
+    "permit_audit": {
+      "status": "NO_POST_STORM_ROOF_PERMIT_FOUND",
+      "portal_source": "City of Fort Worth Open Data Permits FeatureServer",
+      "live_search_url": "https://services5.arcgis.com/3ddLCBXe1bRt7mzj/arcgis/rest/services/CFW_Open_Data_Development_Permits_View/FeatureServer/0/query?where=Full_Street_Address+LIKE+%27%252315%25N%25%27&outFields=*&f=html"
+    },
+    "live_cad_url": "https://mapit.tarrantcounty.com/arcgis/rest/services/Dynamic/TADParcels/MapServer/0/query?where=ACCOUNT%3D%2700825433%27&outFields=*&f=html",
+    "aerial": {
+      "thumbnail_url": "/api/aerial/00825433",
+      "capture_source": "ESRI World Imagery (Satellite Capture)",
+      "roof_archetype": "Commercial Flat Low-Slope"
+    }
+  },
+  {
+    "rank": 20,
+    "lead_id": "TAD-PARCEL-04741838",
+    "address": "701 Commerce St",
+    "city": "Fort Worth",
+    "building_sqft": 120000,
+    "year_built": 1995,
+    "owner": "Leonard, Robert W Etal",
+    "tad_account": "04741838",
+    "verification_score": 95,
+    "hail_proximity": {
+      "distance_miles": 1.59,
+      "hail_size_inches": 1.75,
+      "strike_location": "SE Fort Worth / Little Rd & I-20 (Golf ball size)"
+    },
+    "permit_audit": {
+      "status": "NO_POST_STORM_ROOF_PERMIT_FOUND",
+      "portal_source": "City of Fort Worth Open Data Permits FeatureServer",
+      "live_search_url": "https://services5.arcgis.com/3ddLCBXe1bRt7mzj/arcgis/rest/services/CFW_Open_Data_Development_Permits_View/FeatureServer/0/query?where=Full_Street_Address+LIKE+%27%25701%25Commerce%25%27&outFields=*&f=html"
+    },
+    "live_cad_url": "https://mapit.tarrantcounty.com/arcgis/rest/services/Dynamic/TADParcels/MapServer/0/query?where=ACCOUNT%3D%2704741838%27&outFields=*&f=html",
+    "aerial": {
+      "thumbnail_url": "/api/aerial/04741838",
+      "capture_source": "ESRI World Imagery (Satellite Capture)",
+      "roof_archetype": "Commercial Flat Low-Slope"
+    }
+  }
+]

@@ -1,0 +1,182 @@
+[
+  {
+    "permit_no": "PB26-13875",
+    "file_date": "2026-10-08",
+    "permit_type": "Commercial Building Permit",
+    "permit_subtype": "Remodel",
+    "address_on_permit": "8200 CAMP BOWIE WEST BLVD",
+    "street_pattern": "CAMP BOWIE",
+    "work_description": "Commercial reroof",
+    "job_value": "115746.59"
+  },
+  {
+    "permit_no": "HCLC-26-231",
+    "file_date": "2026-08-26",
+    "permit_type": "Design Review",
+    "permit_subtype": "HCLC",
+    "address_on_permit": "7405 CAMP BOWIE WEST BLVD",
+    "street_pattern": "CAMP BOWIE",
+    "work_description": "Addition of new windows, doors and shade canopies. Replace existing siding with stucco on the north elevation and new siding on lvl 2 south elevation. New roof and rework soffit. New exterior lighting, flatwork and landscaping.",
+    "job_value": null
+  },
+  {
+    "permit_no": "PB25-12003",
+    "file_date": "2025-08-25",
+    "permit_type": "Commercial Building Permit",
+    "permit_subtype": "Remodel",
+    "address_on_permit": "2800 ALTA MERE DR",
+    "street_pattern": "ALTA MERE",
+    "work_description": "Includes reorganization of existing kitchen equipment and addition of new fryer units.  The existing type 1 hood and wrapped ducts will be replaced with Type 1 new equipment. Rooftop equipment will remain existing.",
+    "job_value": "125000"
+  },
+  {
+    "permit_no": "PB23-10112",
+    "file_date": "2023-07-05",
+    "permit_type": "Commercial Building Permit",
+    "permit_subtype": "Remodel",
+    "address_on_permit": "3101 ALTA MERE DR",
+    "street_pattern": "ALTA MERE",
+    "work_description": "Remove existing roof layers down to metal roof deck.\n- Remove existing metal coping cap, drip edge, flashings, and accessories as needed for installation of the new roof.\n- Delete unused/obsolete penetration items.\n- Install one layer 4.5\u201d (3.5 \u201c + 1\u201d) iso board over existing roof surface to provide a clean, smooth surface for the new roof.\n- Mechanically fasten iso board per manufacturer\u2019s recommendations at a minimum of 5 fasteners per 4x8 sheet using Firestone screws and\nplates.\n- Fully adhere Firestone White 60 mil TPO roof membrane to entire field of roof per manufacturer guidelines, using all Firestone fasteners and\naccessories.\n- Fully adhere Firestone White 60 mil TPO on the parapet wall, encapsulating top of parapet wall.\n- Install Firestone prefabricated flashings on roof penetrations.\n- Replace plumbing vent flashings and heat stacks.\n- Set all roof side plumbing and electrical conduit on 1.5 Miro pipe stands. (This is in lieu of 4x4 wood posts that rot over time, compromising the\nTPO membrane.)\n- Install new pre-finished 24 gauge metal custom fabricated coping cap with continuous cleat on parapet wall located on the west side of the\nbuilding.\n- Install termination bar along rear elevation to allow proper water flow into gutters.\n- Install new gutters & downspouts to rear elevation.\n- Provide Firestone Standard 20 Year Materials & Labor Warranty.\n- 5 Year Workmanship Warranty provided by D&G Roof Systems, LLC.\nBuilding Permits: The cost of building permits is included in this bid.\n- Obtain necessary construction permits from City of Fort Worth.\n- Thoroughly clean roof and job site and haul off all construction debris.",
+    "job_value": "138994"
+  },
+  {
+    "permit_no": "PB25-17146",
+    "file_date": "2025-12-16",
+    "permit_type": "Commercial Building Permit",
+    "permit_subtype": "Remodel",
+    "address_on_permit": "4700 OLD DECATUR RD",
+    "street_pattern": "DECATUR",
+    "work_description": "Includes reorganization of existing kitchen equipment and addition of new fryer units.  The existing type 1 hood and wrapped ducts will be replaced with Type 1 new equipment. Rooftop equipment will remain existing.",
+    "job_value": "125000"
+  },
+  {
+    "permit_no": "PB25-01526",
+    "file_date": "2025-02-03",
+    "permit_type": "Commercial Building Permit",
+    "permit_subtype": "Remodel",
+    "address_on_permit": "8601 OLD DECATUR RD",
+    "street_pattern": "DECATUR",
+    "work_description": "Roof replacement of areas indicated on plans for work to be completed in summer 2025. Also, areas of roof top unit replacement as indicated on plans with associated piping, electrical, and ceiling work to be completed in summer 2025.",
+    "job_value": "3808247"
+  },
+  {
+    "permit_no": "PB26-09152",
+    "file_date": "2026-06-24",
+    "permit_type": "Residential Building Permit",
+    "permit_subtype": "Remodel",
+    "address_on_permit": "3423 NW 28TH ST",
+    "street_pattern": "28TH",
+    "work_description": "Changing roof due to hail damage. we are using Architectural shingles with synthetic underlayment. We are not changing any decking.",
+    "job_value": "11000"
+  },
+  {
+    "permit_no": "PB25-16305",
+    "file_date": "2025-11-24",
+    "permit_type": "Commercial Building Permit",
+    "permit_subtype": "Remodel",
+    "address_on_permit": "2501 NE 28TH ST",
+    "street_pattern": "28TH",
+    "work_description": "Includes reorganization of existing kitchen equipment and addition of new fryer units.  The existing type 1 hood and wrapped ducts will be replaced with Type 1 new equipment. Rooftop equipment will remain existing.",
+    "job_value": "125000"
+  },
+  {
+    "permit_no": "PB26-13197",
+    "file_date": "2026-09-21",
+    "permit_type": "Residential Building Permit",
+    "permit_subtype": "New",
+    "address_on_permit": "1417 N SYLVANIA AVE",
+    "street_pattern": "SYLVANIA",
+    "work_description": "New construction of a two-story residential duplex consisting of two separate dwelling units. Work includes slab-on-grade foundation, wood framing, roofing, exterior finishes, plumbing, electrical, HVAC, insulation, interior finishes, fire-rated separation, and associated utility connections in accordance with approved plans and applicable City of Fort Worth codes.",
+    "job_value": "250000"
+  },
+  {
+    "permit_no": "PB26-11314",
+    "file_date": "2026-08-06",
+    "permit_type": "Commercial Building Permit",
+    "permit_subtype": "Remodel",
+    "address_on_permit": "1515 S SYLVANIA AVE",
+    "street_pattern": "SYLVANIA",
+    "work_description": "Tear off and replace 210 squares of TPO roof.",
+    "job_value": "375000"
+  },
+  {
+    "permit_no": "PB26-11907",
+    "file_date": "2026-08-20",
+    "permit_type": "Commercial Building Permit",
+    "permit_subtype": "Remodel",
+    "address_on_permit": "101 N HOUSTON ST",
+    "street_pattern": "HOUSTON",
+    "work_description": "Remodel Roof",
+    "job_value": "100000"
+  },
+  {
+    "permit_no": "PB26-10322",
+    "file_date": "2026-07-09",
+    "permit_type": "Commercial Building Permit",
+    "permit_subtype": "Remodel",
+    "address_on_permit": "918 HOUSTON ST",
+    "street_pattern": "HOUSTON",
+    "work_description": "Roof Replacement",
+    "job_value": "60000"
+  },
+  {
+    "permit_no": "PB26-13889",
+    "file_date": "2026-10-08",
+    "permit_type": "Commercial Building Permit",
+    "permit_subtype": "Remodel",
+    "address_on_permit": "2250 EAST LOOP 820 FWY",
+    "street_pattern": "820",
+    "work_description": "Tear off, haul and dispose of modified bitumen\nTear off, haul and dispose 4 1/2\u201d ISO board roof insulation\nInstall a 4 1/2\" ISO board roof insulation\nApply a single ply of 60 mill TPO membrane mechanically attached\nRemove and dispose metal roofing - Premium grade.\nInstall roofing felt - synthetic underlayment.\nInstall Snap Lock metal roofing.",
+    "job_value": "225023.3"
+  },
+  {
+    "permit_no": "PB26-12793",
+    "file_date": "2026-09-09",
+    "permit_type": "Commercial Building Permit",
+    "permit_subtype": "Remodel",
+    "address_on_permit": "3550 SOUTHWEST LOOP 820 FWY",
+    "street_pattern": "820",
+    "work_description": "Remove north facing and south facing shingle roof and replace with standing seam metal over sancary replace mod bitumen roof over walk way",
+    "job_value": "19256"
+  },
+  {
+    "permit_no": "PB24-14546",
+    "file_date": "2024-09-24",
+    "permit_type": "Commercial Building Permit",
+    "permit_subtype": "Remodel",
+    "address_on_permit": "4924 OLD BENBROOK RD",
+    "street_pattern": "OLD BENBROOK",
+    "work_description": "Remove and replace roofing on middle lower roof area. Repair decking as needed. Install R25 rigid insulation and TPO roofing system.",
+    "job_value": "44874"
+  },
+  {
+    "permit_no": "PB16-10395",
+    "file_date": "2016-09-20",
+    "permit_type": "Commercial Building Permit",
+    "permit_subtype": "Remodel",
+    "address_on_permit": "4300 OLD BENBROOK RD",
+    "street_pattern": "OLD BENBROOK",
+    "work_description": "APARTMENT COMPLEX TEAR OFF AND REROOF . BUILDING 9",
+    "job_value": "8224.5"
+  },
+  {
+    "permit_no": "PB25-03864",
+    "file_date": "2025-03-21",
+    "permit_type": "Residential Building Permit",
+    "permit_subtype": "Remodel",
+    "address_on_permit": "3229 SAPPINGTON PL",
+    "street_pattern": "SAPPINGTON",
+    "work_description": "install 10 roof mounted solar panels and 1 battery; add-on to existing system",
+    "job_value": "5520"
+  },
+  {
+    "permit_no": "PB24-12219",
+    "file_date": "2024-08-13",
+    "permit_type": "Residential Building Permit",
+    "permit_subtype": "Remodel",
+    "address_on_permit": "3229 SAPPINGTON PL",
+    "street_pattern": "SAPPINGTON",
+    "work_description": "Installing 10 panels in 1 array for a 4.0 kW sized, roof mounted addition to an already existing solar system.",
+    "job_value": "21213.84"
+  }
+]
