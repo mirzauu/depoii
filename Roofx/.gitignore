@@ -1,0 +1,20 @@
+# Misc / OS
+.DS_Store
+Thumbs.db
+*.pem
+
+# Environment files
+.env*
+!.env.example
+
+# Python / FastAPI
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.db
+*.db-shm
+*.db-wal
+.pytest_cache/
+depoii-data-engine/.venv/
+depoii-data-engine/__pycache__/

@@ -1,0 +1,5 @@
+roof_activity_values 0
+sample ACTIVITY from Dallas FY2023-24 permits, 15 rows: (B) Alteration, (B) Renovation, (A) New Construction
+recall UNKNOWN
+The layer labels work as Alteration, Renovation, or New Construction. It does not label a roof permit as its own ACTIVITY, so a roof-permit recall rate was not measured.
+Street searches on this layer are logged as match counts. A count of 0 is the result of that search.

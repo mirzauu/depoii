@@ -1,0 +1,32 @@
+RUN_UTC 2026-10-13T21:35:59Z
+db D:\Depoii_backups\depoii_local_2026-10-14_fingerprint_null.db
+canonical depoii_local.db was not modified by this script.
+
+Rows nulled on the backup:
+scored_valuation_times_165 1095
+dallas_year_1996_missing 315
+footprint_land_times_065 136
+replacement_from_065_footprint 78
+scored_footprint_land_times_065 137
+distance_exactly_1_5 2333
+event_date_2026_03_17 522
+dallas_default_permit_value 8277
+substituted_issue_date 18105
+
+Recount after the update (confirm_fingerprint_null.py):
+v165 0
+y1996 0
+fp 0
+d15 0
+m17 0
+released 0
+
+Canonical recount, same script, same time:
+v165 1095
+y1996 315
+fp 136
+d15 2333
+m17 522
+released 0
+
+Saved roll pages were loaded into lead_evidence on the canonical database (180 evidence cells). released_leads stayed 0 because hail and permit evidence are missing and apartments, the church, and multi-story buildings are ineligible.

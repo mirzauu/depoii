@@ -1,0 +1,21 @@
+RUN_UTC 2026-10-13T20:42:20.446953+00:00
+DB d:\Depoii_nextjs\audit\depoii_local_audit_copy.db
+table	canonical_contractors	15498
+table	field_provenance	1337466
+table	manual_disqualifications	10
+table	normalized_permits	93508
+table	parcels	16657
+table	release_fields	25
+table	scored_parcel_leads	11270
+table	storm_swaths	692
+view	release_parcels
+view	release_permits
+---COLUMNS---
+canonical_contractors | id:TEXT, canonical_name:TEXT, primary_license:TEXT, headquarters_city:TEXT, headquarters_state:TEXT, total_permits:INTEGER, total_valuation:REAL, primary_roof_system:TEXT, created_at:TEXT, updated_at:TEXT, website_url:TEXT, hq_address:TEXT, phone_number:TEXT, year_founded:INTEGER, crew_capacity_estimate:TEXT, leadership:TEXT, manufacturer_certifications:TEXT, m_and_a_profile:TEXT, rcat_profile_url:TEXT, rcat_license_number:TEXT, rcat_license_type:TEXT, rcat_member_since:INTEGER, bbb_profile_url:TEXT, bbb_rating:TEXT, bbb_accredited:INTEGER, linkedin_company_url:TEXT
+field_provenance | table_name:TEXT, row_id:TEXT, column_name:TEXT, status:TEXT, source:TEXT, source_ref:TEXT, retrieved_at:TEXT, method:TEXT, method_ver:TEXT
+manual_disqualifications | parcel_id:TEXT, address:TEXT, disqualification_reason:TEXT, disqualified_by:TEXT, disqualified_at:TEXT, evidence_source:TEXT
+normalized_permits | id:TEXT, raw_permit_number:TEXT, jurisdiction_id:TEXT, parcel_id:TEXT, contractor_id:TEXT, source_system:TEXT, jurisdiction:TEXT, state:TEXT, city:TEXT, issue_date:TEXT, applied_date:TEXT, expiration_date:TEXT, status:TEXT, normalized_address:TEXT, zip_code:TEXT, valuation:REAL, valuation_formatted:TEXT, category:TEXT, probable_roof_system:TEXT, raw_description:TEXT, square_footage:INTEGER, contractor_name:TEXT, contractor_license:TEXT, contractor_phone:TEXT, is_hail_storm_window:INTEGER, associated_storm_id:TEXT, is_competitor_capture:INTEGER, confidence_score:INTEGER, latitude:REAL, longitude:REAL, normalized_at:TEXT, permit_scope:TEXT, is_pure_reroof:INTEGER, calibrated_roof_valuation:REAL, geo_quality:TEXT, date_quality:TEXT, area_source:TEXT, year_built_source:TEXT, value_source:TEXT, source_record_id:TEXT, retrieved_at:TEXT
+parcels | id:TEXT, account_number:TEXT, jurisdiction_id:TEXT, jurisdiction:TEXT, address:TEXT, city:TEXT, county:TEXT, state:TEXT, zip_code:TEXT, building_sqft:INTEGER, land_sqft:INTEGER, year_built:INTEGER, property_type:TEXT, owner_name:TEXT, owner_address:TEXT, owner_city:TEXT, owner_state:TEXT, owner_zip:TEXT, total_valuation:REAL, improvement_valuation:REAL, latitude:REAL, longitude:REAL, data_source:TEXT, created_at:TIMESTAMP, is_mock:INTEGER, geo_quality:TEXT, date_quality:TEXT, area_source:TEXT, year_built_source:TEXT, value_source:TEXT, source_record_id:TEXT, retrieved_at:TEXT, footprint_sqft:INTEGER, stories:INTEGER, roof_age_years:INTEGER, roof_age_basis:TEXT, footprint_basis:TEXT, enriched_at:TEXT, data_provenance:TEXT, provenance_date:TEXT, building_sqft_source:TEXT, valuation_source:TEXT, improvement_sections:TEXT
+release_fields | table_name:TEXT, column_name:TEXT
+scored_parcel_leads | parcel_id:TEXT, address:TEXT, city:TEXT, state:TEXT, zip_code:TEXT, owner_name:TEXT, property_type:TEXT, building_sqft:INTEGER, year_built:INTEGER, cad_total_valuation:REAL, storm_id:TEXT, storm_name:TEXT, event_date:TEXT, max_hail_inches:REAL, kinetic_energy_joules:REAL, exposure_score:INTEGER, lead_tier:TEXT, estimated_replacement_low:REAL, estimated_replacement_high:REAL, estimated_replacement_mid:REAL, estimated_replacement_formatted:TEXT, why_strong_summary:TEXT, why_weak_summary:TEXT, created_at:TEXT, is_mock:INTEGER, verification_status:TEXT, verification_score:INTEGER, cad_account_id:TEXT, cad_property_class:TEXT, nearest_hail_distance_mi:REAL, nearest_hail_size_in:REAL, nearest_hail_location:TEXT, muni_permit_check_date:TEXT, muni_permit_status:TEXT, aerial_snapshot_url:TEXT, aerial_capture_date:TEXT, evidence_payload_json:TEXT, footprint_sqft:INTEGER, roof_age_years:INTEGER, roof_age_basis:TEXT, data_provenance:TEXT, provenance_date:TEXT, outbound_ready:INTEGER, outbound_block_reason:TEXT, building_sqft_source:TEXT, valuation_source:TEXT, year_built_source:TEXT
+storm_swaths | id:TEXT, storm_name:TEXT, event_date:TEXT, max_hail_inches:REAL, max_gust_mph:REAL, jurisdiction_id:TEXT, properties:TEXT, created_at:TEXT

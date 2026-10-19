@@ -1,0 +1,315 @@
+RUN_UTC 2026-10-13T20:46:46.832051+00:00
+
+=== API ranked population exposure>=60 by city state ===
+SQL: SELECT COALESCE(city,'(null)'), COALESCE(state,'(null)'), COUNT(*) n, SUM(CASE WHEN data_provenance='unverified_seed' THEN 1 ELSE 0 END) seed_n, SUM(CASE WHEN outbound_ready=1 THEN 1 ELSE 0 END) ready_n FROM scored_parcel_leads WHERE exposure_score >= 60 AND COALESCE(is_mock,0)=0 GROUP BY 1,2 ORDER BY n DESC
+ROWS 46
+New York | NY | 3080 | 3080 | 0
+Fort Worth | TX | 505 | 504 | 1
+New York City | NY | 429 | 429 | 0
+Seattle | WA | 378 | 378 | 0
+Arlington | TX | 221 | 221 | 0
+Addison | TX | 153 | 153 | 0
+Dallas | TX | 134 | 133 | 1
+Farmers Branch | TX | 126 | 126 | 0
+Coppell | TX | 102 | 102 | 0
+Rowlett | TX | 74 | 74 | 0
+Irving | TX | 53 | 53 | 0
+Grand Prairie | TX | 51 | 51 | 0
+Euless | TX | 50 | 50 | 0
+Tarrant County | TX | 49 | 49 | 0
+Richardson | TX | 47 | 47 | 0
+Balch Springs | TX | 38 | 38 | 0
+Grapevine | TX | 35 | 35 | 0
+Hurst | TX | 34 | 34 | 0
+Haltom City | TX | 32 | 32 | 0
+North Richland Hills | TX | 24 | 24 | 0
+Richland Hills | TX | 20 | 20 | 0
+Benbrook | TX | 15 | 15 | 0
+Carrollton | TX | 15 | 15 | 0
+No Town | TX | 15 | 15 | 0
+Mansfield | TX | 14 | 14 | 0
+Pantego | TX | 12 | 12 | 0
+Garland | TX | 11 | 11 | 0
+Forest Hill | TX | 8 | 8 | 0
+Keller | TX | 8 | 8 | 0
+Saginaw | TX | 8 | 8 | 0
+Watauga | TX | 5 | 5 | 0
+Kennedale | TX | 4 | 4 | 0
+Southlake | TX | 4 | 4 | 0
+White Settlement | TX | 4 | 4 | 0
+Azle | TX | 3 | 3 | 0
+Crowley | TX | 3 | 3 | 0
+Everman | TX | 3 | 3 | 0
+Trophy Club | TX | 3 | 3 | 0
+Dalworthington Gardens | TX | 2 | 2 | 0
+Haslet | TX | 2 | 2 | 0
+Roanoke | TX | 2 | 2 | 0
+Westlake | TX | 2 | 2 | 0
+Colleyville | TX | 1 | 1 | 0
+Edgecliff Village | TX | 1 | 1 | 0
+Lake Worth | TX | 1 | 1 | 0
+River Oaks | TX | 1 | 1 | 0
+
+=== exposure score bands all scored ===
+SQL: SELECT SUM(CASE WHEN exposure_score>=60 THEN 1 ELSE 0 END) ge60, SUM(CASE WHEN exposure_score>=85 THEN 1 ELSE 0 END) ge85, SUM(CASE WHEN exposure_score=0 THEN 1 ELSE 0 END) zero, MIN(exposure_score), MAX(exposure_score), COUNT(*) FROM scored_parcel_leads
+ROWS 1
+5782 | 2599 | 4 | 0 | 99 | 11270
+
+=== distance value piles ===
+SQL: SELECT nearest_hail_distance_mi, COUNT(*) n FROM scored_parcel_leads GROUP BY 1 ORDER BY n DESC LIMIT 15
+ROWS 15
+ | 6853
+1.5 | 2333
+1.99 | 12
+3.87 | 10
+3.72 | 9
+3.68 | 9
+2.47 | 9
+1.83 | 9
+1.59 | 9
+4.35 | 8
+3.75 | 8
+3.65 | 8
+3.56 | 8
+3.43 | 8
+2.1 | 8
+
+=== distance exactly 1.5 or 999 by storm ===
+SQL: SELECT event_date, storm_name, SUM(CASE WHEN nearest_hail_distance_mi=1.5 THEN 1 ELSE 0 END) d15, SUM(CASE WHEN nearest_hail_distance_mi=999 THEN 1 ELSE 0 END) d999, SUM(CASE WHEN nearest_hail_distance_mi IS NULL THEN 1 ELSE 0 END) dnull, COUNT(*) n FROM scored_parcel_leads GROUP BY 1,2 ORDER BY n DESC
+ROWS 16
+2026-06-06 | June 06, 2026 New York City Metro Severe Convective Corridor | 1965 | 1 | 3352 | 5318
+2026-06-02 | June 02, 2026 Dallas-Fort Worth Severe Hail Core | 4 | 0 | 152 | 1323
+2026-03-10 | March 10, 2026 Chicago Metro Severe Hail Core | 88 | 0 | 1130 | 1218
+2025-07-03 | July 03, 2025 New York City Metro Severe Hail Event | 131 | 0 | 950 | 1081
+2023-09-08 | September 08, 2023 New York City Metro Severe Hail Event | 56 | 0 | 749 | 805
+2026-04-28 | April 28, 2026 Dallas-Fort Worth Severe Hail Core | 1 | 0 | 24 | 605
+2026-03-17 | March 17, 2026 New York City Metro Severe Derecho & Wind Swath | 81 | 0 | 441 | 522
+2026-05-23 | May 23, 2026 Dallas-Fort Worth Convective Hail Swath | 0 | 0 | 1 | 288
+2026-04-29 | April 29, 2026 Dallas-Fort Worth Severe Hail Core | 0 | 0 | 1 | 35
+2026-07-15 | July 15, 2026 New York City Metro Severe Convective Corridor | 5 | 0 | 29 | 34
+2026-05-24 | May 24, 2026 Dallas-Fort Worth Severe Hail Event | 0 | 0 | 0 | 13
+2026-07-04 | July 04, 2026 New York City Metro Severe Convective Corridor | 0 | 0 | 12 | 12
+2026-06-12 | June 12, 2026 New York City Metro Severe Convective Corridor | 1 | 0 | 5 | 6
+ | Outside known SPC swath | 0 | 0 | 4 | 4
+2026-06-07 | June 07, 2026 New York City Metro Severe Convective Corridor | 1 | 0 | 3 | 4
+2026-04-26 | April 26, 2026 DFW Severe Hail Swath | 0 | 0 | 0 | 2
+
+=== scored valuation vs parcel valuation ===
+SQL: SELECT SUM(CASE WHEN ABS(COALESCE(s.cad_total_valuation,0) - COALESCE(p.total_valuation,0)) < 1 THEN 1 ELSE 0 END) match_val, SUM(CASE WHEN s.building_sqft>0 AND ABS(s.cad_total_valuation - s.building_sqft*165.0)<1 AND ABS(COALESCE(p.total_valuation,0) - s.building_sqft*165.0)>=1 THEN 1 ELSE 0 END) scored165_parcel_not, SUM(CASE WHEN s.building_sqft>0 AND ABS(s.cad_total_valuation - s.building_sqft*165.0)<1 THEN 1 ELSE 0 END) scored165, SUM(CASE WHEN s.year_built IS NOT NULL AND p.year_built IS NOT NULL AND s.year_built<>p.year_built THEN 1 ELSE 0 END) year_mismatch, COUNT(*) n FROM scored_parcel_leads s JOIN parcels p ON p.id=s.parcel_id
+ROWS 1
+10130 | 1095 | 1095 | 0 | 11270
+
+=== 165 fingerprint by city ===
+SQL: SELECT s.city, COUNT(*) n FROM scored_parcel_leads s WHERE s.building_sqft>0 AND ABS(s.cad_total_valuation - s.building_sqft*165.0)<1 GROUP BY 1 ORDER BY n DESC
+ROWS 11
+Addison | 258
+Carrollton | 198
+Dallas | 173
+Farmers Branch | 126
+Coppell | 102
+Rowlett | 74
+Irving | 53
+Richardson | 47
+Balch Springs | 38
+No Town | 15
+Garland | 11
+
+=== 0.65 parcels by data_source city ===
+SQL: SELECT data_source, city, COUNT(*) n FROM parcels WHERE land_sqft>0 AND building_sqft = CAST(ROUND(land_sqft*0.65) AS INT) GROUP BY 1,2 ORDER BY n DESC
+ROWS 3
+Dallas County Appraisal District (DCAD) | Dallas | 132
+NYC MapPLUTO (Department of City Planning) | New York | 6
+Tarrant Appraisal District (TAD) | Fort Worth | 1
+
+=== year 1996-1998 by city and source ===
+SQL: SELECT city, COALESCE(year_built_source,'(null)'), year_built, COUNT(*) n FROM parcels WHERE year_built IN (1996,1997,1998) GROUP BY 1,2,3 ORDER BY n DESC LIMIT 30
+ROWS 30
+Dallas | missing | 1996 | 315
+New York | cad_year_built | 1997 | 70
+New York | cad_year_built | 1996 | 60
+New York | cad_year_built | 1998 | 50
+Dallas | missing | 1998 | 28
+Fort Worth | cad_year_built | 1998 | 9
+Fort Worth | cad_year_built | 1996 | 8
+Fort Worth | cad_year_built | 1997 | 7
+New York City | cad_year_built | 1998 | 7
+Arlington | cad_year_built | 1998 | 5
+New York City | cad_year_built | 1997 | 5
+Arlington | cad_year_built | 1997 | 3
+Euless | cad_year_built | 1996 | 3
+New York City | cad_year_built | 1996 | 3
+Arlington | cad_year_built | 1996 | 2
+Mansfield | cad_year_built | 1996 | 2
+Bedford | cad_year_built | 1998 | 1
+Forest Hill | cad_year_built | 1996 | 1
+Fort Worth | TAD YEAR_BUILT | 1998 | 1
+Grand Prairie | cad_year_built | 1997 | 1
+Grapevine | cad_year_built | 1996 | 1
+Grapevine | cad_year_built | 1997 | 1
+Grapevine | cad_year_built | 1998 | 1
+Haslet | cad_year_built | 1996 | 1
+Hurst | cad_year_built | 1997 | 1
+Mansfield | cad_year_built | 1997 | 1
+North Richland Hills | cad_year_built | 1996 | 1
+North Richland Hills | cad_year_built | 1998 | 1
+Roanoke | cad_year_built | 1996 | 1
+Saginaw | cad_year_built | 1997 | 1
+
+=== residential-like property types in exposure>=60 ===
+SQL: SELECT COALESCE(property_type,'(null)') pt, COUNT(*) n FROM scored_parcel_leads WHERE exposure_score>=60 AND ( UPPER(property_type) LIKE '%APART%' OR UPPER(property_type) LIKE '%RESIDENT%' OR UPPER(property_type) LIKE '%SINGLE FAMILY%' OR UPPER(property_type) LIKE '%CHURCH%' OR UPPER(property_type) LIKE '%VACANT%' OR UPPER(property_type) LIKE '%EXEMPT%' OR property_type IN ('A1','A2','A3','A4','A5','A9','B1','B2','B3','B9','C0','C1','D1','D4','RM') OR UPPER(COALESCE(owner_name,'')) LIKE '%APARTMENT%' OR UPPER(COALESCE(owner_name,'')) LIKE '%CHURCH%' OR UPPER(COALESCE(owner_name,'')) LIKE '% CITY OF%' OR UPPER(COALESCE(owner_name,'')) LIKE 'CITY OF%' OR UPPER(COALESCE(owner_name,'')) LIKE '%ISD%' ) GROUP BY 1 ORDER BY n DESC LIMIT 40
+ROWS 40
+A5 | 427
+A1 | 420
+B2 | 360
+B1 | 213
+Commercial Real Estate - Single Family(Res Use/Zone) | 189
+A2 | 188
+C0 | 122
+B3 | 121
+A9 | 118
+B9 | 116
+D1 | 87
+C1 | 62
+D4 | 39
+Commercial Warehouse/Industrial | 37
+A3 | 36
+M1 | 22
+RM | 16
+Commercial Warehouse & Industrial Complex | 16
+Commercial Retail/Industrial | 15
+Commercial - Apartment | 13
+Commercial Real Estate - Condominium(Residential) | 9
+Commercial Warehouse | 5
+Commercial - Apartment(Mixed Use) | 5
+M9 | 4
+D7 | 4
+D6 | 4
+Commercial Logistics & Business Park | 4
+Commercial - Church/Welfare/Relig Srvc | 4
+C7 | 4
+M3 | 3
+K1 | 3
+Commercial Real Estate - Vacant(Single-family) | 3
+C6 | 3
+Commercial - Vacant(Multi-family) | 2
+C5 | 2
+A4 | 2
+Z9 | 1
+W9 | 1
+W8 | 1
+V0 | 1
+
+=== eligibility flags all scored ===
+SQL: SELECT SUM(CASE WHEN UPPER(COALESCE(property_type,'')) LIKE '%APART%' OR UPPER(COALESCE(owner_name,'')) LIKE '%APARTMENT%' THEN 1 ELSE 0 END) apt, SUM(CASE WHEN UPPER(COALESCE(property_type,'')) LIKE '%SINGLE FAMILY%' OR UPPER(COALESCE(property_type,'')) LIKE '%RESIDENT%' THEN 1 ELSE 0 END) res_word, SUM(CASE WHEN property_type IN ('A1','A2','A3','A4','A5','A9','B1','B2','B3') THEN 1 ELSE 0 END) nyc_small_res_class, SUM(CASE WHEN UPPER(COALESCE(owner_name,'')) LIKE '%CHURCH%' OR UPPER(COALESCE(owner_name,'')) LIKE '%BAPTIST%' THEN 1 ELSE 0 END) church, SUM(CASE WHEN UPPER(COALESCE(owner_name,'')) LIKE 'CITY OF %' OR UPPER(COALESCE(owner_name,'')) LIKE '% COUNTY' THEN 1 ELSE 0 END) gov, SUM(CASE WHEN UPPER(COALESCE(property_type,'')) LIKE '%VACANT%' OR building_sqft=0 THEN 1 ELSE 0 END) vacant_or_zero_sqft, COUNT(*) n FROM scored_parcel_leads
+ROWS 1
+85 | 199 | 2903 | 105 | 5 | 144 | 11270
+
+=== same flags inside API ge60 ===
+SQL: SELECT SUM(CASE WHEN property_type IN ('A1','A2','A3','A4','A5','A9','B1','B2','B3','C0','D1') THEN 1 ELSE 0 END) nyc_housing_class, SUM(CASE WHEN UPPER(COALESCE(property_type,'')) LIKE '%SINGLE FAMILY%' THEN 1 ELSE 0 END) sf, SUM(CASE WHEN UPPER(COALESCE(owner_name,'')) LIKE '%APARTMENT%' THEN 1 ELSE 0 END) apt_owner, SUM(CASE WHEN state<>'TX' THEN 1 ELSE 0 END) non_tx, COUNT(*) n FROM scored_parcel_leads WHERE exposure_score>=60
+ROWS 1
+2094 | 190 | 66 | 3887 | 5782
+
+=== issue_date 2026-10-06 by source and jurisdiction ===
+SQL: SELECT source_system, jurisdiction, date_quality, COUNT(*) n FROM normalized_permits WHERE issue_date='2026-10-06' GROUP BY 1,2,3 ORDER BY n DESC
+ROWS 12
+socrata | Cincinnati, OH | substituted | 5000
+socrata | Seattle, WA | substituted | 4999
+socrata | Gainesville, FL | substituted | 3998
+socrata | Montgomery County, MD | substituted | 1079
+socrata | Baton Rouge, LA | substituted | 1020
+socrata | Framingham, MA | substituted | 1000
+socrata | Sonoma County, CA | substituted | 991
+NYC_DOB_NOW | New York City, NY | source | 50
+DALLASNOW_ACCELA_LIVE | Dallas, TX | source | 15
+CFW_ARCGIS_DEVELOPMENT | Fort Worth, TX | source | 8
+energov | Addison, TX | source | 3
+socrata | New York City, NY | source | 1
+
+=== default dallas fingerprints ===
+SQL: SELECT SUM(CASE WHEN issue_date='2024-01-01' THEN 1 ELSE 0 END) d20240101, SUM(CASE WHEN valuation=75000 THEN 1 ELSE 0 END) v75k, SUM(CASE WHEN valuation=20000 THEN 1 ELSE 0 END) v20k, SUM(CASE WHEN valuation=145000 THEN 1 ELSE 0 END) v145, SUM(CASE WHEN valuation=95000 THEN 1 ELSE 0 END) v95, SUM(CASE WHEN zip_code='75201' THEN 1 ELSE 0 END) zip75201, COUNT(*) n FROM normalized_permits WHERE source_system='DALLAS_ARCGIS_FY24'
+ROWS 1
+0 | 262 | 8015 | 0 | 9 | 801 | 14336
+
+=== dallas link rate by source ===
+SQL: SELECT source_system, SUM(CASE WHEN parcel_id IS NOT NULL AND parcel_id!='' THEN 1 ELSE 0 END) linked, COUNT(*) n FROM normalized_permits WHERE jurisdiction LIKE '%Dallas%' OR city='Dallas' GROUP BY 1 ORDER BY n DESC
+ROWS 5
+DALLAS_ARCGIS_FY24 | 61 | 14336
+DALLASNOW_ACCELA_LIVE | 0 | 3226
+DallasNow Accela Portal | 98 | 145
+energov | 11 | 11
+socrata | 0 | 2
+
+=== fw geo quality link ===
+SQL: SELECT geo_quality, SUM(CASE WHEN parcel_id IS NOT NULL AND parcel_id!='' THEN 1 ELSE 0 END) linked, COUNT(*) n FROM normalized_permits WHERE jurisdiction LIKE '%Fort Worth%' GROUP BY 1
+ROWS 3
+missing | 1 | 35
+source_point | 15 | 249
+zip_centroid | 0 | 6729
+
+=== zip vs city mismatches scored TX sample counts ===
+SQL: SELECT SUM(CASE WHEN city='Dallas' AND substr(zip_code,1,3) NOT IN ('752','750','751') THEN 1 ELSE 0 END) dallas_bad_zip3, SUM(CASE WHEN city='Fort Worth' AND substr(COALESCE(zip_code,''),1,3) NOT IN ('761','760') THEN 1 ELSE 0 END) fw_bad_zip3, SUM(CASE WHEN city='Dallas' THEN 1 ELSE 0 END) dallas_n, SUM(CASE WHEN city='Fort Worth' THEN 1 ELSE 0 END) fw_n FROM scored_parcel_leads
+ROWS 1
+48 | 0 | 178 | 535
+
+=== outbound zip check ===
+SQL: SELECT address, city, zip_code, latitude, longitude FROM ( SELECT s.address, s.city, s.zip_code, p.latitude, p.longitude FROM scored_parcel_leads s JOIN parcels p ON p.id=s.parcel_id WHERE s.outbound_ready=1 )
+ROWS 6
+14222 Dallas Pkwy | Dallas | 75226 | 32.94253899193294 | -96.81991686539216
+14856 Preston Rd | Dallas | 75240 | 32.95047433977882 | -96.80120243419722
+1133 S Madison Ave | Dallas | 75208 | 32.73385401620511 | -96.82712790244761
+14755 Preston Rd | Dallas | 75254 | 32.94832526100074 | -96.80494544326527
+3001 Meacham Blvd | Fort Worth | 76102 | 32.824948969188895 | -97.30340607339363
+3434 W ILLINOIS AVE | Dallas | 75211 |  | 
+
+=== stories>1 scored with building used as roof proxy ===
+SQL: SELECT s.parcel_id, s.address, s.building_sqft, s.footprint_sqft, p.stories, s.estimated_replacement_mid FROM scored_parcel_leads s JOIN parcels p ON p.id=s.parcel_id WHERE COALESCE(p.stories,1)>1
+ROWS 1
+DCAD-PARCEL-0081740A0003B0100 | 14755 Preston Rd | 194113 | 134497 | 8 | 228082.0
+
+=== may 28 or june 2 in swaths or leads ===
+SQL: SELECT 'swath' src, event_date, storm_name, max_hail_inches FROM storm_swaths WHERE event_date IN ('2024-05-28','2026-05-28','2026-06-02','2024-06-02') UNION ALL SELECT 'lead', event_date, storm_name, COUNT(*) FROM scored_parcel_leads WHERE event_date IN ('2024-05-28','2026-05-28','2026-06-02','2024-06-02') GROUP BY event_date, storm_name
+ROWS 4
+swath | 2024-05-28 | May 28, 2024 Dallas-Fort Worth Severe Hail Core | 3.25
+swath | 2024-06-02 | June 02, 2024 Dallas-Fort Worth Convective Hail Swath | 1.75
+swath | 2026-05-28 | May 28, 2026 Dallas-Fort Worth Severe Hail Event | 1.25
+lead | 2026-06-02 | June 02, 2026 Dallas-Fort Worth Severe Hail Core | 1323
+
+=== distinct storm_swath dates count ===
+SQL: SELECT COUNT(DISTINCT event_date), COUNT(*), MIN(event_date), MAX(event_date) FROM storm_swaths
+ROWS 1
+466 | 692 | 2023-01-03 | 2026-09-27
+
+=== contractor phone nulls and patterns ===
+SQL: SELECT COUNT(*) n, SUM(CASE WHEN phone_number IS NULL OR trim(phone_number)='' THEN 1 ELSE 0 END) null_phone, SUM(CASE WHEN phone_number LIKE '%555%' THEN 1 ELSE 0 END) has_555, COUNT(DISTINCT phone_number) d_phone FROM canonical_contractors
+ROWS 1
+15498 | 15372 | 0 | 118
+
+=== top repeated contractor phones ===
+SQL: SELECT phone_number, COUNT(*) n FROM canonical_contractors WHERE phone_number IS NOT NULL AND trim(phone_number)!='' GROUP BY 1 HAVING n>=5 ORDER BY n DESC LIMIT 20
+ROWS 0
+
+=== lead tiers ===
+SQL: SELECT lead_tier, COUNT(*) FROM scored_parcel_leads GROUP BY 1 ORDER BY 2 DESC
+ROWS 6
+DEPRIORITIZED | 5318
+core | 2261
+TIER_2_QUALIFIED | 2147
+TIER_1_HOT_LEAD | 1535
+TIER_3_MONITOR | 6
+envelope | 3
+
+=== verification status of ge60 ===
+SQL: SELECT verification_status, data_provenance, COUNT(*) n FROM scored_parcel_leads WHERE exposure_score>=60 GROUP BY 1,2 ORDER BY n DESC
+ROWS 12
+PERMIT_DETECTED | unverified_seed | 3908
+VERIFIED | unverified_seed | 772
+LOW_STORM_PROXIMITY | unverified_seed | 614
+DISQUALIFIED_INSTITUTIONAL | unverified_seed | 200
+MISSING_COORDINATES | unverified_seed | 129
+UNVERIFIED | unverified_seed | 70
+DISQUALIFIED_MFR | unverified_seed | 53
+NON_ROOF_PERMIT_DETECTED | unverified_seed | 14
+ROOF_PERMIT_DETECTED | unverified_seed | 13
+DISQUALIFIED_MANUAL | unverified_seed | 7
+VERIFIED | live_dcad_scrape | 1
+VERIFIED | live_tad_api | 1

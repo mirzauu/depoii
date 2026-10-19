@@ -1,0 +1,205 @@
+RUN_UTC 2026-10-13T20:48:37.059346+00:00
+SPC_CODES 473
+
+=== scored event_date vs SPC file and previous convective-day file ===
+2023-09-08 file=230908 http=200 rows=46 bytes=4623 | prev=230907 http=200 rows=80 header='Time,Size,Location,County,State,Lat,Lon,Comments' err=None
+2025-07-03 file=250703 http=200 rows=62 bytes=7125 | prev=250702 http=200 rows=3 header='Time,Size,Location,County,State,Lat,Lon,Comments' err=None
+2026-03-10 file=260310 http=200 rows=395 bytes=37901 | prev=260309 http=200 rows=13 header='Time,Size,Location,County,State,Lat,Lon,Comments' err=None
+2026-03-17 file=260317 http=200 rows=0 bytes=49 | prev=260316 http=200 rows=1 header='Time,Size,Location,County,State,Lat,Lon,Comments' err=None
+2026-04-26 file=260426 http=200 rows=218 bytes=16835 | prev=260425 http=200 rows=183 header='Time,Size,Location,County,State,Lat,Lon,Comments' err=None
+2026-04-28 file=260428 http=200 rows=262 bytes=23295 | prev=260427 http=200 rows=242 header='Time,Size,Location,County,State,Lat,Lon,Comments' err=None
+2026-04-29 file=260429 http=200 rows=64 bytes=7298 | prev=260428 http=200 rows=262 header='Time,Size,Location,County,State,Lat,Lon,Comments' err=None
+2026-05-23 file=260523 http=200 rows=10 bytes=933 | prev=260522 http=200 rows=33 header='Time,Size,Location,County,State,Lat,Lon,Comments' err=None
+2026-05-24 file=260524 http=0 rows=0 bytes=0 | prev=260523 http=200 rows=10 header='' err=HTTP Error 504: Gateway Time-out
+2026-06-02 file=260602 http=200 rows=40 bytes=4041 | prev=260601 http=200 rows=91 header='Time,Size,Location,County,State,Lat,Lon,Comments' err=None
+2026-06-06 file=260606 http=200 rows=19 bytes=1649 | prev=260605 http=200 rows=27 header='Time,Size,Location,County,State,Lat,Lon,Comments' err=None
+2026-06-07 file=260607 http=200 rows=24 bytes=2114 | prev=260606 http=200 rows=19 header='Time,Size,Location,County,State,Lat,Lon,Comments' err=None
+2026-06-12 file=260612 http=200 rows=15 bytes=1365 | prev=260611 http=200 rows=58 header='Time,Size,Location,County,State,Lat,Lon,Comments' err=None
+2026-07-04 file=260704 http=200 rows=84 bytes=7762 | prev=260703 http=200 rows=69 header='Time,Size,Location,County,State,Lat,Lon,Comments' err=None
+2026-07-15 file=260715 http=200 rows=3 bytes=439 | prev=260714 http=200 rows=19 header='Time,Size,Location,County,State,Lat,Lon,Comments' err=None
+
+=== storm_swaths vs SPC (claimed state has a hail row) ===
+swaths 692 ok_state_row 386 missing_or_empty 306 http_fail 5 size_mismatch 386
+-- missing sample (up to 40) --
+2024-03-15 | TX-FORT_WORTH | March 15, 2024 Fort Worth Severe Hail Supercell | no_state_rows | 40 | 
+2024-04-11 | FL-GAINESVILLE | April 11, 2024 Big Bend / Alachua County Hail Swath | no_state_rows | 2 | FL
+2023-08-30 | FL-GAINESVILLE | August 30, 2023 Hurricane Idalia Convective Wind Swath | no_state_rows | 9 | FL
+2024-06-26 | NY-NEW_YORK_CITY | June 26, 2024 NYC Metro Severe Convective Storm | no_state_rows | 18 | NY
+2024-07-16 | NY-NEW_YORK_CITY | July 16, 2024 New York City Metro Severe Convective Corridor | no_state_rows | 22 | NY
+2023-11-04 | WA-SEATTLE | November 4, 2023 Puget Sound Severe Wind Core | no_state_rows | 0 | WA
+2024-03-28 | WA-SEATTLE | March 28, 2024 Western Washington Convective Hail Event | no_state_rows | 0 | WA
+2023-07-16 | MA-CAMBRIDGE | July 16, 2023 Eastern Massachusetts Severe Hail Swath | no_state_rows | 48 | 
+2023-08-08 | MA-FRAMINGHAM | August 8, 2023 Boston Metro Severe Convective Corridor | no_state_rows | 51 | 
+2024-06-05 | MD-MONTGOMERY_COUNTY | June 5, 2024 Mid-Atlantic Severe Derecho & Hail Core | no_state_rows | 12 | MD
+2024-02-04 | CA-SONOMA_COUNTY | February 4, 2024 Northern California Convective Wind & Hail | no_state_rows | 18 | CA
+2023-03-03 | TX-DALLAS | March 03, 2023 Dallas-Fort Worth Severe Derecho & Wind Swath | no_state_rows | 1 | TX
+2023-03-10 | TX-DALLAS | March 10, 2023 Dallas-Fort Worth Severe Hail Event | no_state_rows | 0 | TX
+2023-03-17 | TX-DALLAS | March 17, 2023 Dallas-Fort Worth Convective Hail Swath | no_state_rows | 0 | TX
+2023-03-24 | TX-DALLAS | March 24, 2023 Dallas-Fort Worth Severe Hail Event | no_state_rows | 2 | TX
+2023-05-20 | TX-DALLAS | May 20, 2023 Dallas-Fort Worth Severe Hail Core | no_state_rows | 9 | TX
+2023-08-11 | TX-DALLAS | August 11, 2023 Dallas-Fort Worth Convective Hail Swath | no_state_rows | 121 | TX
+2023-09-04 | TX-DALLAS | September 04, 2023 Dallas-Fort Worth Severe Hail Event | no_state_rows | 14 | TX
+2023-09-12 | TX-DALLAS | September 12, 2023 Dallas-Fort Worth Severe Convective Corridor | no_state_rows | 8 | TX
+2023-09-20 | TX-DALLAS | September 20, 2023 Dallas-Fort Worth Convective Hail Swath | no_state_rows | 4 | TX
+2023-09-25 | TX-DALLAS | September 25, 2023 Dallas-Fort Worth Severe Hail Core | no_state_rows | 0 | TX
+2023-10-05 | TX-DALLAS | October 05, 2023 Dallas-Fort Worth Convective Hail Swath | no_state_rows | 0 | TX
+2024-02-03 | TX-DALLAS | February 03, 2024 Dallas-Fort Worth Severe Hail Event | no_state_rows | 0 | TX
+2024-03-05 | TX-DALLAS | March 05, 2024 Dallas-Fort Worth Severe Hail Event | no_state_rows | 6 | TX
+2024-03-25 | TX-DALLAS | March 25, 2024 Dallas-Fort Worth Severe Convective Corridor | no_state_rows | 1 | TX
+2024-04-02 | TX-DALLAS | April 02, 2024 Dallas-Fort Worth Severe Hail Core | no_state_rows | 29 | TX
+2024-04-10 | TX-DALLAS | April 10, 2024 Dallas-Fort Worth Severe Hail Core | no_state_rows | 12 | TX
+2024-06-27 | TX-DALLAS | June 27, 2024 Dallas-Fort Worth Severe Hail Core | no_state_rows | 22 | TX
+2024-09-25 | TX-DALLAS | September 25, 2024 Dallas-Fort Worth Severe Hail Core | no_state_rows | 2 | TX
+2024-11-18 | TX-DALLAS | November 18, 2024 Dallas-Fort Worth Severe Convective Corridor | no_state_rows | 0 | TX
+2024-12-25 | TX-DALLAS | December 25, 2024 Dallas-Fort Worth Convective Hail Swath | no_state_rows | 0 | TX
+2025-03-24 | TX-DALLAS | March 24, 2025 Dallas-Fort Worth Convective Hail Swath | no_state_rows | 3 | TX
+2025-03-26 | TX-DALLAS | March 26, 2025 Dallas-Fort Worth Severe Hail Core | no_state_rows | 0 | TX
+2025-04-15 | TX-DALLAS | April 15, 2025 Dallas-Fort Worth Severe Hail Event | no_state_rows | 0 | TX
+2025-04-20 | TX-DALLAS | April 20, 2025 Dallas-Fort Worth Convective Hail Swath | no_state_rows | 2 | TX
+2025-05-23 | TX-DALLAS | May 23, 2025 Dallas-Fort Worth Convective Hail Swath | no_state_rows | 70 | TX
+2025-05-30 | TX-DALLAS | May 30, 2025 Dallas-Fort Worth Convective Hail Swath | no_state_rows | 6 | TX
+2025-08-01 | TX-DALLAS | August 01, 2025 Dallas-Fort Worth Severe Convective Corridor | no_state_rows | 22 | TX
+2025-08-28 | TX-DALLAS | August 28, 2025 Dallas-Fort Worth Severe Convective Corridor | no_state_rows | 1 | TX
+2025-09-06 | TX-DALLAS | September 06, 2025 Dallas-Fort Worth Severe Hail Event | no_state_rows | 13 | TX
+missing_total 306
+-- size mismatch sample (up to 30) --
+2024-05-28 | TX-DALLAS | May 28, 2024 Dallas-Fort Worth Severe Hail Core | 3.25 | 500.0 | 73 | 2
+2023-06-13 | TX-DALLAS | June 13, 2023 Dallas-Fort Worth Severe Hail Core | 5.0 | 550.0 | 88 | 32
+2024-04-02 | OH-CINCINNATI | April 02, 2024 Greater Cincinnati / Ohio Valley Convective Hail Swath | 1.75 | 100.0 | 2 | 2
+2024-05-07 | OH-CINCINNATI | May 7, 2024 Greater Cincinnati Convective Hail Swath | 2.0 | 100.0 | 3 | 0
+2023-07-20 | OH-CINCINNATI | July 20, 2023 Greater Cincinnati / Ohio Valley Convective Hail Swath | 1.5 | 200.0 | 21 | 0
+2024-05-10 | FL-GAINESVILLE | May 10, 2024 North Florida / Gainesville Severe Derecho & Wind Swath | 0.0 | 175.0 | 1 | 0
+2024-04-10 | LA-BATON_ROUGE | April 10, 2024 Baton Rouge / Southeast Louisiana Convective Hail Swath | 1.75 | 100.0 | 3 | 0
+2024-05-13 | LA-BATON_ROUGE | May 13, 2024 Baton Rouge Severe Convective Hail | 2.0 | 100.0 | 1 | 1
+2024-07-15 | IL-CHICAGO | July 15, 2024 Chicago Metro Severe Derecho & Wind Swath | 0.0 | 100.0 | 1 | 0
+2023-02-08 | TX-DALLAS | February 08, 2023 Dallas-Fort Worth Convective Hail Swath | 1.5 | 150.0 | 1 | 0
+2023-03-01 | TX-DALLAS | March 01, 2023 Dallas-Fort Worth Convective Hail Swath | 1.75 | 400.0 | 45 | 18
+2023-03-02 | TX-DALLAS | March 02, 2023 Dallas-Fort Worth Convective Hail Swath | 1.75 | 175.0 | 23 | 15
+2023-03-08 | TX-DALLAS | March 08, 2023 Dallas-Fort Worth Severe Hail Event | 1.0 | 175.0 | 7 | 2
+2023-03-09 | TX-DALLAS | March 09, 2023 Dallas-Fort Worth Severe Hail Event | 1.0 | 100.0 | 1 | 1
+2023-03-16 | TX-DALLAS | March 16, 2023 Dallas-Fort Worth Severe Hail Core | 3.0 | 400.0 | 60 | 50
+2023-04-02 | TX-DALLAS | April 02, 2023 Dallas-Fort Worth Severe Hail Core | 2.0 | 200.0 | 51 | 30
+2023-04-03 | TX-DALLAS | April 03, 2023 Dallas-Fort Worth Convective Hail Swath | 1.75 | 300.0 | 9 | 8
+2023-04-04 | TX-DALLAS | April 04, 2023 Dallas-Fort Worth Severe Hail Core | 3.0 | 150.0 | 2 | 0
+2023-04-20 | TX-DALLAS | April 20, 2023 Dallas-Fort Worth Severe Hail Core | 3.0 | 300.0 | 82 | 33
+2023-04-21 | TX-DALLAS | April 21, 2023 Dallas-Fort Worth Severe Hail Core | 3.0 | 275.0 | 20 | 0
+2023-04-26 | TX-DALLAS | April 26, 2023 Dallas-Fort Worth Severe Hail Core | 4.5 | 450.0 | 72 | 25
+2023-04-27 | TX-DALLAS | April 27, 2023 Dallas-Fort Worth Severe Hail Core | 2.0 | 150.0 | 2 | 0
+2023-04-28 | TX-DALLAS | April 28, 2023 Dallas-Fort Worth Severe Hail Core | 3.0 | 300.0 | 82 | 13
+2023-05-05 | TX-DALLAS | May 05, 2023 Dallas-Fort Worth Severe Hail Core | 2.25 | 275.0 | 35 | 7
+2023-05-06 | TX-DALLAS | May 06, 2023 Dallas-Fort Worth Severe Hail Event | 1.0 | 325.0 | 46 | 0
+2023-05-07 | TX-DALLAS | May 07, 2023 Dallas-Fort Worth Severe Hail Event | 1.0 | 325.0 | 36 | 0
+2023-05-11 | TX-DALLAS | May 11, 2023 Dallas-Fort Worth Severe Hail Event | 1.0 | 250.0 | 8 | 7
+2023-05-12 | TX-DALLAS | May 12, 2023 Dallas-Fort Worth Severe Hail Core | 2.5 | 225.0 | 7 | 0
+2023-05-15 | TX-DALLAS | May 15, 2023 Dallas-Fort Worth Severe Hail Event | 1.0 | 100.0 | 1 | 1
+2023-05-19 | TX-DALLAS | May 19, 2023 Dallas-Fort Worth Severe Hail Core | 2.5 | 250.0 | 35 | 18
+size_mismatch_total 386
+
+=== haversine recompute vs stored nearest_hail_distance_mi ===
+leads_with_date 11266 no_xy 422 no_spc_file 535 stored_null_skipped 5986 compared 4323 diff_gt_0.25mi 4302
+  2026-06-06 compared 1966 diff>0.25 1966
+  2026-06-02 compared 1171 diff>0.25 1158
+  2026-04-28 compared 581 diff>0.25 579
+  2026-05-23 compared 287 diff>0.25 287
+  2025-07-03 compared 131 diff>0.25 131
+  2026-03-10 compared 88 diff>0.25 88
+  2023-09-08 compared 56 diff>0.25 50
+  2026-04-29 compared 34 diff>0.25 34
+  2026-07-15 compared 5 diff>0.25 5
+  2026-04-26 compared 2 diff>0.25 2
+  2026-06-12 compared 1 diff>0.25 1
+  2026-06-07 compared 1 diff>0.25 1
+-- examples --
+KC-PIN-1976700155 | 2026-03-10 | 1.5 | 1393.845 | 1392.345 | 100.0 | 4 W Medicine Lodge | 2330 | Report made via social media. (DDC)
+KC-PIN-6149700055 | 2026-03-10 | 1.5 | 1397.499 | 1395.999 | 100.0 | 4 W Medicine Lodge | 2330 | Report made via social media. (DDC)
+KC-PIN-1954700015 | 2026-03-10 | 1.5 | 1391.929 | 1390.429 | 100.0 | 4 W Medicine Lodge | 2330 | Report made via social media. (DDC)
+KC-PIN-2516000075 | 2026-03-10 | 1.5 | 1396.573 | 1395.073 | 100.0 | 4 W Medicine Lodge | 2330 | Report made via social media. (DDC)
+KC-PIN-5367201155 | 2026-03-10 | 1.5 | 1391.948 | 1390.448 | 100.0 | 4 W Medicine Lodge | 2330 | Report made via social media. (DDC)
+KC-PIN-0913000485 | 2026-03-10 | 1.5 | 1396.024 | 1394.524 | 100.0 | 4 W Medicine Lodge | 2330 | Report made via social media. (DDC)
+KC-PIN-4088803210 | 2026-03-10 | 1.5 | 1394.497 | 1392.997 | 100.0 | 4 W Medicine Lodge | 2330 | Report made via social media. (DDC)
+KC-PIN-0660002410 | 2026-03-10 | 1.5 | 1393.92 | 1392.42 | 100.0 | 4 W Medicine Lodge | 2330 | Report made via social media. (DDC)
+KC-PIN-7819500000 | 2026-03-10 | 1.5 | 1391.361 | 1389.861 | 100.0 | 4 W Medicine Lodge | 2330 | Report made via social media. (DDC)
+KC-PIN-7666207515 | 2026-03-10 | 1.5 | 1392.935 | 1391.435 | 100.0 | 4 W Medicine Lodge | 2330 | Report made via social media. (DDC)
+KC-PIN-8835400025 | 2026-03-10 | 1.5 | 1388.992 | 1387.492 | 100.0 | 4 W Medicine Lodge | 2330 | Report made via social media. (DDC)
+KC-PIN-3646100185 | 2026-03-10 | 1.5 | 1392.349 | 1390.849 | 100.0 | 4 W Medicine Lodge | 2330 | Report made via social media. (DDC)
+KC-PIN-7137830000 | 2026-03-10 | 1.5 | 1393.901 | 1392.401 | 100.0 | 4 W Medicine Lodge | 2330 | Report made via social media. (DDC)
+KC-PIN-0942000640 | 2026-03-10 | 1.5 | 1393.644 | 1392.144 | 100.0 | 4 W Medicine Lodge | 2330 | Report made via social media. (DDC)
+KC-PIN-0698000040 | 2026-03-10 | 1.5 | 1395.111 | 1393.611 | 100.0 | 4 W Medicine Lodge | 2330 | Report made via social media. (DDC)
+KC-PIN-8800000005 | 2026-03-10 | 1.5 | 1389.754 | 1388.254 | 100.0 | 4 W Medicine Lodge | 2330 | Report made via social media. (DDC)
+KC-PIN-1722800515 | 2026-03-10 | 1.5 | 1392.1 | 1390.6 | 100.0 | 4 W Medicine Lodge | 2330 | Report made via social media. (DDC)
+KC-PIN-0659000070 | 2026-03-10 | 1.5 | 1394.086 | 1392.586 | 100.0 | 4 W Medicine Lodge | 2330 | Report made via social media. (DDC)
+KC-PIN-7666204795 | 2026-03-10 | 1.5 | 1393.231 | 1391.731 | 100.0 | 4 W Medicine Lodge | 2330 | Report made via social media. (DDC)
+KC-PIN-5026900270 | 2026-03-10 | 1.5 | 1391.789 | 1390.289 | 100.0 | 4 W Medicine Lodge | 2330 | Report made via social media. (DDC)
+KC-PIN-5247801465 | 2026-03-10 | 1.5 | 1393.431 | 1391.931 | 100.0 | 4 W Medicine Lodge | 2330 | Report made via social media. (DDC)
+KC-PIN-3524049098 | 2026-03-10 | 1.5 | 1388.886 | 1387.386 | 100.0 | 4 W Medicine Lodge | 2330 | Report made via social media. (DDC)
+KC-PIN-1985200305 | 2026-03-10 | 1.5 | 1394.951 | 1393.451 | 100.0 | 4 W Medicine Lodge | 2330 | Report made via social media. (DDC)
+KC-PIN-5317100150 | 2026-03-10 | 1.5 | 1392.276 | 1390.776 | 100.0 | 4 W Medicine Lodge | 2330 | Report made via social media. (DDC)
+KC-PIN-1983200290 | 2026-03-10 | 1.5 | 1394.366 | 1392.866 | 100.0 | 4 W Medicine Lodge | 2330 | Report made via social media. (DDC)
+
+=== SPC comment source flags on scored-date files (row counts, not leads) ===
+2023-09-08 rows=46 mping=4 no_keyword=31 nws=2 public=1 social=5 spotter=3
+2025-07-03 rows=62 broadcast=1 delayed=1 facebook=2 mping=3 no_keyword=35 public=1 social=19 spotter=2
+2026-03-10 rows=395 broadcast=2 delayed=23 mping=116 no_keyword=169 nws=4 public=15 social=72 spotter=12
+2026-03-17 rows=0 
+2026-04-26 rows=218 delayed=10 mping=64 no_keyword=134 nws=2 public=1 social=12 spotter=2
+2026-04-28 rows=262 broadcast=3 delayed=3 facebook=3 mping=74 no_keyword=161 public=2 social=10 spotter=8
+2026-04-29 rows=64 broadcast=4 facebook=1 mping=13 no_keyword=31 public=4 social=14
+2026-05-23 rows=10 delayed=1 no_keyword=7 public=2 spotter=1
+2026-05-24 rows=0 
+2026-06-02 rows=40 broadcast=4 delayed=1 facebook=2 mping=5 no_keyword=25 public=1 social=3
+2026-06-06 rows=19 broadcast=2 facebook=1 mping=2 no_keyword=12 nws=1 public=1 social=2
+2026-06-07 rows=24 broadcast=2 delayed=1 no_keyword=20 social=1
+2026-06-12 rows=15 delayed=1 mping=3 no_keyword=9 social=2
+2026-07-04 rows=84 delayed=1 facebook=4 mping=11 no_keyword=63 nws=1 social=2 spotter=2
+2026-07-15 rows=3 no_keyword=2 social=1
+
+=== hardcoded APRIL_26 points vs nearest SPC row in 260425 and 260426 ===
+file 260425 http=200 rows=183
+  TX rows 85 max_size 400.0
+  hard 32.76,-97.51 size 2.75 -> SPC 32.76,-97.51 size 275.0 dist_mi 0.000 time 0351 loc 3 W White Settlement cmt Social media photo. (FWD)
+  hard 32.73,-97.46 size 2.5 -> SPC 32.73,-97.46 size 250.0 dist_mi 0.000 time 0359 loc 2 S White Settlement cmt Social media photo. (FWD)
+  hard 32.72,-97.43 size 2.25 -> SPC 32.72,-97.43 size 225.0 dist_mi 0.000 time 0416 loc 2 SW Westover Hills cmt Report from mPING. (FWD)
+  hard 32.71,-97.45 size 2.0 -> SPC 32.71,-97.45 size 175.0 dist_mi 0.000 time 0402 loc 2 N Benbrook cmt Report from mPING. (FWD)
+  hard 32.79,-97.35 size 2.75 -> SPC 32.79,-97.35 size 275.0 dist_mi 0.000 time 0535 loc 3 NNW Fort Worth cmt Social media photo. Time estimated. (FWD)
+  hard 32.71,-96.95 size 3.0 -> SPC 32.71,-96.95 size 300.0 dist_mi 0.000 time 0551 loc 4 WSW Cockrell Hill cmt Delayed report. Facebook photo shows large hail estimated to be up to 
+  hard 32.69,-97.21 size 2.0 -> SPC 32.69,-97.21 size 200.0 dist_mi 0.000 time 0558 loc 3 N Kennedale cmt Delayed report. Received a photo of 2 inch hail near Lake Arlington. T
+  hard 32.71,-97.11 size 1.75 -> SPC 32.75,-97.14 size 100.0 dist_mi 3.268 time 0602 loc 3 NNE Pantego cmt (FWD)
+  hard 32.77,-97.31 size 1.75 -> SPC 32.79,-97.35 size 275.0 dist_mi 2.704 time 0535 loc 3 NNW Fort Worth cmt Social media photo. Time estimated. (FWD)
+file 260426 http=200 rows=218
+  TX rows 13 max_size 300.0
+  hard 32.76,-97.51 size 2.75 -> SPC 33.38,-96.24 size 275.0 dist_mi 85.101 time 1205 loc Leonard cmt Numerous homes and cars had windows broken from baseball size hail in 
+  hard 32.73,-97.46 size 2.5 -> SPC 33.38,-96.24 size 275.0 dist_mi 83.717 time 1205 loc Leonard cmt Numerous homes and cars had windows broken from baseball size hail in 
+  hard 32.72,-97.43 size 2.25 -> SPC 33.38,-96.24 size 275.0 dist_mi 82.638 time 1205 loc Leonard cmt Numerous homes and cars had windows broken from baseball size hail in 
+  hard 32.71,-97.45 size 2.0 -> SPC 33.38,-96.24 size 275.0 dist_mi 83.989 time 1205 loc Leonard cmt Numerous homes and cars had windows broken from baseball size hail in 
+  hard 32.79,-97.35 size 2.75 -> SPC 33.38,-96.24 size 275.0 dist_mi 76.098 time 1205 loc Leonard cmt Numerous homes and cars had windows broken from baseball size hail in 
+  hard 32.71,-96.95 size 3.0 -> SPC 33.38,-96.24 size 275.0 dist_mi 61.919 time 1205 loc Leonard cmt Numerous homes and cars had windows broken from baseball size hail in 
+  hard 32.69,-97.21 size 2.0 -> SPC 33.38,-96.24 size 275.0 dist_mi 73.687 time 1205 loc Leonard cmt Numerous homes and cars had windows broken from baseball size hail in 
+  hard 32.71,-97.11 size 1.75 -> SPC 33.38,-96.24 size 275.0 dist_mi 68.425 time 1205 loc Leonard cmt Numerous homes and cars had windows broken from baseball size hail in 
+  hard 32.77,-97.31 size 1.75 -> SPC 33.38,-96.24 size 275.0 dist_mi 74.928 time 1205 loc Leonard cmt Numerous homes and cars had windows broken from baseball size hail in 
+
+=== 260602 and 260601 TX hail rows (full if <=40) ===
+260601 all=91 TX=6 http=200
+  2248 150.0 35.83 -101.56 7 W Stinnett Hutchinson Public estimated ping pong sized hail at Grandview RV Park west of Stinnett at 5:48 PM. (A
+  2320 175.0 35.9 -101.45 4 S Pringle Hutchinson Hailstones up to golf ball sized were reported 5 miles north of Stinnett off of hwy 207. (
+  2324 100.0 35.92 -101.44 2 SSE Pringle Hutchinson Mostly pea to penny size hail with a few quarter size hailstones mixed in... at the inters
+  0022 100.0 35.83 -101.44 Stinnett Hutchinson (AMA)
+  0032 100.0 35.83 -101.44 Stinnett Hutchinson (AMA)
+  0050 100.0 35.83 -101.44 1 NNE Stinnett Hutchinson (AMA)
+260602 all=40 TX=14 http=200
+  2040 100.0 33.03 -96.44 Lavon Collin (FWD)
+  2117 100.0 29.95 -95.56 4 N Jersey Village Harris Broadcast media passed along a report from a caller... mentioning hail was occurring along
+  2121 100.0 29.89 -95.64 5 W Jersey Village Harris Report from mPING: Quarter (1.00 in.). (HGX)
+  2123 100.0 29.91 -95.65 4 S Cypress Harris Report from mPING: Quarter (1.00 in.). (HGX)
+  2127 100.0 29.89 -95.66 6 W Jersey Village Harris Report from mPING: Quarter (1.00 in.). (HGX)
+  2127 100.0 32.7 -96.4 4 SW Lawrence Kaufman Report from mPING: Quarter (1.00 in.). (FWD)
+  2205 150.0 32.7 -96.62 1 SSW Balch Springs Dallas Ping pong ball size hail reported on Seagoville Rd near I 635. (FWD)
+  2225 150.0 32.42 -97.15 3 W Venus Johnson Intermittent quarter to ping pong ball size hail at US 67 and FM 2738. (FWD)
+  2225 150.0 32.42 -97.19 1 ENE Alvarado Johnson Quarter to ping pong ball size hail at US 67 and CR 607 near Venus. (FWD)
+  2238 100.0 32.92 -97.08 1 SW Grapevine Tarrant Facebook report of quarter size hail reported along Hwy 114 in Grapevine. (FWD)
+  2323 200.0 33.12 -96.87 2 NNE The Colony Denton Egg size hail reported near Lebanon Rd in The Colony. (FWD)
+  0115 100.0 31.95 -106.41 7 NNE El Paso El Paso Location and time approx based on radar. Social media post showed hail stones near 1 inch.
+  0120 100.0 32.73 -99.01 6 WSW Breckenridge Stephens Facebook report of pea to quarter size hail on southwest side of Hubbard Creek Lake. (FWD)
+  0127 100.0 30.05 -97.81 3 SE Buda Hays Report from mPING. Quarter sized hail. (EWX)
+260603 all=20 TX=0 http=200
+
+DONE_UTC 2026-10-13T20:49:44.378031+00:00

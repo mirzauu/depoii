@@ -1,0 +1,27 @@
+retrieved 2026-10-13 UTC
+released_leads 1
+
+DCAD-PARCEL-00000799950250000 16850 DALLAS PKWY
+live page https://www.dallascad.org/AcctDetailCom.aspx?ID=00000799950250000
+owner JC & CB HERNANDEZ HOLDINGS LLC
+year 1979
+stories 1
+market 1625000
+improvement OFFICE BUILDING
+land state code COMMERCIAL IMPROVEMENTS
+roof_sqft_used 11994 from one foundation
+spc file 260602_rpts_hail.csv
+spc 2.00 in at 10.20 miles, 2323 UTC, The Colony, comment: Egg size hail reported near Lebanon Rd in The Colony. (FWD)
+permit searched Dallas FY2023-24 permits on 2026-10-13: 0 matches for ADDRESS LIKE '%16850%' AND UPPER(ADDRESS) LIKE '%DALLAS%'
+exposure_score 46
+replacement not priced
+
+Not released
+2537 Golden Bear Dr: roof 15717, stories 1, nearest SPC report on 260523 is 93.45 miles. No Carrollton permit portal was searched.
+1133 S Madison Ave: nearest SPC report 3.78 miles on 260425. Roof withheld because the page does not give a story count on every section.
+3001 Meacham Blvd: nearest SPC report 1.06 miles. Tarrant living area is not a roof, and stories are not on that feed.
+14856 Preston Rd: foundation sum 81536, stories 1. No stored storm day, so no SPC row was attached.
+3434 W Illinois Ave: no coordinates, so no hail distance.
+14222 Dallas Pkwy and 105 Duane Street stay off the dossier.
+
+Dallas permit ACTIVITY sample: (B) Alteration, (B) Renovation, (A) New Construction. Roof-permit recall UNKNOWN. See permit_recall.txt.

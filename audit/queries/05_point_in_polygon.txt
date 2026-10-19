@@ -1,0 +1,16 @@
+RUN_UTC 2026-10-13T20:51:07.703566+00:00
+polygons 680 bad_json 0 leads_with_xy 10847
+tested_against_assigned_event_date 9521
+centroid_inside_assigned_date_polygon 8725
+centroid_outside_assigned_date_polygon 796
+no_polygon_for_assigned_date 1326
+45m_north_disagrees_with_centroid 16
+outside examples:
+KC-PIN-1297300060 | 2026-03-10 | Seattle | 47.55582 | -122.38317
+KC-PIN-1976700155 | 2026-03-10 | Seattle | 47.60967 | -122.33231
+KC-PIN-8901000786 | 2026-03-10 | Seattle | 47.70782 | -122.30846
+KC-PIN-6749700060 | 2026-03-10 | Seattle | 47.69768 | -122.34755
+KC-PIN-9547202120 | 2026-03-10 | Seattle | 47.67858 | -122.30912
+KC-PIN-9238900115 | 2026-03-10 | Seattle | 47.53514 | -122.39068
+KC-PIN-6149700055 | 2026-03-10 | Seattle | 47.729 | -122.34474
+KC-PIN-1954700015 | 2026-03-10 | Seattle | 47.62086 | -122.28116

@@ -1,0 +1,14 @@
+[build]
+  command = "npm run build"
+  # @netlify/plugin-nextjs owns the publish output — leave as "."
+  publish = "."
+
+[build.environment]
+  NODE_VERSION = "22"
+  # Public marketing site only — no dashboard routes
+  DEPOII_LANDING_ONLY = "1"
+  # SQLite for pilot form (Netlify functions can write under /tmp)
+  DEPOII_DB = "/tmp/depoii-pilot.sqlite"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

@@ -1,0 +1,177 @@
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
+import { ContractorLink } from "@/components/contractor-link";
+import { useDepoiiState } from "@/components/depoii-provider";
+import { EngineLayout, EngineState, Filter, Pager, ScopeFilter, filterField, useDebounced } from "@/components/engine-layout";
+import { useEngine } from "@/components/use-engine";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { mapLeaderboard } from "@/lib/engine-api";
+import { num, pct, usd } from "@/lib/format";
+
+const LIMIT = 50;
+
+/** Common commercial roof systems seen on Dallas roof filings. */
+const ROOF_SYSTEMS = ["TPO", "Metal", "Modified Bitumen", "EPDM", "Built-up", "Shingle", "PVC"];
+
+export default function ContractorsBrowsePage() {
+  const { jurisdiction } = useDepoiiState();
+  const [all, setAll] = useState(false);
+  const [search, setSearch] = useState("");
+  const [minPermits, setMinPermits] = useState("");
+  const [minVal, setMinVal] = useState("");
+  const [roof, setRoof] = useState("");
+  const [hasContact, setHasContact] = useState(false);
+  const [sort, setSort] = useState("volume_desc");
+  const [offset, setOffset] = useState(0);
+
+  const q = useDebounced(search);
+  const minP = useDebounced(minPermits);
+  const minV = useDebounced(minVal);
+
+  const page = useEngine(
+    "contractors/directory",
+    {
+      jurisdiction: all ? undefined : jurisdiction,
+      search: q || undefined,
+      min_permits: minP || undefined,
+      min_valuation: minV || undefined,
+      roof_system: roof || undefined,
+      has_contact: hasContact || undefined,
+      sort_by: sort,
+      limit: LIMIT,
+      offset,
+    },
+    mapLeaderboard,
+  );
+
+  const reset = <T,>(set: (v: T) => void) => (v: T) => {
+    set(v);
+    setOffset(0);
+  };
+
+  const rows = page.data?.contractors ?? [];
+  const total = page.data?.total ?? 0;
+  const place = all ? "All locations" : jurisdiction;
+
+  return (
+    <EngineLayout
+      title="Contractors"
+      subtitle={`${place} · roofing contractor directory from named contractors on commercial roof permits. Broader than the win-share leaderboard.`}
+      filters={
+        <>
+          <ScopeFilter jurisdiction={jurisdiction} all={all} onChange={reset(setAll)} />
+          <Filter label="Search">
+            <input
+              value={search}
+              onChange={(e) => reset(setSearch)(e.target.value)}
+              placeholder="Company name…"
+              className={filterField}
+            />
+          </Filter>
+          <Filter label="Roof system">
+            <select value={roof} onChange={(e) => reset(setRoof)(e.target.value)} className={filterField}>
+              <option value="">Any</option>
+              {ROOF_SYSTEMS.map((s) => (
+                <option key={s} value={s}>{s}</option>
+              ))}
+            </select>
+          </Filter>
+          <Filter label="Min permits">
+            <select value={minPermits} onChange={(e) => reset(setMinPermits)(e.target.value)} className={filterField}>
+              <option value="">Any</option>
+              <option value="2">2+</option>
+              <option value="5">5+</option>
+              <option value="10">10+</option>
+              <option value="25">25+</option>
+            </select>
+          </Filter>
+          <Filter label="Min volume">
+            <select value={minVal} onChange={(e) => reset(setMinVal)(e.target.value)} className={filterField}>
+              <option value="">Any</option>
+              <option value="100000">$100k+</option>
+              <option value="500000">$500k+</option>
+              <option value="1000000">$1M+</option>
+              <option value="5000000">$5M+</option>
+            </select>
+          </Filter>
+          <Filter label="Contact">
+            <select
+              value={hasContact ? "yes" : ""}
+              onChange={(e) => reset(setHasContact)(e.target.value === "yes")}
+              className={filterField}
+            >
+              <option value="">Any</option>
+              <option value="yes">Phone or website</option>
+            </select>
+          </Filter>
+          <Filter label="Sort">
+            <select value={sort} onChange={(e) => reset(setSort)(e.target.value)} className={filterField}>
+              <option value="volume_desc">Volume ↓</option>
+              <option value="permits_desc">Permits ↓</option>
+              <option value="name_asc">Name A–Z</option>
+            </select>
+          </Filter>
+        </>
+      }
+    >
+      <p className="border-b border-border px-4 py-2 text-xs text-muted-foreground">
+        Full regional roofing directory for {place} (named contractors on roof filings). Placeholders like “On Municipal Record” are excluded. For ranked market share, use{" "}
+        <Link href="/competitors" className="underline hover:text-foreground">Leaderboard</Link>.
+      </p>
+      <div className="grid grid-cols-2 gap-px border-b border-border bg-border sm:grid-cols-3">
+        <div className="bg-background px-4 py-3">
+          <p className="text-[11px] uppercase tracking-wider text-muted-foreground">Contractors</p>
+          <p className="mt-0.5 text-lg font-semibold tabular-nums">{page.data ? num(total) : "…"}</p>
+        </div>
+        <div className="bg-background px-4 py-3">
+          <p className="text-[11px] uppercase tracking-wider text-muted-foreground">Permitted volume</p>
+          <p className="mt-0.5 text-lg font-semibold tabular-nums">{page.data ? usd(page.data.valuation, true) : "…"}</p>
+        </div>
+        <div className="bg-background px-4 py-3 sm:col-span-1 col-span-2">
+          <p className="text-[11px] uppercase tracking-wider text-muted-foreground">Showing</p>
+          <p className="mt-0.5 text-lg font-semibold tabular-nums">{rows.length ? `${num(offset + 1)}–${num(offset + rows.length)}` : "—"}</p>
+        </div>
+      </div>
+      <EngineState loading={page.loading && !page.data} error={page.error} empty={!rows.length} onRetry={page.retry}>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="pl-4">Contractor</TableHead>
+              <TableHead className="hidden md:table-cell">Roof system</TableHead>
+              <TableHead className="text-right">Permits</TableHead>
+              <TableHead className="hidden text-right sm:table-cell">Share</TableHead>
+              <TableHead className="pr-4 text-right">Volume</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {rows.map((c) => (
+              <TableRow key={c.id}>
+                <TableCell className="pl-4">
+                  <ContractorLink name={c.name} />
+                  {(c.phone || c.hq) && (
+                    <p className="mt-0.5 max-w-xs truncate text-xs text-muted-foreground">
+                      {[c.phone, c.hq].filter(Boolean).join(" · ")}
+                    </p>
+                  )}
+                </TableCell>
+                <TableCell className="hidden max-w-40 truncate text-xs text-muted-foreground md:table-cell">
+                  {c.roofSystem || "—"}
+                </TableCell>
+                <TableCell className="text-right font-mono tabular-nums">{num(c.permits)}</TableCell>
+                <TableCell className="hidden text-right font-mono tabular-nums sm:table-cell">
+                  {c.share > 0 ? pct(c.share, 1) : "—"}
+                </TableCell>
+                <TableCell className="pr-4 text-right font-mono tabular-nums">
+                  {c.valuationLabel || (c.valuation ? usd(c.valuation, true) : "—")}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        <Pager offset={offset} limit={LIMIT} total={total} onChange={setOffset} />
+      </EngineState>
+    </EngineLayout>
+  );
+}

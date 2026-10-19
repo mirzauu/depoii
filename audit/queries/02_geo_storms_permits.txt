@@ -1,0 +1,650 @@
+RUN_UTC 2026-10-13T20:43:26.628113+00:00
+
+=== city x data_source parcels ===
+SQL: SELECT COALESCE(city,'(null)') city, COALESCE(data_source,'(null)') src, COUNT(*) n FROM parcels GROUP BY 1,2 ORDER BY n DESC
+ROWS 49
+New York | NYC MapPLUTO (Department of City Planning) | 12814
+Fort Worth | Tarrant Appraisal District (TAD) | 693
+New York City | NYC Department of City Planning (MapPLUTO) | 422
+Seattle | King County GIS PropertyInfo | 378
+Addison | Dallas County Appraisal District (DCAD) | 318
+Dallas | Dallas County Appraisal District (DCAD) | 302
+Arlington | Tarrant Appraisal District (TAD) | 282
+Carrollton | Dallas County Appraisal District (DCAD) | 236
+Coppell | Dallas County Appraisal District (DCAD) | 153
+Farmers Branch | Dallas County Appraisal District (DCAD) | 140
+Rowlett | Dallas County Appraisal District (DCAD) | 108
+Richardson | Dallas County Appraisal District (DCAD) | 87
+Tarrant County | Tarrant Appraisal District (TAD) | 62
+Euless | Tarrant Appraisal District (TAD) | 61
+Irving | Dallas County Appraisal District (DCAD) | 60
+Balch Springs | Dallas County Appraisal District (DCAD) | 58
+Grand Prairie | Tarrant Appraisal District (TAD) | 58
+Hurst | Tarrant Appraisal District (TAD) | 49
+Dallas | Dallas Central Appraisal District (DCAD) | 45
+Grapevine | Tarrant Appraisal District (TAD) | 42
+Haltom City | Tarrant Appraisal District (TAD) | 39
+North Richland Hills | Tarrant Appraisal District (TAD) | 26
+Richland Hills | Tarrant Appraisal District (TAD) | 23
+Garland | Dallas County Appraisal District (DCAD) | 20
+Bedford | Tarrant Appraisal District (TAD) | 16
+Benbrook | Tarrant Appraisal District (TAD) | 16
+Mansfield | Tarrant Appraisal District (TAD) | 16
+Pantego | Tarrant Appraisal District (TAD) | 16
+Keller | Tarrant Appraisal District (TAD) | 15
+No Town | Dallas County Appraisal District (DCAD) | 15
+Forest Hill | Tarrant Appraisal District (TAD) | 13
+Saginaw | Tarrant Appraisal District (TAD) | 11
+Watauga | Tarrant Appraisal District (TAD) | 8
+Crowley | Tarrant Appraisal District (TAD) | 7
+Southlake | Tarrant Appraisal District (TAD) | 6
+Azle | Tarrant Appraisal District (TAD) | 5
+Everman | Tarrant Appraisal District (TAD) | 5
+White Settlement | Tarrant Appraisal District (TAD) | 5
+Colleyville | Tarrant Appraisal District (TAD) | 4
+Kennedale | Tarrant Appraisal District (TAD) | 4
+Roanoke | Tarrant Appraisal District (TAD) | 4
+Dalworthington Gardens | Tarrant Appraisal District (TAD) | 3
+Trophy Club | Tarrant Appraisal District (TAD) | 3
+Haslet | Tarrant Appraisal District (TAD) | 2
+River Oaks | Tarrant Appraisal District (TAD) | 2
+Westlake | Tarrant Appraisal District (TAD) | 2
+Dallas | (null) | 1
+Edgecliff Village | Tarrant Appraisal District (TAD) | 1
+Lake Worth | Tarrant Appraisal District (TAD) | 1
+
+=== scored city x verification ===
+SQL: SELECT COALESCE(city,'(null)'), verification_status, outbound_ready, COUNT(*) n FROM scored_parcel_leads GROUP BY 1,2,3 ORDER BY n DESC
+ROWS 117
+New York | PERMIT_DETECTED | 0 | 8139
+Seattle | PERMIT_DETECTED | 0 | 378
+Fort Worth | VERIFIED | 0 | 341
+New York City | PERMIT_DETECTED | 0 | 319
+Addison | VERIFIED | 0 | 168
+Carrollton | VERIFIED | 0 | 158
+New York City | MISSING_COORDINATES | 0 | 129
+Arlington | LOW_STORM_PROXIMITY | 0 | 114
+Farmers Branch | VERIFIED | 0 | 107
+Addison | PERMIT_DETECTED | 0 | 82
+Fort Worth | LOW_STORM_PROXIMITY | 0 | 81
+Rowlett | VERIFIED | 0 | 69
+Fort Worth | DISQUALIFIED_INSTITUTIONAL | 0 | 57
+Coppell | VERIFIED | 0 | 55
+Dallas | LOW_STORM_PROXIMITY | 0 | 51
+Tarrant County | LOW_STORM_PROXIMITY | 0 | 48
+Euless | LOW_STORM_PROXIMITY | 0 | 47
+Dallas | VERIFIED | 0 | 46
+Arlington | UNVERIFIED | 0 | 44
+Richardson | LOW_STORM_PROXIMITY | 0 | 40
+Grand Prairie | VERIFIED | 0 | 39
+Dallas | PERMIT_DETECTED | 0 | 37
+Arlington | PERMIT_DETECTED | 0 | 36
+Dallas | DISQUALIFIED_INSTITUTIONAL | 0 | 36
+Coppell | PERMIT_DETECTED | 0 | 35
+Balch Springs | LOW_STORM_PROXIMITY | 0 | 34
+Irving | VERIFIED | 0 | 33
+Grapevine | LOW_STORM_PROXIMITY | 0 | 28
+Hurst | LOW_STORM_PROXIMITY | 0 | 27
+Carrollton | PERMIT_DETECTED | 0 | 26
+Haltom City | LOW_STORM_PROXIMITY | 0 | 24
+North Richland Hills | LOW_STORM_PROXIMITY | 0 | 22
+Richland Hills | LOW_STORM_PROXIMITY | 0 | 20
+Fort Worth | DISQUALIFIED_MFR | 0 | 19
+New York | DISQUALIFIED_INSTITUTIONAL | 0 | 16
+No Town | LOW_STORM_PROXIMITY | 0 | 15
+Fort Worth | NON_ROOF_PERMIT_DETECTED | 0 | 14
+Fort Worth | ROOF_PERMIT_DETECTED | 0 | 14
+Bedford | LOW_STORM_PROXIMITY | 0 | 13
+Carrollton | DISQUALIFIED_INSTITUTIONAL | 0 | 13
+Mansfield | LOW_STORM_PROXIMITY | 0 | 13
+Coppell | DISQUALIFIED_INSTITUTIONAL | 0 | 12
+New York City | DISQUALIFIED_INSTITUTIONAL | 0 | 12
+Arlington | DISQUALIFIED_INSTITUTIONAL | 0 | 11
+Arlington | VERIFIED | 0 | 11
+Farmers Branch | PERMIT_DETECTED | 0 | 10
+Grand Prairie | PERMIT_DETECTED | 0 | 10
+Irving | DISQUALIFIED_INSTITUTIONAL | 0 | 10
+Farmers Branch | DISQUALIFIED_INSTITUTIONAL | 0 | 9
+Garland | LOW_STORM_PROXIMITY | 0 | 9
+Addison | DISQUALIFIED_INSTITUTIONAL | 0 | 8
+Irving | PERMIT_DETECTED | 0 | 8
+Saginaw | LOW_STORM_PROXIMITY | 0 | 8
+Benbrook | UNVERIFIED | 0 | 7
+Keller | LOW_STORM_PROXIMITY | 0 | 7
+New York City | DISQUALIFIED_MFR | 0 | 7
+Richardson | DISQUALIFIED_INSTITUTIONAL | 0 | 7
+Forest Hill | LOW_STORM_PROXIMITY | 0 | 6
+Fort Worth | DISQUALIFIED_MANUAL | 0 | 6
+Haltom City | UNVERIFIED | 0 | 6
+Pantego | LOW_STORM_PROXIMITY | 0 | 6
+Benbrook | DISQUALIFIED_MFR | 0 | 5
+Dallas | VERIFIED | 1 | 5
+Hurst | DISQUALIFIED_INSTITUTIONAL | 0 | 5
+Rowlett | DISQUALIFIED_INSTITUTIONAL | 0 | 5
+Watauga | LOW_STORM_PROXIMITY | 0 | 5
+Arlington | DISQUALIFIED_MFR | 0 | 4
+Kennedale | LOW_STORM_PROXIMITY | 0 | 4
+Southlake | LOW_STORM_PROXIMITY | 0 | 4
+Balch Springs | DISQUALIFIED_INSTITUTIONAL | 0 | 3
+Euless | DISQUALIFIED_MFR | 0 | 3
+Grapevine | DISQUALIFIED_INSTITUTIONAL | 0 | 3
+Pantego | PERMIT_DETECTED | 0 | 3
+Pantego | UNVERIFIED | 0 | 3
+Trophy Club | LOW_STORM_PROXIMITY | 0 | 3
+White Settlement | UNVERIFIED | 0 | 3
+Azle | LOW_STORM_PROXIMITY | 0 | 2
+Benbrook | DISQUALIFIED_INSTITUTIONAL | 0 | 2
+Crowley | LOW_STORM_PROXIMITY | 0 | 2
+Dallas | UNVERIFIED | 0 | 2
+Dalworthington Gardens | LOW_STORM_PROXIMITY | 0 | 2
+Everman | LOW_STORM_PROXIMITY | 0 | 2
+Forest Hill | DISQUALIFIED_INSTITUTIONAL | 0 | 2
+Fort Worth | UNVERIFIED | 0 | 2
+Garland | DISQUALIFIED_INSTITUTIONAL | 0 | 2
+Grapevine | DISQUALIFIED_MFR | 0 | 2
+Grapevine | UNVERIFIED | 0 | 2
+Hurst | DISQUALIFIED_MFR | 0 | 2
+Irving | DISQUALIFIED_MFR | 0 | 2
+Westlake | LOW_STORM_PROXIMITY | 0 | 2
+Arlington | DISQUALIFIED_MANUAL | 0 | 1
+Azle | DISQUALIFIED_INSTITUTIONAL | 0 | 1
+Balch Springs | DISQUALIFIED_MFR | 0 | 1
+Benbrook | VERIFIED | 0 | 1
+Carrollton | DISQUALIFIED_MFR | 0 | 1
+Colleyville | LOW_STORM_PROXIMITY | 0 | 1
+Crowley | DISQUALIFIED_INSTITUTIONAL | 0 | 1
+Dallas | DISQUALIFIED_MFR | 0 | 1
+Edgecliff Village | LOW_STORM_PROXIMITY | 0 | 1
+Everman | DISQUALIFIED_MFR | 0 | 1
+... truncated 17
+
+=== jurisdiction parcels ===
+SQL: SELECT COALESCE(jurisdiction,'(null)'), COALESCE(county,'(null)'), COALESCE(state,'(null)'), COUNT(*) n FROM parcels GROUP BY 1,2,3 ORDER BY n DESC
+ROWS 6
+New York City, NY | New York | NY | 13236
+Fort Worth, TX | Tarrant County | TX | 1500
+Dallas, TX | Dallas County | TX | 1497
+Seattle, WA | King County | WA | 378
+Dallas, TX | Dallas | TX | 45
+Dallas, TX | No County | TX | 1
+
+=== lat/lon bounds and nulls parcels ===
+SQL: SELECT SUM(CASE WHEN latitude IS NULL OR longitude IS NULL THEN 1 ELSE 0 END) null_xy, SUM(CASE WHEN latitude BETWEEN 32.4 AND 33.2 AND longitude BETWEEN -97.6 AND -96.4 THEN 1 ELSE 0 END) dfw_box, SUM(CASE WHEN latitude BETWEEN 40.4 AND 41.0 AND longitude BETWEEN -74.3 AND -73.6 THEN 1 ELSE 0 END) nyc_box, SUM(CASE WHEN latitude BETWEEN 47.2 AND 47.8 AND longitude BETWEEN -122.6 AND -122.0 THEN 1 ELSE 0 END) seattle_box, SUM(CASE WHEN ABS(latitude-32.7555)<0.0001 THEN 1 ELSE 0 END) downtown_327555, MIN(latitude), MAX(latitude), MIN(longitude), MAX(longitude), COUNT(*) n FROM parcels
+ROWS 1
+468 | 2997 | 12814 | 378 | 0 | 32.55106652878003 | 47.73336 | -122.412334 | -73.7206198 | 16657
+
+=== scored lat via join ===
+SQL: SELECT SUM(CASE WHEN p.latitude IS NULL OR p.longitude IS NULL THEN 1 ELSE 0 END) null_xy, SUM(CASE WHEN p.latitude BETWEEN 32.4 AND 33.2 AND p.longitude BETWEEN -97.6 AND -96.4 THEN 1 ELSE 0 END) dfw_box, SUM(CASE WHEN p.latitude BETWEEN 40.4 AND 41.0 AND p.longitude BETWEEN -74.3 AND -73.6 THEN 1 ELSE 0 END) nyc_box, SUM(CASE WHEN ABS(p.latitude-32.7555)<0.0001 THEN 1 ELSE 0 END) downtown, COUNT(*) n FROM scored_parcel_leads s LEFT JOIN parcels p ON p.id=s.parcel_id
+ROWS 1
+423 | 2269 | 8200 | 0 | 11270
+
+=== outbound ready 6 full ===
+SQL: SELECT s.parcel_id, s.address, s.city, s.zip_code, s.owner_name, s.property_type, s.building_sqft, s.year_built, s.cad_total_valuation, s.storm_name, s.event_date, s.max_hail_inches, s.nearest_hail_distance_mi, s.nearest_hail_size_in, s.nearest_hail_location, s.muni_permit_status, s.verification_status, s.data_provenance, s.building_sqft_source, s.valuation_source, s.year_built_source, s.exposure_score, s.lead_tier, s.why_strong_summary, s.estimated_replacement_mid, p.latitude, p.longitude, p.data_source, p.county, p.account_number, p.stories, p.footprint_sqft, p.land_sqft, p.is_mock FROM scored_parcel_leads s JOIN parcels p ON p.id=s.parcel_id WHERE s.outbound_ready=1
+ROWS 6
+DCAD-PARCEL-00000662970600000 | 14222 Dallas Pkwy | Dallas | 75226 | Westdale Noel Lp |  | 193589 | 1978 | 25868580.0 | Outside known SPC swath |  |  |  |  |  |  | VERIFIED | live_dcad_scrape | DCAD AcctDetailCom.aspx improvement sections | DCAD AcctDetailCom.aspx roll | DCAD AcctDetailCom.aspx roll | 0 | TIER_3_MONITOR | Substantial commercial asset (193,589 sq ft per public roll); Aging roof structure (48 years old per county roll) | 2321434.0 | 32.94253899193294 | -96.81991686539216 | Dallas County Appraisal District (DCAD) | Dallas County | 00000662970600000 | 1 | 246961 | 379940 | 0
+DCAD-PARCEL-008189000B05C0000 | 14856 Preston Rd | Dallas | 75240 | New Pepper Square S/C Partners Ltd |  | 81536 | 2001 | 10750000.0 | Outside known SPC swath |  |  |  |  |  | ZERO_PERMITS_FOUND | VERIFIED | live_dcad_scrape | DCAD AcctDetailCom.aspx improvement sections | DCAD AcctDetailCom.aspx roll | DCAD AcctDetailCom.aspx roll | 0 | TIER_3_MONITOR | Substantial commercial asset (81,536 sq ft per public roll); Aging roof structure (25 years old per county roll) | 1888225.0 | 32.95047433977882 | -96.80120243419722 | Dallas County Appraisal District (DCAD) | Dallas County | 008189000B05C0000 | 1 | 200875 | 309039 | 0
+DCAD-PARCEL-004643000A0010000 | 1133 S Madison Ave | Dallas | 75208 | Treco Investments Ltd |  | 101140 | 1952 | 2225080.0 | April 26, 2026 DFW Severe Hail Swath | 2026-04-26 | 3.0 | 7.33 | 3.0 | Dallas Baptist University / SW Dallas (Tea cup size) | ZERO_PERMITS_FOUND | VERIFIED | live_dcad_scrape | DCAD AcctDetailCom.aspx improvement sections | DCAD AcctDetailCom.aspx roll | DCAD AcctDetailCom.aspx roll | 62 | TIER_3_MONITOR | Recorded 3.0" hail approx 7.33 mi away; Substantial commercial asset (101,140 sq ft per public roll); Aging roof structure (74 years old per county roll) | 1310182.0 | 32.73385401620511 | -96.82712790244761 | Dallas County Appraisal District (DCAD) | Dallas County | 004643000A0010000 | 1 | 139381 | 214433 | 0
+DCAD-PARCEL-0081740A0003B0100 | 14755 Preston Rd | Dallas | 75254 | Signature Exchange Owner Llc |  | 194113 | 1982 | 19136550.0 | Outside known SPC swath |  |  |  |  |  | ZERO_PERMITS_FOUND | VERIFIED | live_dcad_scrape | DCAD AcctDetailCom.aspx improvement sections | DCAD AcctDetailCom.aspx roll | DCAD AcctDetailCom.aspx roll | 0 | TIER_3_MONITOR | Substantial commercial asset (194,113 sq ft per public roll); Aging roof structure (44 years old per county roll) | 228082.0 | 32.94832526100074 | -96.80494544326527 | Dallas County Appraisal District (DCAD) | Dallas County | 0081740A0003B0100 | 8 | 24264 | 206919 | 0
+TAD-PARCEL-07532598 | 3001 Meacham Blvd | Fort Worth | 76102 | Mercantile Partners | Commercial Warehouse & Industrial Complex | 115188 | 1998 | 12062715.0 | April 26, 2026 DFW Severe Hail Swath | 2026-04-26 | 2.75 | 3.63 | 2.75 | 3 NNW Fort Worth (Baseball size) | NO_POST_STORM_ROOF_PERMIT_FOUND | VERIFIED | live_tad_api | TAD LIVING_ARE | TAD TOTAL_VALU | TAD YEAR_BUILT | 62 | TIER_3_MONITOR | Recorded 2.75" hail approx 3.63 mi away; Substantial commercial asset (115,188 sq ft per public roll); Aging roof structure (28 years old per county roll) | 1082767.0 | 32.824948969188895 | -97.30340607339363 | Tarrant Appraisal District (TAD) | Tarrant County | 07532598 | 1 | 115188 | 325742 | 0
+DCAD-PARCEL-006115000A0060000 | 3434 W ILLINOIS AVE | Dallas | 75211 | SIERRA VISTA 16 A LLC & | Commercial Shopping Center | 142616 | 2006 | 29825000.0 | Outside known SPC swath |  |  |  |  |  |  | VERIFIED | live_dcad_scrape | DCAD AcctDetailCom.aspx improvement sections | DCAD AcctDetailCom.aspx roll | DCAD AcctDetailCom.aspx roll | 0 | TIER_3_MONITOR | Substantial commercial asset (142,616 sq ft per public roll); Aging roof structure (20 years old per county roll) | 1340590.0 |  |  |  | Dallas County | 006115000A0060000 | 1 | 142616 |  | 0
+
+=== storm dates scored ===
+SQL: SELECT event_date, storm_name, COUNT(*) n, MIN(nearest_hail_distance_mi), MAX(nearest_hail_distance_mi), COUNT(DISTINCT nearest_hail_distance_mi) FROM scored_parcel_leads GROUP BY 1,2 ORDER BY n DESC
+ROWS 16
+2026-06-06 | June 06, 2026 New York City Metro Severe Convective Corridor | 5318 | 1.5 | 999.0 | 2
+2026-06-02 | June 02, 2026 Dallas-Fort Worth Severe Hail Core | 1323 | 0.18 | 30.96 | 659
+2026-03-10 | March 10, 2026 Chicago Metro Severe Hail Core | 1218 | 1.5 | 1.5 | 1
+2025-07-03 | July 03, 2025 New York City Metro Severe Hail Event | 1081 | 1.5 | 1.5 | 1
+2023-09-08 | September 08, 2023 New York City Metro Severe Hail Event | 805 | 1.5 | 1.5 | 1
+2026-04-28 | April 28, 2026 Dallas-Fort Worth Severe Hail Core | 605 | 0.09 | 21.78 | 390
+2026-03-17 | March 17, 2026 New York City Metro Severe Derecho & Wind Swath | 522 | 1.5 | 1.5 | 1
+2026-05-23 | May 23, 2026 Dallas-Fort Worth Convective Hail Swath | 288 | 1.16 | 4.92 | 178
+2026-04-29 | April 29, 2026 Dallas-Fort Worth Severe Hail Core | 35 | 19.17 | 21.61 | 30
+2026-07-15 | July 15, 2026 New York City Metro Severe Convective Corridor | 34 | 1.5 | 1.5 | 1
+2026-05-24 | May 24, 2026 Dallas-Fort Worth Severe Hail Event | 13 | 8.5 | 10.34 | 13
+2026-07-04 | July 04, 2026 New York City Metro Severe Convective Corridor | 12 |  |  | 0
+2026-06-12 | June 12, 2026 New York City Metro Severe Convective Corridor | 6 | 1.5 | 1.5 | 1
+ | Outside known SPC swath | 4 |  |  | 0
+2026-06-07 | June 07, 2026 New York City Metro Severe Convective Corridor | 4 | 1.5 | 1.5 | 1
+2026-04-26 | April 26, 2026 DFW Severe Hail Swath | 2 | 3.63 | 7.33 | 2
+
+=== storm_swaths ===
+SQL: SELECT event_date, storm_name, max_hail_inches, jurisdiction_id, substr(properties,1,180) FROM storm_swaths ORDER BY event_date
+ROWS 692
+2023-01-03 | January 03, 2023 Chicago Metro Severe Hail Event | 1.0 | IL-CHICAGO | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-01-04 | January 04, 2023 North Florida / Gainesville Convective Hail Swath | 1.75 | FL-GAINESVILLE | {"fill_color": "#EA580C", "stroke_color": "#C2410C", "mass_grams": 42.2, "terminal_velocity_mph": 66.1, "kinetic_energy_joules": 18.42, "severity_tier": "SEVERE_PUNCTURE_RISK", "ra
+2023-01-04 | January 04, 2023 Baton Rouge / Southeast Louisiana Severe Hail Event | 1.25 | LA-BATON_ROUGE | {"fill_color": "#F59E0B", "stroke_color": "#D97706", "mass_grams": 15.4, "terminal_velocity_mph": 55.9, "kinetic_energy_joules": 4.8, "severity_tier": "MODERATE_MEMBRANE_IMPACT", "
+2023-01-10 | January 10, 2023 Northern California / Sonoma County Severe Convective Corridor | 0.0 | CA-SONOMA_COUNTY | {"fill_color": "#3B82F6", "stroke_color": "#1D4ED8", "mass_grams": 0.0, "terminal_velocity_mph": 0.0, "kinetic_energy_joules": 0.0, "severity_tier": "LIGHT_PRECIPITATION", "radar_s
+2023-01-12 | January 12, 2023 Greater Cincinnati / Ohio Valley Severe Hail Event | 1.0 | OH-CINCINNATI | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-01-23 | January 23, 2023 North Florida / Gainesville Severe Derecho & Wind Swath | 0.0 | FL-GAINESVILLE | {"fill_color": "#3B82F6", "stroke_color": "#1D4ED8", "mass_grams": 0.0, "terminal_velocity_mph": 0.0, "kinetic_energy_joules": 0.0, "severity_tier": "LIGHT_PRECIPITATION", "radar_s
+2023-01-25 | January 25, 2023 Baton Rouge / Southeast Louisiana Severe Convective Corridor | 0.0 | LA-BATON_ROUGE | {"fill_color": "#3B82F6", "stroke_color": "#1D4ED8", "mass_grams": 0.0, "terminal_velocity_mph": 0.0, "kinetic_energy_joules": 0.0, "severity_tier": "LIGHT_PRECIPITATION", "radar_s
+2023-02-08 | February 08, 2023 Dallas-Fort Worth Convective Hail Swath | 1.5 | TX-DALLAS | {"fill_color": "#F59E0B", "stroke_color": "#D97706", "mass_grams": 26.6, "terminal_velocity_mph": 61.2, "kinetic_energy_joules": 9.94, "severity_tier": "MODERATE_MEMBRANE_IMPACT", 
+2023-02-27 | February 27, 2023 Greater Cincinnati / Ohio Valley Severe Hail Core | 2.0 | OH-CINCINNATI | {"fill_color": "#DC2626", "stroke_color": "#991B1B", "mass_grams": 62.9, "terminal_velocity_mph": 70.7, "kinetic_energy_joules": 31.43, "severity_tier": "EXTREME_MEMBRANE_PUNCTURE"
+2023-03-01 | March 01, 2023 Dallas-Fort Worth Convective Hail Swath | 1.75 | TX-DALLAS | {"fill_color": "#EA580C", "stroke_color": "#C2410C", "mass_grams": 42.2, "terminal_velocity_mph": 66.1, "kinetic_energy_joules": 18.42, "severity_tier": "SEVERE_PUNCTURE_RISK", "ra
+2023-03-02 | March 02, 2023 Dallas-Fort Worth Convective Hail Swath | 1.75 | TX-DALLAS | {"fill_color": "#EA580C", "stroke_color": "#C2410C", "mass_grams": 42.2, "terminal_velocity_mph": 66.1, "kinetic_energy_joules": 18.42, "severity_tier": "SEVERE_PUNCTURE_RISK", "ra
+2023-03-02 | March 02, 2023 Greater Cincinnati / Ohio Valley Severe Hail Event | 1.0 | OH-CINCINNATI | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-03-03 | March 03, 2023 Dallas-Fort Worth Severe Derecho & Wind Swath | 0.0 | TX-DALLAS | {"fill_color": "#3B82F6", "stroke_color": "#1D4ED8", "mass_grams": 0.0, "terminal_velocity_mph": 0.0, "kinetic_energy_joules": 0.0, "severity_tier": "LIGHT_PRECIPITATION", "radar_s
+2023-03-03 | March 03, 2023 Greater Cincinnati / Ohio Valley Severe Convective Corridor | 0.0 | OH-CINCINNATI | {"fill_color": "#3B82F6", "stroke_color": "#1D4ED8", "mass_grams": 0.0, "terminal_velocity_mph": 0.0, "kinetic_energy_joules": 0.0, "severity_tier": "LIGHT_PRECIPITATION", "radar_s
+2023-03-08 | March 08, 2023 Dallas-Fort Worth Severe Hail Event | 1.0 | TX-DALLAS | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-03-09 | March 09, 2023 Dallas-Fort Worth Severe Hail Event | 1.0 | TX-DALLAS | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-03-10 | March 10, 2023 Dallas-Fort Worth Severe Hail Event | 1.0 | TX-DALLAS | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-03-12 | March 12, 2023 North Florida / Gainesville Severe Convective Corridor | 0.0 | FL-GAINESVILLE | {"fill_color": "#3B82F6", "stroke_color": "#1D4ED8", "mass_grams": 0.0, "terminal_velocity_mph": 0.0, "kinetic_energy_joules": 0.0, "severity_tier": "LIGHT_PRECIPITATION", "radar_s
+2023-03-13 | March 13, 2023 North Florida / Gainesville Severe Convective Corridor | 0.0 | FL-GAINESVILLE | {"fill_color": "#3B82F6", "stroke_color": "#1D4ED8", "mass_grams": 0.0, "terminal_velocity_mph": 0.0, "kinetic_energy_joules": 0.0, "severity_tier": "LIGHT_PRECIPITATION", "radar_s
+2023-03-13 | March 13, 2023 Baton Rouge / Southeast Louisiana Convective Hail Swath | 1.5 | LA-BATON_ROUGE | {"fill_color": "#F59E0B", "stroke_color": "#D97706", "mass_grams": 26.6, "terminal_velocity_mph": 61.2, "kinetic_energy_joules": 9.94, "severity_tier": "MODERATE_MEMBRANE_IMPACT", 
+2023-03-16 | March 16, 2023 Dallas-Fort Worth Severe Hail Core | 3.0 | TX-DALLAS | {"fill_color": "#7F1D1D", "stroke_color": "#450A0A", "mass_grams": 212.4, "terminal_velocity_mph": 86.6, "kinetic_energy_joules": 159.09, "severity_tier": "CATASTROPHIC_MEMBRANE_DE
+2023-03-17 | March 17, 2023 Dallas-Fort Worth Convective Hail Swath | 1.75 | TX-DALLAS | {"fill_color": "#EA580C", "stroke_color": "#C2410C", "mass_grams": 42.2, "terminal_velocity_mph": 66.1, "kinetic_energy_joules": 18.42, "severity_tier": "SEVERE_PUNCTURE_RISK", "ra
+2023-03-21 | March 21, 2023 Northern California / Sonoma County Severe Derecho & Wind Swath | 0.0 | CA-SONOMA_COUNTY | {"fill_color": "#3B82F6", "stroke_color": "#1D4ED8", "mass_grams": 0.0, "terminal_velocity_mph": 0.0, "kinetic_energy_joules": 0.0, "severity_tier": "LIGHT_PRECIPITATION", "radar_s
+2023-03-24 | March 24, 2023 Dallas-Fort Worth Severe Hail Event | 1.25 | TX-DALLAS | {"fill_color": "#F59E0B", "stroke_color": "#D97706", "mass_grams": 15.4, "terminal_velocity_mph": 55.9, "kinetic_energy_joules": 4.8, "severity_tier": "MODERATE_MEMBRANE_IMPACT", "
+2023-03-26 | March 26, 2023 Chicago Metro Severe Hail Event | 1.25 | IL-CHICAGO | {"fill_color": "#F59E0B", "stroke_color": "#D97706", "mass_grams": 15.4, "terminal_velocity_mph": 55.9, "kinetic_energy_joules": 4.8, "severity_tier": "MODERATE_MEMBRANE_IMPACT", "
+2023-03-28 | March 28, 2023 Baton Rouge / Southeast Louisiana Severe Hail Event | 1.25 | LA-BATON_ROUGE | {"fill_color": "#F59E0B", "stroke_color": "#D97706", "mass_grams": 15.4, "terminal_velocity_mph": 55.9, "kinetic_energy_joules": 4.8, "severity_tier": "MODERATE_MEMBRANE_IMPACT", "
+2023-03-31 | March 31, 2023 Chicago Metro Severe Hail Event | 1.0 | IL-CHICAGO | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-04-01 | April 01, 2023 Greater Cincinnati / Ohio Valley Severe Convective Corridor | 0.0 | OH-CINCINNATI | {"fill_color": "#3B82F6", "stroke_color": "#1D4ED8", "mass_grams": 0.0, "terminal_velocity_mph": 0.0, "kinetic_energy_joules": 0.0, "severity_tier": "LIGHT_PRECIPITATION", "radar_s
+2023-04-01 | April 01, 2023 Chicago Metro Severe Derecho & Wind Swath | 0.0 | IL-CHICAGO | {"fill_color": "#3B82F6", "stroke_color": "#1D4ED8", "mass_grams": 0.0, "terminal_velocity_mph": 0.0, "kinetic_energy_joules": 0.0, "severity_tier": "LIGHT_PRECIPITATION", "radar_s
+2023-04-01 | April 01, 2023 Mid-Atlantic / Montgomery County Convective Hail Swath | 1.5 | MD-MONTGOMERY_COUNTY | {"fill_color": "#F59E0B", "stroke_color": "#D97706", "mass_grams": 26.6, "terminal_velocity_mph": 61.2, "kinetic_energy_joules": 9.94, "severity_tier": "MODERATE_MEMBRANE_IMPACT", 
+2023-04-01 | April 01, 2023 Baton Rouge / Southeast Louisiana Severe Hail Event | 1.0 | LA-BATON_ROUGE | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-04-02 | April 02, 2023 Dallas-Fort Worth Severe Hail Core | 2.0 | TX-DALLAS | {"fill_color": "#DC2626", "stroke_color": "#991B1B", "mass_grams": 62.9, "terminal_velocity_mph": 70.7, "kinetic_energy_joules": 31.43, "severity_tier": "EXTREME_MEMBRANE_PUNCTURE"
+2023-04-02 | April 02, 2023 Mid-Atlantic / Montgomery County Severe Convective Corridor | 0.0 | MD-MONTGOMERY_COUNTY | {"fill_color": "#3B82F6", "stroke_color": "#1D4ED8", "mass_grams": 0.0, "terminal_velocity_mph": 0.0, "kinetic_energy_joules": 0.0, "severity_tier": "LIGHT_PRECIPITATION", "radar_s
+2023-04-03 | April 03, 2023 Dallas-Fort Worth Convective Hail Swath | 1.75 | TX-DALLAS | {"fill_color": "#EA580C", "stroke_color": "#C2410C", "mass_grams": 42.2, "terminal_velocity_mph": 66.1, "kinetic_energy_joules": 18.42, "severity_tier": "SEVERE_PUNCTURE_RISK", "ra
+2023-04-04 | April 04, 2023 Dallas-Fort Worth Severe Hail Core | 3.0 | TX-DALLAS | {"fill_color": "#7F1D1D", "stroke_color": "#450A0A", "mass_grams": 212.4, "terminal_velocity_mph": 86.6, "kinetic_energy_joules": 159.09, "severity_tier": "CATASTROPHIC_MEMBRANE_DE
+2023-04-04 | April 04, 2023 Chicago Metro Severe Hail Core | 3.0 | IL-CHICAGO | {"fill_color": "#7F1D1D", "stroke_color": "#450A0A", "mass_grams": 212.4, "terminal_velocity_mph": 86.6, "kinetic_energy_joules": 159.09, "severity_tier": "CATASTROPHIC_MEMBRANE_DE
+2023-04-05 | April 05, 2023 Chicago Metro Severe Derecho & Wind Swath | 0.0 | IL-CHICAGO | {"fill_color": "#3B82F6", "stroke_color": "#1D4ED8", "mass_grams": 0.0, "terminal_velocity_mph": 0.0, "kinetic_energy_joules": 0.0, "severity_tier": "LIGHT_PRECIPITATION", "radar_s
+2023-04-06 | April 06, 2023 Mid-Atlantic / Montgomery County Convective Hail Swath | 1.75 | MD-MONTGOMERY_COUNTY | {"fill_color": "#EA580C", "stroke_color": "#C2410C", "mass_grams": 42.2, "terminal_velocity_mph": 66.1, "kinetic_energy_joules": 18.42, "severity_tier": "SEVERE_PUNCTURE_RISK", "ra
+2023-04-06 | April 06, 2023 Baton Rouge / Southeast Louisiana Severe Hail Event | 1.0 | LA-BATON_ROUGE | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-04-07 | April 07, 2023 Baton Rouge / Southeast Louisiana Severe Hail Event | 1.0 | LA-BATON_ROUGE | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-04-13 | April 13, 2023 North Florida / Gainesville Severe Hail Event | 1.0 | FL-GAINESVILLE | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-04-15 | April 15, 2023 Mid-Atlantic / Montgomery County Severe Hail Event | 1.25 | MD-MONTGOMERY_COUNTY | {"fill_color": "#F59E0B", "stroke_color": "#D97706", "mass_grams": 15.4, "terminal_velocity_mph": 55.9, "kinetic_energy_joules": 4.8, "severity_tier": "MODERATE_MEMBRANE_IMPACT", "
+2023-04-15 | April 15, 2023 Baton Rouge / Southeast Louisiana Severe Convective Corridor | 0.0 | LA-BATON_ROUGE | {"fill_color": "#3B82F6", "stroke_color": "#1D4ED8", "mass_grams": 0.0, "terminal_velocity_mph": 0.0, "kinetic_energy_joules": 0.0, "severity_tier": "LIGHT_PRECIPITATION", "radar_s
+2023-04-16 | April 16, 2023 Baton Rouge / Southeast Louisiana Severe Hail Event | 1.0 | LA-BATON_ROUGE | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-04-19 | April 19, 2023 Chicago Metro Severe Hail Core | 2.0 | IL-CHICAGO | {"fill_color": "#DC2626", "stroke_color": "#991B1B", "mass_grams": 62.9, "terminal_velocity_mph": 70.7, "kinetic_energy_joules": 31.43, "severity_tier": "EXTREME_MEMBRANE_PUNCTURE"
+2023-04-20 | April 20, 2023 Dallas-Fort Worth Severe Hail Core | 3.0 | TX-DALLAS | {"fill_color": "#7F1D1D", "stroke_color": "#450A0A", "mass_grams": 212.4, "terminal_velocity_mph": 86.6, "kinetic_energy_joules": 159.09, "severity_tier": "CATASTROPHIC_MEMBRANE_DE
+2023-04-20 | April 20, 2023 Chicago Metro Convective Hail Swath | 1.75 | IL-CHICAGO | {"fill_color": "#EA580C", "stroke_color": "#C2410C", "mass_grams": 42.2, "terminal_velocity_mph": 66.1, "kinetic_energy_joules": 18.42, "severity_tier": "SEVERE_PUNCTURE_RISK", "ra
+2023-04-21 | April 21, 2023 Dallas-Fort Worth Severe Hail Core | 3.0 | TX-DALLAS | {"fill_color": "#7F1D1D", "stroke_color": "#450A0A", "mass_grams": 212.4, "terminal_velocity_mph": 86.6, "kinetic_energy_joules": 159.09, "severity_tier": "CATASTROPHIC_MEMBRANE_DE
+2023-04-21 | April 21, 2023 Greater Cincinnati / Ohio Valley Severe Hail Event | 1.0 | OH-CINCINNATI | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-04-23 | April 23, 2023 New York City Metro Severe Hail Event | 1.0 | NY-NEW_YORK_CITY | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-04-23 | April 23, 2023 Boston Metro Severe Hail Event | 1.0 | MA-BOSTON | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-04-24 | April 24, 2023 Tampa Bay Metro Severe Hail Core | 3.0 | FL-TAMPA | {"fill_color": "#7F1D1D", "stroke_color": "#450A0A", "mass_grams": 212.4, "terminal_velocity_mph": 86.6, "kinetic_energy_joules": 159.09, "severity_tier": "CATASTROPHIC_MEMBRANE_DE
+2023-04-25 | April 25, 2023 Tampa Bay Metro Severe Hail Event | 1.0 | FL-TAMPA | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-04-26 | April 26, 2023 Dallas-Fort Worth Severe Hail Core | 4.5 | TX-DALLAS | {"fill_color": "#7F1D1D", "stroke_color": "#450A0A", "mass_grams": 717.0, "terminal_velocity_mph": 106.0, "kinetic_energy_joules": 805.41, "severity_tier": "CATASTROPHIC_MEMBRANE_D
+2023-04-26 | April 26, 2023 North Florida / Gainesville Severe Hail Core | 2.5 | FL-GAINESVILLE | {"fill_color": "#7F1D1D", "stroke_color": "#450A0A", "mass_grams": 122.9, "terminal_velocity_mph": 79.0, "kinetic_energy_joules": 76.72, "severity_tier": "CATASTROPHIC_MEMBRANE_DES
+2023-04-26 | April 26, 2023 Tampa Bay Metro Convective Hail Swath | 1.75 | FL-TAMPA | {"fill_color": "#EA580C", "stroke_color": "#C2410C", "mass_grams": 42.2, "terminal_velocity_mph": 66.1, "kinetic_energy_joules": 18.42, "severity_tier": "SEVERE_PUNCTURE_RISK", "ra
+2023-04-27 | April 27, 2023 Dallas-Fort Worth Severe Hail Core | 2.0 | TX-DALLAS | {"fill_color": "#DC2626", "stroke_color": "#991B1B", "mass_grams": 62.9, "terminal_velocity_mph": 70.7, "kinetic_energy_joules": 31.43, "severity_tier": "EXTREME_MEMBRANE_PUNCTURE"
+2023-04-27 | April 27, 2023 North Florida / Gainesville Convective Hail Swath | 1.75 | FL-GAINESVILLE | {"fill_color": "#EA580C", "stroke_color": "#C2410C", "mass_grams": 42.2, "terminal_velocity_mph": 66.1, "kinetic_energy_joules": 18.42, "severity_tier": "SEVERE_PUNCTURE_RISK", "ra
+2023-04-27 | April 27, 2023 Tampa Bay Metro Convective Hail Swath | 1.75 | FL-TAMPA | {"fill_color": "#EA580C", "stroke_color": "#C2410C", "mass_grams": 42.2, "terminal_velocity_mph": 66.1, "kinetic_energy_joules": 18.42, "severity_tier": "SEVERE_PUNCTURE_RISK", "ra
+2023-04-27 | April 27, 2023 Baton Rouge / Southeast Louisiana Severe Hail Core | 2.0 | LA-BATON_ROUGE | {"fill_color": "#DC2626", "stroke_color": "#991B1B", "mass_grams": 62.9, "terminal_velocity_mph": 70.7, "kinetic_energy_joules": 31.43, "severity_tier": "EXTREME_MEMBRANE_PUNCTURE"
+2023-04-28 | April 28, 2023 Dallas-Fort Worth Severe Hail Core | 3.0 | TX-DALLAS | {"fill_color": "#7F1D1D", "stroke_color": "#450A0A", "mass_grams": 212.4, "terminal_velocity_mph": 86.6, "kinetic_energy_joules": 159.09, "severity_tier": "CATASTROPHIC_MEMBRANE_DE
+2023-04-28 | April 28, 2023 Greater Cincinnati / Ohio Valley Severe Hail Event | 1.0 | OH-CINCINNATI | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-04-28 | April 28, 2023 Tampa Bay Metro Severe Convective Corridor | 0.0 | FL-TAMPA | {"fill_color": "#3B82F6", "stroke_color": "#1D4ED8", "mass_grams": 0.0, "terminal_velocity_mph": 0.0, "kinetic_energy_joules": 0.0, "severity_tier": "LIGHT_PRECIPITATION", "radar_s
+2023-05-05 | May 05, 2023 Dallas-Fort Worth Severe Hail Core | 2.25 | TX-DALLAS | {"fill_color": "#DC2626", "stroke_color": "#991B1B", "mass_grams": 89.6, "terminal_velocity_mph": 75.0, "kinetic_energy_joules": 50.34, "severity_tier": "EXTREME_MEMBRANE_PUNCTURE"
+2023-05-06 | May 06, 2023 Dallas-Fort Worth Severe Hail Event | 1.0 | TX-DALLAS | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-05-06 | May 06, 2023 Baton Rouge / Southeast Louisiana Severe Convective Corridor | 0.0 | LA-BATON_ROUGE | {"fill_color": "#3B82F6", "stroke_color": "#1D4ED8", "mass_grams": 0.0, "terminal_velocity_mph": 0.0, "kinetic_energy_joules": 0.0, "severity_tier": "LIGHT_PRECIPITATION", "radar_s
+2023-05-07 | May 07, 2023 Dallas-Fort Worth Severe Hail Event | 1.0 | TX-DALLAS | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-05-08 | May 08, 2023 Chicago Metro Convective Hail Swath | 1.75 | IL-CHICAGO | {"fill_color": "#EA580C", "stroke_color": "#C2410C", "mass_grams": 42.2, "terminal_velocity_mph": 66.1, "kinetic_energy_joules": 18.42, "severity_tier": "SEVERE_PUNCTURE_RISK", "ra
+2023-05-10 | May 10, 2023 North Florida / Gainesville Severe Hail Event | 1.25 | FL-GAINESVILLE | {"fill_color": "#F59E0B", "stroke_color": "#D97706", "mass_grams": 15.4, "terminal_velocity_mph": 55.9, "kinetic_energy_joules": 4.8, "severity_tier": "MODERATE_MEMBRANE_IMPACT", "
+2023-05-10 | May 10, 2023 Tampa Bay Metro Severe Hail Event | 1.0 | FL-TAMPA | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-05-11 | May 11, 2023 Dallas-Fort Worth Severe Hail Event | 1.0 | TX-DALLAS | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-05-11 | May 11, 2023 North Florida / Gainesville Convective Hail Swath | 1.75 | FL-GAINESVILLE | {"fill_color": "#EA580C", "stroke_color": "#C2410C", "mass_grams": 42.2, "terminal_velocity_mph": 66.1, "kinetic_energy_joules": 18.42, "severity_tier": "SEVERE_PUNCTURE_RISK", "ra
+2023-05-11 | May 11, 2023 Tampa Bay Metro Convective Hail Swath | 1.5 | FL-TAMPA | {"fill_color": "#F59E0B", "stroke_color": "#D97706", "mass_grams": 26.6, "terminal_velocity_mph": 61.2, "kinetic_energy_joules": 9.94, "severity_tier": "MODERATE_MEMBRANE_IMPACT", 
+2023-05-12 | May 12, 2023 Dallas-Fort Worth Severe Hail Core | 2.5 | TX-DALLAS | {"fill_color": "#7F1D1D", "stroke_color": "#450A0A", "mass_grams": 122.9, "terminal_velocity_mph": 79.0, "kinetic_energy_joules": 76.72, "severity_tier": "CATASTROPHIC_MEMBRANE_DES
+2023-05-15 | May 15, 2023 Dallas-Fort Worth Severe Hail Event | 1.0 | TX-DALLAS | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-05-19 | May 19, 2023 Dallas-Fort Worth Severe Hail Core | 2.5 | TX-DALLAS | {"fill_color": "#7F1D1D", "stroke_color": "#450A0A", "mass_grams": 122.9, "terminal_velocity_mph": 79.0, "kinetic_energy_joules": 76.72, "severity_tier": "CATASTROPHIC_MEMBRANE_DES
+2023-05-20 | May 20, 2023 Dallas-Fort Worth Severe Hail Core | 2.5 | TX-DALLAS | {"fill_color": "#7F1D1D", "stroke_color": "#450A0A", "mass_grams": 122.9, "terminal_velocity_mph": 79.0, "kinetic_energy_joules": 76.72, "severity_tier": "CATASTROPHIC_MEMBRANE_DES
+2023-05-21 | May 21, 2023 North Florida / Gainesville Severe Hail Event | 1.0 | FL-GAINESVILLE | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-05-24 | May 24, 2023 Dallas-Fort Worth Severe Hail Core | 2.0 | TX-DALLAS | {"fill_color": "#DC2626", "stroke_color": "#991B1B", "mass_grams": 62.9, "terminal_velocity_mph": 70.7, "kinetic_energy_joules": 31.43, "severity_tier": "EXTREME_MEMBRANE_PUNCTURE"
+2023-05-31 | May 31, 2023 Chicago Metro Severe Convective Corridor | 0.0 | IL-CHICAGO | {"fill_color": "#3B82F6", "stroke_color": "#1D4ED8", "mass_grams": 0.0, "terminal_velocity_mph": 0.0, "kinetic_energy_joules": 0.0, "severity_tier": "LIGHT_PRECIPITATION", "radar_s
+2023-06-01 | June 01, 2023 Chicago Metro Severe Hail Event | 1.0 | IL-CHICAGO | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-06-02 | June 02, 2023 New York City Metro Severe Hail Event | 1.0 | NY-NEW_YORK_CITY | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-06-02 | June 02, 2023 Boston Metro Severe Hail Event | 1.0 | MA-BOSTON | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-06-03 | June 03, 2023 Mid-Atlantic / Montgomery County Severe Hail Event | 1.0 | MD-MONTGOMERY_COUNTY | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-06-03 | June 03, 2023 Baton Rouge / Southeast Louisiana Severe Hail Event | 1.0 | LA-BATON_ROUGE | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-06-04 | June 04, 2023 Dallas-Fort Worth Severe Hail Event | 1.0 | TX-DALLAS | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-06-04 | June 04, 2023 Tampa Bay Metro Severe Hail Event | 1.0 | FL-TAMPA | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-06-04 | June 04, 2023 Baton Rouge / Southeast Louisiana Severe Hail Event | 1.25 | LA-BATON_ROUGE | {"fill_color": "#F59E0B", "stroke_color": "#D97706", "mass_grams": 15.4, "terminal_velocity_mph": 55.9, "kinetic_energy_joules": 4.8, "severity_tier": "MODERATE_MEMBRANE_IMPACT", "
+2023-06-05 | June 05, 2023 Baton Rouge / Southeast Louisiana Severe Convective Corridor | 0.0 | LA-BATON_ROUGE | {"fill_color": "#3B82F6", "stroke_color": "#1D4ED8", "mass_grams": 0.0, "terminal_velocity_mph": 0.0, "kinetic_energy_joules": 0.0, "severity_tier": "LIGHT_PRECIPITATION", "radar_s
+2023-06-06 | June 06, 2023 New York City Metro Severe Hail Event | 1.25 | NY-NEW_YORK_CITY | {"fill_color": "#F59E0B", "stroke_color": "#D97706", "mass_grams": 15.4, "terminal_velocity_mph": 55.9, "kinetic_energy_joules": 4.8, "severity_tier": "MODERATE_MEMBRANE_IMPACT", "
+2023-06-06 | June 06, 2023 Boston Metro Severe Hail Event | 1.0 | MA-BOSTON | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-06-08 | June 08, 2023 Dallas-Fort Worth Severe Hail Event | 1.0 | TX-DALLAS | {"fill_color": "#EAB308", "stroke_color": "#CA8A04", "mass_grams": 7.9, "terminal_velocity_mph": 50.0, "kinetic_energy_joules": 1.96, "severity_tier": "GRANULE_LOSS_MEMBRANE_STRESS
+2023-06-08 | June 08, 2023 Baton Rouge / Southeast Louisiana Severe Hail Event | 1.25 | LA-BATON_ROUGE | {"fill_color": "#F59E0B", "stroke_color": "#D97706", "mass_grams": 15.4, "terminal_velocity_mph": 55.9, "kinetic_energy_joules": 4.8, "severity_tier": "MODERATE_MEMBRANE_IMPACT", "
+2023-06-10 | June 10, 2023 Dallas-Fort Worth Severe Hail Core | 2.5 | TX-DALLAS | {"fill_color": "#7F1D1D", "stroke_color": "#450A0A", "mass_grams": 122.9, "terminal_velocity_mph": 79.0, "kinetic_energy_joules": 76.72, "severity_tier": "CATASTROPHIC_MEMBRANE_DES
+2023-06-11 | June 11, 2023 Dallas-Fort Worth Convective Hail Swath | 1.75 | TX-DALLAS | {"fill_color": "#EA580C", "stroke_color": "#C2410C", "mass_grams": 42.2, "terminal_velocity_mph": 66.1, "kinetic_energy_joules": 18.42, "severity_tier": "SEVERE_PUNCTURE_RISK", "ra
+2023-06-11 | June 11, 2023 North Florida / Gainesville Severe Convective Corridor | 0.0 | FL-GAINESVILLE | {"fill_color": "#3B82F6", "stroke_color": "#1D4ED8", "mass_grams": 0.0, "terminal_velocity_mph": 0.0, "kinetic_energy_joules": 0.0, "severity_tier": "LIGHT_PRECIPITATION", "radar_s
+2023-06-12 | June 12, 2023 Dallas-Fort Worth Severe Hail Core | 4.25 | TX-DALLAS | {"fill_color": "#7F1D1D", "stroke_color": "#450A0A", "mass_grams": 604.0, "terminal_velocity_mph": 103.0, "kinetic_energy_joules": 640.8, "severity_tier": "CATASTROPHIC_MEMBRANE_DE
+2023-06-13 | June 13, 2023 Dallas-Fort Worth Severe Hail Core | 5.0 | TX-DALLAS | {"fill_color": "#7F1D1D", "stroke_color": "#450A0A", "mass_grams": 983.5, "terminal_velocity_mph": 111.8, "kinetic_energy_joules": 1227.58, "severity_tier": "CATASTROPHIC_MEMBRANE_
+2023-06-13 | June 13, 2023 Baton Rouge / Southeast Louisiana Severe Convective Corridor | 0.0 | LA-BATON_ROUGE | {"fill_color": "#3B82F6", "stroke_color": "#1D4ED8", "mass_grams": 0.0, "terminal_velocity_mph": 0.0, "kinetic_energy_joules": 0.0, "severity_tier": "LIGHT_PRECIPITATION", "radar_s
+2023-06-14 | June 14, 2023 Dallas-Fort Worth Severe Hail Core | 3.5 | TX-DALLAS | {"fill_color": "#7F1D1D", "stroke_color": "#450A0A", "mass_grams": 337.3, "terminal_velocity_mph": 93.5, "kinetic_energy_joules": 294.74, "severity_tier": "CATASTROPHIC_MEMBRANE_DE
+... truncated 592
+
+=== why_strong distinct ===
+SQL: SELECT why_strong_summary, COUNT(*) n FROM scored_parcel_leads GROUP BY 1 ORDER BY n DESC
+ROWS 7
+ | 11264
+Substantial commercial asset (81,536 sq ft per public roll); Aging roof structure (25 years old per county roll) | 1
+Substantial commercial asset (194,113 sq ft per public roll); Aging roof structure (44 years old per county roll) | 1
+Substantial commercial asset (193,589 sq ft per public roll); Aging roof structure (48 years old per county roll) | 1
+Substantial commercial asset (142,616 sq ft per public roll); Aging roof structure (20 years old per county roll) | 1
+Recorded 3.0" hail approx 7.33 mi away; Substantial commercial asset (101,140 sq ft per public roll); Aging roof structure (74 years old per county roll) | 1
+Recorded 2.75" hail approx 3.63 mi away; Substantial commercial asset (115,188 sq ft per public roll); Aging roof structure (28 years old per county roll) | 1
+
+=== why_weak distinct ===
+SQL: SELECT substr(why_weak_summary,1,200), COUNT(*) n FROM scored_parcel_leads GROUP BY 1 ORDER BY n DESC LIMIT 20
+ROWS 9
+ | 11257
+No severe hail report recorded within 15 miles | 4
+None noted | 2
+Multifamily residential community (Marabella Apartments / HIG REFI TX1 LLC) | 2
+Permit discrepancy and corridor screening failure | 1
+Multifamily apartment complex (Kv Elmsgate Apartments) | 1
+Multi-building residential community with pitched shingle roofs (multifamily/HOA layout) | 1
+Institutional medical / hospital complex (Columbia Plaza Medical Center) | 1
+Disqualified during manual triage | 1
+
+=== property_type scored top ===
+SQL: SELECT COALESCE(property_type,'(null)'), COUNT(*) n FROM scored_parcel_leads GROUP BY 1 ORDER BY n DESC LIMIT 40
+ROWS 40
+Commercial Warehouse/Industrial | 885
+Commercial Retail/Industrial | 841
+A5 | 576
+A1 | 557
+B2 | 519
+B1 | 492
+Commercial Warehouse | 467
+C0 | 380
+C1 | 314
+C7 | 301
+RM | 298
+Commercial Warehouse & Industrial Complex | 285
+D1 | 284
+D4 | 261
+B3 | 255
+Commercial Logistics & Business Park | 254
+A2 | 225
+B9 | 195
+Commercial Real Estate - Single Family(Res Use/Zone) | 189
+K1 | 178
+A9 | 152
+D7 | 140
+O6 | 135
+K4 | 127
+C4 | 110
+O5 | 104
+K2 | 102
+S2 | 99
+C6 | 97
+C3 | 97
+O4 | 89
+D6 | 89
+D3 | 85
+A4 | 85
+C2 | 72
+E1 | 69
+Commercial Real Estate - Townhouse Plat | 67
+M1 | 61
+R4 | 59
+S9 | 53
+
+=== property_type parcels top ===
+SQL: SELECT COALESCE(property_type,'(null)'), COUNT(*) n FROM parcels GROUP BY 1 ORDER BY n DESC LIMIT 40
+ROWS 40
+(null) | 1542
+Commercial Warehouse/Industrial | 1200
+A5 | 939
+A1 | 927
+B2 | 898
+B1 | 862
+C0 | 656
+C1 | 480
+C7 | 433
+RM | 430
+B3 | 430
+Commercial Warehouse | 422
+D1 | 397
+D4 | 388
+A2 | 366
+B9 | 341
+Commercial Warehouse & Industrial Complex | 300
+K1 | 245
+A9 | 244
+D7 | 223
+Commercial Real Estate - Single Family(Res Use/Zone) | 189
+K4 | 185
+O6 | 182
+C4 | 164
+S2 | 161
+D6 | 153
+C3 | 147
+K2 | 144
+O5 | 142
+C6 | 142
+A4 | 137
+D3 | 134
+C2 | 118
+O4 | 113
+M1 | 95
+R4 | 94
+E1 | 92
+W1 | 89
+A3 | 87
+S9 | 85
+
+=== permits jurisdiction geo_quality link ===
+SQL: SELECT COALESCE(jurisdiction,'(null)'), COALESCE(geo_quality,'(null)'), SUM(CASE WHEN parcel_id IS NOT NULL AND parcel_id!='' THEN 1 ELSE 0 END) linked, COUNT(*) n FROM normalized_permits GROUP BY 1,2 ORDER BY n DESC
+ROWS 27
+New York City, NY | source_point | 15849 | 48936
+Dallas, TX | source_point | 61 | 17556
+Fort Worth, TX | zip_centroid | 0 | 6729
+Cincinnati, OH | source_point | 0 | 5000
+Seattle, WA | source_point | 493 | 4999
+Gainesville, FL | source_point | 0 | 3998
+Montgomery County, MD | source_point | 0 | 1079
+Baton Rouge, LA | source_point | 0 | 1020
+Cambridge, MA | source_point | 0 | 1000
+Framingham, MA | source_point | 0 | 1000
+Sonoma County, CA | source_point | 0 | 991
+Addison, TX | source_point | 328 | 328
+Fort Worth, TX | source_point | 15 | 249
+Dallas, TX | missing | 98 | 153
+Chicago, IL | source_point | 0 | 147
+New York City, NY | missing | 36 | 121
+Addison, TX | missing | 0 | 35
+Carrollton, TX | missing | 0 | 35
+Fort Worth, TX | missing | 1 | 35
+Grand Prairie, TX | missing | 0 | 35
+Irving, TX | missing | 0 | 35
+Farmers Branch, TX | missing | 1 | 19
+Chicago, IL | missing | 0 | 2
+Cincinnati, OH | missing | 0 | 2
+Seattle, WA | missing | 0 | 2
+Cambridge, MA | missing | 0 | 1
+Montgomery County, MD | missing | 0 | 1
+
+=== permits source_system ===
+SQL: SELECT COALESCE(source_system,'(null)'), COUNT(*) n, SUM(CASE WHEN parcel_id IS NOT NULL AND parcel_id!='' THEN 1 ELSE 0 END) linked FROM normalized_permits GROUP BY 1 ORDER BY n DESC
+ROWS 12
+NYC_DOB_NOW | 47583 | 14941
+socrata | 20719 | 1437
+DALLAS_ARCGIS_FY24 | 14336 | 61
+CFW_ARCGIS_DEVELOPMENT | 6978 | 15
+DALLASNOW_ACCELA_LIVE | 3226 | 0
+energov | 328 | 328
+DallasNow Accela Portal | 164 | 99
+Irving Municipal Permitting | 35 | 0
+Grand Prairie Municipal Permitting | 35 | 0
+Carrollton Municipal Permitting | 35 | 0
+Addison Municipal Permitting | 35 | 0
+Fort Worth CFW Accela | 34 | 1
+
+=== permit date_quality ===
+SQL: SELECT COALESCE(date_quality,'(null)'), COUNT(*) n, SUM(CASE WHEN issue_date='2026-10-06' THEN 1 ELSE 0 END) d_20261006, SUM(CASE WHEN issue_date='1900-01-01' THEN 1 ELSE 0 END) d_1900, SUM(CASE WHEN issue_date IS NULL THEN 1 ELSE 0 END) null_d FROM normalized_permits GROUP BY 1
+ROWS 2
+source | 75403 | 77 | 0 | 0
+substituted | 18105 | 18087 | 13 | 0
+
+=== issue_date top ===
+SQL: SELECT issue_date, COUNT(*) n FROM normalized_permits GROUP BY 1 ORDER BY n DESC LIMIT 25
+ROWS 25
+2026-10-06 | 18164
+2024-03-25 | 221
+2024-04-30 | 219
+2024-04-22 | 218
+2024-08-13 | 207
+2024-06-10 | 194
+2024-09-11 | 193
+2024-05-29 | 189
+2024-05-21 | 187
+2024-04-24 | 180
+2024-04-01 | 179
+2024-05-07 | 176
+2024-09-23 | 176
+2024-09-26 | 175
+2024-07-30 | 174
+2024-08-28 | 171
+2024-09-09 | 171
+2024-09-24 | 170
+2024-09-03 | 167
+2024-06-07 | 166
+2024-08-15 | 166
+2024-08-30 | 166
+2024-09-27 | 164
+2024-09-19 | 163
+2024-09-25 | 163
+
+=== permit category ===
+SQL: SELECT COALESCE(category,'(null)'), COALESCE(permit_scope,'(null)'), COUNT(*) n FROM normalized_permits GROUP BY 1,2 ORDER BY n DESC LIMIT 30
+ROWS 25
+Commercial | GENERAL_COMMERCIAL | 43965
+Commercial Re-Roof | COMMERCIAL_REROOF | 17455
+Commercial | INTERIOR_OR_GENERAL_ALTERATION | 10410
+Commercial Alteration / Mixed-Use | INTERIOR_OR_GENERAL_ALTERATION | 4333
+Commercial | NEW_CONSTRUCTION | 4266
+Commercial Alteration / Mixed-Use | GENERAL_COMMERCIAL | 3377
+Commercial Alteration / Mixed-Use | NEW_CONSTRUCTION | 2996
+Commercial | COMMERCIAL_REROOF | 2177
+Roof Repair & Alteration | INTERIOR_OR_GENERAL_ALTERATION | 2023
+Roof Repair & Alteration | GENERAL_COMMERCIAL | 677
+New Construction Commercial Roofing | GENERAL_COMMERCIAL | 664
+Commercial | ROOF_REPAIR | 599
+New Construction Commercial Roofing | NEW_CONSTRUCTION | 234
+Roof Repair & Alteration | NEW_CONSTRUCTION | 106
+Roof Tear-Off & Replace | COMMERCIAL_REROOF | 75
+New Construction Commercial Roofing | INTERIOR_OR_GENERAL_ALTERATION | 60
+Roof Tear-Off & Replace | GENERAL_COMMERCIAL | 38
+Roof Repair & Alteration | ROOF_REPAIR | 18
+Commercial Waterproofing & Coating | GENERAL_COMMERCIAL | 14
+Roof Repair & Alteration | COMMERCIAL_REROOF | 7
+Roof Tear-Off & Replace | NEW_CONSTRUCTION | 5
+Roof Tear-Off & Replace | INTERIOR_OR_GENERAL_ALTERATION | 4
+Commercial Waterproofing & Coating | NEW_CONSTRUCTION | 3
+Commercial Waterproofing & Coating | INTERIOR_OR_GENERAL_ALTERATION | 1
+Multi-Family Re-Roof | COMMERCIAL_REROOF | 1
+
+=== parcels with zero permits ===
+SQL: SELECT (SELECT COUNT(*) FROM parcels) parcels, (SELECT COUNT(DISTINCT parcel_id) FROM normalized_permits WHERE parcel_id IS NOT NULL AND parcel_id!='') parcels_with_any_permit, (SELECT COUNT(*) FROM parcels p WHERE NOT EXISTS ( SELECT 1 FROM normalized_permits n WHERE n.parcel_id=p.id)) zero_permit_parcels
+ROWS 1
+16657 | 13766 | 2956
+
+=== scored permit status ===
+SQL: SELECT COALESCE(muni_permit_status,'(null)'), verification_status, COUNT(*) n FROM scored_parcel_leads GROUP BY 1,2 ORDER BY n DESC
+ROWS 25
+PERMIT_DETECTED | PERMIT_DETECTED | 9083
+ZERO_PERMITS_FOUND | VERIFIED | 678
+(null) | LOW_STORM_PROXIMITY | 637
+NO_POST_STORM_ROOF_PERMIT_FOUND | VERIFIED | 342
+(null) | DISQUALIFIED_INSTITUTIONAL | 183
+(null) | MISSING_COORDINATES | 129
+NO_ACTIVE_MUNICIPAL_FEED | UNVERIFIED | 64
+(null) | DISQUALIFIED_MFR | 51
+PERMIT_DETECTED | DISQUALIFIED_INSTITUTIONAL | 18
+NON_ROOF_PERMIT_DETECTED | NON_ROOF_PERMIT_DETECTED | 14
+ROOF_PERMIT_DETECTED | ROOF_PERMIT_DETECTED | 14
+NO_ACTIVE_MUNICIPAL_FEED | VERIFIED | 12
+NON_ROOF_PERMIT_DETECTED | DISQUALIFIED_INSTITUTIONAL | 8
+NO_POST_STORM_ROOF_PERMIT_FOUND | DISQUALIFIED_MANUAL | 6
+NON_ROOF_PERMIT_DETECTED | LOW_STORM_PROXIMITY | 5
+NO_POST_STORM_ROOF_PERMIT_FOUND | DISQUALIFIED_INSTITUTIONAL | 5
+NO_POST_STORM_ROOF_PERMIT_FOUND | UNVERIFIED | 4
+ROOF_PERMIT_DETECTED | DISQUALIFIED_INSTITUTIONAL | 4
+NON_ROOF_PERMIT_DETECTED | DISQUALIFIED_MFR | 3
+(null) | VERIFIED | 2
+ROOF_PERMIT_DETECTED | LOW_STORM_PROXIMITY | 2
+ZERO_PERMITS_FOUND | DISQUALIFIED_INSTITUTIONAL | 2
+ZERO_PERMITS_FOUND | UNVERIFIED | 2
+(null) | DISQUALIFIED_MANUAL | 1
+NO_POST_STORM_ROOF_PERMIT_FOUND | LOW_STORM_PROXIMITY | 1
+
+=== exact 0.65 building = round(land*0.65) ===
+SQL: SELECT SUM(CASE WHEN land_sqft>0 AND building_sqft = CAST(ROUND(land_sqft*0.65) AS INT) THEN 1 ELSE 0 END) eq_round_065, SUM(CASE WHEN land_sqft>0 AND building_sqft = CAST(land_sqft*0.65 AS INT) THEN 1 ELSE 0 END) eq_trunc_065, SUM(CASE WHEN building_sqft>0 AND ABS(total_valuation - building_sqft*165.0)<1 THEN 1 ELSE 0 END) val165, SUM(CASE WHEN building_sqft>0 AND ABS(total_valuation - building_sqft*175.0)<1 THEN 1 ELSE 0 END) val175, SUM(CASE WHEN building_sqft>0 AND ABS(total_valuation - building_sqft*45.0)<1 THEN 1 ELSE 0 END) val45, COUNT(*) n FROM parcels
+ROWS 1
+139 | 121 | 0 | 0 | 15 | 16657
+
+=== scored val = sqft*165 by provenance ===
+SQL: SELECT data_provenance, verification_status, outbound_ready, SUM(CASE WHEN building_sqft>0 AND ABS(cad_total_valuation - building_sqft*165.0)<1 THEN 1 ELSE 0 END) v165, COUNT(*) n FROM scored_parcel_leads GROUP BY 1,2,3 ORDER BY v165 DESC
+ROWS 12
+unverified_seed | VERIFIED | 0 | 636 | 1028
+unverified_seed | PERMIT_DETECTED | 0 | 198 | 9083
+unverified_seed | LOW_STORM_PROXIMITY | 0 | 149 | 645
+unverified_seed | DISQUALIFIED_INSTITUTIONAL | 0 | 105 | 220
+unverified_seed | DISQUALIFIED_MFR | 0 | 5 | 54
+unverified_seed | UNVERIFIED | 0 | 2 | 70
+live_dcad_scrape | VERIFIED | 1 | 0 | 5
+live_tad_api | VERIFIED | 1 | 0 | 1
+unverified_seed | DISQUALIFIED_MANUAL | 0 | 0 | 7
+unverified_seed | MISSING_COORDINATES | 0 | 0 | 129
+unverified_seed | NON_ROOF_PERMIT_DETECTED | 0 | 0 | 14
+unverified_seed | ROOF_PERMIT_DETECTED | 0 | 0 | 14
+
+=== year_built decade spikes share ===
+SQL: SELECT SUM(CASE WHEN year_built IN (1900,1910,1920,1925,1930,1931,1940,1950,1955,1960,1965,1970,1975,1980,1985) THEN 1 ELSE 0 END) round_years, SUM(CASE WHEN year_built IS NULL THEN 1 ELSE 0 END) nulls, COUNT(*) n FROM parcels
+ROWS 1
+6507 | 1799 | 16657
+
+=== round years by data_source ===
+SQL: SELECT data_source, SUM(CASE WHEN year_built IN (1900,1910,1920,1925,1930,1931) THEN 1 ELSE 0 END) early_round, COUNT(*) n FROM parcels GROUP BY 1 ORDER BY n DESC
+ROWS 7
+NYC MapPLUTO (Department of City Planning) | 3964 | 12814
+Tarrant Appraisal District (TAD) | 23 | 1500
+Dallas County Appraisal District (DCAD) | 0 | 1497
+NYC Department of City Planning (MapPLUTO) | 90 | 422
+King County GIS PropertyInfo | 0 | 378
+Dallas Central Appraisal District (DCAD) | 0 | 45
+ | 0 | 1
+
+=== field_provenance status ===
+SQL: SELECT status, COUNT(*) n FROM field_provenance GROUP BY 1 ORDER BY n DESC
+ROWS 2
+fetched | 1243958
+computed | 93508
+
+=== field_provenance top column status ===
+SQL: SELECT table_name, column_name, status, COUNT(*) n FROM field_provenance GROUP BY 1,2,3 ORDER BY n DESC LIMIT 40
+ROWS 25
+normalized_permits | category | fetched | 93508
+normalized_permits | city | fetched | 93508
+normalized_permits | contractor_name | fetched | 93508
+normalized_permits | jurisdiction | fetched | 93508
+normalized_permits | normalized_address | fetched | 93508
+normalized_permits | permit_scope | computed | 93508
+normalized_permits | raw_description | fetched | 93508
+normalized_permits | raw_permit_number | fetched | 93508
+normalized_permits | source_system | fetched | 93508
+normalized_permits | state | fetched | 93508
+normalized_permits | status | fetched | 93508
+normalized_permits | zip_code | fetched | 93508
+parcels | account_number | fetched | 16656
+parcels | address | fetched | 16656
+parcels | city | fetched | 16656
+parcels | county | fetched | 16656
+parcels | data_source | fetched | 16656
+parcels | owner_address | fetched | 16656
+parcels | owner_city | fetched | 16656
+parcels | owner_name | fetched | 16656
+parcels | owner_state | fetched | 16656
+parcels | owner_zip | fetched | 16656
+parcels | state | fetched | 16656
+parcels | zip_code | fetched | 16656
+canonical_contractors | canonical_name | fetched | 15498
+
+=== is_mock distribution ===
+SQL: SELECT 'parcels' t, is_mock, COUNT(*) FROM parcels GROUP BY 2 UNION ALL SELECT 'scored', is_mock, COUNT(*) FROM scored_parcel_leads GROUP BY 2 UNION ALL SELECT 'permits_mock_col_absent', NULL, COUNT(*) FROM normalized_permits
+ROWS 3
+parcels | 0 | 16657
+scored | 0 | 11270
+permits_mock_col_absent |  | 93508

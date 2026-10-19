@@ -1,0 +1,62 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+node_modules/
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+.next/
+/out/
+netlify-landing/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+.cursor/
+.playwright-mcp/
+cookie.txt
+tmp_*
+=
+
+# archives / local dbs (do not push)
+*.zip
+*.tar.gz
+*.db
+*.sqlite
+*.sqlite-*
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# local market-intelligence database and cached appraisal files
+/data/*.sqlite
+/data/*.sqlite-*
+/data/dcad/
+
+# duplicate landing export (source of truth is src/ + netlify-landing/)
+depoii-landing-build/

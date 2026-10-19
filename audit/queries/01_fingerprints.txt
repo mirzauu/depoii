@@ -1,0 +1,343 @@
+RUN_UTC 2026-10-13T20:42:48.777194+00:00
+
+=== release_fields ===
+SQL: SELECT table_name, column_name FROM release_fields ORDER BY 1,2
+ROWS 25
+canonical_contractors | canonical_name
+normalized_permits | category
+normalized_permits | city
+normalized_permits | contractor_name
+normalized_permits | jurisdiction
+normalized_permits | normalized_address
+normalized_permits | permit_scope
+normalized_permits | raw_description
+normalized_permits | raw_permit_number
+normalized_permits | source_system
+normalized_permits | state
+normalized_permits | status
+normalized_permits | zip_code
+parcels | account_number
+parcels | address
+parcels | city
+parcels | county
+parcels | data_source
+parcels | owner_address
+parcels | owner_city
+parcels | owner_name
+parcels | owner_state
+parcels | owner_zip
+parcels | state
+parcels | zip_code
+
+=== release_parcels_sql ===
+SQL: SELECT sql FROM sqlite_master WHERE name='release_parcels'
+ROWS 1
+CREATE VIEW release_parcels AS
+    SELECT
+        id, address, city, state, zip_code, owner_name,
+        owner_address, owner_city, owner_state, owner_zip,
+        county, account_number, data_source
+    FROM parcels
+    WHERE COALESCE(is_mock, 0) = 0
+
+=== release_permits_sql ===
+SQL: SELECT sql FROM sqlite_master WHERE name='release_permits'
+ROWS 1
+CREATE VIEW release_permits AS
+        SELECT
+            id,
+            raw_permit_number,
+            source_system,
+            jurisdiction,
+            state,
+            city,
+            status,
+            normalized_address,
+            zip_code,
+            category,
+            raw_description,
+            contractor_name,
+            permit_scope,
+            CASE WHEN date_quality = 'source' THEN issue_date ELSE NULL END AS issue_date_source,
+            date_quality,
+            geo_quality
+        FROM normalized_permits
+
+=== parcel counts by provenance ===
+SQL: SELECT COALESCE(data_provenance,'(null)') src, COUNT(*) n, SUM(CASE WHEN is_mock=1 THEN 1 ELSE 0 END) mock_n FROM parcels GROUP BY 1 ORDER BY n DESC
+ROWS 3
+unverified_seed | 16651 | 0
+live_dcad_scrape | 5 | 0
+live_tad_api | 1 | 0
+
+=== scored counts by provenance ===
+SQL: SELECT COALESCE(data_provenance,'(null)') src, COALESCE(verification_status,'(null)') vst, COALESCE(outbound_ready,-1) ready, COUNT(*) n FROM scored_parcel_leads GROUP BY 1,2,3 ORDER BY n DESC
+ROWS 12
+unverified_seed | PERMIT_DETECTED | 0 | 9083
+unverified_seed | VERIFIED | 0 | 1028
+unverified_seed | LOW_STORM_PROXIMITY | 0 | 645
+unverified_seed | DISQUALIFIED_INSTITUTIONAL | 0 | 220
+unverified_seed | MISSING_COORDINATES | 0 | 129
+unverified_seed | UNVERIFIED | 0 | 70
+unverified_seed | DISQUALIFIED_MFR | 0 | 54
+unverified_seed | NON_ROOF_PERMIT_DETECTED | 0 | 14
+unverified_seed | ROOF_PERMIT_DETECTED | 0 | 14
+unverified_seed | DISQUALIFIED_MANUAL | 0 | 7
+live_dcad_scrape | VERIFIED | 1 | 5
+live_tad_api | VERIFIED | 1 | 1
+
+=== scored outbound ready ===
+SQL: SELECT outbound_ready, COUNT(*) n, SUM(CASE WHEN is_mock=1 THEN 1 ELSE 0 END) mock_n FROM scored_parcel_leads GROUP BY 1
+ROWS 2
+0 | 11264 | 0
+1 | 6 | 0
+
+=== ratio building/land exact constants parcels ===
+SQL: SELECT ROUND(1.0*building_sqft/land_sqft, 6) ratio, COUNT(*) n FROM parcels WHERE land_sqft IS NOT NULL AND land_sqft > 0 AND building_sqft IS NOT NULL GROUP BY 1 HAVING n >= 10 ORDER BY n DESC LIMIT 30
+ROWS 30
+0.0 | 207
+0.75 | 118
+1.0 | 117
+2.0 | 43
+1.2 | 36
+0.65 | 34
+1.5 | 32
+1.35 | 32
+0.6 | 32
+3.0 | 31
+0.45 | 28
+1.8 | 25
+0.8 | 25
+0.72 | 23
+0.666667 | 23
+0.649998 | 23
+0.649999 | 22
+0.64 | 21
+1.65 | 20
+0.9 | 19
+0.62 | 19
+0.96 | 18
+0.650001 | 18
+4.0 | 17
+0.449999 | 17
+3.6 | 16
+0.7 | 16
+1.05 | 15
+1.6 | 14
+0.66 | 14
+
+=== valuation per sqft exact constants parcels ===
+SQL: SELECT ROUND(1.0*total_valuation/building_sqft, 4) usd_per_sf, COUNT(*) n FROM parcels WHERE building_sqft IS NOT NULL AND building_sqft > 0 AND total_valuation IS NOT NULL GROUP BY 1 HAVING n >= 10 ORDER BY n DESC LIMIT 40
+ROWS 11
+293.3333 | 111
+45.0 | 16
+65.0 | 15
+55.0 | 14
+30.0 | 14
+70.0 | 11
+50.0 | 11
+0.0 | 11
+80.0 | 10
+60.0 | 10
+40.0 | 10
+
+=== exact fingerprint counts parcels ===
+SQL: SELECT SUM(CASE WHEN land_sqft>0 AND ABS(1.0*building_sqft/land_sqft - 0.65) < 1e-9 THEN 1 ELSE 0 END) ratio_065, SUM(CASE WHEN building_sqft>0 AND ABS(1.0*total_valuation/building_sqft - 165) < 0.01 THEN 1 ELSE 0 END) val_165, SUM(CASE WHEN building_sqft>0 AND ABS(1.0*total_valuation/building_sqft - 175) < 0.01 THEN 1 ELSE 0 END) val_175, SUM(CASE WHEN total_valuation = 145000 THEN 1 ELSE 0 END) val_145k, SUM(CASE WHEN total_valuation = 95000 THEN 1 ELSE 0 END) val_95k, SUM(CASE WHEN year_built IN (1996,1997,1998) THEN 1 ELSE 0 END) yb_9698, COUNT(*) n FROM parcels
+ROWS 1
+13 | 0 | 0 | 0 | 0 | 594 | 16657
+
+=== exact fingerprint counts scored ===
+SQL: SELECT SUM(CASE WHEN building_sqft>0 AND ABS(1.0*cad_total_valuation/building_sqft - 165) < 0.01 THEN 1 ELSE 0 END) val_165, SUM(CASE WHEN building_sqft>0 AND ABS(1.0*cad_total_valuation/building_sqft - 175) < 0.01 THEN 1 ELSE 0 END) val_175, SUM(CASE WHEN cad_total_valuation = 145000 THEN 1 ELSE 0 END) val_145k, SUM(CASE WHEN cad_total_valuation = 95000 THEN 1 ELSE 0 END) val_95k, SUM(CASE WHEN year_built IN (1996,1997,1998) THEN 1 ELSE 0 END) yb_9698, COUNT(*) n FROM scored_parcel_leads
+ROWS 1
+1095 | 0 | 0 | 0 | 1257 | 11270
+
+=== year_built histogram parcels top ===
+SQL: SELECT year_built, COUNT(*) n FROM parcels GROUP BY 1 ORDER BY n DESC LIMIT 25
+ROWS 25
+None | 1799
+1920 | 1033
+1910 | 804
+1930 | 744
+1925 | 638
+1931 | 471
+1960 | 465
+1996 | 399
+1900 | 387
+1901 | 335
+1950 | 327
+1899 | 306
+1965 | 299
+1970 | 298
+1955 | 266
+1940 | 239
+1915 | 214
+1980 | 190
+1975 | 189
+1986 | 164
+1935 | 164
+1926 | 160
+1985 | 157
+1927 | 149
+1928 | 148
+
+=== year_built by provenance top spikes ===
+SQL: SELECT COALESCE(data_provenance,'(null)'), year_built, COUNT(*) n FROM parcels WHERE year_built IN (1996,1997,1998) OR year_built IS NULL GROUP BY 1,2 ORDER BY n DESC
+ROWS 5
+unverified_seed | None | 1799
+unverified_seed | 1996 | 399
+unverified_seed | 1998 | 103
+unverified_seed | 1997 | 91
+live_tad_api | 1998 | 1
+
+=== building_sqft top values parcels ===
+SQL: SELECT building_sqft, COUNT(*) n FROM parcels GROUP BY 1 ORDER BY n DESC LIMIT 20
+ROWS 20
+None | 1198
+0 | 216
+2400 | 86
+1600 | 60
+3000 | 57
+1440 | 54
+2700 | 51
+2160 | 50
+2200 | 42
+2000 | 42
+1280 | 41
+2100 | 40
+1800 | 39
+3600 | 38
+5000 | 37
+2800 | 37
+2280 | 37
+2500 | 35
+6000 | 33
+4000 | 33
+
+=== valuation top values parcels ===
+SQL: SELECT total_valuation, COUNT(*) n FROM parcels GROUP BY 1 ORDER BY n DESC LIMIT 20
+ROWS 20
+None | 1538
+0.0 | 31
+51480.0 | 17
+49560.0 | 17
+43140.0 | 17
+48960.0 | 16
+48840.0 | 16
+40920.0 | 16
+49500.0 | 15
+45780.0 | 15
+40500.0 | 15
+40200.0 | 15
+48300.0 | 14
+47940.0 | 14
+46260.0 | 14
+45180.0 | 14
+42840.0 | 14
+42720.0 | 14
+41040.0 | 14
+39960.0 | 14
+
+=== uniqueness rates parcels key cols ===
+SQL: SELECT COUNT(*) n, COUNT(DISTINCT building_sqft) d_sqft, COUNT(DISTINCT year_built) d_year, COUNT(DISTINCT total_valuation) d_val, COUNT(DISTINCT property_type) d_type, COUNT(DISTINCT owner_name) d_owner, COUNT(DISTINCT address) d_addr FROM parcels
+ROWS 1
+16657 | 9051 | 212 | 9690 | 227 | 15032 | 16562
+
+=== uniqueness scored ===
+SQL: SELECT COUNT(*) n, COUNT(DISTINCT building_sqft) d_sqft, COUNT(DISTINCT year_built) d_year, COUNT(DISTINCT cad_total_valuation) d_val, COUNT(DISTINCT storm_name) d_storm, COUNT(DISTINCT event_date) d_date, COUNT(DISTINCT nearest_hail_distance_mi) d_dist, COUNT(DISTINCT why_strong_summary) d_why FROM scored_parcel_leads
+ROWS 1
+11270 | 7709 | 204 | 8491 | 16 | 15 | 834 | 6
+
+=== source columns parcels ===
+SQL: SELECT COALESCE(building_sqft_source,'(null)') s, COUNT(*) n FROM parcels GROUP BY 1 ORDER BY n DESC
+ROWS 3
+(null) | 16651
+DCAD AcctDetailCom.aspx improvement sections | 5
+TAD LIVING_ARE | 1
+
+=== valuation_source parcels ===
+SQL: SELECT COALESCE(valuation_source,'(null)') s, COUNT(*) n FROM parcels GROUP BY 1 ORDER BY n DESC
+ROWS 3
+(null) | 16651
+DCAD AcctDetailCom.aspx roll | 5
+TAD TOTAL_VALU | 1
+
+=== year_built_source parcels ===
+SQL: SELECT COALESCE(year_built_source,'(null)') s, COUNT(*) n FROM parcels GROUP BY 1 ORDER BY n DESC
+ROWS 4
+cad_year_built | 14509
+missing | 2142
+DCAD AcctDetailCom.aspx roll | 5
+TAD YEAR_BUILT | 1
+
+=== data_source parcels ===
+SQL: SELECT COALESCE(data_source,'(null)') s, COUNT(*) n FROM parcels GROUP BY 1 ORDER BY n DESC
+ROWS 7
+NYC MapPLUTO (Department of City Planning) | 12814
+Tarrant Appraisal District (TAD) | 1500
+Dallas County Appraisal District (DCAD) | 1497
+NYC Department of City Planning (MapPLUTO) | 422
+King County GIS PropertyInfo | 378
+Dallas Central Appraisal District (DCAD) | 45
+(null) | 1
+
+=== area_source parcels ===
+SQL: SELECT COALESCE(area_source,'(null)') s, COUNT(*) n FROM parcels GROUP BY 1 ORDER BY n DESC
+ROWS 4
+cad_building | 13611
+missing | 1545
+cad_living | 1500
+(null) | 1
+
+=== year_built vs source cross ===
+SQL: SELECT COALESCE(year_built_source,'(null)') src, year_built, COUNT(*) n FROM parcels GROUP BY 1,2 HAVING n >= 20 ORDER BY n DESC LIMIT 40
+ROWS 40
+missing | None | 1799
+cad_year_built | 1920 | 1033
+cad_year_built | 1910 | 804
+cad_year_built | 1930 | 744
+cad_year_built | 1925 | 638
+cad_year_built | 1931 | 471
+cad_year_built | 1960 | 465
+cad_year_built | 1900 | 387
+cad_year_built | 1901 | 335
+cad_year_built | 1950 | 327
+missing | 1996 | 315
+cad_year_built | 1899 | 306
+cad_year_built | 1965 | 299
+cad_year_built | 1970 | 298
+cad_year_built | 1955 | 266
+cad_year_built | 1940 | 239
+cad_year_built | 1915 | 214
+cad_year_built | 1980 | 190
+cad_year_built | 1975 | 189
+cad_year_built | 1935 | 164
+cad_year_built | 1986 | 164
+cad_year_built | 1926 | 160
+cad_year_built | 1985 | 157
+cad_year_built | 1927 | 149
+cad_year_built | 1928 | 148
+cad_year_built | 2004 | 125
+cad_year_built | 1905 | 122
+cad_year_built | 2002 | 117
+cad_year_built | 1945 | 114
+cad_year_built | 2005 | 113
+cad_year_built | 2022 | 111
+cad_year_built | 1995 | 110
+cad_year_built | 2003 | 110
+cad_year_built | 2006 | 109
+cad_year_built | 2024 | 109
+cad_year_built | 1929 | 107
+cad_year_built | 2000 | 105
+cad_year_built | 1987 | 101
+cad_year_built | 2001 | 99
+cad_year_built | 2007 | 98
+
+=== stories vs building vs footprint ===
+SQL: SELECT SUM(CASE WHEN stories IS NULL THEN 1 ELSE 0 END) stories_null, SUM(CASE WHEN stories > 1 THEN 1 ELSE 0 END) stories_gt1, SUM(CASE WHEN footprint_sqft IS NOT NULL AND building_sqft IS NOT NULL AND footprint_sqft = building_sqft THEN 1 ELSE 0 END) footprint_eq_bldg, SUM(CASE WHEN footprint_sqft IS NOT NULL AND building_sqft IS NOT NULL AND stories > 1 AND footprint_sqft <> building_sqft THEN 1 ELSE 0 END) multistory_diff, SUM(CASE WHEN footprint_sqft IS NULL THEN 1 ELSE 0 END) footprint_null, COUNT(*) n FROM parcels
+ROWS 1
+0 | 1 | 1037 | 1 | 15616 | 16657
+
+=== scored stories-like: footprint vs building ===
+SQL: SELECT SUM(CASE WHEN s.footprint_sqft IS NULL THEN 1 ELSE 0 END) fp_null, SUM(CASE WHEN s.footprint_sqft = s.building_sqft THEN 1 ELSE 0 END) eq, SUM(CASE WHEN p.stories > 1 THEN 1 ELSE 0 END) stories_gt1, SUM(CASE WHEN p.stories > 1 AND s.building_sqft = s.footprint_sqft THEN 1 ELSE 0 END) multi_eq, COUNT(*) n FROM scored_parcel_leads s LEFT JOIN parcels p ON p.id = s.parcel_id
+ROWS 1
+10558 | 707 | 1 | 0 | 11270

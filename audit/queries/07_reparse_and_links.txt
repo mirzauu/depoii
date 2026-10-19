@@ -1,0 +1,83 @@
+RUN_UTC 2026-10-13T20:55:41.070069+00:00
+parcels 16657 footprint_eq_round_land_x_0.65 136 scored_cost_eq_that_footprint_x_9.4 78
+
+=== outbound six vs land*0.65 and DCAD/TAD HTML ===
+DCAD-PARCEL-00000662970600000 | 14222 Dallas Pkwy | zip 75226 | type None | bldg 193589 year 1978 val 25868580.0 stories 1 parcel_fp 246961 scored_fp 246961 land 379940 round(land*0.65) 246961 fp_is_065 True cost 2321434.0 cost_over_pfp 9.4
+  LIVE addr='14222 DALLAS PKWY' owner='WESTDALE NOEL LP' area=193589 year=1978 value=25868580.0 stories=2 units=217 foundation=97139 desc=['APARTMENT (BRICK EXTERIOR)']
+DCAD-PARCEL-008189000B05C0000 | 14856 Preston Rd | zip 75240 | type None | bldg 81536 year 2001 val 10750000.0 stories 1 parcel_fp 200875 scored_fp 200875 land 309039 round(land*0.65) 200875 fp_is_065 True cost 1888225.0 cost_over_pfp 9.4
+  LIVE addr='14856 PRESTON RD' owner='NEW PEPPER SQUARE S/C PARTNERS LTD' area=81536 year=2001 value=10750000.0 stories=1 units=0 foundation=12316 desc=['SHOPPING CENTER', 'DISCOUNT STORE', 'SUPERMARKET']
+DCAD-PARCEL-004643000A0010000 | 1133 S Madison Ave | zip 75208 | type None | bldg 101140 year 1952 val 2225080.0 stories 1 parcel_fp 139381 scored_fp 139381 land 214433 round(land*0.65) 139381 fp_is_065 True cost 1310182.0 cost_over_pfp 9.4
+  LIVE addr='1133 S MADISON AVE' owner='TRECO INVESTMENTS LTD' area=101140 year=1952 value=2225080.0 stories=1 units=0 foundation=29362 desc=['STORAGE WAREHOUSE', 'OFFICE BUILDING', 'SHIPPING DOCK/TRUCK TERMINAL', 'OFFICE BUILDING', 'STORAGE WAREHOUSE', 'STORAGE WAREHOUSE']
+DCAD-PARCEL-0081740A0003B0100 | 14755 Preston Rd | zip 75254 | type None | bldg 194113 year 1982 val 19136550.0 stories 8 parcel_fp 24264 scored_fp 134497 land 206919 round(land*0.65) 134497 fp_is_065 False cost 228082.0 cost_over_pfp 9.4
+  LIVE addr='14755 PRESTON RD' owner='SIGNATURE EXCHANGE PROPERTY' area=194113 year=1982 value=19136550.0 stories=8 units=0 foundation=24264 desc=['OFFICE BUILDING']
+TAD-PARCEL-07532598 | 3001 Meacham Blvd | zip 76102 | type 'Commercial Warehouse & Industrial Complex' | bldg 115188 year 1998 val 12062715.0 stories 1 parcel_fp 115188 scored_fp 115188 land 325742 round(land*0.65) 211732 fp_is_065 False cost 1082767.0 cost_over_pfp 9.4
+DCAD-PARCEL-006115000A0060000 | 3434 W ILLINOIS AVE | zip 75211 | type 'Commercial Shopping Center' | bldg 142616 year 2006 val 29825000.0 stories 1 parcel_fp 142616 scored_fp None land None round(land*0.65) None fp_is_065 False cost 1340590.0 cost_over_pfp 9.4
+  LIVE addr='3434 W ILLINOIS AVE' owner='SIERRA VISTA 16 A LLC &' area=142616 year=2006 value=29825000.0 stories=1 units=0 foundation=66143 desc=['SHOPPING CENTER', 'SUPERMARKET', 'RETAIL STRIP']
+
+=== reparsed DCAD field results (all golden rows with saved HTML) ===
+DCAD-PARCEL-008195001604C0000 addr=PASS owner=PASS sqft=FAIL year=FAIL value=UNKNOWN stories=PASS live_stories=1 db_stories=1 dcad_sections=2 bytes=38048 | reparse desc=['CHURCH BUILDING'] units=0 foundation=39558
+DCAD-PARCEL-00000662970550000 addr=PASS owner=PASS sqft=FAIL year=FAIL value=FAIL stories=PASS live_stories=2 db_stories=1 dcad_sections=1 bytes=35929 | reparse desc=['APARTMENT (BRICK EXTERIOR)'] units=232 foundation=96496
+DCAD-PARCEL-00000799939100000 addr=PASS owner=PASS sqft=FAIL year=FAIL value=FAIL stories=PASS live_stories=2 db_stories=1 dcad_sections=4 bytes=43496 | reparse desc=['RECREATION BUILDING'] units=0 foundation=19204
+DCAD-PARCEL-00000799950250000 addr=PASS owner=PASS sqft=FAIL year=FAIL value=FAIL stories=PASS live_stories=1 db_stories=1 dcad_sections=1 bytes=35850 | reparse desc=['OFFICE BUILDING'] units=0 foundation=11994
+DCAD-PARCEL-00000822000000600 addr=PASS owner=PASS sqft=UNKNOWN year=UNKNOWN value=FAIL stories=UNKNOWN live_stories= db_stories=1 dcad_sections=0 bytes=33246 | reparse desc=[] units=None foundation=None
+DCAD-PARCEL-00000491074000000 addr=PASS owner=FAIL sqft=UNKNOWN year=UNKNOWN value=FAIL stories=UNKNOWN live_stories= db_stories=1 dcad_sections=0 bytes=33048 | reparse desc=[] units=None foundation=None
+DCAD-PARCEL-14105100010080000 addr=PASS owner=PASS sqft=FAIL year=FAIL value=FAIL stories=PASS live_stories=1 db_stories=1 dcad_sections=1 bytes=35881 | reparse desc=['OFFICE BUILDING'] units=0 foundation=15717
+DCAD-PARCEL-65126556010120100 addr=PASS owner=PASS sqft=UNKNOWN year=UNKNOWN value=FAIL stories=UNKNOWN live_stories= db_stories=1 dcad_sections=0 bytes=32938 | reparse desc=[] units=None foundation=None
+DCAD-PARCEL-14105120020020000 addr=PASS owner=PASS sqft=UNKNOWN year=UNKNOWN value=FAIL stories=UNKNOWN live_stories= db_stories=1 dcad_sections=0 bytes=33253 | reparse desc=[] units=None foundation=None
+DCAD-PARCEL-12001000000020000 addr=PASS owner=PASS sqft=UNKNOWN year=UNKNOWN value=FAIL stories=UNKNOWN live_stories= db_stories=1 dcad_sections=0 bytes=33447 | reparse desc=[] units=None foundation=None
+DCAD-PARCEL-00000662970600000 addr=PASS owner=PASS sqft=PASS year=PASS value=PASS stories=PASS live_stories=2 db_stories=1 dcad_sections=1 bytes=35917 | reparse desc=['APARTMENT (BRICK EXTERIOR)'] units=217 foundation=97139
+DCAD-PARCEL-008189000B05C0000 addr=PASS owner=PASS sqft=PASS year=PASS value=PASS stories=PASS live_stories=1 db_stories=1 dcad_sections=3 bytes=41023 | reparse desc=['SHOPPING CENTER'] units=0 foundation=12316
+DCAD-PARCEL-004643000A0010000 addr=PASS owner=PASS sqft=PASS year=PASS value=PASS stories=PASS live_stories=1 db_stories=1 dcad_sections=6 bytes=48675 | reparse desc=['STORAGE WAREHOUSE'] units=0 foundation=29362
+DCAD-PARCEL-0081740A0003B0100 addr=PASS owner=FAIL sqft=PASS year=PASS value=PASS stories=PASS live_stories=8 db_stories=8 dcad_sections=1 bytes=35921 | reparse desc=['OFFICE BUILDING'] units=0 foundation=24264
+DCAD-PARCEL-006115000A0060000 addr=PASS owner=PASS sqft=PASS year=PASS value=PASS stories=PASS live_stories=1 db_stories=1 dcad_sections=3 bytes=41138 | reparse desc=['SHOPPING CENTER'] units=0 foundation=66143
+
+=== street name AND number on the same 60-link sample ===
+  FALSE New York City, NY permit 488 FOSTER ROAD, Staten Island, NY 10309 || parcel 488 FOUNTAIN AVENUE
+  FALSE New York City, NY permit 205 NORTH HENRY STREET, Brooklyn, NY 11222 || parcel 205 HENRY STREET
+  FALSE New York City, NY permit 10 East 53 Street || parcel 410 WEST 53 STREET
+  FALSE New York City, NY permit 121 BEDFORD AVENUE, Staten Island, NY 10306 || parcel 1217 BEDFORD AVENUE
+  FALSE New York City, NY permit 123 SOUTH AVENUE, Staten Island, NY 10303 || parcel 1123 SOUTHERN BOULEVARD
+  FALSE Dallas, TX permit 150 TURTLE CREEK BLVD Ste:106 || parcel 150 TURTLE CREEK BLVD
+  FALSE New York City, NY permit 481 Washington Street || parcel 450 WASHINGTON STREET
+  FALSE New York City, NY permit 111 NORTH    6 STREET, Brooklyn, NY 11249 || parcel 111 EAST 26 STREET
+  FALSE New York City, NY permit 490 WEST END AVENUE, New York, NY 10024 || parcel 3490 FT INDEPENDENCE ST
+  FALSE New York City, NY permit 12 EAST   41 STREET, New York, NY 10017 || parcel 1241 BROADWAY
+  FALSE New York City, NY permit 86 NOSTRAND AVENUE, Staten Island, NY 10314 || parcel 860 NOSTRAND AVENUE
+  FALSE New York City, NY permit 534 EAST   23 STREET, Brooklyn, NY 11210 || parcel 1534 EAST 233 STREET
+  FALSE New York City, NY permit 255 MILL ROAD, Staten Island, NY 10306 || parcel 255 MILLER AVENUE
+  FALSE New York City, NY permit 37 1 STREET, Brooklyn, NY 11231 || parcel 371 BROADWAY
+  FALSE New York City, NY permit 400 Lafayette Street || parcel 95 East Houston Street
+false_links 15 of 60
+
+=== outbound haversine to 260425 TX rows and to 260426 TX rows ===
+  260425 14222 Dallas Pkwy stored_compare_later dist 15.59 size 1.25 time 0556 1 W Cockrell Hill Report from mPING. (FWD)
+  260425 14856 Preston Rd stored_compare_later dist 16.49 size 1.25 time 0556 1 W Cockrell Hill Report from mPING. (FWD)
+  260425 1133 S Madison Ave stored_compare_later dist 3.78 size 1.5 time 0626 1 S Cockrell Hill (FWD)
+  260425 14755 Preston Rd stored_compare_later dist 16.27 size 1.25 time 0556 1 W Cockrell Hill Report from mPING. (FWD)
+  260425 3001 Meacham Blvd stored_compare_later dist 1.06 size 1.0 time 0539 2 NW Haltom City NWS Fort Worth Office. (FWD)
+  260425 DCAD-PARCEL-006115000A0060000 no coordinates
+  260426 14222 Dallas Pkwy stored_compare_later dist 45.15 size 2.75 time 1205 Leonard Numerous homes and cars had windows broken from baseball size hail in the Whitew
+  260426 14856 Preston Rd stored_compare_later dist 43.98 size 2.75 time 1205 Leonard Numerous homes and cars had windows broken from baseball size hail in the Whitew
+  260426 1133 S Madison Ave stored_compare_later dist 56.12 size 2.75 time 1205 Leonard Numerous homes and cars had windows broken from baseball size hail in the Whitew
+  260426 14755 Preston Rd stored_compare_later dist 44.24 size 2.75 time 1205 Leonard Numerous homes and cars had windows broken from baseball size hail in the Whitew
+  260426 3001 Meacham Blvd stored_compare_later dist 72.52 size 2.75 time 1205 Leonard Numerous homes and cars had windows broken from baseball size hail in the Whitew
+  260426 DCAD-PARCEL-006115000A0060000 no coordinates
+
+=== timezone words in 260425 HTML ===
+  CST count 0
+  CDT count 0
+  UTC count 7
+  Central count 0
+  All times count 1
+  time zone count 0
+  snippet NONE
+
+=== census coordinate geocode ===
+  14222 Dallas Pkwy db_zip 75226 census_zcta None county Dallas County http 200 at 2026-10-13T20:55:46.723035+00:00
+  14856 Preston Rd db_zip 75240 census_zcta None county Dallas County http 200 at 2026-10-13T20:55:48.021762+00:00
+  1133 S Madison Ave db_zip 75208 census_zcta None county Dallas County http 200 at 2026-10-13T20:55:49.347901+00:00
+  14755 Preston Rd db_zip 75254 census_zcta None county Dallas County http 200 at 2026-10-13T20:55:50.663162+00:00
+  3001 Meacham Blvd db_zip 76102 census_zcta None county Tarrant County http 200 at 2026-10-13T20:55:51.967433+00:00
+
+=== Dallas FY23-24 permits at 14222 ===
+  http 200 features 0 at 2026-10-13T20:55:53.035419+00:00 err {'code': 400, 'message': 'Cannot perform query. Invalid query parameters.', 'details': ["'outFields' parameter is invalid"]}

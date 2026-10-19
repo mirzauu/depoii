@@ -1,0 +1,8 @@
+RUN_UTC 2026-10-13T21:35:59.764043+00:00
+dallas_sample_features 0
+distinct_ACTIVITY 0
+recall UNKNOWN
+reason Dallas ACTIVITY LIKE '%ROOF%' returned 0 features in audit/queries/09_dallas_permit_recall.txt, and the saved sample has no features to list a vocabulary.
+customer_text searched {portal} on {date}: {n} matches
+forbidden ZERO_PERMITS_FOUND
+forbidden no roofing permit found

@@ -1,0 +1,122 @@
+RUN_UTC 2026-10-13T20:52:26.828988+00:00
+SEED 20261014
+golden_n 30
+strata Counter({('FW', 'large', 'high'): 2, ('NY', 'large', 'high'): 1, ('NY', 'large', 'low'): 1, ('NY', 'large', 'mid'): 1, ('NY', 'mid', 'high'): 1, ('NY', 'mid', 'low'): 1, ('NY', 'mid', 'mid'): 1, ('NY', 'small', 'high'): 1, ('NY', 'small', 'low'): 1, ('SEA', 'large', 'high'): 1, ('SEA', 'mid', 'high'): 1, ('SEA', 'small', 'high'): 1, ('FW', 'large', 'low'): 1, ('FW', 'large', 'mid'): 1, ('FW', 'mid', 'high'): 1, ('FW', 'mid', 'low'): 1, ('FW', 'mid', 'mid'): 1, ('DAL', 'large', 'high'): 1, ('DAL', 'large', 'low'): 1, ('DAL', 'large', 'mid'): 1, ('DAL', 'mid', 'high'): 1, ('DAL', 'mid', 'low'): 1, ('DAL', 'mid', 'mid'): 1, ('TX_OTHER', 'large', 'high'): 1, ('TX_OTHER', 'large', 'low'): 1, ('TX_OTHER', 'large', 'mid'): 1, ('TX_OTHER', 'mid', 'high'): 1, ('TX_OTHER', 'mid', 'low'): 1, ('TX_OTHER', 'mid', 'mid'): 1})
+LIVE NYC-PLUTO-1001510001 NY http= addr=UNKNOWN owner=UNKNOWN sqft=UNKNOWN year=UNKNOWN value=UNKNOWN stories=UNKNOWN no live county endpoint called for this stratum in this script
+LIVE NYC-PLUTO-2024560150 NY http= addr=UNKNOWN owner=UNKNOWN sqft=UNKNOWN year=UNKNOWN value=UNKNOWN stories=UNKNOWN no live county endpoint called for this stratum in this script
+LIVE NYC-PLUTO-3072990071 NY http= addr=UNKNOWN owner=UNKNOWN sqft=UNKNOWN year=UNKNOWN value=UNKNOWN stories=UNKNOWN no live county endpoint called for this stratum in this script
+LIVE NYC-PLUTO-3013790055 NY http= addr=UNKNOWN owner=UNKNOWN sqft=UNKNOWN year=UNKNOWN value=UNKNOWN stories=UNKNOWN no live county endpoint called for this stratum in this script
+LIVE NYC-PLUTO-1007640057 NY http= addr=UNKNOWN owner=UNKNOWN sqft=UNKNOWN year=UNKNOWN value=UNKNOWN stories=UNKNOWN no live county endpoint called for this stratum in this script
+LIVE NYC-PLUTO-5054950001 NY http= addr=UNKNOWN owner=UNKNOWN sqft=UNKNOWN year=UNKNOWN value=UNKNOWN stories=UNKNOWN no live county endpoint called for this stratum in this script
+LIVE NYC-PLUTO-5079080066 NY http= addr=UNKNOWN owner=UNKNOWN sqft=UNKNOWN year=UNKNOWN value=UNKNOWN stories=UNKNOWN no live county endpoint called for this stratum in this script
+LIVE NYC-PLUTO-2040010054 NY http= addr=UNKNOWN owner=UNKNOWN sqft=UNKNOWN year=UNKNOWN value=UNKNOWN stories=UNKNOWN no live county endpoint called for this stratum in this script
+LIVE KC-PIN-1926049321 SEA http= addr=UNKNOWN owner=UNKNOWN sqft=UNKNOWN year=UNKNOWN value=UNKNOWN stories=UNKNOWN no live county endpoint called for this stratum in this script
+LIVE KC-PIN-1975700390 SEA http= addr=UNKNOWN owner=UNKNOWN sqft=UNKNOWN year=UNKNOWN value=UNKNOWN stories=UNKNOWN no live county endpoint called for this stratum in this script
+LIVE KC-PIN-6003500480 SEA http= addr=UNKNOWN owner=UNKNOWN sqft=UNKNOWN year=UNKNOWN value=UNKNOWN stories=UNKNOWN no live county endpoint called for this stratum in this script
+LIVE TAD-PARCEL-00000361 FW http=200 addr=PASS owner=PASS sqft=PASS year=PASS value=PASS stories=UNKNOWN tad_features=1
+LIVE TAD-PARCEL-07013205 FW http=200 addr=PASS owner=PASS sqft=PASS year=PASS value=PASS stories=UNKNOWN tad_features=1
+LIVE TAD-PARCEL-02684853 FW http=200 addr=PASS owner=PASS sqft=PASS year=PASS value=PASS stories=UNKNOWN tad_features=1
+LIVE TAD-PARCEL-00498173 FW http=200 addr=PASS owner=PASS sqft=PASS year=PASS value=PASS stories=UNKNOWN tad_features=1
+LIVE TAD-PARCEL-04977181 FW http=200 addr=PASS owner=PASS sqft=PASS year=PASS value=PASS stories=UNKNOWN tad_features=1
+LIVE TAD-PARCEL-00110949 FW http=200 addr=PASS owner=PASS sqft=PASS year=PASS value=PASS stories=UNKNOWN tad_features=1
+LIVE TAD-PARCEL-06658318 FW http=200 addr=PASS owner=PASS sqft=PASS year=PASS value=PASS stories=UNKNOWN tad_features=1
+LIVE DCAD-PARCEL-008195001604C0000 DAL http=200 addr=UNKNOWN owner=FAIL sqft=FAIL year=FAIL value=UNKNOWN stories=PASS dcad_sections=2 bytes=38048
+LIVE DCAD-PARCEL-00000662970550000 DAL http=200 addr=UNKNOWN owner=FAIL sqft=FAIL year=FAIL value=FAIL stories=FAIL dcad_sections=1 bytes=35929
+LIVE DCAD-PARCEL-00000799939100000 DAL http=200 addr=UNKNOWN owner=FAIL sqft=FAIL year=FAIL value=FAIL stories=FAIL dcad_sections=4 bytes=43496
+LIVE DCAD-PARCEL-00000799950250000 DAL http=200 addr=UNKNOWN owner=FAIL sqft=FAIL year=FAIL value=FAIL stories=PASS dcad_sections=1 bytes=35850
+LIVE DCAD-PARCEL-00000822000000600 DAL http=200 addr=UNKNOWN owner=FAIL sqft=UNKNOWN year=UNKNOWN value=FAIL stories=UNKNOWN dcad_sections=0 bytes=33246
+LIVE DCAD-PARCEL-00000491074000000 DAL http=200 addr=UNKNOWN owner=FAIL sqft=UNKNOWN year=UNKNOWN value=FAIL stories=UNKNOWN dcad_sections=0 bytes=33048
+LIVE TAD-PARCEL-02269775 TX_OTHER http=200 addr=PASS owner=PASS sqft=PASS year=PASS value=PASS stories=UNKNOWN tad_features=1
+LIVE DCAD-PARCEL-14105100010080000 TX_OTHER http=200 addr=UNKNOWN owner=FAIL sqft=FAIL year=FAIL value=FAIL stories=PASS dcad_sections=1 bytes=35881
+LIVE DCAD-PARCEL-65126556010120100 TX_OTHER http=200 addr=UNKNOWN owner=FAIL sqft=UNKNOWN year=UNKNOWN value=FAIL stories=UNKNOWN dcad_sections=0 bytes=32938
+LIVE TAD-PARCEL-04648862 TX_OTHER http=200 addr=PASS owner=PASS sqft=PASS year=PASS value=PASS stories=UNKNOWN tad_features=1
+LIVE DCAD-PARCEL-14105120020020000 TX_OTHER http=200 addr=UNKNOWN owner=FAIL sqft=UNKNOWN year=UNKNOWN value=FAIL stories=UNKNOWN dcad_sections=0 bytes=33253
+LIVE DCAD-PARCEL-12001000000020000 TX_OTHER http=200 addr=UNKNOWN owner=FAIL sqft=UNKNOWN year=UNKNOWN value=FAIL stories=UNKNOWN dcad_sections=0 bytes=33447
+LIVE DCAD-PARCEL-00000662970600000 DAL http=200 addr=UNKNOWN owner=FAIL sqft=PASS year=PASS value=PASS stories=FAIL dcad_sections=1 bytes=35917
+LIVE DCAD-PARCEL-008189000B05C0000 DAL http=200 addr=UNKNOWN owner=FAIL sqft=PASS year=PASS value=PASS stories=PASS dcad_sections=3 bytes=41023
+LIVE DCAD-PARCEL-004643000A0010000 DAL http=200 addr=UNKNOWN owner=FAIL sqft=PASS year=PASS value=PASS stories=PASS dcad_sections=6 bytes=48675
+LIVE DCAD-PARCEL-0081740A0003B0100 DAL http=200 addr=UNKNOWN owner=FAIL sqft=PASS year=PASS value=PASS stories=PASS dcad_sections=1 bytes=35921
+LIVE TAD-PARCEL-07532598 FW http=200 addr=PASS owner=PASS sqft=PASS year=PASS value=PASS stories=UNKNOWN tad_features=1
+LIVE DCAD-PARCEL-006115000A0060000 DAL http=200 addr=UNKNOWN owner=FAIL sqft=PASS year=PASS value=PASS stories=PASS dcad_sections=3 bytes=41138
+
+=== field accuracy on stratified sample where live value present ===
+field_address pass 9 of 9 rate 1.000 wilson95 [0.701, 1.000]
+field_owner pass 9 of 19 rate 0.474 wilson95 [0.273, 0.683]
+field_sqft pass 9 of 14 rate 0.643 wilson95 [0.388, 0.837]
+field_year pass 9 of 14 rate 0.643 wilson95 [0.388, 0.837]
+field_value pass 9 of 18 rate 0.500 wilson95 [0.290, 0.710]
+field_stories pass 3 of 5 rate 0.600 wilson95 [0.231, 0.882]
+n_needed_pm_3pct_p50 1068
+n_needed_pm_3pct_p99 43
+
+=== Fort Worth live roof-permit recall ===
+fw_recall_error URLError: <urlopen error [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond>
+
+=== linked permit vs parcel street-number sample n=60 ===
+  same_num New York City, NY source_point permit[488] 488 FOSTER ROAD, Staten Island, NY 10309 parcel[488] 488 FOUNTAIN AVENUE
+  same_num New York City, NY source_point permit[3966] 3966 ROMBOUTS AVENUE, Bronx, NY 10466 parcel[3966] 3966 ROMBOUTS AVENUE
+  same_num New York City, NY source_point permit[4920] 4920 3 AVENUE, Brooklyn, NY 11220 parcel[4920] 4920 3 AVENUE
+  same_num New York City, NY source_point permit[205] 205 NORTH HENRY STREET, Brooklyn, NY 11222 parcel[205] 205 HENRY STREET
+  same_num New York City, NY source_point permit[3801] 3801 BROADWAY, New York, NY 10032 parcel[3801] 3801 BROADWAY
+  same_num New York City, NY source_point permit[205] 205 WEST   88 STREET, New York, NY 10024 parcel[205] 205 WEST 88 STREET
+  same_num New York City, NY source_point permit[24] 24 WINDOM AVENUE, Staten Island, NY 10305 parcel[24] 24 WINDOM AVENUE
+  same_num New York City, NY source_point permit[44] 44 HAMILTON STREET, Staten Island, NY 10304 parcel[44] 44 HAMILTON PLACE
+  same_num New York City, NY source_point permit[780] 780 POST AVENUE, Staten Island, NY 10310 parcel[780] 780 POST AVENUE
+  MISMATCH New York City, NY source_point permit[10] 10 East 53 Street parcel[410] 410 WEST 53 STREET
+  MISMATCH New York City, NY source_point permit[121] 121 BEDFORD AVENUE, Staten Island, NY 10306 parcel[1217] 1217 BEDFORD AVENUE
+  same_num New York City, NY source_point permit[189] 189 MINNA STREET, Brooklyn, NY 11218 parcel[189] 189 MINNA STREET
+  same_num New York City, NY source_point permit[245] 245 JOLINE AVENUE, Staten Island, NY 10307 parcel[245] 245 JOLINE AVENUE
+  MISMATCH New York City, NY source_point permit[123] 123 SOUTH AVENUE, Staten Island, NY 10303 parcel[1123] 1123 SOUTHERN BOULEVARD
+  same_num New York City, NY source_point permit[118] 118 CLIFTON PLACE, Brooklyn, NY 11238 parcel[118] 118 CLIFTON PLACE
+  same_num Dallas, TX missing permit[150] 150 TURTLE CREEK BLVD Ste:106 parcel[150] 150 TURTLE CREEK BLVD
+  MISMATCH New York City, NY source_point permit[481] 481 Washington Street parcel[450] 450 WASHINGTON STREET
+  same_num New York City, NY source_point permit[1833] 1833 EAST   21 STREET, Brooklyn, NY 11229 parcel[1833] 1833 EAST 21 STREET
+  same_num New York City, NY source_point permit[74] 74 POST AVENUE, New York, NY 10034 parcel[74] 74 POST AVENUE
+  same_num New York City, NY source_point permit[111] 111 NORTH    6 STREET, Brooklyn, NY 11249 parcel[111] 111 EAST 26 STREET
+  same_num New York City, NY source_point permit[120] 120 EAST  124 STREET, New York, NY 10035 parcel[120] 120 EAST 124 STREET
+  same_num New York City, NY source_point permit[19] 19 THAMES STREET, Brooklyn, NY 11206 parcel[19] 19 THAMES STREET
+  same_num New York City, NY source_point permit[4426] 4426 BRUNER AVENUE, Bronx, NY 10466 parcel[4426] 4426 BRUNER AVENUE
+  MISMATCH New York City, NY source_point permit[490] 490 WEST END AVENUE, New York, NY 10024 parcel[3490] 3490 FT INDEPENDENCE ST
+  same_num New York City, NY source_point permit[575] 575 SENECA AVENUE, Queens, NY 11385 parcel[575] 575 SENECA AVENUE
+  same_num New York City, NY source_point permit[2600] 2600 EAST   21 STREET, Brooklyn, NY 11235 parcel[2600] 2600 EAST 21 STREET
+  MISMATCH New York City, NY source_point permit[12] 12 EAST   41 STREET, New York, NY 10017 parcel[1241] 1241 BROADWAY
+  same_num New York City, NY source_point permit[314] 314 EAST   46 STREET, New York, NY 10017 parcel[314] 314 EAST 46 STREET
+  MISMATCH New York City, NY source_point permit[86] 86 NOSTRAND AVENUE, Staten Island, NY 10314 parcel[860] 860 NOSTRAND AVENUE
+  MISMATCH New York City, NY source_point permit[534] 534 EAST   23 STREET, Brooklyn, NY 11210 parcel[1534] 1534 EAST 233 STREET
+  same_num New York City, NY source_point permit[1261] 1261 EAST   57 STREET, Brooklyn, NY 11234 parcel[1261] 1261 57 STREET
+  same_num New York City, NY source_point permit[1126] 1126 EAST  215 STREET, Bronx, NY 10469 parcel[1126] 1126 EAST 215 STREET
+  same_num New York City, NY source_point permit[45] 45 GRAMERCY PARK NORTH, New York, NY 10010 parcel[45] 45 GRAMERCY PARK NORTH
+  same_num New York City, NY source_point permit[19] 19 ACORN COURT, Staten Island, NY 10309 parcel[19] 19 ACORN COURT
+  same_num New York City, NY source_point permit[284] 284 WEST  127 STREET, New York, NY 10027 parcel[284] 284 WEST 127 STREET
+  same_num New York City, NY source_point permit[255] 255 MILL ROAD, Staten Island, NY 10306 parcel[255] 255 MILLER AVENUE
+  same_num New York City, NY source_point permit[61] 61 OTIS AVENUE, Staten Island, NY 10306 parcel[61] 61 OTIS AVENUE
+  same_num New York City, NY source_point permit[166] 166 BEACH   25 STREET, Queens, NY 11691 parcel[166] 166 BEACH 25 STREET
+  same_num New York City, NY source_point permit[1416] 1416 HYLAN BOULEVARD, Staten Island, NY 10305 parcel[1416] 1416 HYLAN BOULEVARD
+  MISMATCH New York City, NY source_point permit[37] 37 1 STREET, Brooklyn, NY 11231 parcel[371] 371 BROADWAY
+  same_num New York City, NY source_point permit[34] 34 WALKER STREET, New York, NY 10013 parcel[34] 34 WALKER STREET
+  same_num New York City, NY source_point permit[1041] 1041 EAST   80 STREET, Brooklyn, NY 11236 parcel[1041] 1041 EAST 80 STREET
+  same_num New York City, NY source_point permit[333] 333 EAST   49 STREET, New York, NY 10017 parcel[333] 333 EAST 49 STREET
+  same_num New York City, NY source_point permit[644] 644 RIVERSIDE DRIVE, New York, NY 10031 parcel[644] 644 RIVERSIDE DRIVE
+  same_num New York City, NY source_point permit[2387] 2387 OCEAN AVENUE, Brooklyn, NY 11229 parcel[2387] 2387 OCEAN AVENUE
+  same_num New York City, NY source_point permit[475] 475 JANSEN STREET, Staten Island, NY 10312 parcel[475] 475 JANSEN STREET
+  same_num New York City, NY source_point permit[179] 179 EAST  116 STREET, New York, NY 10029 parcel[179] 179 EAST 116 STREET
+  same_num New York City, NY source_point permit[908] 908 HART STREET, Brooklyn, NY 11237 parcel[908] 908 HART STREET
+  MISMATCH New York City, NY source_point permit[400] 400 Lafayette Street parcel[95] 95 East Houston Street
+  same_num New York City, NY source_point permit[529] 529 WEST  121 STREET, New York, NY 10027 parcel[529] 529 WEST 121 STREET
+  same_num New York City, NY source_point permit[725] 725 53 STREET, Brooklyn, NY 11220 parcel[725] 725 53 STREET
+  same_num New York City, NY source_point permit[703] 703 EAST   39 STREET, Brooklyn, NY 11203 parcel[703] 703 EAST 39 STREET
+  same_num New York City, NY source_point permit[1750] 1750 2 AVENUE, New York, NY 10128 parcel[1750] 1750 2 AVENUE
+  same_num New York City, NY source_point permit[296] 296 HICKS STREET, Brooklyn, NY 11201 parcel[296] 296 HICKS STREET
+  same_num New York City, NY source_point permit[110] 110 WEST END AVENUE, New York, NY 10023 parcel[110] 110 WEST END AVENUE
+  same_num New York City, NY source_point permit[345] 345 WEST   70 STREET, New York, NY 10023 parcel[345] 345 WEST 70 STREET
+  same_num New York City, NY source_point permit[2414] 2414 CAMBRELENG AVENUE, Bronx, NY 10458 parcel[2414] 2414 CAMBRELENG AVENUE
+  same_num Seattle, WA source_point permit[6525] 6525 30Th Ave Sw parcel[6525] 6525 30Th Ave Sw
+  same_num New York City, NY source_point permit[3000] 3000 PARK AVENUE, Bronx, NY 10451 parcel[3000] 3000 PARK AVENUE
+  same_num New York City, NY source_point permit[2328] 2328 27 STREET, Queens, NY 11105 parcel[2328] 2328 EAST 27 STREET
+street_number_mismatch 10/60 rate 0.167 wilson95 [0.093, 0.280]
+
+=== parcels with zero linked permits of any type ===
+NY 146
+TX 2810
+
+DONE_UTC 2026-10-13T20:53:18.894475+00:00 golden_csv_rows 36

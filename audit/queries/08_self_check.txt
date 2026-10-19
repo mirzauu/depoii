@@ -1,0 +1,34 @@
+RUN_UTC 2026-10-13T20:57:27.051983+00:00
+
+=== SELF-CHECK 1 exposure>=60 ===
+ge60 5782 non_tx 3887 unverified_seed 5780 permit_detected 3908
+
+=== SELF-CHECK 2 sqft*165 on scored leads ===
+scored_165 1095
+parcel_165 0
+
+=== SELF-CHECK 3 re-download 260317 hail and wind ===
+hail http 200 bytes 49 parsed_rows 0 at 2026-10-13T20:57:28.181422+00:00 url https://www.spc.noaa.gov/climo/reports/260317_rpts_hail.csv
+  head Time,Size,Location,County,State,Lat,Lon,Comments
+wind http 200 bytes 50 parsed_rows 0 at 2026-10-13T20:57:30.517927+00:00 url https://www.spc.noaa.gov/climo/reports/260317_rpts_wind.csv
+  head Time,Speed,Location,County,State,Lat,Lon,Comments
+
+=== March 17 leads by state and score ===
+  ('NY', 522, 522)
+
+=== quoted points vs stored distances ===
+  Madison to hardcoded 32.71,-96.95 haversine 7.33 stored 7.33 diff 0.00
+  Meacham to hardcoded 32.79,-97.35 haversine 3.63 stored 3.63 diff 0.00
+
+=== NYC PLUTO for the 8 stratified BBLs ===
+  1001510001 http 200 address 105 DUANE STREET class D6 year 1988 units 440 bldgarea 434418 numfloors 53.0000000 owner TRIBECA EQUITY PARTNERS L P at 2026-10-13T20:57:31.990834+00:00
+  2024560150 http 200 address 1166 GRAND CONCOURSE class D1 year 1938 units 77 bldgarea 86500 numfloors 6.0000000 owner 1166 GC LLC at 2026-10-13T20:57:33.153604+00:00
+  3072990071 http 200 address 2387 OCEAN AVENUE class D1 year 1939 units 66 bldgarea 71400 numfloors 6.0000000 owner MEDJUGORJE REALTY LLC at 2026-10-13T20:57:34.290734+00:00
+  3013790055 http 200 address 1491 ST JOHNS PLACE class C1 year 1924 units 32 bldgarea 31752 numfloors 4.0000000 owner NYC PACT PRESERVATION PARTNERS LLC at 2026-10-13T20:57:35.344451+00:00
+  1007640057 http 200 address 236 WEST 15 STREET class C7 year 1901 units 35 bldgarea 17154 numfloors 6.0000000 owner DERBY HOLIDAY 136, LLC at 2026-10-13T20:57:36.478718+00:00
+  5054950001 http 200 address 4310 AMBOY ROAD class K6 year 1979 units 0 bldgarea 48880 numfloors 1.0000000 owner ELTINGVILLE SHOPPING CENTER OWNER LLC at 2026-10-13T20:57:37.612488+00:00
+  5079080066 http 200 address 493 MAIN STREET class B2 year 1995 units 2 bldgarea 2400 numfloors 2.0000000 owner VITALONE, ALFRED at 2026-10-13T20:57:38.723612+00:00
+  2040010054 http 200 address 2542 EAST TREMONT AVENUE class K1 year 1927 units 0 bldgarea 3125 numfloors 1.0000000 owner BRONX A & A ASSOCIATES, LLC at 2026-10-13T20:57:39.838336+00:00
+
+=== Dallas permit layer fields and a roof sample ===
+  sample http 200 n 1 err None keys ['OBJECTID_1', 'OBJECTID', 'Join_Count', 'TARGET_FID', 'PERMIT_No', 'PERMIT_TYPE', 'ACTIVITY', 'LAND_USE', 'LAND_USE_CODE', 'SINGLE_FAMILY', 'MULTI_FAMILY', 'COMMERCIAL', 'STATUS_NAME', 'STATUS_DESCRIPTION', 'ADDRESS', 'ZIP_CODE', 'CREATED_DATE', 'ISSUE_DATE', 'CONTRACTOR_NAME', 'CONTRACTOR_ADDRESS', 'CONTRACTOR_PHONE', 'CONTRACTOR_EMAIL', 'VALUE', 'AREA', 'UNITS']

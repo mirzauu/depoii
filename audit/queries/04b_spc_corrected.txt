@@ -1,0 +1,101 @@
+RUN_UTC 2026-10-13T20:51:07.862029+00:00
+SIZE_SCALE SPC Size column divided by 100 to inches
+
+=== swath vs SPC after /100 ===
+swaths 692
+max_size_diff_gt_0.25_in 172
+no_hail_in_claimed_state 300
+state_hail_but_none_in_metro_box 235
+state_has_hail 392
+-- size mismatches (stored max vs SPC state max, inches) --
+2024-05-28 | May 28, 2024 Dallas-Fort Worth Severe Hail Core | 3.25 | 5.0 | 73
+2024-03-15 | March 15, 2024 Fort Worth Severe Hail Supercell | 2.25 | 2.75 | 32
+2023-06-13 | June 13, 2023 Dallas-Fort Worth Severe Hail Core | 5.0 | 5.5 | 88
+2024-04-02 | April 02, 2024 Greater Cincinnati / Ohio Valley Convective Hail Swath | 1.75 | 1.0 | 2
+2024-05-07 | May 7, 2024 Greater Cincinnati Convective Hail Swath | 2.0 | 1.0 | 3
+2023-07-20 | July 20, 2023 Greater Cincinnati / Ohio Valley Convective Hail Swath | 1.5 | 2.0 | 21
+2024-05-10 | May 10, 2024 North Florida / Gainesville Severe Derecho & Wind Swath | 0.0 | 1.75 | 1
+2024-04-10 | April 10, 2024 Baton Rouge / Southeast Louisiana Convective Hail Swath | 1.75 | 1.0 | 3
+2024-05-13 | May 13, 2024 Baton Rouge Severe Convective Hail | 2.0 | 1.0 | 1
+2024-07-15 | July 15, 2024 Chicago Metro Severe Derecho & Wind Swath | 0.0 | 1.0 | 1
+2023-03-01 | March 01, 2023 Dallas-Fort Worth Convective Hail Swath | 1.75 | 4.0 | 45
+2023-03-08 | March 08, 2023 Dallas-Fort Worth Severe Hail Event | 1.0 | 1.75 | 7
+2023-03-16 | March 16, 2023 Dallas-Fort Worth Severe Hail Core | 3.0 | 4.0 | 60
+2023-04-03 | April 03, 2023 Dallas-Fort Worth Convective Hail Swath | 1.75 | 3.0 | 9
+2023-04-04 | April 04, 2023 Dallas-Fort Worth Severe Hail Core | 3.0 | 1.5 | 2
+2023-04-27 | April 27, 2023 Dallas-Fort Worth Severe Hail Core | 2.0 | 1.5 | 2
+2023-05-05 | May 05, 2023 Dallas-Fort Worth Severe Hail Core | 2.25 | 2.75 | 35
+2023-05-06 | May 06, 2023 Dallas-Fort Worth Severe Hail Event | 1.0 | 3.25 | 46
+2023-05-07 | May 07, 2023 Dallas-Fort Worth Severe Hail Event | 1.0 | 3.25 | 36
+2023-05-11 | May 11, 2023 Dallas-Fort Worth Severe Hail Event | 1.0 | 2.5 | 8
+-- state hail but metro box empty sample --
+2024-03-15 | March 15, 2024 Fort Worth Severe Hail Supercell | 2.25 | 2.75 | 32
+2024-05-07 | May 7, 2024 Greater Cincinnati Convective Hail Swath | 2.0 | 1.0 | 3
+2023-07-20 | July 20, 2023 Greater Cincinnati / Ohio Valley Convective Hail Swath | 1.5 | 2.0 | 21
+2024-05-10 | May 10, 2024 North Florida / Gainesville Severe Derecho & Wind Swath | 0.0 | 1.75 | 1
+2024-04-10 | April 10, 2024 Baton Rouge / Southeast Louisiana Convective Hail Swath | 1.75 | 1.0 | 3
+2024-07-15 | July 15, 2024 Chicago Metro Severe Derecho & Wind Swath | 0.0 | 1.0 | 1
+2023-02-08 | February 08, 2023 Dallas-Fort Worth Convective Hail Swath | 1.5 | 1.5 | 1
+2023-03-09 | March 09, 2023 Dallas-Fort Worth Severe Hail Event | 1.0 | 1.0 | 1
+2023-04-04 | April 04, 2023 Dallas-Fort Worth Severe Hail Core | 3.0 | 1.5 | 2
+2023-04-21 | April 21, 2023 Dallas-Fort Worth Severe Hail Core | 3.0 | 2.75 | 20
+2023-04-27 | April 27, 2023 Dallas-Fort Worth Severe Hail Core | 2.0 | 1.5 | 2
+2023-05-06 | May 06, 2023 Dallas-Fort Worth Severe Hail Event | 1.0 | 3.25 | 46
+2023-05-07 | May 07, 2023 Dallas-Fort Worth Severe Hail Event | 1.0 | 3.25 | 36
+2023-05-12 | May 12, 2023 Dallas-Fort Worth Severe Hail Core | 2.5 | 2.25 | 7
+2023-05-24 | May 24, 2023 Dallas-Fort Worth Severe Hail Core | 2.0 | 1.75 | 7
+no_state_or_http_examples 300
+
+=== lead distance recompute, same-state SPC points only, size in inches ===
+2023-09-08 cmp=56 gt025=50 gt1=34 gt5=2 no_state_pts=0 no_xy=0 null_stored=749
+2025-07-03 cmp=131 gt025=131 gt1=131 gt5=118 no_state_pts=0 no_xy=0 null_stored=950
+2026-03-10 cmp=0 gt025=0 gt1=0 gt5=0 no_state_pts=796 no_xy=422 null_stored=0
+2026-03-17 cmp=0 gt025=0 gt1=0 gt5=0 no_state_pts=522 no_xy=0 null_stored=0
+2026-04-26 cmp=2 gt025=2 gt1=2 gt5=2 no_state_pts=0 no_xy=0 null_stored=0
+2026-04-28 cmp=581 gt025=579 gt1=570 gt5=471 no_state_pts=0 no_xy=0 null_stored=24
+2026-04-29 cmp=34 gt025=34 gt1=34 gt5=26 no_state_pts=0 no_xy=0 null_stored=1
+2026-05-23 cmp=287 gt025=287 gt1=287 gt5=287 no_state_pts=0 no_xy=0 null_stored=1
+2026-05-24 cmp=13 gt025=13 gt1=13 gt5=13 no_state_pts=0 no_xy=0 null_stored=0
+2026-06-02 cmp=1171 gt025=1158 gt1=1128 gt5=948 no_state_pts=0 no_xy=0 null_stored=152
+2026-06-06 cmp=1966 gt025=1966 gt1=1966 gt5=1966 no_state_pts=0 no_xy=0 null_stored=3352
+2026-06-07 cmp=0 gt025=0 gt1=0 gt5=0 no_state_pts=4 no_xy=0 null_stored=0
+2026-06-12 cmp=0 gt025=0 gt1=0 gt5=0 no_state_pts=6 no_xy=0 null_stored=0
+2026-07-04 cmp=0 gt025=0 gt1=0 gt5=0 no_state_pts=12 no_xy=0 null_stored=0
+2026-07-15 cmp=0 gt025=0 gt1=0 gt5=0 no_state_pts=34 no_xy=0 null_stored=0
+TOTAL cmp=4241 gt025=4220 gt1=4165 gt5=3833 no_state_pts=1374 no_xy=422 null_stored=5229
+leads_with_a_report_within_15mi 3282 of_which_every_such_report_is_delayed_social_or_mping 481
+-- examples diff>1mi --
+NYC-PLUTO-1005170037 | 2026-06-06 | 1.5 | 117.87 | 116.37 | 1.75 | Deposit | 1934 | Public report relayed via Broadcast Media of a picture of estimated Go
+NYC-PLUTO-3026290006 | 2026-06-06 | 1.5 | 119.6 | 118.1 | 1.75 | Deposit | 1934 | Public report relayed via Broadcast Media of a picture of estimated Go
+NYC-PLUTO-2031687501 | 2026-06-06 | 1.5 | 114.22 | 112.72 | 1.75 | Deposit | 1934 | Public report relayed via Broadcast Media of a picture of estimated Go
+NYC-PLUTO-3012540057 | 2026-06-06 | 1.5 | 122.5 | 121.0 | 1.75 | Deposit | 1934 | Public report relayed via Broadcast Media of a picture of estimated Go
+NYC-PLUTO-3044520025 | 2025-07-03 | 1.5 | 16.81 | 15.31 | 1.0 | Huguenot | 2228 | Corrects previous hail report from Huguenot. Photo shared by NYC Emerg
+NYC-PLUTO-1007387505 | 2026-06-06 | 1.5 | 116.98 | 115.48 | 1.75 | Deposit | 1934 | Public report relayed via Broadcast Media of a picture of estimated Go
+NYC-PLUTO-1014177503 | 2026-06-06 | 1.5 | 117.18 | 115.68 | 1.75 | Deposit | 1934 | Public report relayed via Broadcast Media of a picture of estimated Go
+NYC-PLUTO-3063310018 | 2025-07-03 | 1.5 | 10.34 | 8.84 | 1.0 | Huguenot | 2228 | Corrects previous hail report from Huguenot. Photo shared by NYC Emerg
+NYC-PLUTO-1021390542 | 2026-06-06 | 1.5 | 113.48 | 111.98 | 1.75 | Deposit | 1934 | Public report relayed via Broadcast Media of a picture of estimated Go
+NYC-PLUTO-1014020006 | 2026-06-06 | 1.5 | 116.85 | 115.35 | 1.75 | Deposit | 1934 | Public report relayed via Broadcast Media of a picture of estimated Go
+NYC-PLUTO-1013427502 | 2026-06-06 | 1.5 | 117.46 | 115.96 | 1.75 | Deposit | 1934 | Public report relayed via Broadcast Media of a picture of estimated Go
+NYC-PLUTO-1012397502 | 2026-06-06 | 1.5 | 115.22 | 113.72 | 1.75 | Deposit | 1934 | Public report relayed via Broadcast Media of a picture of estimated Go
+-- outbound ready vs SPC same-state nearest --
+DCAD-PARCEL-004643000A0010000 | 1133 S Madison Ave | 2026-04-26 | 7.33 | 56.12 | 3.0 | 2.75 | Leonard | 1205 | Numerous homes and cars had windows broken from baseball size hail in the Whitewright...Tr | Dallas Baptist University / SW Dallas (Tea cup size)
+TAD-PARCEL-07532598 | 3001 Meacham Blvd | 2026-04-26 | 3.63 | 72.52 | 2.75 | 2.75 | Leonard | 1205 | Numerous homes and cars had windows broken from baseball size hail in the Whitewright...Tr | 3 NNW Fort Worth (Baseball size)
+
+=== retry and empty files ===
+260524 http=200 bytes~3362 rows=35 TX=2 dfw_box=1 tx_max_in=1.0 err=None
+  2015 1.0 33.11 -97.36 4 WNW Justin (FWD)
+260317 http=200 bytes~49 rows=0 TX=0 dfw_box=0 tx_max_in=None err=None
+260528 http=200 bytes~2711 rows=25 TX=6 dfw_box=4 tx_max_in=1.25 err=None
+  2055 1.0 32.83 -97.69 6 NW Willow Park Report from mPING. (FWD)
+  2057 1.25 32.78 -97.69 2 NNE Hudson Oaks Facebook photo showed half dollar size hail fell near Lake Weatherford. (FWD)
+  2102 1.25 32.76 -97.65 Willow Park Report from mPING. (FWD)
+  2106 1.0 32.77 -97.65 1 N Willow Park (FWD)
+240528 http=200 bytes~11228 rows=139 TX=73 dfw_box=2 tx_max_in=5.0 err=None
+  1210 1.0 32.48 -96.22 3 N Kemp Amateur radio reported quarter size hail 3 miles north of Kemp. Also estimated 6
+  1526 1.0 31.88 -96.32 Streetman (FWD)
+
+=== SPC HTML 260425 timezone snippet ===
+url https://www.spc.noaa.gov/climo/reports/260425_rpts.html retrieved 2026-10-13T20:52:09.706862+00:00
+swwrss.xml" /> <link rel="alternate" type="application/rss+xml" title="SPC Multimedia Briefings RSS" href="/products/spcmbrss.xml" /> <META NAME="ROBOTS" CONTENT="ALL"> <meta name="description" content="Severe weather, tornado, thunderstorm, fire wea
+
+DONE_UTC 2026-10-13T20:52:09.706884+00:00
