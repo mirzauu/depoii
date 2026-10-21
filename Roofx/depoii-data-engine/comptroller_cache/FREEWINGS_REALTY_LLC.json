@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32066291033",
+    "feiNumber": null,
+    "name": "FREEWINGS REALTY LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "2929 GLENFIELD AVE STE A",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75233",
+    "mailingAddressZip4": "1403",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "02/20/2018",
+    "sosFileNumber": "0802941170",
+    "registeredAgentName": "JADY WINGS",
+    "registeredOfficeAddressStreet": "2929 GLENFIELD AVE",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75233",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "STEVEN FREEDMAN",
+        "AGNT_TITL_TX": "MANAGING M",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "2929 GLENFIELD AVE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75233",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

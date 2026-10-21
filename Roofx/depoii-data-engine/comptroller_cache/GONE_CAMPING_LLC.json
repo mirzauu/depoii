@@ -1,0 +1,70 @@
+{
+  "detail": {
+    "taxpayerId": "32064237244",
+    "feiNumber": null,
+    "name": "GONE CAMPING LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "11120 ZODIAC LN",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75229",
+    "mailingAddressZip4": "4721",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "07/06/2017",
+    "sosFileNumber": "0802761510",
+    "registeredAgentName": "DUSTIN H. SPARKS",
+    "registeredOfficeAddressStreet": "8080 PARK LANE, SUITE 700",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75231",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "BRENDON SMITH",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "11120 ZODIAC LN",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75229",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "BRENDON SMITH",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "11120 ZODIAC LN",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75229",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "DEBORAH SMITH",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "11120 ZODIAC LN",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75229",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "DEBORAH SMITH",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "11120 ZODIAC LN",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75229",
+        "SOURCE": "CPA"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "17529541496",
+    "feiNumber": "752954149",
+    "name": "CRC INVESTMENTS, L.P.",
+    "dbaName": null,
+    "mailingAddressStreet": "959 DRAGON ST",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75207",
+    "mailingAddressZip4": "4203",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "07/26/2001",
+    "sosFileNumber": "0015436810",
+    "registeredAgentName": "CHARLES R CLIFTON",
+    "registeredOfficeAddressStreet": "959 DRAGON ST",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75207",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "DRAGON WORKS, INC.",
+        "AGNT_TITL_TX": "GENERAL PA",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "959 DRAGON ST",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75207",
+        "SOURCE": "CPA"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

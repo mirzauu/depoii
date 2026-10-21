@@ -1,0 +1,39 @@
+{
+  "jurisdiction": "New York City, NY",
+  "as_of": "2026-10-20T17:15:03Z",
+  "storm": {
+    "id": "NONE",
+    "name": "No released lead",
+    "event_date": "",
+    "max_hail_inches": 0,
+    "report_count": 0
+  },
+  "summary": {
+    "exposed_buildings": 0,
+    "unresolved_buildings": 0,
+    "core_unresolved": 0,
+    "pipeline_value_usd": 0,
+    "top_corridor": "",
+    "claim_deadline": "",
+    "days_remaining": 0
+  },
+  "top_owner": {
+    "name": "",
+    "address": "",
+    "parcel_id": ""
+  },
+  "pitch": {
+    "address": "",
+    "hail_inches": 0,
+    "year_built": null,
+    "membrane": ""
+  },
+  "competitor": {
+    "name": "",
+    "share_pct": 0,
+    "storm_chasers": []
+  },
+  "opportunities": [],
+  "total_opportunities": 0,
+  "offset": 0
+}

@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32035222390",
+    "feiNumber": "204409749",
+    "name": "GABON PROPERTIES LP",
+    "dbaName": null,
+    "mailingAddressStreet": "4429 STROMBOLI DR",
+    "mailingAddressCity": "PLANO",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75093",
+    "mailingAddressZip4": "6972",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "03/01/2006",
+    "sosFileNumber": "0800620222",
+    "registeredAgentName": "GABON MANAGEMENT LLC",
+    "registeredOfficeAddressStreet": "4429 STROMBOLI  DRIVE",
+    "registeredOfficeAddressCity": "PLANO",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75093",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "GABON MANAGEMENT LLC",
+        "AGNT_TITL_TX": "GENERAL PA",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "4429 STROMBOLI DRIVE",
+        "CITY_NM": "PLANO",
+        "ST_CD": "TX",
+        "AD_ZP": "75093",
+        "SOURCE": "CPA"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

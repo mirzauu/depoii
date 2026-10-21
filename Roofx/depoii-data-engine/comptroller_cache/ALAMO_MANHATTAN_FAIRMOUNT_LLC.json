@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32056357042",
+    "feiNumber": "320458336",
+    "name": "ALAMO MANHATTAN FAIRMOUNT, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "3012 FAIRMOUNT ST # 100",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75201",
+    "mailingAddressZip4": "1210",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "02/09/2015",
+    "sosFileNumber": "0802152449",
+    "registeredAgentName": "WADE B. JOHNS",
+    "registeredOfficeAddressStreet": "3102 FAIRMOUNT STREET, SUITE 100",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75201",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "ALAMO MANHATTAN PROPERTIES",
+        "AGNT_TITL_TX": "MANAGER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "3012 FAIRMOUNT STREET SUIT",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75201",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

@@ -4,7 +4,7 @@ export const dynamic = "force-dynamic";
 
 export async function POST(req: Request) {
   const body = (await req.json()) as { name?: string; organization?: string; email?: string; password?: string; invite?: string };
-  const result = signUp(body);
+  const result = await signUp(body);
   if ("error" in result) {
     const status = result.error === "A user with that email already exists." ? 409 : result.error.startsWith("Signup is closed") ? 403 : 400;
     return Response.json({ error: result.error }, { status });

@@ -1,0 +1,50 @@
+{
+  "detail": {
+    "taxpayerId": "32058518831",
+    "feiNumber": null,
+    "name": "FHF I STONERIDGE, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "1 FEDERAL ST FL 17",
+    "mailingAddressCity": "BOSTON",
+    "mailingAddressState": "MA",
+    "mailingAddressZip": "02110",
+    "mailingAddressZip4": "2003",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " DE",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "10/08/2015",
+    "sosFileNumber": "0802309210",
+    "registeredAgentName": "CORPORATION SERVICE COMPANY DBA CSC - LAWYERS INCO",
+    "registeredOfficeAddressStreet": "211 E. 7TH STREET, SUITE 620",
+    "registeredOfficeAddressCity": "AUSTIN",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "78701",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "TAR CPF OP LLC",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "ONE FEDERAL STREET 17TH FLOOR",
+        "CITY_NM": "BOSTON",
+        "ST_CD": "MA",
+        "AD_ZP": "02110",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "TAR CPF OP LLC",
+        "AGNT_TITL_TX": "MANAGER",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "ONE FEDERAL STREET 17TH FLOOR",
+        "CITY_NM": "BOSTON",
+        "ST_CD": "MA",
+        "AD_ZP": "02110",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

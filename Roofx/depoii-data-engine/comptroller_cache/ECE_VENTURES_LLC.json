@@ -1,0 +1,50 @@
+{
+  "detail": {
+    "taxpayerId": "32057900733",
+    "feiNumber": null,
+    "name": "ECE VENTURES, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "1601 ELM ST STE 4600",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75201",
+    "mailingAddressZip4": "7212",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "07/28/2015",
+    "sosFileNumber": "0802262218",
+    "registeredAgentName": "NORMAN A LOFGREN",
+    "registeredOfficeAddressStreet": "1601 ELM ST., STE 4600",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75201",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "ELLEN C ENGLISH",
+        "AGNT_TITL_TX": "MANAGER",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "626 GALLIER ST.",
+        "CITY_NM": "NEW ORLEANS",
+        "ST_CD": "LA",
+        "AD_ZP": "70117",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ELLEN C ENGLISH",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "626 GALLIER ST.",
+        "CITY_NM": "NEW ORLEANS",
+        "ST_CD": "LA",
+        "AD_ZP": "70117",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

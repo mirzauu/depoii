@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32066472740",
+    "feiNumber": "824820689",
+    "name": "KD KNOX STREET VILLAGE HOLDCO, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "2525 MCKINNON ST",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75201",
+    "mailingAddressZip4": "1511",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " DE",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "03/08/2018",
+    "sosFileNumber": "0802957372",
+    "registeredAgentName": "C T CORPORATION SYSTEM",
+    "registeredOfficeAddressStreet": "1999 BRYAN ST., STE. 900",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75201",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2023",
+    "officerInfo": [
+      {
+        "AGNT_NM": "KNOX DISTRICT INTERMEDIATE HOLDING COMPANY",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "2525 MCKINNON STREET",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75201",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

@@ -1,0 +1,29 @@
+{
+  "detail": {
+    "taxpayerId": "30116511814",
+    "feiNumber": null,
+    "name": "PARKVIEW INVESTORS LTD",
+    "dbaName": null,
+    "mailingAddressStreet": "PO BOX 15039",
+    "mailingAddressCity": "SAN ANTONIO",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "78212",
+    "mailingAddressZip4": "8239",
+    "rightToTransactTX": "FRANCHISE TAX ENDED",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "INACTIVE",
+    "effectiveSosRegistrationDate": "12/17/1992",
+    "sosFileNumber": "0700202322",
+    "registeredAgentName": "ROBERT A SHEARER",
+    "registeredOfficeAddressStreet": "314 E. COMMERCE, STE. 200",
+    "registeredOfficeAddressCity": "SAN ANTONIO",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "78205",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "",
+    "officerInfo": []
+  },
+  "confidence": "partial_name"
+}

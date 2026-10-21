@@ -1,0 +1,92 @@
+[
+  {
+    "state_code": "OH",
+    "state_name": "Ohio",
+    "total_permits": 5000,
+    "total_valuation_usd": 0,
+    "city_count": 1,
+    "has_parcel_coverage": false,
+    "has_active_storms": false
+  },
+  {
+    "state_code": "WA",
+    "state_name": "Washington",
+    "total_permits": 4999,
+    "total_valuation_usd": 1911908795,
+    "city_count": 1,
+    "has_parcel_coverage": false,
+    "has_active_storms": false
+  },
+  {
+    "state_code": "FL",
+    "state_name": "Florida",
+    "total_permits": 3998,
+    "total_valuation_usd": 0,
+    "city_count": 1,
+    "has_parcel_coverage": false,
+    "has_active_storms": false
+  },
+  {
+    "state_code": "MA",
+    "state_name": "Massachusetts",
+    "total_permits": 2000,
+    "total_valuation_usd": 135696598.32,
+    "city_count": 2,
+    "has_parcel_coverage": false,
+    "has_active_storms": false
+  },
+  {
+    "state_code": "NY",
+    "state_name": "New York",
+    "total_permits": 1472,
+    "total_valuation_usd": 966172976.88,
+    "city_count": 1,
+    "has_parcel_coverage": false,
+    "has_active_storms": false
+  },
+  {
+    "state_code": "MD",
+    "state_name": "Maryland",
+    "total_permits": 1079,
+    "total_valuation_usd": 1390980680.98,
+    "city_count": 27,
+    "has_parcel_coverage": false,
+    "has_active_storms": false
+  },
+  {
+    "state_code": "LA",
+    "state_name": "Louisiana",
+    "total_permits": 1020,
+    "total_valuation_usd": 0,
+    "city_count": 1,
+    "has_parcel_coverage": false,
+    "has_active_storms": false
+  },
+  {
+    "state_code": "CA",
+    "state_name": "California",
+    "total_permits": 991,
+    "total_valuation_usd": 22423412.91,
+    "city_count": 1,
+    "has_parcel_coverage": false,
+    "has_active_storms": false
+  },
+  {
+    "state_code": "TX",
+    "state_name": "Texas",
+    "total_permits": 332,
+    "total_valuation_usd": 51750000,
+    "city_count": 5,
+    "has_parcel_coverage": true,
+    "has_active_storms": true
+  },
+  {
+    "state_code": "IL",
+    "state_name": "Illinois",
+    "total_permits": 147,
+    "total_valuation_usd": 0,
+    "city_count": 1,
+    "has_parcel_coverage": false,
+    "has_active_storms": false
+  }
+]

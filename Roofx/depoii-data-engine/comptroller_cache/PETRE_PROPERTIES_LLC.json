@@ -1,0 +1,50 @@
+{
+  "detail": {
+    "taxpayerId": "32065188545",
+    "feiNumber": null,
+    "name": "PETRE PROPERTIES, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "142 HOWELL ST",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75207",
+    "mailingAddressZip4": "7100",
+    "rightToTransactTX": "FRANCHISE TAX ENDED",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "INACTIVE",
+    "effectiveSosRegistrationDate": "10/19/2017",
+    "sosFileNumber": "0802842179",
+    "registeredAgentName": "ALBERTO D. PEREZ",
+    "registeredOfficeAddressStreet": "142 HOWELL STREET",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75207",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2022",
+    "officerInfo": [
+      {
+        "AGNT_NM": "ALBERTO D. PEREZ",
+        "AGNT_TITL_TX": "MANAGER",
+        "AGNT_ACTV_YR": "2022",
+        "AD_STR_POB_TX": "142 HOWELL STREET",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75207",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MARIA ELENA GUTIERREZ",
+        "AGNT_TITL_TX": "MANAGER",
+        "AGNT_ACTV_YR": "2022",
+        "AD_STR_POB_TX": "142 HOWELL STREET",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75207",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

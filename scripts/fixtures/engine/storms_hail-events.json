@@ -1,0 +1,2084 @@
+{
+  "source": "NWS local storm reports and storm-based warnings, via Iowa Environmental Mesonet",
+  "events": [
+    {
+      "id": "2026-10-13",
+      "event_date": "2026-10-13",
+      "name": "October 13, 2026 — North Texas hail reports",
+      "short_name": "Oct 13, 2026 · North Texas",
+      "max_hail_inches": 2.75,
+      "report_count": 3,
+      "max_warning_hail_inches": 4,
+      "center": {
+        "latitude": 35.46,
+        "longitude": -100.4
+      }
+    },
+    {
+      "id": "2026-09-11",
+      "event_date": "2026-09-11",
+      "name": "September 11, 2026 — North Texas hail reports",
+      "short_name": "Sep 11, 2026 · North Texas",
+      "max_hail_inches": 2.5,
+      "report_count": 12,
+      "max_warning_hail_inches": 0,
+      "center": {
+        "latitude": 31.28,
+        "longitude": -97.64
+      }
+    },
+    {
+      "id": "2026-09-10",
+      "event_date": "2026-09-10",
+      "name": "September 10, 2026 — North Texas hail reports",
+      "short_name": "Sep 10, 2026 · North Texas",
+      "max_hail_inches": 2.25,
+      "report_count": 6,
+      "max_warning_hail_inches": 0,
+      "center": {
+        "latitude": 35.15,
+        "longitude": -101.72
+      }
+    },
+    {
+      "id": "2026-08-26",
+      "event_date": "2026-08-26",
+      "name": "August 26, 2026 — North Texas hail reports",
+      "short_name": "Aug 26, 2026 · North Texas",
+      "max_hail_inches": 1.5,
+      "report_count": 2,
+      "max_warning_hail_inches": 0,
+      "center": {
+        "latitude": 32.95,
+        "longitude": -97.28
+      }
+    },
+    {
+      "id": "2026-08-25",
+      "event_date": "2026-08-25",
+      "name": "August 25, 2026 — North Texas hail reports",
+      "short_name": "Aug 25, 2026 · North Texas",
+      "max_hail_inches": 1.5,
+      "report_count": 2,
+      "max_warning_hail_inches": 0,
+      "center": {
+        "latitude": 35.71,
+        "longitude": -100.34
+      }
+    },
+    {
+      "id": "2026-07-06",
+      "event_date": "2026-07-06",
+      "name": "July 6, 2026 — North Texas hail reports",
+      "short_name": "Jul 6, 2026 · North Texas",
+      "max_hail_inches": 1.75,
+      "report_count": 3,
+      "max_warning_hail_inches": 0,
+      "center": {
+        "latitude": 32.95,
+        "longitude": -96.31
+      }
+    },
+    {
+      "id": "2026-07-04",
+      "event_date": "2026-07-04",
+      "name": "July 4, 2026 — North Texas hail reports",
+      "short_name": "Jul 4, 2026 · North Texas",
+      "max_hail_inches": 1.75,
+      "report_count": 7,
+      "max_warning_hail_inches": 0,
+      "center": {
+        "latitude": 35.68,
+        "longitude": -101.21
+      }
+    },
+    {
+      "id": "2026-06-26",
+      "event_date": "2026-06-26",
+      "name": "June 26, 2026 — North Texas hail reports",
+      "short_name": "Jun 26, 2026 · North Texas",
+      "max_hail_inches": 2,
+      "report_count": 2,
+      "max_warning_hail_inches": 0,
+      "center": {
+        "latitude": 35.64,
+        "longitude": -100.47
+      }
+    },
+    {
+      "id": "2026-06-23",
+      "event_date": "2026-06-23",
+      "name": "June 23, 2026 — North Texas hail reports",
+      "short_name": "Jun 23, 2026 · North Texas",
+      "max_hail_inches": 3,
+      "report_count": 14,
+      "max_warning_hail_inches": 0,
+      "center": {
+        "latitude": 34.95,
+        "longitude": -100.99
+      }
+    },
+    {
+      "id": "2026-06-05",
+      "event_date": "2026-06-05",
+      "name": "June 5, 2026 — North Texas hail reports",
+      "short_name": "Jun 5, 2026 · North Texas",
+      "max_hail_inches": 1.75,
+      "report_count": 2,
+      "max_warning_hail_inches": 0,
+      "center": {
+        "latitude": 35.77,
+        "longitude": -101.01
+      }
+    },
+    {
+      "id": "2026-06-02",
+      "event_date": "2026-06-02",
+      "name": "June 2, 2026 — North Texas hail reports",
+      "short_name": "Jun 2, 2026 · North Texas",
+      "max_hail_inches": 2,
+      "report_count": 24,
+      "max_warning_hail_inches": 0,
+      "center": {
+        "latitude": 32.17,
+        "longitude": -97.04
+      }
+    },
+    {
+      "id": "2026-06-01",
+      "event_date": "2026-06-01",
+      "name": "June 1, 2026 — North Texas hail reports",
+      "short_name": "Jun 1, 2026 · North Texas",
+      "max_hail_inches": 1.75,
+      "report_count": 6,
+      "max_warning_hail_inches": 0,
+      "center": {
+        "latitude": 35.86,
+        "longitude": -101.46
+      }
+    }
+  ],
+  "selected": {
+    "id": "2026-10-13",
+    "event_date": "2026-10-13",
+    "name": "October 13, 2026 — North Texas hail reports",
+    "short_name": "Oct 13, 2026 · North Texas",
+    "max_hail_inches": 2.75,
+    "report_count": 3,
+    "max_warning_hail_inches": 4,
+    "center": {
+      "latitude": 35.46,
+      "longitude": -100.4
+    },
+    "reports": [
+      {
+        "id": "lsr-202610132339-KAMA-NWUS54-LSRAMA",
+        "valid": "2026-10-13T17:47:00-05:00",
+        "latitude": 35.23,
+        "longitude": -100.49,
+        "hail_inches": 2.75,
+        "qualifier": "E",
+        "city": "6 E MCLEAN",
+        "county": "WHEELER",
+        "source": "Trained Spotter",
+        "remark": "Relayed through EM report of large hail was near mm149 on I-40."
+      },
+      {
+        "id": "lsr-202610132344-KAMA-NWUS54-LSRAMA",
+        "valid": "2026-10-13T17:15:00-05:00",
+        "latitude": 34.94,
+        "longitude": -100.57,
+        "hail_inches": 2.5,
+        "qualifier": "E",
+        "city": "7 NE HEDLEY",
+        "county": "DONLEY",
+        "source": "Public",
+        "remark": "Pictures relayed via social media at this location."
+      },
+      {
+        "id": "lsr-202610132247-KAMA-NWUS54-LSRAMA",
+        "valid": "2026-10-13T17:25:00-05:00",
+        "latitude": 36.22,
+        "longitude": -100.13,
+        "hail_inches": 2,
+        "qualifier": "E",
+        "city": "8 E LIPSCOMB",
+        "county": "LIPSCOMB",
+        "source": "Trained Spotter",
+        "remark": "Picture of hail sent via social media east of Lipscomb."
+      }
+    ],
+    "warnings": [
+      {
+        "event_id": 278,
+        "hail_tag_inches": 4,
+        "wind_tag_mph": 80,
+        "issued": "2026-10-13T18:14:00-05:00",
+        "expires": "2026-10-13T19:15:00-05:00",
+        "tier": "core",
+        "basis": "Warning hail tag is 2 inches or larger",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -100.79,
+                  34.11
+                ],
+                [
+                  -101.03,
+                  34.2
+                ],
+                [
+                  -101,
+                  34.75
+                ],
+                [
+                  -100.42,
+                  34.74
+                ],
+                [
+                  -100.79,
+                  34.11
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 5,
+        "hail_tag_inches": 3,
+        "wind_tag_mph": 0,
+        "issued": "2026-10-13T18:02:00-05:00",
+        "expires": "2026-10-13T18:30:00-05:00",
+        "tier": "core",
+        "basis": "Warning hail tag is 2 inches or larger",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -101.14,
+                  33.5
+                ],
+                [
+                  -101.19,
+                  33.61
+                ],
+                [
+                  -100.91,
+                  33.79
+                ],
+                [
+                  -100.8,
+                  33.56
+                ],
+                [
+                  -101.14,
+                  33.5
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 276,
+        "hail_tag_inches": 3,
+        "wind_tag_mph": 70,
+        "issued": "2026-10-13T17:34:00-05:00",
+        "expires": "2026-10-13T18:30:00-05:00",
+        "tier": "core",
+        "basis": "Warning hail tag is 2 inches or larger",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -101.22,
+                  33.4
+                ],
+                [
+                  -101.48,
+                  33.4
+                ],
+                [
+                  -101.17,
+                  33.83
+                ],
+                [
+                  -100.86,
+                  33.83
+                ],
+                [
+                  -101.22,
+                  33.4
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 275,
+        "hail_tag_inches": 3,
+        "wind_tag_mph": 70,
+        "issued": "2026-10-13T17:09:00-05:00",
+        "expires": "2026-10-13T18:15:00-05:00",
+        "tier": "core",
+        "basis": "Warning hail tag is 2 inches or larger",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -100.52,
+                  34.11
+                ],
+                [
+                  -100.87,
+                  33.83
+                ],
+                [
+                  -101.15,
+                  33.83
+                ],
+                [
+                  -100.76,
+                  34.31
+                ],
+                [
+                  -100.52,
+                  34.31
+                ],
+                [
+                  -100.52,
+                  34.11
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 274,
+        "hail_tag_inches": 3,
+        "wind_tag_mph": 70,
+        "issued": "2026-10-13T16:59:00-05:00",
+        "expires": "2026-10-13T17:45:00-05:00",
+        "tier": "core",
+        "basis": "Warning hail tag is 2 inches or larger",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -101.17,
+                  33.54
+                ],
+                [
+                  -101.31,
+                  33.56
+                ],
+                [
+                  -101.2,
+                  33.83
+                ],
+                [
+                  -100.87,
+                  33.83
+                ],
+                [
+                  -101.17,
+                  33.54
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 303,
+        "hail_tag_inches": 2.75,
+        "wind_tag_mph": 70,
+        "issued": "2026-10-13T20:28:00-05:00",
+        "expires": "2026-10-13T21:15:00-05:00",
+        "tier": "core",
+        "basis": "Warning hail tag is 2 inches or larger",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -102.49,
+                  31.65
+                ],
+                [
+                  -102.6,
+                  31.65
+                ],
+                [
+                  -102.72,
+                  31.74
+                ],
+                [
+                  -102.31,
+                  32.08
+                ],
+                [
+                  -102,
+                  31.85
+                ],
+                [
+                  -102.49,
+                  31.65
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 301,
+        "hail_tag_inches": 2.75,
+        "wind_tag_mph": 70,
+        "issued": "2026-10-13T20:02:00-05:00",
+        "expires": "2026-10-13T20:45:00-05:00",
+        "tier": "core",
+        "basis": "Warning hail tag is 2 inches or larger",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -102.79,
+                  31.45
+                ],
+                [
+                  -102.89,
+                  31.58
+                ],
+                [
+                  -102.82,
+                  31.65
+                ],
+                [
+                  -102.8,
+                  31.65
+                ],
+                [
+                  -102.8,
+                  31.67
+                ],
+                [
+                  -102.51,
+                  31.92
+                ],
+                [
+                  -102.31,
+                  31.73
+                ],
+                [
+                  -102.79,
+                  31.45
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 330,
+        "hail_tag_inches": 2.75,
+        "wind_tag_mph": 70,
+        "issued": "2026-10-13T16:48:00-05:00",
+        "expires": "2026-10-13T17:45:00-05:00",
+        "tier": "core",
+        "basis": "Warning hail tag is 2 inches or larger",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -100.6,
+                  35.18
+                ],
+                [
+                  -100.39,
+                  35.18
+                ],
+                [
+                  -100,
+                  34.97
+                ],
+                [
+                  -100.01,
+                  34.95
+                ],
+                [
+                  -100.31,
+                  34.75
+                ],
+                [
+                  -100.79,
+                  34.75
+                ],
+                [
+                  -100.6,
+                  35.18
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 277,
+        "hail_tag_inches": 2.5,
+        "wind_tag_mph": 70,
+        "issued": "2026-10-13T17:46:00-05:00",
+        "expires": "2026-10-13T19:00:00-05:00",
+        "tier": "core",
+        "basis": "Warning hail tag is 2 inches or larger",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -100,
+                  34.35
+                ],
+                [
+                  -100.52,
+                  34.11
+                ],
+                [
+                  -100.52,
+                  34.31
+                ],
+                [
+                  -100.67,
+                  34.31
+                ],
+                [
+                  -100.42,
+                  34.75
+                ],
+                [
+                  -100,
+                  34.75
+                ],
+                [
+                  -100,
+                  34.35
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 300,
+        "hail_tag_inches": 2,
+        "wind_tag_mph": 70,
+        "issued": "2026-10-13T19:29:00-05:00",
+        "expires": "2026-10-13T20:15:00-05:00",
+        "tier": "core",
+        "basis": "Warning hail tag is 2 inches or larger",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -103.08,
+                  31.99
+                ],
+                [
+                  -102.95,
+                  32
+                ],
+                [
+                  -102.75,
+                  31.89
+                ],
+                [
+                  -102.63,
+                  31.6
+                ],
+                [
+                  -102.88,
+                  31.28
+                ],
+                [
+                  -103.03,
+                  31.35
+                ],
+                [
+                  -103.01,
+                  31.38
+                ],
+                [
+                  -103.06,
+                  31.38
+                ],
+                [
+                  -103.06,
+                  31.37
+                ],
+                [
+                  -103.08,
+                  31.38
+                ],
+                [
+                  -103.11,
+                  31.39
+                ],
+                [
+                  -103.2,
+                  31.59
+                ],
+                [
+                  -103.08,
+                  31.99
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 279,
+        "hail_tag_inches": 2,
+        "wind_tag_mph": 60,
+        "issued": "2026-10-13T18:28:00-05:00",
+        "expires": "2026-10-13T19:15:00-05:00",
+        "tier": "core",
+        "basis": "Warning hail tag is 2 inches or larger",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -100.9,
+                  33.58
+                ],
+                [
+                  -100.98,
+                  33.77
+                ],
+                [
+                  -100.66,
+                  34
+                ],
+                [
+                  -100.52,
+                  33.88
+                ],
+                [
+                  -100.52,
+                  33.68
+                ],
+                [
+                  -100.9,
+                  33.58
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 334,
+        "hail_tag_inches": 2,
+        "wind_tag_mph": 70,
+        "issued": "2026-10-13T17:42:00-05:00",
+        "expires": "2026-10-13T18:45:00-05:00",
+        "tier": "core",
+        "basis": "Warning hail tag is 2 inches or larger",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -100.45,
+                  34.75
+                ],
+                [
+                  -100.53,
+                  34.92
+                ],
+                [
+                  -100.51,
+                  35.01
+                ],
+                [
+                  -100.35,
+                  35.04
+                ],
+                [
+                  -100,
+                  35.38
+                ],
+                [
+                  -100,
+                  34.75
+                ],
+                [
+                  -100.45,
+                  34.75
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 332,
+        "hail_tag_inches": 2,
+        "wind_tag_mph": 70,
+        "issued": "2026-10-13T17:36:00-05:00",
+        "expires": "2026-10-13T18:30:00-05:00",
+        "tier": "core",
+        "basis": "Warning hail tag is 2 inches or larger",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -100.35,
+                  35.04
+                ],
+                [
+                  -100.51,
+                  35.01
+                ],
+                [
+                  -100.59,
+                  35.08
+                ],
+                [
+                  -100.61,
+                  35.23
+                ],
+                [
+                  -100.45,
+                  35.83
+                ],
+                [
+                  -100,
+                  35.65
+                ],
+                [
+                  -100,
+                  35.38
+                ],
+                [
+                  -100.35,
+                  35.04
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 305,
+        "hail_tag_inches": 1.75,
+        "wind_tag_mph": 70,
+        "issued": "2026-10-13T23:18:00-05:00",
+        "expires": "2026-10-14T00:15:00-05:00",
+        "tier": "envelope",
+        "basis": "Warning hail tag is under 2 inches",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -103.19,
+                  30.48
+                ],
+                [
+                  -103.11,
+                  30.69
+                ],
+                [
+                  -102.82,
+                  30.73
+                ],
+                [
+                  -102.7,
+                  30.54
+                ],
+                [
+                  -102.83,
+                  30.12
+                ],
+                [
+                  -102.88,
+                  29.89
+                ],
+                [
+                  -103.09,
+                  29.75
+                ],
+                [
+                  -103.33,
+                  29.75
+                ],
+                [
+                  -103.31,
+                  30.06
+                ],
+                [
+                  -103.26,
+                  30.33
+                ],
+                [
+                  -103.19,
+                  30.48
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 304,
+        "hail_tag_inches": 1.75,
+        "wind_tag_mph": 70,
+        "issued": "2026-10-13T22:32:00-05:00",
+        "expires": "2026-10-13T23:30:00-05:00",
+        "tier": "envelope",
+        "basis": "Warning hail tag is under 2 inches",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -103.18,
+                  30.32
+                ],
+                [
+                  -103.06,
+                  30.16
+                ],
+                [
+                  -103.02,
+                  29.61
+                ],
+                [
+                  -103.45,
+                  29.5
+                ],
+                [
+                  -103.53,
+                  29.73
+                ],
+                [
+                  -103.56,
+                  30.03
+                ],
+                [
+                  -103.42,
+                  30.2
+                ],
+                [
+                  -103.18,
+                  30.32
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 333,
+        "hail_tag_inches": 1.75,
+        "wind_tag_mph": 60,
+        "issued": "2026-10-13T17:38:00-05:00",
+        "expires": "2026-10-13T18:45:00-05:00",
+        "tier": "envelope",
+        "basis": "Warning hail tag is under 2 inches",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -100.15,
+                  36.23
+                ],
+                [
+                  -100.21,
+                  36.32
+                ],
+                [
+                  -100,
+                  36.87
+                ],
+                [
+                  -100,
+                  36.25
+                ],
+                [
+                  -100.15,
+                  36.23
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 339,
+        "hail_tag_inches": 1.5,
+        "wind_tag_mph": 60,
+        "issued": "2026-10-13T19:12:00-05:00",
+        "expires": "2026-10-13T20:15:00-05:00",
+        "tier": "envelope",
+        "basis": "Warning hail tag is under 2 inches",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -100.04,
+                  36.06
+                ],
+                [
+                  -100.29,
+                  36.12
+                ],
+                [
+                  -100.39,
+                  36.27
+                ],
+                [
+                  -100.02,
+                  36.87
+                ],
+                [
+                  -100,
+                  36.86
+                ],
+                [
+                  -100,
+                  36.09
+                ],
+                [
+                  -100.04,
+                  36.06
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 280,
+        "hail_tag_inches": 1.5,
+        "wind_tag_mph": 70,
+        "issued": "2026-10-13T19:02:00-05:00",
+        "expires": "2026-10-13T20:15:00-05:00",
+        "tier": "envelope",
+        "basis": "Warning hail tag is under 2 inches",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -100.01,
+                  34.24
+                ],
+                [
+                  -100.04,
+                  34.24
+                ],
+                [
+                  -100.05,
+                  34.23
+                ],
+                [
+                  -100.05,
+                  33.84
+                ],
+                [
+                  -100.04,
+                  33.83
+                ],
+                [
+                  -100.62,
+                  33.65
+                ],
+                [
+                  -100.66,
+                  33.99
+                ],
+                [
+                  -100.27,
+                  34.31
+                ],
+                [
+                  -100,
+                  34.31
+                ],
+                [
+                  -100,
+                  34.23
+                ],
+                [
+                  -100.01,
+                  34.24
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 338,
+        "hail_tag_inches": 1.5,
+        "wind_tag_mph": 60,
+        "issued": "2026-10-13T18:56:00-05:00",
+        "expires": "2026-10-13T20:00:00-05:00",
+        "tier": "envelope",
+        "basis": "Warning hail tag is under 2 inches",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -101.09,
+                  34.75
+                ],
+                [
+                  -101.09,
+                  34.79
+                ],
+                [
+                  -100.33,
+                  35.68
+                ],
+                [
+                  -100,
+                  35.61
+                ],
+                [
+                  -100,
+                  34.75
+                ],
+                [
+                  -101.09,
+                  34.75
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 299,
+        "hail_tag_inches": 1.5,
+        "wind_tag_mph": 70,
+        "issued": "2026-10-13T18:54:00-05:00",
+        "expires": "2026-10-13T19:45:00-05:00",
+        "tier": "envelope",
+        "basis": "Warning hail tag is under 2 inches",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -103.23,
+                  31.54
+                ],
+                [
+                  -103.14,
+                  31.64
+                ],
+                [
+                  -102.91,
+                  31.64
+                ],
+                [
+                  -102.8,
+                  31.61
+                ],
+                [
+                  -102.77,
+                  31.49
+                ],
+                [
+                  -102.82,
+                  31.34
+                ],
+                [
+                  -102.95,
+                  31.2
+                ],
+                [
+                  -103.16,
+                  31.05
+                ],
+                [
+                  -103.25,
+                  31.17
+                ],
+                [
+                  -103.26,
+                  31.24
+                ],
+                [
+                  -103.33,
+                  31.3
+                ],
+                [
+                  -103.23,
+                  31.54
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 336,
+        "hail_tag_inches": 1.5,
+        "wind_tag_mph": 60,
+        "issued": "2026-10-13T18:22:00-05:00",
+        "expires": "2026-10-13T19:30:00-05:00",
+        "tier": "envelope",
+        "basis": "Warning hail tag is under 2 inches",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -100.42,
+                  35.62
+                ],
+                [
+                  -100.48,
+                  35.62
+                ],
+                [
+                  -100.64,
+                  35.71
+                ],
+                [
+                  -100.37,
+                  36.37
+                ],
+                [
+                  -100,
+                  36.19
+                ],
+                [
+                  -100,
+                  35.9
+                ],
+                [
+                  -100.42,
+                  35.62
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 335,
+        "hail_tag_inches": 1.5,
+        "wind_tag_mph": 60,
+        "issued": "2026-10-13T18:07:00-05:00",
+        "expires": "2026-10-13T19:00:00-05:00",
+        "tier": "envelope",
+        "basis": "Warning hail tag is under 2 inches",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -100.54,
+                  35.28
+                ],
+                [
+                  -100,
+                  34.96
+                ],
+                [
+                  -100.49,
+                  34.75
+                ],
+                [
+                  -100.91,
+                  34.75
+                ],
+                [
+                  -100.54,
+                  35.28
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 340,
+        "hail_tag_inches": 1.25,
+        "wind_tag_mph": 60,
+        "issued": "2026-10-13T19:30:00-05:00",
+        "expires": "2026-10-13T20:30:00-05:00",
+        "tier": "envelope",
+        "basis": "Warning hail tag is under 2 inches",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -100.47,
+                  35.84
+                ],
+                [
+                  -100.66,
+                  35.95
+                ],
+                [
+                  -100.41,
+                  36.58
+                ],
+                [
+                  -100.05,
+                  36.5
+                ],
+                [
+                  -100,
+                  36.46
+                ],
+                [
+                  -100,
+                  36.15
+                ],
+                [
+                  -100.47,
+                  35.84
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 331,
+        "hail_tag_inches": 1.25,
+        "wind_tag_mph": 60,
+        "issued": "2026-10-13T17:00:00-05:00",
+        "expires": "2026-10-13T18:00:00-05:00",
+        "tier": "envelope",
+        "basis": "Warning hail tag is under 2 inches",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -100.3,
+                  35.86
+                ],
+                [
+                  -100.45,
+                  35.94
+                ],
+                [
+                  -100.28,
+                  36.44
+                ],
+                [
+                  -100,
+                  36.29
+                ],
+                [
+                  -100,
+                  36
+                ],
+                [
+                  -100.3,
+                  35.86
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 302,
+        "hail_tag_inches": 1,
+        "wind_tag_mph": 60,
+        "issued": "2026-10-13T20:20:00-05:00",
+        "expires": "2026-10-13T21:00:00-05:00",
+        "tier": "envelope",
+        "basis": "Warning hail tag is under 2 inches",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -103.61,
+                  29.17
+                ],
+                [
+                  -103.65,
+                  29.16
+                ],
+                [
+                  -103.66,
+                  29.17
+                ],
+                [
+                  -103.71,
+                  29.19
+                ],
+                [
+                  -103.72,
+                  29.18
+                ],
+                [
+                  -103.76,
+                  29.23
+                ],
+                [
+                  -103.77,
+                  29.22
+                ],
+                [
+                  -103.78,
+                  29.23
+                ],
+                [
+                  -103.77,
+                  29.25
+                ],
+                [
+                  -103.79,
+                  29.27
+                ],
+                [
+                  -103.79,
+                  29.31
+                ],
+                [
+                  -103.51,
+                  29.66
+                ],
+                [
+                  -103.12,
+                  29.46
+                ],
+                [
+                  -103.58,
+                  29.15
+                ],
+                [
+                  -103.61,
+                  29.17
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 953,
+        "hail_tag_inches": 1,
+        "wind_tag_mph": 60,
+        "issued": "2026-10-13T20:12:00-05:00",
+        "expires": "2026-10-13T20:46:00-05:00",
+        "tier": "envelope",
+        "basis": "Warning hail tag is under 2 inches",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -100.05,
+                  34.23
+                ],
+                [
+                  -100.03,
+                  34.24
+                ],
+                [
+                  -100.01,
+                  34.24
+                ],
+                [
+                  -100,
+                  34.23
+                ],
+                [
+                  -100,
+                  34.3
+                ],
+                [
+                  -99.8,
+                  34.46
+                ],
+                [
+                  -99.55,
+                  34.25
+                ],
+                [
+                  -100.05,
+                  34.09
+                ],
+                [
+                  -100.05,
+                  34.23
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 281,
+        "hail_tag_inches": 1,
+        "wind_tag_mph": 70,
+        "issued": "2026-10-13T19:41:00-05:00",
+        "expires": "2026-10-13T20:10:00-05:00",
+        "tier": "envelope",
+        "basis": "Warning hail tag is under 2 inches",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -100.28,
+                  34.31
+                ],
+                [
+                  -100.22,
+                  34.41
+                ],
+                [
+                  -100.15,
+                  34.47
+                ],
+                [
+                  -100,
+                  34.56
+                ],
+                [
+                  -100,
+                  34.31
+                ],
+                [
+                  -100.28,
+                  34.31
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 949,
+        "hail_tag_inches": 1,
+        "wind_tag_mph": 70,
+        "issued": "2026-10-13T19:32:00-05:00",
+        "expires": "2026-10-13T20:15:00-05:00",
+        "tier": "envelope",
+        "basis": "Warning hail tag is under 2 inches",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -100.05,
+                  34.23
+                ],
+                [
+                  -100.03,
+                  34.24
+                ],
+                [
+                  -100.01,
+                  34.24
+                ],
+                [
+                  -100,
+                  34.23
+                ],
+                [
+                  -100,
+                  34.56
+                ],
+                [
+                  -99.94,
+                  34.58
+                ],
+                [
+                  -99.82,
+                  34.49
+                ],
+                [
+                  -99.79,
+                  34.45
+                ],
+                [
+                  -99.69,
+                  34.38
+                ],
+                [
+                  -99.6,
+                  34.38
+                ],
+                [
+                  -99.47,
+                  34.27
+                ],
+                [
+                  -99.48,
+                  34.2
+                ],
+                [
+                  -100.04,
+                  33.99
+                ],
+                [
+                  -100.05,
+                  34
+                ],
+                [
+                  -100.05,
+                  34.23
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 337,
+        "hail_tag_inches": 1,
+        "wind_tag_mph": 60,
+        "issued": "2026-10-13T18:31:00-05:00",
+        "expires": "2026-10-13T19:30:00-05:00",
+        "tier": "envelope",
+        "basis": "Warning hail tag is under 2 inches",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -100.17,
+                  35.42
+                ],
+                [
+                  -100.45,
+                  35.52
+                ],
+                [
+                  -100.19,
+                  36.14
+                ],
+                [
+                  -100,
+                  36.07
+                ],
+                [
+                  -100,
+                  35.58
+                ],
+                [
+                  -100.17,
+                  35.42
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 952,
+        "hail_tag_inches": 0.75,
+        "wind_tag_mph": 60,
+        "issued": "2026-10-13T20:06:00-05:00",
+        "expires": "2026-10-13T20:45:00-05:00",
+        "tier": "envelope",
+        "basis": "Warning hail tag is under 2 inches",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -99.72,
+                  35.31
+                ],
+                [
+                  -99.02,
+                  35.46
+                ],
+                [
+                  -99.32,
+                  34.91
+                ],
+                [
+                  -99.93,
+                  34.58
+                ],
+                [
+                  -99.95,
+                  34.58
+                ],
+                [
+                  -99.97,
+                  34.56
+                ],
+                [
+                  -99.72,
+                  35.31
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 951,
+        "hail_tag_inches": 0.75,
+        "wind_tag_mph": 70,
+        "issued": "2026-10-13T20:00:00-05:00",
+        "expires": "2026-10-13T20:45:00-05:00",
+        "tier": "envelope",
+        "basis": "Warning hail tag is under 2 inches",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -99.97,
+                  34.56
+                ],
+                [
+                  -99.3,
+                  34.92
+                ],
+                [
+                  -99.29,
+                  34.89
+                ],
+                [
+                  -99.32,
+                  34.88
+                ],
+                [
+                  -99.3,
+                  34.85
+                ],
+                [
+                  -99.24,
+                  34.82
+                ],
+                [
+                  -99.19,
+                  34.85
+                ],
+                [
+                  -99.15,
+                  34.81
+                ],
+                [
+                  -99.15,
+                  34.76
+                ],
+                [
+                  -99.17,
+                  34.75
+                ],
+                [
+                  -99.16,
+                  34.71
+                ],
+                [
+                  -99.04,
+                  34.69
+                ],
+                [
+                  -99.06,
+                  34.67
+                ],
+                [
+                  -99.09,
+                  34.68
+                ],
+                [
+                  -99.1,
+                  34.64
+                ],
+                [
+                  -99,
+                  34.64
+                ],
+                [
+                  -99,
+                  34.6
+                ],
+                [
+                  -98.92,
+                  34.6
+                ],
+                [
+                  -98.87,
+                  34.55
+                ],
+                [
+                  -99.71,
+                  34.21
+                ],
+                [
+                  -99.97,
+                  34.56
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 230,
+        "hail_tag_inches": 0,
+        "wind_tag_mph": 0,
+        "issued": "2026-10-13T23:50:00-05:00",
+        "expires": "2026-10-14T02:45:00-05:00",
+        "tier": "envelope",
+        "basis": "Warning hail tag is under 2 inches",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -103.51,
+                  30.48
+                ],
+                [
+                  -103.29,
+                  30.97
+                ],
+                [
+                  -103.02,
+                  31.25
+                ],
+                [
+                  -102.27,
+                  30.96
+                ],
+                [
+                  -102.82,
+                  30.1
+                ],
+                [
+                  -103.51,
+                  30.48
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 229,
+        "hail_tag_inches": 0,
+        "wind_tag_mph": 0,
+        "issued": "2026-10-13T23:01:00-05:00",
+        "expires": "2026-10-14T03:00:00-05:00",
+        "tier": "envelope",
+        "basis": "Warning hail tag is under 2 inches",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -103.01,
+                  30.37
+                ],
+                [
+                  -103.01,
+                  30.29
+                ],
+                [
+                  -103,
+                  29.85
+                ],
+                [
+                  -103.1,
+                  29.59
+                ],
+                [
+                  -103.14,
+                  29.33
+                ],
+                [
+                  -103.43,
+                  29.31
+                ],
+                [
+                  -103.41,
+                  29.73
+                ],
+                [
+                  -103.38,
+                  30.2
+                ],
+                [
+                  -103.35,
+                  30.45
+                ],
+                [
+                  -103.18,
+                  30.47
+                ],
+                [
+                  -103.09,
+                  30.42
+                ],
+                [
+                  -103.01,
+                  30.37
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 44,
+        "hail_tag_inches": 0,
+        "wind_tag_mph": 0,
+        "issued": "2026-10-13T22:47:00-05:00",
+        "expires": "2026-10-14T01:45:00-05:00",
+        "tier": "envelope",
+        "basis": "Warning hail tag is under 2 inches",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -100,
+                  34.93
+                ],
+                [
+                  -100.06,
+                  34.92
+                ],
+                [
+                  -100.22,
+                  34.88
+                ],
+                [
+                  -100.32,
+                  34.89
+                ],
+                [
+                  -100.35,
+                  34.95
+                ],
+                [
+                  -100.35,
+                  35.02
+                ],
+                [
+                  -100.3,
+                  35.08
+                ],
+                [
+                  -100.13,
+                  35.17
+                ],
+                [
+                  -100,
+                  35.18
+                ],
+                [
+                  -100,
+                  34.93
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 228,
+        "hail_tag_inches": 0,
+        "wind_tag_mph": 0,
+        "issued": "2026-10-13T22:02:00-05:00",
+        "expires": "2026-10-14T02:00:00-05:00",
+        "tier": "envelope",
+        "basis": "Warning hail tag is under 2 inches",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -103.79,
+                  29.34
+                ],
+                [
+                  -103.79,
+                  29.76
+                ],
+                [
+                  -103.72,
+                  30.03
+                ],
+                [
+                  -103.31,
+                  30.23
+                ],
+                [
+                  -103.25,
+                  29.97
+                ],
+                [
+                  -103.21,
+                  29.69
+                ],
+                [
+                  -103.35,
+                  29.48
+                ],
+                [
+                  -103.42,
+                  29.31
+                ],
+                [
+                  -103.66,
+                  29.29
+                ],
+                [
+                  -103.79,
+                  29.34
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 110,
+        "hail_tag_inches": 0,
+        "wind_tag_mph": 0,
+        "issued": "2026-10-13T21:48:00-05:00",
+        "expires": "2026-10-14T00:45:00-05:00",
+        "tier": "envelope",
+        "basis": "Warning hail tag is under 2 inches",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -100.84,
+                  34.75
+                ],
+                [
+                  -100.54,
+                  35.13
+                ],
+                [
+                  -100,
+                  35.16
+                ],
+                [
+                  -100,
+                  34.75
+                ],
+                [
+                  -100.84,
+                  34.75
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "event_id": 109,
+        "hail_tag_inches": 0,
+        "wind_tag_mph": 0,
+        "issued": "2026-10-13T18:50:00-05:00",
+        "expires": "2026-10-13T21:45:00-05:00",
+        "tier": "envelope",
+        "basis": "Warning hail tag is under 2 inches",
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -100.84,
+                  34.76
+                ],
+                [
+                  -100.55,
+                  35.12
+                ],
+                [
+                  -100,
+                  35.16
+                ],
+                [
+                  -100.12,
+                  34.75
+                ],
+                [
+                  -100.84,
+                  34.75
+                ],
+                [
+                  -100.84,
+                  34.76
+                ]
+              ]
+            ]
+          ]
+        }
+      }
+    ]
+  }
+}

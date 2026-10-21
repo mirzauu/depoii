@@ -1,13 +1,8 @@
-import fs from "node:fs";
-import os from "node:os";
-import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { closeDb, getDb, persistLive, readPermitContacts } from "@/lib/db";
+import { persistLive, readPermitContacts } from "@/lib/db";
 import { accountCard } from "@/lib/intelligence";
+import { closePool, query, queryOne } from "@/lib/pg";
 import type { LivePayload } from "@/lib/types";
-
-const file = path.join(os.tmpdir(), `depoii-test-${process.pid}.sqlite`);
-process.env.DEPOII_DB = file;
 
 function payload(fetchedAt: string, owner = "FIRST OWNER"): LivePayload {
   return {
@@ -60,54 +55,67 @@ function payload(fetchedAt: string, owner = "FIRST OWNER"): LivePayload {
   };
 }
 
-beforeEach(() => {
-  closeDb();
-  for (const suffix of ["", "-wal", "-shm"]) fs.rmSync(file + suffix, { force: true });
+beforeEach(async () => {
+  if (process.env.DATABASE_URL) {
+    await query(`delete from warehouse.score_snapshots`);
+    await query(`delete from warehouse.warnings`);
+    await query(`delete from warehouse.hail_reports`);
+    await query(`delete from warehouse.permit_contacts`);
+    await query(`delete from warehouse.live_permits`);
+    await query(`delete from warehouse.live_parcels`);
+  }
 });
 
-afterEach(() => closeDb());
+afterEach(async () => {
+  await closePool();
+});
 
 describe("market intelligence store", () => {
-  it("updates a parcel in place instead of inserting a second row", () => {
-    persistLive(payload("2026-10-06T12:00:00.000Z", "FIRST OWNER"));
-    persistLive(payload("2026-10-06T18:00:00.000Z", "SECOND OWNER"));
-    const db = getDb();
-    const parcels = db.prepare(`SELECT account, owner FROM parcels ORDER BY account`).all() as { account: string; owner: string }[];
+  it("updates a parcel in place instead of inserting a second row", async () => {
+    await persistLive(payload("2026-10-06T12:00:00.000Z", "FIRST OWNER"));
+    await persistLive(payload("2026-10-06T18:00:00.000Z", "SECOND OWNER"));
+    const parcels = await query<{ account: string; owner: string }>(
+      `SELECT account, owner FROM warehouse.live_parcels ORDER BY account`,
+    );
     expect(parcels).toEqual([
       { account: "A1", owner: "SECOND OWNER" },
       { account: "A2", owner: "OUTSIDE OWNER" },
     ]);
-    expect((db.prepare(`SELECT COUNT(*) AS n FROM hail_reports`).get() as { n: number }).n).toBe(1);
-    expect((db.prepare(`SELECT COUNT(*) AS n FROM warnings`).get() as { n: number }).n).toBe(1);
+    const hailCount = await queryOne<{ n: string }>(`SELECT COUNT(*)::text AS n FROM warehouse.hail_reports`);
+    const warnCount = await queryOne<{ n: string }>(`SELECT COUNT(*)::text AS n FROM warehouse.warnings`);
+    expect(Number(hailCount?.n)).toBe(1);
+    expect(Number(warnCount?.n)).toBe(1);
   });
 
-  it("writes one score snapshot per building per storm per day, then another the next day", () => {
-    persistLive(payload("2026-10-06T12:00:00.000Z"));
-    persistLive(payload("2026-10-06T18:00:00.000Z"));
-    const db = getDb();
-    expect((db.prepare(`SELECT COUNT(*) AS n FROM score_snapshots`).get() as { n: number }).n).toBe(1);
-    persistLive(payload("2026-10-07T12:00:00.000Z"));
-    const rows = db.prepare(`SELECT account, scored_on FROM score_snapshots ORDER BY scored_on`).all() as { account: string; scored_on: string }[];
+  it("writes one score snapshot per building per storm per day, then another the next day", async () => {
+    await persistLive(payload("2026-10-06T12:00:00.000Z"));
+    await persistLive(payload("2026-10-06T18:00:00.000Z"));
+    const count1 = await queryOne<{ n: string }>(`SELECT COUNT(*)::text AS n FROM warehouse.score_snapshots`);
+    expect(Number(count1?.n)).toBe(1);
+    await persistLive(payload("2026-10-07T12:00:00.000Z"));
+    const rows = await query<{ account: string; scored_on: string }>(
+      `SELECT account, scored_on FROM warehouse.score_snapshots ORDER BY scored_on`,
+    );
     expect(rows).toEqual([
       { account: "A1", scored_on: "2026-10-06" },
       { account: "A1", scored_on: "2026-10-07" },
     ]);
   });
 
-  it("builds an account card from stored facts and leaves out contact fields the roll does not have", () => {
-    persistLive(payload("2026-10-06T12:00:00.000Z"));
-    const card = accountCard("A1", "2026-04-26");
+  it("builds an account card from stored facts and leaves out contact fields the roll does not have", async () => {
+    await persistLive(payload("2026-10-06T12:00:00.000Z"));
+    const card = await accountCard("A1", "2026-04-26");
     expect(card?.card).toContain("FIRST OWNER");
     expect(card?.card).toContain("Tarrant Appraisal District");
     expect(card?.card).toContain("TPO");
     expect(card?.card.toLowerCase()).not.toContain("email");
     expect(card?.card.toLowerCase()).not.toContain("phone");
-    expect(accountCard("missing")).toBeNull();
+    expect(await accountCard("missing")).toBeNull();
   });
 
-  it("stores and retrieves permit contacts", () => {
-    persistLive(payload("2026-10-06T12:00:00.000Z"));
-    const contacts = readPermitContacts("PB1");
+  it("stores and retrieves permit contacts", async () => {
+    await persistLive(payload("2026-10-06T12:00:00.000Z"));
+    const contacts = await readPermitContacts("PB1");
     expect(contacts).toHaveLength(1);
     expect(contacts[0]).toMatchObject({
       permitId: "PB1",
@@ -118,4 +126,3 @@ describe("market intelligence store", () => {
     });
   });
 });
-

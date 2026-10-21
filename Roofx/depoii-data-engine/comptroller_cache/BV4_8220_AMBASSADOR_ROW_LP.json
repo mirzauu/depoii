@@ -1,0 +1,29 @@
+{
+  "detail": {
+    "taxpayerId": "32100549545",
+    "feiNumber": null,
+    "name": "BV4 8220 AMBASSADOR ROW LP",
+    "dbaName": null,
+    "mailingAddressStreet": "211 E 7TH ST STE 620",
+    "mailingAddressCity": "AUSTIN",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "78701",
+    "mailingAddressZip4": "3218",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " DE",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "06/03/2025",
+    "sosFileNumber": "0806068728",
+    "registeredAgentName": "CORPORATION SERVICE COMPANY DBA CSC - LAWYERS INCO",
+    "registeredOfficeAddressStreet": "211 E. 7TH STREET, SUITE 620",
+    "registeredOfficeAddressCity": "AUSTIN",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "78701",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "",
+    "officerInfo": []
+  },
+  "confidence": "exact_name"
+}

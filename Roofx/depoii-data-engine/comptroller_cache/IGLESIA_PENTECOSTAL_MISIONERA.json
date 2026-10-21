@@ -1,0 +1,29 @@
+{
+  "detail": {
+    "taxpayerId": "30118178042",
+    "feiNumber": null,
+    "name": "IGLESIA PENTECOSTAL MISIONERA",
+    "dbaName": null,
+    "mailingAddressStreet": "916 KERRY ST",
+    "mailingAddressCity": "BENBROOK",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "76126",
+    "mailingAddressZip4": "2619",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "09/15/1995",
+    "sosFileNumber": "0137024601",
+    "registeredAgentName": "FELIPE SEPULVEDA",
+    "registeredOfficeAddressStreet": "916 KERRY ST",
+    "registeredOfficeAddressCity": "BENBROOK",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "76126",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "",
+    "officerInfo": []
+  },
+  "confidence": "exact_name"
+}

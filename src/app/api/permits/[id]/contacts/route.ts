@@ -9,7 +9,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
   if (!decodedId) return Response.json({ error: "Permit ID is required." }, { status: 400 });
 
   const recordUrl = new URL(req.url).searchParams.get("recordUrl");
-  const cached = readPermitContacts(decodedId);
+  const cached = await readPermitContacts(decodedId);
   if (cached.length > 0) {
     return Response.json({ permitId: decodedId, contacts: cached, source: "cached" });
   }

@@ -1,7 +1,7 @@
 import { randomBytes } from "node:crypto";
 import { recordActivity } from "@/lib/activity";
 import { createUser, loginLinkStatus, setUserPassword } from "@/lib/auth";
-import { getDb } from "@/lib/db";
+import { query, queryOne } from "@/lib/pg";
 
 export class HttpError extends Error {
   status: number;
@@ -54,13 +54,13 @@ type ActivitySqlRow = {
 function mapActivity(row: ActivitySqlRow): ActivityItem {
   let detail: Record<string, unknown> = {};
   try {
-    const parsed = JSON.parse(row.detail) as unknown;
+    const parsed = typeof row.detail === "string" ? JSON.parse(row.detail) : row.detail;
     if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) detail = parsed as Record<string, unknown>;
   } catch {
     detail = {};
   }
   return {
-    id: row.id,
+    id: Number(row.id),
     at: row.at,
     actorId: row.actor_id,
     actorName: row.actor_name || "",
@@ -74,48 +74,41 @@ function mapActivity(row: ActivitySqlRow): ActivityItem {
   };
 }
 
-export function listActivity(query: ActivityQuery = {}): ActivityItem[] {
+export async function listActivity(q: ActivityQuery = {}): Promise<ActivityItem[]> {
   const where: string[] = [];
-  const params: (string | number)[] = [];
-  if (query.orgId) {
-    where.push("a.org_id = ?");
-    params.push(query.orgId);
+  const params: unknown[] = [];
+  if (q.orgId) { params.push(q.orgId); where.push(`a.org_id = $${params.length}`); }
+  if (q.subjectId) {
+    params.push(q.subjectId, q.subjectId);
+    where.push(`(a.actor_id = $${params.length - 1} or (a.target_type = 'user' and a.target_id = $${params.length}))`);
+  } else if (q.userId) {
+    params.push(q.userId);
+    where.push(`a.actor_id = $${params.length}`);
   }
-  if (query.subjectId) {
-    where.push("(a.actor_id = ? OR (a.target_type = 'user' AND a.target_id = ?))");
-    params.push(query.subjectId, query.subjectId);
-  } else if (query.userId) {
-    where.push("a.actor_id = ?");
-    params.push(query.userId);
-  }
-  if (query.action) {
-    where.push("a.action = ?");
-    params.push(query.action);
-  }
-  const limit = Math.min(Math.max(query.limit ?? 50, 1), 200);
+  if (q.action) { params.push(q.action); where.push(`a.action = $${params.length}`); }
+  const limit = Math.min(Math.max(q.limit ?? 50, 1), 200);
   params.push(limit);
-  const sql = `
-    SELECT a.id, a.at, a.actor_id, u.name AS actor_name, u.email AS actor_email,
-      a.org_id, o.name AS org_name, a.action, a.target_type, a.target_id, a.detail
-    FROM activity a
-    LEFT JOIN users u ON u.id = a.actor_id
-    LEFT JOIN orgs o ON o.id = a.org_id
-    ${where.length ? `WHERE ${where.join(" AND ")}` : ""}
-    ORDER BY a.id DESC
-    LIMIT ?
-  `;
-  return (getDb().prepare(sql).all(...params) as ActivitySqlRow[]).map(mapActivity);
+  const rows = await query<ActivitySqlRow>(
+    `select a.id, a.at, a.actor_id, u.name as actor_name, u.email as actor_email,
+       a.org_id, o.name as org_name, a.action, a.target_type, a.target_id, a.detail
+     from app.activity a
+     left join app.users u on u.id = a.actor_id
+     left join app.orgs o on o.id = a.org_id
+     ${where.length ? `where ${where.join(" and ")}` : ""}
+     order by a.id desc limit $${params.length}`,
+    params,
+  );
+  return rows.map(mapActivity);
 }
 
-export function overview() {
-  const db = getDb();
-  const count = (sql: string) => (db.prepare(sql).get() as { n: number }).n;
+export async function overview() {
+  const count = async (table: string) => Number((await queryOne<{ n: string }>(`select count(*)::text as n from ${table}`))?.n || 0);
   return {
-    orgs: count(`SELECT COUNT(*) AS n FROM orgs`),
-    users: count(`SELECT COUNT(*) AS n FROM users`),
-    leads: count(`SELECT COUNT(*) AS n FROM leads`),
-    outcomes: count(`SELECT COUNT(*) AS n FROM field_outcomes`),
-    activity: listActivity({ limit: 12 }),
+    orgs: await count("app.orgs"),
+    users: await count("app.users"),
+    leads: await count("app.leads"),
+    outcomes: await count("app.field_outcomes"),
+    activity: await listActivity({ limit: 12 }),
   };
 }
 
@@ -135,22 +128,23 @@ function mapOrg(row: OrgSql) {
     name: row.name,
     disabled: Boolean(row.disabled),
     createdAt: row.created_at,
-    members: row.members,
-    leads: row.leads,
-    outcomes: row.outcomes,
+    members: Number(row.members),
+    leads: Number(row.leads),
+    outcomes: Number(row.outcomes),
   };
 }
 
 const ORG_LIST_SQL = `
   SELECT o.id, o.name, o.disabled, o.created_at,
-    (SELECT COUNT(*) FROM memberships m WHERE m.org_id = o.id) AS members,
-    (SELECT COUNT(*) FROM leads l WHERE l.org_id = o.id) AS leads,
-    (SELECT COUNT(*) FROM field_outcomes f WHERE f.org_id = o.id) AS outcomes
-  FROM orgs o
+    (SELECT COUNT(*) FROM app.memberships m WHERE m.org_id = o.id) AS members,
+    (SELECT COUNT(*) FROM app.leads l WHERE l.org_id = o.id) AS leads,
+    (SELECT COUNT(*) FROM app.field_outcomes f WHERE f.org_id = o.id) AS outcomes
+  FROM app.orgs o
 `;
 
-export function listOrgs() {
-  return (getDb().prepare(`${ORG_LIST_SQL} ORDER BY o.name COLLATE NOCASE`).all() as OrgSql[]).map(mapOrg);
+export async function listOrgs() {
+  const rows = await query<OrgSql>(`${ORG_LIST_SQL} ORDER BY lower(o.name)`);
+  return rows.map(mapOrg);
 }
 
 type UserSql = {
@@ -188,46 +182,48 @@ function mapUser(row: UserSql) {
 const USER_SQL = `
   SELECT u.id, u.email, u.name, u.disabled, u.platform_role, u.last_seen_at, u.last_login_at, u.created_at,
     m.role, m.org_id, o.name AS org_name, o.disabled AS org_disabled
-  FROM users u
-  JOIN memberships m ON m.user_id = u.id
-  JOIN orgs o ON o.id = m.org_id
+  FROM app.users u
+  JOIN app.memberships m ON m.user_id = u.id
+  JOIN app.orgs o ON o.id = m.org_id
 `;
 
-export function listUsers() {
-  return (getDb().prepare(`${USER_SQL} ORDER BY u.email COLLATE NOCASE`).all() as UserSql[]).map(mapUser);
+export async function listUsers() {
+  const rows = await query<UserSql>(`${USER_SQL} ORDER BY lower(u.email)`);
+  return rows.map(mapUser);
 }
 
-export function userDetail(id: string) {
-  const user = mapUser(requireAccount(id));
+export async function userDetail(id: string) {
+  const user = mapUser(await requireAccount(id));
   return {
     user,
-    link: loginLinkStatus(id),
-    activity: listActivity({ subjectId: id, limit: 100 }),
+    link: await loginLinkStatus(id),
+    activity: await listActivity({ subjectId: id, limit: 100 }),
   };
 }
 
-function requireOrg(id: string) {
-  const row = getDb().prepare(`${ORG_LIST_SQL} WHERE o.id = ?`).get(id) as OrgSql | undefined;
+async function requireOrg(id: string): Promise<OrgSql> {
+  const row = await queryOne<OrgSql>(`${ORG_LIST_SQL} WHERE o.id = $1`, [id]);
   if (!row) throw new HttpError(404, "Organization not found.");
   return row;
 }
 
-function requireAccount(id: string) {
-  const row = getDb().prepare(`${USER_SQL} WHERE u.id = ?`).get(id) as UserSql | undefined;
+async function requireAccount(id: string): Promise<UserSql> {
+  const row = await queryOne<UserSql>(`${USER_SQL} WHERE u.id = $1`, [id]);
   if (!row) throw new HttpError(404, "User not found.");
   return row;
 }
 
-function superAdminCount() {
-  return (getDb().prepare(`SELECT COUNT(*) AS n FROM users WHERE platform_role = 'superadmin'`).get() as { n: number }).n;
+async function superAdminCount(): Promise<number> {
+  const row = await queryOne<{ n: string }>(`select count(*)::text as n from app.users where platform_role = 'superadmin'`);
+  return Number(row?.n || 0);
 }
 
-function assertNotLastSuperAdmin(userId: string, message: string) {
-  const row = getDb().prepare(`SELECT platform_role FROM users WHERE id = ?`).get(userId) as { platform_role: string } | undefined;
-  if (row?.platform_role === "superadmin" && superAdminCount() <= 1) throw new HttpError(400, message);
+async function assertNotLastSuperAdmin(userId: string, message: string): Promise<void> {
+  const row = await queryOne<{ platform_role: string }>(`select platform_role from app.users where id = $1`, [userId]);
+  if (row?.platform_role === "superadmin" && (await superAdminCount()) <= 1) throw new HttpError(400, message);
 }
 
-export function createOrganization(actorId: string, input: { name?: string; ownerName?: string; ownerEmail?: string; ownerPassword?: string }) {
+export async function createOrganization(actorId: string, input: { name?: string; ownerName?: string; ownerEmail?: string; ownerPassword?: string }) {
   const name = input.name?.trim() || "";
   const email = input.ownerEmail?.trim().toLowerCase() || "";
   const ownerName = input.ownerName?.trim() || email;
@@ -235,45 +231,37 @@ export function createOrganization(actorId: string, input: { name?: string; owne
   if (!name) throw new HttpError(400, "Organization name is required.");
   if (!email.includes("@")) throw new HttpError(400, "Owner email is required.");
   if (password.length < 8) throw new HttpError(400, "Owner password must be at least 8 characters.");
-  const db = getDb();
-  const taken = db.prepare(`SELECT id FROM users WHERE lower(email) = ?`).get(email);
+  const taken = await queryOne(`select id from app.users where lower(email) = $1`, [email]);
   if (taken) throw new HttpError(409, "A user with that email already exists.");
   const orgId = randomBytes(8).toString("hex");
   const now = new Date().toISOString();
-  let ownerId = "";
-  const write = db.transaction(() => {
-    db.prepare(`INSERT INTO orgs (id, name, disabled, created_at) VALUES (?, ?, 0, ?)`).run(orgId, name, now);
-    ownerId = createUser(orgId, email, password, ownerName, "owner");
-    recordActivity({ actorId, orgId, action: "org.create", targetType: "org", targetId: orgId, detail: { name } });
-    recordActivity({ actorId, orgId, action: "user.create", targetType: "user", targetId: ownerId, detail: { email, role: "owner" } });
-  });
-  write();
-  return mapOrg(requireOrg(orgId));
+  await query(`insert into app.orgs (id, name, disabled, created_at) values ($1,$2,0,$3)`, [orgId, name, now]);
+  const ownerId = await createUser(orgId, email, password, ownerName, "owner");
+  await recordActivity({ actorId, orgId, action: "org.create", targetType: "org", targetId: orgId, detail: { name } });
+  await recordActivity({ actorId, orgId, action: "user.create", targetType: "user", targetId: ownerId, detail: { email, role: "owner" } });
+  return mapOrg(await requireOrg(orgId));
 }
 
-export function updateOrganization(actorId: string, id: string, input: { name?: string; disabled?: boolean }) {
-  const current = requireOrg(id);
-  const db = getDb();
+export async function updateOrganization(actorId: string, id: string, input: { name?: string; disabled?: boolean }) {
+  const current = await requireOrg(id);
   if (typeof input.name === "string") {
     const name = input.name.trim();
     if (!name) throw new HttpError(400, "Organization name is required.");
     if (name !== current.name) {
-      db.prepare(`UPDATE orgs SET name = ? WHERE id = ?`).run(name, id);
-      recordActivity({ actorId, orgId: id, action: "org.rename", targetType: "org", targetId: id, detail: { from: current.name, to: name } });
+      await query(`update app.orgs set name = $1 where id = $2`, [name, id]);
+      await recordActivity({ actorId, orgId: id, action: "org.rename", targetType: "org", targetId: id, detail: { from: current.name, to: name } });
     }
   }
   if (typeof input.disabled === "boolean" && input.disabled !== Boolean(current.disabled)) {
-    db.prepare(`UPDATE orgs SET disabled = ? WHERE id = ?`).run(input.disabled ? 1 : 0, id);
-    recordActivity({
-      actorId,
-      orgId: id,
+    await query(`update app.orgs set disabled = $1 where id = $2`, [input.disabled ? 1 : 0, id]);
+    await recordActivity({
+      actorId, orgId: id,
       action: input.disabled ? "org.suspend" : "org.reactivate",
-      targetType: "org",
-      targetId: id,
+      targetType: "org", targetId: id,
       detail: { name: typeof input.name === "string" && input.name.trim() ? input.name.trim() : current.name },
     });
   }
-  return mapOrg(requireOrg(id));
+  return mapOrg(await requireOrg(id));
 }
 
 type LeadSql = {
@@ -299,41 +287,27 @@ type OutcomeSql = {
   contract_value: number;
 };
 
-export function organizationDetail(id: string) {
-  const org = mapOrg(requireOrg(id));
-  const db = getDb();
-  const members = (db.prepare(`${USER_SQL} WHERE m.org_id = ? ORDER BY u.email COLLATE NOCASE`).all(id) as UserSql[]).map(mapUser);
-  const leads = (db.prepare(`
-    SELECT id, parcel_id, storm_id, address, city, stage, assignee, score, price, updated_at
-    FROM leads WHERE org_id = ? ORDER BY updated_at DESC LIMIT 25
-  `).all(id) as LeadSql[]).map((row) => ({
-    id: row.id,
-    parcelId: row.parcel_id,
-    stormId: row.storm_id,
-    address: row.address,
-    city: row.city,
-    stage: row.stage,
-    assignee: row.assignee,
-    score: row.score,
-    price: row.price,
-    updatedAt: row.updated_at,
+export async function organizationDetail(id: string) {
+  const org = mapOrg(await requireOrg(id));
+  const members = (await query<UserSql>(`${USER_SQL} WHERE m.org_id = $1 ORDER BY lower(u.email)`, [id])).map(mapUser);
+  const leads = (await query<LeadSql>(
+    `select id, parcel_id, storm_id, address, city, stage, assignee, score, price, updated_at
+     from app.leads where org_id = $1 order by updated_at desc limit 25`, [id],
+  )).map((row) => ({
+    id: row.id, parcelId: row.parcel_id, stormId: row.storm_id, address: row.address, city: row.city,
+    stage: row.stage, assignee: row.assignee, score: Number(row.score), price: Number(row.price), updatedAt: row.updated_at,
   }));
-  const outcomes = (db.prepare(`
-    SELECT id, parcel_id, storm_id, logged_at, predicted_score, scope, contract_value
-    FROM field_outcomes WHERE org_id = ? ORDER BY logged_at DESC LIMIT 25
-  `).all(id) as OutcomeSql[]).map((row) => ({
-    id: row.id,
-    parcelId: row.parcel_id,
-    stormId: row.storm_id,
-    loggedAt: row.logged_at,
-    predictedScore: row.predicted_score,
-    scope: row.scope,
-    contractValue: row.contract_value,
+  const outcomes = (await query<OutcomeSql>(
+    `select id, parcel_id, storm_id, logged_at, predicted_score, scope, contract_value
+     from app.field_outcomes where org_id = $1 order by logged_at desc limit 25`, [id],
+  )).map((row) => ({
+    id: row.id, parcelId: row.parcel_id, stormId: row.storm_id, loggedAt: row.logged_at,
+    predictedScore: Number(row.predicted_score), scope: row.scope, contractValue: Number(row.contract_value),
   }));
-  return { org, members, leads, outcomes, activity: listActivity({ orgId: id, limit: 50 }) };
+  return { org, members, leads, outcomes, activity: await listActivity({ orgId: id, limit: 50 }) };
 }
 
-export function createMember(actorId: string, input: { email?: string; password?: string; name?: string; orgId?: string; role?: string }) {
+export async function createMember(actorId: string, input: { email?: string; password?: string; name?: string; orgId?: string; role?: string }) {
   const email = input.email?.trim().toLowerCase() || "";
   const password = input.password || "";
   const orgId = input.orgId || "";
@@ -341,83 +315,44 @@ export function createMember(actorId: string, input: { email?: string; password?
   if (!email.includes("@")) throw new HttpError(400, "Email is required.");
   if (password.length < 8) throw new HttpError(400, "Password must be at least 8 characters.");
   if (!role) throw new HttpError(400, "Role must be owner or rep.");
-  requireOrg(orgId);
-  const id = createUser(orgId, email, password, input.name?.trim() || email, role);
-  recordActivity({ actorId, orgId, action: "user.create", targetType: "user", targetId: id, detail: { email, role } });
-  return mapUser(requireAccount(id));
+  await requireOrg(orgId);
+  const id = await createUser(orgId, email, password, input.name?.trim() || email, role);
+  await recordActivity({ actorId, orgId, action: "user.create", targetType: "user", targetId: id, detail: { email, role } });
+  return mapUser(await requireAccount(id));
 }
 
-export function updateMember(actorId: string, id: string, input: { role?: string; orgId?: string; password?: string; disabled?: boolean; platformRole?: string }) {
-  const current = requireAccount(id);
+export async function updateMember(actorId: string, id: string, input: { role?: string; orgId?: string; password?: string; disabled?: boolean; platformRole?: string }) {
+  const current = await requireAccount(id);
   if (typeof input.role === "string" && input.role !== "owner" && input.role !== "rep") throw new HttpError(400, "Role must be owner or rep.");
-  if (typeof input.orgId === "string" && input.orgId !== current.org_id) requireOrg(input.orgId);
+  if (typeof input.orgId === "string" && input.orgId !== current.org_id) await requireOrg(input.orgId);
   if (typeof input.password === "string" && input.password.length < 8) throw new HttpError(400, "Password must be at least 8 characters.");
-  if (input.disabled === true && !current.disabled) assertNotLastSuperAdmin(id, "The last super admin cannot be disabled.");
+  if (input.disabled === true && !current.disabled) await assertNotLastSuperAdmin(id, "The last super admin cannot be disabled.");
   if (typeof input.platformRole === "string" && input.platformRole !== "superadmin" && current.platform_role === "superadmin") {
-    assertNotLastSuperAdmin(id, "The last super admin cannot be demoted.");
+    await assertNotLastSuperAdmin(id, "The last super admin cannot be demoted.");
   }
-  const db = getDb();
   const orgForLog = typeof input.orgId === "string" && input.orgId !== current.org_id ? input.orgId : current.org_id;
-  const write = db.transaction(() => {
-    if (typeof input.role === "string" && input.role !== current.role) {
-      db.prepare(`UPDATE memberships SET role = ? WHERE user_id = ? AND org_id = ?`).run(input.role, id, current.org_id);
-      recordActivity({
-        actorId,
-        orgId: current.org_id,
-        action: "user.role",
-        targetType: "user",
-        targetId: id,
-        detail: { email: current.email, from: current.role, to: input.role },
-      });
+  if (typeof input.role === "string" && input.role !== current.role) {
+    await query(`update app.memberships set role = $1 where user_id = $2 and org_id = $3`, [input.role, id, current.org_id]);
+    await recordActivity({ actorId, orgId: current.org_id, action: "user.role", targetType: "user", targetId: id, detail: { email: current.email, from: current.role, to: input.role } });
+  }
+  if (typeof input.orgId === "string" && input.orgId !== current.org_id) {
+    await query(`update app.memberships set org_id = $1 where user_id = $2 and org_id = $3`, [input.orgId, id, current.org_id]);
+    await recordActivity({ actorId, orgId: input.orgId, action: "user.move", targetType: "user", targetId: id, detail: { email: current.email, from: current.org_id, to: input.orgId } });
+  }
+  if (typeof input.password === "string") {
+    await setUserPassword(id, input.password);
+    await recordActivity({ actorId, orgId: orgForLog, action: "user.password_reset", targetType: "user", targetId: id, detail: { email: current.email } });
+  }
+  if (typeof input.disabled === "boolean" && input.disabled !== Boolean(current.disabled)) {
+    await query(`update app.users set disabled = $1 where id = $2`, [input.disabled ? 1 : 0, id]);
+    await recordActivity({ actorId, orgId: orgForLog, action: input.disabled ? "user.disable" : "user.enable", targetType: "user", targetId: id, detail: { email: current.email } });
+  }
+  if (typeof input.platformRole === "string") {
+    const next = input.platformRole === "superadmin" ? "superadmin" : "";
+    if (next !== (current.platform_role || "")) {
+      await query(`update app.users set platform_role = $1 where id = $2`, [next, id]);
+      await recordActivity({ actorId, orgId: orgForLog, action: next ? "user.superadmin_grant" : "user.superadmin_revoke", targetType: "user", targetId: id, detail: { email: current.email } });
     }
-    if (typeof input.orgId === "string" && input.orgId !== current.org_id) {
-      db.prepare(`UPDATE memberships SET org_id = ? WHERE user_id = ? AND org_id = ?`).run(input.orgId, id, current.org_id);
-      recordActivity({
-        actorId,
-        orgId: input.orgId,
-        action: "user.move",
-        targetType: "user",
-        targetId: id,
-        detail: { email: current.email, from: current.org_id, to: input.orgId },
-      });
-    }
-    if (typeof input.password === "string") {
-      setUserPassword(id, input.password);
-      recordActivity({
-        actorId,
-        orgId: orgForLog,
-        action: "user.password_reset",
-        targetType: "user",
-        targetId: id,
-        detail: { email: current.email },
-      });
-    }
-    if (typeof input.disabled === "boolean" && input.disabled !== Boolean(current.disabled)) {
-      db.prepare(`UPDATE users SET disabled = ? WHERE id = ?`).run(input.disabled ? 1 : 0, id);
-      recordActivity({
-        actorId,
-        orgId: orgForLog,
-        action: input.disabled ? "user.disable" : "user.enable",
-        targetType: "user",
-        targetId: id,
-        detail: { email: current.email },
-      });
-    }
-    if (typeof input.platformRole === "string") {
-      const next = input.platformRole === "superadmin" ? "superadmin" : "";
-      if (next !== (current.platform_role || "")) {
-        db.prepare(`UPDATE users SET platform_role = ? WHERE id = ?`).run(next, id);
-        recordActivity({
-          actorId,
-          orgId: orgForLog,
-          action: next ? "user.superadmin_grant" : "user.superadmin_revoke",
-          targetType: "user",
-          targetId: id,
-          detail: { email: current.email },
-        });
-      }
-    }
-  });
-  write();
-  return mapUser(requireAccount(id));
+  }
+  return mapUser(await requireAccount(id));
 }

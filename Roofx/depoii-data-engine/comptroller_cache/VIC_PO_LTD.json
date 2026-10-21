@@ -1,0 +1,29 @@
+{
+  "detail": {
+    "taxpayerId": "17526409358",
+    "feiNumber": "752640935",
+    "name": "VIC PORTER MINISTRIES, INC.",
+    "dbaName": null,
+    "mailingAddressStreet": "505 PURCELL AVE",
+    "mailingAddressCity": "CANADIAN",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "79014",
+    "mailingAddressZip4": "2639",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "05/15/1996",
+    "sosFileNumber": "0140080101",
+    "registeredAgentName": "DONALD HILL",
+    "registeredOfficeAddressStreet": "505 PURCELL",
+    "registeredOfficeAddressCity": "CANADIAN",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "79014",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:45:37.148Z",
+    "reportYear": "",
+    "officerInfo": []
+  },
+  "confidence": "partial_name"
+}

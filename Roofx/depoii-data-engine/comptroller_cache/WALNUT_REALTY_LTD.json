@@ -1,0 +1,29 @@
+{
+  "detail": {
+    "taxpayerId": "17514222920",
+    "feiNumber": "751422292",
+    "name": "WALNUT REALTY CORPORATION",
+    "dbaName": null,
+    "mailingAddressStreet": "P O BOX 20387",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75220",
+    "mailingAddressZip4": "0387",
+    "rightToTransactTX": "FRANCHISE TAX ENDED",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "INACTIVE",
+    "effectiveSosRegistrationDate": "07/27/1973",
+    "sosFileNumber": "0032835300",
+    "registeredAgentName": "JAMES E WILEY",
+    "registeredOfficeAddressStreet": "9990 MONROE DR",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": null,
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:45:37.148Z",
+    "reportYear": "",
+    "officerInfo": []
+  },
+  "confidence": "partial_name"
+}

@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32037492082",
+    "feiNumber": null,
+    "name": "GERMONT LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "5720 LYNDON B JOHNSON FWY STE 410",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75240",
+    "mailingAddressZip4": "6367",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "07/10/2008",
+    "sosFileNumber": "0801002788",
+    "registeredAgentName": "KIM L. LAWRENCE",
+    "registeredOfficeAddressStreet": "5720 LBJ FREEWAY SUITE 470",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75240",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "Waypoint Trust",
+        "AGNT_TITL_TX": "MANAGER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "1790 KIRBY PARKWAY, SUITE 127",
+        "CITY_NM": "MEMPHIS",
+        "ST_CD": "TN",
+        "AD_ZP": "38138",
+        "SOURCE": "CPA"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "14812394402",
+    "feiNumber": "481239440",
+    "name": "SECURITY PORTFOLIO V, L.P.",
+    "dbaName": null,
+    "mailingAddressStreet": "2850 N HARWOOD ST STE 1000C",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75201",
+    "mailingAddressZip4": "2651",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " KS",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "12/07/2000",
+    "sosFileNumber": "0014292611",
+    "registeredAgentName": "CORPORATION SERVICE COMPANY DBA CSC - LAWYERS INCO",
+    "registeredOfficeAddressStreet": "211 E. 7TH STREET, SUITE 620",
+    "registeredOfficeAddressCity": "AUSTIN",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "78701",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2025",
+    "officerInfo": [
+      {
+        "AGNT_NM": "SECURITY GP PORTFOLIO V, LLC",
+        "AGNT_TITL_TX": "GENERAL PA",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "1223 N ROCK RD, BLDG E #200",
+        "CITY_NM": "WICHITA",
+        "ST_CD": "KS",
+        "AD_ZP": "67206",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32055384302",
+    "feiNumber": null,
+    "name": "NJL PROPERTIES, LLC",
+    "dbaName": "NJL DALLAS PROPERTIES, LLC",
+    "mailingAddressStreet": "8960 LURLINE AVE",
+    "mailingAddressCity": "CHATSWORTH",
+    "mailingAddressState": "CA",
+    "mailingAddressZip": "91311",
+    "mailingAddressZip4": "6103",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " CA",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "10/09/2014",
+    "sosFileNumber": "0802079680",
+    "registeredAgentName": "BUSINESS FILINGS INCORPORATED",
+    "registeredOfficeAddressStreet": "701 BRAZOS STREET, STE. 720",
+    "registeredOfficeAddressCity": "AUSTIN",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "78701",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "DAVID FORUZANFAR",
+        "AGNT_TITL_TX": "GOVERNING",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "8960 LURLINE AVE",
+        "CITY_NM": "CHATSWORTH",
+        "ST_CD": "CA",
+        "AD_ZP": "91311",
+        "SOURCE": "CPA"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

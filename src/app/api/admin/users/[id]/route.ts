@@ -7,7 +7,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
   try {
     await requireSuperAdmin();
     const { id } = await params;
-    return Response.json(userDetail(id));
+    return Response.json(await userDetail(id));
   } catch (error) {
     return adminResponse(error);
   }
@@ -18,7 +18,7 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
     const actor = await requireSuperAdmin();
     const { id } = await params;
     const body = (await req.json()) as { role?: string; orgId?: string; password?: string; disabled?: boolean; platformRole?: string };
-    return Response.json(updateMember(actor.id, id, body));
+    return Response.json(await updateMember(actor.id, id, body));
   } catch (error) {
     return adminResponse(error);
   }

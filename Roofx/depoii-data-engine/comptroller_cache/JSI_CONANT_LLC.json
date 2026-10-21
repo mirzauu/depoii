@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32053588821",
+    "feiNumber": null,
+    "name": "JSI CONANT, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "PO BOX 35828",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75235",
+    "mailingAddressZip4": "0828",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "03/26/2014",
+    "sosFileNumber": "0801959863",
+    "registeredAgentName": "CORPORATION SERVICE COMPANY D/B/A CSC-LAWYERS INCO",
+    "registeredOfficeAddressStreet": "211 E. 7TH STREET SUITE 620",
+    "registeredOfficeAddressCity": "AUSTIN",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "78701",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "RED BARN HOLDINGS LP",
+        "AGNT_TITL_TX": "GENERAL PA",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "PO BOX 35828",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75235",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

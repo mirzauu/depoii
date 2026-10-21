@@ -1,0 +1,29 @@
+{
+  "detail": {
+    "taxpayerId": "19527633333",
+    "feiNumber": "952763333",
+    "name": "OUR REDEEMER EVANGELICAL LUTHERAN CHURCH GARDEN GR",
+    "dbaName": null,
+    "mailingAddressStreet": "12301 MAGNOLIA ST",
+    "mailingAddressCity": "GARDEN GROVE",
+    "mailingAddressState": "CA",
+    "mailingAddressZip": "92841",
+    "mailingAddressZip4": "3396",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " CA",
+    "sosRegistrationStatus": "NOT REGISTERED",
+    "effectiveSosRegistrationDate": "NOT REGISTERED",
+    "sosFileNumber": "NOT REGISTERED",
+    "registeredAgentName": null,
+    "registeredOfficeAddressStreet": null,
+    "registeredOfficeAddressCity": null,
+    "registeredOfficeAddressState": null,
+    "registeredOfficeAddressZip": null,
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "",
+    "officerInfo": []
+  },
+  "confidence": "cleaned_name"
+}

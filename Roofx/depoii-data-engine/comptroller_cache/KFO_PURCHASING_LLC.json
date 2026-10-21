@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32067424336",
+    "feiNumber": null,
+    "name": "KFO PURCHASING LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "3795 PHEASANT RUN ST",
+    "mailingAddressCity": "CELINA",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75009",
+    "mailingAddressZip4": "4569",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "06/08/2018",
+    "sosFileNumber": "0803038771",
+    "registeredAgentName": "JUSTIN KAPLAN",
+    "registeredOfficeAddressStreet": "2360 TWILIGHT STAR DR",
+    "registeredOfficeAddressCity": "LITTLE ELM",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75068",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "JUSTIN KAPLAN",
+        "AGNT_TITL_TX": "MANAGING M",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "2360 TWILIGHT STAR DR",
+        "CITY_NM": "LITTLE ELM",
+        "ST_CD": "TX",
+        "AD_ZP": "75068",
+        "SOURCE": "CPA"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

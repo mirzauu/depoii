@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32037951400",
+    "feiNumber": null,
+    "name": "SULE ETC, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "10815 C F HAWN FWY",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75217",
+    "mailingAddressZip4": "8058",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "09/15/2008",
+    "sosFileNumber": "0801029245",
+    "registeredAgentName": "JOHN O. EGBUNA",
+    "registeredOfficeAddressStreet": "10815 C.F. HAWN FWY.",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75217",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:45:37.148Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "JOHN O EGBUNA",
+        "AGNT_TITL_TX": "MANAGER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "10815 C.F. HAWN FWY.",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75217",
+        "SOURCE": "CPA"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

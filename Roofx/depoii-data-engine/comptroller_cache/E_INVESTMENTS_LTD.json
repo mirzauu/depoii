@@ -1,0 +1,29 @@
+{
+  "detail": {
+    "taxpayerId": "17420744637",
+    "feiNumber": "742074463",
+    "name": "E INVESTMENTS INCORPORATED",
+    "dbaName": null,
+    "mailingAddressStreet": "2727 ALLEN PARKWAY STE 1535",
+    "mailingAddressCity": "HOUSTON",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "77019",
+    "mailingAddressZip4": "2125",
+    "rightToTransactTX": "FRANCHISE TAX INVOLUNTARILY ENDED",
+    "rightToTransactTXLink": "<a href='https://comptroller.texas.gov/taxes/franchise/certificate-letter-request.php'>Request tax clearance to reinstate entity</a>",
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "INACTIVE",
+    "effectiveSosRegistrationDate": "10/30/1979",
+    "sosFileNumber": "0049567900",
+    "registeredAgentName": "EDDY S BLANTON",
+    "registeredOfficeAddressStreet": "700 LOUISIANA, STE. 3920",
+    "registeredOfficeAddressCity": "HOUSTON",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "77002",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "",
+    "officerInfo": []
+  },
+  "confidence": "partial_name"
+}

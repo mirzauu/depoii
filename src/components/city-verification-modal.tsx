@@ -25,14 +25,14 @@ export function CityVerificationModal({ className }: { className?: string }) {
   const [stepData, setStepData] = useState<Record<string, unknown>>({});
   const [summary, setSummary] = useState<{ total_verified: number; pipeline_value_usd: number; aerials_cached: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const eventSourceRef = useRef<EventSource | null>(null);
+  const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const city = jurisdiction ? jurisdiction.split(",")[0].trim() : "Fort Worth";
 
   const closeStream = () => {
-    if (eventSourceRef.current) {
-      eventSourceRef.current.close();
-      eventSourceRef.current = null;
+    if (pollRef.current) {
+      clearInterval(pollRef.current);
+      pollRef.current = null;
     }
   };
 
@@ -60,43 +60,33 @@ export function CityVerificationModal({ className }: { className?: string }) {
 
     try {
       const res = await triggerCityVerification(city);
-      const streamUrl = `/api/engine/verifications/stream/${res.job_id}`;
-
+      // Jobs queue: the local engine worker claims the job; poll for progress.
       closeStream();
-      const es = new EventSource(streamUrl);
-      eventSourceRef.current = es;
-
-      es.addEventListener("progress", (e) => {
+      const poll = async () => {
         try {
-          const payload = JSON.parse(e.data) as VerificationProgressEvent;
-          setProgress(payload.pct || 0);
-          if (payload.step) setCurrentStep(payload.step);
-          if (payload.message) setMessage(payload.message);
-          if (payload.data) setStepData((prev) => ({ ...prev, ...payload.data }));
+          const r = await fetch(`/api/engine/verifications/jobs/${encodeURIComponent(res.job_id)}`);
+          const job = await r.json().catch(() => null);
+          if (!job) return;
+          const payload = job as VerificationProgressEvent & { status?: string; result?: { total_verified: number; pipeline_value_usd: number; aerials_cached: number }; error?: string };
+          setProgress(payload.pct || job.progress || 0);
+          if (payload.step || job.step) setCurrentStep((payload.step || job.step) as string);
+          if (payload.message || job.message) setMessage((payload.message || job.message) as string);
+          if (job.status === "complete") {
+            const finalData = job.result || { total_verified: 0, pipeline_value_usd: 0, aerials_cached: 0 };
+            setProgress(100);
+            setSummary(finalData);
+            setMessage(`Audit complete: ${finalData.total_verified} commercial buildings fully verified.`);
+            setRunning(false);
+            closeStream();
+          } else if (job.status === "error") {
+            setError(job.error || "Verification run encountered an error.");
+            setRunning(false);
+            closeStream();
+          }
         } catch {}
-      });
-
-      es.addEventListener("complete", (e) => {
-        try {
-          const finalData = JSON.parse(e.data);
-          setProgress(100);
-          setSummary(finalData);
-          setMessage(`Audit complete: ${finalData.total_verified} commercial buildings fully verified.`);
-        } catch {}
-        setRunning(false);
-        closeStream();
-      });
-
-      es.addEventListener("error", (e) => {
-        try {
-          const errData = JSON.parse((e as MessageEvent).data || "{}");
-          setError(errData.error || "Verification run encountered an error.");
-        } catch {
-          // SSE closed or network dropped
-        }
-        setRunning(false);
-        closeStream();
-      });
+      };
+      pollRef.current = setInterval(() => void poll(), 2000);
+      void poll();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to launch verification.");
       setRunning(false);

@@ -1,0 +1,30 @@
+[
+  {
+    "log_id": "CAL-001",
+    "timestamp_iso": "2026-10-14T16:42:00Z",
+    "contractor_company": "SR1 Roofing",
+    "contact_name": "Trevor Rodden",
+    "contact_email": "trevor@sr1roofing.com",
+    "parcel_address": "3001 Meacham Blvd, Fort Worth, TX",
+    "assignment_id": "ASN-001",
+    "feedback_type": "POSITIVE_INTEREST",
+    "raw_feedback_summary": "Replied 'Yes' to 3001 Meacham commercial center outreach; expressed direct interest in evaluating TAD parcel file and storm verification.",
+    "objection_category": "NONE",
+    "action_taken": "Assigned 7-day exclusive lock. Audit discovered automated pitch claimed 2.75\" hail (16 mi away); recalculated to verified NOAA SPC 1.00\" hail at 1.06 mi (Haltom City, May 28, 2024). Dispatched standalone v2.1 correction note on Oct 20; held secondary proposed asset (7151 Jack Newell, ASN-049) reserved.",
+    "engine_calibration_note": "Rule codified: Hail severity claims must strictly use proximity threshold (≤3.0 mi) and state exact distance/source. Never attribute regional storm max to local parcel."
+  },
+  {
+    "log_id": "CAL-002",
+    "timestamp_iso": "2026-10-16T09:12:00Z",
+    "contractor_company": "New View Roofing",
+    "contact_name": "Mike Gibson",
+    "contact_email": "mike@newviewroofing.com",
+    "parcel_address": "1133 S Madison Ave, Dallas, TX",
+    "assignment_id": "ASN-002",
+    "feedback_type": "OBJECTION_ENTITY_GAP",
+    "raw_feedback_summary": "Stated estimators could not reach property owner; On-Target Supplies & Logistics was tenant/facility operator at site, not the property owner.",
+    "objection_category": "OWNER_ENTITY_GAP",
+    "action_taken": "Validated objection immediately. Conducted DCAD and Texas SOS entity resolution. Separated owner lane (Treco Investments Ltd / David R. Stewart, GP) from facility lane (Tré Black / On-Target). Re-measured DCAD footprint (96,636 sq ft foundation ground footprint; 101,140 gross improvement area across 6 sections). Dispatched Pack B v2.1 resolution dossier on Oct 20 with 7-day exclusivity.",
+    "engine_calibration_note": "Rule codified: Owner Lane vs Facility Lane must be explicitly bifurcated. Ground footprint (DCAD Section A-F math) must be distinguished from gross improvement area."
+  }
+]

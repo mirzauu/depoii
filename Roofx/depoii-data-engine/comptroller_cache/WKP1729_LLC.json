@@ -1,0 +1,50 @@
+{
+  "detail": {
+    "taxpayerId": "32058670954",
+    "feiNumber": null,
+    "name": "WKP1729 LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "1729 IRVING BLVD STE 100",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75207",
+    "mailingAddressZip4": "6602",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "10/27/2015",
+    "sosFileNumber": "0802320110",
+    "registeredAgentName": "KEN VICHYASTIT",
+    "registeredOfficeAddressStreet": "1729 IRVING BLVD. SUITE 100",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75207",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:45:37.148Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "KEN VICHYASTIT",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "5945 COLHURST STREET",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75230",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "WANNEE WHITIS",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "5945 COLHURST STREET",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75230",
+        "SOURCE": "CPA"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

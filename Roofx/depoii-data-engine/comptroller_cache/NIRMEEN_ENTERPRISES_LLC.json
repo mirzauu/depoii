@@ -1,0 +1,50 @@
+{
+  "detail": {
+    "taxpayerId": "32043821449",
+    "feiNumber": null,
+    "name": "NIRMEEN ENTERPRISES LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "1756 VERMONT CT",
+    "mailingAddressCity": "ALLEN",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75013",
+    "mailingAddressZip4": "3069",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "03/14/2011",
+    "sosFileNumber": "0801396981",
+    "registeredAgentName": "ALI M NOORANI",
+    "registeredOfficeAddressStreet": "1756 VERMONT COURT",
+    "registeredOfficeAddressCity": "ALLEN",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75013",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "ALI NOORANI",
+        "AGNT_TITL_TX": "MANAGER",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "1815 NORTHBROOK CT",
+        "CITY_NM": "ALLEN",
+        "ST_CD": "TX",
+        "AD_ZP": "75013",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "NIRMEEN NOORANI",
+        "AGNT_TITL_TX": "MANAGER",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "1815 NORTHBROOK CT",
+        "CITY_NM": "ALLEN",
+        "ST_CD": "TX",
+        "AD_ZP": "75013",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

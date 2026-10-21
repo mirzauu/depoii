@@ -1,188 +1,12 @@
-import fs from "node:fs";
-import path from "node:path";
-import Database from "better-sqlite3";
+import { query, queryOne, withClient } from "@/lib/pg";
 import { rankOpportunities } from "@/lib/engine/score";
 import type { FieldOutcome, LivePayload, PermitContact, PermitContactRole, ScoreWeights } from "@/lib/types";
 
-const SCHEMA = `
-CREATE TABLE IF NOT EXISTS parcels (
-  account TEXT PRIMARY KEY,
-  owner TEXT NOT NULL,
-  address TEXT NOT NULL,
-  city TEXT NOT NULL,
-  year_built INTEGER NOT NULL,
-  sqft INTEGER NOT NULL,
-  lat REAL NOT NULL,
-  lng REAL NOT NULL,
-  owner_address TEXT NOT NULL,
-  record_url TEXT NOT NULL,
-  updated_at TEXT NOT NULL
-);
-CREATE TABLE IF NOT EXISTS permits (
-  permit_no TEXT PRIMARY KEY,
-  kind TEXT NOT NULL,
-  address TEXT NOT NULL,
-  city TEXT NOT NULL,
-  contractor_name TEXT NOT NULL,
-  contractor_state TEXT NOT NULL,
-  issued TEXT NOT NULL,
-  valuation INTEGER NOT NULL,
-  scope TEXT NOT NULL,
-  membrane TEXT,
-  lat REAL NOT NULL,
-  lng REAL NOT NULL,
-  parcel_ids TEXT NOT NULL,
-  record_url TEXT NOT NULL,
-  portal TEXT NOT NULL,
-  updated_at TEXT NOT NULL
-);
-CREATE TABLE IF NOT EXISTS permit_contacts (
-  id TEXT PRIMARY KEY,
-  permit_no TEXT NOT NULL,
-  role TEXT NOT NULL,
-  name TEXT NOT NULL,
-  company TEXT,
-  phone TEXT,
-  phone_formatted TEXT,
-  email TEXT,
-  email_type TEXT,
-  deliverability TEXT,
-  source TEXT NOT NULL,
-  created_at TEXT NOT NULL
-);
-CREATE INDEX IF NOT EXISTS idx_permit_contacts_permit ON permit_contacts(permit_no);
-CREATE TABLE IF NOT EXISTS hail_reports (
-  id TEXT PRIMARY KEY,
-  storm_date TEXT NOT NULL,
-  valid TEXT NOT NULL,
-  lat REAL NOT NULL,
-  lng REAL NOT NULL,
-  inches REAL NOT NULL,
-  qualifier TEXT NOT NULL,
-  city TEXT NOT NULL,
-  county TEXT NOT NULL,
-  source TEXT NOT NULL,
-  remark TEXT NOT NULL
-);
-CREATE TABLE IF NOT EXISTS warnings (
-  storm_date TEXT NOT NULL,
-  event_id INTEGER NOT NULL,
-  issue TEXT NOT NULL,
-  hail_tag REAL NOT NULL,
-  wind_tag REAL NOT NULL,
-  tier TEXT NOT NULL,
-  basis TEXT NOT NULL,
-  href TEXT NOT NULL,
-  expire TEXT NOT NULL,
-  geometry TEXT NOT NULL,
-  PRIMARY KEY (storm_date, event_id, issue)
-);
-CREATE TABLE IF NOT EXISTS score_snapshots (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  storm_date TEXT NOT NULL,
-  account TEXT NOT NULL,
-  scored_on TEXT NOT NULL,
-  scored_at TEXT NOT NULL,
-  tier TEXT NOT NULL,
-  hail_inches REAL NOT NULL,
-  hail_basis TEXT NOT NULL,
-  score INTEGER NOT NULL,
-  factors TEXT NOT NULL,
-  unresolved INTEGER NOT NULL,
-  pipeline_value INTEGER NOT NULL,
-  roof_age INTEGER NOT NULL,
-  UNIQUE (storm_date, account, scored_on)
-);
-CREATE TABLE IF NOT EXISTS field_outcomes (
-  id TEXT PRIMARY KEY,
-  parcel_id TEXT NOT NULL,
-  storm_id TEXT NOT NULL,
-  logged_at TEXT NOT NULL,
-  predicted_score INTEGER NOT NULL,
-  factors TEXT NOT NULL,
-  moisture_verified INTEGER NOT NULL,
-  scope TEXT NOT NULL,
-  contract_value REAL NOT NULL,
-  notes TEXT NOT NULL,
-  org_id TEXT NOT NULL DEFAULT '',
-  UNIQUE (parcel_id, storm_id)
-);
-CREATE TABLE IF NOT EXISTS orgs (
-  id TEXT PRIMARY KEY,
-  name TEXT NOT NULL,
-  disabled INTEGER NOT NULL DEFAULT 0,
-  created_at TEXT NOT NULL DEFAULT ''
-);
-CREATE TABLE IF NOT EXISTS users (
-  id TEXT PRIMARY KEY,
-  email TEXT NOT NULL UNIQUE,
-  password_hash TEXT NOT NULL,
-  name TEXT NOT NULL,
-  platform_role TEXT NOT NULL DEFAULT '',
-  disabled INTEGER NOT NULL DEFAULT 0,
-  created_at TEXT NOT NULL DEFAULT '',
-  last_login_at TEXT NOT NULL DEFAULT '',
-  last_seen_at TEXT NOT NULL DEFAULT ''
-);
-CREATE TABLE IF NOT EXISTS login_links (
-  user_id TEXT PRIMARY KEY,
-  token_hash TEXT NOT NULL UNIQUE,
-  created_at TEXT NOT NULL,
-  expires_at TEXT NOT NULL
-);
-CREATE TABLE IF NOT EXISTS login_otps (
-  email TEXT PRIMARY KEY,
-  code_hash TEXT NOT NULL,
-  created_at TEXT NOT NULL,
-  expires_at TEXT NOT NULL,
-  attempts INTEGER NOT NULL DEFAULT 0
-);
-CREATE TABLE IF NOT EXISTS team_invites (
-  id TEXT PRIMARY KEY,
-  org_id TEXT NOT NULL,
-  email TEXT NOT NULL,
-  name TEXT NOT NULL,
-  role TEXT NOT NULL,
-  token_hash TEXT NOT NULL UNIQUE,
-  status TEXT NOT NULL DEFAULT 'pending',
-  invited_by TEXT NOT NULL,
-  created_at TEXT NOT NULL,
-  expires_at TEXT NOT NULL
-);
-CREATE INDEX IF NOT EXISTS idx_team_invites_org ON team_invites(org_id, status);
-CREATE TABLE IF NOT EXISTS memberships (
-  org_id TEXT NOT NULL,
-  user_id TEXT NOT NULL,
-  role TEXT NOT NULL,
-  PRIMARY KEY (org_id, user_id)
-);
-CREATE TABLE IF NOT EXISTS activity (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  at TEXT NOT NULL,
-  actor_id TEXT,
-  org_id TEXT,
-  action TEXT NOT NULL,
-  target_type TEXT NOT NULL,
-  target_id TEXT NOT NULL,
-  detail TEXT NOT NULL
-);
-CREATE TABLE IF NOT EXISTS leads (
-  id TEXT PRIMARY KEY,
-  org_id TEXT NOT NULL,
-  parcel_id TEXT NOT NULL,
-  storm_id TEXT NOT NULL,
-  address TEXT NOT NULL,
-  city TEXT NOT NULL,
-  stage TEXT NOT NULL,
-  assignee TEXT NOT NULL,
-  notes TEXT NOT NULL,
-  score INTEGER NOT NULL,
-  hail REAL NOT NULL,
-  price REAL NOT NULL,
-  updated_at TEXT NOT NULL,
-  UNIQUE (org_id, parcel_id, storm_id)
-);
-`;
+/**
+ * Postgres replacement for the former better-sqlite3 store.
+ * Live-cache tables live in the warehouse schema (live_*), tenant
+ * outcomes in app.field_outcomes. All functions are async.
+ */
 
 export interface ParcelRow {
   account: string;
@@ -247,197 +71,73 @@ export interface SnapshotRow {
   roof_age: number;
 }
 
-let current: { file: string; db: Database.Database } | null = null;
-
-export function databasePath() {
-  return process.env.DEPOII_DB || path.join(process.cwd(), "data", "depoii.sqlite");
-}
-
-export function getDb() {
-  const file = databasePath();
-  if (current?.file === file) return current.db;
-  current?.db.close();
-  fs.mkdirSync(path.dirname(file), { recursive: true });
-  const db = new Database(file);
-  db.pragma("journal_mode = WAL");
-  db.exec(SCHEMA);
-  const outcomeCols = db.prepare(`PRAGMA table_info(field_outcomes)`).all() as { name: string }[];
-  if (!outcomeCols.some((col) => col.name === "org_id")) {
-    db.exec(`ALTER TABLE field_outcomes ADD COLUMN org_id TEXT NOT NULL DEFAULT ''`);
-  }
-  const addColumn = (table: string, name: string, definition: string) => {
-    const cols = db.prepare(`PRAGMA table_info(${table})`).all() as { name: string }[];
-    if (!cols.some((col) => col.name === name)) db.exec(`ALTER TABLE ${table} ADD COLUMN ${definition}`);
-  };
-  addColumn("users", "platform_role", "platform_role TEXT NOT NULL DEFAULT ''");
-  addColumn("users", "disabled", "disabled INTEGER NOT NULL DEFAULT 0");
-  addColumn("users", "created_at", "created_at TEXT NOT NULL DEFAULT ''");
-  addColumn("users", "last_login_at", "last_login_at TEXT NOT NULL DEFAULT ''");
-  addColumn("users", "last_seen_at", "last_seen_at TEXT NOT NULL DEFAULT ''");
-  db.exec(`UPDATE users SET last_login_at = last_seen_at WHERE last_login_at = '' AND last_seen_at != ''`);
-  addColumn("orgs", "disabled", "disabled INTEGER NOT NULL DEFAULT 0");
-  addColumn("orgs", "created_at", "created_at TEXT NOT NULL DEFAULT ''");
-  current = { file, db };
-  return db;
-}
-
-export function closeDb() {
-  current?.db.close();
-  current = null;
-}
-
-export function persistLive(payload: LivePayload) {
-  const db = getDb();
+export async function persistLive(payload: LivePayload): Promise<void> {
   const scoredOn = payload.fetchedAt.slice(0, 10);
-  const upsertParcel = db.prepare(`
-    INSERT INTO parcels (account, owner, address, city, year_built, sqft, lat, lng, owner_address, record_url, updated_at)
-    VALUES (@account, @owner, @address, @city, @year_built, @sqft, @lat, @lng, @owner_address, @record_url, @updated_at)
-    ON CONFLICT(account) DO UPDATE SET
-      owner = excluded.owner, address = excluded.address, city = excluded.city,
-      year_built = excluded.year_built, sqft = excluded.sqft, lat = excluded.lat, lng = excluded.lng,
-      owner_address = excluded.owner_address, record_url = excluded.record_url, updated_at = excluded.updated_at
-  `);
-  const upsertPermit = db.prepare(`
-    INSERT INTO permits (permit_no, kind, address, city, contractor_name, contractor_state, issued, valuation, scope, membrane, lat, lng, parcel_ids, record_url, portal, updated_at)
-    VALUES (@permit_no, @kind, @address, @city, @contractor_name, @contractor_state, @issued, @valuation, @scope, @membrane, @lat, @lng, @parcel_ids, @record_url, @portal, @updated_at)
-    ON CONFLICT(permit_no) DO UPDATE SET
-      kind = excluded.kind, address = excluded.address, city = excluded.city,
-      contractor_name = excluded.contractor_name, contractor_state = excluded.contractor_state,
-      issued = excluded.issued, valuation = excluded.valuation, scope = excluded.scope, membrane = excluded.membrane,
-      lat = excluded.lat, lng = excluded.lng, parcel_ids = excluded.parcel_ids,
-      record_url = excluded.record_url, portal = excluded.portal, updated_at = excluded.updated_at
-  `);
-  const upsertContact = db.prepare(`
-    INSERT INTO permit_contacts (id, permit_no, role, name, company, phone, phone_formatted, email, email_type, deliverability, source, created_at)
-    VALUES (@id, @permit_no, @role, @name, @company, @phone, @phone_formatted, @email, @email_type, @deliverability, @source, @created_at)
-    ON CONFLICT(id) DO UPDATE SET
-      role = excluded.role, name = excluded.name, company = excluded.company,
-      phone = excluded.phone, phone_formatted = excluded.phone_formatted,
-      email = excluded.email, email_type = excluded.email_type,
-      deliverability = excluded.deliverability, source = excluded.source,
-      created_at = excluded.created_at
-  `);
-  const insertReport = db.prepare(`
-    INSERT OR IGNORE INTO hail_reports (id, storm_date, valid, lat, lng, inches, qualifier, city, county, source, remark)
-    VALUES (@id, @storm_date, @valid, @lat, @lng, @inches, @qualifier, @city, @county, @source, @remark)
-  `);
-  const warningCount = db.prepare(`SELECT COUNT(*) AS n FROM warnings WHERE storm_date = ?`);
-  const insertWarning = db.prepare(`
-    INSERT OR IGNORE INTO warnings (storm_date, event_id, issue, hail_tag, wind_tag, tier, basis, href, expire, geometry)
-    VALUES (@storm_date, @event_id, @issue, @hail_tag, @wind_tag, @tier, @basis, @href, @expire, @geometry)
-  `);
-  const insertSnapshot = db.prepare(`
-    INSERT OR IGNORE INTO score_snapshots
-      (storm_date, account, scored_on, scored_at, tier, hail_inches, hail_basis, score, factors, unresolved, pipeline_value, roof_age)
-    VALUES
-      (@storm_date, @account, @scored_on, @scored_at, @tier, @hail_inches, @hail_basis, @score, @factors, @unresolved, @pipeline_value, @roof_age)
-  `);
-
-  const write = db.transaction(() => {
-    for (const parcel of payload.parcels) {
-      upsertParcel.run({
-        account: parcel.id,
-        owner: parcel.owner,
-        address: parcel.address,
-        city: parcel.city,
-        year_built: parcel.yearBuilt,
-        sqft: parcel.sqft,
-        lat: parcel.lat,
-        lng: parcel.lng,
-        owner_address: parcel.ownerAddress,
-        record_url: parcel.recordUrl,
-        updated_at: payload.fetchedAt,
-      });
-    }
-    for (const permit of [...payload.permits, ...payload.developments]) {
-      upsertPermit.run({
-        permit_no: permit.id,
-        kind: permit.kind,
-        address: permit.address,
-        city: permit.city,
-        contractor_name: permit.contractorName,
-        contractor_state: permit.contractorState,
-        issued: permit.issued,
-        valuation: permit.valuation,
-        scope: permit.scope,
-        membrane: permit.membrane ?? null,
-        lat: permit.lat,
-        lng: permit.lng,
-        parcel_ids: JSON.stringify(permit.parcelIds),
-        record_url: permit.recordUrl,
-        portal: permit.portal,
-        updated_at: payload.fetchedAt,
-      });
-      if (permit.contacts) {
-        for (const contact of permit.contacts) {
-          upsertContact.run({
-            id: contact.id,
-            permit_no: permit.id,
-            role: contact.role,
-            name: contact.name,
-            company: contact.company ?? null,
-            phone: contact.phone ?? null,
-            phone_formatted: contact.phoneFormatted ?? null,
-            email: contact.email ?? null,
-            email_type: contact.emailType ?? null,
-            deliverability: contact.deliverability ?? null,
-            source: contact.source,
-            created_at: payload.fetchedAt,
-          });
+  await withClient(async (client) => {
+    await client.query("begin");
+    try {
+      for (const parcel of payload.parcels) {
+        await client.query(
+          `insert into warehouse.live_parcels (account, owner, address, city, year_built, sqft, lat, lng, owner_address, record_url, updated_at)
+           values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
+           on conflict (account) do update set owner=excluded.owner, address=excluded.address, city=excluded.city,
+             year_built=excluded.year_built, sqft=excluded.sqft, lat=excluded.lat, lng=excluded.lng,
+             owner_address=excluded.owner_address, record_url=excluded.record_url, updated_at=excluded.updated_at`,
+          [parcel.id, parcel.owner, parcel.address, parcel.city, parcel.yearBuilt, parcel.sqft, parcel.lat, parcel.lng, parcel.ownerAddress, parcel.recordUrl, payload.fetchedAt],
+        );
+      }
+      for (const permit of [...payload.permits, ...payload.developments]) {
+        await client.query(
+          `insert into warehouse.live_permits (permit_no, kind, address, city, contractor_name, contractor_state, issued, valuation, scope, membrane, lat, lng, parcel_ids, record_url, portal, updated_at)
+           values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13::jsonb,$14,$15,$16)
+           on conflict (permit_no) do update set kind=excluded.kind, address=excluded.address, city=excluded.city,
+             contractor_name=excluded.contractor_name, contractor_state=excluded.contractor_state, issued=excluded.issued,
+             valuation=excluded.valuation, scope=excluded.scope, membrane=excluded.membrane, lat=excluded.lat, lng=excluded.lng,
+             parcel_ids=excluded.parcel_ids, record_url=excluded.record_url, portal=excluded.portal, updated_at=excluded.updated_at`,
+          [permit.id, permit.kind, permit.address, permit.city, permit.contractorName, permit.contractorState, permit.issued, permit.valuation, permit.scope, permit.membrane ?? null, permit.lat, permit.lng, JSON.stringify(permit.parcelIds), permit.recordUrl, permit.portal, payload.fetchedAt],
+        );
+        for (const contact of permit.contacts ?? []) {
+          await client.query(
+            `insert into warehouse.permit_contacts (id, permit_no, role, name, company, phone, phone_formatted, email, email_type, deliverability, source, created_at)
+             values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
+             on conflict (id) do update set role=excluded.role, name=excluded.name, company=excluded.company,
+               phone=excluded.phone, phone_formatted=excluded.phone_formatted, email=excluded.email,
+               email_type=excluded.email_type, deliverability=excluded.deliverability, source=excluded.source, created_at=excluded.created_at`,
+            [contact.id, permit.id, contact.role, contact.name, contact.company ?? null, contact.phone ?? null, contact.phoneFormatted ?? null, contact.email ?? null, contact.emailType ?? null, contact.deliverability ?? null, contact.source, payload.fetchedAt],
+          );
         }
       }
-    }
-    for (const report of payload.storm.reports) {
-      insertReport.run({
-        id: report.id,
-        storm_date: payload.storm.date,
-        valid: report.valid,
-        lat: report.lat,
-        lng: report.lng,
-        inches: report.inches,
-        qualifier: report.qualifier,
-        city: report.city,
-        county: report.county,
-        source: report.source,
-        remark: report.remark,
-      });
-    }
-    const stored = warningCount.get(payload.storm.date) as { n: number };
-    if (stored.n === 0) {
-      for (const warning of payload.storm.warnings) {
-        insertWarning.run({
-          storm_date: payload.storm.date,
-          event_id: warning.eventId,
-          issue: warning.issue,
-          hail_tag: warning.hailTag,
-          wind_tag: warning.windTag,
-          tier: warning.tier,
-          basis: warning.basis,
-          href: warning.href,
-          expire: warning.expire,
-          geometry: JSON.stringify(warning.geometry),
-        });
+      for (const report of payload.storm.reports) {
+        await client.query(
+          `insert into warehouse.hail_reports (id, storm_date, valid, lat, lng, inches, qualifier, city, county, source, remark)
+           values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) on conflict (id) do nothing`,
+          [report.id, payload.storm.date, report.valid, report.lat, report.lng, report.inches, report.qualifier, report.city, report.county, report.source, report.remark],
+        );
       }
-    }
-    const exposed = rankOpportunities(payload.parcels, payload.storm, payload.permits, undefined, undefined, payload.permitFeeds).filter((o) => o.tier !== "outside");
-    for (const opportunity of exposed) {
-      insertSnapshot.run({
-        storm_date: payload.storm.date,
-        account: opportunity.parcel.id,
-        scored_on: scoredOn,
-        scored_at: payload.fetchedAt,
-        tier: opportunity.tier,
-        hail_inches: opportunity.hailInches,
-        hail_basis: opportunity.parcel.hailBasis ?? "",
-        score: opportunity.score,
-        factors: JSON.stringify(opportunity.factors),
-        unresolved: opportunity.unresolved ? 1 : 0,
-        pipeline_value: opportunity.pipelineValue,
-        roof_age: opportunity.roofAge,
-      });
+      const existing = await client.query(`select count(*)::int as n from warehouse.warnings where storm_date = $1`, [payload.storm.date]);
+      if (existing.rows[0].n === 0) {
+        for (const warning of payload.storm.warnings) {
+          await client.query(
+            `insert into warehouse.warnings (storm_date, event_id, issue, hail_tag, wind_tag, tier, basis, href, expire, geometry)
+             values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10::jsonb) on conflict do nothing`,
+            [payload.storm.date, warning.eventId, warning.issue, warning.hailTag, warning.windTag, warning.tier, warning.basis, warning.href, warning.expire, JSON.stringify(warning.geometry)],
+          );
+        }
+      }
+      const exposed = rankOpportunities(payload.parcels, payload.storm, payload.permits, undefined, undefined, payload.permitFeeds).filter((o) => o.tier !== "outside");
+      for (const opportunity of exposed) {
+        await client.query(
+          `insert into warehouse.score_snapshots (storm_date, account, scored_on, scored_at, tier, hail_inches, hail_basis, score, factors, unresolved, pipeline_value, roof_age)
+           values ($1,$2,$3,$4,$5,$6,$7,$8,$9::jsonb,$10,$11,$12) on conflict (storm_date, account, scored_on) do nothing`,
+          [payload.storm.date, opportunity.parcel.id, scoredOn, payload.fetchedAt, opportunity.tier, opportunity.hailInches, opportunity.parcel.hailBasis ?? "", opportunity.score, JSON.stringify(opportunity.factors), opportunity.unresolved ? 1 : 0, opportunity.pipelineValue, opportunity.roofAge],
+        );
+      }
+      await client.query("commit");
+    } catch (err) {
+      await client.query("rollback");
+      throw err;
     }
   });
-  write();
 }
 
 function outcomeFrom(row: {
@@ -458,7 +158,7 @@ function outcomeFrom(row: {
     stormId: row.storm_id,
     loggedAt: row.logged_at,
     predictedScore: row.predicted_score,
-    factors: JSON.parse(row.factors) as Record<keyof ScoreWeights, number>,
+    factors: (typeof row.factors === "string" ? JSON.parse(row.factors) : row.factors) as Record<keyof ScoreWeights, number>,
     moistureVerified: Boolean(row.moisture_verified),
     scope: row.scope,
     contractValue: row.contract_value,
@@ -466,96 +166,82 @@ function outcomeFrom(row: {
   };
 }
 
-export function listOutcomes(orgId?: string): FieldOutcome[] {
+export async function listOutcomes(orgId?: string): Promise<FieldOutcome[]> {
   const rows = (orgId
-    ? getDb().prepare(`SELECT * FROM field_outcomes WHERE org_id = ? ORDER BY logged_at DESC, id DESC`).all(orgId)
-    : getDb().prepare(`SELECT * FROM field_outcomes ORDER BY logged_at DESC, id DESC`).all()) as Parameters<typeof outcomeFrom>[0][];
+    ? await query(`select * from app.field_outcomes where org_id = $1 order by logged_at desc, id desc`, [orgId])
+    : await query(`select * from app.field_outcomes order by logged_at desc, id desc`)) as unknown as Parameters<typeof outcomeFrom>[0][];
   return rows.map(outcomeFrom);
 }
 
-export function saveOutcomes(outcomes: FieldOutcome[], orgId = "") {
-  const db = getDb();
-  const stmt = db.prepare(`
-    INSERT INTO field_outcomes (id, parcel_id, storm_id, logged_at, predicted_score, factors, moisture_verified, scope, contract_value, notes, org_id)
-    VALUES (@id, @parcel_id, @storm_id, @logged_at, @predicted_score, @factors, @moisture_verified, @scope, @contract_value, @notes, @org_id)
-    ON CONFLICT(parcel_id, storm_id) DO UPDATE SET
-      id = excluded.id, logged_at = excluded.logged_at, predicted_score = excluded.predicted_score,
-      factors = excluded.factors, moisture_verified = excluded.moisture_verified, scope = excluded.scope,
-      contract_value = excluded.contract_value, notes = excluded.notes, org_id = excluded.org_id
-  `);
-  const write = db.transaction((rows: FieldOutcome[]) => {
-    for (const outcome of rows) {
-      stmt.run({
-        id: outcome.id,
-        parcel_id: outcome.parcelId,
-        storm_id: outcome.stormId,
-        logged_at: outcome.loggedAt,
-        predicted_score: outcome.predictedScore,
-        factors: JSON.stringify(outcome.factors),
-        moisture_verified: outcome.moistureVerified ? 1 : 0,
-        scope: outcome.scope,
-        contract_value: outcome.contractValue,
-        notes: outcome.notes,
-        org_id: orgId,
-      });
-    }
-  });
-  write(outcomes);
-}
-
-export function clearOutcomes(orgId?: string) {
-  if (orgId) getDb().prepare(`DELETE FROM field_outcomes WHERE org_id = ?`).run(orgId);
-  else getDb().prepare(`DELETE FROM field_outcomes`).run();
-}
-
-export function parcelByAccount(account: string) {
-  return getDb().prepare(`SELECT * FROM parcels WHERE account = ?`).get(account) as ParcelRow | undefined;
-}
-
-export function permitsForAccount(account: string) {
-  const rows = getDb().prepare(`SELECT * FROM permits`).all() as PermitRow[];
-  return rows.filter((row) => {
+export async function saveOutcomes(outcomes: FieldOutcome[], orgId = ""): Promise<void> {
+  await withClient(async (client) => {
+    await client.query("begin");
     try {
-      return (JSON.parse(row.parcel_ids) as string[]).includes(account);
-    } catch {
-      return false;
+      for (const outcome of outcomes) {
+        await client.query(
+          `insert into app.field_outcomes (id, parcel_id, storm_id, logged_at, predicted_score, factors, moisture_verified, scope, contract_value, notes, org_id)
+           values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
+           on conflict (parcel_id, storm_id) do update set id=excluded.id, logged_at=excluded.logged_at,
+             predicted_score=excluded.predicted_score, factors=excluded.factors, moisture_verified=excluded.moisture_verified,
+             scope=excluded.scope, contract_value=excluded.contract_value, notes=excluded.notes, org_id=excluded.org_id`,
+          [outcome.id, outcome.parcelId, outcome.stormId, outcome.loggedAt, outcome.predictedScore, JSON.stringify(outcome.factors), outcome.moistureVerified ? 1 : 0, outcome.scope, outcome.contractValue, outcome.notes, orgId],
+        );
+      }
+      await client.query("commit");
+    } catch (err) {
+      await client.query("rollback");
+      throw err;
     }
   });
 }
 
-export function latestSnapshot(account: string, stormDate?: string) {
-  if (stormDate) {
-    return getDb().prepare(`SELECT * FROM score_snapshots WHERE account = ? AND storm_date = ? ORDER BY scored_on DESC, id DESC LIMIT 1`).get(account, stormDate) as SnapshotRow | undefined;
-  }
-  return getDb().prepare(`SELECT * FROM score_snapshots WHERE account = ? ORDER BY scored_on DESC, id DESC LIMIT 1`).get(account) as SnapshotRow | undefined;
+export async function clearOutcomes(orgId?: string): Promise<void> {
+  if (orgId) await query(`delete from app.field_outcomes where org_id = $1`, [orgId]);
+  else await query(`delete from app.field_outcomes`);
 }
 
-export function outcomeFor(account: string, stormDate?: string) {
+export async function parcelByAccount(account: string): Promise<ParcelRow | undefined> {
+  return queryOne<ParcelRow>(`select * from warehouse.live_parcels where account = $1`, [account]);
+}
+
+export async function permitsForAccount(account: string): Promise<PermitRow[]> {
+  const rows = await query<Record<string, unknown>>(`select * from warehouse.live_permits where parcel_ids @> $1::jsonb`, [JSON.stringify([account])]);
+  return rows.map((r) => ({ ...(r as unknown as PermitRow), parcel_ids: JSON.stringify(r.parcel_ids ?? []) }));
+}
+
+export async function latestSnapshot(account: string, stormDate?: string): Promise<SnapshotRow | undefined> {
   const row = stormDate
-    ? getDb().prepare(`SELECT * FROM field_outcomes WHERE parcel_id = ? AND storm_id = ?`).get(account, stormDate)
-    : getDb().prepare(`SELECT * FROM field_outcomes WHERE parcel_id = ? ORDER BY logged_at DESC LIMIT 1`).get(account);
-  return row ? outcomeFrom(row as Parameters<typeof outcomeFrom>[0]) : undefined;
+    ? await queryOne<Record<string, unknown>>(`select * from warehouse.score_snapshots where account = $1 and storm_date = $2 order by scored_on desc, id desc limit 1`, [account, stormDate])
+    : await queryOne<Record<string, unknown>>(`select * from warehouse.score_snapshots where account = $1 order by scored_on desc, id desc limit 1`, [account]);
+  return row ? ({ ...row, factors: typeof row.factors === "string" ? row.factors : JSON.stringify(row.factors ?? {}) } as unknown as SnapshotRow) : undefined;
 }
 
-export function reportsForStorm(stormDate: string) {
-  return getDb().prepare(`SELECT * FROM hail_reports WHERE storm_date = ? ORDER BY inches DESC`).all(stormDate) as HailRow[];
+export async function outcomeFor(account: string, stormDate?: string): Promise<FieldOutcome | undefined> {
+  const row = stormDate
+    ? await queryOne(`select * from app.field_outcomes where parcel_id = $1 and storm_id = $2`, [account, stormDate])
+    : await queryOne(`select * from app.field_outcomes where parcel_id = $1 order by logged_at desc limit 1`, [account]);
+  return row ? outcomeFrom(row as unknown as Parameters<typeof outcomeFrom>[0]) : undefined;
 }
 
-export function warningCount(stormDate: string) {
-  return (getDb().prepare(`SELECT COUNT(*) AS n FROM warnings WHERE storm_date = ?`).get(stormDate) as { n: number }).n;
+export async function reportsForStorm(stormDate: string): Promise<HailRow[]> {
+  return query<HailRow>(`select * from warehouse.hail_reports where storm_date = $1 order by inches desc`, [stormDate]);
 }
 
-export function latestSnapshots(stormDate: string, limit = 10) {
-  const day = getDb().prepare(`SELECT MAX(scored_on) AS day FROM score_snapshots WHERE storm_date = ?`).get(stormDate) as { day: string | null };
-  if (!day.day) return { scoredOn: null as string | null, rows: [] as SnapshotRow[], exposed: 0, unresolved: 0 };
-  const rows = getDb().prepare(`SELECT * FROM score_snapshots WHERE storm_date = ? AND scored_on = ? ORDER BY score DESC LIMIT ?`).all(stormDate, day.day, limit) as SnapshotRow[];
-  const totals = getDb().prepare(`SELECT COUNT(*) AS exposed, SUM(unresolved) AS unresolved FROM score_snapshots WHERE storm_date = ? AND scored_on = ?`).get(stormDate, day.day) as { exposed: number; unresolved: number | null };
-  return { scoredOn: day.day, rows, exposed: totals.exposed, unresolved: totals.unresolved ?? 0 };
+export async function warningCount(stormDate: string): Promise<number> {
+  const row = await queryOne<{ n: string }>(`select count(*)::text as n from warehouse.warnings where storm_date = $1`, [stormDate]);
+  return Number(row?.n || 0);
 }
 
-export function readPermitContacts(permitNo: string, customDb?: Database.Database): PermitContact[] {
-  const db = customDb ?? getDb();
-  const rows = db.prepare(`SELECT * FROM permit_contacts WHERE permit_no = ? ORDER BY role, name`).all(permitNo) as Record<string, unknown>[];
+export async function latestSnapshots(stormDate: string, limit = 10) {
+  const day = await queryOne<{ day: string | null }>(`select max(scored_on) as day from warehouse.score_snapshots where storm_date = $1`, [stormDate]);
+  if (!day?.day) return { scoredOn: null as string | null, rows: [] as SnapshotRow[], exposed: 0, unresolved: 0 };
+  const rows = (await query(`select * from warehouse.score_snapshots where storm_date = $1 and scored_on = $2 order by score desc limit $3`, [stormDate, day.day, limit])) as unknown as SnapshotRow[];
+  const totals = await queryOne<{ exposed: string; unresolved: string | null }>(`select count(*)::text as exposed, sum(unresolved)::text as unresolved from warehouse.score_snapshots where storm_date = $1 and scored_on = $2`, [stormDate, day.day]);
+  return { scoredOn: day.day as string | null, rows, exposed: Number(totals?.exposed || 0), unresolved: Number(totals?.unresolved || 0) };
+}
+
+export async function readPermitContacts(permitNo: string): Promise<PermitContact[]> {
+  const rows = await query<Record<string, unknown>>(`select * from warehouse.permit_contacts where permit_no = $1 order by role, name`, [permitNo]);
   return rows.map((r) => ({
     id: String(r.id),
     permitId: String(r.permit_no),
@@ -572,3 +258,20 @@ export function readPermitContacts(permitNo: string, customDb?: Database.Databas
   }));
 }
 
+export async function upsertPermitContacts(contacts: PermitContact[], createdAt: string): Promise<void> {
+  for (const contact of contacts) {
+    await query(
+      `insert into warehouse.permit_contacts (id, permit_no, role, name, company, phone, phone_formatted, email, email_type, deliverability, source, created_at)
+       values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
+       on conflict (id) do update set role=excluded.role, name=excluded.name, company=excluded.company,
+         phone=excluded.phone, phone_formatted=excluded.phone_formatted, email=excluded.email,
+         email_type=excluded.email_type, deliverability=excluded.deliverability, source=excluded.source, created_at=excluded.created_at`,
+      [contact.id, contact.permitId, contact.role, contact.name, contact.company ?? null, contact.phone ?? null, contact.phoneFormatted ?? null, contact.email ?? null, contact.emailType ?? null, contact.deliverability ?? null, contact.source, createdAt],
+    );
+  }
+}
+
+export async function closeDb(): Promise<void> {
+  const { closePool } = await import("@/lib/pg");
+  await closePool();
+}

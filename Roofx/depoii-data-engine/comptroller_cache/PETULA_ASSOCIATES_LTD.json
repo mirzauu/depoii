@@ -1,0 +1,1050 @@
+{
+  "detail": {
+    "taxpayerId": "14209425967",
+    "feiNumber": "420942596",
+    "name": "PETULA ASSOCIATES, LTD.",
+    "dbaName": null,
+    "mailingAddressStreet": "711 HIGH ST",
+    "mailingAddressCity": "DES MOINES",
+    "mailingAddressState": "IA",
+    "mailingAddressZip": "50392",
+    "mailingAddressZip4": "0001",
+    "rightToTransactTX": "FRANCHISE TAX ENDED",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " IA",
+    "sosRegistrationStatus": "INACTIVE",
+    "effectiveSosRegistrationDate": "03/14/1984",
+    "sosFileNumber": "0006151906",
+    "registeredAgentName": "CORPORATION SERVICE COMPANY D/B/A CSC-LAWYERS INCO",
+    "registeredOfficeAddressStreet": "701 BRAZOS STREET SUITE 1050",
+    "registeredOfficeAddressCity": "AUSTIN",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "78701",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "Not Available",
+    "officerInfo": [
+      {
+        "AGNT_NM": "ANDREW C WARREN",
+        "AGNT_TITL_TX": "ASSISTANT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ANN P HESSELINK",
+        "AGNT_TITL_TX": "COUNSEL",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ANN P HESSELINK",
+        "AGNT_TITL_TX": "SECOND VIC",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ANTHONY V HEPNER",
+        "AGNT_TITL_TX": "DISPOSITIO",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ANTHONY V HEPNER",
+        "AGNT_TITL_TX": "DIRECTOR A",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "BARBARA A MCKENZIE",
+        "AGNT_TITL_TX": "CCO",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "BRADLEY A BENSON",
+        "AGNT_TITL_TX": "INVESTMENT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "BRENDA A STEPHANY",
+        "AGNT_TITL_TX": "ASSISTANT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "BRENDA S TYLER",
+        "AGNT_TITL_TX": "ASSISTANT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "BRETT A CASSABAUM",
+        "AGNT_TITL_TX": "ASSISTANT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "BRIAN S MCLEAN",
+        "AGNT_TITL_TX": "MANAGING D",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "BRIAN SANDFORT",
+        "AGNT_TITL_TX": "INVESTMENT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "BYRON D CARSON",
+        "AGNT_TITL_TX": "MANAGING D",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "CARA STOWE",
+        "AGNT_TITL_TX": "INVESTMENT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "CAROL KRAAYENBRINK",
+        "AGNT_TITL_TX": "DIRECTOR C",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "CHARLES CHRISTOFILIS",
+        "AGNT_TITL_TX": "DIRECTOR C",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "CHARLES J DAVIS",
+        "AGNT_TITL_TX": "COUNSEL",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "CHARLES N GILES",
+        "AGNT_TITL_TX": "MANAGING D",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "CHERYL LYN A TALBERT",
+        "AGNT_TITL_TX": "INVESTMENT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "CHRISTOPHER J HENDERSON",
+        "AGNT_TITL_TX": "SECOND VIC",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "CHRISTOPHER J HENDERSON",
+        "AGNT_TITL_TX": "COUNSEL",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "CRAIG L BASSETT",
+        "AGNT_TITL_TX": "TREASURER",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "CRAIG L BASSETT",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DANIEL DICKMAN",
+        "AGNT_TITL_TX": "ASSISTANT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DANIEL E THORNTON",
+        "AGNT_TITL_TX": "DIRECTOR P",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DANIEL T COOPER",
+        "AGNT_TITL_TX": "PORTFOLIO",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DARIN L BENNINGSDORF",
+        "AGNT_TITL_TX": "ASSISTANT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DARREN J KLEIS",
+        "AGNT_TITL_TX": "INVESTMENT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DAVID A STIVERS",
+        "AGNT_TITL_TX": "MANAGING D",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DAVID M DIMOND",
+        "AGNT_TITL_TX": "DIRECTOR E",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DEAN F STONNER",
+        "AGNT_TITL_TX": "COUNSEL",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DEBRA SVOBODA EPP",
+        "AGNT_TITL_TX": "COUNSEL",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DENNIS D BALLARD",
+        "AGNT_TITL_TX": "COUNSEL",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DONALD KOEHLER II",
+        "AGNT_TITL_TX": "COUNSEL",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DONNA H LUTCAVISH",
+        "AGNT_TITL_TX": "ASSISTANT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DOUGLAS A KINTZLE",
+        "AGNT_TITL_TX": "ASSISTANT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "GARY A LINES",
+        "AGNT_TITL_TX": "SENIOR RES",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JAMES J HALLIWELL",
+        "AGNT_TITL_TX": "ASSISTANT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JAMES P MCCAUGHAN",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JAY B DAVIS",
+        "AGNT_TITL_TX": "DIRECTOR P",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JEAN E HIXSON",
+        "AGNT_TITL_TX": "ASSISTANT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JEFF MENZ",
+        "AGNT_TITL_TX": "PORTFOLIO",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JOHN H ROOT",
+        "AGNT_TITL_TX": "INVESTMENT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JOHN N URBAN",
+        "AGNT_TITL_TX": "DIRECTOR A",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JON J BUENNEKE",
+        "AGNT_TITL_TX": "INVESTMENT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JOYCE N HOFFMAN",
+        "AGNT_TITL_TX": "SECRETARY",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JOYCE N HOFFMAN",
+        "AGNT_TITL_TX": "SENIOR VP",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JULIA M LAWLER",
+        "AGNT_TITL_TX": "CHAIR",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "KAREN A PEARSTON",
+        "AGNT_TITL_TX": "COUNSEL",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "KAREN A PEARSTON",
+        "AGNT_TITL_TX": "SECOND VIC",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "KAREN E SHAFF",
+        "AGNT_TITL_TX": "EXECUTIVE",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "KAREN E SHAFF",
+        "AGNT_TITL_TX": "GENERAL CO",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "KAREN J HALTER",
+        "AGNT_TITL_TX": "BUSINESS P",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "KELLY D RUSH",
+        "AGNT_TITL_TX": "PORTFOLIO",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "KENNETH E DUBAS",
+        "AGNT_TITL_TX": "MANAGING D",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "KENT JURGENSEN",
+        "AGNT_TITL_TX": "DIRECTOR C",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "KERRY M STUDER",
+        "AGNT_TITL_TX": "ASSISTANT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "LEANNE S VALETINE",
+        "AGNT_TITL_TX": "COUNSEL",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "LEANNE S VALETINE",
+        "AGNT_TITL_TX": "SECOND VIC",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "LORI KOOP",
+        "AGNT_TITL_TX": "COUNSEL",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MARC PETERSON",
+        "AGNT_TITL_TX": "DIRECTOR C",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MARGIE A CUSTIS",
+        "AGNT_TITL_TX": "MANAGING D",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MARK A HANRAHAN",
+        "AGNT_TITL_TX": "ASSISTANT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MARK BILLECI",
+        "AGNT_TITL_TX": "MANAGING D",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MARK F SCHOLZ",
+        "AGNT_TITL_TX": "INVESTMENT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MARTIN C STUTZ",
+        "AGNT_TITL_TX": "ASSISTANT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MARTIN L CROPP",
+        "AGNT_TITL_TX": "MANAGING D",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MARY E DUBAS",
+        "AGNT_TITL_TX": "INVESTMENT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MARY E SCHWERZE",
+        "AGNT_TITL_TX": "COUNSEL",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MICHAEL J LARA",
+        "AGNT_TITL_TX": "DIRECTOR A",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MICHAEL S BENSON",
+        "AGNT_TITL_TX": "INVESTMENT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "PATRICIA A BAILEY",
+        "AGNT_TITL_TX": "FINANCE DI",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "PATRICIA A BARRY",
+        "AGNT_TITL_TX": "ASSISTANT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "PATRICK G HALTER",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "PATRICK G HALTER",
+        "AGNT_TITL_TX": "CEO",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "RANDALL C MUNDT",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "RANDALL C MUNDT",
+        "AGNT_TITL_TX": "PRESIDENT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "RANDALL C MUNDT",
+        "AGNT_TITL_TX": "CIO",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "RANDALL L STEWART",
+        "AGNT_TITL_TX": "INVESTMENT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "RANDIE TAYNER",
+        "AGNT_TITL_TX": "INVESTMENT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "RANNEY L RAMSEY",
+        "AGNT_TITL_TX": "DIRECTOR A",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "RICHARD E BRUCE",
+        "AGNT_TITL_TX": "DIRECTOR A",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "RICHARD W HUGHES",
+        "AGNT_TITL_TX": "DIRECTOR A",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ROBERT F BEST",
+        "AGNT_TITL_TX": "MANAGING D",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ROBERT L DIRKS",
+        "AGNT_TITL_TX": "ASSISTANT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ROBERT T KLINKNER",
+        "AGNT_TITL_TX": "INVESTMENT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "RODNEY R VOGEL",
+        "AGNT_TITL_TX": "MANAGING D",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "SANDRA LANZ",
+        "AGNT_TITL_TX": "DIRECTOR C",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "SCOTT R SMITH",
+        "AGNT_TITL_TX": "ASSISTANT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "STEPHANIE L RIVA",
+        "AGNT_TITL_TX": "MANAGING D",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "STEPHEN W PICK",
+        "AGNT_TITL_TX": "CFO",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "STEVEN K GRAVES",
+        "AGNT_TITL_TX": "COO",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "STEVEN P TRAYNOR",
+        "AGNT_TITL_TX": "COUNSEL",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "STEVEN R JOHNSON",
+        "AGNT_TITL_TX": "DIRECTOR L",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "TED E MCWILLIAMS",
+        "AGNT_TITL_TX": "DIRECTOR A",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "THOMAS J BELL",
+        "AGNT_TITL_TX": "INVESTMENT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "THOMAS R HIRSCHAUER",
+        "AGNT_TITL_TX": "INVESTMENT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "THOMAS R POSPISIL",
+        "AGNT_TITL_TX": "COUNSEL",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "TODD E EVERETT",
+        "AGNT_TITL_TX": "MANAGING D",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "TROY KOERSELMAN",
+        "AGNT_TITL_TX": "INVESTMENT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "VANCE K VOSS",
+        "AGNT_TITL_TX": "ASSISTANT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "WILLIAM G WILLIAMS III",
+        "AGNT_TITL_TX": "INVESTMENT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "711 HIGH STREET",
+        "CITY_NM": "DES MOINES",
+        "ST_CD": "IA",
+        "AD_ZP": "50392",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

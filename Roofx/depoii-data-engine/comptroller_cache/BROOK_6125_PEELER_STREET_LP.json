@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32080057030",
+    "feiNumber": "871649011",
+    "name": "BROOK 6125 PEELER STREET, LP",
+    "dbaName": null,
+    "mailingAddressStreet": "150 MANUFACTURING ST STE 215",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75207",
+    "mailingAddressZip4": "6403",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "07/08/2021",
+    "sosFileNumber": "0804147001",
+    "registeredAgentName": "JOHN T SUGHRUE",
+    "registeredOfficeAddressStreet": "150 MANUFACTURING STREET, STE 215",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75207",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "JTS PEELER GP, INC., A TEXAS CORPORATION",
+        "AGNT_TITL_TX": "GENERAL PA",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "150 MANUFACTURING STREET, #215",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75207",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

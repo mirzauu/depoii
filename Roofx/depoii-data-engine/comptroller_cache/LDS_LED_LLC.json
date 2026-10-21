@@ -1,0 +1,70 @@
+{
+  "detail": {
+    "taxpayerId": "32079815349",
+    "feiNumber": null,
+    "name": "LDS LED INC",
+    "dbaName": null,
+    "mailingAddressStreet": "2060 N COLLINS BLVD STE 118",
+    "mailingAddressCity": "RICHARDSON",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75080",
+    "mailingAddressZip4": "2657",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "06/22/2021",
+    "sosFileNumber": "0804121257",
+    "registeredAgentName": "ZHONG'S ACCOUNTING & TAX SERVICES, LLC",
+    "registeredOfficeAddressStreet": "2060 N COLLINS BLVD STE 118",
+    "registeredOfficeAddressCity": "RICHARDSON",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75080",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "HAISHENG GAO",
+        "AGNT_TITL_TX": "SHAREHOLDE",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "3901 BOULTON CT",
+        "CITY_NM": "PLANO",
+        "ST_CD": "TX",
+        "AD_ZP": "75025",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "HAISHENG GAO",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "3901 BOULTON CT",
+        "CITY_NM": "PLANO",
+        "ST_CD": "TX",
+        "AD_ZP": "75025",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "HUI ZHANG",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "13072 SPRUCE WOOD TR",
+        "CITY_NM": "FRISCO",
+        "ST_CD": "TX",
+        "AD_ZP": "75035",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "HUI ZHANG",
+        "AGNT_TITL_TX": "SHAREHOLDE",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "13072 SPRUCE WOOD TR",
+        "CITY_NM": "FRISCO",
+        "ST_CD": "TX",
+        "AD_ZP": "75035",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

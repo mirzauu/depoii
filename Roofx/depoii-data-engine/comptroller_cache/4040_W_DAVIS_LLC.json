@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32045915728",
+    "feiNumber": null,
+    "name": "4040 W DAVIS LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "416 N COCKRELL HILL RD",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75211",
+    "mailingAddressZip4": "3441",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "12/08/2011",
+    "sosFileNumber": "0801516858",
+    "registeredAgentName": "DAVID VARELA",
+    "registeredOfficeAddressStreet": "416 N COCKRELL HILL RD",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75211",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "DAVID VARELA",
+        "AGNT_TITL_TX": "MGR",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "416 N COCKRELL HILL RD",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75211",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

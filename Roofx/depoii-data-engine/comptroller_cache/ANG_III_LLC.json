@@ -1,0 +1,1760 @@
+{
+  "detail": {
+    "taxpayerId": "32044113580",
+    "feiNumber": null,
+    "name": "ANG III (MULTI) LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "292 9TH AVE FL 58",
+    "mailingAddressCity": "NEW YORK",
+    "mailingAddressState": "NY",
+    "mailingAddressZip": "10001",
+    "mailingAddressZip4": "5703",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " DE",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "04/25/2011",
+    "sosFileNumber": "0801416639",
+    "registeredAgentName": "CORPORATION SERVICE COMPANY DBA CSC - LAWYERS INCO",
+    "registeredOfficeAddressStreet": "211 E. 7TH STREET, SUITE 620",
+    "registeredOfficeAddressCity": "AUSTIN",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "78701",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2025",
+    "officerInfo": [
+      {
+        "AGNT_NM": " PETER SANDS",
+        "AGNT_TITL_TX": "HEAD OF INVESTOR RELATIONS",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": " ZIAD A HAMMODI",
+        "AGNT_TITL_TX": "ASSISTANT SECRETARY",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "ABIGAIL LAMB",
+        "AGNT_TITL_TX": "TRANSACTION COUNSEL",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "ABIGAIL LAMB",
+        "AGNT_TITL_TX": "EXECUTIVE DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "ABIGAIL OCONNOR",
+        "AGNT_TITL_TX": "VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "ABIGAIL OCONNOR",
+        "AGNT_TITL_TX": "IT AUDIT MANAGER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "AMANDA WOODWARD",
+        "AGNT_TITL_TX": "VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "AMEEN AHAD",
+        "AGNT_TITL_TX": "SENIOR VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "ANDREW WEAKLAND",
+        "AGNT_TITL_TX": "DIRECTOR OF SYSTEMS DEVELOPMENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "ANDREW WEAKLAND",
+        "AGNT_TITL_TX": "SENIOR VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "ANNA MCGRATH",
+        "AGNT_TITL_TX": "HEAD OF INTEGRATED COMMUNICATIONS",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "ANNA MCGRATH",
+        "AGNT_TITL_TX": "SENIOR OF VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "BENJAMIN H GRIFWOLD IV",
+        "AGNT_TITL_TX": "EMERITUS DIRECTORS",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "BOYD BORJIET",
+        "AGNT_TITL_TX": "VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "BRIAN ZANDER",
+        "AGNT_TITL_TX": "CHIEF ACCOUNTING OFFICER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "BRIAN ZANDER",
+        "AGNT_TITL_TX": "EXECUTIVE DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "BROOKS G GORDON",
+        "AGNT_TITL_TX": "HEAD OF ASSET MANAGEMENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "BROOKS G GORDON",
+        "AGNT_TITL_TX": "MANAGING DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "CHARLES STOCKS",
+        "AGNT_TITL_TX": "HEAD OF PROJECT MANAGEMENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "CHARLES STOCKS",
+        "AGNT_TITL_TX": "SENIOR VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "CHRISTOPHER D HAYES",
+        "AGNT_TITL_TX": "MANAGING DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "CHRISTOPHER DIGIACOMO",
+        "AGNT_TITL_TX": "EXECUTIVE DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "CHRISTOPHER DIGIACOMO",
+        "AGNT_TITL_TX": "CHIEF INFORMATION OFFICER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "CHRISTOPHER J NIEHAUS",
+        "AGNT_TITL_TX": "CHAIRMAN OF THE EXECUTIVE COMMITTEE",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "CHRISTOPHER J NIEHAUS",
+        "AGNT_TITL_TX": "NON EXECUTIVE CHAIRMAN OF THE BOARD",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "CHRISTOPHER J NIEHAUS",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "CHRISTOPHER J NIEHAUS",
+        "AGNT_TITL_TX": "CHAIRMAN OF THE INVESTMENT COMMITTEE",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "COLLIN CASSIDY",
+        "AGNT_TITL_TX": "SENIOR VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "CONSTANTIN H BEIER",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "CRAIG J VACHRIS",
+        "AGNT_TITL_TX": "CHIEF CREDIT OFFICER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "CRAIG J VACHRIS",
+        "AGNT_TITL_TX": "EXECUTIVE DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "CRISTINA D HAMEL",
+        "AGNT_TITL_TX": "VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "CRISTINA D HAMEL",
+        "AGNT_TITL_TX": "DIRECTOR OF CORPORATE EVENTS",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "CURTIS BRAITHWAITE",
+        "AGNT_TITL_TX": "SOLUTIONS ARCHITECT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "CURTIS BRAITHWAITE",
+        "AGNT_TITL_TX": "VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "DARIO ONFROY",
+        "AGNT_TITL_TX": "AUTHORIZED TAX REPRESENTATIVE",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "DARREN SHARLACH",
+        "AGNT_TITL_TX": "ASSISTANT SECRETARY",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "DARREN SHARLACH",
+        "AGNT_TITL_TX": "MANAGING DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "DARREN SHARLACH",
+        "AGNT_TITL_TX": "SENIOR GLOBAL TRANSACTION COUNSEL",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "DAVID COBERT",
+        "AGNT_TITL_TX": "HEAD OF CORPORATE FINANCE AND TREASURY",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "DAVID COLBERT",
+        "AGNT_TITL_TX": "EXECUTIVE DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "ELISABETH STHEEMAN",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "ERITT SINKKO",
+        "AGNT_TITL_TX": "SENIOR VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "ERITT SINKKO",
+        "AGNT_TITL_TX": "TAX PROVISIONS SENIOR MANAGER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "FLORA NG",
+        "AGNT_TITL_TX": "LEASE ADMINISTRATION ASSISTANT MANAGER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "FLORA NG",
+        "AGNT_TITL_TX": "ASSISTANT SECRETARY",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "GABRIELA STOUT",
+        "AGNT_TITL_TX": "VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "GABRIELA STOUT",
+        "AGNT_TITL_TX": "ACCOUNTING MANAGER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "GENA PANTER",
+        "AGNT_TITL_TX": "SENIOR VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "GENA PANTER",
+        "AGNT_TITL_TX": "CORPORATE COUNSEL",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "GINO M SABATINI",
+        "AGNT_TITL_TX": "HEAD OF INVESTMENTS",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "GINO M SABATINI",
+        "AGNT_TITL_TX": "MANAGING DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "GREGORY M BUTCHART",
+        "AGNT_TITL_TX": "MANAGING DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "GREGORY M BUTCHART",
+        "AGNT_TITL_TX": "HEAD OF AMSTERDAM OFFICE",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "HELEN LOZOVSKY",
+        "AGNT_TITL_TX": "VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "HELEN LOZOVSKY",
+        "AGNT_TITL_TX": "JD EDWARDS ERP SOLUTIONS ARCHITECT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "IAN IRLANDA",
+        "AGNT_TITL_TX": "SENIOR VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "IAN IRLANDA",
+        "AGNT_TITL_TX": "TREASURY & AP OPERATIONS",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "JAMES J CARDASIS",
+        "AGNT_TITL_TX": "SECOND VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "JAMES J CARDASIS",
+        "AGNT_TITL_TX": "HEAD OF OFFICE MANAGEMENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "JAMES KANNENGIESER",
+        "AGNT_TITL_TX": "SENIOR VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "JAMES KANNENGIESER",
+        "AGNT_TITL_TX": "FINANCIAL REPORTING DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "JASON E FOX",
+        "AGNT_TITL_TX": "PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "JASON E FOX",
+        "AGNT_TITL_TX": "CHIEF EXECUTIVE OFFICER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "JASON E FOX",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "JASON PATTERSON",
+        "AGNT_TITL_TX": "EXECUTIVE DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "JASON WONG",
+        "AGNT_TITL_TX": "ASSISTANT CONTROLLER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "JASON WONG",
+        "AGNT_TITL_TX": "VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "JEREMIAH GREGORY",
+        "AGNT_TITL_TX": "HEAD OF STRATEGY & CAPITAL MARKETS",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "JEREMIAH GREGORY",
+        "AGNT_TITL_TX": "MANAGING DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "JESSICA DOLFMAN MARTIN",
+        "AGNT_TITL_TX": "EXECUTIVE DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "JESSICA DOLFMAN MARTIN",
+        "AGNT_TITL_TX": "TRANSACTION COUNSEL",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "JOHN D MILLER",
+        "AGNT_TITL_TX": "MANAGING DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "JOHN D MILLER",
+        "AGNT_TITL_TX": "CHIEF INVESTMENT OFFICER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "JULIAN WYKE",
+        "AGNT_TITL_TX": "INFRASTRUCTURE ENGINEER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "JULIAN WYKE",
+        "AGNT_TITL_TX": "SECOND VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "JULIUS LITINSKAS",
+        "AGNT_TITL_TX": "VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "KATE LIU",
+        "AGNT_TITL_TX": "SENIOR PARALEGAL",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "KATE LIU",
+        "AGNT_TITL_TX": "ASSISTANT SECRETARY",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "KEITH PARKER",
+        "AGNT_TITL_TX": "SERVICE DELIVERY MANAGER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "KEITH PARKER",
+        "AGNT_TITL_TX": "VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "KIA RACE",
+        "AGNT_TITL_TX": "VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "LEAH SPECKHARD",
+        "AGNT_TITL_TX": "SENIOR PARALEGAL",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "LEAH SPECKHARD",
+        "AGNT_TITL_TX": "ASSISTANT SECRETARY",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "LESLEY VARS",
+        "AGNT_TITL_TX": "SENIOR VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "LESLEY VARS",
+        "AGNT_TITL_TX": "TRANSACTION COUNSEL",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "LEYDIANA GEANO",
+        "AGNT_TITL_TX": "CORPORATE CONTROLLER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "LEYDIANA GENAO",
+        "AGNT_TITL_TX": "SENIOR VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "LIOU GUO",
+        "AGNT_TITL_TX": "SENIOR VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "LIOU GUO",
+        "AGNT_TITL_TX": "DOMESTIC TAX DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "LOU FERNANDES",
+        "AGNT_TITL_TX": "EXECUTIVE DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "LOU FERNANDES",
+        "AGNT_TITL_TX": "DIRECTOR OF INTERNAL AUDIT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "LUIS CASTELLANOS",
+        "AGNT_TITL_TX": "EXECUTIVE DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "LUIS CASTELLANOS",
+        "AGNT_TITL_TX": "HEAD OF SELF STORAGE",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "MADELINE VASILE",
+        "AGNT_TITL_TX": "PARALEGAL",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "MADELINE VASILE",
+        "AGNT_TITL_TX": "ASSISTANT SECRETARY",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "MAGGIE YANG",
+        "AGNT_TITL_TX": "VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "MAGGIE YANG",
+        "AGNT_TITL_TX": "TAX SENIOR MANAGER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "MARGARET G LEWIS",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "MARGARET G LEWIS",
+        "AGNT_TITL_TX": "CHAIRMAN OF THE NOMINATING & CORPORATE GOVERNANCE",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "MARINA FOLZ",
+        "AGNT_TITL_TX": "VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "MARK A ALEXANDER",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "MARK FORESI",
+        "AGNT_TITL_TX": "MANAGING DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "MARY KATE MACLEAN",
+        "AGNT_TITL_TX": "SENIOR VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "MICHAEL FITZGERALD",
+        "AGNT_TITL_TX": "EXECUTIVE DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "MICHAEL FITZGERALD",
+        "AGNT_TITL_TX": "HEAD OF US RETAIL INVESTMENTS",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "MICHAEL KALIMTZIS",
+        "AGNT_TITL_TX": "VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "MICHAEL KALIMTZIS",
+        "AGNT_TITL_TX": "PROJECT MANAGER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "NATTALY NERENBERG",
+        "AGNT_TITL_TX": "SENIOR VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "NATTALY NERENBERG",
+        "AGNT_TITL_TX": "CONTROLLER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "NICOLAS ISHAM",
+        "AGNT_TITL_TX": "MANAGING DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "PAMELA M SILER",
+        "AGNT_TITL_TX": "DIRECTOR OF ESG REPORTING & IR OPERATIONS",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "PAMELA M SILER",
+        "AGNT_TITL_TX": "EXECUTIVE DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "PEACOLA J JOHNSON",
+        "AGNT_TITL_TX": "SENIOR VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "PEACOLA J JOHNSON",
+        "AGNT_TITL_TX": "RISK MANAGER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "PETER BATES",
+        "AGNT_TITL_TX": "HEAD OF NORTH AMERICAN ASSET MANAGEMENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "PETER BATES",
+        "AGNT_TITL_TX": "MANAGING DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "PETER J FARRELL",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "PETER J FARRELL",
+        "AGNT_TITL_TX": "CHAIRMAN OF THE COMPENSATION COMMITTEE",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "PETER SANDS",
+        "AGNT_TITL_TX": "EXECUTIVE DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "PETER SANDS",
+        "AGNT_TITL_TX": "HEAD OF INVESTOR RELATIONS",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "PUNEET SHARMA",
+        "AGNT_TITL_TX": "EXECUTIVE DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "PUNEET SHARMA",
+        "AGNT_TITL_TX": "GLOBAL DIRECTOR OF TAX",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "RHONDA O GASS",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "ROB WHIRTY",
+        "AGNT_TITL_TX": "VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "ROBERT J FLANAGAN",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "ROBERT J FLANAGAN",
+        "AGNT_TITL_TX": "CHAIRMAN OF THE AUDIT COMMITTEE",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "ROBIN H GERSTEN",
+        "AGNT_TITL_TX": "ASSISTANT SECRETARY",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "ROBIN H GERSTEN",
+        "AGNT_TITL_TX": "SENIOR PARALEGAL",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "RYAN HEARD",
+        "AGNT_TITL_TX": "VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "RYAN HEARD",
+        "AGNT_TITL_TX": "PROJECT MANAGER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "SALINA CHAN",
+        "AGNT_TITL_TX": "SENIOR PAYROLL ACCOUNTANT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "SALINA CHAN",
+        "AGNT_TITL_TX": "ASSISTANT SECRETARY",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "SAM RUBENSTEIN",
+        "AGNT_TITL_TX": "VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "SAPNA SANAGAVARAPU",
+        "AGNT_TITL_TX": "CHIEF LEGAL OFFICER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "SAPNA SANAGAVARAPU",
+        "AGNT_TITL_TX": "EXECUTIVE DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "SHIELA MALIWAT",
+        "AGNT_TITL_TX": "DIRECTOR OF PROPERTY ACCOUNTING",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "SHIELA MALIWAT",
+        "AGNT_TITL_TX": "SENIOR VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "STACEY L LAMENDOLA",
+        "AGNT_TITL_TX": "HEAD OF HUMAN RESOURCES",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "STACEY L LAMENDOLA",
+        "AGNT_TITL_TX": "EXECUTIVE DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "SUNGWON NEUER",
+        "AGNT_TITL_TX": "ASSISTANT SECRETARY",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "SUNGWON NEUER",
+        "AGNT_TITL_TX": "LEASE ADMINISTRATION SENIOR MANAGER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "SUSAN C HYDE",
+        "AGNT_TITL_TX": "MANAGING DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "SUSAN C HYDE",
+        "AGNT_TITL_TX": "CHIEF ADMINISTRATIVE OFFICER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "SUSAN C HYDE",
+        "AGNT_TITL_TX": "CORPORATE SECRETARY",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "SUSAN C HYDE",
+        "AGNT_TITL_TX": "CHIEF ETHICS OFFICER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "SUSAN JIAN",
+        "AGNT_TITL_TX": "SENIOR PROPERTY ACCOUNTANT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "SUSAN JIAN",
+        "AGNT_TITL_TX": "SECOND VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "TAYLOR UPCHURCH",
+        "AGNT_TITL_TX": "ASSISTANT SECRETARY",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "TAYLOR UPCHURCH",
+        "AGNT_TITL_TX": "PARALEGAL",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "TIMOTHY GOODWIN",
+        "AGNT_TITL_TX": "VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "TIMOTHY GOODWIN",
+        "AGNT_TITL_TX": "LEASE & LOAN COMPLIANCE SENIOR MANAGER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "TONIANN SANZONE",
+        "AGNT_TITL_TX": "CHIEF FINANCIAL OFFICER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "TONIANN SANZONE",
+        "AGNT_TITL_TX": "MANAGING DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "TONIANN SANZONE",
+        "AGNT_TITL_TX": "TREASURER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "TONIT M CALAWAY",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "TREESA VARGHESE",
+        "AGNT_TITL_TX": "ASSISTANT CONTROLLER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "TREESA VARGHESE",
+        "AGNT_TITL_TX": "VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "TYLER SWANN",
+        "AGNT_TITL_TX": "MANAGING DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "VENU RAMTAKAH",
+        "AGNT_TITL_TX": "JD EDWARDS CNC & INFRASTRUCTURE ADMINISTRATOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "VENU RAMTAKAH",
+        "AGNT_TITL_TX": "SECOND VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "VIRGINIA LENTINO",
+        "AGNT_TITL_TX": "DIRECTOR OF IT INFRASTRUCTURE AND SECURITY",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "VIRGINIA LENTINO",
+        "AGNT_TITL_TX": "SENIOR VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "WALTER JAMESON",
+        "AGNT_TITL_TX": "SENIOR VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "WENDY CHIH W CHANG",
+        "AGNT_TITL_TX": "SENIOR VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "WENDY CHIH W CHANG",
+        "AGNT_TITL_TX": "DIRECTOR OF PAYROLL",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "WILLIAM CAREY",
+        "AGNT_TITL_TX": "EXECUTIVE DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "YASMIN GUERRERO",
+        "AGNT_TITL_TX": "SENIOR VICE PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "YASMIN GUERRERO",
+        "AGNT_TITL_TX": "DIRECTOR OF LEASE ADMINISTRATION",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "ZACHARY PASANEN",
+        "AGNT_TITL_TX": "MANAGING DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "ZIAD A HAMMODI",
+        "AGNT_TITL_TX": "ASSISTANT SECRETARY",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "ZIAD A HAMMODI",
+        "AGNT_TITL_TX": "MANAGING DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "ZIAD A HAMMODI",
+        "AGNT_TITL_TX": "CHIEF GLOBAL TRANSACTION COUNSEL",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "395 9TH AVENUE 58TH FLOOR",
+        "CITY_NM": "NEW YORK",
+        "ST_CD": "NY",
+        "AD_ZP": "10001",
+        "SOURCE": "CPA"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

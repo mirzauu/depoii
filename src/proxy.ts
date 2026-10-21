@@ -16,7 +16,7 @@ function isPublicAsset(pathname: string) {
   );
 }
 
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (isLandingOnly()) {
@@ -50,7 +50,7 @@ export function proxy(request: NextRequest) {
   ) {
     return NextResponse.next();
   }
-  const session = readSessionToken(request.cookies.get("depoii_session")?.value);
+  const session = await readSessionToken(request.cookies.get("depoii_session")?.value);
   if (!session) {
     if (pathname.startsWith("/api/")) {
       return NextResponse.json({ error: "Sign in required." }, { status: 401 });

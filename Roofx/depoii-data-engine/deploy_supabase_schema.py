@@ -1,7 +1,11 @@
-import psycopg2
+import os
 import sys
 
-CONNECTION_STRING = "postgresql://postgres:Alimirsa%40123@db.enbebudptwexwkxocgtv.supabase.co:5432/postgres"
+import psycopg2
+
+CONNECTION_STRING = os.environ.get("SUPABASE_DB_URL", "")
+if not CONNECTION_STRING:
+    raise SystemExit("SUPABASE_DB_URL is not set. Rotate the leaked password, then export the new direct connection string.")
 
 DDL_STATEMENTS = """
 -- 1. Enable PostGIS Extension

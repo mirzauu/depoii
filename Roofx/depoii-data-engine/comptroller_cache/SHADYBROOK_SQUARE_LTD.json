@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32036175316",
+    "feiNumber": null,
+    "name": "SHADYBROOK SQUARE, LTD.",
+    "dbaName": null,
+    "mailingAddressStreet": "7995 LYNDON B JOHNSON FWY STE 250",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75251",
+    "mailingAddressZip4": "1249",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "01/12/2000",
+    "sosFileNumber": "0012997310",
+    "registeredAgentName": "MICHAEL J HOPKINS",
+    "registeredOfficeAddressStreet": "7995 LBJ FREEWAY SUITE 250",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75251",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "HOPKINS SHADYBROOK, INC.",
+        "AGNT_TITL_TX": "GENERAL PA",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "7995 LBJ FREEWAY SUITE 250",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75251",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

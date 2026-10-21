@@ -1,0 +1,50 @@
+{
+  "detail": {
+    "taxpayerId": "32041941868",
+    "feiNumber": "272755229",
+    "name": "CCI PROPERTIES LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "500 CRESCENT CT STE 220",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75201",
+    "mailingAddressZip4": "7808",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "05/26/2010",
+    "sosFileNumber": "0801274630",
+    "registeredAgentName": "CHAD ELIAS",
+    "registeredOfficeAddressStreet": "500 CRESCENT COURT, STE 220",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75201",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2023",
+    "officerInfo": [
+      {
+        "AGNT_NM": "CHAD ELIAS",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "500 CRESCENT COURT, #220",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75201",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ELIZABETH STOVER-ELIAS",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "500 CRESCENT COURT, #220",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75201",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "13928856361",
+    "feiNumber": "392885636",
+    "name": "DELTA LOGISTICS & FREIGHT LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "1804 SABINAL ST",
+    "mailingAddressCity": "MISSION",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "78572",
+    "mailingAddressZip4": "2021",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "06/24/2025",
+    "sosFileNumber": "0806094298",
+    "registeredAgentName": "CLAUDIA ASTRID DELGADO-LOPEZ",
+    "registeredOfficeAddressStreet": "1804 SABINAL ST",
+    "registeredOfficeAddressCity": "MISSION",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "78572",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "LUIS EDUARDO LOPEZ",
+        "AGNT_TITL_TX": "MANAGER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "1804 SABINAL ST",
+        "CITY_NM": "MISSION",
+        "ST_CD": "TX",
+        "AD_ZP": "78572",
+        "SOURCE": "CPA"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32035513137",
+    "feiNumber": null,
+    "name": "CREATE AND BUILD, LTD.",
+    "dbaName": null,
+    "mailingAddressStreet": "370 GRAY WOLF",
+    "mailingAddressCity": "BLANCO",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "78606",
+    "mailingAddressZip4": "4425",
+    "rightToTransactTX": "FRANCHISE TAX ENDED",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "INACTIVE",
+    "effectiveSosRegistrationDate": "11/04/2004",
+    "sosFileNumber": "0800409965",
+    "registeredAgentName": "TAMMY PATTERSON",
+    "registeredOfficeAddressStreet": "8650 KING GEORGE",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75235",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2021",
+    "officerInfo": [
+      {
+        "AGNT_NM": "THINK AND ACT, INC.",
+        "AGNT_TITL_TX": "GENERAL PA",
+        "AGNT_ACTV_YR": "2021",
+        "AD_STR_POB_TX": "8650 KING GEORGE DR",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75235",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

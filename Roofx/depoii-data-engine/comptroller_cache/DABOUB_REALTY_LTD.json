@@ -1,0 +1,29 @@
+{
+  "detail": {
+    "taxpayerId": "32035409195",
+    "feiNumber": null,
+    "name": "DABOUB REALTY NO. 2, LTD.",
+    "dbaName": null,
+    "mailingAddressStreet": "14901 TRINITY BLVD",
+    "mailingAddressCity": "FORT WORTH",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "76155",
+    "mailingAddressZip4": "2611",
+    "rightToTransactTX": "FRANCHISE TAX ENDED",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "INACTIVE",
+    "effectiveSosRegistrationDate": "05/03/2005",
+    "sosFileNumber": "0800487894",
+    "registeredAgentName": "HENRY A. DABOUB",
+    "registeredOfficeAddressStreet": "14901 TRINITY BLVD",
+    "registeredOfficeAddressCity": "FORT WORTH",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "76155",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "",
+    "officerInfo": []
+  },
+  "confidence": "partial_name"
+}

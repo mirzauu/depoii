@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32036444803",
+    "feiNumber": null,
+    "name": "BELCLAIRE REALTY, LTD.",
+    "dbaName": null,
+    "mailingAddressStreet": "4220 GURLEY AVE",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75223",
+    "mailingAddressZip4": "2816",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "09/02/1993",
+    "sosFileNumber": "0006996310",
+    "registeredAgentName": "BELCLAIRE INVESTMENT CORPORATION",
+    "registeredOfficeAddressStreet": "4220 GURLEY AVENUE",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75223",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "BELCLAIRE INVESTMENT CORPORATION",
+        "AGNT_TITL_TX": "GENERAL PA",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "4220 GURLEY AVE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75226",
+        "SOURCE": "CPA"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

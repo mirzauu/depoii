@@ -5,7 +5,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   ...(process.env.NETLIFY ? {} : { output: "standalone" as const }),
   allowedDevOrigins: ["127.0.0.1", "localhost"],
-  serverExternalPackages: ["better-sqlite3", "nodemailer"],
+  serverExternalPackages: ["nodemailer"],
   turbopack: {
     root: process.cwd(),
   },

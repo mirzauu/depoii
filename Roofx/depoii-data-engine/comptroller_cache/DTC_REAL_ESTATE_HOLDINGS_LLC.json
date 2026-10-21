@@ -1,0 +1,50 @@
+{
+  "detail": {
+    "taxpayerId": "32064994174",
+    "feiNumber": null,
+    "name": "DTC REAL ESTATE HOLDINGS, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "1373 ROUND TABLE DR",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75247",
+    "mailingAddressZip4": "3505",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "10/02/2017",
+    "sosFileNumber": "0802827222",
+    "registeredAgentName": "DEREK FAY",
+    "registeredOfficeAddressStreet": "1373 ROUND TABLE DRIVE",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75247",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "CARA FAY WADE IAT",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "1373 ROUND TABLE DR",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75247",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DEREK FAY IAT",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "1373 ROUND TABLE DR",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75247",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

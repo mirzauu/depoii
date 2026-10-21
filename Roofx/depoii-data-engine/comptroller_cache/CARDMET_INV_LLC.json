@@ -1,0 +1,50 @@
+{
+  "detail": {
+    "taxpayerId": "32021276558",
+    "feiNumber": null,
+    "name": "CARDMET INVESTMENTS, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "2707 BARGE LN",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75212",
+    "mailingAddressZip4": "4204",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "10/19/2006",
+    "sosFileNumber": "0800722973",
+    "registeredAgentName": "DAVID L YOES",
+    "registeredOfficeAddressStreet": "2707 BARGE LANE",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75212",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "DAVID L YOES",
+        "AGNT_TITL_TX": "PRESIDENT",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "2707 BARGE LANE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75212",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DAVID L YOES",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "2707 BARGE LANE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75212",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

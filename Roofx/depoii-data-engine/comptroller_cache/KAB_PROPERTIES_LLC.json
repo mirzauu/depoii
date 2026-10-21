@@ -1,0 +1,50 @@
+{
+  "detail": {
+    "taxpayerId": "32070212371",
+    "feiNumber": "834264535",
+    "name": "KAB PROPERTIES, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "4504 BRONZE WAY",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75236",
+    "mailingAddressZip4": "2008",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "03/27/2019",
+    "sosFileNumber": "0803275870",
+    "registeredAgentName": "KWADWO ASIAMA",
+    "registeredOfficeAddressStreet": "823 S GREAT SW PKWY",
+    "registeredOfficeAddressCity": "GRAND PRAIRIE",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75051",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "KWADWO ASIAMA",
+        "AGNT_TITL_TX": "MANAGER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "4504 BRONZE WAY",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75236",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "KWADWO ASIAMA",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "4504 BRONZE WAY",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75236",
+        "SOURCE": "CPA"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

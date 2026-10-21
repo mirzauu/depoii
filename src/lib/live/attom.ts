@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import Database from "better-sqlite3";
+import { DatabaseSync } from "node:sqlite";
 import type { Parcel, Permit } from "@/lib/types";
 
 const BASE = "https://api.gateway.attomdata.com/propertyapi/v1.0.0";
@@ -16,7 +16,7 @@ export interface AttomBuilding {
 function cacheDb() {
   const dir = path.join(process.cwd(), "data");
   fs.mkdirSync(dir, { recursive: true });
-  const db = new Database(path.join(dir, "attom.sqlite"));
+  const db = new DatabaseSync(path.join(dir, "attom.sqlite"));
   db.exec(`CREATE TABLE IF NOT EXISTS attom_building (
     address_key TEXT PRIMARY KEY,
     payload TEXT NOT NULL,

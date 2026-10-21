@@ -1,4 +1,4 @@
-import { getDb } from "@/lib/db";
+import { query } from "@/lib/pg";
 import { sendMail, smtpConfigured } from "@/lib/mail";
 
 export const dynamic = "force-dynamic";
@@ -13,23 +13,9 @@ export async function POST(req: Request) {
   if (!name || !company || !email.includes("@") || !territory || !sizeRange) {
     return Response.json({ error: "Name, company, email, territory, and size range are required." }, { status: 400 });
   }
-  const db = getDb();
-  db.exec(`CREATE TABLE IF NOT EXISTS pilot_requests (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    company TEXT NOT NULL,
-    email TEXT NOT NULL,
-    territory TEXT NOT NULL,
-    size_range TEXT NOT NULL,
-    created_at TEXT NOT NULL
-  )`);
-  db.prepare(`INSERT INTO pilot_requests (name, company, email, territory, size_range, created_at) VALUES (?, ?, ?, ?, ?, ?)`).run(
-    name,
-    company,
-    email,
-    territory,
-    sizeRange,
-    new Date().toISOString(),
+  await query(
+    `insert into app.pilot_requests (name, company, email, territory, size_range, created_at) values ($1,$2,$3,$4,$5,$6)`,
+    [name, company, email, territory, sizeRange, new Date().toISOString()],
   );
 
   const notifyTo = process.env.PILOT_NOTIFY_EMAIL || process.env.SMTP_USER;

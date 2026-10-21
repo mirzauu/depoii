@@ -1,0 +1,29 @@
+{
+  "detail": {
+    "taxpayerId": "32105502911",
+    "feiNumber": null,
+    "name": "SCC TOP LINE 1 LP",
+    "dbaName": null,
+    "mailingAddressStreet": "4723 MEMPHIS ST",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75207",
+    "mailingAddressZip4": "5303",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "04/16/2026",
+    "sosFileNumber": "0806551504",
+    "registeredAgentName": "SHOAL CREEK CAPITAL PARTNERS LLC",
+    "registeredOfficeAddressStreet": "4723 MEMPHIS STREET",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75207",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "",
+    "officerInfo": []
+  },
+  "confidence": "exact_name"
+}

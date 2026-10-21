@@ -1,0 +1,29 @@
+{
+  "detail": {
+    "taxpayerId": "32036395682",
+    "feiNumber": null,
+    "name": "GREENBRIAR HOLDINGS DALLAS NO. 2, LTD.",
+    "dbaName": null,
+    "mailingAddressStreet": "8214 WESTCHESTER DR STE 730",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75225",
+    "mailingAddressZip4": "6199",
+    "rightToTransactTX": "FRANCHISE TAX ENDED",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "INACTIVE",
+    "effectiveSosRegistrationDate": "08/09/1995",
+    "sosFileNumber": "0008275910",
+    "registeredAgentName": "BEVERLY H EVERSOLE",
+    "registeredOfficeAddressStreet": "8214 WESTCHESTER DR., SUITE 730",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75225",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "",
+    "officerInfo": []
+  },
+  "confidence": "cleaned_name"
+}

@@ -1,0 +1,430 @@
+{
+  "detail": {
+    "taxpayerId": "13642866043",
+    "feiNumber": "364286604",
+    "name": "SVC MANUFACTURING, INC.",
+    "dbaName": null,
+    "mailingAddressStreet": "700 ANDERSON HILL RD ATTN: TAX DEPT",
+    "mailingAddressCity": "PURCHASE",
+    "mailingAddressState": "NY",
+    "mailingAddressZip": "10577",
+    "mailingAddressZip4": "1401",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " DE",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "04/29/1999",
+    "sosFileNumber": "0012641606",
+    "registeredAgentName": "CT CORPORATION SYSTEM",
+    "registeredOfficeAddressStreet": "1999 BRYAN ST., STE. 900",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75201",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:45:37.148Z",
+    "reportYear": "2025",
+    "officerInfo": [
+      {
+        "AGNT_NM": "ADA CHENG",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ADA CHENG",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ADA CHENG",
+        "AGNT_TITL_TX": "TREASURER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ALICIA GOURLEY",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ART W LAWRENCE",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "BRETT E WELL",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "BRETT E WELL",
+        "AGNT_TITL_TX": "ASSISTANT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "BRETT OBRIEN",
+        "AGNT_TITL_TX": "PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "BRIAN MCLAUHLIN",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "CHARLES F MUELLER",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "CHRISTINE GRIFF",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "CHRISTINE GRIFF",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "CYNTHIA NASTANSKI",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "CYNTHIA NESTANSKI",
+        "AGNT_TITL_TX": "SECRETARY",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "CYNTHIA NESTANSKI",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "CYNTHIA POGGIOGALLE",
+        "AGNT_TITL_TX": "ATTOMEY IN",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DAVID H PATRICK",
+        "AGNT_TITL_TX": "ASSISTANT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DAVID H PATRICK",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DAVID LAPP",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DAVID LENINGTON",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ERIC CHRISTEL",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "EUNICE YANG",
+        "AGNT_TITL_TX": "ASSISTANT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "EUNICE YANG",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "HEATHER A HAMMOND",
+        "AGNT_TITL_TX": "ASSISTANT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "HEATHER A HAMMOND",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JAMES KEELEY",
+        "AGNT_TITL_TX": "ATTOMEY IN",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JARRELL W BETHARD",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JEFFRY HUMMEL",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JOHN THIBODEAU",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MEGAN M HURLEY",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MEGAN M HURLEY",
+        "AGNT_TITL_TX": "ASSISTANT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "NOHA BASSIL TOPALIAN",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "NOHA BASSIL TOPALIAN",
+        "AGNT_TITL_TX": "ASSISTANT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "RICHARD RICH SCHUTZENHOFER",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ROBERT EDGAR RIETBROSK",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "SHAM KOHL",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "SHAM KOHL",
+        "AGNT_TITL_TX": "ASSISTANT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "SHARON LABREE",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "THOMAS TODD SALCITO",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "TYRONE SAPENTER",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

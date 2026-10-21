@@ -1,0 +1,70 @@
+{
+  "detail": {
+    "taxpayerId": "30117738200",
+    "feiNumber": null,
+    "name": "CEDAR ROUTH CORPORATION",
+    "dbaName": null,
+    "mailingAddressStreet": "5950 CEDAR SPRINGS RD OFC 200",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75235",
+    "mailingAddressZip4": "6805",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "03/29/1995",
+    "sosFileNumber": "0135032500",
+    "registeredAgentName": "LOUIS A BEECHERL III",
+    "registeredOfficeAddressStreet": "5950 CEDAR SPRINGS ROAD, SUITE 200",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75235",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "JOHN T BEECHERL",
+        "AGNT_TITL_TX": "PRESIDENT",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "5950 CEDAR SPRINGS RD LB 215",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75235",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "LOUIS BEECHERL III",
+        "AGNT_TITL_TX": "TREASURER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "5950 CEDAR SPRINGS RD LB 220",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75235",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "LOUIS BEECHERL III",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "5950 CEDAR SPRINGS RD LB 220",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75235",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ROBERT R BEECHERL",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "5950 CEDAR SPRINGS RD LB 200",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75235",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "cleaned_name"
+}

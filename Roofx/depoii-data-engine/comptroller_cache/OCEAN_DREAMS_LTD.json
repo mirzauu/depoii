@@ -1,0 +1,29 @@
+{
+  "detail": {
+    "taxpayerId": "17605063852",
+    "feiNumber": "760506385",
+    "name": "OCEAN DREAMS INC",
+    "dbaName": null,
+    "mailingAddressStreet": "2428 SEAWALL BLVD",
+    "mailingAddressCity": "GALVESTON",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "77550",
+    "mailingAddressZip4": "7954",
+    "rightToTransactTX": "FRANCHISE TAX INVOLUNTARILY ENDED",
+    "rightToTransactTXLink": "<a href='https://comptroller.texas.gov/taxes/franchise/certificate-letter-request.php'>Request tax clearance to reinstate entity</a>",
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "INACTIVE",
+    "effectiveSosRegistrationDate": "08/01/1996",
+    "sosFileNumber": "0140893500",
+    "registeredAgentName": "P A STOCKSTILL",
+    "registeredOfficeAddressStreet": "55 WAUGH DR. SUITE 607",
+    "registeredOfficeAddressCity": "HOUSTON",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "77007",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "",
+    "officerInfo": []
+  },
+  "confidence": "partial_name"
+}

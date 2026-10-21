@@ -1,0 +1,50 @@
+{
+  "detail": {
+    "taxpayerId": "32064491833",
+    "feiNumber": null,
+    "name": "GARIBALDI PROPERTIES, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "2121 LOHMANS CROSSING RD STE 504-468",
+    "mailingAddressCity": "LAKEWAY",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "78734",
+    "mailingAddressZip4": "5217",
+    "rightToTransactTX": "FRANCHISE TAX INVOLUNTARILY ENDED",
+    "rightToTransactTXLink": "<a href='https://comptroller.texas.gov/taxes/franchise/certificate-letter-request.php'>Request tax clearance to reinstate entity</a>",
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "INACTIVE",
+    "effectiveSosRegistrationDate": "08/03/2017",
+    "sosFileNumber": "0802783063",
+    "registeredAgentName": null,
+    "registeredOfficeAddressStreet": null,
+    "registeredOfficeAddressCity": null,
+    "registeredOfficeAddressState": null,
+    "registeredOfficeAddressZip": null,
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2019",
+    "officerInfo": [
+      {
+        "AGNT_NM": "THOMAS SEIDENSTRICKER",
+        "AGNT_TITL_TX": "MANAGER",
+        "AGNT_ACTV_YR": "2019",
+        "AD_STR_POB_TX": "2121 LOHMAN S CROSSING ROAD, SUITE 504-4",
+        "CITY_NM": "LAKEWAY",
+        "ST_CD": "TX",
+        "AD_ZP": "78734",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "THOMAS SEIDENSTRICKER",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2019",
+        "AD_STR_POB_TX": "2121 LOHMAN S CROSSING ROAD, SUITE 504-4",
+        "CITY_NM": "LAKEWAY",
+        "ST_CD": "TX",
+        "AD_ZP": "78734",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

@@ -1,0 +1,110 @@
+{
+  "detail": {
+    "taxpayerId": "32084083396",
+    "feiNumber": null,
+    "name": "HENDERSON AVE GRAND OWNER LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "16055 SPACE CENTER BLVD STE 235",
+    "mailingAddressCity": "HOUSTON",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "77062",
+    "mailingAddressZip4": "6212",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " DE",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "03/30/2022",
+    "sosFileNumber": "0804522818",
+    "registeredAgentName": "NATIONAL REGISTERED AGENTS, INC.",
+    "registeredOfficeAddressStreet": "16055 SPACE CENTER BLVD ., #235",
+    "registeredOfficeAddressCity": "HOUSTON",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "77062",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2025",
+    "officerInfo": [
+      {
+        "AGNT_NM": "JASON BLACKSBERG",
+        "AGNT_TITL_TX": "OFFICER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "58 FRANKLIN AVE",
+        "CITY_NM": "RYE",
+        "ST_CD": "NY",
+        "AD_ZP": "10580",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JASON BLACKSBERG",
+        "AGNT_TITL_TX": "OFFICER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "58 FRANKLIN AVE",
+        "CITY_NM": "RYE",
+        "ST_CD": "NY",
+        "AD_ZP": "10580",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JOHN GOTTFRIED",
+        "AGNT_TITL_TX": "OFFICER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "27 NICKERSON LANE",
+        "CITY_NM": "DARIEN",
+        "ST_CD": "CT",
+        "AD_ZP": "06820",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JOHN GOTTFRIED",
+        "AGNT_TITL_TX": "OFFICER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "27 NICKERSON LANE",
+        "CITY_NM": "DARIEN",
+        "ST_CD": "CT",
+        "AD_ZP": "06820",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JOSEPH NAPOLITANO",
+        "AGNT_TITL_TX": "OFFICER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "3278 WATERBURY DRIVE",
+        "CITY_NM": "WANTAGH",
+        "ST_CD": "NY",
+        "AD_ZP": "11793",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JOSEPH NAPOLITANO",
+        "AGNT_TITL_TX": "OFFICER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "3278 WATERBURY DRIVE",
+        "CITY_NM": "WANTAGH",
+        "ST_CD": "NY",
+        "AD_ZP": "11793",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "KENNETH F BERNSTEIN",
+        "AGNT_TITL_TX": "OFFICER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "45 NORTH BROOK LANE",
+        "CITY_NM": "IRVINGTON",
+        "ST_CD": "NY",
+        "AD_ZP": "10533",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "KENNETH F. BERNSTEIN",
+        "AGNT_TITL_TX": "OFFICER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "45 NORTH BROOK LANE",
+        "CITY_NM": "IRVINGTON",
+        "ST_CD": "NY",
+        "AD_ZP": "10533",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

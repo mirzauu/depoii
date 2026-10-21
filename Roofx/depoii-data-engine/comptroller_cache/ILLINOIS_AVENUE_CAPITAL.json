@@ -1,0 +1,50 @@
+{
+  "detail": {
+    "taxpayerId": "32053315357",
+    "feiNumber": null,
+    "name": "ILLINOIS AVENUE CAPITAL PARTNERS, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "4314 MEDICAL PKWY STE 200",
+    "mailingAddressCity": "AUSTIN",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "78756",
+    "mailingAddressZip4": "3332",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "02/26/2014",
+    "sosFileNumber": "0801941193",
+    "registeredAgentName": "LONG VIEW EQUITY PARTNERS II, LTD.",
+    "registeredOfficeAddressStreet": "4314 MEDICAL PKWY SUITE 200",
+    "registeredOfficeAddressCity": "AUSTIN",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "78756",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "DUSTIN JOHNSON",
+        "AGNT_TITL_TX": "MANAGER",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "4314 MEDICAL PKWY STE 200",
+        "CITY_NM": "AUSTIN",
+        "ST_CD": "TX",
+        "AD_ZP": "78756",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DUSTIN JOHNSON",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "4314 MEDICAL PKWY STE 200",
+        "CITY_NM": "AUSTIN",
+        "ST_CD": "TX",
+        "AD_ZP": "78756",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "cleaned_name"
+}

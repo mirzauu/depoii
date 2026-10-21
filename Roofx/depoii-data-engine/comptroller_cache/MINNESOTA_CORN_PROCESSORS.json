@@ -1,0 +1,170 @@
+{
+  "detail": {
+    "taxpayerId": "14119284678",
+    "feiNumber": "411928467",
+    "name": "MINNESOTA CORN PROCESSORS, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "4666 E FARIES PKWY",
+    "mailingAddressCity": "DECATUR",
+    "mailingAddressState": "IL",
+    "mailingAddressZip": "62526",
+    "mailingAddressZip4": "5666",
+    "rightToTransactTX": "FRANCHISE TAX ENDED",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " CO",
+    "sosRegistrationStatus": "INACTIVE",
+    "effectiveSosRegistrationDate": "06/14/2000",
+    "sosFileNumber": "0707005323",
+    "registeredAgentName": "CT CORPORATION SYSTEM",
+    "registeredOfficeAddressStreet": "1999 BRYAN ST., STE. 900",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75201",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2003",
+    "officerInfo": [
+      {
+        "AGNT_NM": "BRADFORD A SCHULTZ",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2003",
+        "AD_STR_POB_TX": "1104 TRAVIS RD",
+        "CITY_NM": "MARSHALL",
+        "ST_CD": "MN",
+        "AD_ZP": "56258",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DANIEL H SLACKEN",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2003",
+        "AD_STR_POB_TX": "504 W THOMAS AVE",
+        "CITY_NM": "MARSHALL",
+        "ST_CD": "MN",
+        "AD_ZP": "56258",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DANIEL H SLACKEN",
+        "AGNT_TITL_TX": "CFO",
+        "AGNT_ACTV_YR": "2003",
+        "AD_STR_POB_TX": "504 W THOMAS AVE",
+        "CITY_NM": "MARSHALL",
+        "ST_CD": "MN",
+        "AD_ZP": "56258",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "GARY WADAS",
+        "AGNT_TITL_TX": "CONTROLLER",
+        "AGNT_ACTV_YR": "2003",
+        "AD_STR_POB_TX": "605 DESCHEPPER",
+        "CITY_NM": "MARSHALL",
+        "ST_CD": "MN",
+        "AD_ZP": "56258",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "GARY WADAS",
+        "AGNT_TITL_TX": "TREASURER",
+        "AGNT_ACTV_YR": "2003",
+        "AD_STR_POB_TX": "605 DESCHEPPER",
+        "CITY_NM": "MARSHALL",
+        "ST_CD": "MN",
+        "AD_ZP": "56258",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JOE BENNETT",
+        "AGNT_TITL_TX": "SECRETARY",
+        "AGNT_ACTV_YR": "2003",
+        "AD_STR_POB_TX": "303 W JAMES AVE",
+        "CITY_NM": "MARSHALL",
+        "ST_CD": "MN",
+        "AD_ZP": "56258",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JOE BENNETT",
+        "AGNT_TITL_TX": "GENERAL CO",
+        "AGNT_ACTV_YR": "2003",
+        "AD_STR_POB_TX": "303 W JAMES AVE",
+        "CITY_NM": "MARSHALL",
+        "ST_CD": "MN",
+        "AD_ZP": "56258",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "L DANIEL THOMPSON",
+        "AGNT_TITL_TX": "PRESIDENT",
+        "AGNT_ACTV_YR": "2003",
+        "AD_STR_POB_TX": "1401 RIDGEWAY ROAD",
+        "CITY_NM": "MARSHALL",
+        "ST_CD": "MN",
+        "AD_ZP": "56258",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "L DANIEL THOMPSON",
+        "AGNT_TITL_TX": "CEO",
+        "AGNT_ACTV_YR": "2003",
+        "AD_STR_POB_TX": "1401 RIDGEWAY ROAD",
+        "CITY_NM": "MARSHALL",
+        "ST_CD": "MN",
+        "AD_ZP": "56258",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "LAWRENCE J SCHIAVO",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2003",
+        "AD_STR_POB_TX": "1400 RIDGEWAY ROAD",
+        "CITY_NM": "MARSHALL",
+        "ST_CD": "MN",
+        "AD_ZP": "56258",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MICHAEL MOTE",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2003",
+        "AD_STR_POB_TX": "1119 SKYLIT DRIVE",
+        "CITY_NM": "MARSHALL",
+        "ST_CD": "MN",
+        "AD_ZP": "56258",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MICHAEL MOTE",
+        "AGNT_TITL_TX": "CHIEF INFO",
+        "AGNT_ACTV_YR": "2003",
+        "AD_STR_POB_TX": "1119 SKYLIT DRIVE",
+        "CITY_NM": "MARSHALL",
+        "ST_CD": "MN",
+        "AD_ZP": "56258",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ROGER EVERT",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2003",
+        "AD_STR_POB_TX": "506 E LYON STREET",
+        "CITY_NM": "MARSHALL",
+        "ST_CD": "MN",
+        "AD_ZP": "56258",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ROGER L UNTIEDT",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2003",
+        "AD_STR_POB_TX": "609 DESCHEPPER STREET",
+        "CITY_NM": "MARSHALL",
+        "ST_CD": "MN",
+        "AD_ZP": "56258",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "cleaned_name"
+}

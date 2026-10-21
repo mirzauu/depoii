@@ -1,0 +1,29 @@
+{
+  "detail": {
+    "taxpayerId": "16312710698",
+    "feiNumber": "631271069",
+    "name": "OCCMED HOLDING CORPORATION",
+    "dbaName": null,
+    "mailingAddressStreet": "1 HEALTHSOUTH PKWY S",
+    "mailingAddressCity": "BIRMINGHAM",
+    "mailingAddressState": "AL",
+    "mailingAddressZip": "35243",
+    "mailingAddressZip4": "2358",
+    "rightToTransactTX": "FRANCHISE TAX ENDED",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " DE",
+    "sosRegistrationStatus": "INACTIVE",
+    "effectiveSosRegistrationDate": "03/28/2001",
+    "sosFileNumber": "0013775306",
+    "registeredAgentName": "CT CORPORATION SYSTEM",
+    "registeredOfficeAddressStreet": "350 N. ST. PAUL ST.",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75201",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "",
+    "officerInfo": []
+  },
+  "confidence": "partial_name"
+}

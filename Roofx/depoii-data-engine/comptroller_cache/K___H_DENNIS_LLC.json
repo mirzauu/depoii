@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32044052424",
+    "feiNumber": "451657857",
+    "name": "K & H DENNIS LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "10828 DENNIS RD",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75229",
+    "mailingAddressZip4": "3643",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "04/15/2011",
+    "sosFileNumber": "0801412191",
+    "registeredAgentName": "HOLLY H NGUYEN",
+    "registeredOfficeAddressStreet": "10828 DENNIS RD, #B",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75229",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "HOLLY NGUYEN",
+        "AGNT_TITL_TX": "M.MEMBER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

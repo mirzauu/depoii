@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32052010108",
+    "feiNumber": null,
+    "name": "PEELER STREET PARTNERS, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "3899 MAPLE AVE # 300",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75219",
+    "mailingAddressZip4": "3913",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "09/18/2013",
+    "sosFileNumber": "0801851654",
+    "registeredAgentName": "BENNIE M. BRAY",
+    "registeredOfficeAddressStreet": "8214 WESTCHESTER DRIVE, SUITE 800",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75225",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "BENNIE M BRAY",
+        "AGNT_TITL_TX": "MANAGING M",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "3899 MAPLE AVE STE 300",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75219",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

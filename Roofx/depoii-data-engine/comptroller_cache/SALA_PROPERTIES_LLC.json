@@ -1,0 +1,50 @@
+{
+  "detail": {
+    "taxpayerId": "32056767992",
+    "feiNumber": "473547830",
+    "name": "SALA PROPERTIES LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "4530 MINT WAY",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75236",
+    "mailingAddressZip4": "2014",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "03/25/2015",
+    "sosFileNumber": "0802182509",
+    "registeredAgentName": "MARGARET A SALA",
+    "registeredOfficeAddressStreet": "4530 MINT WAY",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75236",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "MARGARET SALA",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "4530 MINT WAY",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75236",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MARGARET SALA",
+        "AGNT_TITL_TX": "GOVERNING",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "629 BIZERTE AVE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75224",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

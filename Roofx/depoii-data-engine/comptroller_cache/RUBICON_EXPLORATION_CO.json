@@ -1,0 +1,80 @@
+{
+  "detail": {
+    "taxpayerId": "17519804102",
+    "feiNumber": "751980410",
+    "name": "RUBICON EXPLORATION COMPANY",
+    "dbaName": null,
+    "mailingAddressStreet": "3015 HANSBORO AVE",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75233",
+    "mailingAddressZip4": "1413",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "06/27/1984",
+    "sosFileNumber": "0071020300",
+    "registeredAgentName": "MATTHEW L BEDDOE",
+    "registeredOfficeAddressStreet": "3015 HANSBORO AVENUE",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75233",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2025",
+    "officerInfo": [
+      {
+        "AGNT_NM": "BRENNAN C CUSTARD",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "3015 HANSBORO AVE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75233",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "BRENNAN C CUSTARD",
+        "AGNT_TITL_TX": "VP / TREAS",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "3015 HANSBORO AVE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75233",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "CALEN MCADAMS",
+        "AGNT_TITL_TX": "SEC",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "3015 HANSBORO AVE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75233",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MATTHEW L BEDDOE",
+        "AGNT_TITL_TX": "PRESIDENT",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "4518 SHADY HILL DR",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75229",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MATTHEW L BEDDOE",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "4518 SHADY HILL DR",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75229",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "cleaned_name"
+}

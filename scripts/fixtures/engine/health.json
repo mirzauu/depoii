@@ -1,0 +1,33 @@
+{
+  "status": "healthy",
+  "engine_version": "2.0.0",
+  "environment": "development",
+  "uptime_seconds": 22.7,
+  "database": "connected",
+  "redis": "simulated",
+  "jurisdictions_synced": 3,
+  "jurisdictions_stale": [],
+  "last_sync_summary": {
+    "Dallas, TX": {
+      "last_sync": "2026-10-06T06:00:00Z",
+      "status": "SUCCESS",
+      "row_count": 142,
+      "etag": "W/\"20261006-tx-dal-01\"",
+      "drift_pct": 0.04
+    },
+    "Fort Worth, TX": {
+      "last_sync": "2026-10-06T06:15:00Z",
+      "status": "SUCCESS",
+      "row_count": 88,
+      "etag": null,
+      "drift_pct": 0.02
+    },
+    "Austin, TX": {
+      "last_sync": "2026-10-06T06:30:00Z",
+      "status": "SUCCESS",
+      "row_count": 115,
+      "etag": "W/\"20261006-tx-aus-02\"",
+      "drift_pct": -0.01
+    }
+  }
+}

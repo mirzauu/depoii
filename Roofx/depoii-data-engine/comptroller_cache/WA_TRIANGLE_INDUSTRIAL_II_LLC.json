@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32101375320",
+    "feiNumber": null,
+    "name": "WA TRIANGLE INDUSTRIAL II, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "4350 LA JOLLA VILLAGE DR STE 900",
+    "mailingAddressCity": "SAN DIEGO",
+    "mailingAddressState": "CA",
+    "mailingAddressZip": "92122",
+    "mailingAddressZip4": "1246",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " DE",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "07/29/2025",
+    "sosFileNumber": "0806147488",
+    "registeredAgentName": "NATIONAL REGISTERED AGENTS INC.",
+    "registeredOfficeAddressStreet": "1999 BRYAN ST. SUITE 900",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75201",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:45:37.148Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "WA TRIANGLE TIER LLC",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "4350 LA JOLLA VILLAGE DRIVE 900",
+        "CITY_NM": "SAN DIEGO",
+        "ST_CD": "CA",
+        "AD_ZP": "92122",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

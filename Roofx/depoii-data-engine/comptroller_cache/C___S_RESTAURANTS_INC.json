@@ -1,0 +1,50 @@
+{
+  "detail": {
+    "taxpayerId": "32015291282",
+    "feiNumber": null,
+    "name": "C & S RESTAURANTS LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "515 MEADOWVIEW LN",
+    "mailingAddressCity": "COPPELL",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75019",
+    "mailingAddressZip4": "5742",
+    "rightToTransactTX": "FRANCHISE TAX ENDED",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "INACTIVE",
+    "effectiveSosRegistrationDate": "06/23/2004",
+    "sosFileNumber": "0800356943",
+    "registeredAgentName": "STEPHEN BUTTS",
+    "registeredOfficeAddressStreet": "515 MEADOWVIEW LANE",
+    "registeredOfficeAddressCity": "COPPELL",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75019",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "Not Available",
+    "officerInfo": [
+      {
+        "AGNT_NM": "CHERYL BUTTS",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "515 MEADOWVIEW LANE",
+        "CITY_NM": "COPPELL",
+        "ST_CD": "TX",
+        "AD_ZP": "75019",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "STEPHEN BUTTS",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "515 MEADOWVIEW LANE",
+        "CITY_NM": "COPPELL",
+        "ST_CD": "TX",
+        "AD_ZP": "75019",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

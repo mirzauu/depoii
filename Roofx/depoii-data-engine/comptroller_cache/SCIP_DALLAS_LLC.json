@@ -1,0 +1,60 @@
+{
+  "detail": {
+    "taxpayerId": "32054794113",
+    "feiNumber": "471653471",
+    "name": "SCIP DALLAS LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "500 HOGSBACK RD",
+    "mailingAddressCity": "MASON",
+    "mailingAddressState": "MI",
+    "mailingAddressZip": "48854",
+    "mailingAddressZip4": "8523",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " MI",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "07/30/2014",
+    "sosFileNumber": "0802039139",
+    "registeredAgentName": "UNITED AGENT GROUP INC.",
+    "registeredOfficeAddressStreet": "2595 N DALLAS PKWY, SUITE 350",
+    "registeredOfficeAddressCity": "FRISCO",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75034",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "DART MANAGEMENT SERVICES IN",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "500 HOGSBACK RD",
+        "CITY_NM": "MASON",
+        "ST_CD": "MI",
+        "AD_ZP": "48854",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DART MANAGEMENT SERVICES IN",
+        "AGNT_TITL_TX": "NONMEMBER",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "500 HOGSBACK RD",
+        "CITY_NM": "MASON",
+        "ST_CD": "MI",
+        "AD_ZP": "48854",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "SOLO CUP INDUSTRIAL PORTFOL",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "500 HOGSBACK RD",
+        "CITY_NM": "MASON",
+        "ST_CD": "MI",
+        "AD_ZP": "48854",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

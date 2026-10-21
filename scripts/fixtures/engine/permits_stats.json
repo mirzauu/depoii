@@ -1,0 +1,43 @@
+{
+  "total_permits": 18856,
+  "total_valuation_usd": 4865592805.27,
+  "by_category": {
+    "Commercial": 3813,
+    "Commercial Re-Roof": 5064,
+    "Commercial Waterproofing & Coating": 6,
+    "Multi-Family Re-Roof": 1,
+    "Roof Repair & Alteration": 14,
+    "Roofing": 9958
+  },
+  "by_roof_system": {
+    "Unspecified Commercial System": 14886,
+    "Elastomeric Restoration / Coating": 6,
+    "Commercial Tile / Shingle": 2,
+    "TPO Single-Ply Commercial System": 140,
+    "Commercial Flat / Membrane": 3268,
+    "Architectural Asphalt Shingle": 110,
+    "Modified Bitumen SBS/APP": 22,
+    "EPDM Membrane": 5,
+    "Standing Seam Architectural Metal": 98,
+    "Liquid Applied Roofing System": 58,
+    "Built-Up Roof (BUR) Multi-Ply": 11,
+    "TPO Single-Ply Membrane": 234,
+    "PVC Single-Ply Membrane": 11,
+    "TPO Single-Ply": 5
+  },
+  "by_jurisdiction": {
+    "Addison, TX": 52,
+    "Cambridge, MA": 900,
+    "Carrollton, TX": 35,
+    "Chicago, IL": 2,
+    "Cincinnati, OH": 2,
+    "Dallas, TX": 10494,
+    "Fort Worth, TX": 310,
+    "Gainesville, FL": 3998,
+    "Grand Prairie, TX": 35,
+    "Irving, TX": 35,
+    "Montgomery County, MD": 1,
+    "New York City, NY": 2989,
+    "Seattle, WA": 3
+  }
+}

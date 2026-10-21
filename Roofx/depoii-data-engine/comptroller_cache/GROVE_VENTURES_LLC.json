@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "17607322728",
+    "feiNumber": "760732272",
+    "name": "GROVE VENTURES, L.L.C.",
+    "dbaName": null,
+    "mailingAddressStreet": "6606 MAPLESHADE LN APT 23E",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75252",
+    "mailingAddressZip4": "8559",
+    "rightToTransactTX": "FRANCHISE TAX ENDED",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "INACTIVE",
+    "effectiveSosRegistrationDate": "04/11/2003",
+    "sosFileNumber": "0800193162",
+    "registeredAgentName": "ALAN GROVE",
+    "registeredOfficeAddressStreet": "6651 FLANARY LANE",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75252",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2023",
+    "officerInfo": [
+      {
+        "AGNT_NM": "ALAN GROVE",
+        "AGNT_TITL_TX": "MANAGER",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "6606 MAPLESHADE LANE, APT. 23E",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75252",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

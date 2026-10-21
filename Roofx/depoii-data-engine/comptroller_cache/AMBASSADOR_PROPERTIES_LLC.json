@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32099602180",
+    "feiNumber": null,
+    "name": "AMBASSADOR PROPERTIES LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "5900 BALCONES DR STE 100",
+    "mailingAddressCity": "AUSTIN",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "78731",
+    "mailingAddressZip4": "4298",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "04/04/2025",
+    "sosFileNumber": "0805979565",
+    "registeredAgentName": "NORTHWEST REGISTERED AGENT, LLC",
+    "registeredOfficeAddressStreet": "5900 BALCONES DRIVE STE 100",
+    "registeredOfficeAddressCity": "AUSTIN",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "78731",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "MOHAMMED W WAZWAZ",
+        "AGNT_TITL_TX": "Managing Member",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "3873 114TH LN NE",
+        "CITY_NM": "BLAINE",
+        "ST_CD": "MN",
+        "AD_ZP": "55449",
+        "SOURCE": "CPA"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

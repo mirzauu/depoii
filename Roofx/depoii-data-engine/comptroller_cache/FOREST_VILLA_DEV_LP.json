@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32035883761",
+    "feiNumber": null,
+    "name": "FOREST VILLA DEVELOPMENT L.P.",
+    "dbaName": null,
+    "mailingAddressStreet": "14241 DALLAS PKWY STE 800",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75254",
+    "mailingAddressZip4": "2919",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "06/28/2002",
+    "sosFileNumber": "0800098992",
+    "registeredAgentName": "JENNIFER S. STODDARD",
+    "registeredOfficeAddressStreet": "14241 DALLAS PARKWAY, SUITE 800",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75254",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "FOREST VILLA MANAGEMENT, L.L.C.",
+        "AGNT_TITL_TX": "GENERAL PA",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "4005 EUCLID AVE.",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75205",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

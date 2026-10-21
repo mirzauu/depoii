@@ -8,7 +8,7 @@ export async function GET(req: Request) {
     await requireSuperAdmin();
     const url = new URL(req.url);
     const limit = Number(url.searchParams.get("limit") || "50");
-    return Response.json(listActivity({
+    return Response.json(await listActivity({
       orgId: url.searchParams.get("orgId") || undefined,
       userId: url.searchParams.get("userId") || undefined,
       action: url.searchParams.get("action") || undefined,

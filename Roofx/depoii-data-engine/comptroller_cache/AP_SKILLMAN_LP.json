@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32096528057",
+    "feiNumber": null,
+    "name": "AP SKILLMAN, LP",
+    "dbaName": null,
+    "mailingAddressStreet": "2151 HAWKINS ST STE 1100",
+    "mailingAddressCity": "CHARLOTTE",
+    "mailingAddressState": "NC",
+    "mailingAddressZip": "28203",
+    "mailingAddressZip4": "5050",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " DE",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "08/27/2024",
+    "sosFileNumber": "0805684995",
+    "registeredAgentName": "C T CORPORATION SYSTEM",
+    "registeredOfficeAddressStreet": "1999 BRYAN ST., STE. 900",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75201",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": null,
+        "AGNT_TITL_TX": null,
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "CPA"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

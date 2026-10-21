@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32036373572",
+    "feiNumber": null,
+    "name": "BCW WAREHOUSE LEASING, L.P.",
+    "dbaName": null,
+    "mailingAddressStreet": "6000 DENTON DR",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75235",
+    "mailingAddressZip4": "6626",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "04/01/1996",
+    "sosFileNumber": "0008796610",
+    "registeredAgentName": "BCW WAREHOUSE MANAGEMENT, INC.",
+    "registeredOfficeAddressStreet": "6000 DENTON DR.",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75235",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2025",
+    "officerInfo": [
+      {
+        "AGNT_NM": "BCW WAREHOUSE MANAGEMENT, INC.",
+        "AGNT_TITL_TX": "GENERAL PA",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "6000 DENTON DR.",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75235",
+        "SOURCE": "CPA"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

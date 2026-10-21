@@ -1,0 +1,60 @@
+{
+  "detail": {
+    "taxpayerId": "32049819884",
+    "feiNumber": null,
+    "name": "JETER ILLINOIS PROPERTY, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "2604 PEACHTREE LN",
+    "mailingAddressCity": "MCKINNEY",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75072",
+    "mailingAddressZip4": "3622",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "12/28/2012",
+    "sosFileNumber": "0801708288",
+    "registeredAgentName": "ERIN M SINGLETON",
+    "registeredOfficeAddressStreet": "2604 PEACHTREE LN.",
+    "registeredOfficeAddressCity": "MCKINNEY",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75070",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "BRADLEY SINGLETON",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "2604 PEACHTREE LANE",
+        "CITY_NM": "MCKINNEY",
+        "ST_CD": "TX",
+        "AD_ZP": "75072",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "ERIN M SINGLETON",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "2604 PEACHTREE LANE",
+        "CITY_NM": "MCKINNEY",
+        "ST_CD": "TX",
+        "AD_ZP": "75072",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "WILLIAM SINGLETON",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "2604 PEACHTREE LANE",
+        "CITY_NM": "MCKINNEY",
+        "ST_CD": "TX",
+        "AD_ZP": "75072",
+        "SOURCE": "CPA"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

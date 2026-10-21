@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32009262349",
+    "feiNumber": null,
+    "name": "JJC HOLDINGS COMPANY LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "500 SHADY GLN",
+    "mailingAddressCity": "ENNIS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75119",
+    "mailingAddressZip4": "3731",
+    "rightToTransactTX": "FRANCHISE TAX INVOLUNTARILY ENDED",
+    "rightToTransactTXLink": "<a href='https://comptroller.texas.gov/taxes/franchise/certificate-letter-request.php'>Request tax clearance to reinstate entity</a>",
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "INACTIVE",
+    "effectiveSosRegistrationDate": "11/18/2002",
+    "sosFileNumber": "0800143148",
+    "registeredAgentName": "JOHN CODY",
+    "registeredOfficeAddressStreet": "500 SHADY GLEN",
+    "registeredOfficeAddressCity": "ENNIS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75119",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "Not Available",
+    "officerInfo": [
+      {
+        "AGNT_NM": "JOHN CODY",
+        "AGNT_TITL_TX": "MANAGING M",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "500 SHADY GLEN",
+        "CITY_NM": "ENNIS",
+        "ST_CD": "TX",
+        "AD_ZP": "75119",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "cleaned_name"
+}

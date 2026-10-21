@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "10304083362",
+    "feiNumber": "030408336",
+    "name": "SOLACE COUNSELING ASSOCIATES PLLC",
+    "dbaName": null,
+    "mailingAddressStreet": "1475 PRUDENTIAL DR",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75235",
+    "mailingAddressZip4": "4109",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "04/25/2002",
+    "sosFileNumber": "0800078635",
+    "registeredAgentName": "JOHN N. O'DEA",
+    "registeredOfficeAddressStreet": "2519 OAKLAWN AVE. #100",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75219",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "DHIREN PATEL DO PA",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "2519 OAK LAWN AVE SUITE 1",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75219",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "cleaned_name"
+}

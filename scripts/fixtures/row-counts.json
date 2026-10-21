@@ -1,0 +1,49 @@
+{
+  "next": {
+    "path": "data/depoii.sqlite",
+    "tables": {
+      "parcels": 47867,
+      "permits": 2136,
+      "hail_reports": 174,
+      "warnings": 621,
+      "score_snapshots": 1070,
+      "field_outcomes": 0,
+      "orgs": 2,
+      "users": 4,
+      "memberships": 4,
+      "leads": 573,
+      "activity": 1102,
+      "login_links": 2,
+      "permit_contacts": 0,
+      "archived_unverified_leads": 1004,
+      "pilot_requests": 3,
+      "login_otps": 0,
+      "team_invites": 1
+    }
+  },
+  "engine": {
+    "path": "Roofx/depoii-data-engine/depoii_local.db",
+    "tables": {
+      "normalized_permits": 160594,
+      "canonical_contractors": 15498,
+      "storm_swaths": 692,
+      "parcels": 66132,
+      "scored_parcel_leads": 11275,
+      "field_provenance": 1337466,
+      "release_fields": 25,
+      "manual_disqualifications": 10,
+      "lead_evidence": 4051,
+      "released_leads": 283,
+      "staged_baseline_roof_matches": 7832,
+      "staged_aging_commercial_leads": 950,
+      "staged_hail_commercial_leads": 14406,
+      "owner_entities": 279,
+      "owner_persons": 668,
+      "lead_contacts": 283
+    }
+  },
+  "engine_root": {
+    "path": "depoii_local.db",
+    "tables": {}
+  }
+}

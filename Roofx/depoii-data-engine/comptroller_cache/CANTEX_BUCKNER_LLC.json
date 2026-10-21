@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32097818929",
+    "feiNumber": null,
+    "name": "CANTEX BUCKNER, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "107 PITTSBURG ST",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75207",
+    "mailingAddressZip4": "7207",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "12/03/2024",
+    "sosFileNumber": "0805806081",
+    "registeredAgentName": "CANTEX RE, LLC",
+    "registeredOfficeAddressStreet": "107 PITTSBURG STREET",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75207",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "CANTEX RE LC",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "107 PITTSBURG ST DALLAS",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "752074312",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

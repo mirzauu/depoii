@@ -1,0 +1,70 @@
+{
+  "detail": {
+    "taxpayerId": "32082236665",
+    "feiNumber": null,
+    "name": "SKILLMAN 635 LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "10300 N CENTRAL EXPY STE 220",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75231",
+    "mailingAddressZip4": "8626",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "12/10/2021",
+    "sosFileNumber": "0804342559",
+    "registeredAgentName": "MICHAEL UHM",
+    "registeredOfficeAddressStreet": "10300 N. CENTRAL EXWY., SUITE 220",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75231",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "MICHAEL UHM",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "PO BOX 409",
+        "CITY_NM": "COPPELL",
+        "ST_CD": "TX",
+        "AD_ZP": "75019",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MICHAEL UHM",
+        "AGNT_TITL_TX": "MANAGING M",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "PO BOX 409",
+        "CITY_NM": "COPPELL",
+        "ST_CD": "TX",
+        "AD_ZP": "75019",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "PAUL H YOM",
+        "AGNT_TITL_TX": "MANAGING M",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "3212 MERITA DR",
+        "CITY_NM": "RICHARDSON",
+        "ST_CD": "TX",
+        "AD_ZP": "75082",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "PAUL H YOM",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "3212 MERITA DR",
+        "CITY_NM": "RICHARDSON",
+        "ST_CD": "TX",
+        "AD_ZP": "75082",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

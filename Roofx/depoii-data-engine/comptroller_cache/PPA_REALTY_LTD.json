@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32036153461",
+    "feiNumber": null,
+    "name": "PPA REALTY LTD.",
+    "dbaName": null,
+    "mailingAddressStreet": "1999 BRYAN ST STE 900",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75201",
+    "mailingAddressZip4": "3140",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "05/04/2000",
+    "sosFileNumber": "0013441110",
+    "registeredAgentName": "C T CORPORATION SYSTEM",
+    "registeredOfficeAddressStreet": "1999 BRYAN ST., STE. 900",
+    "registeredOfficeAddressCity": "HOUSTON",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75201",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "PP LAND GP, LLC",
+        "AGNT_TITL_TX": "GENERAL PA",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "11 GREENWAY PLAZA, STE 3100",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75201",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "cleaned_name"
+}

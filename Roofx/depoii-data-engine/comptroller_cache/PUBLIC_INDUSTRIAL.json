@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "17524537549",
+    "feiNumber": "752453754",
+    "name": "PUBLIC INDUSTRIAL PROPERTY CO., INC.",
+    "dbaName": null,
+    "mailingAddressStreet": "2964 LYNDON B JOHNSON FWY STE 400",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75234",
+    "mailingAddressZip4": "7694",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "10/26/1992",
+    "sosFileNumber": "0124839100",
+    "registeredAgentName": "HOWARD L. LAWSON",
+    "registeredOfficeAddressStreet": "2964 LBJ FREEWAY, SUITE 400",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75234",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "HOWARD LAWSON",
+        "AGNT_TITL_TX": "PRESIDENT",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "2964 LBJ FREEWAY SUITE 400",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75234",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "cleaned_name"
+}

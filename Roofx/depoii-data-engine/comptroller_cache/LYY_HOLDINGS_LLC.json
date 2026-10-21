@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32063558350",
+    "feiNumber": null,
+    "name": "LYY HOLDINGS, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "6225 WESTCHESTER LN",
+    "mailingAddressCity": "PLANO",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75093",
+    "mailingAddressZip4": "6174",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "04/25/2017",
+    "sosFileNumber": "0802706922",
+    "registeredAgentName": "XIAOMING YI",
+    "registeredOfficeAddressStreet": "6225 WESTCHESTER LANE",
+    "registeredOfficeAddressCity": "PLANO",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75093",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "XIAMONG YI",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "6225 WESTCHESTER LANE",
+        "CITY_NM": "PLANO",
+        "ST_CD": "TX",
+        "AD_ZP": "75093",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

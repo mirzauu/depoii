@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "15619489014",
+    "feiNumber": "561948901",
+    "name": "PRIMAX PROPERTIES, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "1100 E MOREHEAD ST",
+    "mailingAddressCity": "CHARLOTTE",
+    "mailingAddressState": "NC",
+    "mailingAddressZip": "28204",
+    "mailingAddressZip4": "2815",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " NC",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "05/18/2000",
+    "sosFileNumber": "0706872823",
+    "registeredAgentName": "CORPORATION SERVICE COMPANY",
+    "registeredOfficeAddressStreet": "211 E. 7TH STREET SUITE 620",
+    "registeredOfficeAddressCity": "AUSTIN",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "78701",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "WILLIAM G SEYMOUR",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "1100 E MOREHEAD STREET",
+        "CITY_NM": "CHARLOTTE",
+        "ST_CD": "NC",
+        "AD_ZP": "28204",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

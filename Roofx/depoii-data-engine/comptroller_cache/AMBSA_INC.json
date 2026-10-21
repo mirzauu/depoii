@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32039889525",
+    "feiNumber": "270563895",
+    "name": "AMBSA INC.",
+    "dbaName": null,
+    "mailingAddressStreet": "9118 BARTON CREEK DR",
+    "mailingAddressCity": "ROWLETT",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75089",
+    "mailingAddressZip4": "2637",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "07/10/2009",
+    "sosFileNumber": "0801145628",
+    "registeredAgentName": "ASFAW F SIBHAT",
+    "registeredOfficeAddressStreet": "9118 BARTON CREEK DRIVE",
+    "registeredOfficeAddressCity": "ROWLETT",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75089",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "ASFAW SIBHAT",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "118 BARTON CREEK DR",
+        "CITY_NM": "ROWLETT",
+        "ST_CD": "TX",
+        "AD_ZP": "75089",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "cleaned_name"
+}

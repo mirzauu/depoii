@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32069084062",
+    "feiNumber": null,
+    "name": "4000 DAN MORTON DRIVE, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "9722 VAN DYKE RD",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75218",
+    "mailingAddressZip4": "2153",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " OH",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "12/03/2018",
+    "sosFileNumber": "0803177733",
+    "registeredAgentName": "ROBERT H. RICHMOND III",
+    "registeredOfficeAddressStreet": "9722 VAN DYKE ROAD",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75218",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "BRYAN B KELLER",
+        "AGNT_TITL_TX": "PRESIDENT",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "24862 ELLIOT ROAD",
+        "CITY_NM": "DEFIANCE",
+        "ST_CD": "OH",
+        "AD_ZP": "43512",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32050620973",
+    "feiNumber": null,
+    "name": "DENNIS ROAD INDUSTRIAL GP, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "2964 LYNDON B JOHNSON FWY STE 400",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75234",
+    "mailingAddressZip4": "7694",
+    "rightToTransactTX": "FRANCHISE TAX ENDED",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "INACTIVE",
+    "effectiveSosRegistrationDate": "04/04/2013",
+    "sosFileNumber": "0801762500",
+    "registeredAgentName": "HOWARD L. LAWSON",
+    "registeredOfficeAddressStreet": "7411 HINES PLACE, STE 100",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75235",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "HOWARD LAWSON",
+        "AGNT_TITL_TX": "MANAGER",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "2964 LBJ FREEWAY STE 400",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75234",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

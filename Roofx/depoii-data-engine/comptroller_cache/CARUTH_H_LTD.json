@@ -1,0 +1,29 @@
+{
+  "detail": {
+    "taxpayerId": "17525277764",
+    "feiNumber": "752527776",
+    "name": "CARUTH HAVEN RETAIL JOINT VENTURE",
+    "dbaName": null,
+    "mailingAddressStreet": "7001 PRESTON RD STE 410",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75205",
+    "mailingAddressZip4": "1187",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "NOT REGISTERED",
+    "effectiveSosRegistrationDate": "NOT REGISTERED",
+    "sosFileNumber": "NOT REGISTERED",
+    "registeredAgentName": null,
+    "registeredOfficeAddressStreet": null,
+    "registeredOfficeAddressCity": null,
+    "registeredOfficeAddressState": null,
+    "registeredOfficeAddressZip": null,
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "",
+    "officerInfo": []
+  },
+  "confidence": "partial_name"
+}

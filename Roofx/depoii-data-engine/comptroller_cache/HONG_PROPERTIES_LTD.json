@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "17527867695",
+    "feiNumber": "752786769",
+    "name": "HONG PROPERTIES, LTD.",
+    "dbaName": null,
+    "mailingAddressStreet": "12215 FORESTGATE DR STE 101",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75243",
+    "mailingAddressZip4": "5496",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "10/01/1998",
+    "sosFileNumber": "0011320010",
+    "registeredAgentName": "HELENE H. CORPORATION",
+    "registeredOfficeAddressStreet": "12215 FORESTGATE DR",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75243",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "HELENE H. CORPORATION",
+        "AGNT_TITL_TX": "GENERAL PA",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "12215 FORESTGATE DR",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75243",
+        "SOURCE": "CPA"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

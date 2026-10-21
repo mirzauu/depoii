@@ -1,0 +1,100 @@
+{
+  "detail": {
+    "taxpayerId": "32003851790",
+    "feiNumber": "752963575",
+    "name": "IGLESIA NUEVA ESPERANZA VIVA, INC.",
+    "dbaName": null,
+    "mailingAddressStreet": "11103 DENNIS RD",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75229",
+    "mailingAddressZip4": "3651",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "09/21/2001",
+    "sosFileNumber": "0800014117",
+    "registeredAgentName": "LETICIA GARCIA",
+    "registeredOfficeAddressStreet": "11103 DENNIS RD.",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75229",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2009",
+    "officerInfo": [
+      {
+        "AGNT_NM": "CINDY MORENO",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2009",
+        "AD_STR_POB_TX": "11103 DENNIS RD.",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75229",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "KARINA JAQUEZ",
+        "AGNT_TITL_TX": "TREASURER",
+        "AGNT_ACTV_YR": "2009",
+        "AD_STR_POB_TX": "11103 DENNIS RD.",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75229",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "LETICIA GARCIA",
+        "AGNT_TITL_TX": "PRESIDENT",
+        "AGNT_ACTV_YR": "2009",
+        "AD_STR_POB_TX": "12107 HIGH MEDDOW DR",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75234",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "LETICIA GARCIA",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2009",
+        "AD_STR_POB_TX": "11103 DENNIS RD.",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75229",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MILEIDY SOTO",
+        "AGNT_TITL_TX": "SECRETARY",
+        "AGNT_ACTV_YR": "2009",
+        "AD_STR_POB_TX": "11103 DENNIS RD",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75229",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MILEIDY SOTO",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2009",
+        "AD_STR_POB_TX": "11103 DENNIS RD",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75229",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "YOSVANY REINOSO",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2009",
+        "AD_STR_POB_TX": "3535 COLGATE LN",
+        "CITY_NM": "IRVING",
+        "ST_CD": "TX",
+        "AD_ZP": "75062",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

@@ -1,0 +1,29 @@
+{
+  "detail": {
+    "taxpayerId": "32054776920",
+    "feiNumber": "471487701",
+    "name": "PRESBYTERY OF THE GULF SOUTH",
+    "dbaName": null,
+    "mailingAddressStreet": "1351 S MASON RD",
+    "mailingAddressCity": "KATY",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "77450",
+    "mailingAddressZip4": "4555",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "08/01/2014",
+    "sosFileNumber": "0802036798",
+    "registeredAgentName": "JONATHAN TUCKER",
+    "registeredOfficeAddressStreet": "C/O CORNERSTONE EVANGELICAL PRESBYTERIAN CHURCH 13",
+    "registeredOfficeAddressCity": "KATY",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "77450",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "",
+    "officerInfo": []
+  },
+  "confidence": "cleaned_name"
+}

@@ -1,0 +1,170 @@
+{
+  "detail": {
+    "taxpayerId": "17523615767",
+    "feiNumber": "752361576",
+    "name": "ICA PROPERTIES, INC.",
+    "dbaName": null,
+    "mailingAddressStreet": "PO BOX 2969",
+    "mailingAddressCity": "ODESSA",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "79760",
+    "mailingAddressZip4": "2969",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "01/16/1991",
+    "sosFileNumber": "0117932200",
+    "registeredAgentName": "CHRISTOPHER A ROSE",
+    "registeredOfficeAddressStreet": "700 N. GRANT #600",
+    "registeredOfficeAddressCity": "ODESSA",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "79761",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "CHRISTOPHER A ROSE",
+        "AGNT_TITL_TX": "SNR. VP",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "PO BOX 2969",
+        "CITY_NM": "ODESSA",
+        "ST_CD": "TX",
+        "AD_ZP": "79760",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "CHRISTOPHER A ROSE",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "PO BOX 2969",
+        "CITY_NM": "ODESSA",
+        "ST_CD": "TX",
+        "AD_ZP": "79760",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "EDWARD LASATER",
+        "AGNT_TITL_TX": "EXEC. VP",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "PO BOX 2969",
+        "CITY_NM": "ODESSA",
+        "ST_CD": "TX",
+        "AD_ZP": "79760",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "EDWARD LASATER",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "PO BOX 2969",
+        "CITY_NM": "ODESSA",
+        "ST_CD": "TX",
+        "AD_ZP": "79760",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JOAN BISHOP",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "PO BOX 2969",
+        "CITY_NM": "ODESSA",
+        "ST_CD": "TX",
+        "AD_ZP": "79760",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JOAN BISHOP",
+        "AGNT_TITL_TX": "ASST SECRE",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "PO BOX 2969",
+        "CITY_NM": "ODESSA",
+        "ST_CD": "TX",
+        "AD_ZP": "79760",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JOHN BUSHMAN",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "PO BOX 2969",
+        "CITY_NM": "ODESSA",
+        "ST_CD": "TX",
+        "AD_ZP": "79760",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JOHN BUSHMAN",
+        "AGNT_TITL_TX": "CHAIRMAN",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "PO BOX 2969",
+        "CITY_NM": "ODESSA",
+        "ST_CD": "TX",
+        "AD_ZP": "79760",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "LUCY MORALES",
+        "AGNT_TITL_TX": "SECRETARY",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "PO BOX 2969",
+        "CITY_NM": "ODESSA",
+        "ST_CD": "TX",
+        "AD_ZP": "79760",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "LUCY MORALES",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "PO BOX 2969",
+        "CITY_NM": "ODESSA",
+        "ST_CD": "TX",
+        "AD_ZP": "79760",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "TOM GLASMAN",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "PO BOX 2969",
+        "CITY_NM": "ODESSA",
+        "ST_CD": "TX",
+        "AD_ZP": "79760",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "TOM GLASMAN",
+        "AGNT_TITL_TX": "VP",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "PO BOX 2969",
+        "CITY_NM": "ODESSA",
+        "ST_CD": "TX",
+        "AD_ZP": "79760",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "TOM GLASMAN",
+        "AGNT_TITL_TX": "PRESIDENT",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "PO BOX 2969",
+        "CITY_NM": "ODESSA",
+        "ST_CD": "TX",
+        "AD_ZP": "79760",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "TOM GLASMAN",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "PO BOX 2969",
+        "CITY_NM": "ODESSA",
+        "ST_CD": "TX",
+        "AD_ZP": "79760",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

@@ -1,0 +1,139 @@
+{
+  "generatedAt": "2026-10-20T17:14:08.479Z",
+  "base": "http://localhost:8000",
+  "routes": {
+    "health": {
+      "status": 200,
+      "bytes": 600
+    },
+    "permits/search?limit=5": {
+      "status": 200,
+      "bytes": 4972
+    },
+    "permits/stats": {
+      "status": 200,
+      "bytes": 978
+    },
+    "permits/cities": {
+      "status": 200,
+      "bytes": 637
+    },
+    "permits/active-jobsites?limit=5": {
+      "status": 200,
+      "bytes": 4072
+    },
+    "permits/roof-aging-alarm?limit=5": {
+      "status": 200,
+      "bytes": 3808
+    },
+    "permits/multiphase-projects?limit=5": {
+      "status": 500,
+      "bytes": 310
+    },
+    "contractors/leaderboard?limit=5": {
+      "status": 200,
+      "bytes": 4021
+    },
+    "contractors/directory?limit=5": {
+      "status": 200,
+      "bytes": 3601
+    },
+    "locations/hierarchy": {
+      "status": 200,
+      "bytes": 27822
+    },
+    "locations/states": {
+      "status": 200,
+      "bytes": 1639
+    },
+    "locations/cities": {
+      "status": 200,
+      "bytes": 15767
+    },
+    "parcels/search?limit=5": {
+      "status": 200,
+      "bytes": 2209
+    },
+    "parcels/browse?limit=5": {
+      "status": 200,
+      "bytes": 2535
+    },
+    "parcels/dark-market/overdue?limit=5": {
+      "status": 200,
+      "bytes": 90
+    },
+    "storms/active-swaths": {
+      "status": 200,
+      "bytes": 700220
+    },
+    "storms/hail-events": {
+      "status": 200,
+      "bytes": 18100
+    },
+    "intelligence/unresolved-exposure?limit=5": {
+      "status": 200,
+      "bytes": 119
+    },
+    "intelligence/leads/ranked?limit=5": {
+      "status": 200,
+      "bytes": 2640
+    },
+    "brief": {
+      "status": 200,
+      "bytes": 562
+    },
+    "verifications/stats": {
+      "status": 200,
+      "bytes": 257
+    }
+  },
+  "rowCounts": {
+    "next": {
+      "path": "data/depoii.sqlite",
+      "tables": {
+        "parcels": 47867,
+        "permits": 2136,
+        "hail_reports": 174,
+        "warnings": 621,
+        "score_snapshots": 1070,
+        "field_outcomes": 0,
+        "orgs": 2,
+        "users": 4,
+        "memberships": 4,
+        "leads": 573,
+        "activity": 1102,
+        "login_links": 2,
+        "permit_contacts": 0,
+        "archived_unverified_leads": 1004,
+        "pilot_requests": 3,
+        "login_otps": 0,
+        "team_invites": 1
+      }
+    },
+    "engine": {
+      "path": "Roofx/depoii-data-engine/depoii_local.db",
+      "tables": {
+        "normalized_permits": 160594,
+        "canonical_contractors": 15498,
+        "storm_swaths": 692,
+        "parcels": 66132,
+        "scored_parcel_leads": 11275,
+        "field_provenance": 1337466,
+        "release_fields": 25,
+        "manual_disqualifications": 10,
+        "lead_evidence": 4051,
+        "released_leads": 283,
+        "staged_baseline_roof_matches": 7832,
+        "staged_aging_commercial_leads": 950,
+        "staged_hail_commercial_leads": 14406,
+        "owner_entities": 279,
+        "owner_persons": 668,
+        "lead_contacts": 283
+      }
+    },
+    "engine_root": {
+      "path": "depoii_local.db",
+      "tables": {}
+    }
+  }
+}

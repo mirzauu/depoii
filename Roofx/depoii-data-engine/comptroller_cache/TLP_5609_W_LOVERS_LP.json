@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32054455939",
+    "feiNumber": null,
+    "name": "TLP 5609 W LOVERS LP",
+    "dbaName": null,
+    "mailingAddressStreet": "200 CRESCENT CT STE 1040",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75201",
+    "mailingAddressZip4": "2103",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "06/25/2014",
+    "sosFileNumber": "0802016240",
+    "registeredAgentName": "AMY DAVISON",
+    "registeredOfficeAddressStreet": "200 CRESCENT COURT, SUITE 1040",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75201",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:45:37.148Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "TREGAN GP LLC",
+        "AGNT_TITL_TX": "GENERAL PA",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "200 CRESCENT COURT, SUITE 1550",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75201",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

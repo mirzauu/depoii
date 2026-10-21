@@ -1,3 +1,5 @@
+import os
+
 import psycopg2
 from psycopg2.extras import execute_values
 from datetime import datetime
@@ -7,7 +9,9 @@ import time
 from app.api.v1.permits import _PERMIT_WAREHOUSE
 from app.science.parcel_seed import SEED_COMMERCIAL_PARCELS
 
-CONNECTION_STRING = "postgresql://postgres:Alimirsa%40123@db.enbebudptwexwkxocgtv.supabase.co:5432/postgres"
+CONNECTION_STRING = os.environ.get("SUPABASE_DB_URL", "")
+if not CONNECTION_STRING:
+    raise SystemExit("SUPABASE_DB_URL is not set. Rotate the leaked password, then export the new direct connection string.")
 
 def seed_jurisdictions(cur):
     print("Seeding jurisdictions from warehouse cities...")

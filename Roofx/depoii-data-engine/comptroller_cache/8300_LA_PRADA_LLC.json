@@ -1,0 +1,29 @@
+{
+  "detail": {
+    "taxpayerId": "32100184061",
+    "feiNumber": null,
+    "name": "8300 LA PRADA LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "16801 ADDISON RD # SITE124",
+    "mailingAddressCity": "ADDISON",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75001",
+    "mailingAddressZip4": "5112",
+    "rightToTransactTX": "FORFEITED",
+    "rightToTransactTXLink": "<a href='https://comptroller.texas.gov/taxinfo/franchise/webfile_franchise.html'>File missing reports, information reports and/or payments</a>",
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "05/12/2025",
+    "sosFileNumber": "0806033070",
+    "registeredAgentName": "LEONID MURASHKOVSKIY",
+    "registeredOfficeAddressStreet": "16801 ADDISON RD SITE 124",
+    "registeredOfficeAddressCity": "ADDISON",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75001",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "",
+    "officerInfo": []
+  },
+  "confidence": "exact_name"
+}

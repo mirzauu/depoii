@@ -1,0 +1,29 @@
+{
+  "detail": {
+    "taxpayerId": "17512797287",
+    "feiNumber": "751279728",
+    "name": "CEDAR CREEK REALTY INC",
+    "dbaName": null,
+    "mailingAddressStreet": "PO BOX 356",
+    "mailingAddressCity": "MABANK",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75147",
+    "mailingAddressZip4": "0356",
+    "rightToTransactTX": "FRANCHISE TAX ENDED",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "INACTIVE",
+    "effectiveSosRegistrationDate": "06/13/1967",
+    "sosFileNumber": "0023612100",
+    "registeredAgentName": "JIM L WHATLEY",
+    "registeredOfficeAddressStreet": "610 VALLEY VISTA",
+    "registeredOfficeAddressCity": "ATHENS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": null,
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "",
+    "officerInfo": []
+  },
+  "confidence": "cleaned_name"
+}

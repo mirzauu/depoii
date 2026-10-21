@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32060485102",
+    "feiNumber": "311298618",
+    "name": "INTERNATIONAL BAZAAR INC",
+    "dbaName": null,
+    "mailingAddressStreet": "6651 GATE PKWY STE 1",
+    "mailingAddressCity": "JACKSONVILLE",
+    "mailingAddressState": "FL",
+    "mailingAddressZip": "32256",
+    "mailingAddressZip4": "8075",
+    "rightToTransactTX": "FRANCHISE TAX ENDED",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " OH",
+    "sosRegistrationStatus": "NOT REGISTERED",
+    "effectiveSosRegistrationDate": "NOT REGISTERED",
+    "sosFileNumber": "NOT REGISTERED",
+    "registeredAgentName": null,
+    "registeredOfficeAddressStreet": null,
+    "registeredOfficeAddressCity": null,
+    "registeredOfficeAddressState": null,
+    "registeredOfficeAddressZip": null,
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": null,
+        "AGNT_TITL_TX": null,
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "CPA"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

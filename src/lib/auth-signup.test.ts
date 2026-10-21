@@ -1,27 +1,17 @@
-import fs from "node:fs";
-import os from "node:os";
-import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-
-const file = path.join(os.tmpdir(), `depoii-auth-${process.pid}.sqlite`);
+import { signUp } from "@/lib/auth";
 
 describe("signup is invite-only", () => {
   beforeEach(() => {
-    process.env.DEPOII_DB = file;
     delete process.env.DEPOII_INVITE_CODE;
-    if (fs.existsSync(file)) fs.unlinkSync(file);
   });
 
-  afterEach(async () => {
-    const { closeDb } = await import("@/lib/db");
-    closeDb();
-    if (fs.existsSync(file)) fs.unlinkSync(file);
+  afterEach(() => {
     delete process.env.DEPOII_INVITE_CODE;
   });
 
   it("rejects public signup when no invite code is set", async () => {
-    const { signUp } = await import("@/lib/auth");
-    const result = signUp({
+    const result = await signUp({
       name: "Test Owner",
       organization: "Test Roofing",
       email: "owner@example.com",
@@ -32,8 +22,7 @@ describe("signup is invite-only", () => {
 
   it("rejects a wrong invite code", async () => {
     process.env.DEPOII_INVITE_CODE = "pilot-only";
-    const { signUp } = await import("@/lib/auth");
-    const result = signUp({
+    const result = await signUp({
       name: "Test Owner",
       organization: "Test Roofing",
       email: "owner@example.com",
@@ -45,8 +34,7 @@ describe("signup is invite-only", () => {
 
   it("accepts a matching invite code", async () => {
     process.env.DEPOII_INVITE_CODE = "pilot-only";
-    const { signUp } = await import("@/lib/auth");
-    const result = signUp({
+    const result = await signUp({
       name: "Test Owner",
       organization: "Test Roofing",
       email: "owner@example.com",

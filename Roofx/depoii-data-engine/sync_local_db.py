@@ -4,7 +4,9 @@ import time
 import sqlite3
 from sqlalchemy import create_engine, text
 
-SUPABASE_URL = "postgresql://postgres:Alimirsa%40123@db.enbebudptwexwkxocgtv.supabase.co:5432/postgres"
+SUPABASE_URL = os.environ.get("SUPABASE_DB_URL", "")
+if not SUPABASE_URL:
+    raise SystemExit("SUPABASE_DB_URL is not set. Rotate the leaked password, then export the new direct connection string.")
 LOCAL_DB_PATH = os.path.join(os.path.dirname(__file__), "depoii_local.db")
 
 def main():

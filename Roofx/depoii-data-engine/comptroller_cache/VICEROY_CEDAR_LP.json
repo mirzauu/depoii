@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32034942097",
+    "feiNumber": null,
+    "name": "VICEROY CEDAR, LP",
+    "dbaName": null,
+    "mailingAddressStreet": "2722 FAIRMOUNT ST",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75201",
+    "mailingAddressZip4": "1958",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "01/01/2008",
+    "sosFileNumber": "0800907612",
+    "registeredAgentName": "STEPHEN J ROGERS",
+    "registeredOfficeAddressStreet": "2718 FAIRMOUNT ST.",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75201",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:45:37.148Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "VICEROY FIELD, INC.",
+        "AGNT_TITL_TX": "GENERAL PA",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "2718 FAIRMOUNT ST.",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75201",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32073933262",
+    "feiNumber": "850628443",
+    "name": "921 WEST COMMERCE STREET DAL LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "921 WEST COMMERCE STREET",
+    "mailingAddressCity": "LOS ANGELES",
+    "mailingAddressState": "CA",
+    "mailingAddressZip": "90071",
+    "mailingAddressZip4": null,
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " DE",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "04/08/2020",
+    "sosFileNumber": "0803589540",
+    "registeredAgentName": "C T CORPORATION SYSTEM",
+    "registeredOfficeAddressStreet": "1999 BRYAN ST. SUITE 900",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75201",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2023",
+    "officerInfo": [
+      {
+        "AGNT_NM": "CITY STORAGE SYSTEMS LLC",
+        "AGNT_TITL_TX": "MANAGING M",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "777 S FIGUEROA ST FLOOR 41",
+        "CITY_NM": "LOS ANGELES",
+        "ST_CD": "CA",
+        "AD_ZP": "90017",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "cleaned_name"
+}

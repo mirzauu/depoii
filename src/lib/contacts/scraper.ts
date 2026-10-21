@@ -1,4 +1,4 @@
-import { getDb, readPermitContacts } from "@/lib/db";
+import { readPermitContacts, upsertPermitContacts } from "@/lib/db";
 import type { PermitContact, PermitContactRole } from "@/lib/types";
 import { createPermitContact, verifyEmailMx } from "./hygiene";
 
@@ -84,7 +84,7 @@ export async function fetchPermitContactsOnDemand(
   fetchImpl: typeof fetch = fetch,
 ): Promise<PermitContact[]> {
   // Check cache first
-  const existing = readPermitContacts(permitId);
+  const existing = await readPermitContacts(permitId);
   if (existing.length > 0) return existing;
 
   if (!recordUrl || !/^https?:\/\//i.test(recordUrl)) {
@@ -115,35 +115,11 @@ export async function fetchPermitContactsOnDemand(
     }
 
     // Persist to database
-    const db = getDb();
-    const upsertContact = db.prepare(`
-      INSERT INTO permit_contacts (id, permit_no, role, name, company, phone, phone_formatted, email, email_type, deliverability, source, created_at)
-      VALUES (@id, @permit_no, @role, @name, @company, @phone, @phone_formatted, @email, @email_type, @deliverability, @source, @created_at)
-      ON CONFLICT(id) DO UPDATE SET
-        role = excluded.role, name = excluded.name, company = excluded.company,
-        phone = excluded.phone, phone_formatted = excluded.phone_formatted,
-        email = excluded.email, email_type = excluded.email_type,
-        deliverability = excluded.deliverability, source = excluded.source,
-        created_at = excluded.created_at
-    `);
-
     const now = new Date().toISOString();
-    for (const contact of parsed) {
-      upsertContact.run({
-        id: contact.id,
-        permit_no: permitId,
-        role: contact.role,
-        name: contact.name,
-        company: contact.company ?? null,
-        phone: contact.phone ?? null,
-        phone_formatted: contact.phoneFormatted ?? null,
-        email: contact.email ?? null,
-        email_type: contact.emailType ?? null,
-        deliverability: contact.deliverability ?? null,
-        source: contact.source,
-        created_at: now,
-      });
-    }
+    await upsertPermitContacts(
+      parsed.map((contact) => ({ ...contact, permitId })),
+      now,
+    );
 
     return parsed;
   } catch {

@@ -97,6 +97,18 @@ export function VerificationCard({ leadId }: { leadId: string }) {
       const res = await fetch(`/api/engine/verifications/verify/${encodeURIComponent(leadId)}`, { method: "POST" });
       const body = await res.json().catch(() => null);
       if (!res.ok) throw new Error((body && typeof body.error === "string" && body.error) || "The live check did not finish.");
+      // Queued job: wait for the local worker to finish (up to ~2 minutes).
+      if (body && typeof body.job_id === "string") {
+        const deadline = Date.now() + 120_000;
+        for (;;) {
+          await new Promise((r) => setTimeout(r, 3000));
+          const poll = await fetch(`/api/engine/verifications/jobs/${encodeURIComponent(body.job_id)}`);
+          const job = await poll.json().catch(() => null);
+          if (job?.status === "complete") break;
+          if (job?.status === "error") throw new Error(job.error || "The live check did not finish.");
+          if (Date.now() > deadline) throw new Error("The live check is still queued — is the local engine worker running?");
+        }
+      }
       setStamp(Date.now());
       card.retry();
     } catch (error) {

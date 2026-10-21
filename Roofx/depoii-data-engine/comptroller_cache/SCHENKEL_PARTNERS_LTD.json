@@ -1,0 +1,70 @@
+{
+  "detail": {
+    "taxpayerId": "13513825276",
+    "feiNumber": "351382527",
+    "name": "SCHENKEL & SHULTZ, INC.",
+    "dbaName": null,
+    "mailingAddressStreet": "834 ORANGE AVE",
+    "mailingAddressCity": "WINTER PARK",
+    "mailingAddressState": "FL",
+    "mailingAddressZip": "32789",
+    "mailingAddressZip4": "4705",
+    "rightToTransactTX": "FRANCHISE TAX ENDED",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " FL",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "10/08/1993",
+    "sosFileNumber": "0009725706",
+    "registeredAgentName": "CORPORATION SERVICE COMPANY D/B/A CSC-LAWYERS INCO",
+    "registeredOfficeAddressStreet": "211 E. 7TH STREET SUITE 620",
+    "registeredOfficeAddressCity": "AUSTIN",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "78701",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "DANIEL C LAGGAN",
+        "AGNT_TITL_TX": "PRESIDENT",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "1512 NORTH FERN CREEK AVENUE",
+        "CITY_NM": "ORLANDO",
+        "ST_CD": "FL",
+        "AD_ZP": "32803",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "J THOMAS CHANDLER",
+        "AGNT_TITL_TX": "OFFICER",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "3331 LAKEVIEW OAKS DRIVE",
+        "CITY_NM": "LONGWOOD",
+        "ST_CD": "FL",
+        "AD_ZP": "32779",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JOHN D TORBERT",
+        "AGNT_TITL_TX": "OFFICER",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "1338 CUMBIE AVENUE",
+        "CITY_NM": "ORLANDO",
+        "ST_CD": "FL",
+        "AD_ZP": "32804",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MICHELLE C PALMANO",
+        "AGNT_TITL_TX": "OFFICER",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "1761 OAKHURST AVENUE",
+        "CITY_NM": "WINTER PARK",
+        "ST_CD": "FL",
+        "AD_ZP": "32789",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

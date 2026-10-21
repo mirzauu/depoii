@@ -1,0 +1,29 @@
+{
+  "detail": {
+    "taxpayerId": "12222289451",
+    "feiNumber": "222228945",
+    "name": "ABLEST SERVICE CORP",
+    "dbaName": "ABLEST TEMPORARY SERVICES CORP.",
+    "mailingAddressStreet": "1901 ULMERTON RD STE 300",
+    "mailingAddressCity": "CLEARWATER",
+    "mailingAddressState": "FL",
+    "mailingAddressZip": "33762",
+    "mailingAddressZip4": "2317",
+    "rightToTransactTX": "FRANCHISE TAX ENDED",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " DE",
+    "sosRegistrationStatus": "INACTIVE",
+    "effectiveSosRegistrationDate": "02/24/1997",
+    "sosFileNumber": "0011411306",
+    "registeredAgentName": "CORPORATION SERVICE COMPANY D/B/A C",
+    "registeredOfficeAddressStreet": "701 BRAZOS STREET, SUITE 1050",
+    "registeredOfficeAddressCity": "AUSTIN",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "78701",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "",
+    "officerInfo": []
+  },
+  "confidence": "partial_name"
+}

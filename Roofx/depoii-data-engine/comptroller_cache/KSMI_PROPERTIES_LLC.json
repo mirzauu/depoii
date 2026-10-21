@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32039463602",
+    "feiNumber": null,
+    "name": "KSMI PROPERTIES LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "350 N SAINT PAUL ST",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75201",
+    "mailingAddressZip4": "4240",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " OK",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "05/05/2009",
+    "sosFileNumber": "0801119272",
+    "registeredAgentName": "CAPITOL CORPORATE SERVICES, INC.",
+    "registeredOfficeAddressStreet": "1501 S MOPAC EXPY STE 220",
+    "registeredOfficeAddressCity": "AUSTIN",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "78746",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "GAY KIRBY",
+        "AGNT_TITL_TX": "MANAGING M",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "6723 AVONDALE DRIVE",
+        "CITY_NM": "OKLAHOMA CITY",
+        "ST_CD": "OK",
+        "AD_ZP": "73116",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

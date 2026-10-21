@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     return Response.json({ ok: true, step: "otp" });
   }
 
-  const result = verifyLoginOtp(email, code);
+  const result = await verifyLoginOtp(email, code);
   if ("error" in result) {
     const status = result.error.includes("incorrect") || result.error.includes("expired") || result.error.includes("attempts")
       ? 401

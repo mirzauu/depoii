@@ -43,10 +43,10 @@ export function LandingPage({ formMode = "api" }: { formMode?: FormMode }) {
               Know which commercial roofs are worth the drive
             </p>
             <a
-              href="mailto:support@depoii.com"
+              href="mailto:hello@depoii.com"
               className="mt-4 inline-block text-sm font-medium text-sky-800 underline-offset-4 hover:underline"
             >
-              support@depoii.com
+              hello@depoii.com
             </a>
           </div>
           <nav className="flex flex-col gap-2 sm:items-end">

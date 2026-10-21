@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32079215706",
+    "feiNumber": null,
+    "name": "2474 MANANA, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "1301 W 7TH ST STE 141",
+    "mailingAddressCity": "FORT WORTH",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "76102",
+    "mailingAddressZip4": "2652",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "05/13/2021",
+    "sosFileNumber": "0804069303",
+    "registeredAgentName": "ZACHARY M. GARSEK",
+    "registeredOfficeAddressStreet": "3230 CAMP BOWIE BLVD., SUITE 580",
+    "registeredOfficeAddressCity": "FORT WORTH",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "76107",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "FORT GP LLC",
+        "AGNT_TITL_TX": "MANAGER",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "1301 WEST 7TH STREET STE 141",
+        "CITY_NM": "FORT WORTH",
+        "ST_CD": "TX",
+        "AD_ZP": "76102",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

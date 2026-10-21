@@ -1,0 +1,29 @@
+{
+  "detail": {
+    "taxpayerId": "32022099835",
+    "feiNumber": null,
+    "name": "FRITO LAY INC",
+    "dbaName": null,
+    "mailingAddressStreet": "701 N WILDWOOD DR % TAX DEPT",
+    "mailingAddressCity": "IRVING",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75061",
+    "mailingAddressZip4": null,
+    "rightToTransactTX": "FRANCHISE TAX ENDED",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": null,
+    "sosRegistrationStatus": "NOT REGISTERED",
+    "effectiveSosRegistrationDate": "NOT REGISTERED",
+    "sosFileNumber": "NOT REGISTERED",
+    "registeredAgentName": null,
+    "registeredOfficeAddressStreet": null,
+    "registeredOfficeAddressCity": null,
+    "registeredOfficeAddressState": null,
+    "registeredOfficeAddressZip": null,
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "",
+    "officerInfo": []
+  },
+  "confidence": "exact_name"
+}

@@ -21,8 +21,8 @@ export async function GET() {
     const user = await requireUser();
     return Response.json({
       orgName: user.orgName,
-      members: listOrgMembers(user.orgId),
-      invites: listPendingInvites(user.orgId),
+      members: await listOrgMembers(user.orgId),
+      invites: await listPendingInvites(user.orgId),
     });
   } catch (error) {
     const status = (error as { status?: number }).status;
@@ -50,7 +50,7 @@ export async function POST(req: Request) {
     }
 
     if (body.action === "cancel" && body.inviteId) {
-      const result = cancelTeamInvite(user.orgId, body.inviteId, user.id);
+      const result = await cancelTeamInvite(user.orgId, body.inviteId, user.id);
       if ("error" in result) return Response.json({ error: result.error }, { status: 400 });
       return Response.json({ ok: true });
     }

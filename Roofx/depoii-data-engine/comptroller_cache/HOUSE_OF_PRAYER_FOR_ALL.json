@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32073751383",
+    "feiNumber": null,
+    "name": "HOUSE OF PRAYER FOR ALL",
+    "dbaName": null,
+    "mailingAddressStreet": "401 BUTCH CASSIDY DR",
+    "mailingAddressCity": "ANNA",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75409",
+    "mailingAddressZip4": "5146",
+    "rightToTransactTX": "FRANCHISE TAX INVOLUNTARILY ENDED",
+    "rightToTransactTXLink": "<a href='https://comptroller.texas.gov/taxes/franchise/certificate-letter-request.php'>Request tax clearance to reinstate entity</a>",
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "INACTIVE",
+    "effectiveSosRegistrationDate": "03/09/2020",
+    "sosFileNumber": "0803575743",
+    "registeredAgentName": "RHONDA L. SIMMONS",
+    "registeredOfficeAddressStreet": "401 BUTCH CASSIDY DRIVE",
+    "registeredOfficeAddressCity": "ANNA",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75409",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2021",
+    "officerInfo": [
+      {
+        "AGNT_NM": "DAVID WONG",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2021",
+        "AD_STR_POB_TX": "902 ST. PAUL DRIVE",
+        "CITY_NM": "RICHARDSON",
+        "ST_CD": "TX",
+        "AD_ZP": "75080",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

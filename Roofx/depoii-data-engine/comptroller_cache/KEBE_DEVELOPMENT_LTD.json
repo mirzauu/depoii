@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32070755130",
+    "feiNumber": null,
+    "name": "KEBE DEVELOPMENT, LTD.",
+    "dbaName": null,
+    "mailingAddressStreet": "4819 WOODALL ST",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75247",
+    "mailingAddressZip4": "6708",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "05/16/2019",
+    "sosFileNumber": "0803320683",
+    "registeredAgentName": "JOHN R PEARCE",
+    "registeredOfficeAddressStreet": "5665 N. DALLAS PARKWAY",
+    "registeredOfficeAddressCity": "FRISCO",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75034",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "8 BIRDS CORP.",
+        "AGNT_TITL_TX": "GENERAL PA",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "4819 WOODALL ST.",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75247",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

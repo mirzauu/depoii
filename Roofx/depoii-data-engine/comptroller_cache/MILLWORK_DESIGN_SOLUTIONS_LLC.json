@@ -1,0 +1,50 @@
+{
+  "detail": {
+    "taxpayerId": "32055397759",
+    "feiNumber": "472298275",
+    "name": "MILLWORK DESIGN SOLUTIONS LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "1304 N WESTMORELAND RD",
+    "mailingAddressCity": "DESOTO",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75115",
+    "mailingAddressZip4": "2806",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "10/10/2014",
+    "sosFileNumber": "0802080296",
+    "registeredAgentName": "ROBERT ALFARO JR",
+    "registeredOfficeAddressStreet": "4805 READING ST",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75247",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2023",
+    "officerInfo": [
+      {
+        "AGNT_NM": "ORALIA ALFARO",
+        "AGNT_TITL_TX": "GOVERNING",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "708 ARBOR CREEK DRIVE",
+        "CITY_NM": "DESOTO",
+        "ST_CD": "TX",
+        "AD_ZP": "75115",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ROBERT ALFARO",
+        "AGNT_TITL_TX": "GOVERNING",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "708 ARBOR CREEK DRIVE",
+        "CITY_NM": "DESOTO",
+        "ST_CD": "TX",
+        "AD_ZP": "75115",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

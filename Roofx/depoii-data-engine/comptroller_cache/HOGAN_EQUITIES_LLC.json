@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32060717637",
+    "feiNumber": null,
+    "name": "HOGAN EQUITIES, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "601 CHATHAM HL",
+    "mailingAddressCity": "HEATH",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75032",
+    "mailingAddressZip4": "1204",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "06/07/2016",
+    "sosFileNumber": "0802474334",
+    "registeredAgentName": "BRIAN HOGAN",
+    "registeredOfficeAddressStreet": "601 CHATHAM HILL",
+    "registeredOfficeAddressCity": "HEATH",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75032",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "BRIAN HOGAN",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "601 CHATHAM HILL",
+        "CITY_NM": "HEATH",
+        "ST_CD": "TX",
+        "AD_ZP": "75032",
+        "SOURCE": "CPA"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

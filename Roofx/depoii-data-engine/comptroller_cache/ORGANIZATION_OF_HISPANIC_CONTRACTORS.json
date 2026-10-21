@@ -1,0 +1,240 @@
+{
+  "detail": {
+    "taxpayerId": "17527213205",
+    "feiNumber": "752721320",
+    "name": "ORGANIZATION OF HISPANIC CONTRACTORS",
+    "dbaName": null,
+    "mailingAddressStreet": "2210 W ILLINOIS AVE",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75224",
+    "mailingAddressZip4": "1636",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "09/07/1995",
+    "sosFileNumber": "0136971501",
+    "registeredAgentName": "JOHN H. MARTINEZ",
+    "registeredOfficeAddressStreet": "2210 W. ILLINOIS AVENUE",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75224",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2005",
+    "officerInfo": [
+      {
+        "AGNT_NM": "ANGELA M LOPEZ",
+        "AGNT_TITL_TX": "PARLIAMENT",
+        "AGNT_ACTV_YR": "2005",
+        "AD_STR_POB_TX": "2210 W. ILLINOIS AVENUE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75224",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ANTHONY GONZALES",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2005",
+        "AD_STR_POB_TX": "2210 W. ILLINOIS AVENUE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75224",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "CHRISTOPHER ESCOBEDO",
+        "AGNT_TITL_TX": "VICE-CHAIR",
+        "AGNT_ACTV_YR": "2005",
+        "AD_STR_POB_TX": "2210 W. ILLINOIS AVENUE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75224",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ERIC GARCIA",
+        "AGNT_TITL_TX": "TREASURER",
+        "AGNT_ACTV_YR": "2005",
+        "AD_STR_POB_TX": "2210 W. ILLINOIS AVENUE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75224",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "HAYDEE CLARK",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2005",
+        "AD_STR_POB_TX": "2210 W IILLINOIS AVENUE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75224",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JERRY BUSTAMANTE",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2005",
+        "AD_STR_POB_TX": "2210 W IILLINOIS AVENUE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75224",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JOHN H. MARTINEZ",
+        "AGNT_TITL_TX": "PRESIDENT",
+        "AGNT_ACTV_YR": "2005",
+        "AD_STR_POB_TX": "2210 W. ILLINOIS AVENUE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75224",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JOSE CASTRLLLO",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2005",
+        "AD_STR_POB_TX": "2210 W IILLINOIS AVENUE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75224",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JULIE GUTIERREZ",
+        "AGNT_TITL_TX": "SECRETARY",
+        "AGNT_ACTV_YR": "2005",
+        "AD_STR_POB_TX": "2210 W. ILLINOIS AVENUE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75224",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "KERVIN CAMPBELL",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2005",
+        "AD_STR_POB_TX": "2210 W IILLINOIS AVENUE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75224",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "LISSI RIEDEL",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2005",
+        "AD_STR_POB_TX": "2210 W IILLINOIS AVENUE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75224",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "NILO QUIROZ",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2005",
+        "AD_STR_POB_TX": "2210 W IILLINOIS AVENUE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75224",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "PATRICK CASTILLO",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2005",
+        "AD_STR_POB_TX": "2210 W IILLINOIS AVENUE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75224",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "RENEE M EDWARDS",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2005",
+        "AD_STR_POB_TX": "2210 W. ILLINOIS AVENUE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75224",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "REY ROCA",
+        "AGNT_TITL_TX": "BOARD CHAI",
+        "AGNT_ACTV_YR": "2005",
+        "AD_STR_POB_TX": "2210 W. ILLINOIS AVENUE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75224",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "RODRIGO SALINAS",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2005",
+        "AD_STR_POB_TX": "2210 W IILLINOIS AVENUE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75224",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ROGER LNOJOSA",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2005",
+        "AD_STR_POB_TX": "2210 W IILLINOIS AVENUE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75224",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "SHAUN DURON",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2005",
+        "AD_STR_POB_TX": "2210 W. ILLINOIS AVENUE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75224",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "STEVE AGUILAR",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2005",
+        "AD_STR_POB_TX": "2210 W IILLINOIS AVENUE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75224",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "VLADIMIR NARANJO",
+        "AGNT_TITL_TX": "CHAIR-ELEC",
+        "AGNT_ACTV_YR": "2005",
+        "AD_STR_POB_TX": "2210 W. ILLINOIS AVENUE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75224",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "WILFREDO CURET",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2005",
+        "AD_STR_POB_TX": "2210 W IILLINOIS AVENUE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75224",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

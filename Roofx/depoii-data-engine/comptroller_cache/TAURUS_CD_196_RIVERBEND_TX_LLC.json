@@ -1,0 +1,60 @@
+{
+  "detail": {
+    "taxpayerId": "32065090683",
+    "feiNumber": null,
+    "name": "TAURUS CD 196 RIVERBEND TX LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "610 N WYMORE RD STE 200",
+    "mailingAddressCity": "MAITLAND",
+    "mailingAddressState": "FL",
+    "mailingAddressZip": "32751",
+    "mailingAddressZip4": "4239",
+    "rightToTransactTX": "FRANCHISE TAX ENDED",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " DE",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "10/11/2017",
+    "sosFileNumber": "0802834293",
+    "registeredAgentName": "CORPORATION SERVICE COMPANY",
+    "registeredOfficeAddressStreet": "211 E. 7TH STREET SUITE 620",
+    "registeredOfficeAddressCity": "AUSTIN",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "78701",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:45:37.148Z",
+    "reportYear": "2019",
+    "officerInfo": [
+      {
+        "AGNT_NM": "TAURUS CD 196 INDUSTRIAL PO",
+        "AGNT_TITL_TX": "GOVERNING",
+        "AGNT_ACTV_YR": "2019",
+        "AD_STR_POB_TX": "610 N WYMORE RD STE 200",
+        "CITY_NM": "MAITLAND",
+        "ST_CD": "FL",
+        "AD_ZP": "32751",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "TAURUS CD 196 INDUSTRIAL PO",
+        "AGNT_TITL_TX": "GOVERNING",
+        "AGNT_ACTV_YR": "2019",
+        "AD_STR_POB_TX": "610 N WYMORE RD STE 200",
+        "CITY_NM": "MAITLAND",
+        "ST_CD": "FL",
+        "AD_ZP": "32751",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "TAURUS US LOGISTICS PROPERT",
+        "AGNT_TITL_TX": "GOVERNING",
+        "AGNT_ACTV_YR": "2019",
+        "AD_STR_POB_TX": "610 N WYMORE RD STE 200",
+        "CITY_NM": "MAITLAND",
+        "ST_CD": "FL",
+        "AD_ZP": "32751",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

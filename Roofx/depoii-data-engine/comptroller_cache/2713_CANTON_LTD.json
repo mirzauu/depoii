@@ -1,0 +1,50 @@
+{
+  "detail": {
+    "taxpayerId": "17526113893",
+    "feiNumber": "752611389",
+    "name": "2713 CANTON BOMB FACTORY, INC.",
+    "dbaName": null,
+    "mailingAddressStreet": "2550 PACIFIC AVE STE 1600",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75226",
+    "mailingAddressZip4": "1495",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "09/06/1995",
+    "sosFileNumber": "0136968700",
+    "registeredAgentName": "TREVOR BERT",
+    "registeredOfficeAddressStreet": "2550 PACIFIC AVE, STE 1600",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75226",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "JOE BEARD",
+        "AGNT_TITL_TX": "PRESIDENT",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "2550 PACIFIC AVENUE, SUITE 1600",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75226",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "JOE BEARD",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "2550 PACIFIC AVENUE, SUITE 1600",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75226",
+        "SOURCE": "CPA"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

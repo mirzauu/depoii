@@ -1,0 +1,80 @@
+{
+  "detail": {
+    "taxpayerId": "32076079915",
+    "feiNumber": null,
+    "name": "JAI PRO LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "2625 ROYAL LN",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75229",
+    "mailingAddressZip4": "3421",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "09/28/2020",
+    "sosFileNumber": "0803779675",
+    "registeredAgentName": "JATIN JARI",
+    "registeredOfficeAddressStreet": "2625 ROYAL LANE",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75229",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "ILA JARI",
+        "AGNT_TITL_TX": "MBR",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "2625 ROYAL LANE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75229",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "ILA JARI",
+        "AGNT_TITL_TX": "OWNER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "2625 ROYAL LANE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75229",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "JATIN JARI",
+        "AGNT_TITL_TX": "OWNER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "2625 ROYAL LANE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75229",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "JATIN JARI",
+        "AGNT_TITL_TX": "MBR",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "2625 ROYAL LANE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75229",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "SASHI SHARMA MANGALICK",
+        "AGNT_TITL_TX": "MEMBER/OWN",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "2625 ROYAL LANE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75229",
+        "SOURCE": "CPA"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

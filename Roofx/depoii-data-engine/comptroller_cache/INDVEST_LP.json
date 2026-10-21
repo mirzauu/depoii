@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32063569266",
+    "feiNumber": null,
+    "name": "INDVEST, L.P.",
+    "dbaName": null,
+    "mailingAddressStreet": "PO BOX 492480",
+    "mailingAddressCity": "LOS ANGELES",
+    "mailingAddressState": "CA",
+    "mailingAddressZip": "90049",
+    "mailingAddressZip4": "8480",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " CA",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "04/21/2017",
+    "sosFileNumber": "0802708428",
+    "registeredAgentName": "REGISTERED AGENT SOLUTIONS, INC.",
+    "registeredOfficeAddressStreet": "CORPORATE CENTER ONE 5301 SOUTHWEST PARKWAY, SUITE",
+    "registeredOfficeAddressCity": "AUSTIN",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "78735",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "DAVID J HADDAD",
+        "AGNT_TITL_TX": "GENERAL PA",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "11601 WILSHIRE BLVD STE 2170",
+        "CITY_NM": "LOS ANGELES",
+        "ST_CD": "CA",
+        "AD_ZP": "90025",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

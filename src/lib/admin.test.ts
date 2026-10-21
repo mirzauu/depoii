@@ -1,36 +1,34 @@
-import fs from "node:fs";
-import os from "node:os";
-import path from "node:path";
-import { afterAll, beforeAll, expect, test } from "vitest";
+import { afterAll, beforeEach, expect, test } from "vitest";
 import { HttpError, createOrganization, updateMember, updateOrganization } from "@/lib/admin";
 import { createLoginLink, redeemLoginLink, revokeLoginLink, signIn } from "@/lib/auth";
-import { closeDb, getDb } from "@/lib/db";
+import { closePool, query, queryOne } from "@/lib/pg";
 
-const previousDb = process.env.DEPOII_DB;
 const previousEmail = process.env.DEPOII_SUPERADMIN_EMAIL;
 const previousPassword = process.env.DEPOII_SUPERADMIN_PASSWORD;
-const dir = fs.mkdtempSync(path.join(os.tmpdir(), "depoii-admin-"));
 
-beforeAll(() => {
-  process.env.DEPOII_DB = path.join(dir, "depoii.sqlite");
+beforeEach(async () => {
   delete process.env.DEPOII_SUPERADMIN_EMAIL;
   delete process.env.DEPOII_SUPERADMIN_PASSWORD;
-  closeDb();
+  // Clean tenant tables for test isolation
+  if (process.env.DATABASE_URL) {
+    await query(`delete from app.login_links`);
+    await query(`delete from app.memberships`);
+    await query(`delete from app.activity`);
+    await query(`delete from app.users`);
+    await query(`delete from app.orgs`);
+  }
 });
 
-afterAll(() => {
-  closeDb();
-  if (previousDb === undefined) delete process.env.DEPOII_DB;
-  else process.env.DEPOII_DB = previousDb;
+afterAll(async () => {
   if (previousEmail === undefined) delete process.env.DEPOII_SUPERADMIN_EMAIL;
   else process.env.DEPOII_SUPERADMIN_EMAIL = previousEmail;
   if (previousPassword === undefined) delete process.env.DEPOII_SUPERADMIN_PASSWORD;
   else process.env.DEPOII_SUPERADMIN_PASSWORD = previousPassword;
-  fs.rmSync(dir, { recursive: true, force: true });
+  await closePool();
 });
 
-test("super admin can manage orgs and users without deleting them", () => {
-  const org = createOrganization("actor", {
+test("super admin can manage orgs and users without deleting them", async () => {
+  const org = await createOrganization("actor", {
     name: "North Roofing",
     ownerName: "Ada Owner",
     ownerEmail: "ada@north.test",
@@ -39,64 +37,76 @@ test("super admin can manage orgs and users without deleting them", () => {
   expect(org.name).toBe("North Roofing");
   expect(org.members).toBe(1);
 
-  const signedIn = signIn("ada@north.test", "correct-horse");
+  const signedIn = await signIn("ada@north.test", "correct-horse");
   expect(signedIn).toMatchObject({ user: { email: "ada@north.test", role: "owner", platformRole: "" } });
   if (!("user" in signedIn)) throw new Error("expected a session");
 
-  updateOrganization(signedIn.user.id, org.id, { name: "North Roofing Co", disabled: true });
-  expect(signIn("ada@north.test", "correct-horse")).toEqual({ error: "This organization is suspended." });
+  await updateOrganization(signedIn.user.id, org.id, { name: "North Roofing Co", disabled: true });
+  expect(await signIn("ada@north.test", "correct-horse")).toEqual({ error: "This organization is suspended." });
 
-  const promoted = updateMember(signedIn.user.id, signedIn.user.id, { platformRole: "superadmin" });
+  const promoted = await updateMember(signedIn.user.id, signedIn.user.id, { platformRole: "superadmin" });
   expect(promoted.platformRole).toBe("superadmin");
-  const asAdmin = signIn("ada@north.test", "correct-horse");
+  const asAdmin = await signIn("ada@north.test", "correct-horse");
   expect(asAdmin).toMatchObject({ user: { platformRole: "superadmin", orgName: "North Roofing Co" } });
 
-  expect(() => updateMember(signedIn.user.id, signedIn.user.id, { disabled: true })).toThrow(HttpError);
-  expect(() => updateMember(signedIn.user.id, signedIn.user.id, { platformRole: "" })).toThrow(HttpError);
+  await expect(updateMember(signedIn.user.id, signedIn.user.id, { disabled: true })).rejects.toThrow(HttpError);
+  await expect(updateMember(signedIn.user.id, signedIn.user.id, { platformRole: "" })).rejects.toThrow(HttpError);
 
-  const other = createOrganization(signedIn.user.id, {
+  const other = await createOrganization(signedIn.user.id, {
     name: "South Roofing",
     ownerName: "Bea",
     ownerEmail: "bea@south.test",
     ownerPassword: "another-pass",
   });
-  const moved = updateMember(signedIn.user.id, promoted.id, { orgId: other.id, role: "rep", password: "fresh-password" });
+  const moved = await updateMember(signedIn.user.id, promoted.id, { orgId: other.id, role: "rep", password: "fresh-password" });
   expect(moved.orgId).toBe(other.id);
   expect(moved.role).toBe("rep");
-  expect(signIn("ada@north.test", "fresh-password")).toMatchObject({ user: { orgName: "South Roofing", role: "rep" } });
+  expect(await signIn("ada@north.test", "fresh-password")).toMatchObject({ user: { orgName: "South Roofing", role: "rep" } });
 
-  const details = getDb().prepare(`SELECT detail FROM activity`).all() as { detail: string }[];
+  const details = await query<{ detail: string }>(`SELECT detail FROM app.activity`);
   expect(details.length).toBeGreaterThan(0);
   for (const row of details) {
-    expect(row.detail).not.toContain("correct-horse");
-    expect(row.detail).not.toContain("fresh-password");
-    expect(row.detail).not.toContain("another-pass");
+    const d = typeof row.detail === "string" ? row.detail : JSON.stringify(row.detail);
+    expect(d).not.toContain("correct-horse");
+    expect(d).not.toContain("fresh-password");
+    expect(d).not.toContain("another-pass");
   }
-  expect(getDb().prepare(`SELECT COUNT(*) AS n FROM orgs`).get()).toEqual({ n: 2 });
-  expect(getDb().prepare(`SELECT COUNT(*) AS n FROM users`).get()).toEqual({ n: 2 });
+  const orgCount = await queryOne<{ n: string }>(`SELECT COUNT(*)::text AS n FROM app.orgs`);
+  const userCount = await queryOne<{ n: string }>(`SELECT COUNT(*)::text AS n FROM app.users`);
+  expect(Number(orgCount?.n)).toBe(2);
+  expect(Number(userCount?.n)).toBe(2);
 });
 
-test("a shared sign-in link opens the account without a password", () => {
-  createOrganization("actor", {
+test("a shared sign-in link opens the account without a password", async () => {
+  await createOrganization("actor", {
     name: "Link Roofing",
     ownerName: "Lia",
     ownerEmail: "lia@link.test",
     ownerPassword: "link-password",
   });
-  const signedIn = signIn("lia@link.test", "link-password");
+  const signedIn = await signIn("lia@link.test", "link-password");
   if (!("user" in signedIn)) throw new Error("expected a session");
-  const created = createLoginLink(signedIn.user.id);
+  const created = await createLoginLink(signedIn.user.id);
   if ("error" in created) throw new Error(created.error);
-  const opened = redeemLoginLink(created.token);
+  const opened = await redeemLoginLink(created.token);
   expect(opened).toMatchObject({ user: { email: "lia@link.test" } });
-  expect(redeemLoginLink(created.token)).toMatchObject({ user: { email: "lia@link.test" } });
-  const login = getDb().prepare(`SELECT last_login_at, last_seen_at FROM users WHERE id = ?`).get(signedIn.user.id) as { last_login_at: string; last_seen_at: string };
-  expect(login.last_login_at).not.toBe("");
-  expect(login.last_seen_at).not.toBe("");
-  const details = getDb().prepare(`SELECT detail FROM activity WHERE actor_id = ?`).all(signedIn.user.id) as { detail: string }[];
-  for (const row of details) expect(row.detail).not.toContain(created.token);
-  revokeLoginLink(signedIn.user.id);
-  expect(redeemLoginLink(created.token)).toEqual({ error: "This sign-in link is not valid." });
-  updateMember(signedIn.user.id, signedIn.user.id, { disabled: true });
-  expect(createLoginLink(signedIn.user.id)).toEqual({ error: "This account is disabled." });
+  expect(await redeemLoginLink(created.token)).toMatchObject({ user: { email: "lia@link.test" } });
+  const login = await queryOne<{ last_login_at: string; last_seen_at: string }>(
+    `SELECT last_login_at, last_seen_at FROM app.users WHERE id = $1`,
+    [signedIn.user.id],
+  );
+  expect(login?.last_login_at).toBeTruthy();
+  expect(login?.last_seen_at).toBeTruthy();
+  const details = await query<{ detail: string }>(
+    `SELECT detail FROM app.activity WHERE actor_id = $1`,
+    [signedIn.user.id],
+  );
+  for (const row of details) {
+    const d = typeof row.detail === "string" ? row.detail : JSON.stringify(row.detail);
+    expect(d).not.toContain(created.token);
+  }
+  await revokeLoginLink(signedIn.user.id);
+  expect(await redeemLoginLink(created.token)).toEqual({ error: "This sign-in link is not valid." });
+  await updateMember(signedIn.user.id, signedIn.user.id, { disabled: true });
+  expect(await createLoginLink(signedIn.user.id)).toEqual({ error: "This account is disabled." });
 });

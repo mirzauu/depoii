@@ -1,0 +1,29 @@
+{
+  "detail": {
+    "taxpayerId": "17560325320",
+    "feiNumber": "756032532",
+    "name": "NEWTEX REALTY INC",
+    "dbaName": null,
+    "mailingAddressStreet": "PO BOX 670295",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75367",
+    "mailingAddressZip4": "0295",
+    "rightToTransactTX": "FRANCHISE TAX ENDED",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "INACTIVE",
+    "effectiveSosRegistrationDate": "05/05/1959",
+    "sosFileNumber": "0015559100",
+    "registeredAgentName": "ALFRED W BRAUMAN",
+    "registeredOfficeAddressStreet": "5934 ROYAL LANE, STE 239",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75230",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "",
+    "officerInfo": []
+  },
+  "confidence": "partial_name"
+}

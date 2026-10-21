@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "13419931400",
+    "feiNumber": "341993140",
+    "name": "HEARTHSTONE PROPERTIES, DELAWARE, LLC",
+    "dbaName": "CPS HEARTHSTONE PROPERTIES, LLC",
+    "mailingAddressStreet": "11812 SAN VICENTE BLVD STE 200",
+    "mailingAddressCity": "LOS ANGELES",
+    "mailingAddressState": "CA",
+    "mailingAddressZip": "90049",
+    "mailingAddressZip4": "6622",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " DE",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "08/22/2006",
+    "sosFileNumber": "0800697360",
+    "registeredAgentName": "ERESIDENTAGENT, INC.",
+    "registeredOfficeAddressStreet": "1501 S. MOPAC EXPY., STE. 220",
+    "registeredOfficeAddressCity": "AUSTIN",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "78746",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "MATTHEW FISHBURN",
+        "AGNT_TITL_TX": "TRUSTEE",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": null,
+        "CITY_NM": null,
+        "ST_CD": null,
+        "AD_ZP": null,
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "cleaned_name"
+}

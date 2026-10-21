@@ -1,0 +1,70 @@
+{
+  "detail": {
+    "taxpayerId": "32064380754",
+    "feiNumber": null,
+    "name": "AP DEEP ELLUM PARKING, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "2151 HAWKINS ST STE 1100",
+    "mailingAddressCity": "CHARLOTTE",
+    "mailingAddressState": "NC",
+    "mailingAddressZip": "28203",
+    "mailingAddressZip4": "5050",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " DE",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "07/21/2017",
+    "sosFileNumber": "0802774599",
+    "registeredAgentName": "C T CORPORATION SYSTEM",
+    "registeredOfficeAddressStreet": "1999 BRYAN ST., STE. 900",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75201",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2023",
+    "officerInfo": [
+      {
+        "AGNT_NM": "ASANA PARTNERS FUND I GP LLC",
+        "AGNT_TITL_TX": "GENERAL PA",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "1616 CAMDEN RD STE 210",
+        "CITY_NM": "CHARLOTTE",
+        "ST_CD": "NC",
+        "AD_ZP": "28203",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JASON TOMPKINS",
+        "AGNT_TITL_TX": "MANAGING P",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "1616 CAMDEN RD STE 210",
+        "CITY_NM": "CHARLOTTE",
+        "ST_CD": "NC",
+        "AD_ZP": "28203",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "STEFAN NEUDORFF",
+        "AGNT_TITL_TX": "CFO",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "1616 CAMDEN ROAD STE 210",
+        "CITY_NM": "CHARLOTTE",
+        "ST_CD": "NC",
+        "AD_ZP": "28203",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "TERRY BROWN",
+        "AGNT_TITL_TX": "MANAGING P",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "1616 CAMDEN RD STE 210",
+        "CITY_NM": "CHARLOTTE",
+        "ST_CD": "NC",
+        "AD_ZP": "28203",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

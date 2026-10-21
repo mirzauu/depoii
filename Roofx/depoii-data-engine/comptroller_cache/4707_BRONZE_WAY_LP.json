@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32045286245",
+    "feiNumber": null,
+    "name": "4707 BRONZE WAY LP",
+    "dbaName": null,
+    "mailingAddressStreet": "385 INVERNESS PKWY STE 460",
+    "mailingAddressCity": "ENGLEWOOD",
+    "mailingAddressState": "CO",
+    "mailingAddressZip": "80112",
+    "mailingAddressZip4": "5854",
+    "rightToTransactTX": "FRANCHISE TAX INVOLUNTARILY ENDED",
+    "rightToTransactTXLink": "<a href='https://comptroller.texas.gov/taxes/franchise/certificate-letter-request.php'>Request tax clearance to reinstate entity</a>",
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "INACTIVE",
+    "effectiveSosRegistrationDate": "10/11/2011",
+    "sosFileNumber": "0801492861",
+    "registeredAgentName": "C T CORPORATION SYSTEM",
+    "registeredOfficeAddressStreet": "1999 BRYAN ST., STE. 900",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75201",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2021",
+    "officerInfo": [
+      {
+        "AGNT_NM": "4701 BRONZE WAY GP LLC",
+        "AGNT_TITL_TX": "GENERAL PA",
+        "AGNT_ACTV_YR": "2021",
+        "AD_STR_POB_TX": "385 INVERNESS PARKWAY",
+        "CITY_NM": "ENGLEWOOD",
+        "ST_CD": "CO",
+        "AD_ZP": "80112",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

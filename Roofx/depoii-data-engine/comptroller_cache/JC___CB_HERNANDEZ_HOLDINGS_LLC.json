@@ -1,0 +1,60 @@
+{
+  "detail": {
+    "taxpayerId": "32067200553",
+    "feiNumber": null,
+    "name": "JC & CB HERNANDEZ HOLDINGS, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "4600 TOUR 18 DR",
+    "mailingAddressCity": "FLOWER MOUND",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75022",
+    "mailingAddressZip4": "6448",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "05/16/2018",
+    "sosFileNumber": "0803018960",
+    "registeredAgentName": "JUAN HERNANDEZ",
+    "registeredOfficeAddressStreet": "4600 TOUR 18",
+    "registeredOfficeAddressCity": "FLOWER MOUND",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75022",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "CLARABETH HERNANDEZ",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "4600 TOUR 18 DRIVE",
+        "CITY_NM": "FLOWER MOUND",
+        "ST_CD": "TX",
+        "AD_ZP": "75022",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "JUAN HERNANDEZ",
+        "AGNT_TITL_TX": "MANAGING M",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "4600 TOUR 18 DRIVE",
+        "CITY_NM": "FLOWER MOUND",
+        "ST_CD": "TX",
+        "AD_ZP": "75022",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "JUAN HERNANDEZ",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "4600 TOUR 18 DRIVE",
+        "CITY_NM": "FLOWER MOUND",
+        "ST_CD": "TX",
+        "AD_ZP": "75022",
+        "SOURCE": "CPA"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

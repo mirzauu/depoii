@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32040603410",
+    "feiNumber": null,
+    "name": "7101 JWCF, LP",
+    "dbaName": null,
+    "mailingAddressStreet": "5024 STRATHMORE TER",
+    "mailingAddressCity": "COLLEYVILLE",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "76034",
+    "mailingAddressZip4": "5138",
+    "rightToTransactTX": "FRANCHISE TAX INVOLUNTARILY ENDED",
+    "rightToTransactTXLink": "<a href='https://comptroller.texas.gov/taxes/franchise/certificate-letter-request.php'>Request tax clearance to reinstate entity</a>",
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "INACTIVE",
+    "effectiveSosRegistrationDate": "11/03/2009",
+    "sosFileNumber": "0801189638",
+    "registeredAgentName": "BLUE QUAIL MANAGEMENT, LLC",
+    "registeredOfficeAddressStreet": "5024 STRATHMORE TERRACE",
+    "registeredOfficeAddressCity": "COLLEYVILLE",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "76034",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "BLUE QUAIL MANAGEMENT, LLC",
+        "AGNT_TITL_TX": "GENERAL PA",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "5024 STRATHMORE TERRACE",
+        "CITY_NM": "COLLEYVILLE",
+        "ST_CD": "TX",
+        "AD_ZP": "76034",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

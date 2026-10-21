@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32063113099",
+    "feiNumber": null,
+    "name": "SL4 DFW INDUSTRIAL, LP",
+    "dbaName": null,
+    "mailingAddressStreet": "100 CRESCENT CT STE 850",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75201",
+    "mailingAddressZip4": "6904",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "03/09/2017",
+    "sosFileNumber": "0802670857",
+    "registeredAgentName": "W. HUNTER SAGE",
+    "registeredOfficeAddressStreet": "200 PARK PLACE, 4200 WESTHEIMER, SUITE 900",
+    "registeredOfficeAddressCity": "HOUSTON",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "77027",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "SL4 DFW INDUSTRIAL GP, LLC",
+        "AGNT_TITL_TX": "GENERAL PA",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "300 CRESCENT COURT, SUITE 1113",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75201",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

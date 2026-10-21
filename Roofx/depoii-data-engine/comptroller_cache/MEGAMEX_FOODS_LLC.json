@@ -1,0 +1,290 @@
+{
+  "detail": {
+    "taxpayerId": "32040651070",
+    "feiNumber": null,
+    "name": "MEGAMEX FOODS, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "1999 BRYAN ST STE 900",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75201",
+    "mailingAddressZip4": "3140",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " DE",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "11/09/2009",
+    "sosFileNumber": "0801192364",
+    "registeredAgentName": "C T CORPORATION SYSTEM",
+    "registeredOfficeAddressStreet": "1999 BRYAN ST., STE. 900",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75201",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2023",
+    "officerInfo": [
+      {
+        "AGNT_NM": "ADAM BLAESSER",
+        "AGNT_TITL_TX": "V.P OF FIN",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "333 S ANITA DRIVE SUITE 1000",
+        "CITY_NM": "ORANGE",
+        "ST_CD": "CA",
+        "AD_ZP": "92868",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ALEJANDRO DE LA BARREDA",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "333 S ANITA DRIVE SUITE 1000",
+        "CITY_NM": "ORANGE",
+        "ST_CD": "CA",
+        "AD_ZP": "92868",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ALEJANDRO DE LA BARREDA",
+        "AGNT_TITL_TX": "BOARD MEMB",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "333 S ANITA DRIVE SUITE 1000",
+        "CITY_NM": "ORANGE",
+        "ST_CD": "CA",
+        "AD_ZP": "92868",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ANDREW LOWER",
+        "AGNT_TITL_TX": "SR. DIRECT",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "333 S ANITA DRIVE SUITE 1000",
+        "CITY_NM": "ORANGE",
+        "ST_CD": "CA",
+        "AD_ZP": "92868",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DEANNA BRADY",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "333 S ANITA DRIVE SUITE 1000",
+        "CITY_NM": "ORANGE",
+        "ST_CD": "CA",
+        "AD_ZP": "92868",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DEANNA BRADY",
+        "AGNT_TITL_TX": "BOARD MEMB",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "333 S ANITA DRIVE SUITE 1000",
+        "CITY_NM": "ORANGE",
+        "ST_CD": "CA",
+        "AD_ZP": "92868",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ELDON QUAM",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "333 S ANITA DRIVE SUITE 1000",
+        "CITY_NM": "ORANGE",
+        "ST_CD": "CA",
+        "AD_ZP": "92868",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ELDON QUAM",
+        "AGNT_TITL_TX": "BOARD MEMB",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "333 S ANITA DRIVE SUITE 1000",
+        "CITY_NM": "ORANGE",
+        "ST_CD": "CA",
+        "AD_ZP": "92868",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ENRIQUE HERNANDEZ-PONS TORRES",
+        "AGNT_TITL_TX": "BOARD MEMB",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "333 S ANITA DRIVE SUITE 1000",
+        "CITY_NM": "ORANGE",
+        "ST_CD": "CA",
+        "AD_ZP": "92868",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ENRIQUE HERNANDEZ-PONS TORRES",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "333 S ANITA DRIVE SUITE 1000",
+        "CITY_NM": "ORANGE",
+        "ST_CD": "CA",
+        "AD_ZP": "92868",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "GERARDO CANAVATI MIGUEL",
+        "AGNT_TITL_TX": "SECRETARY",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "333 S ANITA DRIVE SUITE 1000",
+        "CITY_NM": "ORANGE",
+        "ST_CD": "CA",
+        "AD_ZP": "92868",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "HECTOR HERNANDEZ-PONS TORRES",
+        "AGNT_TITL_TX": "BOARD MEMB",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "333 S ANITA DRIVE SUITE 1000",
+        "CITY_NM": "ORANGE",
+        "ST_CD": "CA",
+        "AD_ZP": "92868",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "HECTOR HERNANDEZ-PONS TORRES",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "333 S ANITA DRIVE SUITE 1000",
+        "CITY_NM": "ORANGE",
+        "ST_CD": "CA",
+        "AD_ZP": "92868",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ING SERGIO ZARDONI",
+        "AGNT_TITL_TX": "SECRETARY",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "333 S ANITA DRIVE SUITE 1000",
+        "CITY_NM": "ORANGE",
+        "ST_CD": "CA",
+        "AD_ZP": "92868",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "KARLA WEIDEMAN",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "333 S ANITA DRIVE SUITE 1000",
+        "CITY_NM": "ORANGE",
+        "ST_CD": "CA",
+        "AD_ZP": "92868",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "KARLA WEIDEMAN",
+        "AGNT_TITL_TX": "BOARD MEMB",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "333 S ANITA DRIVE SUITE 1000",
+        "CITY_NM": "ORANGE",
+        "ST_CD": "CA",
+        "AD_ZP": "92868",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "KEVIN MEAD",
+        "AGNT_TITL_TX": "QUALITY MG",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "333 S ANITA DRIVE SUITE 1000",
+        "CITY_NM": "ORANGE",
+        "ST_CD": "CA",
+        "AD_ZP": "92868",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MARTHA GUERRA",
+        "AGNT_TITL_TX": "SR. DIRECT",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "333 S ANITA DRIVE SUITE 1000",
+        "CITY_NM": "ORANGE",
+        "ST_CD": "CA",
+        "AD_ZP": "92868",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MICHELLE CANELLOPOULUS",
+        "AGNT_TITL_TX": "SR. DIRECT",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "333 S ANITA DRIVE SUITE 1000",
+        "CITY_NM": "ORANGE",
+        "ST_CD": "CA",
+        "AD_ZP": "92868",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ROGER PATRN",
+        "AGNT_TITL_TX": "BOARD MEMB",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "333 S ANITA DRIVE SUITE 1000",
+        "CITY_NM": "ORANGE",
+        "ST_CD": "CA",
+        "AD_ZP": "92868",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ROGER PATRN",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "333 S ANITA DRIVE SUITE 1000",
+        "CITY_NM": "ORANGE",
+        "ST_CD": "CA",
+        "AD_ZP": "92868",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "RYAN MICHAELIS",
+        "AGNT_TITL_TX": "PRESIDENT",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "333 S ANITA DRIVE SUITE 1000",
+        "CITY_NM": "ORANGE",
+        "ST_CD": "CA",
+        "AD_ZP": "92868",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "SANTIAGO SEVERI",
+        "AGNT_TITL_TX": "V.P OF ADM",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "333 S ANITA DRIVE SUITE 1000",
+        "CITY_NM": "ORANGE",
+        "ST_CD": "CA",
+        "AD_ZP": "92868",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "SCOTT AAKRE",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "1 HORMEL PLACE",
+        "CITY_NM": "AUSTIN",
+        "ST_CD": "MN",
+        "AD_ZP": "55912",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "SCOTT AAKRE",
+        "AGNT_TITL_TX": "BOARD MEMB",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "1 HORMEL PLACE",
+        "CITY_NM": "AUSTIN",
+        "ST_CD": "MN",
+        "AD_ZP": "55912",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "TODD RYPKEMA",
+        "AGNT_TITL_TX": "SR. DIRECT",
+        "AGNT_ACTV_YR": "2023",
+        "AD_STR_POB_TX": "333 S ANITA DRIVE SUITE 1000",
+        "CITY_NM": "ORANGE",
+        "ST_CD": "CA",
+        "AD_ZP": "92868",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

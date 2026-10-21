@@ -1,0 +1,50 @@
+{
+  "detail": {
+    "taxpayerId": "32045815860",
+    "feiNumber": "453954124",
+    "name": "MIEGEL INVESTMENTS LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "1851 HACIENDA HEIGHTS LN",
+    "mailingAddressCity": "FRISCO",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75036",
+    "mailingAddressZip4": "6591",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "11/30/2011",
+    "sosFileNumber": "0801513304",
+    "registeredAgentName": "WILLIAM ROBERT MIEGEL",
+    "registeredOfficeAddressStreet": "1851 HACIENDA HEIGHTS",
+    "registeredOfficeAddressCity": "FRISCO",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75036",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "ELIZABETH M MIEGEL",
+        "AGNT_TITL_TX": "PARTNER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "1020 HILLTOP",
+        "CITY_NM": "WIMBERLEY",
+        "ST_CD": "TX",
+        "AD_ZP": "78676",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "WILLIAM MIEGEL",
+        "AGNT_TITL_TX": "PARTNER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "1851 HACIENDA HEIGHTS",
+        "CITY_NM": "FRISCO",
+        "ST_CD": "TX",
+        "AD_ZP": "75036",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

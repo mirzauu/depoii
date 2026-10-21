@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32039295640",
+    "feiNumber": "264488754",
+    "name": "FR MASSACHUSETTS 7, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "1 N WACKER DR STE 4200",
+    "mailingAddressCity": "CHICAGO",
+    "mailingAddressState": "IL",
+    "mailingAddressZip": "60606",
+    "mailingAddressZip4": "2862",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " DE",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "04/09/2009",
+    "sosFileNumber": "0801109376",
+    "registeredAgentName": "C T CORPORATION SYSTEM",
+    "registeredOfficeAddressStreet": "1999 BRYAN ST., STE. 900",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75201",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2025",
+    "officerInfo": [
+      {
+        "AGNT_NM": "FIRST INDUSTRIAL LP",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "1 NORTH WACKER DRIVE SUITE 4200",
+        "CITY_NM": "CHICAGO",
+        "ST_CD": "IL",
+        "AD_ZP": "60606",
+        "SOURCE": "CPA"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

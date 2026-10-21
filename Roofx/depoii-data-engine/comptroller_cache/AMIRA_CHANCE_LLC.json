@@ -1,0 +1,50 @@
+{
+  "detail": {
+    "taxpayerId": "32051593179",
+    "feiNumber": null,
+    "name": "AMIRA CHANCE, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "16161 CLEAR VALLEY PL",
+    "mailingAddressCity": "ENCINO",
+    "mailingAddressState": "CA",
+    "mailingAddressZip": "91436",
+    "mailingAddressZip4": "3311",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " CA",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "07/26/2013",
+    "sosFileNumber": "0801823652",
+    "registeredAgentName": "TESINA PAINTER",
+    "registeredOfficeAddressStreet": "4125 GERMAN POINTER WAY",
+    "registeredOfficeAddressCity": "FORT WORTH",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "76123",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "KAMBIZ HAKIMI",
+        "AGNT_TITL_TX": "manager",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "16161 CLEAR VALLEY PLACE",
+        "CITY_NM": "ENCINO",
+        "ST_CD": "CA",
+        "AD_ZP": "91436",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "kambiz hakimi",
+        "AGNT_TITL_TX": "partner",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "16430 Ventura Blvd suite 106",
+        "CITY_NM": "Encino",
+        "ST_CD": "CA",
+        "AD_ZP": "91436",
+        "SOURCE": "CPA"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

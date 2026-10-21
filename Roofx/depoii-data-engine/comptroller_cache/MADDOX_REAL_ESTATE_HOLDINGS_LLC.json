@@ -1,0 +1,50 @@
+{
+  "detail": {
+    "taxpayerId": "32069812702",
+    "feiNumber": null,
+    "name": "MADDOX REAL ESTATE HOLDINGS LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "2050 N STEMMONS FWY UNIT 119",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75207",
+    "mailingAddressZip4": "3205",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "02/20/2019",
+    "sosFileNumber": "0803243263",
+    "registeredAgentName": "KEN GRAVES",
+    "registeredOfficeAddressStreet": "2050 N. STEMMONS FRWY, STE. 119",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75207",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "AMBER GRAVES",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "6142 LA COSA DRIVE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75248",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "KENNETH GRAVES",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "6142 LA COSA DRIVE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75248",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

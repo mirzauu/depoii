@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   try {
     await requireSuperAdmin();
-    return Response.json(overview());
+    return Response.json(await overview());
   } catch (error) {
     return adminResponse(error);
   }

@@ -1,0 +1,50 @@
+{
+  "detail": {
+    "taxpayerId": "30119315791",
+    "feiNumber": null,
+    "name": "SCENTS CORPORATION",
+    "dbaName": null,
+    "mailingAddressStreet": "2503 SOUTHWELL RD",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75229",
+    "mailingAddressZip4": "4623",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "01/23/1997",
+    "sosFileNumber": "0143114600",
+    "registeredAgentName": "RAFIQ MEHERALI",
+    "registeredOfficeAddressStreet": "2503 SOUTHWELL RD",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75229",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "RAFIQ MEHERALI",
+        "AGNT_TITL_TX": "M MEMBER",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "9970 STRAIT LN",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75220",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "RAFIQ MEHERALI",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "9970 STRAIT LN",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75220",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "cleaned_name"
+}

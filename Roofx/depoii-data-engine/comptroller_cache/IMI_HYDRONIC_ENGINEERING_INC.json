@@ -1,0 +1,90 @@
+{
+  "detail": {
+    "taxpayerId": "17521831762",
+    "feiNumber": "752183176",
+    "name": "IMI HYDRONIC ENGINEERING INC.",
+    "dbaName": null,
+    "mailingAddressStreet": "7979 E TUFTS AVE STE 1150",
+    "mailingAddressCity": "DENVER",
+    "mailingAddressState": "CO",
+    "mailingAddressZip": "80237",
+    "mailingAddressZip4": "2698",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "06/24/1987",
+    "sosFileNumber": "0104226100",
+    "registeredAgentName": "CORPORATION SERVICE COMPANY D/B/A CSC-LAWYERS INCO",
+    "registeredOfficeAddressStreet": "211 E. 7TH STREET, SUITE 620",
+    "registeredOfficeAddressCity": "AUSTIN",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "78701",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "BECKY MAN",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "8908 GOVERNORS ROW",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75247",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "BECKY MAN",
+        "AGNT_TITL_TX": "TREASURER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "8908 GOVERNORS ROW",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75247",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "CHRIS RODGERS",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "8908 GOVERNORS ROW",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75247",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "CHRIS RODGERS",
+        "AGNT_TITL_TX": "PRESIDENT",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "8908 GOVERNORS ROW",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75247",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "STEFAN KUPPER",
+        "AGNT_TITL_TX": "TAX OFFICE",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "5400 S DELAWARE STREET",
+        "CITY_NM": "LITTLETON",
+        "ST_CD": "CO",
+        "AD_ZP": "80120",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "STEFAN KUPPER",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "5400 S DELAWARE STREET",
+        "CITY_NM": "LITTLETON",
+        "ST_CD": "CO",
+        "AD_ZP": "80120",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "cleaned_name"
+}

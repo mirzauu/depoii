@@ -1,0 +1,29 @@
+{
+  "detail": {
+    "taxpayerId": "32045435008",
+    "feiNumber": null,
+    "name": "EAST DALLAS CONGREGATIONAL METHODIST CHURCH",
+    "dbaName": null,
+    "mailingAddressStreet": "5303 ASH LN",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75223",
+    "mailingAddressZip4": "1801",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "10/26/2011",
+    "sosFileNumber": "0801499766",
+    "registeredAgentName": "SAMUEL H GONZALES",
+    "registeredOfficeAddressStreet": "5303 ASH LANE",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75223",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "",
+    "officerInfo": []
+  },
+  "confidence": "cleaned_name"
+}

@@ -1,0 +1,70 @@
+{
+  "detail": {
+    "taxpayerId": "32050229437",
+    "feiNumber": null,
+    "name": "LAVO PROPERTIES, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "2800 N HENDERSON AVE STE 200",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75206",
+    "mailingAddressZip4": "6593",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "02/18/2013",
+    "sosFileNumber": "0801735040",
+    "registeredAgentName": "2001 AGENCY CORPORATION",
+    "registeredOfficeAddressStreet": "14160 DALLAS PARKWAY, SUITE 800",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75254",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "DAVE ANDRES TRUST",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "2800 N HENDERSON SUITE 200",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75206",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DAVE ANDRES TRUST",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "2800 N HENDERSON SUITE 200",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75206",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "WONDERFUL SEVEN GP LLC",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "2800 N HENDERSON SUITE 200",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75206",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "WONDERFUL SEVEN GP LLC",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "2800 N HENDERSON SUITE 200",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75206",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

@@ -2,9 +2,9 @@ import { cookieMaxAge, cookieName, redeemLoginLink, sessionToken } from "@/lib/a
 
 export const dynamic = "force-dynamic";
 
-export function GET(req: Request) {
+export async function GET(req: Request) {
   const url = new URL(req.url);
-  const result = redeemLoginLink(url.searchParams.get("token") || "");
+  const result = await redeemLoginLink(url.searchParams.get("token") || "");
   const host = req.headers.get("x-forwarded-host") || req.headers.get("host") || url.host;
   const proto = req.headers.get("x-forwarded-proto") || url.protocol.replace(":", "") || "http";
   const dest = new URL("error" in result ? "/login" : "/", `${proto}://${host}`);

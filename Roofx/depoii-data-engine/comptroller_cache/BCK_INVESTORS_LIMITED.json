@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32036432071",
+    "feiNumber": null,
+    "name": "BCK INVESTORS LIMITED PARTNERSHIP",
+    "dbaName": null,
+    "mailingAddressStreet": "15950 DALLAS PKWY STE 600",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75248",
+    "mailingAddressZip4": "6685",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "03/07/1994",
+    "sosFileNumber": "0007333010",
+    "registeredAgentName": "FRED BASTIE",
+    "registeredOfficeAddressStreet": "14901 QUORUM, STE. 850",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75240",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "THE BCK COMPANY, L.C.",
+        "AGNT_TITL_TX": "GENERAL PA",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "14901 QUORUM, STE. 850",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75240",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "cleaned_name"
+}

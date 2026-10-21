@@ -1,0 +1,60 @@
+{
+  "detail": {
+    "taxpayerId": "32059303670",
+    "feiNumber": null,
+    "name": "MOUNT OLYMPUS TRIAD, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "4212 BELCLAIRE AVE",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75205",
+    "mailingAddressZip4": "3033",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "01/14/2016",
+    "sosFileNumber": "0802369634",
+    "registeredAgentName": "SAMUEL J CHANTILIS",
+    "registeredOfficeAddressStreet": "4212 BELCLAIRE AVE.",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75205",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "SAMUEL J CHANTILIS",
+        "AGNT_TITL_TX": "TRUSTEE",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "4212 BELCLAIRE AVE.",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75205",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "SAMUEL J CHANTILIS",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "4212 BELCLAIRE AVE.",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75205",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "SAMUEL J CHANTILIS",
+        "AGNT_TITL_TX": "MANAGER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "4212 BELCLAIRE AVE.",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75205",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

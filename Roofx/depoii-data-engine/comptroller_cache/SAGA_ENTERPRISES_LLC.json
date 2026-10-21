@@ -1,0 +1,50 @@
+{
+  "detail": {
+    "taxpayerId": "32093158916",
+    "feiNumber": null,
+    "name": "SAGA ENTERPRISES LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "4142 W SPARTAN DR",
+    "mailingAddressCity": "ODESSA",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "79764",
+    "mailingAddressZip4": "1044",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "01/24/2024",
+    "sosFileNumber": "0805368797",
+    "registeredAgentName": "ROBERT ANTHONY MCMILLIAN",
+    "registeredOfficeAddressStreet": "4142 W SPARTAN DR",
+    "registeredOfficeAddressCity": "ODESSA",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "79764",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "ROBERT MCMILLIAN",
+        "AGNT_TITL_TX": "OWNER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "4142 WEST SPARTAN DRIVE",
+        "CITY_NM": "ODESSA",
+        "ST_CD": "TX",
+        "AD_ZP": "79764",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "ROBERT MCMILLIAN",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "4142 WEST SPARTAN DRIVE",
+        "CITY_NM": "ODESSA",
+        "ST_CD": "TX",
+        "AD_ZP": "79764",
+        "SOURCE": "CPA"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32067663032",
+    "feiNumber": null,
+    "name": "CANTEX 7901, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "107 PITTSBURG ST",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75207",
+    "mailingAddressZip4": "7207",
+    "rightToTransactTX": "FRANCHISE TAX ENDED",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "INACTIVE",
+    "effectiveSosRegistrationDate": "07/02/2018",
+    "sosFileNumber": "0803057560",
+    "registeredAgentName": "ROMIT S CHEEMA",
+    "registeredOfficeAddressStreet": "1201 N RIVERFRONT BLVD, SUITE 150",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75207",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "CANTEX TIKA CAPITAL LLC",
+        "AGNT_TITL_TX": "MANAGER",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "107 PITTSBURG ST",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75207",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

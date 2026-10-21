@@ -577,7 +577,7 @@ export async function loadLive(opts: { stormId?: string | null; refresh?: boolea
     permits,
     developments,
   };
-  persistLive(payload);
+  await persistLive(payload);
   onHttp = null;
   return payload;
 }

@@ -1,0 +1,29 @@
+{
+  "detail": {
+    "taxpayerId": "30007464230",
+    "feiNumber": null,
+    "name": "TABERNACULO DE FE INC.",
+    "dbaName": null,
+    "mailingAddressStreet": "407 JUANITA AVE",
+    "mailingAddressCity": "SAN ANTONIO",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "78237",
+    "mailingAddressZip4": "3835",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "06/16/1983",
+    "sosFileNumber": "0066010901",
+    "registeredAgentName": "RUBEN D TAMEZ",
+    "registeredOfficeAddressStreet": "407 JUANITA",
+    "registeredOfficeAddressCity": "SAN ANTONIO",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "78237",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:45:37.148Z",
+    "reportYear": "",
+    "officerInfo": []
+  },
+  "confidence": "cleaned_name"
+}

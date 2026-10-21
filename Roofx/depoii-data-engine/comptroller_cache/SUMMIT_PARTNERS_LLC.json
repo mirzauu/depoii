@@ -1,0 +1,60 @@
+{
+  "detail": {
+    "taxpayerId": "32080311841",
+    "feiNumber": "262320588",
+    "name": "SUMMIT PARTNERS LLC",
+    "dbaName": "SUMMIT PARTNERS TECHNOLOGIES, LLC",
+    "mailingAddressStreet": "5241 CALIFORNIA AVE STE 150",
+    "mailingAddressCity": "IRVINE",
+    "mailingAddressState": "CA",
+    "mailingAddressZip": "92617",
+    "mailingAddressZip4": "3215",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " NV",
+    "sosRegistrationStatus": "NOT REGISTERED",
+    "effectiveSosRegistrationDate": "NOT REGISTERED",
+    "sosFileNumber": "NOT REGISTERED",
+    "registeredAgentName": "BUSINESS FILINGS INCORPORATED",
+    "registeredOfficeAddressStreet": "701 BRAZOS STREET, STE. 720",
+    "registeredOfficeAddressCity": "AUSTIN",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "78701",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:45:37.148Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "CHRISTOPHER M MOON",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "9050 W TROPICANA AVE UNI",
+        "CITY_NM": "LAS VEGAS",
+        "ST_CD": "NV",
+        "AD_ZP": "89147",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JOHN P GEORGES",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "5738 STONEHEATH AVENUE",
+        "CITY_NM": "LAS VEGAS",
+        "ST_CD": "NV",
+        "AD_ZP": "89139",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JON L LANKERT",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "5670 HEDGEFORD COURT",
+        "CITY_NM": "LAS VEGAS",
+        "ST_CD": "NV",
+        "AD_ZP": "89120",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

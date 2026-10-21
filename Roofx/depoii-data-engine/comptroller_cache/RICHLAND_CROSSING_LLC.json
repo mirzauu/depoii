@@ -1,0 +1,70 @@
+{
+  "detail": {
+    "taxpayerId": "13919069040",
+    "feiNumber": "391906904",
+    "name": "RICHLAND CROSSING L L C",
+    "dbaName": null,
+    "mailingAddressStreet": "2505 BROOKLAND DR NE",
+    "mailingAddressCity": "CEDAR RAPIDS",
+    "mailingAddressState": "IA",
+    "mailingAddressZip": "52402",
+    "mailingAddressZip4": "3301",
+    "rightToTransactTX": "FRANCHISE TAX ENDED",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " IA",
+    "sosRegistrationStatus": "INACTIVE",
+    "effectiveSosRegistrationDate": "11/17/1997",
+    "sosFileNumber": "0703132323",
+    "registeredAgentName": "RICHARD M REHMAN",
+    "registeredOfficeAddressStreet": "6060 VILLAGE BEND #1806",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75206",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "Not Available",
+    "officerInfo": [
+      {
+        "AGNT_NM": "JEFFREY S REHMAN",
+        "AGNT_TITL_TX": "SECRETARY",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "2107 EVERGREEN ST NE",
+        "CITY_NM": "CEDAR RAPIDS",
+        "ST_CD": "IA",
+        "AD_ZP": "52402",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "RICHARD H REHMAN",
+        "AGNT_TITL_TX": "MANAGING M",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "2505 BROOKLAND DR NE",
+        "CITY_NM": "CEDAR RAPIDS",
+        "ST_CD": "IA",
+        "AD_ZP": "52402",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "RICHARD H REHMAN",
+        "AGNT_TITL_TX": "MANAGER",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "2505 BROOKLAND DR NE",
+        "CITY_NM": "CEDAR RAPIDS",
+        "ST_CD": "IA",
+        "AD_ZP": "52402",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "RICHARD H REHMAN",
+        "AGNT_TITL_TX": "PRESIDENT",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "5400 PRESTON OAKS RD 3126",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75240",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

@@ -1,0 +1,50 @@
+{
+  "detail": {
+    "taxpayerId": "32065874623",
+    "feiNumber": null,
+    "name": "RETAMEN, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "3330 COURTLAND MANOR LN",
+    "mailingAddressCity": "KINGWOOD",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "77339",
+    "mailingAddressZip4": "1978",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "01/09/2018",
+    "sosFileNumber": "0802901257",
+    "registeredAgentName": "RICHARD MENCHACA",
+    "registeredOfficeAddressStreet": "128 ELIZABETH RD",
+    "registeredOfficeAddressCity": "SAN ANTONIO",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "78209",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "RICHARD MENCHACA",
+        "AGNT_TITL_TX": "MANAGER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "3330 COURTLAND MANOR LANE",
+        "CITY_NM": "KINGWOOD",
+        "ST_CD": "TX",
+        "AD_ZP": "77339",
+        "SOURCE": "CPA"
+      },
+      {
+        "AGNT_NM": "RICHARD V MENCHACA",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "612 SAN JUAN CT",
+        "CITY_NM": "IRVING",
+        "ST_CD": "TX",
+        "AD_ZP": "75062",
+        "SOURCE": "CPA"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

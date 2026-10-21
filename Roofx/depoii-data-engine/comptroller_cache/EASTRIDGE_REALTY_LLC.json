@@ -1,0 +1,70 @@
+{
+  "detail": {
+    "taxpayerId": "32084425415",
+    "feiNumber": null,
+    "name": "EASTRIDGE REALTY LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "180 PHILLIPS HILL RD # 1A",
+    "mailingAddressCity": "NEW CITY",
+    "mailingAddressState": "NY",
+    "mailingAddressZip": "10956",
+    "mailingAddressZip4": "4132",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "05/04/2022",
+    "sosFileNumber": "0804552444",
+    "registeredAgentName": "BRIAN KOHN",
+    "registeredOfficeAddressStreet": "6310 EASTRIDGE DR EASTRIDGE ACADEMY",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75231",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "ASHER JACOBS",
+        "AGNT_TITL_TX": "MANAGING M",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "4 ROSEWOOD LN",
+        "CITY_NM": "SUFFERN",
+        "ST_CD": "NE",
+        "AD_ZP": "10901",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ASHER JACOBS",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "4 ROSEWOOD LN",
+        "CITY_NM": "SUFFERN",
+        "ST_CD": "NE",
+        "AD_ZP": "10901",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "BRIAN KOHN",
+        "AGNT_TITL_TX": "MANAGING M",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "759 HILLCREST PL",
+        "CITY_NM": "VALLEY STREAM",
+        "ST_CD": "NE",
+        "AD_ZP": "11581",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "BRIAN KOHN",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "759 HILLCREST PL",
+        "CITY_NM": "VALLEY STREAM",
+        "ST_CD": "NE",
+        "AD_ZP": "11581",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "exact_name"
+}

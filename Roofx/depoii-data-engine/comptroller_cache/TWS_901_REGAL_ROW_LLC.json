@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32078872739",
+    "feiNumber": null,
+    "name": "TWS 901 REGAL ROW, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "8805 CHANCELLOR ROW",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75247",
+    "mailingAddressZip4": "5525",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "04/21/2021",
+    "sosFileNumber": "0804038076",
+    "registeredAgentName": "CHARLIE A MEADOR",
+    "registeredOfficeAddressStreet": "8805 CHANCELLOR ROW",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75247",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:45:37.148Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "CAROL MEADOR",
+        "AGNT_TITL_TX": "MANAGING M",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "8805 CHANCELLOR ROW",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75247",
+        "SOURCE": "CPA"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

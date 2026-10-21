@@ -15,12 +15,12 @@ function snapshotLine(snapshot: SnapshotRow) {
   return `Depoii score ${snapshot.score} on ${snapshot.scored_on} for storm ${snapshot.storm_date}. Tier: ${snapshot.tier}. Hail used in the score: ${snapshot.hail_inches}". ${snapshot.hail_basis} ${snapshot.unresolved ? "No roofing permit matched this address on or after the storm date." : "A roofing permit matched this address on or after the storm date, or the permit site was not fetched so absence was not scored."}`;
 }
 
-export function accountCard(account: string, stormDate?: string) {
-  const parcel = parcelByAccount(account);
+export async function accountCard(account: string, stormDate?: string) {
+  const parcel = await parcelByAccount(account);
   if (!parcel) return null;
-  const permits = permitsForAccount(account);
-  const snapshot = latestSnapshot(account, stormDate);
-  const outcome = outcomeFor(account, snapshot?.storm_date);
+  const permits = await permitsForAccount(account);
+  const snapshot = await latestSnapshot(account, stormDate);
+  const outcome = await outcomeFor(account, snapshot?.storm_date);
   const cad = parcel.city === "Dallas" ? "Dallas Central Appraisal District" : "Tarrant Appraisal District";
   const permitOffice = parcel.city === "Dallas" ? "Dallas" : "Fort Worth";
   const lines = [
@@ -43,15 +43,16 @@ export function accountCard(account: string, stormDate?: string) {
   };
 }
 
-export function stormCard(stormDate: string) {
-  const reports = reportsForStorm(stormDate);
-  const warnings = warningCount(stormDate);
-  const scores = latestSnapshots(stormDate);
+export async function stormCard(stormDate: string) {
+  const reports = await reportsForStorm(stormDate);
+  const warnings = await warningCount(stormDate);
+  const scores = await latestSnapshots(stormDate);
   if (!reports.length && !warnings && !scores.rows.length) return null;
   const largest = reports[0];
-  const buildings = scores.rows.map((row) => {
-    const parcel = parcelByAccount(row.account);
-    return {
+  const buildings = [];
+  for (const row of scores.rows) {
+    const parcel = await parcelByAccount(row.account);
+    buildings.push({
       account: row.account,
       address: parcel?.address ?? row.account,
       owner: parcel?.owner ?? "",
@@ -59,8 +60,8 @@ export function stormCard(stormDate: string) {
       tier: row.tier,
       hailInches: row.hail_inches,
       unresolved: Boolean(row.unresolved),
-    };
-  });
+    });
+  }
   const lines = [
     `Storm day ${stormDate}, North Texas (NWS Fort Worth office).`,
     reports.length

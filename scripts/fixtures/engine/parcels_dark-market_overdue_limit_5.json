@@ -1,0 +1,9 @@
+{
+  "total": 0,
+  "count": 0,
+  "minAge": 15,
+  "minSqft": 20000,
+  "limit": 5,
+  "offset": 0,
+  "overdueParcels": []
+}

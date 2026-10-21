@@ -1,0 +1,50 @@
+{
+  "detail": {
+    "taxpayerId": "17523901332",
+    "feiNumber": "752390133",
+    "name": "KPW ENTERPRISES, INC.",
+    "dbaName": null,
+    "mailingAddressStreet": "5841 SOUTHMOOR LN",
+    "mailingAddressCity": "THE COLONY",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75056",
+    "mailingAddressZip4": "7113",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "07/16/1993",
+    "sosFileNumber": "0127777300",
+    "registeredAgentName": "KEVIN P WALLS",
+    "registeredOfficeAddressStreet": "5841 SOUTHMOOR LANE",
+    "registeredOfficeAddressCity": "THE COLONY",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75056",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "KEVIN P WALLS",
+        "AGNT_TITL_TX": "PRESIDENT",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "5841 SOUTHMOOR LANE",
+        "CITY_NM": "THE COLONY",
+        "ST_CD": "TX",
+        "AD_ZP": "75056",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "ROYCE E GREGORY JR",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "5841 SOUTHMOOR LANE",
+        "CITY_NM": "THE COLONY",
+        "ST_CD": "TX",
+        "AD_ZP": "75056",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

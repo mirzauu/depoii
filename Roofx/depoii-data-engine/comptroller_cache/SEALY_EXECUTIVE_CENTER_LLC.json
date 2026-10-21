@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32072667960",
+    "feiNumber": null,
+    "name": "SEALY EXECUTIVE CENTER, L.L.C.",
+    "dbaName": null,
+    "mailingAddressStreet": "211 E 7TH ST STE 620",
+    "mailingAddressCity": "AUSTIN",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "78701",
+    "mailingAddressZip4": "3218",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " GA",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "11/26/2019",
+    "sosFileNumber": "0803480274",
+    "registeredAgentName": "CORPORATION SERVICE COMPANY D/B/A CSC-LAWYERS INCO",
+    "registeredOfficeAddressStreet": "211 E. 7TH STREET SUITE 620",
+    "registeredOfficeAddressCity": "AUSTIN",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "78701",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2025",
+    "officerInfo": [
+      {
+        "AGNT_NM": "SEALY INDUSTRIAL PARTNERS GP LLC",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "2025",
+        "AD_STR_POB_TX": "333 TEXAS ST STE 1050",
+        "CITY_NM": "SHREVEPORT",
+        "ST_CD": "LA",
+        "AD_ZP": "71101",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

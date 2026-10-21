@@ -1,0 +1,70 @@
+{
+  "detail": {
+    "taxpayerId": "32012648682",
+    "feiNumber": null,
+    "name": "HORN FAMILY INVESTMENTS, L.L.C.",
+    "dbaName": null,
+    "mailingAddressStreet": "PO BOX 601852",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75360",
+    "mailingAddressZip4": "1852",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "10/28/2003",
+    "sosFileNumber": "0800262945",
+    "registeredAgentName": "PRISCILLA H UNDERWOOD",
+    "registeredOfficeAddressStreet": "3804 MAPLEWOOD",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75205",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "HORN FAMILY TRUST UAD 12-29",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "P O BOX 601852",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75360",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "LESLIE K PETERSON",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "54 SEVEN BRIDGES ROAD",
+        "CITY_NM": "CHAPPAQUA",
+        "ST_CD": "NY",
+        "AD_ZP": "10514",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MICHAEL D HORN JR",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "P O BOX 601852",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75360",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "SUZANNE HORN DERISO",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "331 CAMDEN ROAD NE",
+        "CITY_NM": "ATLANTA",
+        "ST_CD": "GA",
+        "AD_ZP": "30309",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

@@ -154,7 +154,20 @@ def main():
     # 3. Server query on OBJECTID > last_oid
     where_base = "(upper(WORK_DESCRIPTION) LIKE '%ROOF%' OR upper(WORK_DESCRIPTION) LIKE '%TPO%' OR upper(WORK_DESCRIPTION) LIKE '%EPDM%' OR upper(WORK_DESCRIPTION) LIKE '%SHINGLE%' OR upper(WORK_DESCRIPTION) LIKE '%BITUMEN%')"
 
+    # Resume from Supabase harvest_state when available (Phase 2); the
+    # dedupe set below still protects against re-inserts on older runs.
     last_oid = 0
+    pg = None
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from app.core import pg as _pg
+
+        if _pg.available():
+            pg = _pg
+            last_oid = _pg.get_harvest_state("NewPermit_2008_2024")
+            print(f"[+] Resuming from Supabase harvest_state last_oid={last_oid:,}")
+    except Exception as e:
+        print(f"[!] Supabase harvest_state unavailable ({e}); scanning from 0 with local dedupe.")
     total_scanned = 0
     total_stored = 0
     total_skipped_dedupe = 0
@@ -260,6 +273,25 @@ def main():
             """, batch_inserts)
             conn.commit()
             total_stored += len(batch_inserts)
+
+            # Dual-write to Supabase warehouse (Phase 2). Local SQLite stays
+            # the working cache; Postgres is the hosted app's source.
+            if pg is not None:
+                try:
+                    pg_cols = ["id", "raw_permit_number", "jurisdiction_id", "parcel_id", "contractor_id", "source_system",
+                               "jurisdiction", "state", "city", "issue_date", "applied_date", "expiration_date",
+                               "status", "normalized_address", "zip_code", "valuation", "valuation_formatted",
+                               "category", "probable_roof_system", "raw_description", "square_footage", "contractor_name",
+                               "contractor_license", "contractor_phone", "is_hail_storm_window", "associated_storm_id",
+                               "is_competitor_capture", "confidence_score", "latitude", "longitude", "normalized_at",
+                               "permit_scope", "is_pure_reroof", "calibrated_roof_valuation", "geo_quality", "date_quality",
+                               "area_source", "year_built_source", "value_source", "source_record_id", "retrieved_at", "data_source"]
+                    bool_idx = {pg_cols.index(c) for c in ("is_hail_storm_window", "is_competitor_capture", "is_pure_reroof")}
+                    pg_rows = [tuple(bool(v) if i in bool_idx and v is not None else v for i, v in enumerate(r)) for r in batch_inserts]
+                    pg.upsert_rows("warehouse.normalized_permits", pg_cols, pg_rows, ["id"])
+                    pg.set_harvest_state("NewPermit_2008_2024", last_oid, {"stored": total_stored, "scanned": total_scanned})
+                except Exception as e:
+                    print(f"[!] Supabase dual-write failed ({e}); continuing with local SQLite only.")
 
         print(f"  [+] Scanned: {total_scanned:,} | Last OBJECTID: {last_oid:,} | Stored: {total_stored:,} (Full: {counts_by_scope['FULL_REPLACEMENT']:,}, Maint: {counts_by_scope['ROOF_MAINTENANCE_COATING']:,}, Unclass: {counts_by_scope['UNCLASSIFIED_ROOF_WORK']:,}) | Deduped: {total_skipped_dedupe:,} | Rejected: {total_rejected:,}")
         time.sleep(0.3)

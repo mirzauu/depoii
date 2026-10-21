@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32035869471",
+    "feiNumber": null,
+    "name": "DENTAL DEPOT OF DALLAS, LTD.",
+    "dbaName": null,
+    "mailingAddressStreet": "3104 NW 23RD ST",
+    "mailingAddressCity": "OKLAHOMA CITY",
+    "mailingAddressState": "OK",
+    "mailingAddressZip": "73107",
+    "mailingAddressZip4": "1902",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "08/02/2002",
+    "sosFileNumber": "0800112405",
+    "registeredAgentName": "CHARLES C NUNNALLY",
+    "registeredOfficeAddressStreet": "3326 FOREST LANE",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75234",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "DENTAL DEPOT OF TEXAS, INC.",
+        "AGNT_TITL_TX": "GENERAL PA",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "3104 NW 23RD",
+        "CITY_NM": "OKLAHOMA CITY",
+        "ST_CD": "OK",
+        "AD_ZP": "73107",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "cleaned_name"
+}

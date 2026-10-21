@@ -1,0 +1,29 @@
+{
+  "detail": {
+    "taxpayerId": "32103925056",
+    "feiNumber": null,
+    "name": "MAXGARDEN PROPERTIES LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "1421 PATTON PL STE 100",
+    "mailingAddressCity": "CARROLLTON",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75007",
+    "mailingAddressZip4": "4804",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " CA",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "01/15/2026",
+    "sosFileNumber": "0806393681",
+    "registeredAgentName": "JEFF JIAN MA",
+    "registeredOfficeAddressStreet": "1421 PATTON PLACE STE 100",
+    "registeredOfficeAddressCity": "CARROLLTON",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75007",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "",
+    "officerInfo": []
+  },
+  "confidence": "exact_name"
+}

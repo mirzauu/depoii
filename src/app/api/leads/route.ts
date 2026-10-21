@@ -1,6 +1,6 @@
 import { recordActivity } from "@/lib/activity";
 import { requireUser } from "@/lib/auth";
-import { getDb } from "@/lib/db";
+import { query, queryOne } from "@/lib/pg";
 
 export const dynamic = "force-dynamic";
 
@@ -31,9 +31,9 @@ function mapLead(row: LeadRow) {
     stage: row.stage,
     assignee: row.assignee,
     notes: row.notes,
-    score: row.score,
-    hail: row.hail,
-    price: row.price,
+    score: Number(row.score),
+    hail: Number(row.hail),
+    price: Number(row.price),
     updatedAt: row.updated_at,
   };
 }
@@ -43,11 +43,10 @@ const PILOT_ORG_ID = "19b8a9bce1316429";
 export async function GET() {
   try {
     const user = await requireUser();
-    const db = getDb();
-    let rows = db.prepare(`SELECT * FROM leads WHERE org_id = ? ORDER BY updated_at DESC`).all(user.orgId) as LeadRow[];
+    let rows = await query<LeadRow>(`select * from app.leads where org_id = $1 order by updated_at desc`, [user.orgId]);
     // Super-admin (Depoii org) should still see the Dallas pilot book during demos.
     if (user.platformRole === "superadmin" && user.orgId !== PILOT_ORG_ID) {
-      const pilot = db.prepare(`SELECT * FROM leads WHERE org_id = ? ORDER BY updated_at DESC`).all(PILOT_ORG_ID) as LeadRow[];
+      const pilot = await query<LeadRow>(`select * from app.leads where org_id = $1 order by updated_at desc`, [PILOT_ORG_ID]);
       if (pilot.length && rows.length === 0) rows = pilot;
       else if (pilot.length) {
         const seen = new Set(rows.map((r) => `${r.parcel_id}|${r.storm_id}`));
@@ -82,23 +81,24 @@ export async function POST(req: Request) {
     const stage = STAGES.includes(body.stage as (typeof STAGES)[number]) ? body.stage! : "New";
     const id = crypto.randomUUID();
     const now = new Date().toISOString();
-    getDb().prepare(`
-      INSERT INTO leads (id, org_id, parcel_id, storm_id, address, city, stage, assignee, notes, score, hail, price, updated_at)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-      ON CONFLICT(org_id, parcel_id, storm_id) DO UPDATE SET
-        address = excluded.address, city = excluded.city, stage = excluded.stage, assignee = excluded.assignee,
-        notes = excluded.notes, score = excluded.score, hail = excluded.hail, price = excluded.price, updated_at = excluded.updated_at
-    `).run(id, user.orgId, body.parcelId, body.stormId || "", body.address || "", body.city || "", stage, body.assignee || user.name, body.notes || "", body.score || 0, body.hail || 0, body.price || 0, now);
-    const row = getDb().prepare(`SELECT * FROM leads WHERE org_id = ? AND parcel_id = ? AND storm_id = ?`).get(user.orgId, body.parcelId, body.stormId || "") as LeadRow;
-    recordActivity({
+    await query(
+      `insert into app.leads (id, org_id, parcel_id, storm_id, address, city, stage, assignee, notes, score, hail, price, updated_at)
+       values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)
+       on conflict (org_id, parcel_id, storm_id) do update set
+         address = excluded.address, city = excluded.city, stage = excluded.stage, assignee = excluded.assignee,
+         notes = excluded.notes, score = excluded.score, hail = excluded.hail, price = excluded.price, updated_at = excluded.updated_at`,
+      [id, user.orgId, body.parcelId, body.stormId || "", body.address || "", body.city || "", stage, body.assignee || user.name, body.notes || "", body.score || 0, body.hail || 0, body.price || 0, now],
+    );
+    const row = await queryOne<LeadRow>(`select * from app.leads where org_id = $1 and parcel_id = $2 and storm_id = $3`, [user.orgId, body.parcelId, body.stormId || ""]);
+    await recordActivity({
       actorId: user.id,
       orgId: user.orgId,
       action: "lead.save",
       targetType: "lead",
-      targetId: row.id,
-      detail: { parcelId: row.parcel_id, stage: row.stage, address: row.address },
+      targetId: row!.id,
+      detail: { parcelId: row!.parcel_id, stage: row!.stage, address: row!.address },
     });
-    return Response.json({ ...mapLead(row), promptOutcome: stage === "Inspected" });
+    return Response.json({ ...mapLead(row!), promptOutcome: stage === "Inspected" });
   } catch {
     return Response.json({ error: "Sign in required." }, { status: 401 });
   }

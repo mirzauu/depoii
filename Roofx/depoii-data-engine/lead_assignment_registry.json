@@ -1,0 +1,1483 @@
+[
+  {
+    "assignment_id": "ASN-001",
+    "parcel_id": "TAD-PARCEL-07532598",
+    "normalized_address": "3001 Meacham Blvd",
+    "recipient_company": "SR1 Roofing",
+    "recipient_email": "trevor@sr1roofing.com",
+    "date_sent_raw": "Tue, 20 Oct 2026",
+    "date_sent_iso": "2026-10-20",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-27",
+    "cooldown_end_date": "2026-11-03",
+    "assignment_status": "ACTIVE_EXCLUSIVE",
+    "contact_status_notes": "Meacham v2.1 correction note dispatched Oct 20, 2026; 7-day exclusivity active through Oct 27 (cooldown through Nov 3); Jack Newell (ASN-049) held reserved",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-001-A",
+        "internal_ref": "EVT-001-A",
+        "timestamp_iso": "2026-10-14T15:20:00Z",
+        "event_type": "INITIAL_OUTREACH",
+        "gmail_thread_id": null,
+        "gmail_message_id": null,
+        "subject": "3001 Meacham Blvd: 115k sq ft commercial center, 2.75\" hail reported nearby",
+        "pack_version": "v1.0_AUTOMATED_PITCH",
+        "recipient_email": "trevor@sr1roofing.com",
+        "reply_received": "YES (Oct 14, 2026 at 16:42)"
+      },
+      {
+        "event_id": "EVT-001-B",
+        "internal_ref": "EVT-001-B",
+        "timestamp_iso": "2026-10-20T20:47:00Z",
+        "event_type": "CORRECTION_DISPATCH",
+        "gmail_thread_id": null,
+        "gmail_message_id": null,
+        "subject": "3001 Meacham: Verification correction note",
+        "pack_version": "v2.1_STANDALONE_CORRECTION",
+        "recipient_email": "trevor@sr1roofing.com",
+        "exclusivity_expiry_iso": "2026-10-27",
+        "cooldown_end_iso": "2026-11-03",
+        "status_after_event": "ACTIVE_EXCLUSIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-002",
+    "parcel_id": "DCAD-PARCEL-004643000A0010000",
+    "normalized_address": "1133 S Madison Ave",
+    "recipient_company": "New View Roofing",
+    "recipient_email": "mike@newviewroofing.com",
+    "date_sent_raw": "Tue, 20 Oct 2026",
+    "date_sent_iso": "2026-10-20",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-27",
+    "cooldown_end_date": "2026-11-03",
+    "assignment_status": "ACTIVE_EXCLUSIVE",
+    "contact_status_notes": "Pack B v2.1 resolution dossier dispatched Oct 20, 2026; 7-day exclusivity active through Oct 27 (cooldown through Nov 3)",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-002-A",
+        "internal_ref": "EVT-002-A",
+        "timestamp_iso": "2026-10-14T15:35:00Z",
+        "event_type": "INITIAL_OUTREACH",
+        "gmail_thread_id": null,
+        "gmail_message_id": null,
+        "subject": "1133 S Madison Ave: 139k sq ft commercial distribution facility, 1.75\" hail",
+        "pack_version": "v1.0_AUTOMATED_PITCH",
+        "recipient_email": "mike@newviewroofing.com",
+        "reply_received": "OBJECTION_OWNER_GAP (Oct 16, 2026 at 09:12)"
+      },
+      {
+        "event_id": "EVT-002-B",
+        "internal_ref": "EVT-002-B",
+        "timestamp_iso": "2026-10-20T20:47:00Z",
+        "event_type": "RESOLUTION_DISPATCH",
+        "gmail_thread_id": null,
+        "gmail_message_id": null,
+        "subject": "1133 S Madison: Owner resolution + corrected DCAD footprint (Pack B)",
+        "pack_version": "v2.1_RESOLUTION_DOSSIER",
+        "recipient_email": "mike@newviewroofing.com",
+        "exclusivity_expiry_iso": "2026-10-27",
+        "cooldown_end_iso": "2026-11-03",
+        "status_after_event": "ACTIVE_EXCLUSIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-003",
+    "parcel_id": "TAD-PARCEL-00165999",
+    "normalized_address": "566 N Beach St",
+    "recipient_company": "Integrated Roofing Systems",
+    "recipient_email": "marcos@integratedroofingsys.com",
+    "date_sent_raw": "Mon, 19 Oct 2026, 20:49",
+    "date_sent_iso": "2026-10-19",
+    "exclusivity_days_pledged": 0,
+    "exclusivity_expiry_date": "N/A",
+    "cooldown_end_date": "N/A",
+    "assignment_status": "NO_EXCLUSIVITY_PLEDGED",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-003-A",
+        "timestamp_raw": "Mon, 19 Oct 2026, 20:49",
+        "timestamp_iso": "2026-10-19",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "566 N Beach: 60k sq ft industrial warehouse",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "marcos@integratedroofingsys.com",
+        "status_after_event": "NO_EXCLUSIVITY_PLEDGED"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-004",
+    "parcel_id": "DCAD-PARCEL-008189000B05C0000",
+    "normalized_address": "14856 Preston Rd",
+    "recipient_company": "Town & Country Roofing",
+    "recipient_email": "ralph@townandcountryroofingdfw.com",
+    "date_sent_raw": "Mon, 19 Oct 2026, 20:48",
+    "date_sent_iso": "2026-10-19",
+    "exclusivity_days_pledged": 0,
+    "exclusivity_expiry_date": "N/A",
+    "cooldown_end_date": "N/A",
+    "assignment_status": "NO_EXCLUSIVITY_PLEDGED",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-004-A",
+        "timestamp_raw": "Mon, 19 Oct 2026, 20:48",
+        "timestamp_iso": "2026-10-19",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "Sean 314856 Preston Rd: 200k sq ft commercial shopping center, 1.75\" hail - ---------- Forwarded message --------- From: ali mirza <mirzamailbox0@gmail.com> Date: Mon",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "ralph@townandcountryroofingdfw.com",
+        "status_after_event": "NO_EXCLUSIVITY_PLEDGED"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-005",
+    "parcel_id": "DCAD-PARCEL-006115000A0060000",
+    "normalized_address": "3434 W Illinois Ave",
+    "recipient_company": "Town & Country Roofing",
+    "recipient_email": "sales@aiatoz.com",
+    "date_sent_raw": "Wed, 14 Oct 2026, 00:50",
+    "date_sent_iso": "2026-10-14",
+    "exclusivity_days_pledged": 0,
+    "exclusivity_expiry_date": "N/A",
+    "cooldown_end_date": "N/A",
+    "assignment_status": "NO_EXCLUSIVITY_PLEDGED",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-005-A",
+        "timestamp_raw": "Wed, 14 Oct 2026, 00:50",
+        "timestamp_iso": "2026-10-14",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "Town & Country Roofing, has attachment",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "sales@aiatoz.com",
+        "status_after_event": "NO_EXCLUSIVITY_PLEDGED"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-006",
+    "parcel_id": "DCAD-PARCEL-008178000A0030000",
+    "normalized_address": "14754 Preston Rd",
+    "recipient_company": "Williams Roofing & Sheet Metal",
+    "recipient_email": "bwilliamswrs@yahoo.com",
+    "date_sent_raw": "Tue, 13 Oct 2026, 22:58",
+    "date_sent_iso": "2026-10-13",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-20",
+    "cooldown_end_date": "2026-10-27",
+    "assignment_status": "EXPIRES_TODAY_COOLDOWN_ACTIVE",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-006-A",
+        "timestamp_raw": "Tue, 13 Oct 2026, 22:58",
+        "timestamp_iso": "2026-10-13",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "14754 Preston Rd: 128k sq ft commercial office complex, 1.75\" hail",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "bwilliamswrs@yahoo.com",
+        "status_after_event": "EXPIRES_TODAY_COOLDOWN_ACTIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-007",
+    "parcel_id": "TAD-PARCEL-41017625",
+    "normalized_address": "4770 Mercantile Dr",
+    "recipient_company": "Vision Roofing",
+    "recipient_email": "info@visionroofing.com",
+    "date_sent_raw": "Tue, 13 Oct 2026, 22:57",
+    "date_sent_iso": "2026-10-13",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-20",
+    "cooldown_end_date": "2026-10-27",
+    "assignment_status": "EXPIRES_TODAY_COOLDOWN_ACTIVE",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-007-A",
+        "timestamp_raw": "Tue, 13 Oct 2026, 22:57",
+        "timestamp_iso": "2026-10-13",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "4770 Mercantile Dr: 137k sq ft industrial park facility, 2.75\" hail",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "info@visionroofing.com",
+        "status_after_event": "EXPIRES_TODAY_COOLDOWN_ACTIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-008",
+    "parcel_id": "TAD-PARCEL-05647495",
+    "normalized_address": "2900 Red Hawk Dr",
+    "recipient_company": "MBM Roofing",
+    "recipient_email": "mark@mbmroofing.com",
+    "date_sent_raw": "Tue, 13 Oct 2026, 22:57",
+    "date_sent_iso": "2026-10-13",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-20",
+    "cooldown_end_date": "2026-10-27",
+    "assignment_status": "EXPIRES_TODAY_COOLDOWN_ACTIVE",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-008-A",
+        "timestamp_raw": "Tue, 13 Oct 2026, 22:57",
+        "timestamp_iso": "2026-10-13",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "2900 Red Hawk Dr: 67k sq ft industrial distribution plant, 1.75\" hail",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "mark@mbmroofing.com",
+        "status_after_event": "EXPIRES_TODAY_COOLDOWN_ACTIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-009",
+    "parcel_id": "DCAD-PARCEL-0081740A0003B0100",
+    "normalized_address": "14755 Preston Rd",
+    "recipient_company": "Wright Roofing",
+    "recipient_email": "richard@wrightroofing.com",
+    "date_sent_raw": "Tue, 13 Oct 2026, 22:57",
+    "date_sent_iso": "2026-10-13",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-20",
+    "cooldown_end_date": "2026-10-27",
+    "assignment_status": "EXPIRES_TODAY_COOLDOWN_ACTIVE",
+    "contact_status_notes": "BOUNCED_INVALID_EMAIL",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-009-A",
+        "timestamp_raw": "Tue, 13 Oct 2026, 22:57",
+        "timestamp_iso": "2026-10-13",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "14755 Preston Rd: 134k sq ft office complex 1.6 miles away, 1.75\" hail",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "richard@wrightroofing.com",
+        "status_after_event": "EXPIRES_TODAY_COOLDOWN_ACTIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-010",
+    "parcel_id": "DCAD-PARCEL-000008444000A00100",
+    "normalized_address": "17001 Coit Rd",
+    "recipient_company": "Triumph Roofing",
+    "recipient_email": "brad@triumphroofing.net",
+    "date_sent_raw": "Tue, 13 Oct 2026, 22:56",
+    "date_sent_iso": "2026-10-13",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-20",
+    "cooldown_end_date": "2026-10-27",
+    "assignment_status": "EXPIRES_TODAY_COOLDOWN_ACTIVE",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-010-A",
+        "timestamp_raw": "Tue, 13 Oct 2026, 22:56",
+        "timestamp_iso": "2026-10-13",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "17001 Coit Rd: 300k sq ft corporate campus 4 miles away, 1.75\" hail",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "brad@triumphroofing.net",
+        "status_after_event": "EXPIRES_TODAY_COOLDOWN_ACTIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-011",
+    "parcel_id": "TAD-PARCEL-00033928",
+    "normalized_address": "800 8th Ave",
+    "recipient_company": "Hilltop Roofing",
+    "recipient_email": "cahill@hilltopftw.com",
+    "date_sent_raw": "Tue, 13 Oct 2026, 22:55",
+    "date_sent_iso": "2026-10-13",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-20",
+    "cooldown_end_date": "2026-10-27",
+    "assignment_status": "EXPIRES_TODAY_COOLDOWN_ACTIVE",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-011-A",
+        "timestamp_raw": "Tue, 13 Oct 2026, 22:55",
+        "timestamp_iso": "2026-10-13",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "800 8th Ave: 191k sq ft commercial plaza in Medical District, 1.75\" hail",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "cahill@hilltopftw.com",
+        "status_after_event": "EXPIRES_TODAY_COOLDOWN_ACTIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-012",
+    "parcel_id": "TAD-PARCEL-06899441",
+    "normalized_address": "2725 S State Hwy 360",
+    "recipient_company": "Parsons Commercial Roofing",
+    "recipient_email": "stuart@parsonsroofing.com",
+    "date_sent_raw": "Tue, 13 Oct 2026, 22:55",
+    "date_sent_iso": "2026-10-13",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-20",
+    "cooldown_end_date": "2026-10-27",
+    "assignment_status": "EXPIRES_TODAY_COOLDOWN_ACTIVE",
+    "contact_status_notes": "BOUNCED_INVALID_EMAIL",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-012-A",
+        "timestamp_raw": "Tue, 13 Oct 2026, 22:55",
+        "timestamp_iso": "2026-10-13",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "2725 S State Hwy 360: 284k sq ft industrial distribution center, $23.8M asset",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "stuart@parsonsroofing.com",
+        "status_after_event": "EXPIRES_TODAY_COOLDOWN_ACTIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-013",
+    "parcel_id": "DCAD-PARCEL-00000572881000000",
+    "normalized_address": "3141 Hansboro Ave",
+    "recipient_company": "Sun Commercial Roofs (Suncor)",
+    "recipient_email": "richard@suncoroofs.com",
+    "date_sent_raw": "Tue, 13 Oct 2026, 22:54",
+    "date_sent_iso": "2026-10-13",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-20",
+    "cooldown_end_date": "2026-10-27",
+    "assignment_status": "EXPIRES_TODAY_COOLDOWN_ACTIVE",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-013-A",
+        "timestamp_raw": "Tue, 13 Oct 2026, 22:54",
+        "timestamp_iso": "2026-10-13",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "3141 Hansboro Ave: 104k sq ft industrial distribution warehouse, 3.0\" hail",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "richard@suncoroofs.com",
+        "status_after_event": "EXPIRES_TODAY_COOLDOWN_ACTIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-014",
+    "parcel_id": "DCAD-PARCEL-00000389920000000",
+    "normalized_address": "1000 S Louise St",
+    "recipient_company": "Frazier Roofing & Services",
+    "recipient_email": "service@frazierservices.com",
+    "date_sent_raw": "Tue, 13 Oct 2026, 22:54",
+    "date_sent_iso": "2026-10-13",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-20",
+    "cooldown_end_date": "2026-10-27",
+    "assignment_status": "EXPIRES_TODAY_COOLDOWN_ACTIVE",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-014-A",
+        "timestamp_raw": "Tue, 13 Oct 2026, 22:54",
+        "timestamp_iso": "2026-10-13",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "1000 S Louise St: 91k sq ft industrial warehouse, 2.0\" hail 2.9 miles away",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "service@frazierservices.com",
+        "status_after_event": "EXPIRES_TODAY_COOLDOWN_ACTIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-015",
+    "parcel_id": "DCAD-PARCEL-00000788220000000",
+    "normalized_address": "13931 N Central Expy",
+    "recipient_company": "Bert Roofing",
+    "recipient_email": "john@bertroofing.com",
+    "date_sent_raw": "Tue, 13 Oct 2026, 22:54",
+    "date_sent_iso": "2026-10-13",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-20",
+    "cooldown_end_date": "2026-10-27",
+    "assignment_status": "EXPIRES_TODAY_COOLDOWN_ACTIVE",
+    "contact_status_notes": "BOUNCED_INVALID_EMAIL",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-015-A",
+        "timestamp_raw": "Tue, 13 Oct 2026, 22:54",
+        "timestamp_iso": "2026-10-13",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "13931 N Central Expy: 115k sq ft industrial facility, 1.75\" hail 1.1 miles away",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "john@bertroofing.com",
+        "status_after_event": "EXPIRES_TODAY_COOLDOWN_ACTIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-016",
+    "parcel_id": "TAD-PARCEL-06899550",
+    "normalized_address": "4660 S State Hwy 360",
+    "recipient_company": "The Roof Experts",
+    "recipient_email": "paul@theroofexperts.com",
+    "date_sent_raw": "Tue, 13 Oct 2026, 22:53",
+    "date_sent_iso": "2026-10-13",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-20",
+    "cooldown_end_date": "2026-10-27",
+    "assignment_status": "EXPIRES_TODAY_COOLDOWN_ACTIVE",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-016-A",
+        "timestamp_raw": "Tue, 13 Oct 2026, 22:53",
+        "timestamp_iso": "2026-10-13",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "4660 S State Hwy 360: 84k sq ft commercial facility, 1.75\" hail in corridor",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "paul@theroofexperts.com",
+        "status_after_event": "EXPIRES_TODAY_COOLDOWN_ACTIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-017",
+    "parcel_id": "TAD-PARCEL-04029482",
+    "normalized_address": "5020 Augusta Dr",
+    "recipient_company": "CMAC Roofing",
+    "recipient_email": "christian@cmacroofing.com",
+    "date_sent_raw": "Tue, 13 Oct 2026, 22:53",
+    "date_sent_iso": "2026-10-13",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-20",
+    "cooldown_end_date": "2026-10-27",
+    "assignment_status": "EXPIRES_TODAY_COOLDOWN_ACTIVE",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-017-A",
+        "timestamp_raw": "Tue, 13 Oct 2026, 22:53",
+        "timestamp_iso": "2026-10-13",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "5020 Augusta Dr: 93k sq ft industrial plant, 2.75\" hail 3.6 miles away",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "christian@cmacroofing.com",
+        "status_after_event": "EXPIRES_TODAY_COOLDOWN_ACTIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-018",
+    "parcel_id": "DCAD-PARCEL-00000779767000000",
+    "normalized_address": "13575 Goldmark Dr",
+    "recipient_company": "R&B Roofing",
+    "recipient_email": "doug@rbroof.com",
+    "date_sent_raw": "Tue, 13 Oct 2026, 22:52",
+    "date_sent_iso": "2026-10-13",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-20",
+    "cooldown_end_date": "2026-10-27",
+    "assignment_status": "EXPIRES_TODAY_COOLDOWN_ACTIVE",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-018-A",
+        "timestamp_raw": "Tue, 13 Oct 2026, 22:52",
+        "timestamp_iso": "2026-10-13",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "13575 Goldmark Dr: 174k sq ft commercial facility, 1.75\" hail 1.5 miles away",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "doug@rbroof.com",
+        "status_after_event": "EXPIRES_TODAY_COOLDOWN_ACTIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-019",
+    "parcel_id": "TAD-PARCEL-05029481",
+    "normalized_address": "2550 114th St",
+    "recipient_company": "Cardinal Roofing Inc",
+    "recipient_email": "jpotter@cardinalroofinginc.com",
+    "date_sent_raw": "Tue, 13 Oct 2026, 22:52",
+    "date_sent_iso": "2026-10-13",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-20",
+    "cooldown_end_date": "2026-10-27",
+    "assignment_status": "EXPIRES_TODAY_COOLDOWN_ACTIVE",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-019-A",
+        "timestamp_raw": "Tue, 13 Oct 2026, 22:52",
+        "timestamp_iso": "2026-10-13",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "2550 114th St: 140k sq ft industrial warehouse across the street, 1.75\" hail",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "jpotter@cardinalroofinginc.com",
+        "status_after_event": "EXPIRES_TODAY_COOLDOWN_ACTIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-020",
+    "parcel_id": "DCAD-PARCEL-00000491074000000",
+    "normalized_address": "3113 Glenfield Ave",
+    "recipient_company": "Paragon Roofing",
+    "recipient_email": "john@paragonroofinginc.com",
+    "date_sent_raw": "Tue, 13 Oct 2026, 22:52",
+    "date_sent_iso": "2026-10-13",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-20",
+    "cooldown_end_date": "2026-10-27",
+    "assignment_status": "EXPIRES_TODAY_COOLDOWN_ACTIVE",
+    "contact_status_notes": "John Davis & Jim Stalcup inactive; referred to Jonny Martellino (REFERRED_CONTACT_UNVERIFIED)",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-020-A",
+        "timestamp_raw": "Tue, 13 Oct 2026, 22:52",
+        "timestamp_iso": "2026-10-13",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "3113 Glenfield Ave: 148k sq ft industrial plant, 3.0\" hail recorded in corridor",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "john@paragonroofinginc.com",
+        "status_after_event": "EXPIRES_TODAY_COOLDOWN_ACTIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-021",
+    "parcel_id": "DCAD-PARCEL-00000778555700000",
+    "normalized_address": "1648 Diplomat Dr",
+    "recipient_company": "Chamberlin Roofing & Waterproofing",
+    "recipient_email": "jkafka@chamberlinltd.com",
+    "date_sent_raw": "Tue, 13 Oct 2026, 22:51",
+    "date_sent_iso": "2026-10-13",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-20",
+    "cooldown_end_date": "2026-10-27",
+    "assignment_status": "EXPIRES_TODAY_COOLDOWN_ACTIVE",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-021-A",
+        "timestamp_raw": "Tue, 13 Oct 2026, 22:51",
+        "timestamp_iso": "2026-10-13",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "1648 Diplomat Dr: 233k sq ft industrial facility, 1.75\" hail 2 miles away",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "jkafka@chamberlinltd.com",
+        "status_after_event": "EXPIRES_TODAY_COOLDOWN_ACTIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-022",
+    "parcel_id": "DCAD-PARCEL-007291000A0010000",
+    "normalized_address": "200 Southwestern Blvd",
+    "recipient_company": "KPost Company",
+    "recipient_email": "steve.little@kpostcompany.com",
+    "date_sent_raw": "Tue, 13 Oct 2026, 22:50",
+    "date_sent_iso": "2026-10-13",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-20",
+    "cooldown_end_date": "2026-10-27",
+    "assignment_status": "EXPIRES_TODAY_COOLDOWN_ACTIVE",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-022-A",
+        "timestamp_raw": "Tue, 13 Oct 2026, 22:50",
+        "timestamp_iso": "2026-10-13",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "200 Southwestern Blvd: 287k sq ft commercial facility, 1.75\" hail 1.2 miles away",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "steve.little@kpostcompany.com",
+        "status_after_event": "EXPIRES_TODAY_COOLDOWN_ACTIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-023",
+    "parcel_id": "TAD-PARCEL-03099901",
+    "normalized_address": "3100 Sappington Pl",
+    "recipient_company": "Arrington Roofing",
+    "recipient_email": "chris@arringtonroofing.com",
+    "date_sent_raw": "Tue, 13 Oct 2026, 09:12",
+    "date_sent_iso": "2026-10-13",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-20",
+    "cooldown_end_date": "2026-10-27",
+    "assignment_status": "EXPIRES_TODAY_COOLDOWN_ACTIVE",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-023-A",
+        "timestamp_raw": "Tue, 13 Oct 2026, 09:12",
+        "timestamp_iso": "2026-10-13",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "3100 Sappington Pl: 56k sq ft 1973 commercial roof, 2.25\" hail 0.6 miles away",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "chris@arringtonroofing.com",
+        "status_after_event": "EXPIRES_TODAY_COOLDOWN_ACTIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-024",
+    "parcel_id": "TAD-PARCEL-01583492",
+    "normalized_address": "6400 Plaza Pkwy",
+    "recipient_company": "Castro Roofing of Texas",
+    "recipient_email": "rudy@castroroofing.com",
+    "date_sent_raw": "Wed, 21 Oct 2026",
+    "date_sent_iso": "2026-10-21",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-28",
+    "cooldown_end_date": "2026-11-04",
+    "assignment_status": "ACTIVE_EXCLUSIVE",
+    "contact_status_notes": "Re-audited footprint (138,557 sq ft, 0 reroofs on file) dispatched Oct 21, 2026 via Gmail from mirzamailbox0@gmail.com. 7-day exclusivity active through Oct 28.",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-024-A",
+        "timestamp_raw": "Tue, 13 Oct 2026, 09:12",
+        "timestamp_iso": "2026-10-13",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "6400 Plaza Pkwy: 138k sq ft 1970 commercial roof, no permit on record",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "rudy@castroroofing.com",
+        "status_after_event": "EXPIRES_TODAY_COOLDOWN_ACTIVE"
+      },
+      {
+        "event_id": "EVT-024-B",
+        "internal_ref": "EVT-024-B",
+        "timestamp_iso": "2026-10-21T01:17:00+05:30",
+        "event_type": "REAUDIT_REACTIVATION_DISPATCH",
+        "subject": "6400 Plaza Pkwy: Re-audited TAD parcel records (138,557 sq ft)",
+        "recipient_email": "rudy@castroroofing.com",
+        "status_after_event": "ACTIVE_EXCLUSIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-025",
+    "parcel_id": "TAD-PARCEL-02540608",
+    "normalized_address": "2821 Lackland Rd",
+    "recipient_company": "Peak Roofing & Construction",
+    "recipient_email": "jeff@peakroofingconstruction.com",
+    "date_sent_raw": "Tue, 13 Oct 2026, 09:11",
+    "date_sent_iso": "2026-10-13",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-20",
+    "cooldown_end_date": "2026-10-27",
+    "assignment_status": "EXPIRES_TODAY_COOLDOWN_ACTIVE",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-025-A",
+        "timestamp_raw": "Tue, 13 Oct 2026, 09:11",
+        "timestamp_iso": "2026-10-13",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "2821 Lackland Rd: 53k sq ft 2016 mod-bit roof, 2.25\" hail 0.9 miles away",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "jeff@peakroofingconstruction.com",
+        "status_after_event": "EXPIRES_TODAY_COOLDOWN_ACTIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-026",
+    "parcel_id": "TAD-PARCEL-03082865",
+    "normalized_address": "401 NE 38th St",
+    "recipient_company": "Texas Roof Management",
+    "recipient_email": "cawtrey@texasroof.com",
+    "date_sent_raw": "Wed, 21 Oct 2026",
+    "date_sent_iso": "2026-10-21",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-28",
+    "cooldown_end_date": "2026-11-04",
+    "assignment_status": "ACTIVE_EXCLUSIVE",
+    "contact_status_notes": "Re-audited footprint (132,000 sq ft, 0 reroofs on file) dispatched Oct 21, 2026 via Gmail from mirzamailbox0@gmail.com. 7-day exclusivity active through Oct 28.",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-026-A",
+        "timestamp_raw": "Tue, 13 Oct 2026, 09:11",
+        "timestamp_iso": "2026-10-13",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "401 NE 38th: 132k sq ft industrial facility, 1.75\" hail 0.6 miles away",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "cawtrey@texasroof.com",
+        "status_after_event": "EXPIRES_TODAY_COOLDOWN_ACTIVE"
+      },
+      {
+        "event_id": "EVT-026-B",
+        "internal_ref": "EVT-026-B",
+        "timestamp_iso": "2026-10-21T01:17:00+05:30",
+        "event_type": "REAUDIT_REACTIVATION_DISPATCH",
+        "subject": "401 NE 38th St: Re-audited structural records (132,000 sq ft industrial facility)",
+        "recipient_email": "cawtrey@texasroof.com",
+        "status_after_event": "ACTIVE_EXCLUSIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-027",
+    "parcel_id": "TAD-PARCEL-07126220",
+    "normalized_address": "4001 Mark IV Pkwy",
+    "recipient_company": "Supreme Roofing",
+    "recipient_email": "trainey@supremeroofing.com",
+    "date_sent_raw": "Tue, 13 Oct 2026, 09:10",
+    "date_sent_iso": "2026-10-13",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-20",
+    "cooldown_end_date": "2026-10-27",
+    "assignment_status": "CORRECTED_REPLACEMENT_OFFERED",
+    "contact_status_notes": "4001 Mark IV retracted due to permit #PB23-06720. Verified clean replacement parcel offered: 5201 Blue Mound Rd (60,232 sq ft, TAD-PARCEL-04744128, 0 reroofs on file). Dispatched Oct 21, 2026 via Gmail from mirzamailbox0@gmail.com.",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-027-A",
+        "timestamp_raw": "Tue, 13 Oct 2026, 09:10",
+        "timestamp_iso": "2026-10-13",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "4001 Mark IV Pkwy: 211k sq ft industrial facility, 1.75\" hail 1.1 miles away",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "trainey@supremeroofing.com",
+        "status_after_event": "EXPIRES_TODAY_COOLDOWN_ACTIVE"
+      },
+      {
+        "event_id": "EVT-027-B",
+        "internal_ref": "EVT-027-B",
+        "timestamp_iso": "2026-10-21T01:18:00+05:30",
+        "event_type": "CORRECTION_AND_REPLACEMENT_DISPATCH",
+        "subject": "4001 Mark IV correction — and a verified 60k sq ft replacement on Blue Mound Rd",
+        "recipient_email": "trainey@supremeroofing.com",
+        "status_after_event": "CORRECTED_REPLACEMENT_OFFERED"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-028",
+    "parcel_id": "TAD-PARCEL-02488819",
+    "normalized_address": "2529 NE Loop 820",
+    "recipient_company": "Alpine Roofing Construction",
+    "recipient_email": "alpineroofing15@outlook.com",
+    "date_sent_raw": "Tue, 13 Oct 2026, 05:45",
+    "date_sent_iso": "2026-10-13",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-20",
+    "cooldown_end_date": "2026-10-27",
+    "assignment_status": "EXPIRES_TODAY_COOLDOWN_ACTIVE",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-028-A",
+        "timestamp_raw": "Tue, 13 Oct 2026, 05:45",
+        "timestamp_iso": "2026-10-13",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "jeff",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "alpineroofing15@outlook.com",
+        "status_after_event": "EXPIRES_TODAY_COOLDOWN_ACTIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-029",
+    "parcel_id": "TAD-PARCEL-00036692",
+    "normalized_address": "201 NE 28th St",
+    "recipient_company": "Maze Roofing & Commercial Construction",
+    "recipient_email": "kyle@mazerc.com",
+    "date_sent_raw": "Tue, 13 Oct 2026, 05:42",
+    "date_sent_iso": "2026-10-13",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-20",
+    "cooldown_end_date": "2026-10-27",
+    "assignment_status": "EXPIRES_TODAY_COOLDOWN_ACTIVE",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-029-A",
+        "timestamp_raw": "Tue, 13 Oct 2026, 05:42",
+        "timestamp_iso": "2026-10-13",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "info",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "kyle@mazerc.com",
+        "status_after_event": "EXPIRES_TODAY_COOLDOWN_ACTIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-030",
+    "parcel_id": "TAD-PARCEL-02488819",
+    "normalized_address": "2529 NE Loop 820",
+    "recipient_company": "Alpine Roofing Construction",
+    "recipient_email": "info@alpineroofingconstruction.com",
+    "date_sent_raw": "Mon, 12 Oct 2026, 22:15",
+    "date_sent_iso": "2026-10-12",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-19",
+    "cooldown_end_date": "2026-10-26",
+    "assignment_status": "EXPIRED_COOLDOWN_ACTIVE",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-030-A",
+        "timestamp_raw": "Mon, 12 Oct 2026, 22:15",
+        "timestamp_iso": "2026-10-12",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "2529 NE Loop 820: 72k sq ft business park facility, no roof permit on record",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "info@alpineroofingconstruction.com",
+        "status_after_event": "EXPIRED_COOLDOWN_ACTIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-031",
+    "parcel_id": "TAD-PARCEL-00165999",
+    "normalized_address": "566 N Beach St",
+    "recipient_company": "Integrated Roofing Systems",
+    "recipient_email": "info@integratedroofingsystems.com",
+    "date_sent_raw": "Mon, 12 Oct 2026, 22:09",
+    "date_sent_iso": "2026-10-12",
+    "exclusivity_days_pledged": 0,
+    "exclusivity_expiry_date": "N/A",
+    "cooldown_end_date": "N/A",
+    "assignment_status": "NO_EXCLUSIVITY_PLEDGED",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-031-A",
+        "timestamp_raw": "Mon, 12 Oct 2026, 22:09",
+        "timestamp_iso": "2026-10-12",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "566 N Beach: 60k sq ft industrial warehouse, 2.75\" hail 1.4 miles away",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "info@integratedroofingsystems.com",
+        "status_after_event": "NO_EXCLUSIVITY_PLEDGED"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-032",
+    "parcel_id": "TAD-PARCEL-02500010",
+    "normalized_address": "3535 W Loop 820 S",
+    "recipient_company": "MHH Roofing",
+    "recipient_email": "mike@mhhroofing.com",
+    "date_sent_raw": "Mon, 12 Oct 2026, 22:06",
+    "date_sent_iso": "2026-10-12",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-19",
+    "cooldown_end_date": "2026-10-26",
+    "assignment_status": "EXPIRED_COOLDOWN_ACTIVE",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-032-A",
+        "timestamp_raw": "Mon, 12 Oct 2026, 22:06",
+        "timestamp_iso": "2026-10-12",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "3535 W Loop 820 S: 66k sq ft 1985 commercial roof, 2\" hail 1.6 miles away",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "mike@mhhroofing.com",
+        "status_after_event": "EXPIRED_COOLDOWN_ACTIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-033",
+    "parcel_id": "TAD-PARCEL-01413384",
+    "normalized_address": "6000 E Berry St",
+    "recipient_company": "Joe Hall Roofing",
+    "recipient_email": "tina@joehallroofing.com",
+    "date_sent_raw": "Wed, 21 Oct 2026",
+    "date_sent_iso": "2026-10-21",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-28",
+    "cooldown_end_date": "2026-11-04",
+    "assignment_status": "ACTIVE_EXCLUSIVE",
+    "contact_status_notes": "Re-audited footprint (56,820 sq ft, 0 reroofs on file) dispatched Oct 21, 2026 to Brett & Tina via Gmail from mirzamailbox0@gmail.com. 7-day exclusivity active through Oct 28.",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-033-A",
+        "timestamp_raw": "Mon, 12 Oct 2026, 21:18",
+        "timestamp_iso": "2026-10-12",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "brett",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "tina@joehallroofing.com",
+        "status_after_event": "EXPIRED_COOLDOWN_ACTIVE"
+      },
+      {
+        "event_id": "EVT-033-B",
+        "internal_ref": "EVT-033-B",
+        "timestamp_iso": "2026-10-21T01:19:00+05:30",
+        "event_type": "REAUDIT_REACTIVATION_DISPATCH",
+        "subject": "6000 E Berry St: Re-audited structural records (56,820 sq ft commercial facility)",
+        "recipient_email": "brett@joehallroofing.com, tina@joehallroofing.com",
+        "status_after_event": "ACTIVE_EXCLUSIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-034",
+    "parcel_id": "TAD-PARCEL-02511100",
+    "normalized_address": "711 SW Loop 820",
+    "recipient_company": "Boyd Bone Dry Roofing",
+    "recipient_email": "jeanne.curtis@boydbonedry.com",
+    "date_sent_raw": "Mon, 12 Oct 2026, 21:16",
+    "date_sent_iso": "2026-10-12",
+    "exclusivity_days_pledged": 0,
+    "exclusivity_expiry_date": "N/A",
+    "cooldown_end_date": "N/A",
+    "assignment_status": "NO_EXCLUSIVITY_PLEDGED",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-034-A",
+        "timestamp_raw": "Mon, 12 Oct 2026, 21:16",
+        "timestamp_iso": "2026-10-12",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "711 SW Loop 820: 74k sq ft 1973 facility, no roof permit on record",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "jeanne.curtis@boydbonedry.com",
+        "status_after_event": "NO_EXCLUSIVITY_PLEDGED"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-035",
+    "parcel_id": "TAD-PARCEL-00973092",
+    "normalized_address": "3600 McCart Ave",
+    "recipient_company": "Zenith Roofing Services",
+    "recipient_email": "info@zenithroofing.com",
+    "date_sent_raw": "Wed, 21 Oct 2026",
+    "date_sent_iso": "2026-10-21",
+    "exclusivity_days_pledged": 0,
+    "exclusivity_expiry_date": "N/A",
+    "cooldown_end_date": "N/A",
+    "assignment_status": "DISPATCHED_NON_EXCLUSIVE",
+    "contact_status_notes": "3600 McCart Ave pitched to Steve Zbeida & Michael Davis via info@zenithroofing.com on Oct 21, 2026. Non-exclusive yard-proximity angle.",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-035-A",
+        "timestamp_raw": "Mon, 12 Oct 2026, 21:14",
+        "timestamp_iso": "2026-10-12",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "3600 McCart: 2014 re-roof, 311k sq ft plant half a mile from Bolt St",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "info@zenithroofing.com",
+        "status_after_event": "NO_EXCLUSIVITY_PLEDGED"
+      },
+      {
+        "event_id": "EVT-035-B",
+        "internal_ref": "EVT-035-B",
+        "timestamp_iso": "2026-10-21T01:19:00+05:30",
+        "event_type": "NON_EXCLUSIVE_FACILITY_PITCH",
+        "subject": "Attn: Steve Zbeida / Michael Davis — 3600 McCart Ave (311k sq ft facility near Bolt St)",
+        "recipient_email": "info@zenithroofing.com",
+        "status_after_event": "DISPATCHED_NON_EXCLUSIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-036",
+    "parcel_id": "TAD-PARCEL-00036655",
+    "normalized_address": "901 Terminal Rd",
+    "recipient_company": "TriVan Roofing",
+    "recipient_email": "sherry.custable@trivanroofing.com",
+    "date_sent_raw": "Mon, 12 Oct 2026, 21:11",
+    "date_sent_iso": "2026-10-12",
+    "exclusivity_days_pledged": 0,
+    "exclusivity_expiry_date": "N/A",
+    "cooldown_end_date": "N/A",
+    "assignment_status": "NO_EXCLUSIVITY_PLEDGED",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-036-A",
+        "timestamp_raw": "Mon, 12 Oct 2026, 21:11",
+        "timestamp_iso": "2026-10-12",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "901 Terminal: 2003 re-roof, 2.75\" hail 0.4 miles away",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "sherry.custable@trivanroofing.com",
+        "status_after_event": "NO_EXCLUSIVITY_PLEDGED"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-037",
+    "parcel_id": "TAD-PARCEL-00036692",
+    "normalized_address": "201 NE 28th St",
+    "recipient_company": "Maze Roofing & Commercial Construction",
+    "recipient_email": "info@mazecommercialroofing.com",
+    "date_sent_raw": "Mon, 12 Oct 2026, 20:45",
+    "date_sent_iso": "2026-10-12",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-19",
+    "cooldown_end_date": "2026-10-26",
+    "assignment_status": "EXPIRED_COOLDOWN_ACTIVE",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-037-A",
+        "timestamp_raw": "Mon, 12 Oct 2026, 20:45",
+        "timestamp_iso": "2026-10-12",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "201 NE 28th: 1998 flat roof, 2.75\" hail 0.5 miles away",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "info@mazecommercialroofing.com",
+        "status_after_event": "EXPIRED_COOLDOWN_ACTIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-038",
+    "parcel_id": "TAD-PARCEL-00588219",
+    "normalized_address": "7408 Camp Bowie West Blvd",
+    "recipient_company": "Ducker Commercial Roofing",
+    "recipient_email": "info@duckercommercialroofing.com",
+    "date_sent_raw": "Mon, 12 Oct 2026, 20:43",
+    "date_sent_iso": "2026-10-12",
+    "exclusivity_days_pledged": 0,
+    "exclusivity_expiry_date": "N/A",
+    "cooldown_end_date": "N/A",
+    "assignment_status": "NO_EXCLUSIVITY_PLEDGED",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-038-A",
+        "timestamp_raw": "Mon, 12 Oct 2026, 20:43",
+        "timestamp_iso": "2026-10-12",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "7408 Camp Bowie West: 2015 re-roof, 2.25\" hail 0.9 miles away",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "info@duckercommercialroofing.com",
+        "status_after_event": "NO_EXCLUSIVITY_PLEDGED"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-039",
+    "parcel_id": "TAD-PARCEL-00588300",
+    "normalized_address": "6777 Camp Bowie Blvd",
+    "recipient_company": "CGJ Roofing",
+    "recipient_email": "Chase@cgjroofing.com",
+    "date_sent_raw": "Mon, 12 Oct 2026, 20:41",
+    "date_sent_iso": "2026-10-12",
+    "exclusivity_days_pledged": 0,
+    "exclusivity_expiry_date": "N/A",
+    "cooldown_end_date": "N/A",
+    "assignment_status": "NO_EXCLUSIVITY_PLEDGED",
+    "contact_status_notes": "Standard outreach recipient",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-039-A",
+        "timestamp_raw": "Mon, 12 Oct 2026, 20:41",
+        "timestamp_iso": "2026-10-12",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "6777 Camp Bowie: 2016 mod-bit roof, 2.25\" hail 0.2 miles away",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "Chase@cgjroofing.com",
+        "status_after_event": "NO_EXCLUSIVITY_PLEDGED"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-040",
+    "parcel_id": "NO_PARCEL_APPLICABLE",
+    "normalized_address": "NO_PROPERTY_PITCHED",
+    "recipient_company": "Superior Roofing",
+    "recipient_email": "ahannum@superiorroofing.com",
+    "date_sent_raw": "Thu, 8 Oct 2026, 00:46",
+    "date_sent_iso": "2026-10-08",
+    "exclusivity_days_pledged": 0,
+    "exclusivity_expiry_date": "N/A",
+    "cooldown_end_date": "N/A",
+    "assignment_status": "NO_EXCLUSIVITY_PLEDGED",
+    "contact_status_notes": "General service outreach template; no specific property pitched",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-040-A",
+        "timestamp_raw": "Thu, 8 Oct 2026, 00:46",
+        "timestamp_iso": "2026-10-08",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "AI for Superior Roofing",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "ahannum@superiorroofing.com",
+        "status_after_event": "NO_EXCLUSIVITY_PLEDGED"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-041",
+    "parcel_id": "NO_PARCEL_APPLICABLE",
+    "normalized_address": "NO_PROPERTY_PITCHED",
+    "recipient_company": "RestoreMasters Contracting",
+    "recipient_email": "matt@restoremastersllc.com",
+    "date_sent_raw": "Thu, 8 Oct 2026, 00:43",
+    "date_sent_iso": "2026-10-08",
+    "exclusivity_days_pledged": 0,
+    "exclusivity_expiry_date": "N/A",
+    "cooldown_end_date": "N/A",
+    "assignment_status": "NO_EXCLUSIVITY_PLEDGED",
+    "contact_status_notes": "General service outreach template; no specific property pitched",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-041-A",
+        "timestamp_raw": "Thu, 8 Oct 2026, 00:43",
+        "timestamp_iso": "2026-10-08",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "AI for RestoreMasters Contracting",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "matt@restoremastersllc.com",
+        "status_after_event": "NO_EXCLUSIVITY_PLEDGED"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-042",
+    "parcel_id": "NO_PARCEL_APPLICABLE",
+    "normalized_address": "NO_PROPERTY_PITCHED",
+    "recipient_company": "All Seasons Roofing",
+    "recipient_email": "chad@allseasonsroofing.com",
+    "date_sent_raw": "Thu, 1 Oct 2026, 23:37",
+    "date_sent_iso": "2026-10-01",
+    "exclusivity_days_pledged": 0,
+    "exclusivity_expiry_date": "N/A",
+    "cooldown_end_date": "N/A",
+    "assignment_status": "NO_EXCLUSIVITY_PLEDGED",
+    "contact_status_notes": "General service outreach template; no specific property pitched",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-042-A",
+        "timestamp_raw": "Thu, 1 Oct 2026, 23:37",
+        "timestamp_iso": "2026-10-01",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "AI for All Seasons Roofing",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "chad@allseasonsroofing.com",
+        "status_after_event": "NO_EXCLUSIVITY_PLEDGED"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-043",
+    "parcel_id": "NO_PARCEL_APPLICABLE",
+    "normalized_address": "NO_PROPERTY_PITCHED",
+    "recipient_company": "Monaco Roofing",
+    "recipient_email": "kenneth@monacoroofing.com",
+    "date_sent_raw": "Thu, 1 Oct 2026, 23:37",
+    "date_sent_iso": "2026-10-01",
+    "exclusivity_days_pledged": 0,
+    "exclusivity_expiry_date": "N/A",
+    "cooldown_end_date": "N/A",
+    "assignment_status": "NO_EXCLUSIVITY_PLEDGED",
+    "contact_status_notes": "General service outreach template; no specific property pitched",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-043-A",
+        "timestamp_raw": "Thu, 1 Oct 2026, 23:37",
+        "timestamp_iso": "2026-10-01",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "AI for Monaco Roofing",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "kenneth@monacoroofing.com",
+        "status_after_event": "NO_EXCLUSIVITY_PLEDGED"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-044",
+    "parcel_id": "NO_PARCEL_APPLICABLE",
+    "normalized_address": "NO_PROPERTY_PITCHED",
+    "recipient_company": "Great Lakes Roofing and Coating",
+    "recipient_email": "edwin@greatlakesroofingandcoating.com",
+    "date_sent_raw": "Thu, 1 Oct 2026, 23:37",
+    "date_sent_iso": "2026-10-01",
+    "exclusivity_days_pledged": 0,
+    "exclusivity_expiry_date": "N/A",
+    "cooldown_end_date": "N/A",
+    "assignment_status": "NO_EXCLUSIVITY_PLEDGED",
+    "contact_status_notes": "General service outreach template; no specific property pitched",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-044-A",
+        "timestamp_raw": "Thu, 1 Oct 2026, 23:37",
+        "timestamp_iso": "2026-10-01",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "AI for Great Lakes Roofing and Coating",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "edwin@greatlakesroofingandcoating.com",
+        "status_after_event": "NO_EXCLUSIVITY_PLEDGED"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-045",
+    "parcel_id": "NO_PARCEL_APPLICABLE",
+    "normalized_address": "NO_PROPERTY_PITCHED",
+    "recipient_company": "Spokane Roofing",
+    "recipient_email": "jeff@spokaneroofing.com",
+    "date_sent_raw": "Thu, 1 Oct 2026, 23:36",
+    "date_sent_iso": "2026-10-01",
+    "exclusivity_days_pledged": 0,
+    "exclusivity_expiry_date": "N/A",
+    "cooldown_end_date": "N/A",
+    "assignment_status": "NO_EXCLUSIVITY_PLEDGED",
+    "contact_status_notes": "General service outreach template; no specific property pitched",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-045-A",
+        "timestamp_raw": "Thu, 1 Oct 2026, 23:36",
+        "timestamp_iso": "2026-10-01",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "quick question, Jeff",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "jeff@spokaneroofing.com",
+        "status_after_event": "NO_EXCLUSIVITY_PLEDGED"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-046",
+    "parcel_id": "NO_PARCEL_APPLICABLE",
+    "normalized_address": "NO_PROPERTY_PITCHED",
+    "recipient_company": "Brink Roofing",
+    "recipient_email": "kyle@brinkroofing.com",
+    "date_sent_raw": "Thu, 1 Oct 2026, 23:36",
+    "date_sent_iso": "2026-10-01",
+    "exclusivity_days_pledged": 0,
+    "exclusivity_expiry_date": "N/A",
+    "cooldown_end_date": "N/A",
+    "assignment_status": "NO_EXCLUSIVITY_PLEDGED",
+    "contact_status_notes": "General service outreach template; no specific property pitched",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-046-A",
+        "timestamp_raw": "Thu, 1 Oct 2026, 23:36",
+        "timestamp_iso": "2026-10-01",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "quick question, Kyle",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "kyle@brinkroofing.com",
+        "status_after_event": "NO_EXCLUSIVITY_PLEDGED"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-047",
+    "parcel_id": "NO_PARCEL_APPLICABLE",
+    "normalized_address": "NO_PROPERTY_PITCHED",
+    "recipient_company": "Chandlers Roofing",
+    "recipient_email": "brian@chandlersroofing.com",
+    "date_sent_raw": "Thu, 1 Oct 2026, 23:36",
+    "date_sent_iso": "2026-10-01",
+    "exclusivity_days_pledged": 0,
+    "exclusivity_expiry_date": "N/A",
+    "cooldown_end_date": "N/A",
+    "assignment_status": "NO_EXCLUSIVITY_PLEDGED",
+    "contact_status_notes": "General service outreach template; no specific property pitched",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-047-A",
+        "timestamp_raw": "Thu, 1 Oct 2026, 23:36",
+        "timestamp_iso": "2026-10-01",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "quick question, Brian",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "brian@chandlersroofing.com",
+        "status_after_event": "NO_EXCLUSIVITY_PLEDGED"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-048",
+    "parcel_id": "NO_PARCEL_APPLICABLE",
+    "normalized_address": "NO_PROPERTY_PITCHED",
+    "recipient_company": "Maverick Roofing",
+    "recipient_email": "bruce@maverickroofing.com",
+    "date_sent_raw": "Thu, 1 Oct 2026, 23:35",
+    "date_sent_iso": "2026-10-01",
+    "exclusivity_days_pledged": 0,
+    "exclusivity_expiry_date": "N/A",
+    "cooldown_end_date": "N/A",
+    "assignment_status": "NO_EXCLUSIVITY_PLEDGED",
+    "contact_status_notes": "General service outreach template; no specific property pitched",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-048-A",
+        "timestamp_raw": "Thu, 1 Oct 2026, 23:35",
+        "timestamp_iso": "2026-10-01",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "AI for Maverick Roofing",
+        "pack_version": "v1.0_INITIAL_OUTREACH",
+        "recipient_email": "bruce@maverickroofing.com",
+        "status_after_event": "NO_EXCLUSIVITY_PLEDGED"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-049",
+    "parcel_id": "TAD-PARCEL-41009673",
+    "normalized_address": "7151 Jack Newell Blvd S",
+    "recipient_company": "SR1 Roofing",
+    "recipient_email": "trevor@sr1roofing.com",
+    "date_sent_raw": "PENDING_DISPATCH",
+    "date_sent_iso": "PENDING_DISPATCH",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "PENDING_DISPATCH",
+    "cooldown_end_date": "PENDING_DISPATCH",
+    "assignment_status": "RESERVED_PENDING_DISPATCH",
+    "contact_status_notes": "Pack A proposed inventory (526k sq ft Aging/Capital Candidate); held reserved pending dispatch",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-049-A",
+        "timestamp_iso": "2026-10-20T20:47:00Z",
+        "event_type": "PILOT_INVENTORY_RESERVATION",
+        "subject": "HELD_RESERVED_FOR_SR1",
+        "pack_version": "v2.1_PACK_A_ASSET_2",
+        "recipient_email": "trevor@sr1roofing.com",
+        "status_after_event": "RESERVED_PENDING_DISPATCH",
+        "notes": "Held reserved pending facilities-level contact path verification"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-050",
+    "parcel_id": "TAD-PARCEL-04283894",
+    "normalized_address": "6701 South Fwy",
+    "recipient_company": "MRB Contractors LLC",
+    "recipient_email": "gpender@mrbcg.com",
+    "date_sent_raw": "Wed, 21 Oct 2026",
+    "date_sent_iso": "2026-10-21",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-28",
+    "cooldown_end_date": "2026-11-04",
+    "assignment_status": "ACTIVE_EXCLUSIVE",
+    "contact_status_notes": "Wave 1 initial outreach dispatched Oct 21, 2026 via Gmail to Greg Pender & Matt Ragan. Referencing .62M Joel East Rd reroof program and pitching 6701 South Fwy (257,485 sq ft). 7-day exclusivity active through Oct 28.",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-050-A",
+        "internal_ref": "EVT-050-A",
+        "timestamp_iso": "2026-10-21T01:15:00+05:30",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "6701 South Fwy: 257k sq ft commercial facility — Depoii roof intelligence",
+        "recipient_email": "gpender@mrbcg.com",
+        "pack_version": "v2.2_AUDITED_WAVE1",
+        "status_after_event": "ACTIVE_EXCLUSIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-051",
+    "parcel_id": "TAD-PARCEL-01859664",
+    "normalized_address": "2821 Lackland Rd",
+    "recipient_company": "Frontier Roofing Systems",
+    "recipient_email": "office@frontierroofs.com",
+    "date_sent_raw": "Wed, 21 Oct 2026",
+    "date_sent_iso": "2026-10-21",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-28",
+    "cooldown_end_date": "2026-11-04",
+    "assignment_status": "ACTIVE_EXCLUSIVE",
+    "contact_status_notes": "Wave 1 initial outreach dispatched Oct 21, 2026 via Gmail to Ronald Gaston. Referencing  recent FW reroofs and pitching 2821 Lackland Rd (53,425 sq ft). 7-day exclusivity active through Oct 28.",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-051-A",
+        "internal_ref": "EVT-051-A",
+        "timestamp_iso": "2026-10-21T01:15:00+05:30",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "Attn: Ronald Gaston — 2821 Lackland Rd (53k sq ft Fort Worth commercial facility)",
+        "recipient_email": "office@frontierroofs.com",
+        "pack_version": "v2.2_AUDITED_WAVE1",
+        "status_after_event": "ACTIVE_EXCLUSIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-052",
+    "parcel_id": "TAD-PARCEL-04283908",
+    "normalized_address": "4000 Dan Morton Dr",
+    "recipient_company": "Sta-Dry Roofing",
+    "recipient_email": "lbrown1tx@yahoo.com",
+    "date_sent_raw": "Wed, 21 Oct 2026",
+    "date_sent_iso": "2026-10-21",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-28",
+    "cooldown_end_date": "2026-11-04",
+    "assignment_status": "ACTIVE_EXCLUSIVE",
+    "contact_status_notes": "Wave 1 initial outreach dispatched Oct 21, 2026 via Gmail to Larry Brown. Referencing  permitted reroof project and pitching 4000 Dan Morton Dr (165,160 sq ft). 7-day exclusivity active through Oct 28.",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-052-A",
+        "internal_ref": "EVT-052-A",
+        "timestamp_iso": "2026-10-21T01:16:00+05:30",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "Attn: Larry Brown — 4000 Dan Morton Dr (165k sq ft I-20 commercial facility)",
+        "recipient_email": "lbrown1tx@yahoo.com",
+        "pack_version": "v2.2_AUDITED_WAVE1",
+        "status_after_event": "ACTIVE_EXCLUSIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-053",
+    "parcel_id": "DCAD-PARCEL-1729IRVING",
+    "normalized_address": "1729 Irving Blvd",
+    "recipient_company": "ClimAply Commercial Roofing LLC",
+    "recipient_email": "info@climaplyroofing.com",
+    "date_sent_raw": "Wed, 21 Oct 2026",
+    "date_sent_iso": "2026-10-21",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-28",
+    "cooldown_end_date": "2026-11-04",
+    "assignment_status": "ACTIVE_EXCLUSIVE",
+    "contact_status_notes": "Wave 1 initial outreach dispatched Oct 21, 2026 via Gmail to Marc VanDusen. Referencing  single-ply reroof project and pitching 1729 Irving Blvd (61,250 sq ft). Opened by prospect within 3 minutes of send! 7-day exclusivity active through Oct 28.",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-053-A",
+        "internal_ref": "EVT-053-A",
+        "timestamp_iso": "2026-10-21T01:16:00+05:30",
+        "event_type": "INITIAL_OUTREACH",
+        "subject": "Attn: Marc VanDusen — 1729 Irving Blvd (61k sq ft commercial single-ply candidate)",
+        "recipient_email": "info@climaplyroofing.com",
+        "pack_version": "v2.2_AUDITED_WAVE1",
+        "status_after_event": "ACTIVE_EXCLUSIVE"
+      }
+    ]
+  },
+  {
+    "assignment_id": "ASN-054",
+    "parcel_id": "TAD-PARCEL-04744128",
+    "normalized_address": "5201 Blue Mound Rd",
+    "recipient_company": "Supreme Roofing",
+    "recipient_email": "trainey@supremeroofing.com",
+    "date_sent_raw": "Wed, 21 Oct 2026",
+    "date_sent_iso": "2026-10-21",
+    "exclusivity_days_pledged": 7,
+    "exclusivity_expiry_date": "2026-10-28",
+    "cooldown_end_date": "2026-11-04",
+    "assignment_status": "ACTIVE_EXCLUSIVE",
+    "contact_status_notes": "Offered to Supreme Roofing (Tim Rainey) on Oct 21, 2026 as clean replacement parcel (60,232 sq ft, 0 reroofs on file) following 4001 Mark IV retraction. 7-day exclusivity active through Oct 28.",
+    "dispatch_history": [
+      {
+        "event_id": "EVT-054-A",
+        "internal_ref": "EVT-054-A",
+        "timestamp_iso": "2026-10-21T01:18:00+05:30",
+        "event_type": "REPLACEMENT_OFFER",
+        "subject": "4001 Mark IV correction — and a verified 60k sq ft replacement on Blue Mound Rd",
+        "recipient_email": "trainey@supremeroofing.com",
+        "pack_version": "v2.2_AUDITED_WAVE2",
+        "status_after_event": "ACTIVE_EXCLUSIVE"
+      }
+    ]
+  }
+]

@@ -1,0 +1,553 @@
+[
+  {
+    "canonical_name": "KPost Company (KPost Roofing & Waterproofing)",
+    "match_keys": ["kpost", "kpost company"],
+    "named_staff": [
+      {"name": "Steve Little", "role": "CEO & President"},
+      {"name": "Jayne Williams", "role": "Chief Financial Officer"},
+      {"name": "Keith Post", "role": "Chairman & Founder"},
+      {"name": "Luciano Perez", "role": "VP Commercial Operations"}
+    ],
+    "unnamed_staff_notes": "Team directory lists 20+ additional commercial estimators and project managers without individual web profiles",
+    "staff_count": 25,
+    "distinct_roles_count": 5,
+    "year_founded": 2004,
+    "years_in_business": 22,
+    "commercial_credentials": [
+      "Carlisle SynTec Centurion Award Applicator",
+      "Firestone Building Products Master Contractor",
+      "RCAT Commercial Member",
+      "BBB A+ Rating (Accredited)"
+    ],
+    "source_url": "https://kpostcompany.com/about-us",
+    "access_date": "2026-10-20",
+    "pipeline_lane": "ENTERPRISE_LANE",
+    "campaign_status": "CONTACTED_UNAUDITED",
+    "assignment_id": "ASN-022",
+    "evidence_audit_note": "Branch B qualifies on 4 named C-level/VP executives. Branch C qualifies on Carlisle/Firestone/RCAT."
+  },
+  {
+    "canonical_name": "Chamberlin Roofing & Waterproofing",
+    "match_keys": ["chamberlin", "chamberlin roofing"],
+    "named_staff": [
+      {"name": "John Kafka", "role": "Chief Executive Officer / Chairman"},
+      {"name": "Art Canales", "role": "Executive Vice President DFW"},
+      {"name": "David Neal", "role": "Director of Estimating"},
+      {"name": "Matt Durham", "role": "Senior Project Manager"}
+    ],
+    "unnamed_staff_notes": "Large regional commercial workforce (30+ office staff across estimating and project controls)",
+    "staff_count": 30,
+    "distinct_roles_count": 6,
+    "year_founded": 1897,
+    "years_in_business": 125,
+    "commercial_credentials": [
+      "Sika Sarnafil Elite Contractor",
+      "Johns Manville Peak Advantage Master Contractor",
+      "Carlisle SynTec Perfection Award Winner",
+      "NRCA Member"
+    ],
+    "source_url": "https://www.chamberlinltd.com/leadership",
+    "access_date": "2026-10-20",
+    "pipeline_lane": "ENTERPRISE_LANE",
+    "campaign_status": "CONTACTED_UNAUDITED",
+    "assignment_id": "ASN-021",
+    "evidence_audit_note": "Branch B qualifies on 4 named executives/directors. Branch C qualifies on 125-year longevity + Sika/JM/Carlisle national certs."
+  },
+  {
+    "canonical_name": "Empire Roofing, Inc.",
+    "match_keys": ["empire roofing"],
+    "named_staff": [
+      {"name": "Matt Kelley", "role": "President"},
+      {"name": "Ronnie McGlothlin", "role": "Founder"},
+      {"name": "Sandra McGlothlin", "role": "Vice President"},
+      {"name": "Billy Ray", "role": "Director of Field Operations"}
+    ],
+    "unnamed_staff_notes": "50+ commercial estimating, service, and safety staff at national HQ in Fort Worth",
+    "staff_count": 50,
+    "distinct_roles_count": 6,
+    "year_founded": 1982,
+    "years_in_business": 44,
+    "commercial_credentials": [
+      "RCAT Commercial & Residential Roofing License #03-0035 / Commercial #02-0656",
+      "Firestone Inner Circle of Quality",
+      "Carlisle Hall of Fame Applicator"
+    ],
+    "source_url": "https://web.rcat.net/rcat/Contractor-(Contratista)/Empire-Roofing,-Inc-501",
+    "access_date": "2026-10-20",
+    "pipeline_lane": "ENTERPRISE_LANE",
+    "campaign_status": "NET_NEW_ENTERPRISE",
+    "assignment_id": "NONE_PROSPECT",
+    "evidence_audit_note": "Branch A qualifies via permit database ($20M commercial valuation). Branch B qualifies on 4 named executives. Branch C qualifies on RCAT Commercial #02-0656."
+  },
+  {
+    "canonical_name": "SR1 Roofing, LLC",
+    "match_keys": ["sr1 roofing", "sr1"],
+    "named_staff": [
+      {
+        "name": "Trevor Rodden",
+        "role": "Managing Partner & Commercial Lead",
+        "source_url": "https://sr1roofing.com",
+        "access_date": "2026-10-20"
+      },
+      {
+        "name": "Travis Rodden",
+        "role": "Operations & Logistics Partner",
+        "source_url": "https://sr1roofing.com",
+        "access_date": "2026-10-20"
+      }
+    ],
+    "unnamed_staff_notes": "Lean shop: 2 verified active partners (Trevor & Travis Rodden). Micah Rodden identified as President on 2018 Texas Comptroller PIR for SOS 0802715757, but marked LEAD_UNVERIFIED due to lack of a second current operating source; excluded from Branch B headcount.",
+    "staff_count": 6,
+    "distinct_roles_count": 2,
+    "year_founded": 2010,
+    "years_in_business": 15,
+    "commercial_credentials": [
+      "Carlisle SynTec Certified Applicator (Issuer: Carlisle SynTec)",
+      "GAF Commercial Contractor (Issuer: GAF Materials Corporation)"
+    ],
+    "source_url": "https://sr1roofing.com",
+    "access_date": "2026-10-20",
+    "pipeline_lane": "ACTIVE_DESIGN_PARTNER",
+    "campaign_status": "ACTIVE_EXCLUSIVE",
+    "evidence_audit_note": "Gate 4 Entity Flag: Texas SOS 0802715757 (taxpayer 32063685476) listed as INACTIVE (franchise tax involuntarily ended 2018) while business claims 2010 founding and operates today at sr1roofing.com. Parked as GATE4_ENTITY_RESOLUTION_REQUIRED. Resolution path: extract official legal entity name from Carlisle SynTec applicator certificate or W-9 at pilot contracting; do not raise with Trevor. Branch B: FAIL (2 of 3 named staff verified; Micah Rodden is LEAD_UNVERIFIED). Branch C: PASS (15 years + Carlisle/GAF). Score: 1 of 3 (Curated Watchlist)."
+  },
+  {
+    "canonical_name": "Mob Home Solutions Inc dba New View Roofing",
+    "match_keys": ["new view roofing", "mob home"],
+    "named_staff": [
+      {
+        "name": "Mike Gibson",
+        "role": "Owner & President",
+        "source_url": "https://newviewroofing.com/about-us/",
+        "access_date": "2026-10-20"
+      },
+      {
+        "name": "Stephanie Gibson",
+        "role": "Vice President & Controller",
+        "source_url": "https://newviewroofing.com/about-us/",
+        "access_date": "2026-10-20"
+      }
+    ],
+    "unnamed_staff_notes": "Dedicated commercial estimating division. Tom Longville and Nick Catanese identified in customer reviews (Birdeye/Thumbtack) but downgraded to LEAD_UNVERIFIED because they are absent from official citable company directories.",
+    "staff_count": 8,
+    "distinct_roles_count": 2,
+    "year_founded": 2013,
+    "years_in_business": 12,
+    "commercial_credentials": [
+      "GAF Commercial Master Elite Contractor (Issuer: GAF Materials Corporation)",
+      "BBB Accredited A+ Rating (Issuer: Better Business Bureau)"
+    ],
+    "source_url": "https://newviewroofing.com",
+    "access_date": "2026-10-20",
+    "pipeline_lane": "ACTIVE_DESIGN_PARTNER",
+    "campaign_status": "ACTIVE_EXCLUSIVE",
+    "assignment_id": "ASN-002",
+    "evidence_audit_note": "Operating entity: Mob Home Solutions, Inc. (Texas SOS 0801874220 / Comptroller 32052346734, active since 2013). Branch B: FAIL (2 of 3 named staff verified; Longville/Catanese downgraded to LEAD_UNVERIFIED). Branch C: PASS (12 years + GAF Master Elite). Score: 1 of 3 (Curated Watchlist pending 3rd operating staff member)."
+  },
+  {
+    "canonical_name": "Supreme Roofing (Supreme Systems)",
+    "match_keys": ["supreme roofing", "supreme systems"],
+    "named_staff": [
+      {"name": "Tim Rainey", "role": "President"},
+      {"name": "Mike Buttrey", "role": "Vice President Operations"},
+      {"name": "David Hawn", "role": "Chief Estimator"}
+    ],
+    "unnamed_staff_notes": "Commercial service department with dedicated dispatch",
+    "staff_count": 15,
+    "distinct_roles_count": 4,
+    "year_founded": 1987,
+    "years_in_business": 35,
+    "commercial_credentials": [
+      "RCAT Commercial Roofing License #02-0215 (Member since 2017)",
+      "Carlisle ESP Excellence in Single-Ply Applicator"
+    ],
+    "source_url": "https://web.rcat.net/rcat/Contractor-(Contratista)/Supreme-Roofing-887",
+    "access_date": "2026-10-20",
+    "pipeline_lane": "CONTACTED_UNAUDITED",
+    "campaign_status": "CONTACTED_UNAUDITED",
+    "assignment_id": "ASN-027",
+    "evidence_audit_note": "Branch B qualifies on 3 named executives. Branch C qualifies on RCAT Commercial #02-0215 + 35 years."
+  },
+  {
+    "canonical_name": "Texas Roof Management Inc.",
+    "match_keys": ["texas roof management"],
+    "named_staff": [
+      {"name": "Catherine Awtrey", "role": "CEO & President"},
+      {"name": "Wayne Awtrey", "role": "Executive Vice President"},
+      {"name": "Steve Martin", "role": "Director of Commercial Estimating"}
+    ],
+    "unnamed_staff_notes": "Large commercial project management and preventive maintenance team",
+    "staff_count": 12,
+    "distinct_roles_count": 4,
+    "year_founded": 1984,
+    "years_in_business": 40,
+    "commercial_credentials": [
+      "Carlisle ESP Partner",
+      "GAF Commercial Master Select",
+      "Johns Manville Peak Advantage",
+      "National Women in Roofing Founding Member"
+    ],
+    "source_url": "https://www.texasroof.com/leadership",
+    "access_date": "2026-10-20",
+    "pipeline_lane": "CONTACTED_UNAUDITED",
+    "campaign_status": "CONTACTED_UNAUDITED",
+    "assignment_id": "ASN-026",
+    "evidence_audit_note": "Branch B qualifies on 3 named leaders. Branch C qualifies on 40 years + Carlisle/GAF/JM certifications."
+  },
+  {
+    "canonical_name": "Castro Roofing of Texas, LLC",
+    "match_keys": ["castro roofing"],
+    "named_staff": [
+      {"name": "Rudy Castro", "role": "Chief Executive Officer"},
+      {"name": "John Castro", "role": "Vice President Operations"},
+      {"name": "Marcus Valenzuela", "role": "Lead Commercial Estimator"}
+    ],
+    "unnamed_staff_notes": "Commercial division focused on institutional and industrial roofing",
+    "staff_count": 10,
+    "distinct_roles_count": 3,
+    "year_founded": 1972,
+    "years_in_business": 50,
+    "commercial_credentials": [
+      "RCAT Commercial Roofing Contractor",
+      "Firestone Red Shield Applicator",
+      "Carlisle SynTec Applicator"
+    ],
+    "source_url": "https://castroroofing.com",
+    "access_date": "2026-10-20",
+    "pipeline_lane": "CONTACTED_UNAUDITED",
+    "campaign_status": "CONTACTED_UNAUDITED",
+    "assignment_id": "ASN-024",
+    "evidence_audit_note": "Branch B qualifies on 3 named staff. Branch C qualifies on 50 years + RCAT commercial membership."
+  },
+  {
+    "canonical_name": "Town & Country Roofing Inc.",
+    "match_keys": ["town & country roofing", "town and country"],
+    "named_staff": [
+      {"name": "Ralph Paroli", "role": "President & Owner"},
+      {"name": "Sean Paroli", "role": "Commercial Project Estimator"}
+    ],
+    "unnamed_staff_notes": "Dedicated commercial reroof department",
+    "staff_count": 10,
+    "distinct_roles_count": 3,
+    "year_founded": 1999,
+    "years_in_business": 25,
+    "commercial_credentials": [
+      "RCAT Commercial Roofing License",
+      "BBB Accredited A+ Rating",
+      "CertainTeed Commercial Contractor"
+    ],
+    "source_url": "https://townandcountryroofingdfw.com",
+    "access_date": "2026-10-20",
+    "pipeline_lane": "CONTACTED_UNAUDITED",
+    "campaign_status": "CONTACTED_UNAUDITED",
+    "assignment_id": "ASN-004/005",
+    "evidence_audit_note": "Branch B qualifies on 2 named principals. Branch C qualifies on 25 years + RCAT Commercial."
+  },
+  {
+    "canonical_name": "Triumph Roofing and Construction, LLC",
+    "match_keys": ["triumph roofing"],
+    "named_staff": [
+      {"name": "Brad Beldon", "role": "Managing Partner"},
+      {"name": "Jeff Edwards", "role": "Commercial Division Manager"}
+    ],
+    "unnamed_staff_notes": "Commercial low-slope and standing seam team",
+    "staff_count": 6,
+    "distinct_roles_count": 2,
+    "year_founded": 2009,
+    "years_in_business": 15,
+    "commercial_credentials": [
+      "GAF Master Elite Commercial",
+      "Owens Corning Preferred Contractor"
+    ],
+    "source_url": "https://triumphroofing.net",
+    "access_date": "2026-10-20",
+    "pipeline_lane": "CONTACTED_UNAUDITED",
+    "campaign_status": "CONTACTED_UNAUDITED",
+    "assignment_id": "ASN-010",
+    "evidence_audit_note": "Branch B qualifies on 2 named leaders. Branch C qualifies on 15 years + GAF commercial credentials."
+  },
+  {
+    "canonical_name": "Bert Roofing, Inc.",
+    "match_keys": ["bert roofing"],
+    "named_staff": [
+      {"name": "John Bert", "role": "President & Founder"},
+      {"name": "Kyle Bert", "role": "Operations & Estimating Lead"}
+    ],
+    "unnamed_staff_notes": "Independent Dallas commercial and residential specialist",
+    "staff_count": 5,
+    "distinct_roles_count": 2,
+    "year_founded": 1988,
+    "years_in_business": 35,
+    "commercial_credentials": [
+      "RCAT Commercial & Residential Roofing License #03-0219",
+      "BBB Accredited A+ Rating"
+    ],
+    "source_url": "https://web.rcat.net/rcat/Contractor-(Contratista)/Bert-Roofing,-Inc-381",
+    "access_date": "2026-10-20",
+    "pipeline_lane": "CONTACTED_UNAUDITED",
+    "campaign_status": "CONTACTED_UNAUDITED",
+    "assignment_id": "ASN-015",
+    "evidence_audit_note": "Branch B qualifies on 2 named principals. Branch C qualifies on 35 years + RCAT Commercial #03-0219."
+  },
+  {
+    "canonical_name": "Arrington Roofing Co Inc.",
+    "match_keys": ["arrington roofing"],
+    "named_staff": [
+      {"name": "Chris Arrington", "role": "President & Owner"},
+      {"name": "Mark Henderson", "role": "Senior Estimator"}
+    ],
+    "unnamed_staff_notes": "Commercial roof restoration and replacement specialists",
+    "staff_count": 6,
+    "distinct_roles_count": 2,
+    "year_founded": 1983,
+    "years_in_business": 40,
+    "commercial_credentials": [
+      "NRCA Member",
+      "GAF Commercial Certified",
+      "HydroStop Certified Applicator"
+    ],
+    "source_url": "https://arringtonroofing.com",
+    "access_date": "2026-10-20",
+    "pipeline_lane": "CONTACTED_UNAUDITED",
+    "campaign_status": "CONTACTED_UNAUDITED",
+    "assignment_id": "ASN-023",
+    "evidence_audit_note": "Branch B qualifies on 2 named leaders. Branch C qualifies on 40 years + commercial manufacturer credentials."
+  },
+  {
+    "canonical_name": "Paragon Roofing, LLC",
+    "match_keys": ["paragon roofing"],
+    "named_staff": [
+      {"name": "John Horn", "role": "Managing Partner"},
+      {"name": "David Miller", "role": "Commercial Project Superintendent"}
+    ],
+    "unnamed_staff_notes": "DFW commercial low-slope, TPO, and architectural sheet metal division",
+    "staff_count": 4,
+    "distinct_roles_count": 2,
+    "year_founded": 1989,
+    "years_in_business": 35,
+    "commercial_credentials": [
+      "Commercial Low-Slope & Metal Certified",
+      "BBB Accredited A+ Rating"
+    ],
+    "source_url": "https://paragonroofing.us",
+    "access_date": "2026-10-20",
+    "pipeline_lane": "CONTACTED_UNAUDITED",
+    "campaign_status": "CONTACTED_UNAUDITED",
+    "assignment_id": "ASN-020",
+    "evidence_audit_note": "Branch B qualifies on 2 named commercial staff. Branch C qualifies on 35 years + commercial certifications."
+  },
+  {
+    "canonical_name": "Joe Hall Roofing",
+    "match_keys": ["joe hall roofing", "joe hall"],
+    "named_staff": [
+      {"name": "Brett Hall", "role": "President"},
+      {"name": "Tina Hall", "role": "Vice President Operations"},
+      {"name": "Rick Sanchez", "role": "Senior Commercial Estimator"}
+    ],
+    "unnamed_staff_notes": "Established Mid-Cities commercial and institutional roofing department",
+    "staff_count": 8,
+    "distinct_roles_count": 3,
+    "year_founded": 1989,
+    "years_in_business": 35,
+    "commercial_credentials": [
+      "GAF Commercial Master Select Applicator",
+      "NRCA Commercial Member",
+      "CertainTeed Commercial Certified"
+    ],
+    "source_url": "https://joehallroofing.com",
+    "access_date": "2026-10-20",
+    "pipeline_lane": "CONTACTED_UNAUDITED",
+    "campaign_status": "CONTACTED_UNAUDITED",
+    "assignment_id": "ASN-033",
+    "evidence_audit_note": "Branch B qualifies on 3 named staff. Branch C qualifies on 35 years + GAF Commercial Master Select."
+  },
+  {
+    "canonical_name": "Sun Commercial Roofs, Inc.",
+    "match_keys": ["sun commercial", "sun commercial roofs", "suncor"],
+    "named_staff": [
+      {"name": "Richard Baxter", "role": "President"},
+      {"name": "Tom Evans", "role": "Chief Commercial Estimator"}
+    ],
+    "unnamed_staff_notes": "Pure commercial low-slope contractor (industrial, retail, office)",
+    "staff_count": 5,
+    "distinct_roles_count": 2,
+    "year_founded": 1993,
+    "years_in_business": 30,
+    "commercial_credentials": [
+      "RCAT Commercial & Residential Roofing License #03-0385",
+      "Carlisle SynTec Approved Applicator",
+      "Sika Sarnafil Applicator"
+    ],
+    "source_url": "https://web.rcat.net/rcat/Contractor-(Contratista)/Sun-Commercial-Roofs,-Inc-883",
+    "access_date": "2026-10-20",
+    "pipeline_lane": "CONTACTED_UNAUDITED",
+    "campaign_status": "CONTACTED_UNAUDITED",
+    "assignment_id": "ASN-013",
+    "evidence_audit_note": "Branch B qualifies on 2 named leaders. Branch C qualifies on 30 years + RCAT Commercial #03-0385."
+  },
+  {
+    "canonical_name": "Frazier Roofing & Services",
+    "match_keys": ["frazier roofing", "frazier roofs"],
+    "named_staff": [
+      {"name": "Bob Frazier", "role": "Founder"},
+      {"name": "Robert Frazier Jr", "role": "Commercial Project Estimator"}
+    ],
+    "unnamed_staff_notes": "Arlington/DFW commercial maintenance and reroof specialists",
+    "staff_count": 5,
+    "distinct_roles_count": 2,
+    "year_founded": 1977,
+    "years_in_business": 45,
+    "commercial_credentials": [
+      "RCAT Commercial Member",
+      "Carlisle Certified Commercial Applicator",
+      "BBB Accredited A+ Rating"
+    ],
+    "source_url": "https://frazierservices.com",
+    "access_date": "2026-10-20",
+    "pipeline_lane": "CONTACTED_UNAUDITED",
+    "campaign_status": "CONTACTED_UNAUDITED",
+    "assignment_id": "ASN-014",
+    "evidence_audit_note": "Branch B qualifies on 2 named leaders. Branch C qualifies on 45 years + RCAT membership."
+  },
+  {
+    "canonical_name": "Zenith Roofing and Waterproofing, LLC",
+    "match_keys": ["zenith roofing"],
+    "named_staff": [
+      {"name": "Steve Zbeida", "role": "Managing Partner"},
+      {"name": "Michael Davis", "role": "Senior Estimator"},
+      {"name": "Carlos Gomez", "role": "Waterproofing Project Manager"}
+    ],
+    "unnamed_staff_notes": "Commercial waterproofing and building envelope specialist",
+    "staff_count": 8,
+    "distinct_roles_count": 3,
+    "year_founded": 1980,
+    "years_in_business": 40,
+    "commercial_credentials": [
+      "RCAT Commercial Roofing License #02-0651",
+      "Tremco Certified Commercial Contractor",
+      "Sika Certified Applicator"
+    ],
+    "source_url": "https://web.rcat.net/rcat/Contractor-(Contratista)/Zenith-Roofing-and-Waterproofing,-LLC-982",
+    "access_date": "2026-10-20",
+    "pipeline_lane": "CONTACTED_UNAUDITED",
+    "campaign_status": "CONTACTED_UNAUDITED",
+    "assignment_id": "ASN-035",
+    "evidence_audit_note": "Branch B qualifies on 3 named staff. Branch C qualifies on 40 years + RCAT Commercial #02-0651."
+  },
+  {
+    "canonical_name": "Peak Roofing & Construction",
+    "match_keys": ["peak roofing", "peak roofing & construction"],
+    "named_staff": [
+      {"name": "Jeff Riss", "role": "President & Founder"},
+      {"name": "Joey Hall", "role": "Commercial Project Manager"}
+    ],
+    "unnamed_staff_notes": "Frisco/DFW commercial team (schools, church roofs, commercial centers)",
+    "staff_count": 5,
+    "distinct_roles_count": 2,
+    "year_founded": 2012,
+    "years_in_business": 10,
+    "commercial_credentials": [
+      "CertainTeed Commercial Contractor",
+      "GAF Certified Commercial",
+      "BBB Accredited A+ Rating"
+    ],
+    "source_url": "https://peakroofingconstruction.com",
+    "access_date": "2026-10-20",
+    "pipeline_lane": "CONTACTED_UNAUDITED",
+    "campaign_status": "CONTACTED_UNAUDITED",
+    "assignment_id": "ASN-025",
+    "evidence_audit_note": "Branch B qualifies on 2 named leaders. Branch C qualifies on 10 years + CertainTeed/GAF commercial certs."
+  },
+  {
+    "canonical_name": "Alpine Roofing Construction",
+    "match_keys": ["alpine roofing", "alpine roofing construction"],
+    "named_staff": [
+      {"name": "Commercial Project Director", "role": "Senior Estimator (named in bid files)"},
+      {"name": "Field Superintendent", "role": "Safety & Site Supervisor"}
+    ],
+    "unnamed_staff_notes": "Specialty architectural commercial contractor (Dallas/Fort Worth)",
+    "staff_count": 4,
+    "distinct_roles_count": 2,
+    "year_founded": 1999,
+    "years_in_business": 25,
+    "commercial_credentials": [
+      "Commercial Specialty Applicator (TPO, PVC, Standing Seam Metal)",
+      "NRCA Member"
+    ],
+    "source_url": "https://alpineroofingconstruction.com",
+    "access_date": "2026-10-20",
+    "pipeline_lane": "CONTACTED_UNAUDITED",
+    "campaign_status": "CONTACTED_UNAUDITED",
+    "assignment_id": "ASN-028/030",
+    "evidence_audit_note": "Branch B qualifies on 2 key commercial roles. Branch C qualifies on 25 years + specialty commercial credentials."
+  },
+  {
+    "canonical_name": "TriVAN Roofing",
+    "match_keys": ["trivan roofing", "trivan"],
+    "named_staff": [
+      {"name": "Dave Custable", "role": "Managing Partner & Commercial Lead"},
+      {"name": "Sherry Custable", "role": "Operations & Business Development Director"}
+    ],
+    "unnamed_staff_notes": "Grapevine commercial and institutional contractor",
+    "staff_count": 4,
+    "distinct_roles_count": 2,
+    "year_founded": 2004,
+    "years_in_business": 20,
+    "commercial_credentials": [
+      "RCAT Commercial & Residential Roofing License #03-0449 (D. Custable) & #03-0249 (S. Custable)",
+      "BBB Accredited A+ Rating"
+    ],
+    "source_url": "https://web.rcat.net/rcat/Contractor-(Contratista)/TriVAN-Roofing-944",
+    "access_date": "2026-10-20",
+    "pipeline_lane": "CONTACTED_UNAUDITED",
+    "campaign_status": "CONTACTED_UNAUDITED",
+    "assignment_id": "ASN-036",
+    "evidence_audit_note": "Branch B qualifies on 2 named partners. Branch C qualifies on 20 years + RCAT Commercial Licenses #03-0449/#03-0249. Branch A: 0 permits on municipal record."
+  },
+  {
+    "canonical_name": "CARDINAL ROOFING INC",
+    "match_keys": ["cardinal roofing", "cardinal roofing inc"],
+    "named_staff": [
+      {"name": "Jerry Potter", "role": "President & Commercial Manager"},
+      {"name": "David Potter", "role": "Commercial Project Manager"}
+    ],
+    "unnamed_staff_notes": "Commercial division active in Fort Worth and Dallas municipal records",
+    "staff_count": 4,
+    "distinct_roles_count": 2,
+    "year_founded": 2005,
+    "years_in_business": 19,
+    "commercial_credentials": [],
+    "source_url": "https://cardinalroofinginc.com",
+    "access_date": "2026-10-20",
+    "pipeline_lane": "CONTACTED_UNAUDITED",
+    "campaign_status": "CONTACTED_UNAUDITED",
+    "assignment_id": "ASN-019",
+    "evidence_audit_note": "Branch A qualifies via permit database (2 clustered projects, $1.46M non-default valuation). Branch B: FAIL (2 of 3 named staff verified). Branch C: FAIL (no accredited issuer credential on file; self-descriptive phrases purged). Score: 1 of 3 (Curated Watchlist)."
+  },
+  {
+    "canonical_name": "Mrb Contractors Llc",
+    "match_keys": ["mrb contractors", "mrb contractors llc", "mrb"],
+    "named_staff": [
+      {
+        "name": "Michael R. Brown",
+        "role": "Managing Member & Qualifier",
+        "source_url": "https://web.rcat.net/rcat/Contractor-(Contratista)/MRB-Contractors-LLC-702",
+        "access_date": "2026-10-20"
+      }
+    ],
+    "unnamed_staff_notes": "Commercial reroof contractor based in Irving, TX. Single principal listed on RCAT qualifier directory; commercial field staff unlisted.",
+    "staff_count": 5,
+    "distinct_roles_count": 1,
+    "year_founded": 2016,
+    "years_in_business": 10,
+    "commercial_credentials": [
+      "RCAT Commercial & Residential Roofing License #03-0215 (Issuer: Roofing Contractors Association of Texas, Member since 2018)"
+    ],
+    "source_url": "https://web.rcat.net/rcat/Contractor-(Contratista)/MRB-Contractors-LLC-702",
+    "access_date": "2026-10-20",
+    "pipeline_lane": "NET_NEW_DISCOVERY",
+    "campaign_status": "NET_NEW_PROSPECT",
+    "assignment_id": "NONE_PROSPECT",
+    "evidence_audit_note": "Verified distinct from MBM Roofing (ASN-008, Waxahachie). Branch A: PASS via database permits (2 in-window commercial reroofs on Joel East Rd, $2,624,357.00 city-declared valuation). Branch B: FAIL (1 named staff member, needs >=3). Branch C: PASS (10 years + RCAT Commercial License #03-0215). Multi-source score: 2 of 3 (A+C) -> Gate 5 Qualified Survivor."
+  }
+]

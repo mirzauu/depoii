@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "32058445399",
+    "feiNumber": null,
+    "name": "VICEROY WADLEY, L.P.",
+    "dbaName": null,
+    "mailingAddressStreet": "2722 FAIRMOUNT ST",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75201",
+    "mailingAddressZip4": "1958",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "09/30/2015",
+    "sosFileNumber": "0802303043",
+    "registeredAgentName": "STEPHEN J ROGERS",
+    "registeredOfficeAddressStreet": "2722 FAIRMOUNT STREET",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75201",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:45:37.148Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "VICEROY ABILITY, INC.",
+        "AGNT_TITL_TX": "GENERAL PA",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "2722 FAIRMOUNT STREET",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75201",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

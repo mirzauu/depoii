@@ -1,0 +1,1267 @@
+{
+  "total_states": 10,
+  "total_cities": 41,
+  "total_permits": 21038,
+  "total_valuation_usd": 4478932464.09,
+  "states": [
+    {
+      "state_code": "OH",
+      "state_name": "Ohio",
+      "total_permits": 5000,
+      "total_valuation_usd": 0,
+      "city_count": 1,
+      "has_parcel_coverage": false,
+      "has_active_storms": false,
+      "cities": [
+        {
+          "city": "Cincinnati",
+          "state": "OH",
+          "permit_count": 5000,
+          "total_valuation_usd": 0,
+          "roof_categories": {
+            "Commercial Re-Roof": 3690,
+            "Roof Repair & Alteration": 1135,
+            "New Construction Commercial Roofing": 175
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 5000
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.cincinnati-oh.gov/Thriving-Neighborhoods/Buildings-Permits-Commercial-and-Residential/2c85-m678",
+          "cad_portal_url": "https://wedge.hcauditor.org/",
+          "metro_area": "Cincinnati Metropolitan Area",
+          "latitude": 39.1031,
+          "longitude": -84.512
+        }
+      ]
+    },
+    {
+      "state_code": "WA",
+      "state_name": "Washington",
+      "total_permits": 4999,
+      "total_valuation_usd": 1911908795,
+      "city_count": 1,
+      "has_parcel_coverage": false,
+      "has_active_storms": false,
+      "cities": [
+        {
+          "city": "Seattle",
+          "state": "WA",
+          "permit_count": 4999,
+          "total_valuation_usd": 1911908795,
+          "roof_categories": {
+            "Commercial Re-Roof": 3149,
+            "New Construction Commercial Roofing": 620,
+            "Roof Repair & Alteration": 1210,
+            "Roof Tear-Off & Replace": 20
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 3844
+            },
+            {
+              "name": "Seattle Housing Auth General",
+              "permits": 190
+            },
+            {
+              "name": "Blanket: Bank Of America Tower",
+              "permits": 35
+            },
+            {
+              "name": "Odelia Pacific Corporation",
+              "permits": 30
+            },
+            {
+              "name": "Howland Homes LLC",
+              "permits": 20
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.seattle.gov/Permitting/Building-Permits/i5jq-ms7b",
+          "cad_portal_url": "https://blue.kingcounty.com/Assessor/eRealProperty",
+          "metro_area": "Seattle-Tacoma-Bellevue Metro",
+          "latitude": 47.5724752,
+          "longitude": -122.38285229
+        }
+      ]
+    },
+    {
+      "state_code": "FL",
+      "state_name": "Florida",
+      "total_permits": 3998,
+      "total_valuation_usd": 0,
+      "city_count": 1,
+      "has_parcel_coverage": false,
+      "has_active_storms": false,
+      "cities": [
+        {
+          "city": "Gainesville",
+          "state": "FL",
+          "permit_count": 3998,
+          "total_valuation_usd": 0,
+          "roof_categories": {
+            "Commercial Re-Roof": 3998
+          },
+          "top_contractors": [
+            {
+              "name": "Clayton Crosier",
+              "permits": 76
+            },
+            {
+              "name": "Bryan Nazworth",
+              "permits": 76
+            },
+            {
+              "name": "Mark Hurm",
+              "permits": 72
+            },
+            {
+              "name": "Kirk R. Smith",
+              "permits": 72
+            },
+            {
+              "name": "Gary Williams",
+              "permits": 62
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.cityofgainesville.org/Building-Development/Building-Permits/btya-7q4v",
+          "cad_portal_url": "https://www.acpafl.org/",
+          "metro_area": "Gainesville Metro",
+          "latitude": 29.66487,
+          "longitude": -82.38362
+        }
+      ]
+    },
+    {
+      "state_code": "MA",
+      "state_name": "Massachusetts",
+      "total_permits": 2000,
+      "total_valuation_usd": 135696598.32,
+      "city_count": 2,
+      "has_parcel_coverage": false,
+      "has_active_storms": false,
+      "cities": [
+        {
+          "city": "Cambridge",
+          "state": "MA",
+          "permit_count": 1000,
+          "total_valuation_usd": 78735772.57,
+          "roof_categories": {
+            "Commercial Re-Roof": 1000
+          },
+          "top_contractors": [
+            {
+              "name": "RB Farina Roofing",
+              "permits": 80
+            },
+            {
+              "name": "RB Farina Roofing & Construction",
+              "permits": 42
+            },
+            {
+              "name": "WS Aiken LLC",
+              "permits": 29
+            },
+            {
+              "name": "Ranch Roofing Inc..",
+              "permits": 28
+            },
+            {
+              "name": "IMA Construction Corp.",
+              "permits": 23
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.cambridgema.gov/Inspectional-Services/Building-Permits/j2mk-n7h9",
+          "cad_portal_url": "https://www.cambridgema.gov/assessing",
+          "metro_area": "Greater Boston Metro",
+          "latitude": 42.370834,
+          "longitude": -71.10228
+        },
+        {
+          "city": "Framingham",
+          "state": "MA",
+          "permit_count": 1000,
+          "total_valuation_usd": 56960825.75,
+          "roof_categories": {
+            "Commercial Re-Roof": 968,
+            "Roof Repair & Alteration": 16,
+            "New Construction Commercial Roofing": 12,
+            "Roof Tear-Off & Replace": 4
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 1000
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://www.framinghamma.gov/224/Inspectional-Services",
+          "cad_portal_url": "https://framinghamma.gov/assessor",
+          "metro_area": "Greater Boston Metro",
+          "latitude": 42.2793,
+          "longitude": -71.4162
+        }
+      ]
+    },
+    {
+      "state_code": "NY",
+      "state_name": "New York",
+      "total_permits": 1472,
+      "total_valuation_usd": 966172976.88,
+      "city_count": 1,
+      "has_parcel_coverage": false,
+      "has_active_storms": false,
+      "cities": [
+        {
+          "city": "New York City",
+          "state": "NY",
+          "permit_count": 1472,
+          "total_valuation_usd": 966172976.88,
+          "roof_categories": {
+            "Commercial Re-Roof": 1272,
+            "Roof Repair & Alteration": 139,
+            "New Construction Commercial Roofing": 51,
+            "Commercial Waterproofing & Coating": 6,
+            "Roof Tear-Off & Replace": 4
+          },
+          "top_contractors": [
+            {
+              "name": "Sunrun Installation Svc",
+              "permits": 23
+            },
+            {
+              "name": "Core Four Construction In",
+              "permits": 22
+            },
+            {
+              "name": "Momentum Solar",
+              "permits": 14
+            },
+            {
+              "name": "Arsenal Scaffold Inc.",
+              "permits": 12
+            },
+            {
+              "name": "Ace Group Ny Corp.",
+              "permits": 12
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.cityofnewyork.us/Housing-Development/DOB-Permit-Issuance/ipu4-2q9a",
+          "cad_portal_url": "https://a836-acris.nyc.gov/",
+          "metro_area": "New York Metropolitan Area",
+          "latitude": 40.756514,
+          "longitude": -73.817023
+        }
+      ]
+    },
+    {
+      "state_code": "MD",
+      "state_name": "Maryland",
+      "total_permits": 1079,
+      "total_valuation_usd": 1390980680.98,
+      "city_count": 27,
+      "has_parcel_coverage": false,
+      "has_active_storms": false,
+      "cities": [
+        {
+          "city": "Silver Spring",
+          "state": "MD",
+          "permit_count": 234,
+          "total_valuation_usd": 209805231.3,
+          "roof_categories": {
+            "Commercial Re-Roof": 152,
+            "Roof Repair & Alteration": 61,
+            "Roof Tear-Off & Replace": 5,
+            "New Construction Commercial Roofing": 14,
+            "Commercial Waterproofing & Coating": 2
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 234
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.montgomerycountymd.gov/Community-Recreation/Commercial-Permits/i82y-u238",
+          "cad_portal_url": "https://sdat.dat.maryland.gov/RealProperty",
+          "metro_area": "Washington-Arlington-Alexandria Metro",
+          "latitude": 38.999165999,
+          "longitude": -77.04055799
+        },
+        {
+          "city": "Rockville",
+          "state": "MD",
+          "permit_count": 206,
+          "total_valuation_usd": 378369630,
+          "roof_categories": {
+            "Commercial Re-Roof": 160,
+            "Roof Repair & Alteration": 31,
+            "New Construction Commercial Roofing": 11,
+            "Commercial Waterproofing & Coating": 4
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 206
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.montgomerycountymd.gov/Community-Recreation/Commercial-Permits/i82y-u238",
+          "cad_portal_url": "https://sdat.dat.maryland.gov/RealProperty",
+          "metro_area": "Washington-Arlington-Alexandria Metro",
+          "latitude": 39.056375003,
+          "longitude": -77.120323031
+        },
+        {
+          "city": "Bethesda",
+          "state": "MD",
+          "permit_count": 198,
+          "total_valuation_usd": 264642084,
+          "roof_categories": {
+            "Commercial Re-Roof": 147,
+            "Roof Repair & Alteration": 33,
+            "New Construction Commercial Roofing": 15,
+            "Commercial Waterproofing & Coating": 2,
+            "Roof Tear-Off & Replace": 1
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 198
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.montgomerycountymd.gov/Community-Recreation/Commercial-Permits/i82y-u238",
+          "cad_portal_url": "https://sdat.dat.maryland.gov/RealProperty",
+          "metro_area": "Washington-Arlington-Alexandria Metro",
+          "latitude": 38.948590015,
+          "longitude": -77.116055972
+        },
+        {
+          "city": "Germantown",
+          "state": "MD",
+          "permit_count": 79,
+          "total_valuation_usd": 164923001.93,
+          "roof_categories": {
+            "Commercial Re-Roof": 56,
+            "Roof Repair & Alteration": 15,
+            "New Construction Commercial Roofing": 7,
+            "Roof Tear-Off & Replace": 1
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 79
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.montgomerycountymd.gov/Community-Recreation/Commercial-Permits/i82y-u238",
+          "cad_portal_url": "https://sdat.dat.maryland.gov/RealProperty",
+          "metro_area": "Washington-Arlington-Alexandria Metro",
+          "latitude": 39.171810993,
+          "longitude": -77.265449985
+        },
+        {
+          "city": "Chevy Chase",
+          "state": "MD",
+          "permit_count": 61,
+          "total_valuation_usd": 91422158,
+          "roof_categories": {
+            "Commercial Re-Roof": 43,
+            "Roof Repair & Alteration": 17,
+            "New Construction Commercial Roofing": 1
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 61
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.montgomerycountymd.gov/Community-Recreation/Commercial-Permits/i82y-u238",
+          "cad_portal_url": "https://sdat.dat.maryland.gov/RealProperty",
+          "metro_area": "Washington-Arlington-Alexandria Metro",
+          "latitude": 38.99565,
+          "longitude": -77.076175966
+        },
+        {
+          "city": "Montgomery County",
+          "state": "MD",
+          "permit_count": 42,
+          "total_valuation_usd": 27711732,
+          "roof_categories": {
+            "Commercial Re-Roof": 35,
+            "New Construction Commercial Roofing": 1,
+            "Roof Repair & Alteration": 5,
+            "Roof Tear-Off & Replace": 1
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 42
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.montgomerycountymd.gov/Community-Recreation/Commercial-Permits/i82y-u238",
+          "cad_portal_url": "https://sdat.dat.maryland.gov/RealProperty",
+          "metro_area": "Washington-Arlington-Alexandria Metro",
+          "latitude": 33.351942,
+          "longitude": -111.873223
+        },
+        {
+          "city": "Gaithersburg",
+          "state": "MD",
+          "permit_count": 41,
+          "total_valuation_usd": 18173556.88,
+          "roof_categories": {
+            "Commercial Re-Roof": 32,
+            "Roof Repair & Alteration": 5,
+            "Roof Tear-Off & Replace": 1,
+            "New Construction Commercial Roofing": 3
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 41
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.montgomerycountymd.gov/Community-Recreation/Commercial-Permits/i82y-u238",
+          "cad_portal_url": "https://sdat.dat.maryland.gov/RealProperty",
+          "metro_area": "Washington-Arlington-Alexandria Metro",
+          "latitude": 39.17902,
+          "longitude": -77.17957
+        },
+        {
+          "city": "Clarksburg",
+          "state": "MD",
+          "permit_count": 32,
+          "total_valuation_usd": 50460002.16,
+          "roof_categories": {
+            "Commercial Re-Roof": 28,
+            "New Construction Commercial Roofing": 3,
+            "Roof Repair & Alteration": 1
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 32
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.montgomerycountymd.gov/Community-Recreation/Commercial-Permits/i82y-u238",
+          "cad_portal_url": "https://sdat.dat.maryland.gov/RealProperty",
+          "metro_area": "Washington-Arlington-Alexandria Metro",
+          "latitude": 39.290188988,
+          "longitude": -77.285546017
+        },
+        {
+          "city": "Potomac",
+          "state": "MD",
+          "permit_count": 26,
+          "total_valuation_usd": 37620777,
+          "roof_categories": {
+            "Commercial Re-Roof": 19,
+            "Roof Repair & Alteration": 4,
+            "New Construction Commercial Roofing": 3
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 26
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.montgomerycountymd.gov/Community-Recreation/Commercial-Permits/i82y-u238",
+          "cad_portal_url": "https://sdat.dat.maryland.gov/RealProperty",
+          "metro_area": "Washington-Arlington-Alexandria Metro",
+          "latitude": 39.05873,
+          "longitude": -77.25064
+        },
+        {
+          "city": "Montgomery Village",
+          "state": "MD",
+          "permit_count": 25,
+          "total_valuation_usd": 33845263,
+          "roof_categories": {
+            "Commercial Re-Roof": 19,
+            "New Construction Commercial Roofing": 2,
+            "Roof Repair & Alteration": 4
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 25
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.montgomerycountymd.gov/Community-Recreation/Commercial-Permits/i82y-u238",
+          "cad_portal_url": "https://sdat.dat.maryland.gov/RealProperty",
+          "metro_area": "Washington-Arlington-Alexandria Metro",
+          "latitude": 39.193905983000036,
+          "longitude": -77.18592500199998
+        },
+        {
+          "city": "Kensington",
+          "state": "MD",
+          "permit_count": 23,
+          "total_valuation_usd": 5160398,
+          "roof_categories": {
+            "Commercial Re-Roof": 19,
+            "New Construction Commercial Roofing": 2,
+            "Roof Repair & Alteration": 2
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 23
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.montgomerycountymd.gov/Community-Recreation/Commercial-Permits/i82y-u238",
+          "cad_portal_url": "https://sdat.dat.maryland.gov/RealProperty",
+          "metro_area": "Washington-Arlington-Alexandria Metro",
+          "latitude": 39.043656251,
+          "longitude": -77.111065169
+        },
+        {
+          "city": "Olney",
+          "state": "MD",
+          "permit_count": 21,
+          "total_valuation_usd": 3632685,
+          "roof_categories": {
+            "Commercial Re-Roof": 16,
+            "New Construction Commercial Roofing": 2,
+            "Roof Repair & Alteration": 3
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 21
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.montgomerycountymd.gov/Community-Recreation/Commercial-Permits/i82y-u238",
+          "cad_portal_url": "https://sdat.dat.maryland.gov/RealProperty",
+          "metro_area": "Washington-Arlington-Alexandria Metro",
+          "latitude": 39.15301,
+          "longitude": -77.06437
+        },
+        {
+          "city": "Takoma Park",
+          "state": "MD",
+          "permit_count": 16,
+          "total_valuation_usd": 17056148,
+          "roof_categories": {
+            "Roof Repair & Alteration": 2,
+            "Commercial Re-Roof": 11,
+            "New Construction Commercial Roofing": 3
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 16
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.montgomerycountymd.gov/Community-Recreation/Commercial-Permits/i82y-u238",
+          "cad_portal_url": "https://sdat.dat.maryland.gov/RealProperty",
+          "metro_area": "Washington-Arlington-Alexandria Metro",
+          "latitude": 38.995327004,
+          "longitude": -76.997357997
+        },
+        {
+          "city": "Burtonsville",
+          "state": "MD",
+          "permit_count": 14,
+          "total_valuation_usd": 2563059,
+          "roof_categories": {
+            "Roof Repair & Alteration": 3,
+            "Commercial Re-Roof": 10,
+            "New Construction Commercial Roofing": 1
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 14
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.montgomerycountymd.gov/Community-Recreation/Commercial-Permits/i82y-u238",
+          "cad_portal_url": "https://sdat.dat.maryland.gov/RealProperty",
+          "metro_area": "Washington-Arlington-Alexandria Metro",
+          "latitude": 39.11472,
+          "longitude": -76.93167
+        },
+        {
+          "city": "Damascus",
+          "state": "MD",
+          "permit_count": 12,
+          "total_valuation_usd": 11867720,
+          "roof_categories": {
+            "Commercial Re-Roof": 8,
+            "Roof Repair & Alteration": 3,
+            "Roof Tear-Off & Replace": 1
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 12
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.montgomerycountymd.gov/Community-Recreation/Commercial-Permits/i82y-u238",
+          "cad_portal_url": "https://sdat.dat.maryland.gov/RealProperty",
+          "metro_area": "Washington-Arlington-Alexandria Metro",
+          "latitude": 39.29029300800005,
+          "longitude": -77.20145700399996
+        },
+        {
+          "city": "Poolesville",
+          "state": "MD",
+          "permit_count": 10,
+          "total_valuation_usd": 13733097,
+          "roof_categories": {
+            "Commercial Re-Roof": 10
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 10
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.montgomerycountymd.gov/Community-Recreation/Commercial-Permits/i82y-u238",
+          "cad_portal_url": "https://sdat.dat.maryland.gov/RealProperty",
+          "metro_area": "Washington-Arlington-Alexandria Metro",
+          "latitude": 39.124916005,
+          "longitude": -77.422270029
+        },
+        {
+          "city": "Boyds",
+          "state": "MD",
+          "permit_count": 8,
+          "total_valuation_usd": 50740994.71,
+          "roof_categories": {
+            "New Construction Commercial Roofing": 1,
+            "Commercial Re-Roof": 7
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 8
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.montgomerycountymd.gov/Community-Recreation/Commercial-Permits/i82y-u238",
+          "cad_portal_url": "https://sdat.dat.maryland.gov/RealProperty",
+          "metro_area": "Washington-Arlington-Alexandria Metro",
+          "latitude": 39.133303985,
+          "longitude": -77.320462008
+        },
+        {
+          "city": "Wheaton",
+          "state": "MD",
+          "permit_count": 7,
+          "total_valuation_usd": 713812,
+          "roof_categories": {
+            "Commercial Re-Roof": 4,
+            "Roof Repair & Alteration": 3
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 7
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.montgomerycountymd.gov/Community-Recreation/Commercial-Permits/i82y-u238",
+          "cad_portal_url": "https://sdat.dat.maryland.gov/RealProperty",
+          "metro_area": "Washington-Arlington-Alexandria Metro",
+          "latitude": 39.036804013,
+          "longitude": -77.05508299
+        },
+        {
+          "city": "North Bethesda",
+          "state": "MD",
+          "permit_count": 6,
+          "total_valuation_usd": 102000,
+          "roof_categories": {
+            "Commercial Re-Roof": 6
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 6
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.montgomerycountymd.gov/Community-Recreation/Commercial-Permits/i82y-u238",
+          "cad_portal_url": "https://sdat.dat.maryland.gov/RealProperty",
+          "metro_area": "Washington-Arlington-Alexandria Metro",
+          "latitude": 39.052228014,
+          "longitude": -77.124075022
+        },
+        {
+          "city": "Brookeville",
+          "state": "MD",
+          "permit_count": 5,
+          "total_valuation_usd": 1624454,
+          "roof_categories": {
+            "Commercial Re-Roof": 5
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 5
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.montgomerycountymd.gov/Community-Recreation/Commercial-Permits/i82y-u238",
+          "cad_portal_url": "https://sdat.dat.maryland.gov/RealProperty",
+          "metro_area": "Washington-Arlington-Alexandria Metro",
+          "latitude": 39.19000701500005,
+          "longitude": -77.06502099399995
+        },
+        {
+          "city": "Sandy Spring",
+          "state": "MD",
+          "permit_count": 3,
+          "total_valuation_usd": 6066922,
+          "roof_categories": {
+            "Commercial Re-Roof": 3
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 3
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.montgomerycountymd.gov/Community-Recreation/Commercial-Permits/i82y-u238",
+          "cad_portal_url": "https://sdat.dat.maryland.gov/RealProperty",
+          "metro_area": "Washington-Arlington-Alexandria Metro",
+          "latitude": 39.148718011,
+          "longitude": -77.026591979
+        },
+        {
+          "city": "Mount Airy",
+          "state": "MD",
+          "permit_count": 3,
+          "total_valuation_usd": 385000,
+          "roof_categories": {
+            "Commercial Re-Roof": 3
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 3
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.montgomerycountymd.gov/Community-Recreation/Commercial-Permits/i82y-u238",
+          "cad_portal_url": "https://sdat.dat.maryland.gov/RealProperty",
+          "metro_area": "Washington-Arlington-Alexandria Metro",
+          "latitude": 39.342203014,
+          "longitude": -77.190356011
+        },
+        {
+          "city": "Dickerson",
+          "state": "MD",
+          "permit_count": 3,
+          "total_valuation_usd": 233955,
+          "roof_categories": {
+            "Commercial Re-Roof": 3
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 3
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.montgomerycountymd.gov/Community-Recreation/Commercial-Permits/i82y-u238",
+          "cad_portal_url": "https://sdat.dat.maryland.gov/RealProperty",
+          "metro_area": "Washington-Arlington-Alexandria Metro",
+          "latitude": 39.19902598400006,
+          "longitude": -77.45038796099999
+        },
+        {
+          "city": "Cabin John",
+          "state": "MD",
+          "permit_count": 1,
+          "total_valuation_usd": 20000,
+          "roof_categories": {
+            "Commercial Re-Roof": 1
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 1
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.montgomerycountymd.gov/Community-Recreation/Commercial-Permits/i82y-u238",
+          "cad_portal_url": "https://sdat.dat.maryland.gov/RealProperty",
+          "metro_area": "Washington-Arlington-Alexandria Metro",
+          "latitude": 38.97363401,
+          "longitude": -77.155670019
+        },
+        {
+          "city": "Ashton",
+          "state": "MD",
+          "permit_count": 1,
+          "total_valuation_usd": 25000,
+          "roof_categories": {
+            "Commercial Re-Roof": 1
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 1
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.montgomerycountymd.gov/Community-Recreation/Commercial-Permits/i82y-u238",
+          "cad_portal_url": "https://sdat.dat.maryland.gov/RealProperty",
+          "metro_area": "Washington-Arlington-Alexandria Metro",
+          "latitude": 39.164265017,
+          "longitude": -77.015877979
+        },
+        {
+          "city": "Highland",
+          "state": "MD",
+          "permit_count": 1,
+          "total_valuation_usd": 20000,
+          "roof_categories": {
+            "Commercial Re-Roof": 1
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 1
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.montgomerycountymd.gov/Community-Recreation/Commercial-Permits/i82y-u238",
+          "cad_portal_url": "https://sdat.dat.maryland.gov/RealProperty",
+          "metro_area": "Washington-Arlington-Alexandria Metro",
+          "latitude": 39.166430564,
+          "longitude": -77.00528228
+        },
+        {
+          "city": "Darnestown",
+          "state": "MD",
+          "permit_count": 1,
+          "total_valuation_usd": 62000,
+          "roof_categories": {
+            "Commercial Re-Roof": 1
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 1
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.montgomerycountymd.gov/Community-Recreation/Commercial-Permits/i82y-u238",
+          "cad_portal_url": "https://sdat.dat.maryland.gov/RealProperty",
+          "metro_area": "Washington-Arlington-Alexandria Metro",
+          "latitude": 39.110038001,
+          "longitude": -77.299506998
+        }
+      ]
+    },
+    {
+      "state_code": "LA",
+      "state_name": "Louisiana",
+      "total_permits": 1020,
+      "total_valuation_usd": 0,
+      "city_count": 1,
+      "has_parcel_coverage": false,
+      "has_active_storms": false,
+      "cities": [
+        {
+          "city": "Baton Rouge",
+          "state": "LA",
+          "permit_count": 1020,
+          "total_valuation_usd": 0,
+          "roof_categories": {
+            "Commercial Re-Roof": 1020
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 1020
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.brla.gov/Government-Administration/Building-Permits/26w4-r6ws",
+          "cad_portal_url": "https://www.ebrpa.org/",
+          "metro_area": "Baton Rouge Metro",
+          "latitude": 30.4515,
+          "longitude": -91.1871
+        }
+      ]
+    },
+    {
+      "state_code": "CA",
+      "state_name": "California",
+      "total_permits": 991,
+      "total_valuation_usd": 22423412.91,
+      "city_count": 1,
+      "has_parcel_coverage": false,
+      "has_active_storms": false,
+      "cities": [
+        {
+          "city": "Sonoma County",
+          "state": "CA",
+          "permit_count": 991,
+          "total_valuation_usd": 22423412.91,
+          "roof_categories": {
+            "Commercial Re-Roof": 901,
+            "Roof Tear-Off & Replace": 63,
+            "New Construction Commercial Roofing": 10,
+            "Roof Repair & Alteration": 17
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 991
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://sonomacounty.ca.gov/Permit-Sonoma/",
+          "cad_portal_url": "https://sonomacounty.ca.gov/Auditor-Controller-Treasurer-Tax-Collector/",
+          "metro_area": "San Francisco Bay Area - North Bay",
+          "latitude": 38.2919,
+          "longitude": -122.458
+        }
+      ]
+    },
+    {
+      "state_code": "TX",
+      "state_name": "Texas",
+      "total_permits": 332,
+      "total_valuation_usd": 51750000,
+      "city_count": 5,
+      "has_parcel_coverage": true,
+      "has_active_storms": true,
+      "cities": [
+        {
+          "city": "Addison",
+          "state": "TX",
+          "permit_count": 315,
+          "total_valuation_usd": 39375000,
+          "roof_categories": {
+            "Commercial Re-Roof": 232,
+            "Roof Repair & Alteration": 73,
+            "New Construction Commercial Roofing": 8,
+            "Commercial Waterproofing & Coating": 2
+          },
+          "top_contractors": [
+            {
+              "name": "Commercial Roofing Contractor",
+              "permits": 301
+            },
+            {
+              "name": "Red Roof Inn & Suites",
+              "permits": 6
+            },
+            {
+              "name": "Southwest Re",
+              "permits": 1
+            },
+            {
+              "name": "Hudson Peters Commercial",
+              "permits": 1
+            },
+            {
+              "name": "Holt Lunsford Commercial",
+              "permits": 1
+            }
+          ],
+          "parcel_coverage": true,
+          "parcel_source": "Dallas County CAD / Seeded Commercial",
+          "has_active_storms": true,
+          "storm_details": "DFW Severe Hail Corridor (May 28 - 2.50\" MESH)",
+          "portal_url": "https://addisontx-energovweb.tylerhost.net/apps/selfservice#/search",
+          "cad_portal_url": "https://www.dallascad.org",
+          "metro_area": "Dallas-Fort Worth Metroplex",
+          "latitude": 32.9618,
+          "longitude": -96.8292
+        },
+        {
+          "city": "Dallas",
+          "state": "TX",
+          "permit_count": 13,
+          "total_valuation_usd": 6675000,
+          "roof_categories": {
+            "Roof Tear-Off & Replace": 1,
+            "Commercial Re-Roof": 10,
+            "Roof Repair & Alteration": 2
+          },
+          "top_contractors": [
+            {
+              "name": "Commercial Roofing Contractor",
+              "permits": 7
+            },
+            {
+              "name": "Gmac Commercial Mortgage",
+              "permits": 2
+            },
+            {
+              "name": "Kpost Roofing & Waterproofing",
+              "permits": 1
+            },
+            {
+              "name": "Empire Roofing",
+              "permits": 1
+            },
+            {
+              "name": "Transwestern Commercial Services",
+              "permits": 1
+            }
+          ],
+          "parcel_coverage": true,
+          "parcel_source": "Dallas County CAD / Seeded Commercial",
+          "has_active_storms": true,
+          "storm_details": "DFW Severe Hail Corridor (May 28 - 2.50\" MESH)",
+          "portal_url": "https://aca-prod.accela.com/dallas",
+          "cad_portal_url": "https://www.dallascad.org/SearchOption.aspx",
+          "metro_area": "Dallas-Fort Worth Metroplex",
+          "latitude": 32.7767,
+          "longitude": -96.797
+        },
+        {
+          "city": "Fort Worth",
+          "state": "TX",
+          "permit_count": 2,
+          "total_valuation_usd": 4325000,
+          "roof_categories": {
+            "Roof Tear-Off & Replace": 1,
+            "Commercial Re-Roof": 1
+          },
+          "top_contractors": [
+            {
+              "name": "CentiMark Corporation",
+              "permits": 1
+            },
+            {
+              "name": "Ralph Wright Commercial Refrigeration Inc..",
+              "permits": 1
+            }
+          ],
+          "parcel_coverage": true,
+          "parcel_source": "Tarrant Appraisal District (Live ESRI GIS)",
+          "has_active_storms": true,
+          "storm_details": "DFW Severe Hail Corridor (May 28 - 2.50\" MESH)",
+          "portal_url": "https://aca-prod.accela.com/CFW",
+          "cad_portal_url": "https://www.tad.org/",
+          "metro_area": "Dallas-Fort Worth Metroplex",
+          "latitude": 32.7555,
+          "longitude": -97.3308
+        },
+        {
+          "city": "Austin",
+          "state": "TX",
+          "permit_count": 1,
+          "total_valuation_usd": 1250000,
+          "roof_categories": {
+            "Commercial Waterproofing & Coating": 1
+          },
+          "top_contractors": [
+            {
+              "name": "Texas Commercial Roofing LLC",
+              "permits": 1
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.austintexas.gov/Building-and-Development/Building-and-Demolition-Permits/3syk-w9eu",
+          "cad_portal_url": "https://www.traviscad.org/",
+          "metro_area": "Austin-Round Rock Metro",
+          "latitude": 30.2672,
+          "longitude": -97.7431
+        },
+        {
+          "city": "Keller",
+          "state": "TX",
+          "permit_count": 1,
+          "total_valuation_usd": 125000,
+          "roof_categories": {
+            "Commercial Re-Roof": 1
+          },
+          "top_contractors": [
+            {
+              "name": "Smart Commercial Services",
+              "permits": 1
+            }
+          ],
+          "parcel_coverage": true,
+          "parcel_source": "Tarrant Appraisal District (Live ESRI GIS)",
+          "has_active_storms": true,
+          "storm_details": "DFW Severe Hail Corridor (May 28 - 2.50\" MESH)",
+          "portal_url": "https://www.cityofkeller.com/services/community-development/building-services",
+          "cad_portal_url": "https://www.tad.org/",
+          "metro_area": "Dallas-Fort Worth Metroplex",
+          "latitude": 32.9342,
+          "longitude": -97.2295
+        }
+      ]
+    },
+    {
+      "state_code": "IL",
+      "state_name": "Illinois",
+      "total_permits": 147,
+      "total_valuation_usd": 0,
+      "city_count": 1,
+      "has_parcel_coverage": false,
+      "has_active_storms": false,
+      "cities": [
+        {
+          "city": "Chicago",
+          "state": "IL",
+          "permit_count": 147,
+          "total_valuation_usd": 0,
+          "roof_categories": {
+            "Roof Repair & Alteration": 47,
+            "Commercial Re-Roof": 64,
+            "New Construction Commercial Roofing": 13,
+            "Roof Tear-Off & Replace": 21,
+            "Commercial Waterproofing & Coating": 2
+          },
+          "top_contractors": [
+            {
+              "name": "Licensed Commercial Contractor",
+              "permits": 147
+            }
+          ],
+          "parcel_coverage": false,
+          "parcel_source": null,
+          "has_active_storms": false,
+          "storm_details": null,
+          "portal_url": "https://data.cityofchicago.org/Buildings/Building-Permits/ydr8-5enu",
+          "cad_portal_url": "https://www.cookcountyassessor.com/",
+          "metro_area": "Chicago Metropolitan Area",
+          "latitude": 41.85149434564635,
+          "longitude": -87.68302776775269
+        }
+      ]
+    }
+  ]
+}

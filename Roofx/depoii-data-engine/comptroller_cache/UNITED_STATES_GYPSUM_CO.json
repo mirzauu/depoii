@@ -1,0 +1,270 @@
+{
+  "detail": {
+    "taxpayerId": "13618984101",
+    "feiNumber": "361898410",
+    "name": "UNITED STATES GYPSUM COMPANY",
+    "dbaName": null,
+    "mailingAddressStreet": "550 W ADAMS ST STE 1300",
+    "mailingAddressCity": "CHICAGO",
+    "mailingAddressState": "IL",
+    "mailingAddressZip": "60661",
+    "mailingAddressZip4": "3692",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " DE",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "06/27/1966",
+    "sosFileNumber": "0002566506",
+    "registeredAgentName": "CT CORP SYSTEM",
+    "registeredOfficeAddressStreet": "1999 BRYAN ST., STE. 900",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75201",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:45:37.148Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "BRENT SEPPA",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "550 W ADAMS",
+        "CITY_NM": "CHICAGO",
+        "ST_CD": "IL",
+        "AD_ZP": "60661",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "BRIAN TAUKE",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "550 W ADAMS STREET",
+        "CITY_NM": "CHICAGO",
+        "ST_CD": "IL",
+        "AD_ZP": "60661",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DANIEL E RYAN",
+        "AGNT_TITL_TX": "OTHER",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "550 W ADAMS STREET",
+        "CITY_NM": "CHICAGO",
+        "ST_CD": "IL",
+        "AD_ZP": "60661",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DEAN UPDEGROVE",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "550 W ADAMS",
+        "CITY_NM": "CHICAGO",
+        "ST_CD": "IL",
+        "AD_ZP": "60661",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "DIANE EARLL",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "550 W ADAMS",
+        "CITY_NM": "CHICAGO",
+        "ST_CD": "IL",
+        "AD_ZP": "60661",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "EVGENI GANCHEV",
+        "AGNT_TITL_TX": "ASSISTANT",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "550 W. ADAMS STREET",
+        "CITY_NM": "CHICAGO",
+        "ST_CD": "IL",
+        "AD_ZP": "60661",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "GREGORY D SALAH",
+        "AGNT_TITL_TX": "PRESIDENT",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "550 W ADAMS STREET",
+        "CITY_NM": "CHICAGO",
+        "ST_CD": "IL",
+        "AD_ZP": "60661",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JEFFREY D BARTH",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "550 W ADAMS STREET",
+        "CITY_NM": "CHICAGO",
+        "ST_CD": "IL",
+        "AD_ZP": "60661",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JEFFREY WHITE",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "550 W ADAMS",
+        "CITY_NM": "CHICAGO",
+        "ST_CD": "IL",
+        "AD_ZP": "60661",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JEFFRY T RUSSART",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "550 W ADAMS STREET",
+        "CITY_NM": "CHICAGO",
+        "ST_CD": "IL",
+        "AD_ZP": "60661",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JESSICA A GARASCIA",
+        "AGNT_TITL_TX": "ASSISTANT",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "550 W ADAMS STREET",
+        "CITY_NM": "CHICAGO",
+        "ST_CD": "IL",
+        "AD_ZP": "60661",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JOHN LINDSAY",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "550 W ADAMS",
+        "CITY_NM": "CHICAGO",
+        "ST_CD": "IL",
+        "AD_ZP": "60661",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "JOHN REALE",
+        "AGNT_TITL_TX": "OTHER",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "550 W ADAMS STREET",
+        "CITY_NM": "CHICAGO",
+        "ST_CD": "IL",
+        "AD_ZP": "60661",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MATTHEW F HILZINGER",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "550 W ADAMS STREET",
+        "CITY_NM": "CHICAGO",
+        "ST_CD": "IL",
+        "AD_ZP": "60661",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MATTHEW F HILZINGER",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "550 W ADAMS STREET",
+        "CITY_NM": "CHICAGO",
+        "ST_CD": "IL",
+        "AD_ZP": "60661",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MATTHEW P BYRNE",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "550 W ADAMS STREET",
+        "CITY_NM": "CHICAGO",
+        "ST_CD": "IL",
+        "AD_ZP": "60661",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MICHAEL MEAGHER",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "550 W ADAMS STREET",
+        "CITY_NM": "CHICAGO",
+        "ST_CD": "IL",
+        "AD_ZP": "60661",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MICHELE R GREEN",
+        "AGNT_TITL_TX": "SENIOR VIC",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "550 W ADAMS STREET",
+        "CITY_NM": "CHICAGO",
+        "ST_CD": "IL",
+        "AD_ZP": "60661",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "MICHELLE WARNER",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "550 W ADAMS STREET",
+        "CITY_NM": "CHICAGO",
+        "ST_CD": "IL",
+        "AD_ZP": "60661",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "PAUL R HANEY",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "550 W ADAMS STREET",
+        "CITY_NM": "CHICAGO",
+        "ST_CD": "IL",
+        "AD_ZP": "60661",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "PETER SAVU",
+        "AGNT_TITL_TX": "SENIOR VIC",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "550 W ADAMS STREET",
+        "CITY_NM": "CHICAGO",
+        "ST_CD": "IL",
+        "AD_ZP": "60661",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "SCOTT SCHAFER",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "550 W ADAMS",
+        "CITY_NM": "CHICAGO",
+        "ST_CD": "IL",
+        "AD_ZP": "60661",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "SEAN GILLEN",
+        "AGNT_TITL_TX": "TREASURER",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "550 W ADAMS",
+        "CITY_NM": "CHICAGO",
+        "ST_CD": "IL",
+        "AD_ZP": "60661",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "STEVE BJORKLUND",
+        "AGNT_TITL_TX": "VICE PRESI",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "550 W ADAMS STREET",
+        "CITY_NM": "CHICAGO",
+        "ST_CD": "IL",
+        "AD_ZP": "60661",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "cleaned_name"
+}

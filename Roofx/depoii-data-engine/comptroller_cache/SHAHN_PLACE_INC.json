@@ -1,0 +1,100 @@
+{
+  "detail": {
+    "taxpayerId": "17526195684",
+    "feiNumber": "752619568",
+    "name": "SHAHN PLACE, INC.",
+    "dbaName": null,
+    "mailingAddressStreet": "2200 E LEDBETTER DR",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75216",
+    "mailingAddressZip4": "7408",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "11/15/1995",
+    "sosFileNumber": "0137753101",
+    "registeredAgentName": "KAMEL D WESLEY",
+    "registeredOfficeAddressStreet": "2200 E LEDBETTER DR",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75216",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2024",
+    "officerInfo": [
+      {
+        "AGNT_NM": "KAMEL D. WESLEY",
+        "AGNT_TITL_TX": "BOARD MEMB",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "3520 RIO GRANDE CIRCLE",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75233",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "KAMEL WESLEY",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "3520 RIOGRANDE CIR",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75233",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "KAMEL WESLEY",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "3520 RIOGRANDE CIR",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75233",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "KAMEL WESLEY",
+        "AGNT_TITL_TX": "PROGRAM DI",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "3520 RIOGRANDE CIR",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75233",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "PAT WESLEY",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "3520 RIOGRANDE CIR",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75233",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "PAT WESLEY",
+        "AGNT_TITL_TX": "SECRETARY",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "3520 RIOGRANDE CIR",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75233",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "PAT WESLEY",
+        "AGNT_TITL_TX": "DIRECTOR",
+        "AGNT_ACTV_YR": "2024",
+        "AD_STR_POB_TX": "3520 RIOGRANDE CIR",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75233",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

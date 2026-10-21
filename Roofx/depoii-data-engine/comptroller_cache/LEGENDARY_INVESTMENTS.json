@@ -1,0 +1,29 @@
+{
+  "detail": {
+    "taxpayerId": "30009766426",
+    "feiNumber": null,
+    "name": "LEGENDARY INVESTMENTS INC",
+    "dbaName": null,
+    "mailingAddressStreet": "CHARLES WALKER 1301-J WEST HENDERSON ST",
+    "mailingAddressCity": "CLEBURNE",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "76031",
+    "mailingAddressZip4": "0000",
+    "rightToTransactTX": "FRANCHISE TAX INVOLUNTARILY ENDED",
+    "rightToTransactTXLink": "<a href='https://comptroller.texas.gov/taxes/franchise/certificate-letter-request.php'>Request tax clearance to reinstate entity</a>",
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "INACTIVE",
+    "effectiveSosRegistrationDate": "03/26/1986",
+    "sosFileNumber": "0079119700",
+    "registeredAgentName": "CHARLES WALKER",
+    "registeredOfficeAddressStreet": "1301-J WEST HENDERSON ST.",
+    "registeredOfficeAddressCity": "CLEBURNE",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "76031",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "",
+    "officerInfo": []
+  },
+  "confidence": "cleaned_name"
+}

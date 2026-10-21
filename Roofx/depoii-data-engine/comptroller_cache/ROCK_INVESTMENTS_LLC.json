@@ -1,0 +1,40 @@
+{
+  "detail": {
+    "taxpayerId": "17427786128",
+    "feiNumber": "742778612",
+    "name": "ROCK INVESTMENTS BRASSFIELD L L C",
+    "dbaName": null,
+    "mailingAddressStreet": "513 EARL GARRETT ST",
+    "mailingAddressCity": "KERRVILLE",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "78028",
+    "mailingAddressZip4": "4532",
+    "rightToTransactTX": "FRANCHISE TAX INVOLUNTARILY ENDED",
+    "rightToTransactTXLink": "<a href='https://comptroller.texas.gov/taxes/franchise/certificate-letter-request.php'>Request tax clearance to reinstate entity</a>",
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "INACTIVE",
+    "effectiveSosRegistrationDate": "03/08/1996",
+    "sosFileNumber": "0701694622",
+    "registeredAgentName": "HERBERT N LACKSHIN",
+    "registeredOfficeAddressStreet": "3555 TIMMONS LANE SUITE 1450",
+    "registeredOfficeAddressCity": "HOUSTON",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "77027",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "Not Available",
+    "officerInfo": [
+      {
+        "AGNT_NM": "STEPHEN A VINEBERG",
+        "AGNT_TITL_TX": "MANAGING M",
+        "AGNT_ACTV_YR": "Not Available",
+        "AD_STR_POB_TX": "1980 SHERBROOKE ST WEST NO 400",
+        "CITY_NM": "MONTREAL",
+        "ST_CD": "QC",
+        "AD_ZP": "H3H 1G8",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}

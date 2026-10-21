@@ -1,0 +1,50 @@
+{
+  "detail": {
+    "taxpayerId": "32051194713",
+    "feiNumber": null,
+    "name": "G G SQUARED, LLC",
+    "dbaName": null,
+    "mailingAddressStreet": "12500 SCHROEDER RD",
+    "mailingAddressCity": "DALLAS",
+    "mailingAddressState": "TX",
+    "mailingAddressZip": "75243",
+    "mailingAddressZip4": "1844",
+    "rightToTransactTX": "ACTIVE",
+    "rightToTransactTXLink": null,
+    "stateOfFormation": " TX",
+    "sosRegistrationStatus": "ACTIVE",
+    "effectiveSosRegistrationDate": "06/07/2013",
+    "sosFileNumber": "0801798319",
+    "registeredAgentName": "REGINA GRANLUND",
+    "registeredOfficeAddressStreet": "12500 SCHROEDER RD",
+    "registeredOfficeAddressCity": "DALLAS",
+    "registeredOfficeAddressState": "TX",
+    "registeredOfficeAddressZip": "75243",
+    "taxId": 13,
+    "lastUpdated": "2026-10-20T01:38:20.448Z",
+    "reportYear": "2026",
+    "officerInfo": [
+      {
+        "AGNT_NM": "GARY GRANLUND",
+        "AGNT_TITL_TX": "MEMBER",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "12500 SCHROEDER RD",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75243",
+        "SOURCE": "SOS"
+      },
+      {
+        "AGNT_NM": "REGINA GRANLUND",
+        "AGNT_TITL_TX": "MANAGING M",
+        "AGNT_ACTV_YR": "2026",
+        "AD_STR_POB_TX": "12500 SCHROEDER RD",
+        "CITY_NM": "DALLAS",
+        "ST_CD": "TX",
+        "AD_ZP": "75243",
+        "SOURCE": "SOS"
+      }
+    ]
+  },
+  "confidence": "partial_name"
+}
