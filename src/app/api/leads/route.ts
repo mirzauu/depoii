@@ -1,6 +1,8 @@
 import { recordActivity } from "@/lib/activity";
 import { requireUser } from "@/lib/auth";
 import { query, queryOne } from "@/lib/pg";
+import { getOrgTier } from "@/lib/territories";
+import { getClaimStatus, convertClaim } from "@/lib/claims";
 
 export const dynamic = "force-dynamic";
 
@@ -43,19 +45,7 @@ const PILOT_ORG_ID = "19b8a9bce1316429";
 export async function GET() {
   try {
     const user = await requireUser();
-    let rows = await query<LeadRow>(`select * from app.leads where org_id = $1 order by updated_at desc`, [user.orgId]);
-    // Super-admin (Depoii org) should still see the Dallas pilot book during demos.
-    if (user.platformRole === "superadmin" && user.orgId !== PILOT_ORG_ID) {
-      const pilot = await query<LeadRow>(`select * from app.leads where org_id = $1 order by updated_at desc`, [PILOT_ORG_ID]);
-      if (pilot.length && rows.length === 0) rows = pilot;
-      else if (pilot.length) {
-        const seen = new Set(rows.map((r) => `${r.parcel_id}|${r.storm_id}`));
-        for (const row of pilot) {
-          const key = `${row.parcel_id}|${row.storm_id}`;
-          if (!seen.has(key)) rows.push(row);
-        }
-      }
-    }
+    const rows = await query<LeadRow>(`select * from app.leads where org_id = $1 order by updated_at desc`, [user.orgId]);
     return Response.json(rows.map(mapLead));
   } catch {
     return Response.json({ error: "Sign in required." }, { status: 401 });
@@ -78,6 +68,27 @@ export async function POST(req: Request) {
       price?: number;
     };
     if (!body.parcelId) return Response.json({ error: "A lead needs a parcel id." }, { status: 400 });
+
+    if (user.platformRole !== "superadmin") {
+      const { canOrgAccessParcel } = await import("@/lib/territories");
+      const access = await canOrgAccessParcel(user.orgId, body.parcelId, false);
+      if (!access.allowed) {
+        return Response.json({ error: access.reason || "This property is outside your subscribed territories." }, { status: 403 });
+      }
+
+      // Enforce territory claim gate for pro/exclusive subscribers
+      const orgTier = await getOrgTier(user.orgId);
+      if (orgTier && orgTier.tier !== "shared_intelligence") {
+        const claimStatus = await getClaimStatus(body.parcelId);
+        if (!claimStatus.claimed || claimStatus.claimedByOrg !== user.orgId) {
+          return Response.json(
+            { error: "Claim this property first before adding it to your pipeline." },
+            { status: 403 }
+          );
+        }
+      }
+    }
+
     const stage = STAGES.includes(body.stage as (typeof STAGES)[number]) ? body.stage! : "New";
     const id = crypto.randomUUID();
     const now = new Date().toISOString();
@@ -98,6 +109,14 @@ export async function POST(req: Request) {
       targetId: row!.id,
       detail: { parcelId: row!.parcel_id, stage: row!.stage, address: row!.address },
     });
+
+    if (stage === "Won") {
+      const claimStatus = await getClaimStatus(body.parcelId);
+      if (claimStatus.claimed && claimStatus.claimedByOrg === user.orgId && claimStatus.claimId) {
+        await convertClaim(claimStatus.claimId, user.orgId, user.id);
+      }
+    }
+
     return Response.json({ ...mapLead(row!), promptOutcome: stage === "Inspected" });
   } catch {
     return Response.json({ error: "Sign in required." }, { status: 401 });

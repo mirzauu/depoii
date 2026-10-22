@@ -87,7 +87,7 @@ export default function PropertyPage() {
             <CardContent className="space-y-3 text-sm">
               <div className="flex items-center gap-3">
                 <span className="font-mono text-3xl font-semibold">{v.index}</span>
-                <span className="rounded-full border border-red-500/40 bg-red-500/10 px-2 py-0.5 text-xs text-red-300">{v.rating}</span>
+                <span className="rounded-full border border-[#DE7272]/40 bg-[#DE7272]/10 px-2 py-0.5 text-xs text-[#DE7272]">{v.rating}</span>
                 <ProvenanceBadge kind="depoii-modeled" className="ml-auto" />
               </div>
               <p>{v.fmBenchmark}</p>
@@ -182,9 +182,9 @@ function OutcomeForm({ o }: { o: NonNullable<ReturnType<typeof useDepoii>["oppor
             <Textarea value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Drone + IR survey, wet insulation at NE drains…" />
           </label>
           <div className="flex items-center gap-3">
-            <Button type="submit">{existing ? "Update outcome" : "Log outcome"}</Button>
+            <Button type="submit" variant="brand">{existing ? "Update outcome" : "Log outcome"}</Button>
             {saved && (
-              <span className="flex items-center gap-1 text-xs text-emerald-300">
+              <span className="flex items-center gap-1 text-xs text-[#B4E4D6]">
                 <CheckCircle2 className="size-4" /> Saved · <Link href="/outcomes" className="underline">view calibration</Link>
               </span>
             )}

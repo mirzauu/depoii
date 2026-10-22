@@ -43,10 +43,12 @@ export async function proxy(request: NextRequest) {
   }
 
   if (
+    isPublicAsset(pathname) ||
     pathname.startsWith("/login") ||
     pathname.startsWith("/welcome") ||
     pathname.startsWith("/api/auth") ||
-    pathname.startsWith("/api/pilot")
+    pathname.startsWith("/api/pilot") ||
+    pathname === "/api/engine/health"
   ) {
     return NextResponse.next();
   }
@@ -54,6 +56,11 @@ export async function proxy(request: NextRequest) {
   if (!session) {
     if (pathname.startsWith("/api/")) {
       return NextResponse.json({ error: "Sign in required." }, { status: 401 });
+    }
+    if (pathname === "/") {
+      const url = request.nextUrl.clone();
+      url.pathname = "/welcome";
+      return NextResponse.rewrite(url);
     }
     const url = request.nextUrl.clone();
     url.pathname = "/login";

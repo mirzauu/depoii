@@ -3,7 +3,7 @@
 export { RELEASED_PARCEL_IDS } from "./released-parcels";
 import { RELEASED_PARCEL_IDS } from "./released-parcels";
 
-const MAX_HAIL_MILES = 5;
+const MAX_HAIL_MILES = 15;
 
 type Row = Record<string, unknown>;
 

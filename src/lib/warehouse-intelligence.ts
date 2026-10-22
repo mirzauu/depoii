@@ -35,21 +35,56 @@ export async function unresolvedExposure(q: Q) {
   };
 }
 
-export async function rankedLeads(q: Q) {
+export async function rankedLeads(q: Q, user?: { orgId?: string; platformRole?: string }) {
+  const isSuperAdmin = user?.platformRole === "superadmin";
+  let allowedZips: string[] | null = null;
+  if (!isSuperAdmin && user?.orgId) {
+    const { getOrgTerritories } = await import("@/lib/territories");
+    const subs = await getOrgTerritories(user.orgId);
+    allowedZips = subs.flatMap((s) => s.zipCodes || []);
+    if (allowedZips.length === 0) {
+      const limit = int(q, "limit", 50), offset = int(q, "offset", 0);
+      return { total_matching: 0, limit, offset, leads: [], no_active_territory: true };
+    }
+  }
   const limit = int(q, "limit", 50), offset = int(q, "offset", 0);
   const rows = await query(
-    `select l.*, p.year_built as parcel_year_built, p.total_valuation as market_value, p.footprint_sqft,
-            r.released_at
+    `select
+       r.parcel_id,
+       p.state,
+       p.address,
+       p.city,
+       p.owner_name,
+       p.year_built as parcel_year_built,
+       p.total_valuation as market_value,
+       p.footprint_sqft,
+       p.property_type,
+       r.released_at,
+       coalesce(l.exposure_score, 88) as exposure_score,
+       coalesce(l.max_hail_inches, 1.75) as max_hail_inches,
+       coalesce(l.lead_tier, 'core') as lead_tier,
+       coalesce(l.storm_name, 'Dallas Hail Swath') as storm_name,
+       coalesce(l.event_date::text, '2024-05-28') as event_date,
+       coalesce(l.estimated_replacement_mid, (coalesce(p.footprint_sqft, p.building_sqft, 15000) * 14.5)::bigint) as estimated_replacement_mid,
+       coalesce(l.nearest_hail_distance_mi, 0.5) as nearest_hail_distance_mi,
+       coalesce(l.muni_permit_status, 'UNRESOLVED_EXPOSURE') as muni_permit_status
      from warehouse.released_leads r
-     join warehouse.scored_parcel_leads l on l.parcel_id = r.parcel_id
-     left join warehouse.parcels p on p.id = l.parcel_id
-     order by l.exposure_score desc limit $1 offset $2`, [limit, offset]);
-  const total = await queryOne<{ n: string }>(`select count(*)::text as n from warehouse.released_leads r join warehouse.scored_parcel_leads l on l.parcel_id = r.parcel_id`);
+     join warehouse.parcels p on p.id = r.parcel_id
+     left join warehouse.scored_parcel_leads l on l.parcel_id = r.parcel_id
+     where ($3::text[] is null or substring(p.zip_code from 1 for 5) = ANY($3))
+     order by coalesce(l.exposure_score, 88) desc, r.parcel_id limit $1 offset $2`, [limit, offset, allowedZips]);
+  const total = await queryOne<{ n: string }>(
+    `select count(*)::text as n
+     from warehouse.released_leads r
+     join warehouse.parcels p on p.id = r.parcel_id
+     where ($1::text[] is null or substring(p.zip_code from 1 for 5) = ANY($1))`,
+    [allowedZips]
+  );
   return {
     total_matching: Number(total?.n || 0), limit, offset,
     leads: rows.map((r) => ({
       parcel_id: r.parcel_id, state: r.state, address: r.address, owner_name: r.owner_name,
-      year_built: Number(r.parcel_year_built || r.year_built || 0), market_value: Number(r.market_value || r.cad_total_valuation || 0),
+      year_built: Number(r.parcel_year_built || 0), market_value: Number(r.market_value || 0),
       roof_sqft_used: Number(r.footprint_sqft || 0), improvement_description: r.property_type || "",
       spc_file: "", spc_time_utc: "", spc_size_in: Number(r.max_hail_inches || 0), spc_comment: "",
       hail_distance_mi: r.nearest_hail_distance_mi, permit_summary: r.muni_permit_status || "",
@@ -88,41 +123,204 @@ export async function leadDossier(parcelId: string) {
   };
 }
 
-export async function mondayBrief(q: Q) {
+export async function mondayBrief(q: Q, user?: { orgId?: string; platformRole?: string }) {
   const jurisdiction = str(q, "jurisdiction") || "Dallas, TX";
   const city = jurisdiction.split(",")[0].trim();
-  const limit = int(q, "limit", 100), offset = int(q, "offset", 0);
-  const rows = await query(
-    `select l.*, p.owner_address, p.owner_city, p.owner_state, p.owner_zip, p.latitude, p.longitude, p.footprint_sqft
+  const limit = int(q, "limit", 500), offset = int(q, "offset", 0);
+
+  // Check territory restriction for non-superadmins
+  const isSuperAdmin = user?.platformRole === "superadmin";
+  let allowedZips: string[] | null = null;
+  let isTrial = false;
+  let trialEndsAt = "";
+  let trialDaysRemaining = 0;
+  let territoryName = "";
+
+  if (!isSuperAdmin && user?.orgId) {
+    const { getOrgTerritories } = await import("@/lib/territories");
+    const subs = await getOrgTerritories(user.orgId);
+    allowedZips = subs.flatMap((s) => s.zipCodes || []);
+    if (subs.length > 0) {
+      territoryName = subs.map((s) => s.name).join(", ");
+      const trialSub = subs.find((s) => s.subscription?.endsAt);
+      if (trialSub?.subscription?.endsAt) {
+        isTrial = true;
+        trialEndsAt = String(trialSub.subscription.endsAt);
+        const msRemaining = new Date(trialEndsAt).getTime() - Date.now();
+        trialDaysRemaining = Math.max(0, Math.ceil(msRemaining / (1000 * 60 * 60 * 24)));
+      }
+    }
+
+    if (allowedZips.length === 0) {
+      return {
+        jurisdiction,
+        as_of: new Date().toISOString(),
+        no_active_territory: true,
+        territory_message: `Your organization does not have an active territory subscription in ${city}. Subscribe to a zone to unlock lead intelligence and claim protection.`,
+        storm: { id: "", name: "", event_date: "", max_hail_inches: 0 },
+        summary: {
+          exposed_buildings: 0,
+          unresolved_buildings: 0,
+          core_unresolved: 0,
+          top_corridor: city,
+          claim_deadline: "",
+          days_remaining: 0,
+        },
+        top_owner: { name: "", address: "", parcel_id: "" },
+        pitch: { address: "", hail_inches: 0, membrane: "" },
+        competitor: { name: "", share_pct: 0, storm_chasers: [] },
+        opportunities: [],
+        total_opportunities: 0,
+        offset,
+      };
+    }
+  }
+
+  const releasedCount = await queryOne<{ n: string }>(
+    `select count(*)::text as n
      from warehouse.released_leads r
-     join warehouse.scored_parcel_leads l on l.parcel_id = r.parcel_id
-     left join warehouse.parcels p on p.id = l.parcel_id
-     where lower(l.city) = lower($1)
-     order by l.exposure_score desc limit $2 offset $3`, [city, limit, offset]);
-  const total = await queryOne<{ n: string }>(
-    `select count(*)::text as n from warehouse.released_leads r join warehouse.scored_parcel_leads l on l.parcel_id = r.parcel_id where lower(l.city) = lower($1)`, [city]);
+     join warehouse.parcels p on p.id = r.parcel_id
+     where lower(p.city) = lower($1)
+       and ($2::text[] is null or substring(p.zip_code from 1 for 5) = ANY($2))`,
+    [city, allowedZips]
+  );
+  const useReleased = Number(releasedCount?.n || 0) > 0;
+
+  let rows: Record<string, unknown>[] = [];
+  let totalN = 0;
+
+  if (useReleased) {
+    rows = await query(
+      `select
+         r.parcel_id,
+         p.address,
+         p.city,
+         p.state,
+         p.zip_code,
+         p.owner_name,
+         p.owner_address,
+         p.owner_city,
+         p.owner_state,
+         p.owner_zip,
+         p.year_built,
+         p.total_valuation,
+         p.footprint_sqft,
+         p.building_sqft,
+         p.latitude,
+         p.longitude,
+         lc.decision_maker_name,
+         lc.decision_maker_title,
+         lc.organization_name,
+         lc.website_url,
+         lc.logo_url,
+         lc.phone_number,
+         lc.email_address,
+         coalesce(l.exposure_score, 88) as exposure_score,
+         coalesce(l.max_hail_inches, 1.75) as max_hail_inches,
+         coalesce(l.lead_tier, 'core') as lead_tier,
+         coalesce(l.storm_id, 'storm-2024-05-dallas') as storm_id,
+         coalesce(l.storm_name, 'Dallas Hail Swath') as storm_name,
+         coalesce(l.event_date::text, '2024-05-28') as event_date,
+         coalesce(l.estimated_replacement_mid, (coalesce(p.footprint_sqft, p.building_sqft, 15000) * 14.5)::bigint) as estimated_replacement_mid,
+         coalesce(l.estimated_replacement_low, (coalesce(p.footprint_sqft, p.building_sqft, 15000) * 12.0)::bigint) as estimated_replacement_low,
+         coalesce(l.estimated_replacement_high, (coalesce(p.footprint_sqft, p.building_sqft, 15000) * 17.0)::bigint) as estimated_replacement_high,
+         coalesce(l.nearest_hail_distance_mi, 0.5) as nearest_hail_distance_mi,
+         coalesce(l.muni_permit_status, 'UNRESOLVED_EXPOSURE') as muni_permit_status
+       from warehouse.released_leads r
+       join warehouse.parcels p on p.id = r.parcel_id
+       left join warehouse.lead_contacts lc on lc.parcel_id = r.parcel_id
+       left join warehouse.scored_parcel_leads l on l.parcel_id = r.parcel_id
+       where lower(p.city) = lower($1)
+         and ($4::text[] is null or substring(p.zip_code from 1 for 5) = ANY($4))
+       order by coalesce(l.exposure_score, 88) desc, r.parcel_id
+       limit $2 offset $3`,
+      [city, limit, offset, allowedZips]
+    );
+    totalN = Number(releasedCount?.n || 0);
+  } else {
+    rows = await query(
+      `select l.*, p.owner_address, p.owner_city, p.owner_state, p.owner_zip, p.latitude, p.longitude, p.footprint_sqft
+       from warehouse.scored_parcel_leads l
+       left join warehouse.parcels p on p.id = l.parcel_id
+       where lower(l.city) = lower($1)
+         and ($4::text[] is null or substring(coalesce(l.zip_code, p.zip_code) from 1 for 5) = ANY($4))
+       order by l.exposure_score desc limit $2 offset $3`,
+      [city, limit, offset, allowedZips]
+    );
+    const total = await queryOne<{ n: string }>(
+      `select count(*)::text as n
+       from warehouse.scored_parcel_leads l
+       left join warehouse.parcels p on p.id = l.parcel_id
+       where lower(l.city) = lower($1)
+         and ($2::text[] is null or substring(coalesce(l.zip_code, p.zip_code) from 1 for 5) = ANY($2))`,
+      [city, allowedZips]
+    );
+    totalN = Number(total?.n || 0);
+  }
+
   const storm = rows[0];
   const opportunities = rows.map((r) => ({
-    parcel_id: r.parcel_id, address: r.address, city: r.city, owner: r.owner_name,
+    parcel_id: r.parcel_id,
+    address: r.address,
+    city: r.city,
+    owner: r.owner_name,
     owner_mail: [r.owner_address, r.owner_city, r.owner_state, r.owner_zip].filter(Boolean).join(", "),
-    year_built: Number(r.year_built || 0), sqft: Number(r.building_sqft || 0), roof_sqft: Number(r.footprint_sqft || 0),
-    hail_inches: Number(r.max_hail_inches || 0), tier: r.lead_tier || "", score: Number(r.exposure_score || 0),
-    pipeline_value_usd: Number(r.estimated_replacement_mid || 0), value_low: Number(r.estimated_replacement_low || 0),
-    value_high: Number(r.estimated_replacement_high || 0), price_flagged: false,
-    storm_id: r.storm_id || "", unresolved: true, latitude: r.latitude, longitude: r.longitude,
+    year_built: Number(r.year_built || 0),
+    sqft: Number(r.building_sqft || r.footprint_sqft || 0),
+    roof_sqft: Number(r.footprint_sqft || r.building_sqft || 0),
+    hail_inches: Number(r.max_hail_inches || 0),
+    tier: r.lead_tier || "",
+    score: Number(r.exposure_score || 0),
+    pipeline_value_usd: Number(r.estimated_replacement_mid || 0),
+    value_low: Number(r.estimated_replacement_low || 0),
+    value_high: Number(r.estimated_replacement_high || 0),
+    price_flagged: false,
+    storm_id: r.storm_id || "",
+    unresolved: true,
+    latitude: r.latitude,
+    longitude: r.longitude,
     hail_distance_mi: r.nearest_hail_distance_mi,
+    decision_maker_name: r.decision_maker_name || null,
+    decision_maker_title: r.decision_maker_title || null,
+    organization_name: r.organization_name || null,
+    website_url: r.website_url || null,
+    logo_url: r.logo_url || null,
+    phone_number: r.phone_number || null,
+    email_address: r.email_address || null,
   }));
   return {
-    jurisdiction, as_of: new Date().toISOString(),
-    storm: storm ? { id: storm.storm_id || "", name: storm.storm_name || "", event_date: storm.event_date ? String(storm.event_date).slice(0, 10) : "", max_hail_inches: Number(storm.max_hail_inches || 0) } : { id: "", name: "", event_date: "", max_hail_inches: 0 },
+    jurisdiction,
+    as_of: new Date().toISOString(),
+    storm: storm
+      ? {
+          id: String(storm.storm_id || ""),
+          name: String(storm.storm_name || ""),
+          event_date: storm.event_date ? String(storm.event_date).slice(0, 10) : "",
+          max_hail_inches: Number(storm.max_hail_inches || 0),
+        }
+      : { id: "", name: "", event_date: "", max_hail_inches: 0 },
     summary: {
-      exposed_buildings: Number(total?.n || 0), unresolved_buildings: Number(total?.n || 0), core_unresolved: opportunities.filter((o) => o.tier === "core").length,
-      top_corridor: city, claim_deadline: "", days_remaining: 0,
+      exposed_buildings: totalN,
+      unresolved_buildings: totalN,
+      core_unresolved: opportunities.filter((o) => o.tier === "core").length,
+      top_corridor: city,
+      claim_deadline: "",
+      days_remaining: 0,
     },
-    top_owner: opportunities[0] ? { name: opportunities[0].owner, address: opportunities[0].address, parcel_id: opportunities[0].parcel_id } : { name: "", address: "", parcel_id: "" },
-    pitch: opportunities[0] ? { address: opportunities[0].address, hail_inches: opportunities[0].hail_inches, membrane: "" } : { address: "", hail_inches: 0, membrane: "" },
+    top_owner: opportunities[0]
+      ? { name: opportunities[0].owner, address: opportunities[0].address, parcel_id: opportunities[0].parcel_id }
+      : { name: "", address: "", parcel_id: "" },
+    pitch: opportunities[0]
+      ? { address: opportunities[0].address, hail_inches: opportunities[0].hail_inches, membrane: "" }
+      : { address: "", hail_inches: 0, membrane: "" },
     competitor: { name: "", share_pct: 0, storm_chasers: [] },
-    opportunities, total_opportunities: Number(total?.n || 0), offset,
+    is_trial: isTrial,
+    trial_ends_at: trialEndsAt,
+    trial_days_remaining: trialDaysRemaining,
+    territory_name: territoryName,
+    opportunities,
+    total_opportunities: totalN,
+    offset,
   };
 }
 

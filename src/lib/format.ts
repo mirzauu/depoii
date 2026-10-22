@@ -20,5 +20,10 @@ export const longDate = (iso: string) => {
   });
 };
 
-export const shortDate = (iso: string) =>
-  new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
+export const shortDate = (iso: string) => {
+  if (!iso) return "—";
+  const dateStr = iso.length >= 10 ? iso.slice(0, 10) : iso;
+  const d = new Date(`${dateStr}T12:00:00Z`);
+  if (isNaN(d.getTime())) return iso;
+  return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
+};

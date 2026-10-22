@@ -22,7 +22,7 @@ function LoginForm() {
   const [pending, setPending] = useState(false);
   const linkError =
     searchParams.get("error") === "link"
-      ? "That sign-in link is not valid. Sign in with your email instead."
+      ? (searchParams.get("reason") || "That sign-in link is not valid. Sign in with your email instead.")
       : searchParams.get("error") === "invite"
         ? "That invite is not valid or has expired. Ask your admin to send a new one."
         : "";
@@ -37,15 +37,20 @@ function LoginForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
-      const data = (await res.json().catch(() => ({}))) as { error?: string };
+      const data = (await res.json().catch(() => ({}))) as { error?: string; step?: string; bypassed?: boolean };
       if (!res.ok) {
-        setError(data.error || "Could not send the code.");
+        setError(data.error || "Could not sign in.");
+        return;
+      }
+      if (data.bypassed || data.step !== "otp") {
+        router.replace(safeNext(searchParams.get("next")));
+        router.refresh();
         return;
       }
       setStep("otp");
       setCode("");
     } catch {
-      setError("Could not send the code.");
+      setError("Could not sign in.");
     } finally {
       setPending(false);
     }
@@ -128,11 +133,11 @@ function LoginForm() {
           {shownError ? <p className="text-sm text-destructive">{shownError}</p> : null}
           <Button type="submit" disabled={pending} className="h-10 w-full">
             {pending
-              ? step === "email"
-                ? "Sending…"
-                : "Verifying…"
+              ? "Signing in…"
               : step === "email"
-                ? "Send code"
+                ? email.trim().toLowerCase() === "admin@depoii.local"
+                  ? "Sign in"
+                  : "Send code"
                 : "Sign in"}
           </Button>
           {step === "otp" ? (

@@ -7,14 +7,17 @@ export async function GET(req: Request) {
   const result = await redeemLoginLink(url.searchParams.get("token") || "");
   const host = req.headers.get("x-forwarded-host") || req.headers.get("host") || url.host;
   const proto = req.headers.get("x-forwarded-proto") || url.protocol.replace(":", "") || "http";
-  const dest = new URL("error" in result ? "/login" : "/", `${proto}://${host}`);
-  if ("error" in result) dest.searchParams.set("error", "link");
+
+  // Redirect to home URL ("/") instead of login/signup page
+  const dest = new URL("/", `${proto}://${host}`);
   const headers = new Headers({ Location: dest.toString() });
+
   if (!("error" in result)) {
     headers.append(
       "Set-Cookie",
       `${cookieName()}=${sessionToken(result.user)}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${cookieMaxAge()}`,
     );
   }
+
   return new Response(null, { status: 303, headers });
 }

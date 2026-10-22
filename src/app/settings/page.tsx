@@ -2,7 +2,7 @@
 
 import { PageHeader } from "@/components/app-shell";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { useMe } from "@/components/use-me";
+import { useMe } from "@/hooks/use-me";
 
 function roleLabel(role: string, platformRole: string) {
   if (platformRole === "superadmin") return "Super admin";

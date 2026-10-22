@@ -12,6 +12,8 @@ node_modules/
 
 # testing
 /coverage
+.tmp-vitest-pg*
+.test-db.json
 
 # next.js
 .next/
@@ -30,7 +32,10 @@ cookie.txt
 tmp_*
 =
 
-# archives / local dbs (do not push)
+# archives / scratch / local dbs (do not push)
+archives/
+scratch/
+landing-sites/
 *.zip
 *.tar.gz
 *.db

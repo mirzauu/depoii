@@ -319,6 +319,17 @@ export interface AgingRoof {
   roofSystem: string;
   laterPermits: number;
   priority: number;
+  ownerName?: string;
+  ownerMail?: string;
+  decisionMaker?: string;
+  decisionMakerTitle?: string;
+  phone?: string;
+  email?: string;
+  websiteUrl?: string;
+  logoUrl?: string;
+  buildingSqft?: number;
+  permitCount?: number;
+  permitStatus?: "permitted" | "unpermitted";
 }
 
 export interface AgingPage {
@@ -335,7 +346,7 @@ export function mapAging(body: unknown): AgingPage {
   const b = (body ?? {}) as Row;
   return {
     total: num(b, ["total_aging_roofs", "total"]),
-    pipeline: 0,
+    pipeline: num(b, ["total_replacement_pipeline_usd", "totalPipeline", "pipeline"]),
     critical: num(b, ["critical_expired_count"]),
     endOfWarranty: num(b, ["end_of_warranty_count"]),
     approaching: num(b, ["approaching_term_count"]),
@@ -356,6 +367,17 @@ export function mapAging(body: unknown): AgingPage {
       roofSystem: str(row, ["roof_system", "probable_roof_system"]),
       laterPermits: num(row, ["subsequent_permits_count"]),
       priority: num(row, ["replacement_priority_score"]),
+      ownerName: str(row, ["owner_name", "owner"]),
+      ownerMail: str(row, ["owner_mail"]),
+      decisionMaker: str(row, ["decision_maker_name", "decision_maker"]),
+      decisionMakerTitle: str(row, ["decision_maker_title"]),
+      phone: str(row, ["phone_number", "phone"]),
+      email: str(row, ["email_address", "email"]),
+      websiteUrl: str(row, ["website_url", "website"]),
+      logoUrl: str(row, ["logo_url"]),
+      buildingSqft: num(row, ["building_sqft"]),
+      permitCount: num(row, ["permit_count", "subsequent_permits_count"]),
+      permitStatus: (str(row, ["permit_status"]) || (num(row, ["permit_count", "subsequent_permits_count"]) > 0 ? "permitted" : "unpermitted")) as "permitted" | "unpermitted",
     })).filter((r) => r.id),
   };
 }
@@ -374,13 +396,22 @@ export interface OverdueParcel {
   ownerMail: string;
   propertyType: string;
   reroofValue: number;
+  reroofValueFormatted?: string;
   permitCount: number;
   angle: string;
   source: string;
+  decisionMaker?: string;
+  decisionMakerTitle?: string;
+  phone?: string;
+  email?: string;
+  websiteUrl?: string;
+  logoUrl?: string;
 }
 
 export interface DarkMarketPage {
   total: number;
+  pipelineUSD: number;
+  pipelineFormatted: string;
   parcels: OverdueParcel[];
 }
 
@@ -388,6 +419,8 @@ export function mapDarkMarket(body: unknown): DarkMarketPage {
   const b = (body ?? {}) as Row;
   return {
     total: num(b, ["total"]),
+    pipelineUSD: num(b, ["total_pipeline", "totalPipeline"]),
+    pipelineFormatted: str(b, ["total_pipeline_formatted", "totalPipelineFormatted"], "$0"),
     parcels: rows(body, ["overdueParcels", "items"]).map((row) => ({
       parcelId: str(row, ["parcelId", "parcel_id"]),
       address: str(row, ["address"]),
@@ -401,10 +434,17 @@ export function mapDarkMarket(body: unknown): DarkMarketPage {
       owner: str(row, ["ownerName", "owner_name"]),
       ownerMail: str(row, ["ownerMail", "owner_mail"]),
       propertyType: str(row, ["propertyType", "land_use"]),
-      reroofValue: 0,
+      reroofValue: num(row, ["reroofValue", "reroof_value", "estimated_replacement_cost_usd"]),
+      reroofValueFormatted: str(row, ["reroofValueFormatted", "reroof_value_formatted"]),
       permitCount: num(row, ["permitCount", "permit_count"]),
       angle: str(row, ["outreachAngle"]),
-      source: str(row, ["dataSource"]),
+      source: str(row, ["dataSource", "data_source"]),
+      decisionMaker: str(row, ["decisionMaker", "decision_maker_name"]) || undefined,
+      decisionMakerTitle: str(row, ["decisionMakerTitle", "decision_maker_title"]) || undefined,
+      phone: str(row, ["phone", "phone_number"]) || undefined,
+      email: str(row, ["email", "email_address"]) || undefined,
+      websiteUrl: str(row, ["websiteUrl", "website_url"]) || undefined,
+      logoUrl: str(row, ["logoUrl", "logo_url"]) || undefined,
     })).filter((p) => p.parcelId),
   };
 }
@@ -606,6 +646,39 @@ export function mapBrowseParcelDetail(body: unknown): BrowseParcel {
   };
 }
 
+export interface ParcelContact {
+  decisionMakerName: string;
+  decisionMakerTitle: string;
+  organizationName: string;
+  phoneNumber: string;
+  phoneType: string;
+  emailAddress: string;
+  emailStatus: string;
+  websiteUrl: string;
+  logoUrl?: string;
+  tenantOrFacilityName: string;
+  confidence: string;
+  sourceSystem: string;
+  sourceUrl: string;
+}
+
+export interface ParcelOfficer {
+  name: string;
+  title: string;
+  role: string;
+  address: string;
+}
+
+export interface ParcelEntity {
+  legalName: string;
+  taxpayerId: string;
+  sosFileNumber: string;
+  sosStatus: string;
+  registeredAgentName: string;
+  registeredAgentAddress: string;
+  mailingAddress: string;
+}
+
 export interface ParcelDossier extends EngineParcel {
   account: string;
   jurisdiction: string;
@@ -613,11 +686,25 @@ export interface ParcelDossier extends EngineParcel {
   landSqft: number;
   improvementValuation: number;
   ownerAddress: string;
+  contact?: ParcelContact | null;
+  officers?: ParcelOfficer[];
+  entity?: ParcelEntity | null;
+  yearBuiltSource?: string;
+  areaSource?: string;
+  dataProvenance?: string;
+  provenanceDate?: string;
+  retrievedAt?: string;
+  sourceRecordId?: string;
+  improvementSections?: string;
+  footprintSqft?: number;
+  stories?: number;
   permits: { id: string; permitNumber: string; issued: string; valuation: string; status: string; roofSystem: string; contractor: string; scope: string }[];
 }
 
 export function mapParcelDossier(body: unknown): ParcelDossier {
   const row = (body ?? {}) as Row;
+  const rawContact = row.contact as Row | undefined;
+  const rawEntity = row.entity as Row | undefined;
   return {
     ...mapParcel(row),
     account: str(row, ["accountNumber"]),
@@ -626,6 +713,45 @@ export function mapParcelDossier(body: unknown): ParcelDossier {
     landSqft: num(row, ["landSqft", "land_sqft"]),
     improvementValuation: num(row, ["improvementValuation"]),
     ownerAddress: str(row, ["ownerAddress"]),
+    yearBuiltSource: str(row, ["yearBuiltSource", "year_built_source"]),
+    areaSource: str(row, ["areaSource", "area_source"]),
+    dataProvenance: str(row, ["dataProvenance", "data_provenance"]),
+    provenanceDate: str(row, ["provenanceDate", "provenance_date"]),
+    retrievedAt: str(row, ["retrievedAt", "retrieved_at"]),
+    sourceRecordId: str(row, ["sourceRecordId", "source_record_id", "accountNumber"]),
+    improvementSections: str(row, ["improvementSections", "improvement_sections"]),
+    footprintSqft: num(row, ["footprintSqft", "footprint_sqft"]),
+    stories: num(row, ["stories"]),
+    contact: rawContact ? {
+      decisionMakerName: str(rawContact, ["decisionMakerName"]),
+      decisionMakerTitle: str(rawContact, ["decisionMakerTitle"]),
+      organizationName: str(rawContact, ["organizationName"]),
+      phoneNumber: str(rawContact, ["phoneNumber"]),
+      phoneType: str(rawContact, ["phoneType"]),
+      emailAddress: str(rawContact, ["emailAddress"]),
+      emailStatus: str(rawContact, ["emailStatus"]),
+      websiteUrl: str(rawContact, ["websiteUrl"]),
+      logoUrl: str(rawContact, ["logoUrl", "logo_url"]),
+      tenantOrFacilityName: str(rawContact, ["tenantOrFacilityName"]),
+      confidence: str(rawContact, ["confidence"]),
+      sourceSystem: str(rawContact, ["sourceSystem"]),
+      sourceUrl: str(rawContact, ["sourceUrl"]),
+    } : null,
+    officers: rows(row.officers, []).map((o) => ({
+      name: str(o, ["name"]),
+      title: str(o, ["title"]),
+      role: str(o, ["role"]),
+      address: str(o, ["address"]),
+    })),
+    entity: rawEntity ? {
+      legalName: str(rawEntity, ["legalName"]),
+      taxpayerId: str(rawEntity, ["taxpayerId"]),
+      sosFileNumber: str(rawEntity, ["sosFileNumber"]),
+      sosStatus: str(rawEntity, ["sosStatus"]),
+      registeredAgentName: str(rawEntity, ["registeredAgentName"]),
+      registeredAgentAddress: str(rawEntity, ["registeredAgentAddress"]),
+      mailingAddress: str(rawEntity, ["mailingAddress"]),
+    } : null,
     permits: rows(row.permits, []).map((p) => ({
       id: str(p, ["id"]),
       permitNumber: str(p, ["permitNumber", "permit_number", "id"]),
@@ -1010,7 +1136,42 @@ export interface MondayBrief {
   chasers: string[];
   totalOpportunities: number;
   offset: number;
-  opportunities: { parcelId: string; address: string; city: string; owner: string; ownerMail: string; yearBuilt: number; sqft: number; hail: number; tier: string; score: number; value: number; valueLow: number; valueHigh: number; roofSqft: number; priceFlagged: boolean; stormId: string; unresolved: boolean; permitStatus?: string; recentActivity?: string; lat: number | null; lng: number | null }[];
+  noActiveTerritory?: boolean;
+  territoryMessage?: string;
+  isTrial?: boolean;
+  trialEndsAt?: string;
+  trialDaysRemaining?: number;
+  territoryName?: string;
+  opportunities: {
+    parcelId: string;
+    address: string;
+    city: string;
+    owner: string;
+    ownerMail: string;
+    yearBuilt: number;
+    sqft: number;
+    hail: number;
+    tier: string;
+    score: number;
+    value: number;
+    valueLow: number;
+    valueHigh: number;
+    roofSqft: number;
+    priceFlagged: boolean;
+    stormId: string;
+    unresolved: boolean;
+    permitStatus?: string;
+    recentActivity?: string;
+    lat: number | null;
+    lng: number | null;
+    decisionMaker?: string;
+    decisionTitle?: string;
+    organizationName?: string;
+    websiteUrl?: string;
+    logoUrl?: string;
+    phone?: string;
+    email?: string;
+  }[];
 }
 
 export function mapBrief(body: unknown): MondayBrief {
@@ -1023,6 +1184,12 @@ export function mapBrief(body: unknown): MondayBrief {
   return {
     jurisdiction: str(row, ["jurisdiction"]),
     asOf: str(row, ["as_of"]),
+    noActiveTerritory: Boolean(row.no_active_territory),
+    territoryMessage: str(row, ["territory_message"]),
+    isTrial: Boolean(row.is_trial),
+    trialEndsAt: str(row, ["trial_ends_at"]),
+    trialDaysRemaining: num(row, ["trial_days_remaining"]),
+    territoryName: str(row, ["territory_name"]),
     stormName: str(storm, ["name"]),
     stormDate: str(storm, ["event_date"]).slice(0, 10),
     maxHail: num(storm, ["max_hail_inches"]),
@@ -1070,6 +1237,13 @@ export function mapBrief(body: unknown): MondayBrief {
         recentActivity: str(o, ["recent_activity"]),
         lat: coord(o, ["latitude", "lat"]),
         lng: coord(o, ["longitude", "lng", "lon"]),
+        decisionMaker: str(o, ["decision_maker_name", "decisionMaker"]),
+        decisionTitle: str(o, ["decision_maker_title", "decisionTitle"]),
+        organizationName: str(o, ["organization_name", "organizationName"]),
+        websiteUrl: str(o, ["website_url", "websiteUrl"]),
+        logoUrl: str(o, ["logo_url", "logoUrl"]),
+        phone: str(o, ["phone_number", "phone"]),
+        email: str(o, ["email_address", "email"]),
       };
     }),
   };

@@ -1,8 +1,0 @@
-{
-  "name": "depoii-netlify-landing",
-  "private": true,
-  "scripts": {
-    "build": "next build",
-    "dev": "next dev -p 4418"
-  }
-}

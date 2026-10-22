@@ -32,12 +32,22 @@ export async function setup() {
 
   const client = new Client({ connectionString: url });
   await client.connect();
-  let sql = fs.readFileSync(path.join(process.cwd(), "supabase/migrations/20261020000000_depoii_fullstack.sql"), "utf8");
-  sql = sql
-    .replace("create extension if not exists postgis;", "-- postgis stripped for local test")
-    .replaceAll("geometry(Point, 4326)", "text")
-    .replaceAll("geometry(MultiPolygon, 4326)", "text");
-  await client.query(sql);
+
+  const migrationsDir = path.join(process.cwd(), "supabase/migrations");
+  const migrationFiles = fs
+    .readdirSync(migrationsDir)
+    .filter((f) => f.endsWith(".sql"))
+    .sort();
+
+  for (const file of migrationFiles) {
+    let sql = fs.readFileSync(path.join(migrationsDir, file), "utf8");
+    sql = sql
+      .replace("create extension if not exists postgis;", "-- postgis stripped for local test")
+      .replaceAll("geometry(Point, 4326)", "text")
+      .replaceAll("geometry(MultiPolygon, 4326)", "text");
+    await client.query(sql);
+  }
+
   await client.end();
 
   return async () => {

@@ -24,18 +24,20 @@ const READ_PATHS = [
 
 const WRITE_PATHS = [/^verifications\/(trigger-city|verify\/[^/]+)$/];
 
-async function sessionOrg() {
+type AuthUser = { id: string; orgId: string; platformRole?: string };
+
+async function sessionOrg(): Promise<{ orgId: string; userId: string; platformRole: string }> {
   const { requireUser } = await import("@/lib/auth");
   try {
     const user = await requireUser();
-    return { orgId: user.orgId, userId: user.id };
+    return { orgId: user.orgId, userId: user.id, platformRole: user.platformRole || "" };
   } catch {
-    return { orgId: "", userId: "" };
+    return { orgId: "", userId: "", platformRole: "" };
   }
 }
 
 /** Local (Supabase) handlers. Returns undefined to fall through to proxy. */
-async function localGet(path: string[], q: URLSearchParams): Promise<unknown | undefined> {
+async function localGet(path: string[], q: URLSearchParams, user?: AuthUser | null): Promise<unknown | undefined> {
   const joined = path.join("/");
   switch (joined) {
     case "health":
@@ -44,7 +46,10 @@ async function localGet(path: string[], q: URLSearchParams): Promise<unknown | u
     case "permits/stats": return wh.permitsStats();
     case "permits/cities": return wh.permitsCities();
     case "permits/active-jobsites": return wh.activeJobsites(q);
-    case "permits/roof-aging-alarm": return wh.roofAging(q);
+    case "permits/roof-aging-alarm": {
+      if (!q.get("jurisdiction")) q.set("jurisdiction", "Dallas, TX");
+      return wh.roofAging(q);
+    }
     case "permits/multiphase-projects": return wh.multiphase(q);
     case "contractors/leaderboard":
     case "contractors/directory": return wh.contractors(q);
@@ -60,22 +65,45 @@ async function localGet(path: string[], q: URLSearchParams): Promise<unknown | u
       return wh.parcelsSearch(q);
     }
     case "parcels/browse": return wh.parcelsBrowse(q);
-    case "parcels/dark-market/overdue": return wh.darkMarket(q);
+    case "parcels/dark-market/overdue": {
+      if (!q.get("jurisdiction")) q.set("jurisdiction", "Dallas, TX");
+      return wh.darkMarket(q);
+    }
     case "storms/active-swaths": return intel.activeSwaths();
     case "storms/live-alerts": return intel.liveAlerts(q);
     case "storms/hail-events": return intel.hailEvents(q);
     case "intelligence/unresolved-exposure": return intel.unresolvedExposure(q);
-    case "intelligence/leads/ranked": return intel.rankedLeads(q);
-    case "brief": return intel.mondayBrief(q);
+    case "intelligence/leads/ranked": return intel.rankedLeads(q, user ?? undefined);
+    case "brief": return intel.mondayBrief(q, user ?? undefined);
     case "verifications/stats": return intel.verificationStats();
   }
   if (path[0] === "permits" && path[1] === "parcels" && path[2]) return (await wh.permitsParcel(decodeURIComponent(path[2]))) ?? notFound();
   if (path[0] === "parcels" && path[1] === "browse" && path[2]) return (await wh.parcelBrowseDetail(decodeURIComponent(path[2]))) ?? notFound();
-  if (path[0] === "parcels" && path[1]) return (await wh.permitsParcel(decodeURIComponent(path[1]))) ?? notFound();
-  if (path[0] === "intelligence" && path[1] === "leads" && path[3] === "dossier") return (await intel.leadDossier(decodeURIComponent(path[2]))) ?? notFound();
+  if (path[0] === "parcels" && path[1]) {
+    const parcelId = decodeURIComponent(path[1]);
+    if (user && user.platformRole !== "superadmin") {
+      const { canOrgAccessParcel } = await import("@/lib/territories");
+      const access = await canOrgAccessParcel(user.orgId, parcelId, false);
+      if (!access.allowed) {
+        return { __status: 403, error: access.reason || "This property is outside your subscribed territories." };
+      }
+    }
+    return (await wh.permitsParcel(parcelId)) ?? notFound();
+  }
+  if (path[0] === "intelligence" && path[1] === "leads" && path[3] === "dossier") {
+    const parcelId = decodeURIComponent(path[2]);
+    if (user && user.platformRole !== "superadmin") {
+      const { canOrgAccessParcel } = await import("@/lib/territories");
+      const access = await canOrgAccessParcel(user.orgId, parcelId, false);
+      if (!access.allowed) {
+        return { __status: 403, error: access.reason || "This property is outside your subscribed territories." };
+      }
+    }
+    return (await intel.leadDossier(parcelId)) ?? notFound();
+  }
   if (path[0] === "verifications" && path[1] === "evidence-card" && path[2]) return (await intel.evidenceCard(decodeURIComponent(path[2]))) ?? notFound();
   if (path[0] === "verifications" && (path[1] === "jobs" || path[1] === "stream") && path[2]) {
-    const { orgId } = await sessionOrg();
+    const orgId = user?.orgId || (await sessionOrg()).orgId;
     const job = await getJob(decodeURIComponent(path[2]), orgId);
     if (!job) return notFound();
     return { job_id: job.id, status: job.status, progress: job.progress, step: job.step, message: job.message, result: job.result, error: job.error, type: job.type };
@@ -170,9 +198,21 @@ export async function GET(req: Request, { params }: { params: Promise<{ path: st
   if (!READ_PATHS.some((re) => re.test(path.join("/")))) {
     return Response.json({ error: `The data engine route ${path.join("/")} is not available from this app.` }, { status: 404 });
   }
+
+  let user: AuthUser | null = null;
+  const isHealth = path.length === 1 && path[0] === "health";
+  if (!isHealth) {
+    try {
+      const { requireUser } = await import("@/lib/auth");
+      user = await requireUser();
+    } catch {
+      return Response.json({ error: "Sign in required." }, { status: 401 });
+    }
+  }
+
   if (engineBackend() === "supabase") {
     try {
-      const body = await localGet(path, new URL(req.url).searchParams);
+      const body = await localGet(path, new URL(req.url).searchParams, user);
       if (body !== undefined) return respond(body, path);
     } catch (err) {
       console.error("[engine] warehouse query failed", path.join("/"), err);
@@ -187,6 +227,14 @@ export async function POST(req: Request, { params }: { params: Promise<{ path: s
   if (!WRITE_PATHS.some((re) => re.test(path.join("/")))) {
     return Response.json({ error: `The data engine route ${path.join("/")} cannot receive POST requests.` }, { status: 404 });
   }
+
+  try {
+    const { requireUser } = await import("@/lib/auth");
+    await requireUser();
+  } catch {
+    return Response.json({ error: "Sign in required." }, { status: 401 });
+  }
+
   if (engineBackend() === "supabase") {
     const body = (await req.json().catch(() => ({}))) as Record<string, unknown>;
     try {

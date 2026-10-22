@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState, type ReactNode } from "react";
+import { Search, X } from "lucide-react";
 import { useDepoiiState } from "@/components/depoii-provider";
 import { EngineLayout, EngineState, Filter, Pager, filterField, useDebounced } from "@/components/engine-layout";
 import { useEngine } from "@/components/use-engine";
@@ -9,6 +10,7 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { engineGet, mapBrowseParcelDetail, mapParcelBrowse, type BrowseParcel } from "@/lib/engine-api";
 import { num, usd } from "@/lib/format";
+import { cn } from "@/lib/utils";
 
 const LIMIT = 50;
 
@@ -104,26 +106,127 @@ export default function BuildingsPage() {
   const city = jurisdiction.split(",")[0] || "Dallas";
   const sections = parseSections(detail?.improvementSections);
 
+  const clearAllFilters = () => {
+    setPropertyClass("all");
+    setSearch("");
+    setMinSqft("5000");
+    setSort("sqft_desc");
+    setOffset(0);
+  };
+
+  const activeCount = [
+    propertyClass !== "all",
+    Boolean(search),
+    minSqft !== "5000" && minSqft !== "",
+    sort !== "sqft_desc",
+  ].filter(Boolean).length;
+
   return (
     <>
       <EngineLayout
         title="Building Browse"
         subtitle={`${city} county appraisal inventory — commercial and industrial improvements. Not Opportunity Pipeline leads.`}
+        onResetFilters={clearAllFilters}
+        activeFiltersCount={activeCount}
         filters={
           <>
-            <Filter label="Property class">
-              <select value={propertyClass} onChange={(e) => reset(setPropertyClass)(e.target.value as typeof propertyClass)} className={filterField}>
-                <option value="all">All (commercial + industrial)</option>
-                <option value="commercial">Commercial improvements</option>
-                <option value="industrial">Industrial improvements</option>
-              </select>
+            <div className="space-y-1.5">
+              <label className="text-[10px] font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider block">
+                Property Class
+              </label>
+              <div className="grid grid-cols-3 gap-1 rounded-lg border border-neutral-300 dark:border-neutral-800 bg-neutral-100 dark:bg-[#13141a] p-1 text-center">
+                <button
+                  type="button"
+                  onClick={() => reset(setPropertyClass)("all")}
+                  className={cn(
+                    "rounded py-1.5 text-[11px] font-medium transition-colors",
+                    propertyClass === "all"
+                      ? "bg-white dark:bg-white/10 text-neutral-900 dark:text-white font-semibold shadow-sm"
+                      : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200"
+                  )}
+                >
+                  All
+                </button>
+                <button
+                  type="button"
+                  onClick={() => reset(setPropertyClass)("commercial")}
+                  className={cn(
+                    "rounded py-1.5 text-[11px] font-medium transition-colors",
+                    propertyClass === "commercial"
+                      ? "bg-white dark:bg-white/10 text-neutral-900 dark:text-white font-semibold shadow-sm"
+                      : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200"
+                  )}
+                >
+                  Commercial
+                </button>
+                <button
+                  type="button"
+                  onClick={() => reset(setPropertyClass)("industrial")}
+                  className={cn(
+                    "rounded py-1.5 text-[11px] font-medium transition-colors",
+                    propertyClass === "industrial"
+                      ? "bg-white dark:bg-white/10 text-neutral-900 dark:text-white font-semibold shadow-sm"
+                      : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200"
+                  )}
+                >
+                  Industrial
+                </button>
+              </div>
+            </div>
+
+            <Filter label="Search Address / Owner">
+              <div className="relative">
+                <Search className="pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-neutral-500" />
+                <input
+                  value={search}
+                  onChange={(e) => reset(setSearch)(e.target.value)}
+                  placeholder="Address or owner…"
+                  className={cn(filterField, "pl-8 pr-7")}
+                />
+                {search && (
+                  <button
+                    type="button"
+                    onClick={() => reset(setSearch)("")}
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-300"
+                  >
+                    <X className="size-3" />
+                  </button>
+                )}
+              </div>
             </Filter>
-            <Filter label="Search address or owner">
-              <input value={search} onChange={(e) => reset(setSearch)(e.target.value)} placeholder="Address or owner…" className={filterField} />
+
+            <Filter label="Min Building Sq Ft">
+              <div className="space-y-1.5">
+                <div className="relative">
+                  <input
+                    value={minSqft}
+                    onChange={(e) => reset(setMinSqft)(e.target.value.replace(/\D/g, ""))}
+                    inputMode="numeric"
+                    placeholder="e.g. 5000"
+                    className={cn(filterField, "font-mono pr-12")}
+                  />
+                  <span className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-neutral-500 text-[11px]">sq ft</span>
+                </div>
+                <div className="flex gap-1">
+                  {["0", "10000", "25000", "50000"].map((val) => (
+                    <button
+                      key={val}
+                      type="button"
+                      onClick={() => reset(setMinSqft)(val)}
+                      className={cn(
+                        "flex-1 rounded border py-0.5 text-[10px] font-mono transition-colors",
+                        minSqft === val
+                          ? "border-neutral-400 dark:border-white/20 bg-neutral-200 dark:bg-white/10 text-neutral-900 dark:text-white font-semibold"
+                          : "border-neutral-300 dark:border-neutral-800 bg-neutral-100 dark:bg-[#111217] text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200"
+                      )}
+                    >
+                      {val === "0" ? "Any" : `${Number(val) / 1000}k+`}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </Filter>
-            <Filter label="Min building sq ft">
-              <input value={minSqft} onChange={(e) => reset(setMinSqft)(e.target.value)} inputMode="numeric" className={filterField} />
-            </Filter>
+
             <Filter label="Sort">
               <select value={sort} onChange={(e) => reset(setSort)(e.target.value)} className={filterField}>
                 <option value="sqft_desc">Largest roof area</option>
@@ -134,7 +237,7 @@ export default function BuildingsPage() {
           </>
         }
       >
-        <p className="border-b border-amber-500/30 bg-amber-500/10 px-4 py-2 text-xs text-amber-100">
+        <p className="border-b border-[#FFCA88]/40 bg-[#FFCA88]/15 px-4 py-2 text-xs text-amber-900 dark:text-[#FFCA88]">
           County appraisal inventory for {city}. These are CAD building records, not verified roof leads. Use Opportunity Pipeline for the released call list.
         </p>
         <EngineState loading={page.loading && !page.data} error={page.error} empty={!rows.length} onRetry={page.retry}>

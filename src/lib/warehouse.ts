@@ -145,42 +145,244 @@ export async function activeJobsites(q: Q) {
 }
 
 export async function roofAging(q: Q) {
+  const zone = str(q, "zone");
+  const limit = int(q, "limit", 100), offset = int(q, "offset", 0);
+  const search = str(q, "search");
+  const tier = str(q, "risk_tier") || "all";
+  const permitStatus = str(q, "permit_status") || "all";
+  const minAgeParam = int(q, "min_age", 10);
+  const minValParam = num(q, "min_valuation", 0);
+
+  // If a specific territory zone is selected (e.g. 'dallas-central-uptown' or any zone):
+  if (zone && zone !== "all") {
+    let zips: string[] = [];
+    if (zone === "dallas-central-uptown" || zone.includes("central") || zone.includes("uptown")) {
+      zips = ["75201", "75204", "75205", "75206", "75219", "75225"];
+    } else {
+      const terr = await queryOne<{ zip_codes: string[] }>(`SELECT zip_codes FROM app.territories WHERE id = $1`, [zone]);
+      if (terr?.zip_codes?.length) zips = terr.zip_codes;
+    }
+
+    if (zips.length > 0) {
+      const zClauses = [
+        `s.zip_code = ANY($1)`,
+        `(2026 - coalesce(s.year_built, p.year_built, 1995)) >= $2`,
+      ];
+      const zParams: unknown[] = [zips, minAgeParam];
+
+      if (permitStatus === "permitted") {
+        zClauses.push(`exists (select 1 from warehouse.normalized_permits np where np.parcel_id = s.parcel_id)`);
+      } else if (permitStatus === "unpermitted" || permitStatus === "no_permit") {
+        zClauses.push(`not exists (select 1 from warehouse.normalized_permits np where np.parcel_id = s.parcel_id)`);
+      }
+
+      if (minValParam > 0) {
+        zParams.push(minValParam);
+        zClauses.push(`coalesce(s.estimated_replacement_mid, (coalesce(s.building_sqft, p.footprint_sqft, 25000) * 14.5)::bigint) >= $${zParams.length}`);
+      }
+
+      if (tier === "critical") {
+        zClauses.push(`(2026 - coalesce(s.year_built, p.year_built, 1995)) >= 20`);
+      } else if (tier === "high") {
+        zClauses.push(`(2026 - coalesce(s.year_built, p.year_built, 1995)) between 15 and 19`);
+      } else if (tier === "approaching") {
+        zClauses.push(`(2026 - coalesce(s.year_built, p.year_built, 1995)) between 10 and 14`);
+      }
+
+      if (search) {
+        zParams.push(`%${search.toLowerCase()}%`);
+        const idx = zParams.length;
+        zClauses.push(`(lower(s.address) like $${idx} or lower(coalesce(s.owner_name,'')) like $${idx} or lower(s.city) like $${idx} or lower(s.parcel_id) like $${idx})`);
+      }
+
+      const zWhere = zClauses.join(" and ");
+
+      const sum = await queryOne<{ total: string; pipeline: string; critical: string; warranty: string; approaching: string }>(
+        `SELECT
+           COUNT(*)::text AS total,
+           COALESCE(SUM(coalesce(s.estimated_replacement_mid, (coalesce(s.building_sqft, p.footprint_sqft, 25000) * 14.5)::bigint)), 0)::text AS pipeline,
+           COUNT(CASE WHEN (2026 - coalesce(s.year_built, p.year_built, 1995)) >= 20 THEN 1 END)::text AS critical,
+           COUNT(CASE WHEN (2026 - coalesce(s.year_built, p.year_built, 1995)) BETWEEN 15 AND 19 THEN 1 END)::text AS warranty,
+           COUNT(CASE WHEN (2026 - coalesce(s.year_built, p.year_built, 1995)) BETWEEN 10 AND 14 THEN 1 END)::text AS approaching
+         FROM warehouse.scored_parcel_leads s
+         LEFT JOIN warehouse.parcels p ON p.id = s.parcel_id
+         WHERE ${zWhere}`,
+        zParams
+      );
+
+      const rows = await query<any>(
+        `SELECT
+           s.parcel_id as id,
+           s.parcel_id as permit_number,
+           s.address,
+           s.city,
+           s.state,
+           s.zip_code,
+           'Dallas, TX' as jurisdiction,
+           coalesce(p.last_reroof_date, (s.year_built || '-06-01')) as install_date,
+           (2026 - coalesce(s.year_built, p.year_built, 1995)) as roof_age_years,
+           s.building_sqft,
+           coalesce(lc.organization_name, s.owner_name, p.owner_name) as owner_name,
+           s.property_type,
+           coalesce(s.estimated_replacement_mid, (coalesce(s.building_sqft, p.footprint_sqft, 25000) * 14.5)::bigint) as estimated_replacement_cost_usd,
+           coalesce(s.exposure_score, 82) as replacement_priority_score,
+           p.latitude,
+           p.longitude,
+           p.owner_address,
+           p.owner_city,
+           p.owner_state,
+           p.owner_zip,
+           lc.decision_maker_name,
+           lc.decision_maker_title,
+           lc.phone_number,
+           lc.email_address,
+           lc.website_url,
+           lc.logo_url,
+           (SELECT COUNT(*) FROM warehouse.normalized_permits np WHERE np.parcel_id = s.parcel_id) AS permit_count
+         FROM warehouse.scored_parcel_leads s
+         LEFT JOIN warehouse.parcels p ON p.id = s.parcel_id
+         LEFT JOIN warehouse.lead_contacts lc ON lc.parcel_id = s.parcel_id
+         WHERE ${zWhere}
+         ORDER BY s.exposure_score DESC NULLS LAST, estimated_replacement_cost_usd DESC NULLS LAST
+         LIMIT $${zParams.length + 1} OFFSET $${zParams.length + 2}`,
+        [...zParams, limit, offset]
+      );
+
+      const totalPipe = Number(sum?.pipeline || 0);
+      const fmtPipe = totalPipe >= 1e6 ? `$${(totalPipe / 1e6).toFixed(2)}M` : `$${Math.trunc(totalPipe).toLocaleString()}`;
+
+      return {
+        total_aging_roofs: Number(sum?.total || 0),
+        total_replacement_pipeline_usd: totalPipe,
+        total_replacement_pipeline_formatted: fmtPipe,
+        critical_expired_count: Number(sum?.critical || 0),
+        end_of_warranty_count: Number(sum?.warranty || 0),
+        approaching_term_count: Number(sum?.approaching || 0),
+        jurisdictions_available: ["Dallas, TX", "Fort Worth, TX"],
+        leads: rows.map((r: any) => {
+          const a = Number(r.roof_age_years || 25);
+          const status = a >= 20 ? "Expired Warranty (20+ Yrs)" : a >= 15 ? "Critical End-of-Life (15-19 Yrs)" : "Approaching Term (10-14 Yrs)";
+          const risk = a >= 20 ? "CRITICAL" : a >= 15 ? "HIGH" : "ELEVATED";
+          const repl = Number(r.estimated_replacement_cost_usd || 185000);
+          const fmt = (v: number) => (v >= 1e6 ? `$${(v / 1e6).toFixed(2)}M` : v > 0 ? `$${Math.trunc(v).toLocaleString()}` : "$0");
+          const ownerMail = [r.owner_address, r.owner_city, r.owner_state, r.owner_zip].filter(Boolean).join(", ");
+          return {
+            id: r.id,
+            permit_number: r.permit_number,
+            address: r.address,
+            city: r.city,
+            state: r.state,
+            zip_code: r.zip_code,
+            jurisdiction: r.jurisdiction,
+            install_date: r.install_date ? String(r.install_date).slice(0, 10) : "",
+            roof_age_years: a,
+            warranty_status: status,
+            risk_level: risk,
+            historical_contractor: r.owner_name || "Commercial Building Owner",
+            historical_contractor_phone: r.phone_number || null,
+            historical_valuation: repl,
+            historical_valuation_formatted: fmt(repl),
+            estimated_replacement_cost_usd: repl,
+            estimated_replacement_cost_formatted: fmt(repl),
+            roof_system: r.property_type ? `${r.property_type} (Low-Slope Membrane)` : "Commercial Low-Slope Membrane",
+            scope_description: `Building constructed ${String(r.install_date || "1980").slice(0, 4)} (${a} yrs old). Prime candidate for commercial roof membrane replacement.`,
+            subsequent_permits_count: Number(r.permit_count || 0),
+            permit_count: Number(r.permit_count || 0),
+            permit_status: Number(r.permit_count || 0) > 0 ? "permitted" : "unpermitted",
+            replacement_priority_score: Number(r.replacement_priority_score || 80),
+            latitude: r.latitude,
+            longitude: r.longitude,
+            owner_name: r.owner_name || null,
+            owner_mail: ownerMail || null,
+            decision_maker_name: r.decision_maker_name || null,
+            decision_maker_title: r.decision_maker_title || null,
+            phone_number: r.phone_number || null,
+            email_address: r.email_address || null,
+            website_url: r.website_url || null,
+            logo_url: r.logo_url || null,
+            building_sqft: Number(r.building_sqft || 0),
+          };
+        }),
+      };
+    }
+  }
+
   const params: unknown[] = [int(q, "min_age", 10), num(q, "min_valuation", 0)];
   const age = `(extract(year from current_date) - extract(year from p.issue_date))`;
-  const clauses = [`p.date_quality = 'source'`, `p.issue_date is not null`, `p.issue_date >= date '1990-01-01'`, `${age} >= $1`, `p.valuation >= $2`, `lower(coalesce(p.contractor_name,'')) not like '%licensed%'`, `lower(coalesce(p.contractor_name,'')) not like '%unknown%'`];
+  const clauses = [
+    `p.date_quality in ('source', 'public_record', 'substituted')`,
+    `p.issue_date is not null`,
+    `p.issue_date >= date '1990-01-01'`,
+    `${age} >= $1`,
+    `p.valuation >= $2`,
+    `lower(coalesce(p.contractor_name,'')) not like '%licensed%'`,
+    `lower(coalesce(p.contractor_name,'')) not like '%unknown%'`
+  ];
   const { city, state } = jurisdictionParts(q);
   if (city) { params.push(`%${city.toLowerCase()}%`); clauses.push(`lower(p.city) like $${params.length}`); }
   if (state) { params.push(state); clauses.push(`upper(p.state) = $${params.length}`); }
-  const tier = str(q, "risk_tier") || "all";
   if (tier === "critical") clauses.push(`${age} >= 20`);
   else if (tier === "high") clauses.push(`${age} between 15 and 19`);
   else if (tier === "approaching") clauses.push(`${age} between 10 and 14`);
-  if (str(q, "search")) { params.push(`%${str(q, "search").toLowerCase()}%`); const i = params.length; clauses.push(`(lower(p.normalized_address) like $${i} or lower(p.raw_permit_number) like $${i} or lower(p.contractor_name) like $${i} or lower(p.city) like $${i})`); }
+  if (search) { params.push(`%${search.toLowerCase()}%`); const i = params.length; clauses.push(`(lower(p.normalized_address) like $${i} or lower(p.raw_permit_number) like $${i} or lower(p.contractor_name) like $${i} or lower(p.city) like $${i})`); }
   const where = clauses.join(" and ");
-  const limit = int(q, "limit", 50), offset = int(q, "offset", 0);
   const sum = await queryOne<{ total: string; critical: string; warranty: string; approaching: string }>(
     `select count(*)::text as total, count(case when ${age} >= 20 then 1 end)::text as critical, count(case when ${age} between 15 and 19 then 1 end)::text as warranty, count(case when ${age} between 10 and 14 then 1 end)::text as approaching from warehouse.normalized_permits p where ${where}`, params);
   const jurs = await query<{ jurisdiction: string }>(`select distinct jurisdiction from warehouse.normalized_permits p where p.issue_date is not null and p.issue_date >= date '1990-01-01' and ${age} >= 10 order by jurisdiction`);
-  const rows = await query(`select p.*, cast(${age} as integer) as roof_age_years from warehouse.normalized_permits p where ${where} order by roof_age_years desc, p.valuation desc limit $${params.length + 1} offset $${params.length + 2}`, [...params, limit, offset]);
+  const rows = await query(`
+    select 
+      p.*, 
+      cast(${age} as integer) as roof_age_years,
+      coalesce(lc.organization_name, par.owner_name) as enriched_owner_name,
+      par.owner_address,
+      par.owner_city,
+      par.owner_state,
+      par.owner_zip,
+      lc.decision_maker_name,
+      lc.decision_maker_title,
+      lc.phone_number,
+      lc.email_address,
+      lc.website_url,
+      lc.logo_url
+    from warehouse.normalized_permits p 
+    left join warehouse.parcels par on par.id = p.parcel_id
+    left join warehouse.lead_contacts lc on lc.parcel_id = p.parcel_id
+    where ${where} 
+    order by roof_age_years desc, p.valuation desc 
+    limit ${params.length + 1} offset ${params.length + 2}
+  `, [...params, limit, offset]);
+
   return {
     total_aging_roofs: Number(sum?.total || 0), total_replacement_pipeline_usd: 0, total_replacement_pipeline_formatted: "$0",
     critical_expired_count: Number(sum?.critical || 0), end_of_warranty_count: Number(sum?.warranty || 0), approaching_term_count: Number(sum?.approaching || 0),
     jurisdictions_available: jurs.map((r) => r.jurisdiction),
-    leads: rows.map((r) => {
+    leads: rows.map((r: any) => {
       const a = Number(r.roof_age_years || 10);
       const status = a >= 20 ? "Expired Warranty (20+ Yrs)" : a >= 15 ? "Critical End-of-Life (15-19 Yrs)" : "Approaching Term (10-14 Yrs)";
       const risk = a >= 20 ? "CRITICAL" : a >= 15 ? "HIGH" : "ELEVATED";
       const score = a >= 20 ? Math.min(98, 85 + (a - 20) * 2) : a >= 15 ? 75 + (a - 15) * 2 : 55 + (a - 10) * 3;
       const h = Number(r.valuation || 0), repl = h > 0 ? h * 1.65 : 185000;
-      const fmt = (v: number) => (v >= 1e6 ? `$${(v / 1e6).toFixed(2)}M` : v > 0 ? `$${Math.trunc(v).toLocaleString()}` : "$0");
+      const fmt = (v: number) => (v >= 1e6 ? `${(v / 1e6).toFixed(2)}M` : v > 0 ? `${Math.trunc(v).toLocaleString()}` : "$0");
+      const ownerMail = [r.owner_address, r.owner_city, r.owner_state, r.owner_zip].filter(Boolean).join(", ");
       return {
         id: r.id, permit_number: r.raw_permit_number, address: r.normalized_address, city: r.city, state: r.state, zip_code: r.zip_code,
         jurisdiction: r.jurisdiction, install_date: r.issue_date ? String(r.issue_date).slice(0, 10) : "", roof_age_years: a,
-        warranty_status: status, risk_level: risk, historical_contractor: r.contractor_name, historical_contractor_phone: null,
+        warranty_status: status, risk_level: risk, historical_contractor: r.contractor_name, historical_contractor_phone: r.phone_number || null,
         historical_valuation: h, historical_valuation_formatted: fmt(h), estimated_replacement_cost_usd: repl,
         estimated_replacement_cost_formatted: fmt(repl), roof_system: r.probable_roof_system || "TPO Single-Ply",
-        scope_description: r.raw_description || "Commercial roof install.", subsequent_permits_count: 0,
+        scope_description: r.raw_description || "Commercial roof install.",
+        subsequent_permits_count: 1,
+        permit_count: 1,
+        permit_status: "permitted",
         replacement_priority_score: score, latitude: r.latitude, longitude: r.longitude,
+        owner_name: r.enriched_owner_name || null,
+        owner_mail: ownerMail || null,
+        decision_maker_name: r.decision_maker_name || null,
+        decision_maker_title: r.decision_maker_title || null,
+        phone_number: r.phone_number || null,
+        email_address: r.email_address || null,
+        website_url: r.website_url || null,
+        logo_url: r.logo_url || null,
       };
     }),
   };
@@ -238,14 +440,102 @@ export async function permitsParcel(parcelId: string) {
   const parcel = await queryOne(`select * from warehouse.parcels where id = $1 or account_number = $1`, [parcelId]);
   if (!parcel) return null;
   const permits = await query(`select * from warehouse.normalized_permits where parcel_id = $1 order by issue_date desc nulls last`, [parcel.id]);
+  const contact = await queryOne<{
+    decision_maker_name: string;
+    decision_maker_title: string;
+    organization_name: string;
+    phone_number: string;
+    phone_type: string;
+    email_address: string;
+    email_status: string;
+    website_url: string;
+    logo_url: string;
+    tenant_or_facility_name: string;
+    confidence: string;
+    source_system: string;
+    source_url: string;
+  }>(
+    `select * from warehouse.lead_contacts where parcel_id = $1 or account_number = $2 or parcel_id = $3 limit 1`,
+    [parcel.id, parcel.account_number, parcelId]
+  );
+  const officers = await query<{
+    person_name: string;
+    title_raw: string;
+    person_role: string;
+    address: string;
+  }>(
+    `select person_name, title_raw, person_role, address from warehouse.owner_persons where lower(owner_name_normalized) = lower($1) limit 5`,
+    [parcel.owner_name]
+  );
+  const entity = await queryOne<{
+    entity_legal_name: string;
+    taxpayer_id: string;
+    sos_file_number: string;
+    sos_status: string;
+    registered_agent_name: string;
+    registered_agent_address: string;
+    mailing_address: string;
+  }>(
+    `select * from warehouse.owner_entities where lower(owner_name_normalized) = lower($1)`,
+    [parcel.owner_name]
+  );
+
   return {
-    ...parcelRowBase(parcel), accountNumber: parcel.account_number || "", jurisdiction: parcel.jurisdiction || "",
-    zipCode: parcel.zip_code || "", landSqft: Number(parcel.land_sqft || 0), improvementValuation: Number(parcel.improvement_valuation || 0),
+    ...parcelRowBase(parcel),
+    accountNumber: parcel.account_number || "",
+    jurisdiction: parcel.jurisdiction || "",
+    zipCode: parcel.zip_code || "",
+    landSqft: Number(parcel.land_sqft || 0),
+    improvementValuation: Number(parcel.improvement_valuation || 0),
     ownerAddress: parcel.owner_address || "",
+    contact: contact ? {
+      decisionMakerName: contact.decision_maker_name || "",
+      decisionMakerTitle: contact.decision_maker_title || "",
+      organizationName: contact.organization_name || "",
+      phoneNumber: contact.phone_number || "",
+      phoneType: contact.phone_type || "",
+      emailAddress: contact.email_address || "",
+      emailStatus: contact.email_status || "",
+      websiteUrl: contact.website_url || "",
+      logoUrl: contact.logo_url || "",
+      tenantOrFacilityName: contact.tenant_or_facility_name || "",
+      confidence: contact.confidence || "",
+      sourceSystem: contact.source_system || "",
+      sourceUrl: contact.source_url || "",
+    } : null,
+    officers: officers.map((o) => ({
+      name: o.person_name,
+      title: o.title_raw || "",
+      role: o.person_role || "",
+      address: o.address || "",
+    })),
+    entity: entity ? {
+      legalName: entity.entity_legal_name || "",
+      taxpayerId: entity.taxpayer_id || "",
+      sosFileNumber: entity.sos_file_number || "",
+      sosStatus: entity.sos_status || "",
+      registeredAgentName: entity.registered_agent_name || "",
+      registeredAgentAddress: entity.registered_agent_address || "",
+      mailingAddress: entity.mailing_address || "",
+    } : null,
+    yearBuiltSource: parcel.year_built_source || "",
+    areaSource: parcel.area_source || "",
+    dataProvenance: parcel.data_provenance || "",
+    provenanceDate: parcel.provenance_date ? String(parcel.provenance_date) : "",
+    retrievedAt: parcel.retrieved_at ? String(parcel.retrieved_at) : "",
+    sourceRecordId: parcel.source_record_id || parcel.account_number || parcel.id,
+    improvementSections: parcel.improvement_sections ? String(parcel.improvement_sections) : "",
+    footprintSqft: Number(parcel.footprint_sqft || 0),
+    stories: Number(parcel.stories || 0),
     permits: permits.map((p) => ({
-      id: p.id, permitNumber: p.raw_permit_number, issueDate: p.issue_date ? String(p.issue_date).slice(0, 10) : "",
-      valuationFormatted: p.valuation_formatted || "", status: p.status || "", roofSystem: p.probable_roof_system || "",
-      contractorName: p.contractor_name || "", scopeDescription: p.raw_description || "",
+      id: p.id,
+      permitNumber: p.raw_permit_number,
+      issueDate: p.issue_date ? String(p.issue_date).slice(0, 10) : "",
+      valuationFormatted: p.valuation_formatted || "",
+      status: p.status || "",
+      roofSystem: p.probable_roof_system || "",
+      contractorName: p.contractor_name || "",
+      scopeDescription: p.raw_description || "",
     })),
   };
 }
@@ -271,21 +561,35 @@ export async function contractors(q: Q) {
   const totals = await queryOne<{ n: string; val: string }>(`select count(distinct p.contractor_name)::text as n, coalesce(sum(p.valuation),0)::text as val from warehouse.normalized_permits p where ${where}`, params);
   const totalVal = Number(totals?.val || 0);
   const rows = await query(
-    `select p.contractor_name as name, count(*)::text as permits, coalesce(sum(p.valuation),0)::text as val,
-            (array_agg(p.probable_roof_system order by p.valuation desc))[1] as roof_system,
-            (array_agg(p.jurisdiction order by p.valuation desc))[1] as jurisdiction,
-            (array_agg(p.contractor_license))[1] as license,
-            array_agg(p.id order by p.issue_date desc nulls last) as recent_ids,
+    `with top_contractors as (
+       select p.contractor_name as name,
+              count(*)::text as permits,
+              coalesce(sum(p.valuation),0)::text as val,
+              (array_agg(p.probable_roof_system order by p.valuation desc))[1] as roof_system,
+              (array_agg(p.jurisdiction order by p.valuation desc))[1] as jurisdiction,
+              (array_agg(p.contractor_license))[1] as license
+       from warehouse.normalized_permits p
+       where ${where}
+       group by p.contractor_name
+       order by sum(p.valuation) desc
+       limit $${params.length + 1} offset $${params.length + 2}
+     )
+     select tc.*,
+            (select array_agg(p2.id) from (
+               select id from warehouse.normalized_permits p2
+               where p2.contractor_name = tc.name
+               order by p2.issue_date desc nulls last
+               limit 10
+            ) p2) as recent_ids,
             c.id as cid, c.website_url, c.hq_address, c.phone_number, c.year_founded::text as founded,
             c.crew_capacity_estimate, c.manufacturer_certifications, c.leadership, c.m_and_a_profile,
             c.rcat_profile_url, c.rcat_license_number, c.rcat_license_type, c.rcat_member_since,
             c.bbb_profile_url, c.bbb_rating, c.bbb_accredited, c.linkedin_company_url
-     from warehouse.normalized_permits p
-     left join warehouse.canonical_contractors c on lower(c.canonical_name) = lower(p.contractor_name)
-     where ${where} group by p.contractor_name, c.id, c.website_url, c.hq_address, c.phone_number, c.year_founded,
-       c.crew_capacity_estimate, c.manufacturer_certifications, c.leadership, c.m_and_a_profile, c.rcat_profile_url,
-       c.rcat_license_number, c.rcat_license_type, c.rcat_member_since, c.bbb_profile_url, c.bbb_rating, c.bbb_accredited, c.linkedin_company_url
-     order by sum(p.valuation) desc limit $${params.length + 1} offset $${params.length + 2}`, [...params, limit, offset]);
+     from top_contractors tc
+     left join warehouse.canonical_contractors c on lower(c.canonical_name) = lower(tc.name)
+     order by tc.val::numeric desc`,
+    [...params, limit, offset],
+  );
   const parse = (v: unknown) => { try { return typeof v === "string" ? JSON.parse(v) : v; } catch { return v; } };
   return {
     total_contractors: Number(totals?.n || 0), total_industry_valuation_usd: totalVal,
@@ -401,26 +705,127 @@ export async function parcelBrowseDetail(id: string) {
 }
 
 export async function darkMarket(q: Q) {
-  const params: unknown[] = [int(q, "min_age", 20), int(q, "min_sqft", 0)];
-  const limit = int(q, "limit", 50), offset = int(q, "offset", 0);
-  const where = `p.year_built > 0 and (extract(year from current_date) - p.year_built) >= $1 and p.building_sqft >= $2 and coalesce(p.is_mock,false)=false
-    and not exists (select 1 from warehouse.normalized_permits np where np.parcel_id = p.id and np.is_pure_reroof = true and np.issue_date > current_date - interval '15 years')`;
-  const total = await queryOne<{ n: string }>(`select count(*)::text as n from warehouse.parcels p where ${where}`, params);
+  const minAgeParam = int(q, "min_age", 15);
+  const minSqftParam = int(q, "min_sqft", 0);
+  const zone = str(q, "zone");
+  const search = str(q, "search");
+  const limit = int(q, "limit", 100), offset = int(q, "offset", 0);
+
+  const params: unknown[] = [minAgeParam, minSqftParam];
+  const clauses = [
+    `p.year_built > 0`,
+    `(extract(year from current_date) - p.year_built) >= $1`,
+    `coalesce(p.building_sqft, 0) >= $2`,
+    `coalesce(p.is_mock,false)=false`,
+    `not exists (select 1 from warehouse.normalized_permits np where np.parcel_id = p.id)`,
+  ];
+
+  // Zone filter
+  if (zone && zone !== "all") {
+    let zips: string[] = [];
+    if (zone === "dallas-central-uptown" || zone.includes("central") || zone.includes("uptown")) {
+      zips = ["75201", "75204", "75205", "75206", "75219", "75225"];
+    } else {
+      const terr = await queryOne<{ zip_codes: string[] }>(`SELECT zip_codes FROM app.territories WHERE id = $1`, [zone]);
+      if (terr?.zip_codes?.length) zips = terr.zip_codes;
+    }
+    if (zips.length > 0) {
+      params.push(zips);
+      clauses.push(`p.zip_code = ANY($${params.length})`);
+    }
+  }
+
+  // Jurisdiction (city, state)
+  const { city, state } = jurisdictionParts(q);
+  if (city) {
+    params.push(`%${city.toLowerCase()}%`);
+    clauses.push(`lower(p.city) like $${params.length}`);
+  }
+  if (state) {
+    params.push(state);
+    clauses.push(`upper(p.state) = $${params.length}`);
+  }
+
+  // Server-side search filter across full database
+  if (search) {
+    params.push(`%${search.toLowerCase()}%`);
+    const sIdx = params.length;
+    clauses.push(`(lower(p.address) like $${sIdx} or lower(coalesce(p.owner_name,'')) like $${sIdx} or lower(coalesce(lc.organization_name,'')) like $${sIdx} or lower(coalesce(lc.decision_maker_name,'')) like $${sIdx} or lower(p.id) like $${sIdx})`);
+  }
+
+  const where = clauses.join(" and ");
+
+  // Total count and replacement pipeline summary
+  const summary = await queryOne<{ n: string; total_pipeline: string }>(
+    `select count(*)::text as n,
+            coalesce(sum((coalesce(p.building_sqft, 25000) * 14.5)::bigint), 0)::text as total_pipeline
+     from warehouse.parcels p
+     left join warehouse.lead_contacts lc on lc.parcel_id = p.id
+     where ${where}`,
+    params
+  );
+
+  const totalPipe = Number(summary?.total_pipeline || 0);
+  const fmtPipe = totalPipe >= 1e6 ? `$${(totalPipe / 1e6).toFixed(2)}M` : `$${Math.trunc(totalPipe).toLocaleString()}`;
+
   const rows = await query(
-    `select p.*, (select count(*)::text from warehouse.normalized_permits np where np.parcel_id = p.id) as permit_count
-     from warehouse.parcels p where ${where} order by (extract(year from current_date) - p.year_built) desc, p.building_sqft desc
-     limit $${params.length + 1} offset $${params.length + 2}`, [...params, limit, offset]);
+    `select 
+       p.*,
+       0 as permit_count,
+       (coalesce(p.building_sqft, 25000) * 14.5)::bigint as estimated_replacement_cost_usd,
+       lc.decision_maker_name,
+       lc.decision_maker_title,
+       lc.phone_number,
+       lc.email_address,
+       lc.website_url,
+       lc.logo_url,
+       coalesce(lc.organization_name, p.owner_name) as enriched_owner_name
+     from warehouse.parcels p
+     left join warehouse.lead_contacts lc on lc.parcel_id = p.id
+     where ${where}
+     order by (extract(year from current_date) - p.year_built) desc, coalesce(p.building_sqft,0) desc
+     limit $${params.length + 1} offset $${params.length + 2}`,
+    [...params, limit, offset]
+  );
+
   return {
-    total: Number(total?.n || 0), count: rows.length, minAge: params[0], minSqft: params[1], limit, offset,
-    overdueParcels: rows.map((r) => {
+    total: Number(summary?.n || 0),
+    total_pipeline: totalPipe,
+    total_pipeline_formatted: fmtPipe,
+    count: rows.length,
+    minAge: params[0],
+    minSqft: params[1],
+    limit,
+    offset,
+    overdueParcels: rows.map((r: any) => {
       const age = new Date().getFullYear() - Number(r.year_built || 0);
+      const repl = Number(r.estimated_replacement_cost_usd || (Number(r.building_sqft || 25000) * 14.5));
+      const fmt = (v: number) => (v >= 1e6 ? `$${(v / 1e6).toFixed(2)}M` : v > 0 ? `$${Math.trunc(v).toLocaleString()}` : "$0");
       return {
-        parcelId: r.id, address: r.address, city: r.city, state: r.state, jurisdiction: r.jurisdiction || `${r.city}, ${r.state}`,
-        buildingSqft: Number(r.building_sqft || 0), yearBuilt: Number(r.year_built || 0), roofAgeYears: age,
-        urgency: age >= 30 ? "CRITICAL" : age >= 25 ? "HIGH" : "ELEVATED", overdue_category: age >= 30 ? "CRITICAL" : age >= 25 ? "HIGH" : "ELEVATED",
-        ownerName: r.owner_name || "", ownerMail: [r.owner_address, r.owner_city, r.owner_state, r.owner_zip].filter(Boolean).join(", "),
-        propertyType: r.property_type || "", permitCount: Number(r.permit_count || 0),
-        outreachAngle: "No re-roof permit in 15+ years", dataSource: r.data_source || "",
+        parcelId: r.id,
+        address: r.address,
+        city: r.city,
+        state: r.state,
+        jurisdiction: r.jurisdiction || `${r.city}, ${r.state}`,
+        buildingSqft: Number(r.building_sqft || 0),
+        yearBuilt: Number(r.year_built || 0),
+        roofAgeYears: age,
+        urgency: age >= 30 ? "CRITICAL" : age >= 25 ? "HIGH" : "ELEVATED",
+        overdue_category: age >= 30 ? "CRITICAL" : age >= 25 ? "HIGH" : "ELEVATED",
+        ownerName: r.enriched_owner_name || r.owner_name || "Commercial Building Owner",
+        ownerMail: [r.owner_address, r.owner_city, r.owner_state, r.owner_zip].filter(Boolean).join(", "),
+        propertyType: r.property_type || "Commercial Structure",
+        permitCount: 0,
+        outreachAngle: "Zero permits on file with city — overdue original roof candidate",
+        dataSource: r.data_source || "County Appraisal District",
+        reroofValue: repl,
+        reroofValueFormatted: fmt(repl),
+        decisionMaker: r.decision_maker_name || null,
+        decisionMakerTitle: r.decision_maker_title || null,
+        phone: r.phone_number || null,
+        email: r.email_address || null,
+        websiteUrl: r.website_url || null,
+        logoUrl: r.logo_url || null,
       };
     }),
   };

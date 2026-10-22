@@ -1,6 +1,6 @@
 import { afterAll, beforeEach, expect, test } from "vitest";
 import { HttpError, createOrganization, updateMember, updateOrganization } from "@/lib/admin";
-import { createLoginLink, redeemLoginLink, revokeLoginLink, signIn } from "@/lib/auth";
+import { createLoginLink, loginLinkStatus, redeemLoginLink, revokeLoginLink, signIn, updateLoginLink } from "@/lib/auth";
 import { closePool, query, queryOne } from "@/lib/pg";
 
 const previousEmail = process.env.DEPOII_SUPERADMIN_EMAIL;
@@ -109,4 +109,77 @@ test("a shared sign-in link opens the account without a password", async () => {
   expect(await redeemLoginLink(created.token)).toEqual({ error: "This sign-in link is not valid." });
   await updateMember(signedIn.user.id, signedIn.user.id, { disabled: true });
   expect(await createLoginLink(signedIn.user.id)).toEqual({ error: "This account is disabled." });
+});
+
+test("login link supports admin deactivation, click limits, and configurable expiration", async () => {
+  const org = await createOrganization("actor", {
+    name: "Apex Roofing",
+    ownerName: "Marcus",
+    ownerEmail: "marcus@apex.test",
+    ownerPassword: "password123",
+  });
+  const signedIn = await signIn("marcus@apex.test", "password123");
+  if (!("user" in signedIn)) throw new Error("expected a session");
+  const userId = signedIn.user.id;
+
+  // 1. Single-use link: maxUses = 1
+  const single = await createLoginLink(userId, { expiresInDays: 3, maxUses: 1 });
+  if ("error" in single) throw new Error(single.error);
+  expect(single.maxUses).toBe(1);
+  expect(single.isActive).toBe(true);
+
+  let status = await loginLinkStatus(userId);
+  expect(status?.active).toBe(true);
+  expect(status?.useCount).toBe(0);
+  expect(status?.maxUses).toBe(1);
+
+  // First click succeeds
+  const click1 = await redeemLoginLink(single.token);
+  expect(click1).toMatchObject({ user: { email: "marcus@apex.test" } });
+
+  status = await loginLinkStatus(userId);
+  expect(status?.useCount).toBe(1);
+  expect(status?.exhausted).toBe(true);
+  expect(status?.active).toBe(false);
+  expect(status?.reason).toBe("exhausted");
+
+  // Second click rejected due to click limit reached
+  const click2 = await redeemLoginLink(single.token);
+  expect(click2).toEqual({ error: "This sign-in link has reached its maximum number of uses." });
+
+  // 2. Admin can manually deactivate the link
+  const multi = await createLoginLink(userId, { expiresInDays: 7, maxUses: 5 });
+  if ("error" in multi) throw new Error(multi.error);
+  expect(multi.maxUses).toBe(5);
+
+  const deactResult = await updateLoginLink(userId, { isActive: false });
+  expect(deactResult).toMatchObject({ ok: true });
+  status = await loginLinkStatus(userId);
+  expect(status?.isActive).toBe(false);
+  expect(status?.active).toBe(false);
+  expect(status?.reason).toBe("deactivated");
+
+  const clickDeactivated = await redeemLoginLink(multi.token);
+  expect(clickDeactivated).toEqual({ error: "This sign-in link has been deactivated." });
+
+  // 3. Admin can reactivate the link
+  const reactResult = await updateLoginLink(userId, { isActive: true });
+  expect(reactResult).toMatchObject({ ok: true });
+  status = await loginLinkStatus(userId);
+  expect(status?.isActive).toBe(true);
+  expect(status?.active).toBe(true);
+
+  const clickReactivated = await redeemLoginLink(multi.token);
+  expect(clickReactivated).toMatchObject({ user: { email: "marcus@apex.test" } });
+
+  // 4. Admin can set expiration (expired link rejected)
+  const pastDate = new Date(Date.now() - 10000).toISOString();
+  await updateLoginLink(userId, { expiresAt: pastDate });
+  status = await loginLinkStatus(userId);
+  expect(status?.expired).toBe(true);
+  expect(status?.active).toBe(false);
+  expect(status?.reason).toBe("expired");
+
+  const clickExpired = await redeemLoginLink(multi.token);
+  expect(clickExpired).toEqual({ error: "This sign-in link has expired." });
 });

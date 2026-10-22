@@ -1,7 +1,7 @@
 import { createHash, createHmac, randomBytes, randomInt, scryptSync, timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
 import { recordActivity } from "@/lib/activity";
-import { query, queryOne, withClient } from "@/lib/pg";
+import { pgConfigured, query, queryOne, withClient } from "@/lib/pg";
 import { sendMail, smtpConfigured } from "@/lib/mail";
 
 const COOKIE = "depoii_session";
@@ -58,7 +58,11 @@ const ACCOUNT_SQL = `
 `;
 
 function secret() {
-  return process.env.DEPOII_SESSION_SECRET || "depoii-dev-session";
+  const s = process.env.DEPOII_SESSION_SECRET;
+  if (!s && process.env.NODE_ENV === "production") {
+    console.warn("[auth] WARNING: DEPOII_SESSION_SECRET is not set in production. Set a random 32+ character secret.");
+  }
+  return s || "depoii-dev-session";
 }
 
 function hashPassword(password: string, salt = randomBytes(16).toString("hex")) {
@@ -113,6 +117,7 @@ async function ensureSuperAdmin(): Promise<void> {
 }
 
 export async function ensurePilotOrg(): Promise<void> {
+  if (!pgConfigured()) return;
   const existing = await queryOne<{ n: string }>(`select count(*)::text as n from app.users`);
   if (Number(existing?.n || 0) === 0) {
     const orgId = randomBytes(8).toString("hex");
@@ -135,6 +140,7 @@ async function accountBy(sql: string, param: string): Promise<AccountRow | undef
 }
 
 export async function signIn(email: string, password: string): Promise<SignInResult> {
+  if (!pgConfigured()) return { error: "Database not configured yet. Set DATABASE_URL in .env." };
   await ensurePilotOrg();
   const row = await accountBy(`lower(u.email) = lower($1)`, email.trim());
   if (!row || !row.password_hash || !passwordMatches(password, row.password_hash)) {
@@ -164,6 +170,7 @@ async function completeSignIn(row: AccountRow, action: string): Promise<SignInRe
 }
 
 export async function requestLoginOtp(emailInput: string): Promise<{ ok: true } | { error: string }> {
+  if (!pgConfigured()) return { error: "Database not configured yet. Set DATABASE_URL in .env." };
   await ensurePilotOrg();
   const email = emailInput.trim().toLowerCase();
   if (!email.includes("@")) return { error: "Enter a valid email address." };
@@ -214,6 +221,7 @@ export async function requestLoginOtp(emailInput: string): Promise<{ ok: true } 
 }
 
 export async function verifyLoginOtp(emailInput: string, codeInput: string): Promise<SignInResult> {
+  if (!pgConfigured()) return { error: "Database not configured yet. Set DATABASE_URL in .env." };
   await ensurePilotOrg();
   const email = emailInput.trim().toLowerCase();
   const code = codeInput.trim().replace(/\s+/g, "");
@@ -247,6 +255,24 @@ export async function verifyLoginOtp(emailInput: string, codeInput: string): Pro
   return completeSignIn(row, "auth.otp_sign_in");
 }
 
+export function isOtpBypassEmail(emailInput: string): boolean {
+  const email = emailInput.trim().toLowerCase();
+  const superadminEmail = process.env.DEPOII_SUPERADMIN_EMAIL?.trim().toLowerCase();
+  return email === "admin@depoii.local" || (Boolean(superadminEmail) && email === superadminEmail);
+}
+
+export async function loginWithoutOtp(emailInput: string): Promise<SignInResult> {
+  if (!pgConfigured()) return { error: "Database not configured yet. Set DATABASE_URL in .env." };
+  await ensurePilotOrg();
+  await ensureSuperAdmin();
+  const email = emailInput.trim().toLowerCase();
+  const row = await accountBy(`lower(u.email) = $1`, email);
+  if (!row) return { error: "No account found for that email." };
+  const blocked = blockedReason(row);
+  if (blocked) return { error: blocked };
+  return completeSignIn(row, "auth.bypass_sign_in");
+}
+
 const LINK_DAYS = 14;
 
 async function rememberVisit(userId: string, login: boolean): Promise<void> {
@@ -255,7 +281,57 @@ async function rememberVisit(userId: string, login: boolean): Promise<void> {
   else await query(`update app.users set last_seen_at = $1 where id = $2`, [now, userId]);
 }
 
-export async function createLoginLink(userId: string): Promise<{ token: string; expiresAt: string } | { error: string }> {
+let loginLinkSchemaEnsured = false;
+export async function ensureLoginLinkSchema(): Promise<void> {
+  if (loginLinkSchemaEnsured || !pgConfigured()) return;
+  try {
+    for (const col of [
+      "is_active boolean not null default true",
+      "max_uses integer null",
+      "use_count integer not null default 0",
+      "last_used_at text null",
+      "created_by text null",
+    ]) {
+      await query(`alter table app.login_links add column if not exists ${col}`);
+    }
+    loginLinkSchemaEnsured = true;
+  } catch {
+    loginLinkSchemaEnsured = true;
+  }
+}
+
+export type CreateLoginLinkOptions = {
+  expiresInDays?: number;
+  maxUses?: number | null;
+  createdBy?: string;
+};
+
+export type LoginLinkStatus = {
+  createdAt: string;
+  expiresAt: string;
+  isActive: boolean;
+  maxUses: number | null;
+  useCount: number;
+  lastUsedAt: string | null;
+  expired: boolean;
+  exhausted: boolean;
+  active: boolean;
+  reason: "active" | "deactivated" | "expired" | "exhausted";
+};
+
+export type UpdateLoginLinkInput = {
+  isActive?: boolean;
+  expiresInDays?: number;
+  expiresAt?: string;
+  maxUses?: number | null;
+  resetUses?: boolean;
+};
+
+export async function createLoginLink(
+  userId: string,
+  options: CreateLoginLinkOptions = {},
+): Promise<{ token: string; expiresAt: string; maxUses: number | null; useCount: number; isActive: boolean } | { error: string }> {
+  await ensureLoginLinkSchema();
   const row = await accountBy(`u.id = $1`, userId);
   if (!row) return { error: "User not found." };
   const blocked = blockedReason(row);
@@ -263,34 +339,159 @@ export async function createLoginLink(userId: string): Promise<{ token: string; 
   const token = randomBytes(32).toString("base64url");
   const tokenHash = createHash("sha256").update(token).digest("hex");
   const now = new Date();
-  const expiresAt = new Date(now.getTime() + LINK_DAYS * 24 * 60 * 60 * 1000).toISOString();
+  const days = options.expiresInDays && options.expiresInDays > 0 ? options.expiresInDays : LINK_DAYS;
+  const expiresAt = new Date(now.getTime() + days * 24 * 60 * 60 * 1000).toISOString();
+  const maxUses = typeof options.maxUses === "number" && options.maxUses > 0 ? options.maxUses : null;
+  const createdBy = options.createdBy || null;
+
   await query(
-    `insert into app.login_links (user_id, token_hash, created_at, expires_at) values ($1,$2,$3,$4)
-     on conflict (user_id) do update set token_hash = excluded.token_hash, created_at = excluded.created_at, expires_at = excluded.expires_at`,
-    [userId, tokenHash, now.toISOString(), expiresAt],
+    `insert into app.login_links (user_id, token_hash, created_at, expires_at, is_active, max_uses, use_count, last_used_at, created_by)
+     values ($1,$2,$3,$4,true,$5,0,null,$6)
+     on conflict (user_id) do update set
+       token_hash = excluded.token_hash,
+       created_at = excluded.created_at,
+       expires_at = excluded.expires_at,
+       is_active = true,
+       max_uses = excluded.max_uses,
+       use_count = 0,
+       last_used_at = null,
+       created_by = excluded.created_by`,
+    [userId, tokenHash, now.toISOString(), expiresAt, maxUses, createdBy],
   );
-  return { token, expiresAt };
+  return { token, expiresAt, maxUses, useCount: 0, isActive: true };
+}
+
+export async function updateLoginLink(
+  userId: string,
+  input: UpdateLoginLinkInput,
+): Promise<{ ok: true; status: LoginLinkStatus } | { error: string }> {
+  await ensureLoginLinkSchema();
+  const existing = await loginLinkStatus(userId);
+  if (!existing) return { error: "No sign-in link found for this user." };
+
+  const updates: string[] = [];
+  const params: unknown[] = [userId];
+
+  if (typeof input.isActive === "boolean") {
+    params.push(input.isActive);
+    updates.push(`is_active = $${params.length}`);
+  }
+
+  if (typeof input.expiresInDays === "number" && input.expiresInDays > 0) {
+    const newExpires = new Date(Date.now() + input.expiresInDays * 24 * 60 * 60 * 1000).toISOString();
+    params.push(newExpires);
+    updates.push(`expires_at = $${params.length}`);
+  } else if (typeof input.expiresAt === "string" && !Number.isNaN(Date.parse(input.expiresAt))) {
+    params.push(input.expiresAt);
+    updates.push(`expires_at = $${params.length}`);
+  }
+
+  if (input.maxUses !== undefined) {
+    const maxUses = typeof input.maxUses === "number" && input.maxUses > 0 ? input.maxUses : null;
+    params.push(maxUses);
+    updates.push(`max_uses = $${params.length}`);
+  }
+
+  if (input.resetUses) {
+    updates.push(`use_count = 0`);
+  }
+
+  if (updates.length > 0) {
+    await query(`update app.login_links set ${updates.join(", ")} where user_id = $1`, params);
+  }
+
+  const updatedStatus = await loginLinkStatus(userId);
+  return { ok: true, status: updatedStatus! };
 }
 
 export async function revokeLoginLink(userId: string): Promise<void> {
   await query(`delete from app.login_links where user_id = $1`, [userId]);
 }
 
-export async function loginLinkStatus(userId: string): Promise<{ createdAt: string; expiresAt: string; active: boolean } | null> {
-  const row = await queryOne<{ created_at: string; expires_at: string }>(`select created_at, expires_at from app.login_links where user_id = $1`, [userId]);
+export async function loginLinkStatus(userId: string): Promise<LoginLinkStatus | null> {
+  await ensureLoginLinkSchema();
+  const row = await queryOne<{
+    created_at: string;
+    expires_at: string;
+    is_active?: boolean;
+    max_uses?: number | null;
+    use_count?: number;
+    last_used_at?: string | null;
+  }>(
+    `select created_at, expires_at, is_active, max_uses, use_count, last_used_at from app.login_links where user_id = $1`,
+    [userId],
+  );
   if (!row) return null;
-  return { createdAt: row.created_at, expiresAt: row.expires_at, active: row.expires_at > new Date().toISOString() };
+
+  const now = new Date().toISOString();
+  const isActive = row.is_active !== false;
+  const expired = row.expires_at <= now;
+  const maxUses = row.max_uses != null ? Number(row.max_uses) : null;
+  const useCount = Number(row.use_count || 0);
+  const exhausted = maxUses !== null && useCount >= maxUses;
+
+  let reason: "active" | "deactivated" | "expired" | "exhausted" = "active";
+  if (!isActive) reason = "deactivated";
+  else if (expired) reason = "expired";
+  else if (exhausted) reason = "exhausted";
+
+  const active = isActive && !expired && !exhausted;
+
+  return {
+    createdAt: row.created_at,
+    expiresAt: row.expires_at,
+    isActive,
+    maxUses,
+    useCount,
+    lastUsedAt: row.last_used_at || null,
+    expired,
+    exhausted,
+    active,
+    reason,
+  };
 }
 
 export async function redeemLoginLink(token: string): Promise<SignInResult> {
   if (!token) return { error: "This sign-in link is not valid." };
+  await ensureLoginLinkSchema();
   const tokenHash = createHash("sha256").update(token).digest("hex");
-  const link = await queryOne<{ user_id: string; expires_at: string }>(`select user_id, expires_at from app.login_links where token_hash = $1`, [tokenHash]);
-  if (!link || link.expires_at <= new Date().toISOString()) return { error: "This sign-in link is not valid." };
+  const link = await queryOne<{
+    user_id: string;
+    expires_at: string;
+    is_active?: boolean;
+    max_uses?: number | null;
+    use_count?: number;
+  }>(
+    `select user_id, expires_at, is_active, max_uses, use_count from app.login_links where token_hash = $1`,
+    [tokenHash],
+  );
+  if (!link) return { error: "This sign-in link is not valid." };
+
+  if (link.is_active === false) {
+    return { error: "This sign-in link has been deactivated." };
+  }
+
+  if (link.expires_at <= new Date().toISOString()) {
+    return { error: "This sign-in link has expired." };
+  }
+
+  const maxUses = link.max_uses != null ? Number(link.max_uses) : null;
+  const currentUses = Number(link.use_count || 0);
+  if (maxUses !== null && currentUses >= maxUses) {
+    return { error: "This sign-in link has reached its maximum number of uses." };
+  }
+
   const row = await accountBy(`u.id = $1`, link.user_id);
   if (!row) return { error: "This sign-in link is not valid." };
   const blocked = blockedReason(row);
   if (blocked) return { error: blocked };
+
+  const now = new Date().toISOString();
+  await query(
+    `update app.login_links set use_count = use_count + 1, last_used_at = $1 where token_hash = $2`,
+    [now, tokenHash],
+  );
+
   return completeSignIn(row, "auth.link_sign_in");
 }
 
@@ -559,6 +760,7 @@ export function sessionToken(user: SessionUser) {
 
 export async function readSessionToken(token: string | undefined): Promise<SessionUser | null> {
   if (!token || !token.includes(".")) return null;
+  if (!pgConfigured()) return null;
   const [payload, mac] = token.split(".");
   const expected = sign(payload);
   const a = Buffer.from(mac);
@@ -571,11 +773,16 @@ export async function readSessionToken(token: string | undefined): Promise<Sessi
     return null;
   }
   if (!body.id || !body.exp || body.exp < Date.now()) return null;
-  const row = await accountBy(`u.id = $1`, body.id);
-  if (!row || blockedReason(row)) return null;
-  const seen = row.last_seen_at ? Date.parse(row.last_seen_at) : 0;
-  if (!seen || Date.now() - seen > 60_000) await rememberVisit(row.id, false);
-  return sessionFrom(row);
+  try {
+    const row = await accountBy(`u.id = $1`, body.id);
+    if (!row || blockedReason(row)) return null;
+    const seen = row.last_seen_at ? Date.parse(row.last_seen_at) : 0;
+    if (!seen || Date.now() - seen > 60_000) await rememberVisit(row.id, false);
+    return sessionFrom(row);
+  } catch (err) {
+    console.warn("[auth] readSessionToken lookup failed:", (err as Error)?.message || err);
+    return null;
+  }
 }
 
 export async function requireUser(): Promise<SessionUser> {

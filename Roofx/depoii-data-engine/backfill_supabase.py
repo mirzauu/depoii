@@ -18,15 +18,24 @@ import sqlite3
 import sys
 from datetime import datetime
 
+try:
+    from dotenv import load_dotenv
+    root_env = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".env"))
+    load_dotenv(root_env)
+    if not os.environ.get("SUPABASE_DB_URL") and os.environ.get("DIRECT_URL"):
+        os.environ["SUPABASE_DB_URL"] = os.environ["DIRECT_URL"]
+except ImportError:
+    pass
+
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from app.core import pg  # noqa: E402
 
 ENGINE_DB = os.path.join(os.path.dirname(os.path.abspath(__file__)), "depoii_local.db")
-NEXT_DB = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "depoii.sqlite")
+NEXT_DB = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "data", "depoii.sqlite"))
 
 # sqlite table -> (pg table, conflict keys, {sqlite_col: pg_col})
 ENGINE_TABLES = {
-    "normalized_permits": ("warehouse.normalized_permits", ["id"], {}),
+    "normalized_permits": ("warehouse.normalized_permits", ["raw_permit_number", "jurisdiction", "issue_date"], {}),
     "canonical_contractors": ("warehouse.canonical_contractors", ["id"], {}),
     "storm_swaths": ("warehouse.storm_swaths", ["id"], {}),
     "parcels": ("warehouse.parcels", ["id"], {}),
@@ -39,7 +48,7 @@ ENGINE_TABLES = {
 }
 NEXT_TABLES = {
     "orgs": ("app.orgs", ["id"], {}),
-    "users": ("app.users", ["id"], {}),
+    "users": ("app.users", ["email"], {}),
     "memberships": ("app.memberships", ["org_id", "user_id"], {}),
     "login_links": ("app.login_links", ["user_id"], {}),
     "login_otps": ("app.login_otps", ["email"], {}),
@@ -58,17 +67,29 @@ NEXT_TABLES = {
 BOOL_COLS = {"is_hail_storm_window", "is_competitor_capture", "is_pure_reroof", "is_mock", "outbound_ready", "bbb_accredited", "has_active_storms"}
 
 
-def pg_columns(cur, table: str) -> dict[str, str]:
+def pg_columns(cur, table: str) -> dict[str, tuple[str, bool]]:
     schema, name = table.split(".")
     cur.execute(
-        "SELECT column_name, data_type FROM information_schema.columns WHERE table_schema=%s AND table_name=%s",
+        "SELECT column_name, data_type, is_nullable FROM information_schema.columns WHERE table_schema=%s AND table_name=%s",
         (schema, name),
     )
-    return {r[0]: r[1] for r in cur.fetchall()}
+    return {r[0]: (r[1], r[2] == "YES") for r in cur.fetchall()}
 
 
-def convert(value, pg_type: str, col: str):
+def convert(value, col_meta: tuple[str, bool], col: str):
+    pg_type, is_nullable = col_meta
     if value is None or value == "":
+        if not is_nullable:
+            if col in ("created_at", "updated_at", "issue_date", "filing_date"):
+                return datetime.now().isoformat()
+            if pg_type in ("text", "character varying"):
+                return ""
+            if pg_type in ("bigint", "integer", "smallint"):
+                return 0
+            if pg_type in ("double precision", "numeric", "real"):
+                return 0.0
+            if col in BOOL_COLS or pg_type == "boolean":
+                return False
         return None
     if col in BOOL_COLS or pg_type == "boolean":
         return bool(int(value)) if isinstance(value, (int, float, str)) and str(value).strip() in ("0", "1") else bool(value)
@@ -86,17 +107,17 @@ def convert(value, pg_type: str, col: str):
             datetime.strptime(text, "%Y-%m-%d")
             return text
         except Exception:
-            return None
+            return None if is_nullable else "2026-01-01"
     if pg_type in ("double precision", "numeric", "real"):
         try:
             return float(value)
         except Exception:
-            return None
+            return None if is_nullable else 0.0
     if pg_type in ("bigint", "integer", "smallint"):
         try:
             return int(float(value))
         except Exception:
-            return None
+            return None if is_nullable else 0
     return value
 
 

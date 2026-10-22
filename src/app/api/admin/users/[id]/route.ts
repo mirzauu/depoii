@@ -7,7 +7,13 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
   try {
     await requireSuperAdmin();
     const { id } = await params;
-    return Response.json(await userDetail(id));
+    return Response.json(await userDetail(id), {
+      headers: {
+        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        Pragma: "no-cache",
+        Expires: "0",
+      },
+    });
   } catch (error) {
     return adminResponse(error);
   }

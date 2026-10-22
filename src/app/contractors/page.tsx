@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { Search, X, Phone, HardHat } from "lucide-react";
 import { ContractorLink } from "@/components/contractor-link";
 import { useDepoiiState } from "@/components/depoii-provider";
 import { EngineLayout, EngineState, Filter, Pager, ScopeFilter, filterField, useDebounced } from "@/components/engine-layout";
@@ -9,6 +10,7 @@ import { useEngine } from "@/components/use-engine";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { mapLeaderboard } from "@/lib/engine-api";
 import { num, pct, usd } from "@/lib/format";
+import { cn } from "@/lib/utils";
 
 const LIMIT = 50;
 
@@ -51,6 +53,27 @@ export default function ContractorsBrowsePage() {
     setOffset(0);
   };
 
+  const clearAllFilters = () => {
+    setSearch("");
+    setMinPermits("");
+    setMinVal("");
+    setRoof("");
+    setHasContact(false);
+    setSort("volume_desc");
+    setAll(false);
+    setOffset(0);
+  };
+
+  const activeCount = [
+    Boolean(search),
+    Boolean(minPermits),
+    Boolean(minVal),
+    Boolean(roof),
+    hasContact,
+    all,
+    sort !== "volume_desc",
+  ].filter(Boolean).length;
+
   const rows = page.data?.contractors ?? [];
   const total = page.data?.total ?? 0;
   const place = all ? "All locations" : jurisdiction;
@@ -59,58 +82,97 @@ export default function ContractorsBrowsePage() {
     <EngineLayout
       title="Contractors"
       subtitle={`${place} · roofing contractor directory from named contractors on commercial roof permits. Broader than the win-share leaderboard.`}
+      onResetFilters={clearAllFilters}
+      activeFiltersCount={activeCount}
       filters={
         <>
           <ScopeFilter jurisdiction={jurisdiction} all={all} onChange={reset(setAll)} />
-          <Filter label="Search">
-            <input
-              value={search}
-              onChange={(e) => reset(setSearch)(e.target.value)}
-              placeholder="Company name…"
-              className={filterField}
-            />
+
+          <Filter label="Search Contractor">
+            <div className="relative">
+              <Search className="pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-neutral-500" />
+              <input
+                value={search}
+                onChange={(e) => reset(setSearch)(e.target.value)}
+                placeholder="Company name…"
+                className={cn(filterField, "pl-8 pr-7")}
+              />
+              {search && (
+                <button
+                  type="button"
+                  onClick={() => reset(setSearch)("")}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-300"
+                >
+                  <X className="size-3" />
+                </button>
+              )}
+            </div>
           </Filter>
+
           <Filter label="Roof system">
             <select value={roof} onChange={(e) => reset(setRoof)(e.target.value)} className={filterField}>
-              <option value="">Any</option>
+              <option value="">Any Roof System</option>
               {ROOF_SYSTEMS.map((s) => (
                 <option key={s} value={s}>{s}</option>
               ))}
             </select>
           </Filter>
+
           <Filter label="Min permits">
             <select value={minPermits} onChange={(e) => reset(setMinPermits)(e.target.value)} className={filterField}>
-              <option value="">Any</option>
-              <option value="2">2+</option>
-              <option value="5">5+</option>
-              <option value="10">10+</option>
-              <option value="25">25+</option>
+              <option value="">Any Volume</option>
+              <option value="2">2+ permits</option>
+              <option value="5">5+ permits</option>
+              <option value="10">10+ permits</option>
+              <option value="25">25+ permits</option>
             </select>
           </Filter>
+
           <Filter label="Min volume">
             <select value={minVal} onChange={(e) => reset(setMinVal)(e.target.value)} className={filterField}>
-              <option value="">Any</option>
+              <option value="">Any Valuation</option>
               <option value="100000">$100k+</option>
               <option value="500000">$500k+</option>
               <option value="1000000">$1M+</option>
               <option value="5000000">$5M+</option>
             </select>
           </Filter>
-          <Filter label="Contact">
-            <select
-              value={hasContact ? "yes" : ""}
-              onChange={(e) => reset(setHasContact)(e.target.value === "yes")}
-              className={filterField}
-            >
-              <option value="">Any</option>
-              <option value="yes">Phone or website</option>
-            </select>
+
+          <Filter label="Contact Details">
+            <div className="grid grid-cols-2 gap-1 rounded-lg border border-neutral-300 dark:border-neutral-800 bg-neutral-100 dark:bg-[#111217] p-1">
+              <button
+                type="button"
+                onClick={() => reset(setHasContact)(false)}
+                className={cn(
+                  "rounded py-1 text-center text-xs font-medium transition-colors",
+                  !hasContact
+                    ? "bg-white dark:bg-white/10 text-neutral-900 dark:text-white font-semibold shadow-sm"
+                    : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200"
+                )}
+              >
+                All
+              </button>
+              <button
+                type="button"
+                onClick={() => reset(setHasContact)(true)}
+                className={cn(
+                  "rounded py-1 text-center text-xs font-medium transition-colors flex items-center justify-center gap-1",
+                  hasContact
+                    ? "border border-[#B4E4D6]/50 bg-[#B4E4D6]/20 text-emerald-800 dark:text-[#B4E4D6] font-semibold shadow-sm"
+                    : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200"
+                )}
+              >
+                <Phone className="size-3" />
+                Phone/Web
+              </button>
+            </div>
           </Filter>
+
           <Filter label="Sort">
             <select value={sort} onChange={(e) => reset(setSort)(e.target.value)} className={filterField}>
-              <option value="volume_desc">Volume ↓</option>
-              <option value="permits_desc">Permits ↓</option>
-              <option value="name_asc">Name A–Z</option>
+              <option value="volume_desc">Volume (High to Low)</option>
+              <option value="permits_desc">Permits (High to Low)</option>
+              <option value="name_asc">Name (A–Z)</option>
             </select>
           </Filter>
         </>

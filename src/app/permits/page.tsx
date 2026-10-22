@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Search, X, Check, HardHat } from "lucide-react";
 import { ContractorLink } from "@/components/contractor-link";
 import { useDepoiiState } from "@/components/depoii-provider";
 import { EngineLayout, EngineState, Filter, Kpis, Pager, ScopeFilter, filterField, useDebounced } from "@/components/engine-layout";
@@ -8,6 +9,7 @@ import { useEngine } from "@/components/use-engine";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { mapJobsites, mapMultiphase, mapPermitSearch, mapStats } from "@/lib/engine-api";
 import { num, shortDate, usd } from "@/lib/format";
+import { cn } from "@/lib/utils";
 
 const LIMIT = 50;
 
@@ -81,78 +83,230 @@ export default function PermitsPage() {
     setOffset(0);
   };
 
+  const clearAllFilters = () => {
+    setSearch("");
+    setContractor("");
+    setCategory("");
+    setRoof("");
+    setStatus("");
+    setMode("all");
+    setMinVal("");
+    setMaxVal("");
+    setHail(false);
+    setSort("date_desc");
+    setAll(false);
+    setOffset(0);
+  };
+
+  const activeCount = [
+    Boolean(search),
+    Boolean(contractor),
+    Boolean(category),
+    Boolean(roof),
+    Boolean(status),
+    mode !== "all",
+    Boolean(minVal),
+    Boolean(maxVal),
+    hail,
+    all,
+  ].filter(Boolean).length;
+
   return (
     <EngineLayout
       title="All permits"
       subtitle={view === "jobsites" ? `${all ? "All locations" : jurisdiction} · open permits issued in the last 90 to 180 days` : view === "phases" ? "Campuses permitted in stages, with a later phase still open" : `${all ? "All locations" : jurisdiction} · commercial roofing permits from the data engine warehouse`}
+      onResetFilters={clearAllFilters}
+      activeFiltersCount={activeCount}
       filters={
         <>
-          <Filter label="View">
-            <select value={view} onChange={(e) => { setView(e.target.value as "all" | "jobsites" | "phases"); setOffset(0); }} className={filterField}>
-              <option value="all">All permits</option>
-              <option value="jobsites">Active jobsites</option>
-              <option value="phases">Multi-phase projects</option>
-            </select>
-          </Filter>
-          <ScopeFilter jurisdiction={jurisdiction} all={all} onChange={reset(setAll)} />
-          {view !== "phases" && <>
-          <Filter label="Search">
-            <input value={search} onChange={(e) => reset(setSearch)(e.target.value)} placeholder="Permit, address, scope" className={filterField} />
-          </Filter>
-          <Filter label="Contractor">
-            <input value={contractor} onChange={(e) => reset(setContractor)(e.target.value)} placeholder="Name" className={filterField} />
-          </Filter>
-          {view === "all" && <>
-          <Filter label="Category">
-            <select value={category} onChange={(e) => reset(setCategory)(e.target.value)} className={filterField}>
-              <option value="">Any</option>
-              {(stats.data?.byCategory ?? []).map((x) => <option key={x.name} value={x.name}>{x.name}</option>)}
-            </select>
-          </Filter>
-          <Filter label="Roof system">
-            <select value={roof} onChange={(e) => reset(setRoof)(e.target.value)} className={filterField}>
-              <option value="">Any</option>
-              {(stats.data?.byRoofSystem ?? []).map((x) => <option key={x.name} value={x.name}>{x.name}</option>)}
-            </select>
-          </Filter>
-          <Filter label="Status">
-            <select value={status} onChange={(e) => reset(setStatus)(e.target.value)} className={filterField}>
-              <option value="">Any</option>
-              <option value="active">Active</option>
-              <option value="completed">Completed</option>
-              <option value="expired">Expired</option>
-            </select>
-          </Filter>
-          <Filter label="Intelligence">
-            <select value={mode} onChange={(e) => reset(setMode)(e.target.value)} className={filterField}>
-              <option value="all">All permits</option>
-              <option value="storm_matched">Storm matched</option>
-              <option value="unresolved_hail">Unresolved hail</option>
-              <option value="commercial_only">Commercial only</option>
-            </select>
-          </Filter>
-          <div className="grid grid-cols-2 gap-2">
-            <Filter label="Min value">
-              <input value={minVal} inputMode="numeric" onChange={(e) => reset(setMinVal)(e.target.value.replace(/[^\d.]/g, ""))} placeholder="$" className={filterField} />
-            </Filter>
-            <Filter label="Max value">
-              <input value={maxVal} inputMode="numeric" onChange={(e) => reset(setMaxVal)(e.target.value.replace(/[^\d.]/g, ""))} placeholder="$" className={filterField} />
-            </Filter>
+          <div className="space-y-1.5">
+            <label className="text-[10px] font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider block">
+              Permit View
+            </label>
+            <div className="grid grid-cols-3 gap-1 rounded-lg border border-neutral-300 dark:border-neutral-800 bg-neutral-100 dark:bg-[#13141a] p-1 text-center">
+              <button
+                type="button"
+                onClick={() => { setView("all"); setOffset(0); }}
+                className={cn(
+                  "rounded py-1.5 text-[11px] font-medium transition-colors",
+                  view === "all"
+                    ? "bg-white dark:bg-white/10 text-neutral-900 dark:text-white font-semibold shadow-sm"
+                    : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200"
+                )}
+              >
+                All
+              </button>
+              <button
+                type="button"
+                onClick={() => { setView("jobsites"); setOffset(0); }}
+                className={cn(
+                  "rounded py-1.5 text-[11px] font-medium transition-colors",
+                  view === "jobsites"
+                    ? "bg-white dark:bg-white/10 text-neutral-900 dark:text-white font-semibold shadow-sm"
+                    : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200"
+                )}
+              >
+                Jobsites
+              </button>
+              <button
+                type="button"
+                onClick={() => { setView("phases"); setOffset(0); }}
+                className={cn(
+                  "rounded py-1.5 text-[11px] font-medium transition-colors",
+                  view === "phases"
+                    ? "bg-white dark:bg-white/10 text-neutral-900 dark:text-white font-semibold shadow-sm"
+                    : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200"
+                )}
+              >
+                Phases
+              </button>
+            </div>
           </div>
-          <label className="flex items-center gap-2 text-sm">
-            <input type="checkbox" checked={hail} onChange={(e) => reset(setHail)(e.target.checked)} className="accent-red-500" />
-            Filed within 180 days of a storm
-          </label>
-          </>}
-          {view === "all" && <Filter label="Sort">
-            <select value={sort} onChange={(e) => reset(setSort)(e.target.value)} className={filterField}>
-              <option value="date_desc">Newest first</option>
-              <option value="date_asc">Oldest first</option>
-              <option value="valuation_desc">Highest value</option>
-              <option value="valuation_asc">Lowest value</option>
-            </select>
-          </Filter>}
-          </>}
+
+          <ScopeFilter jurisdiction={jurisdiction} all={all} onChange={reset(setAll)} />
+
+          {view !== "phases" && (
+            <>
+              <Filter label="Search">
+                <div className="relative">
+                  <Search className="pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-neutral-500" />
+                  <input
+                    value={search}
+                    onChange={(e) => reset(setSearch)(e.target.value)}
+                    placeholder="Permit, address, scope…"
+                    className={cn(filterField, "pl-8 pr-7")}
+                  />
+                  {search && (
+                    <button
+                      type="button"
+                      onClick={() => reset(setSearch)("")}
+                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-300"
+                    >
+                      <X className="size-3" />
+                    </button>
+                  )}
+                </div>
+              </Filter>
+
+              <Filter label="Contractor">
+                <div className="relative">
+                  <HardHat className="pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-neutral-500" />
+                  <input
+                    value={contractor}
+                    onChange={(e) => reset(setContractor)(e.target.value)}
+                    placeholder="Contractor name…"
+                    className={cn(filterField, "pl-8 pr-7")}
+                  />
+                  {contractor && (
+                    <button
+                      type="button"
+                      onClick={() => reset(setContractor)("")}
+                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-300"
+                    >
+                      <X className="size-3" />
+                    </button>
+                  )}
+                </div>
+              </Filter>
+
+              {view === "all" && (
+                <>
+                  <Filter label="Category">
+                    <select value={category} onChange={(e) => reset(setCategory)(e.target.value)} className={filterField}>
+                      <option value="">Any Category</option>
+                      {(stats.data?.byCategory ?? []).map((x) => <option key={x.name} value={x.name}>{x.name}</option>)}
+                    </select>
+                  </Filter>
+
+                  <Filter label="Roof system">
+                    <select value={roof} onChange={(e) => reset(setRoof)(e.target.value)} className={filterField}>
+                      <option value="">Any Roof System</option>
+                      {(stats.data?.byRoofSystem ?? []).map((x) => <option key={x.name} value={x.name}>{x.name}</option>)}
+                    </select>
+                  </Filter>
+
+                  <Filter label="Status">
+                    <select value={status} onChange={(e) => reset(setStatus)(e.target.value)} className={filterField}>
+                      <option value="">Any Status</option>
+                      <option value="active">Active</option>
+                      <option value="completed">Completed</option>
+                      <option value="expired">Expired</option>
+                    </select>
+                  </Filter>
+
+                  <Filter label="Intelligence">
+                    <select value={mode} onChange={(e) => reset(setMode)(e.target.value)} className={filterField}>
+                      <option value="all">All permits</option>
+                      <option value="storm_matched">Storm matched</option>
+                      <option value="unresolved_hail">Unresolved hail</option>
+                      <option value="commercial_only">Commercial only</option>
+                    </select>
+                  </Filter>
+
+                  <div className="grid grid-cols-2 gap-2">
+                    <Filter label="Min value">
+                      <div className="relative">
+                        <span className="pointer-events-none absolute left-2 top-1/2 -translate-y-1/2 text-neutral-500 text-xs">$</span>
+                        <input
+                          value={minVal}
+                          inputMode="numeric"
+                          onChange={(e) => reset(setMinVal)(e.target.value.replace(/[^\d.]/g, ""))}
+                          placeholder="Min"
+                          className={cn(filterField, "pl-5 font-mono")}
+                        />
+                      </div>
+                    </Filter>
+                    <Filter label="Max value">
+                      <div className="relative">
+                        <span className="pointer-events-none absolute left-2 top-1/2 -translate-y-1/2 text-neutral-500 text-xs">$</span>
+                        <input
+                          value={maxVal}
+                          inputMode="numeric"
+                          onChange={(e) => reset(setMaxVal)(e.target.value.replace(/[^\d.]/g, ""))}
+                          placeholder="Max"
+                          className={cn(filterField, "pl-5 font-mono")}
+                        />
+                      </div>
+                    </Filter>
+                  </div>
+
+                  <label
+                    className={cn(
+                      "flex items-center gap-2 rounded-lg border p-2 text-xs cursor-pointer transition-colors",
+                      hail
+                        ? "border-[#B4E4D6]/50 bg-[#B4E4D6]/15 text-neutral-900 dark:text-white"
+                        : "border-neutral-300 dark:border-neutral-800 bg-white dark:bg-[#14151c] text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200"
+                    )}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={hail}
+                      onChange={(e) => reset(setHail)(e.target.checked)}
+                      className="sr-only"
+                    />
+                    <div
+                      className={cn(
+                        "size-3.5 rounded border flex items-center justify-center shrink-0 transition-colors",
+                        hail ? "border-[#B4E4D6] bg-[#B4E4D6] text-neutral-950" : "border-neutral-400 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-900"
+                      )}
+                    >
+                      {hail && <Check className="size-2.5 stroke-[3]" />}
+                    </div>
+                    <span className="text-[11px] font-medium">Post-Storm Window (180d)</span>
+                  </label>
+
+                  <Filter label="Sort">
+                    <select value={sort} onChange={(e) => reset(setSort)(e.target.value)} className={filterField}>
+                      <option value="date_desc">Newest first</option>
+                      <option value="date_asc">Oldest first</option>
+                      <option value="valuation_desc">Highest value</option>
+                      <option value="valuation_asc">Lowest value</option>
+                    </select>
+                  </Filter>
+                </>
+              )}
+            </>
+          )}
         </>
       }
     >

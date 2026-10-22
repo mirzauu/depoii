@@ -112,33 +112,68 @@ export async function overview() {
   };
 }
 
+type OrgSubscriptionItem = {
+  territory_id: string;
+  territory_name: string;
+  tier: string;
+  starts_at: string;
+  ends_at: string | null;
+  is_trial: boolean;
+  trial_days_left: number | null;
+};
+
 type OrgSql = {
   id: string;
   name: string;
   disabled: number;
   created_at: string;
+  subscription_tier: string;
+  max_active_claims: number;
   members: number;
   leads: number;
   outcomes: number;
+  active_subscriptions: OrgSubscriptionItem[] | string | null;
 };
 
 function mapOrg(row: OrgSql) {
+  let activeSubs: OrgSubscriptionItem[] = [];
+  if (Array.isArray(row.active_subscriptions)) {
+    activeSubs = row.active_subscriptions;
+  } else if (typeof row.active_subscriptions === "string") {
+    try { activeSubs = JSON.parse(row.active_subscriptions); } catch {}
+  }
   return {
     id: row.id,
     name: row.name,
     disabled: Boolean(row.disabled),
     createdAt: row.created_at,
+    subscriptionTier: row.subscription_tier || "shared_intelligence",
+    maxActiveClaims: Number(row.max_active_claims || 0),
     members: Number(row.members),
     leads: Number(row.leads),
     outcomes: Number(row.outcomes),
+    activeSubscriptions: activeSubs,
   };
 }
 
 const ORG_LIST_SQL = `
-  SELECT o.id, o.name, o.disabled, o.created_at,
+  SELECT o.id, o.name, o.disabled, o.created_at, o.subscription_tier, o.max_active_claims,
     (SELECT COUNT(*) FROM app.memberships m WHERE m.org_id = o.id) AS members,
     (SELECT COUNT(*) FROM app.leads l WHERE l.org_id = o.id) AS leads,
-    (SELECT COUNT(*) FROM app.field_outcomes f WHERE f.org_id = o.id) AS outcomes
+    (SELECT COUNT(*) FROM app.field_outcomes f WHERE f.org_id = o.id) AS outcomes,
+    (SELECT json_agg(json_build_object(
+      'territory_id', ts.territory_id,
+      'territory_name', t.name,
+      'tier', ts.tier,
+      'starts_at', ts.starts_at::text,
+      'ends_at', ts.ends_at::text,
+      'is_trial', (ts.ends_at IS NOT NULL AND ts.ends_at > NOW()),
+      'trial_days_left', CASE WHEN ts.ends_at IS NOT NULL THEN GREATEST(0, CEIL(EXTRACT(EPOCH FROM (ts.ends_at - NOW())) / 86400))::int ELSE NULL END
+    ))
+    FROM app.territory_subscriptions ts
+    JOIN app.territories t ON t.id = ts.territory_id
+    WHERE ts.org_id = o.id AND ts.status = 'active' AND (ts.ends_at IS NULL OR ts.ends_at > NOW())
+    ) AS active_subscriptions
   FROM app.orgs o
 `;
 
