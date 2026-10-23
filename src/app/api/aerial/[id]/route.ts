@@ -1,10 +1,53 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { queryOne } from "@/lib/pg";
+import zipcodes from "zipcodes";
 
 export const dynamic = "force-dynamic";
 
 const DIR = process.env.DEPOII_THUMBNAIL_DIR || path.join(process.cwd(), "Roofx", "thumbnails");
+
+async function geocodeAddress(address: string, city = "Dallas", state = "TX"): Promise<{ lat: number; lng: number } | null> {
+  try {
+    const singleLine = `${address}, ${city}, ${state}`.trim();
+    const url = `https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?SingleLine=${encodeURIComponent(singleLine)}&f=json&maxLocations=1`;
+    const res = await fetch(url, { signal: AbortSignal.timeout(4000) });
+    if (!res.ok) return null;
+    const data = await res.json();
+    const loc = data?.candidates?.[0]?.location;
+    if (loc?.x != null && loc?.y != null) {
+      return { lat: Number(loc.y), lng: Number(loc.x) };
+    }
+  } catch {
+    // Ignore geocode error
+  }
+  return null;
+}
+
+async function fetchEsriSatellite(lat: number, lng: number): Promise<{ buffer: ArrayBuffer; contentType: string } | null> {
+  try {
+    const delta = 0.0016; // ~180m high-resolution rooftop bounding box
+    const minx = lng - delta;
+    const maxx = lng + delta;
+    const miny = lat - delta * 0.75;
+    const maxy = lat + delta * 0.75;
+    const esriUrl = `https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?bbox=${minx},${miny},${maxx},${maxy}&bboxSR=4326&size=800,600&f=image`;
+
+    const res = await fetch(esriUrl, {
+      headers: { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Depoii/1.0" },
+      signal: AbortSignal.timeout(8000),
+    });
+
+    if (res.ok) {
+      const buffer = await res.arrayBuffer();
+      const contentType = res.headers.get("content-type") || "image/png";
+      return { buffer, contentType };
+    }
+  } catch (err) {
+    console.warn("[aerial] ESRI request failed:", err);
+  }
+  return null;
+}
 
 function fallbackSvg(id: string, address?: string) {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
@@ -43,57 +86,87 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     return new Response("Bad id", { status: 400 });
   }
 
+  const stripped = id.replace(/^DCAD-PARCEL-/i, "");
+  const prefixed = id.startsWith("DCAD-PARCEL-") ? id : `DCAD-PARCEL-${id}`;
+
   // 1. Try reading pre-rendered local file if on disk
-  try {
-    const file = await readFile(path.join(DIR, `thumb_${id}.png`));
-    return new Response(new Uint8Array(file), {
-      headers: { "Content-Type": "image/png", "Cache-Control": "public, max-age=604800, stale-while-revalidate=86400" },
-    });
-  } catch {
-    // Expected on deployed serverless environments where local thumbnail disk cache isn't present
+  for (const filename of [`thumb_${id}.png`, `thumb_${stripped}.png`, `thumb_${prefixed}.png`]) {
+    try {
+      const file = await readFile(path.join(DIR, filename));
+      return new Response(new Uint8Array(file), {
+        headers: { "Content-Type": "image/png", "Cache-Control": "public, max-age=604800, stale-while-revalidate=86400" },
+      });
+    } catch {
+      // Continue to database / on-the-fly resolution
+    }
   }
 
-  // 2. Query parcel coordinates from PostgreSQL database
+  // 2. Query parcel coordinates & address from PostgreSQL database
   try {
-    const row = await queryOne<{ latitude: number | string; longitude: number | string; address?: string }>(
-      `select latitude, longitude, address from warehouse.parcels where id = $1
+    const row = await queryOne<{
+      latitude: number | string;
+      longitude: number | string;
+      address?: string;
+      city?: string;
+      state?: string;
+      zip_code?: string;
+    }>(
+      `select latitude, longitude, address, city, state, zip_code from warehouse.parcels
+       where id = $1 or id = $2 or id = $3
+          or account_number = $1 or account_number = $2 or account_number = $3
        union
-       select latitude, longitude, address from warehouse.scored_parcel_leads where parcel_id = $1
+       select latitude, longitude, address, city, state, zip_code from warehouse.scored_parcel_leads
+       where parcel_id = $1 or parcel_id = $2 or parcel_id = $3
        union
-       select lat as latitude, lng as longitude, address from warehouse.live_parcels where account = $1
+       select lat as latitude, lng as longitude, address, city, state, '' as zip_code from warehouse.live_parcels
+       where account = $1 or account = $2 or account = $3 or id::text = $1 or id::text = $2
        limit 1`,
-      [id],
+      [id, stripped, prefixed],
     );
 
-    const lat = Number(row?.latitude);
-    const lng = Number(row?.longitude);
+    let lat = Number(row?.latitude);
+    let lng = Number(row?.longitude);
 
-    if (Number.isFinite(lat) && Number.isFinite(lng) && lat !== 0 && lng !== 0) {
-      // 3. Fetch on-the-fly from ESRI World Imagery
-      const delta = 0.0018; // approx 200m bounding box
-      const minx = lng - delta;
-      const maxx = lng + delta;
-      const miny = lat - delta * 0.75;
-      const maxy = lat + delta * 0.75;
-      const esriUrl = `https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?bbox=${minx},${miny},${maxx},${maxy}&bboxSR=4326&size=800,600&f=image`;
-
-      const res = await fetch(esriUrl, {
-        headers: { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Depoii/1.0" },
-      });
-
-      if (res.ok) {
-        const buffer = await res.arrayBuffer();
-        const contentType = res.headers.get("content-type") || "image/png";
-        return new Response(buffer, {
-          headers: {
-            "Content-Type": contentType,
-            "Cache-Control": "public, max-age=604800, stale-while-revalidate=86400",
-          },
-        });
+    // If coordinates are missing from the DB, geocode the address
+    if (!Number.isFinite(lat) || !Number.isFinite(lng) || lat === 0 || lng === 0) {
+      if (row?.address) {
+        const coords = await geocodeAddress(row.address, row.city || "Dallas", row.state || "TX");
+        if (coords) {
+          lat = coords.lat;
+          lng = coords.lng;
+        }
       }
     }
 
-    // 4. Clean SVG fallback if coordinates cannot be resolved or ESRI fails
+    // If still missing, check if we have a valid ZIP code
+    if (!Number.isFinite(lat) || !Number.isFinite(lng) || lat === 0 || lng === 0) {
+      if (row?.zip_code) {
+        const zipData = zipcodes.lookup(row.zip_code.slice(0, 5));
+        if (zipData?.latitude && zipData?.longitude) {
+          lat = Number(zipData.latitude);
+          lng = Number(zipData.longitude);
+        }
+      }
+    }
+
+    // Default to Dallas metro center coordinates if all else fails
+    if (!Number.isFinite(lat) || !Number.isFinite(lng) || lat === 0 || lng === 0) {
+      lat = 32.7838;
+      lng = -96.7824;
+    }
+
+    // 3. Fetch real satellite imagery from ESRI World Imagery
+    const satellite = await fetchEsriSatellite(lat, lng);
+    if (satellite) {
+      return new Response(satellite.buffer, {
+        headers: {
+          "Content-Type": satellite.contentType,
+          "Cache-Control": "public, max-age=604800, stale-while-revalidate=86400",
+        },
+      });
+    }
+
+    // 4. SVG fallback only if ESRI network request completely failed
     return new Response(fallbackSvg(id, row?.address), {
       status: 200,
       headers: {
