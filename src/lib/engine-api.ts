@@ -1031,6 +1031,11 @@ export function mapHailEvents(body: unknown): HailEventsCatalog {
       source: str(root, ["source"], "Depoii data engine"),
       reports,
       warnings,
+      affectedZips: Array.isArray(selectedRow?.affected_zips)
+        ? (selectedRow.affected_zips as unknown[]).map(String)
+        : Array.isArray(selectedRow?.affectedZips)
+          ? (selectedRow.affectedZips as unknown[]).map(String)
+          : [],
     },
   };
 }
@@ -1146,6 +1151,7 @@ export interface MondayBrief {
     parcelId: string;
     address: string;
     city: string;
+    zipCode?: string;
     owner: string;
     ownerMail: string;
     yearBuilt: number;
@@ -1218,6 +1224,7 @@ export function mapBrief(body: unknown): MondayBrief {
         parcelId: str(o, ["parcel_id"]),
         address: str(o, ["address"]),
         city: str(o, ["city"]),
+        zipCode: str(o, ["zip_code", "zipCode", "zip"]),
         owner: str(o, ["owner"]),
         ownerMail: str(o, ["owner_mail"]),
         yearBuilt: num(o, ["year_built"]),

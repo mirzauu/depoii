@@ -138,15 +138,11 @@ export function VerificationCard({ leadId }: { leadId: string }) {
       <div className="flex flex-wrap items-center gap-2">
         <h2 className="text-sm font-semibold">Verification</h2>
         <VerificationBadge status={view.status} score={view.score} />
-        {view.verifiedAt && <span className="text-xs text-muted-foreground">Checked {view.verifiedAt}</span>}
-        <button type="button" onClick={recheck} disabled={busy} className="ml-auto inline-flex h-7 items-center gap-1.5 rounded-md border border-border px-2 text-xs hover:bg-muted disabled:opacity-50">
-          {busy ? <Loader2 className="size-3.5 animate-spin" /> : <RefreshCw className="size-3.5" />}
-          {busy ? "Checking…" : unchecked ? "Verify" : "Verify again"}
-        </button>
+        {/* Verification button hidden for now */}
       </div>
       {fault && <p className="mt-2 text-sm text-red-400">{fault}</p>}
       {card.error && !v && !fault && (
-        <p className="mt-2 text-sm text-muted-foreground">No live check on file yet. Run Verify to pull appraisal, hail, permits, and a satellite roof image for this parcel.</p>
+        <p className="mt-2 text-sm text-muted-foreground">No live check on file yet for appraisal, hail, permits, and satellite roof imagery for this parcel.</p>
       )}
       {unchecked && v ? (
         <p className="mt-2 text-sm text-muted-foreground">This building hasn&apos;t been run through the live checks yet.</p>

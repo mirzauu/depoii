@@ -12,7 +12,8 @@ function isPublicAsset(pathname: string) {
     pathname === "/icon.svg" ||
     pathname === "/apple-icon" ||
     pathname.startsWith("/manifest") ||
-    pathname.startsWith("/landing/")
+    pathname.startsWith("/landing/") ||
+    pathname.startsWith("/api/aerial")
   );
 }
 

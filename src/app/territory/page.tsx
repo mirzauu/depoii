@@ -60,7 +60,7 @@ export default function TerritoryPage() {
   const totalParcels = territories.reduce((acc, t) => acc + (Number(t.totalParcels) || 0), 0);
 
   return (
-    <div className="flex h-[calc(100vh-3.5rem)] flex-col bg-background dark:bg-[#0b0c10] text-foreground dark:text-neutral-200 overflow-hidden font-sans select-none antialiased">
+    <div data-tour="territory-container" className="flex h-[calc(100vh-3.5rem)] flex-col bg-background dark:bg-[#0b0c10] text-foreground dark:text-neutral-200 overflow-hidden font-sans select-none antialiased">
       {/* Top Header */}
       <header className="shrink-0 border-b border-border dark:border-neutral-800/80 bg-background dark:bg-[#0e0f12] px-5 py-3.5 z-20">
         <div className="flex flex-wrap items-center justify-between gap-3">

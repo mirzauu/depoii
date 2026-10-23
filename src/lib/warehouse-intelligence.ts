@@ -1,6 +1,34 @@
 import { query, queryOne } from "@/lib/pg";
+import zipcodes from "zipcodes";
 
 /** Wave B/C: intelligence, brief, storms, verifications (read side). */
+
+function lookupZip(lat: number, lng: number): string | undefined {
+  try {
+    const mod = zipcodes as unknown as { lookupByCoords?: (lat: number, lng: number) => { zip?: string } | null; default?: { lookupByCoords?: (lat: number, lng: number) => { zip?: string } | null } };
+    const fn = mod?.lookupByCoords || mod?.default?.lookupByCoords;
+    if (typeof fn === "function") {
+      const match = fn(lat, lng);
+      return match?.zip;
+    }
+  } catch {
+    /* ignore */
+  }
+  return undefined;
+}
+
+function extractCoordsZips(coords: unknown, zips: Set<string>, maxCount = 40) {
+  if (!Array.isArray(coords) || zips.size >= maxCount) return;
+  if (typeof coords[0] === "number" && typeof coords[1] === "number") {
+    const z = lookupZip(Number(coords[1]), Number(coords[0]));
+    if (z) zips.add(z);
+    return;
+  }
+  const step = Math.max(1, Math.floor(coords.length / 15));
+  for (let i = 0; i < coords.length && zips.size < maxCount; i += step) {
+    extractCoordsZips(coords[i], zips, maxCount);
+  }
+}
 
 type Q = URLSearchParams;
 const str = (q: Q, k: string) => q.get(k)?.trim() || "";
@@ -263,6 +291,7 @@ export async function mondayBrief(q: Q, user?: { orgId?: string; platformRole?: 
     parcel_id: r.parcel_id,
     address: r.address,
     city: r.city,
+    zip_code: r.zip_code,
     owner: r.owner_name,
     owner_mail: [r.owner_address, r.owner_city, r.owner_state, r.owner_zip].filter(Boolean).join(", "),
     year_built: Number(r.year_built || 0),
@@ -355,12 +384,50 @@ export async function hailEvents(q: Q) {
   if (wanted) {
     const reports = await query(`select * from warehouse.hail_reports where storm_date = $1 order by inches desc limit 200`, [wanted]);
     const warnings = await query(`select * from warehouse.warnings where storm_date = $1`, [wanted]);
+    if (warnings.length === 0) {
+      const swaths = await query(
+        `select id, storm_name, max_hail_inches::text as hail, properties->'polygon' as polygon
+         from warehouse.storm_swaths
+         where (event_date::text = $1 or id = $1) and properties->'polygon' is not null
+         limit 5`,
+        [wanted]
+      );
+      for (const sw of swaths) {
+        if (sw.polygon) {
+          const polyCoords = Array.isArray(sw.polygon[0]) && Array.isArray(sw.polygon[0][0]) ? sw.polygon : [sw.polygon];
+          warnings.push({
+            event_id: sw.id,
+            hail_tag: Number(sw.hail || 2.0),
+            wind_tag: 60,
+            tier: "core",
+            basis: `${sw.storm_name} swath`,
+            geometry: { type: "Polygon", coordinates: polyCoords },
+          });
+        }
+      }
+    }
+
+    const stormZips = new Set<string>();
+    for (const r of reports) {
+      const lat = Number(r.lat);
+      const lng = Number(r.lng);
+      if (Number.isFinite(lat) && Number.isFinite(lng) && lat !== 0 && lng !== 0) {
+        const z = lookupZip(lat, lng);
+        if (z) stormZips.add(z);
+      }
+    }
+    for (const w of warnings) {
+      const geom = typeof w.geometry === "string" ? JSON.parse(w.geometry) : w.geometry;
+      extractCoordsZips(geom?.coordinates, stormZips);
+    }
+
     const ev = events.find((e) => String(e.d).slice(0, 10) === wanted);
-    if (ev || reports.length) {
+    if (ev || reports.length || warnings.length) {
       selected = {
         id: wanted, event_date: wanted, name: ev?.name || wanted, short_name: wanted,
         max_hail_inches: Number(ev?.hail || 0), report_count: reports.length, max_warning_hail_inches: 0,
         center: reports[0] ? { latitude: Number(reports[0].lat), longitude: Number(reports[0].lng) } : { latitude: 32.78, longitude: -96.8 },
+        affected_zips: Array.from(stormZips).sort(),
         reports: reports.map((r) => ({
           id: r.id, valid: r.valid, latitude: Number(r.lat), longitude: Number(r.lng), hail_inches: Number(r.inches),
           qualifier: r.qualifier, city: r.city, county: r.county, source: r.source, remark: r.remark,

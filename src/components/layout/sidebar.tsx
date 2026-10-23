@@ -5,14 +5,16 @@ import { usePathname, useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import { Briefcase, ChevronDown, ChevronsLeft, ChevronsRight, House, Info, Layers, Search, Shield, Users, type LucideIcon } from "lucide-react";
 import { cn } from "cn";
-import { DepoiiMark } from "./depoii-logo";
+import { DepoiiAiMark, DepoiiMark } from "./depoii-logo";
 import { useMe } from "@/hooks/use-me";
 
-type NavLink = { href: string; label: string; match?: string[]; engine?: boolean };
-type NavGroup = { id: string; label: string; icon: LucideIcon; items: NavLink[]; match?: string[] };
+type NavIcon = LucideIcon | React.ComponentType<{ className?: string; title?: string }>;
+type NavLink = { href: string; label: string; match?: string[]; engine?: boolean; badge?: string; disabled?: boolean; permission?: string };
+type NavGroup = { id: string; label: string; icon: NavIcon; items: NavLink[]; match?: string[] };
 
-export const TOP: (NavLink & { icon: LucideIcon })[] = [
-  { href: "/", label: "Overview", icon: House },
+export const TOP: (NavLink & { icon: NavIcon })[] = [
+  { href: "/", label: "Overview", icon: House, permission: "nav:overview" },
+  { href: "", label: "AI Assistant", icon: DepoiiAiMark, badge: "Soon", disabled: true },
 ];
 
 export const GROUPS: NavGroup[] = [
@@ -21,11 +23,11 @@ export const GROUPS: NavGroup[] = [
     label: "Leads",
     icon: Briefcase,
     items: [
-      { href: "/territory", label: "Territory Explorer", match: ["/territory"] },
-      { href: "/claims", label: "My Claims", match: ["/claims"] },
-      { href: "/pipeline", label: "Opportunity Pipeline", match: ["/parcels", "/property"] },
-      { href: "/roof-aging", label: "Roof Aging Alarm", engine: true },
-      { href: "/map", label: "Hail Map", engine: true },
+      { href: "/pipeline", label: "Opportunity Pipeline", match: ["/parcels", "/property"], permission: "nav:pipeline" },
+      { href: "/roof-aging", label: "Roof Aging Alarm", engine: true, permission: "nav:roof_aging" },
+      { href: "/map", label: "Hail Map", engine: true, permission: "nav:map" },
+      { href: "/territory", label: "Territory Explorer", match: ["/territory"], permission: "nav:territory" },
+      { href: "/claims", label: "My Claims", match: ["/claims"], permission: "nav:claims" },
     ],
   },
   {
@@ -33,10 +35,10 @@ export const GROUPS: NavGroup[] = [
     label: "Prospect and enrich",
     icon: Search,
     items: [
-      { href: "/permits", label: "Permit", engine: true },
-      { href: "/buildings", label: "Building", engine: true },
-      { href: "/contractors", label: "Contractors", match: ["/contractors"], engine: true },
-      { href: "/competitors", label: "Leaderboard", engine: true },
+      { href: "/permits", label: "Permit", engine: true, permission: "nav:permits" },
+      { href: "/buildings", label: "Building", engine: true, permission: "nav:buildings" },
+      { href: "/contractors", label: "Contractors", match: ["/contractors"], engine: true, permission: "nav:contractors" },
+      { href: "/competitors", label: "Leaderboard", engine: true, permission: "nav:competitors" },
     ],
   },
   {
@@ -44,15 +46,16 @@ export const GROUPS: NavGroup[] = [
     label: "Organization",
     icon: Users,
     items: [
-      { href: "/outcomes", label: "Field Outcomes" },
-      { href: "/team", label: "Team" },
+      { href: "/outcomes", label: "Field Outcomes", permission: "nav:outcomes" },
+      { href: "/team", label: "Team", permission: "nav:team" },
+      { href: "", label: "CRM", badge: "Soon", disabled: true, permission: "nav:crm" },
     ],
   },
 ];
 
 export const FLAT_NAV: NavLink[] = [...TOP, ...GROUPS.flatMap((g) => g.items)];
 
-export const ENGINE_PATHS = [...TOP.filter((i) => i.engine).map((i) => i.href), ...GROUPS.flatMap((g) => g.items).filter((i) => i.engine).map((i) => i.href), "/territory", "/claims", "/pipeline", "/team", "/outcomes", "/buildings", "/settings", "/login", "/admin", "/parcels", "/contractors", "/jobsites", "/multiphase", "/capital", "/dark-market", "/storm-targets", "/competitors", "/map"];
+export const ENGINE_PATHS = [...TOP.filter((i) => i.engine).map((i) => i.href), ...GROUPS.flatMap((g) => g.items).filter((i) => i.engine).map((i) => i.href), "/territory", "/claims", "/pipeline", "/team", "/outcomes", "/crm", "/buildings", "/settings", "/login", "/admin", "/parcels", "/contractors", "/jobsites", "/multiphase", "/capital", "/dark-market", "/storm-targets", "/competitors", "/map"];
 
 export const SidebarPreview = createContext<{ path: string; go: (href: string) => void } | null>(null);
 
@@ -212,6 +215,20 @@ export function Sidebar() {
     }
   };
 
+  const canAccess = (perm?: string) => {
+    if (!perm) return true;
+    if (me?.platformRole === "superadmin" || me?.role === "owner") return true;
+    if (!me?.permissions || me.permissions.length === 0) return true;
+    if (me.permissions.includes("*")) return true;
+    return me.permissions.includes(perm);
+  };
+
+  const visibleTop = TOP.filter((link) => canAccess(link.permission));
+  const visibleGroups = GROUPS.map((group) => ({
+    ...group,
+    items: group.items.filter((item) => canAccess(item.permission)),
+  })).filter((group) => group.items.length > 0);
+
   const fade = cn("overflow-hidden whitespace-nowrap transition-opacity duration-150", collapsed ? "opacity-0" : "opacity-100");
   const row = "flex w-full items-center gap-2.5 overflow-hidden rounded-md px-3 py-2 text-sm whitespace-nowrap text-muted-foreground hover:bg-muted hover:text-foreground";
 
@@ -243,9 +260,29 @@ export function Sidebar() {
         </button>
       )}
 
-      <nav className="flex min-h-0 flex-1 flex-col gap-0.5 overflow-x-hidden overflow-y-auto px-2 pb-4">
-        {TOP.map((link) => {
+      <nav data-tour="sidebar-nav" className="flex min-h-0 flex-1 flex-col gap-0.5 overflow-x-hidden overflow-y-auto px-2 pb-4">
+        {visibleTop.map((link) => {
           const Icon = link.icon;
+          if (link.disabled) {
+            return (
+              <div
+                key={link.label}
+                title={`${link.label} (Coming Soon)`}
+                aria-disabled="true"
+                className={cn(row, "cursor-not-allowed select-none text-muted-foreground/60 hover:bg-transparent hover:text-muted-foreground/60 justify-between")}
+              >
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <Icon className="size-4 shrink-0" />
+                  <span className={fade}>{link.label}</span>
+                </div>
+                {link.badge && (
+                  <span className={cn(fade, "rounded-full border border-current/30 bg-current/10 px-1.5 py-0.5 text-[10px] font-medium text-current")}>
+                    {link.badge}
+                  </span>
+                )}
+              </div>
+            );
+          }
           return (
             <NavTo key={link.href} href={link.href} title={link.label} className={cn(row, isActive(path, link, fromParam) && "bg-muted font-medium text-foreground")}>
               <Icon className="size-4 shrink-0" />
@@ -254,9 +291,9 @@ export function Sidebar() {
           );
         })}
 
-        {GROUPS.length > 0 && <div className="my-2 border-t border-border" />}
+        {visibleGroups.length > 0 && <div className="my-2 border-t border-border" />}
 
-        {GROUPS.map((group) => {
+        {visibleGroups.map((group) => {
           const Icon = group.icon;
           const expanded = !collapsed && !!open[group.id];
           const here = groupActive(path, group, fromParam);
@@ -270,18 +307,39 @@ export function Sidebar() {
               <div className={cn("grid transition-[grid-template-rows] duration-200", expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]")}>
                 <div className="overflow-hidden" inert={!expanded}>
                   <div className="flex flex-col gap-0.5 py-0.5">
-                    {group.items.map((item) => (
-                      <NavTo
-                        key={item.href}
-                        href={item.href}
-                        className={cn(
-                          "w-full rounded-md py-1.5 pr-3 pl-9 text-left text-sm whitespace-nowrap text-muted-foreground hover:bg-muted hover:text-foreground",
-                          isActive(path, item, fromParam) && "bg-muted font-medium text-foreground",
-                        )}
-                      >
-                        {item.label}
-                      </NavTo>
-                    ))}
+                    {group.items.map((item) =>
+                      item.disabled ? (
+                        <div
+                          key={item.label}
+                          title={`${item.label} (Coming Soon)`}
+                          aria-disabled="true"
+                          className="w-full rounded-md py-1.5 pr-3 pl-9 text-left text-sm whitespace-nowrap text-muted-foreground/60 cursor-not-allowed select-none flex items-center justify-between"
+                        >
+                          <span>{item.label}</span>
+                          {item.badge && (
+                            <span className="rounded-full border border-current/30 bg-current/10 px-1.5 py-0.5 text-[10px] font-medium text-current">
+                              {item.badge}
+                            </span>
+                          )}
+                        </div>
+                      ) : (
+                        <NavTo
+                          key={item.href}
+                          href={item.href}
+                          className={cn(
+                            "w-full rounded-md py-1.5 pr-3 pl-9 text-left text-sm whitespace-nowrap text-muted-foreground hover:bg-muted hover:text-foreground flex items-center justify-between",
+                            isActive(path, item, fromParam) && "bg-muted font-medium text-foreground",
+                          )}
+                        >
+                          <span>{item.label}</span>
+                          {item.badge && (
+                            <span className="rounded-full border border-current/30 bg-current/10 px-1.5 py-0.5 text-[10px] font-medium text-current">
+                              {item.badge}
+                            </span>
+                          )}
+                        </NavTo>
+                      ),
+                    )}
                   </div>
                 </div>
               </div>

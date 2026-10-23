@@ -3,12 +3,14 @@
 import { useEffect, useState } from "react";
 
 export type Me = {
+  id?: string;
   email: string;
   name: string;
   orgId: string;
   orgName: string;
   role: string;
   platformRole: string;
+  permissions?: string[];
 };
 
 export function useMe() {

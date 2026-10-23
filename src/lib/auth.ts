@@ -11,7 +11,7 @@ const OTP_RESEND_MS = 45 * 1000;
 const OTP_MAX_ATTEMPTS = 5;
 const TEAM_INVITE_DAYS = 14;
 
-export type TeamRole = "owner" | "rep";
+export type TeamRole = "owner" | "rep" | string;
 
 export type TeamInvite = {
   id: string;
@@ -125,13 +125,25 @@ export async function ensurePilotOrg(): Promise<void> {
     const email = (process.env.DEPOII_PILOT_EMAIL || "pilot@depoii.local").toLowerCase();
     const password = process.env.DEPOII_PILOT_PASSWORD || "depoii-pilot";
     const now = new Date().toISOString();
-    await query(`insert into app.orgs (id, name, disabled, created_at) values ($1,$2,0,$3)`, [orgId, "Pilot", now]);
+    await query(
+      `insert into app.orgs (id, name, disabled, created_at, subscription_tier, max_active_claims, max_monthly_claims) values ($1,$2,0,$3,'pro_territory',15,50)`,
+      [orgId, "Pilot", now],
+    );
     await query(
       `insert into app.users (id, email, password_hash, name, platform_role, disabled, created_at, last_seen_at) values ($1,$2,$3,$4,'',0,$5,'')`,
       [userId, email, hashPassword(password), "Pilot rep", now],
     );
     await query(`insert into app.memberships (org_id, user_id, role) values ($1,$2,$3)`, [orgId, userId, "owner"]);
   }
+  try {
+    await query(`
+      UPDATE app.orgs
+      SET subscription_tier = 'pro_territory',
+          max_active_claims = 15,
+          max_monthly_claims = 50
+      WHERE subscription_tier = 'shared_intelligence' OR max_active_claims = 0 OR max_active_claims IS NULL
+    `);
+  } catch {}
   await ensureSuperAdmin();
 }
 
@@ -495,19 +507,32 @@ export async function redeemLoginLink(token: string): Promise<SignInResult> {
   return completeSignIn(row, "auth.link_sign_in");
 }
 
+export async function resolveOrgRole(orgId: string, roleInput?: string): Promise<{ role: string; roleId?: string }> {
+  const clean = (roleInput || "rep").trim();
+  const row = await queryOne<{ id: string; name: string }>(
+    `select id, name from app.org_roles where org_id = $1 and (lower(name) = lower($2) or id = $2)`,
+    [orgId, clean],
+  );
+  if (row) {
+    return { role: row.name.toLowerCase(), roleId: row.id };
+  }
+  return { role: clean.toLowerCase() || "rep" };
+}
+
 export async function listOrgMembers(orgId: string) {
-  return query<{ id: string; name: string; email: string; role: string }>(
-    `select u.id, u.name, u.email, m.role
-     from app.users u join app.memberships m on m.user_id = u.id
+  return query<{ id: string; name: string; email: string; role: string; roleColor?: string }>(
+    `select u.id, u.name, u.email, coalesce(r.name, m.role) as role, coalesce(r.color, '#38bdf8') as "roleColor"
+     from app.users u
+     join app.memberships m on m.user_id = u.id
+     left join app.org_roles r on r.id = m.role_id or (m.role_id is null and lower(r.name) = lower(m.role) and r.org_id = m.org_id)
      where m.org_id = $1
-     order by case m.role when 'owner' then 0 else 1 end, lower(u.name)`,
+     order by case lower(m.role) when 'owner' then 0 else 1 end, lower(u.name)`,
     [orgId],
   );
 }
 
 function parseTeamRole(role: string | undefined): TeamRole | "" {
-  if (role === "owner" || role === "rep") return role;
-  return "";
+  return (role || "").trim().toLowerCase();
 }
 
 export async function listPendingInvites(orgId: string): Promise<TeamInvite[]> {
@@ -525,7 +550,7 @@ export async function listPendingInvites(orgId: string): Promise<TeamInvite[]> {
 }
 
 async function sendTeamInviteEmail(input: { to: string; name: string; orgName: string; role: string; acceptUrl: string; inviterName: string }) {
-  const roleLabel = input.role === "owner" ? "Owner" : "Rep";
+  const roleLabel = input.role ? input.role.charAt(0).toUpperCase() + input.role.slice(1) : "Rep";
   await sendMail({
     to: input.to,
     fromName: "Depoii",
@@ -564,10 +589,9 @@ export async function createTeamInvite(input: {
   if (!smtpConfigured()) return { error: "Email invites are not configured." };
   const name = input.name?.trim() || "";
   const email = input.email?.trim().toLowerCase() || "";
-  const role = parseTeamRole(input.role);
   if (!name) return { error: "Name is required." };
   if (!email.includes("@")) return { error: "Email is required." };
-  if (!role) return { error: "Role must be owner or rep." };
+  const { role } = await resolveOrgRole(input.orgId, input.role);
 
   const existingUser = await queryOne<{ id: string }>(`select id from app.users where lower(email) = $1`, [email]);
   if (existingUser) {
@@ -667,14 +691,14 @@ export async function acceptTeamInvite(token: string): Promise<SignInResult> {
     return { error: "This invite has expired." };
   }
 
-  const role = parseTeamRole(invite.role) || "rep";
+  const { role, roleId } = await resolveOrgRole(invite.org_id, invite.role);
   const existing = await queryOne<{ id: string }>(`select id from app.users where lower(email) = $1`, [invite.email]);
   if (existing) return { error: "An account with this email already exists. Sign in instead." };
 
   const userId = await withClient(async (client) => {
     await client.query("begin");
     try {
-      const newId = await createUser(invite.org_id, invite.email, randomBytes(24).toString("base64url"), invite.name, role);
+      const newId = await createUser(invite.org_id, invite.email, randomBytes(24).toString("base64url"), invite.name, role, roleId);
       await client.query(`update app.team_invites set status = 'accepted' where id = $1`, [invite.id]);
       await client.query("commit");
       return newId;
@@ -708,7 +732,10 @@ export async function signUp(input: { name?: string; organization?: string; emai
   const userId = await withClient(async (client) => {
     await client.query("begin");
     try {
-      await client.query(`insert into app.orgs (id, name, disabled, created_at) values ($1,$2,0,$3)`, [orgId, organization, now]);
+      await client.query(
+        `insert into app.orgs (id, name, disabled, created_at, subscription_tier, max_active_claims, max_monthly_claims) values ($1,$2,0,$3,'pro_territory',15,50)`,
+        [orgId, organization, now],
+      );
       const id = await createUser(orgId, email, password, name, "owner");
       await client.query("commit");
       return id;
@@ -727,7 +754,14 @@ export async function signUp(input: { name?: string; organization?: string; emai
   return { user };
 }
 
-export async function createUser(orgId: string, email: string, password: string, name: string, role: "owner" | "rep" = "rep"): Promise<string> {
+export async function createUser(
+  orgId: string,
+  email: string,
+  password: string,
+  name: string,
+  role: string = "rep",
+  roleId?: string,
+): Promise<string> {
   const id = randomBytes(8).toString("hex");
   const normalized = email.trim().toLowerCase();
   const taken = await queryOne(`select id from app.users where lower(email) = $1`, [normalized]);
@@ -741,7 +775,7 @@ export async function createUser(orgId: string, email: string, password: string,
     `insert into app.users (id, email, password_hash, name, platform_role, disabled, created_at, last_seen_at) values ($1,$2,$3,$4,'',0,$5,'')`,
     [id, normalized, hashPassword(password), name.trim() || normalized, now],
   );
-  await query(`insert into app.memberships (org_id, user_id, role) values ($1,$2,$3)`, [orgId, id, role]);
+  await query(`insert into app.memberships (org_id, user_id, role, role_id) values ($1,$2,$3,$4)`, [orgId, id, role, roleId || null]);
   return id;
 }
 

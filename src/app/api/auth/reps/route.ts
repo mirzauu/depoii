@@ -5,7 +5,10 @@ import {
   listPendingInvites,
   requireUser,
   resendTeamInvite,
+  resolveOrgRole,
 } from "@/lib/auth";
+import { getOrgRoles } from "@/lib/roles";
+import { query } from "@/lib/pg";
 
 export const dynamic = "force-dynamic";
 
@@ -19,10 +22,12 @@ function requestOrigin(req: Request) {
 export async function GET() {
   try {
     const user = await requireUser();
+    const roles = await getOrgRoles(user.orgId);
     return Response.json({
       orgName: user.orgName,
       members: await listOrgMembers(user.orgId),
       invites: await listPendingInvites(user.orgId),
+      roles,
     });
   } catch (error) {
     const status = (error as { status?: number }).status;
@@ -34,14 +39,26 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const user = await requireUser();
-    if (user.role !== "owner") return Response.json({ error: "Only an organization owner can manage the team." }, { status: 403 });
+    if (user.role !== "owner" && user.platformRole !== "superadmin") {
+      return Response.json({ error: "Only an organization owner can manage the team." }, { status: 403 });
+    }
     const body = (await req.json()) as {
       email?: string;
       name?: string;
       role?: string;
+      memberId?: string;
       inviteId?: string;
       action?: string;
     };
+
+    if (body.action === "update_role" && body.memberId && body.role) {
+      const { role, roleId } = await resolveOrgRole(user.orgId, body.role);
+      await query(
+        `update app.memberships set role = $1, role_id = $2 where org_id = $3 and user_id = $4`,
+        [role, roleId || null, user.orgId, body.memberId],
+      );
+      return Response.json({ ok: true });
+    }
 
     if (body.action === "resend" && body.inviteId) {
       const result = await resendTeamInvite(user.orgId, body.inviteId, user, requestOrigin(req));

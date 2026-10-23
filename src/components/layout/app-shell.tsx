@@ -13,6 +13,7 @@ import { DepoiiLoader, DepoiiMark } from "./depoii-logo";
 import { AccountMenu, ENGINE_PATHS, FLAT_NAV, Sidebar, isActive } from "./sidebar";
 import { useMe } from "@/hooks/use-me";
 import { ThemeToggle } from "./theme-toggle";
+import { WalkthroughProvider, HeaderTourButton } from "@/components/walkthrough";
 
 const selectClass = "h-8 w-full min-w-0 rounded-md border border-border bg-background px-2 text-sm text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring";
 
@@ -71,7 +72,7 @@ export function CitySelect({ className }: { className?: string }) {
   }, [open]);
 
   return (
-    <div ref={root} className={cn("relative flex items-center gap-2 text-xs text-muted-foreground", className)}>
+    <div ref={root} data-tour="city-selector" className={cn("relative flex items-center gap-2 text-xs text-muted-foreground", className)}>
       <Building2 className="size-4 shrink-0 text-sky-400" />
       <button
         type="button"
@@ -282,25 +283,37 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       : FLAT_NAV;
   if (path === "/login" || path === "/welcome") return <main className="min-h-screen">{children}</main>;
   return (
-    <div className="flex min-h-screen print:block">
-      <Sidebar />
+    <WalkthroughProvider>
+      <div className="flex min-h-screen print:block">
+        <Sidebar />
 
-      <div className="flex min-w-0 flex-1 flex-col">
-        <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur print:hidden">
-          <div className="flex items-center gap-3 px-4 py-2.5 lg:px-6">
-            <Link href="/" className="flex items-center gap-2 lg:hidden" suppressHydrationWarning>
-              <DepoiiMark className="size-7 text-foreground" />
-              <span className="font-bold">Depoii</span>
-            </Link>
-            <CitySelect className="ml-auto w-full max-w-xs" />
-            <ThemeToggle />
-            <div className="lg:hidden">
-              <AccountMenu />
+        <div className="flex min-w-0 flex-1 flex-col">
+          <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur print:hidden">
+            <div className="flex items-center gap-3 px-4 py-2.5 lg:px-6">
+              <Link href="/" className="flex items-center gap-2 lg:hidden" suppressHydrationWarning>
+                <DepoiiMark className="size-7 text-foreground" />
+                <span className="font-bold">Depoii</span>
+              </Link>
+              <CitySelect className="ml-auto w-full max-w-xs" />
+              <HeaderTourButton />
+              <ThemeToggle />
+              <div className="lg:hidden">
+                <AccountMenu />
+              </div>
             </div>
-          </div>
           <nav className="flex gap-1 overflow-x-auto px-3 pb-2 lg:hidden">
             {mobileNav.map((link) => {
               const fromParam = typeof window !== "undefined" ? new URLSearchParams(window.location.search).get("from") : null;
+              if (link.disabled) {
+                return (
+                  <span
+                    key={link.label}
+                    className="shrink-0 rounded-full border border-border/50 px-3 py-1 text-xs text-muted-foreground/60 cursor-not-allowed select-none"
+                  >
+                    {link.label}{link.badge ? ` (${link.badge})` : ""}
+                  </span>
+                );
+              }
               return (
                 <Link
                   key={link.href}
@@ -320,6 +333,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </main>
       </div>
     </div>
+    </WalkthroughProvider>
   );
 }
 

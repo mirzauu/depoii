@@ -18,6 +18,7 @@ type DayLead = {
   parcelId: string;
   address: string;
   city: string;
+  zipCode?: string;
   owner: string;
   lat: number;
   lng: number;
@@ -32,6 +33,7 @@ type DayLead = {
 export default function MapPage() {
   const { storm: liveStorm, opportunities, jurisdiction } = useDepoii();
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [selectedZip, setSelectedZip] = useState<string | null>(null);
   const [showOutside, setShowOutside] = useState(false);
   const [showEngine, setShowEngine] = useState(true);
   const [panelOpen, setPanelOpen] = useState(true);
@@ -82,6 +84,12 @@ export default function MapPage() {
   const briefOps = brief.data?.opportunities ?? [];
   const bookTotal = brief.data?.totalOpportunities || briefOps.length;
 
+  /** Reset ZIP and property selection when storm changes */
+  useEffect(() => {
+    setSelectedZip(null);
+    setSelectedId(null);
+  }, [catalogStorm?.id, catalogStorm?.date]);
+
   /** Full pilot book in a stable shuffled order (reshuffles when the book reloads). */
   const shuffledBriefOps = useMemo(() => {
     const list = [...briefOps];
@@ -107,6 +115,7 @@ export default function MapPage() {
           parcelId: o.parcelId,
           address: o.address,
           city: o.city,
+          zipCode: o.zipCode || "",
           owner: o.owner,
           lat,
           lng,
@@ -126,8 +135,43 @@ export default function MapPage() {
 
   const coordsReady = briefOps.some((o) => o.lat != null && o.lng != null);
   const dayScoped = Boolean(catalogStorm && dayLeads.length && coordsReady);
-  const dayExposed = dayLeads.filter((o) => o.tier !== "outside");
-  const dayUnresolved = dayExposed.filter((o) => o.unresolved);
+  const dayExposed = useMemo(() => dayLeads.filter((o) => o.tier !== "outside"), [dayLeads]);
+  const dayUnresolved = useMemo(() => dayExposed.filter((o) => o.unresolved), [dayExposed]);
+
+  /** Unique ZIP codes affected by this storm, with lead counts */
+  const affectedZips = useMemo(() => {
+    const counts = new Map<string, number>();
+
+    // 1. Include all storm-level affected ZIP codes from warnings/reports/swaths (even if 0 pilot leads in Depoii)
+    if (catalogStorm?.affectedZips?.length) {
+      for (const z of catalogStorm.affectedZips) {
+        const clean = z.trim().slice(0, 5);
+        if (clean && !counts.has(clean)) {
+          counts.set(clean, 0);
+        }
+      }
+    }
+
+    // 2. Count buildings from exposed leads
+    for (const lead of dayExposed) {
+      const z = (lead.zipCode || "").trim().slice(0, 5);
+      if (z) {
+        counts.set(z, (counts.get(z) || 0) + 1);
+      }
+    }
+
+    // Sort: ZIPs with leads first (by lead count descending), then by ZIP string ascending
+    return Array.from(counts.entries())
+      .map(([zip, count]) => ({ zip, count }))
+      .sort((a, b) => b.count - a.count || a.zip.localeCompare(b.zip));
+  }, [catalogStorm?.affectedZips, dayExposed]);
+
+  /** Leads filtered by selected ZIP code (or all exposed if none selected) */
+  const filteredDayLeads = useMemo(() => {
+    const base = showOutside ? dayLeads : dayExposed;
+    if (!selectedZip) return base;
+    return base.filter((o) => (o.zipCode || "").trim().slice(0, 5) === selectedZip);
+  }, [showOutside, dayLeads, dayExposed, selectedZip]);
 
   // Newest TX hail day is often outside Dallas. On first load, walk the catalog until a day hits local leads.
   useEffect(() => {
@@ -142,29 +186,25 @@ export default function MapPage() {
     if (next?.date || next?.id) setEventDate(next.date || next.id);
   }, [userPickedDay, hail.loading, catalogStorm, dayLeads.length, dayExposed.length, catalogEvents]);
 
-  // When a hail day is selected, stats follow day classification — not the live ArcGIS storm.
+  // When a hail day is selected, stats follow day classification and active ZIP filter — not the live ArcGIS storm.
   const liveExposed = opportunities.filter((o) => o.tier !== "outside");
   const liveUnresolved = liveExposed.filter((o) => o.unresolved);
 
   const exposedCount = dayScoped
-    ? dayExposed.length
+    ? filteredDayLeads.length
     : liveExposed.length || briefOps.length;
   const unresolvedCount = dayScoped
-    ? dayUnresolved.length
+    ? filteredDayLeads.filter((o) => o.unresolved).length
     : liveExposed.length
       ? liveUnresolved.length
       : briefOps.filter((o) => o.unresolved).length;
   const pipelineValue = dayScoped
-    ? dayExposed.reduce((s, o) => s + o.value, 0)
+    ? filteredDayLeads.reduce((s, o) => s + o.value, 0)
     : liveExposed.length
       ? liveUnresolved.reduce((s, o) => s + o.pipelineValue, 0)
       : briefOps.reduce((s, o) => s + o.value, 0);
 
-  const listLeads = dayScoped
-    ? showOutside
-      ? dayLeads
-      : dayExposed
-    : [];
+  const listLeads = dayScoped ? filteredDayLeads : [];
 
   const selectedLive = opportunities.find((o) => o.parcel.id === selectedId) ?? null;
   const selectedDay = dayLeads.find((o) => o.parcelId === selectedId) ?? null;
@@ -173,15 +213,15 @@ export default function MapPage() {
 
   const points: MapPoint[] = useMemo(() => {
     const buildings: MapPoint[] = dayScoped
-      ? (showOutside ? dayLeads : dayExposed)
+      ? filteredDayLeads
           .filter((o) => Number.isFinite(o.lat) && Number.isFinite(o.lng) && o.lat !== 0 && o.lng !== 0)
-          .slice(0, 80)
+          .slice(0, 100)
           .map((o) => ({
             id: o.parcelId,
             lng: o.lng,
             lat: o.lat,
             state: (o.tier === "outside" ? "outside" : o.unresolved ? "unresolved" : "resolved") as MapPoint["state"],
-            title: `${o.address} · ${o.tier} · score ${o.score}`,
+            title: `${o.address}${o.zipCode ? ` (${o.zipCode.slice(0, 5)})` : ""} · ${o.tier} · score ${o.score}`,
           }))
       : (() => {
           const inSwath = opportunities.some((o) => o.tier !== "outside");
@@ -205,7 +245,7 @@ export default function MapPage() {
       title: `${r.inches}" ${r.qualifier === "M" ? "measured" : r.qualifier === "E" ? "estimated" : "reported"} hail · ${r.city} · ${r.source}`,
     }));
     return [...buildings, ...reports];
-  }, [dayScoped, dayLeads, dayExposed, showOutside, opportunities, storm]);
+  }, [dayScoped, filteredDayLeads, showOutside, opportunities, storm]);
 
   const classifyBasis = catalogStorm
     ? catalogStorm.warnings.length || catalogStorm.reports.length
@@ -214,7 +254,7 @@ export default function MapPage() {
     : null;
 
   return (
-    <div className="flex flex-col lg:h-[calc(100vh-53px)] lg:flex-row">
+    <div data-tour="map-container" className="flex flex-col lg:h-[calc(100vh-53px)] lg:flex-row">
       <div className="relative h-[60vh] lg:h-auto lg:flex-1">
         <DepoiiMap storm={storm} focus={focus} engineSwaths={showEngine ? swaths.data ?? [] : []} points={points} selectedId={selectedId} onSelect={setSelectedId} className="absolute inset-0" />
         <div className="pointer-events-none absolute top-3 left-3 right-14 z-10 max-w-sm">
@@ -245,13 +285,16 @@ export default function MapPage() {
                 const match = catalogEvents.find((s) => s.id === id);
                 setUserPickedDay(true);
                 setEventDate(match?.date || id);
+                setSelectedZip(null);
+                setSelectedId(null);
               }}
             />
             {dayScoped && (
               <p className="text-[11px] text-muted-foreground">
-                {exposedCount} of {bookTotal || dayLeads.length} released leads inside {catalogStorm?.date ? longDate(catalogStorm.date) : "this day"}
+                {selectedZip
+                  ? `${exposedCount} released leads inside ZIP ${selectedZip} for ${catalogStorm?.date ? longDate(catalogStorm.date) : "this day"}`
+                  : `${exposedCount} of ${bookTotal || dayLeads.length} released leads inside ${catalogStorm?.date ? longDate(catalogStorm.date) : "this day"}`}
                 {classifyBasis ? ` · ${classifyBasis}` : ""}.
-                {exposedCount === 0 ? " This day is outside the Dallas pilot area — pick another hail day, or show unexposed parcels." : ""}
               </p>
             )}
             {!stormReady && !hail.loading && briefOps.length > 0 && (
@@ -267,6 +310,70 @@ export default function MapPage() {
               <Stat label="Unresolved" value={unresolvedCount} accent />
               <Stat label="Pipeline" value={usd(pipelineValue, true)} />
             </div>
+
+            {/* Affected ZIP codes section */}
+            {dayScoped && (
+              <div className="space-y-1.5 border-t border-border pt-2.5">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5">
+                    <span className="size-2 rounded-full bg-emerald-400" />
+                    <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                      Affected ZIP Codes ({affectedZips.length})
+                    </p>
+                  </div>
+                  {selectedZip && (
+                    <button
+                      type="button"
+                      onClick={() => setSelectedZip(null)}
+                      className="text-[10px] text-sky-400 hover:text-sky-300 hover:underline"
+                    >
+                      Clear filter
+                    </button>
+                  )}
+                </div>
+
+                {affectedZips.length > 0 ? (
+                  <div className="flex flex-wrap gap-1 max-h-28 overflow-y-auto pr-1">
+                    <button
+                      type="button"
+                      onClick={() => setSelectedZip(null)}
+                      className={cn(
+                        "rounded px-2 py-0.5 text-xs font-mono transition-colors",
+                        selectedZip === null
+                          ? "bg-primary text-primary-foreground font-semibold shadow-xs"
+                          : "bg-muted/70 text-muted-foreground hover:bg-muted hover:text-foreground border border-border/40"
+                      )}
+                    >
+                      All ({dayExposed.length})
+                    </button>
+                    {affectedZips.map(({ zip, count }) => (
+                      <button
+                        key={zip}
+                        type="button"
+                        onClick={() => setSelectedZip((curr) => (curr === zip ? null : zip))}
+                        className={cn(
+                          "rounded px-2 py-0.5 text-xs font-mono transition-colors flex items-center gap-1 border",
+                          selectedZip === zip
+                            ? "bg-sky-500 text-white font-semibold border-sky-400 shadow-xs"
+                            : "bg-muted/70 text-foreground border-border/60 hover:bg-muted hover:border-border"
+                        )}
+                        title={count > 0 ? `${zip}: ${count} pilot buildings exposed` : `${zip}: storm impact area (0 pilot buildings seeded)`}
+                      >
+                        <span>{zip}</span>
+                        <span className={cn("text-[10px]", selectedZip === zip ? "text-sky-100" : "text-muted-foreground")}>
+                          ({count})
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="rounded border border-border/50 bg-muted/30 p-2 text-xs text-muted-foreground">
+                    Storm corridor tracked. No localized ZIP centroids mapped for this event.
+                  </p>
+                )}
+              </div>
+            )}
+
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-muted-foreground">
               <Legend cls="bg-amber-500/50 border-amber-500" label="NWS warning" />
               <Legend cls="bg-red-600/60 border-red-500" label={'Warning with 2"+ hail'} />
@@ -311,8 +418,20 @@ export default function MapPage() {
               ← All exposed properties
             </button>
             <div className="rounded-md border border-border p-3">
-              <p className="text-sm font-semibold">{selectedDay.address}</p>
-              <p className="mt-1 text-xs text-muted-foreground">
+              <div className="flex items-start justify-between gap-2">
+                <div>
+                  <p className="text-sm font-semibold">{selectedDay.address}</p>
+                  <p className="mt-0.5 text-xs text-muted-foreground">
+                    {selectedDay.city ? `${selectedDay.city}, TX` : ""}{selectedDay.zipCode ? ` ${selectedDay.zipCode.slice(0, 5)}` : ""}
+                  </p>
+                </div>
+                {selectedDay.zipCode && (
+                  <span className="shrink-0 rounded bg-sky-500/20 border border-sky-500/30 px-2 py-0.5 text-xs font-mono font-medium text-sky-300">
+                    ZIP {selectedDay.zipCode.slice(0, 5)}
+                  </span>
+                )}
+              </div>
+              <p className="mt-2 text-xs text-muted-foreground">
                 {selectedDay.owner || "Owner not on record"} · {selectedDay.tier} · {selectedDay.hail}&quot; hail
               </p>
               <p className="mt-1 text-xs text-muted-foreground">{usd(selectedDay.value, true)} pipeline</p>
@@ -325,33 +444,85 @@ export default function MapPage() {
           </div>
         ) : (
           <div className="p-4">
-            <p className="text-sm font-semibold">Buildings hit</p>
+            <div className="flex items-center justify-between mb-1">
+              <p className="text-sm font-semibold">Buildings hit</p>
+              {selectedZip ? (
+                <span className="rounded-full bg-sky-500/20 border border-sky-500/40 text-sky-300 px-2 py-0.5 text-xs font-mono font-medium flex items-center gap-1">
+                  ZIP {selectedZip}
+                  <button
+                    type="button"
+                    onClick={() => setSelectedZip(null)}
+                    className="ml-1 text-muted-foreground hover:text-foreground"
+                    title="Clear ZIP filter"
+                  >
+                    ×
+                  </button>
+                </span>
+              ) : dayScoped && affectedZips.length > 0 ? (
+                <span className="rounded-full bg-muted border border-border px-2 py-0.5 text-[11px] font-mono text-muted-foreground">
+                  {affectedZips.length} affected ZIPs
+                </span>
+              ) : null}
+            </div>
+
             <p className="mb-3 text-xs text-muted-foreground">
-              {city} buildings
-              {dayScoped && catalogStorm?.date
-                ? ` — ${exposedCount} of ${bookTotal || dayLeads.length} released leads inside ${longDate(catalogStorm.date)}`
-                : storm.date
-                  ? ` inside the ${longDate(storm.date)} warning areas`
-                  : " from the released pilot book"}
-              , highest score first. Click one to zoom to it.
+              {dayScoped && catalogStorm?.date ? (
+                selectedZip ? (
+                  <>
+                    Showing <span className="font-semibold text-foreground">{listLeads.length}</span> buildings in ZIP{" "}
+                    <span className="font-mono font-semibold text-sky-400">{selectedZip}</span> hit by{" "}
+                    {longDate(catalogStorm.date)}.{" "}
+                    <button
+                      type="button"
+                      onClick={() => setSelectedZip(null)}
+                      className="text-sky-400 underline hover:text-sky-300 ml-1"
+                    >
+                      Show all {dayExposed.length} buildings
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <span className="font-semibold text-foreground">{dayExposed.length}</span> buildings across{" "}
+                    <span className="font-semibold text-foreground">{affectedZips.length}</span> affected ZIP codes (
+                    {affectedZips.map((z) => z.zip).join(", ")}) inside {longDate(catalogStorm.date)}.
+                  </>
+                )
+              ) : storm.date ? (
+                `${city} buildings inside the ${longDate(storm.date)} warning areas, highest score first.`
+              ) : (
+                `${city} buildings from the released pilot book, highest score first.`
+              )}
             </p>
+
             {dayScoped ? (
               listLeads.length ? (
                 <ul className="space-y-1.5">
-                  {listLeads.slice(0, 80).map((o) => (
+                  {listLeads.slice(0, 100).map((o) => (
                     <li key={o.parcelId || o.address}>
                       <button
                         type="button"
                         onClick={() => setSelectedId(o.parcelId)}
                         className={cn(
-                          "flex w-full items-center gap-3 rounded-md border border-border/60 p-2.5 text-left hover:bg-muted",
+                          "flex w-full items-center gap-3 rounded-md border border-border/60 p-2.5 text-left hover:bg-muted transition-colors",
                           o.tier === "outside" && "opacity-60",
                         )}
                       >
                         <ScorePill score={o.score} />
                         <span className="min-w-0 flex-1">
-                          <span className="block truncate text-sm font-medium">{o.address}</span>
-                          <span className="block truncate text-[11px] text-muted-foreground">
+                          <span className="flex items-center gap-2">
+                            <span className="block truncate text-sm font-medium">{o.address}</span>
+                            {o.zipCode && (
+                              <span className={cn(
+                                "shrink-0 rounded px-1.5 py-0.2 text-[10px] font-mono border",
+                                selectedZip === o.zipCode.slice(0, 5)
+                                  ? "bg-sky-500/20 text-sky-300 border-sky-500/40"
+                                  : "bg-muted text-muted-foreground border-border/80"
+                              )}>
+                                {o.zipCode.slice(0, 5)}
+                              </span>
+                            )}
+                          </span>
+                          <span className="block truncate text-[11px] text-muted-foreground mt-0.5">
                             {o.owner || "Owner not on record"} · {o.hail}&quot; hail · {usd(o.value, true)}
                           </span>
                         </span>
@@ -364,7 +535,9 @@ export default function MapPage() {
                 <p className="rounded-md border border-dashed border-border p-6 text-center text-sm text-muted-foreground">
                   {brief.loading || hail.loading
                     ? "Classifying buildings for this hail day…"
-                    : `No ${city} released leads sit inside this hail day.`}
+                    : selectedZip
+                      ? `Storm impacted ZIP ${selectedZip}. No Depoii pilot buildings are currently seeded in this ZIP code.`
+                      : `No ${city} pilot buildings sit inside this storm swath.`}
                 </p>
               )
             ) : liveExposed.length ? (

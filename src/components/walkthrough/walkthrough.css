@@ -1,0 +1,219 @@
+/* Depoii Custom Driver.js Walkthrough Theme */
+@import "driver.js/dist/driver.css";
+
+/* Popover Card Container */
+.depoii-tour-popover,
+.driver-popover {
+  background-color: #111216 !important;
+  color: #f4f4f5 !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05) !important;
+  padding: 18px 20px !important;
+  min-width: 290px !important;
+  max-width: 360px !important;
+  font-family: inherit !important;
+  z-index: 1000000000 !important;
+  backdrop-filter: blur(12px) !important;
+  animation: depoiiTourFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+:root:not(.dark) .depoii-tour-popover,
+:root:not(.dark) .driver-popover {
+  background-color: #ffffff !important;
+  color: #18181b !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.04) !important;
+}
+
+@keyframes depoiiTourFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Close Button (X) */
+.driver-popover-close-btn {
+  color: #71717a !important;
+  top: 12px !important;
+  right: 12px !important;
+  width: 26px !important;
+  height: 26px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 6px !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  transition: all 0.15s ease !important;
+}
+
+.driver-popover-close-btn:hover {
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+:root:not(.dark) .driver-popover-close-btn:hover {
+  color: #18181b !important;
+  background-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Title */
+.driver-popover-title {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.015em !important;
+  line-height: 1.35 !important;
+  color: #ffffff !important;
+  padding-right: 22px !important;
+  margin-bottom: 6px !important;
+}
+
+:root:not(.dark) .driver-popover-title {
+  color: #09090b !important;
+}
+
+/* Description */
+.driver-popover-description {
+  font-size: 13px !important;
+  line-height: 1.55 !important;
+  color: #a1a1aa !important;
+  margin-top: 4px !important;
+  margin-bottom: 16px !important;
+}
+
+:root:not(.dark) .driver-popover-description {
+  color: #52525b !important;
+}
+
+/* Footer Container */
+.driver-popover-footer {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  margin-top: 14px !important;
+  padding-top: 12px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+:root:not(.dark) .driver-popover-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Progress Indicator */
+.driver-popover-progress-text {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  color: #a1a1aa !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  padding: 3px 8px !important;
+  border-radius: 9999px !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+:root:not(.dark) .driver-popover-progress-text {
+  color: #52525b !important;
+  background: rgba(0, 0, 0, 0.04) !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Navigation Buttons Group */
+.driver-popover-navigation-btns {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+/* Shared Button Styles */
+.driver-popover-footer-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  border-radius: 7px !important;
+  padding: 6px 12px !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+}
+
+/* Previous Button */
+.driver-popover-prev-btn {
+  background-color: transparent !important;
+  color: #d4d4d8 !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+}
+
+.driver-popover-prev-btn:hover {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+}
+
+:root:not(.dark) .driver-popover-prev-btn {
+  color: #52525b !important;
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+}
+
+:root:not(.dark) .driver-popover-prev-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+  color: #09090b !important;
+}
+
+/* Next / Done Button: Depoii Pastel Mint Accent (#B4E4D6) */
+.driver-popover-next-btn {
+  background-color: #B4E4D6 !important;
+  color: #09090b !important;
+  border: 1px solid #B4E4D6 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 2px 8px rgba(180, 228, 214, 0.25) !important;
+}
+
+.driver-popover-next-btn:hover {
+  background-color: #9cd7c7 !important;
+  border-color: #9cd7c7 !important;
+  transform: translateY(-0.5px) !important;
+}
+
+/* Popover Arrow */
+.driver-popover-arrow-side-top {
+  border-bottom-color: #111216 !important;
+}
+.driver-popover-arrow-side-bottom {
+  border-top-color: #111216 !important;
+}
+.driver-popover-arrow-side-left {
+  border-right-color: #111216 !important;
+}
+.driver-popover-arrow-side-right {
+  border-left-color: #111216 !important;
+}
+
+:root:not(.dark) .driver-popover-arrow-side-top {
+  border-bottom-color: #ffffff !important;
+}
+:root:not(.dark) .driver-popover-arrow-side-bottom {
+  border-top-color: #ffffff !important;
+}
+:root:not(.dark) .driver-popover-arrow-side-left {
+  border-right-color: #ffffff !important;
+}
+:root:not(.dark) .driver-popover-arrow-side-right {
+  border-left-color: #ffffff !important;
+}
+
+/* Cutout active element glow */
+.driver-active-element {
+  position: relative !important;
+  z-index: 1000000001 !important;
+  outline: 2px solid #B4E4D6 !important;
+  outline-offset: 4px !important;
+  border-radius: 8px !important;
+  transition: outline-color 0.2s ease !important;
+}

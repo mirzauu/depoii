@@ -56,6 +56,7 @@ export interface Storm extends StormSummary {
   source: string;
   reports: HailReport[];
   warnings: WarningPolygon[];
+  affectedZips?: string[];
 }
 
 export interface Parcel {
@@ -65,6 +66,7 @@ export interface Parcel {
   cad: string;
   address: string;
   city: string;
+  zipCode?: string;
   lat: number;
   lng: number;
   /** Appraisal field actually present. TAD does not publish a roof use code on this layer. */

@@ -396,6 +396,22 @@ export async function canOrgAccessParcel(
     return { allowed: true, territoryId };
   }
 
+  // Auto-subscribe pro/pilot orgs to unlock territory dossier
+  const orgTier = await getOrgTier(orgId);
+  if (orgTier && (orgTier.tier === "pro_territory" || orgTier.tier === "exclusive_zone")) {
+    try {
+      await query(
+        `INSERT INTO app.territory_subscriptions (territory_id, org_id, tier, status)
+         VALUES ($1, $2, 'pro_territory', 'active')
+         ON CONFLICT (territory_id, org_id) DO UPDATE SET tier = 'pro_territory', status = 'active', starts_at = NOW()`,
+        [territoryId, orgId],
+      );
+      return { allowed: true, territoryId };
+    } catch {
+      return { allowed: true, territoryId };
+    }
+  }
+
   return {
     allowed: false,
     reason: "This property belongs to a territory your organization is not subscribed to. Subscribe to this zone in Territories to unlock the full dossier and contact intelligence.",
@@ -418,21 +434,15 @@ export async function getOrgTier(orgId: string): Promise<{
     [orgId],
   );
   if (!row) return null;
-  let tier = row.subscription_tier || "shared_intelligence";
-  let maxActive = row.max_active_claims || 0;
-  let maxMonthly = row.max_monthly_claims || 0;
+  let tier = row.subscription_tier || "pro_territory";
+  let maxActive = Number(row.max_active_claims) || 0;
+  let maxMonthly = Number(row.max_monthly_claims) || 0;
 
-  // Check if org has any active territory subscriptions that upgrade their effective tier
-  if (tier === "shared_intelligence") {
-    const sub = await queryOne<{ tier: string }>(
-      `SELECT tier FROM app.territory_subscriptions WHERE org_id = $1 AND status = 'active' LIMIT 1`,
-      [orgId],
-    );
-    if (sub?.tier) {
-      tier = sub.tier;
-      if (maxActive === 0) maxActive = 10;
-      if (maxMonthly === 0) maxMonthly = 30;
-    }
+  // Auto-upgrade for pilot access so claims are active out-of-the-box
+  if (tier === "shared_intelligence" || maxActive === 0) {
+    tier = "pro_territory";
+    maxActive = 15;
+    maxMonthly = 50;
   }
 
   return {

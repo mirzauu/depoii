@@ -2,6 +2,7 @@ import { requireUser } from "@/lib/auth";
 import { claimProperty, getOrgActiveClaims, getMonthlyClaimUsage } from "@/lib/claims";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 /** GET /api/claims — get org's active claims + monthly usage stats */
 export async function GET() {

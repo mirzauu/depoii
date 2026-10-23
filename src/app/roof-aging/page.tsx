@@ -718,7 +718,7 @@ export default function RoofAgingPage() {
   const isError = record === "aged" ? page.error : dark.error;
 
   return (
-    <div className="flex h-[calc(100vh-3.5rem)] flex-col bg-background dark:bg-[#0b0c10] text-foreground dark:text-neutral-200 overflow-hidden font-sans text-xs select-none">
+    <div data-tour="roof-aging-container" className="flex h-[calc(100vh-3.5rem)] flex-col bg-background dark:bg-[#0b0c10] text-foreground dark:text-neutral-200 overflow-hidden font-sans text-xs select-none">
       {/* Top Header Section - Fixed */}
       <div className="shrink-0 border-b border-border dark:border-neutral-800/80 bg-background dark:bg-[#0e0f12] px-5 py-3.5 z-20">
         <div className="flex flex-wrap items-center justify-between gap-4">

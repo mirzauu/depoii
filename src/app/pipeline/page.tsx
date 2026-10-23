@@ -551,7 +551,7 @@ export default function PipelinePage() {
   return (
     <div className="flex h-[calc(100dvh-53px)] max-h-[calc(100dvh-53px)] flex-col bg-background dark:bg-[#0b0c0e] text-foreground dark:text-neutral-100 antialiased font-sans overflow-hidden">
       {/* Top Header Row - Fixed */}
-      <div className="shrink-0 border-b border-border dark:border-neutral-800/80 bg-background dark:bg-[#0e0f12] px-5 py-3.5 z-20">
+      <div data-tour="pipeline-header" className="shrink-0 border-b border-border dark:border-neutral-800/80 bg-background dark:bg-[#0e0f12] px-5 py-3.5 z-20">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="space-y-0.5">
             <div className="flex items-center gap-3">
@@ -678,7 +678,7 @@ export default function PipelinePage() {
       </div>
 
       {/* Main Two-Column Layout */}
-      <div className="flex flex-1 min-h-0 overflow-hidden">
+      <div data-tour="pipeline-content" className="flex flex-1 min-h-0 overflow-hidden">
         {/* Left Filter Sidebar - Fixed */}
         {!hideFilters && (
           <aside className="w-64 shrink-0 border-r border-border dark:border-neutral-800/80 bg-neutral-50/70 dark:bg-[#0d0e12] p-3 text-xs flex flex-col justify-between overflow-y-auto h-full z-10">

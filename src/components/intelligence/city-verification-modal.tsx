@@ -101,18 +101,7 @@ export function CityVerificationModal({ className }: { className?: string }) {
 
   return (
     <>
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        className={cn(
-          "inline-flex items-center gap-1.5 rounded-md border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-xs font-medium text-emerald-600 transition hover:bg-emerald-500/20 dark:text-emerald-400",
-          className,
-        )}
-        title={`Audit and verify commercial buildings in ${city}`}
-      >
-        <ShieldCheck className="size-3.5" />
-        <span>Audit {city}</span>
-      </button>
+      {/* Verification / audit button hidden for now */}
 
       {open && (
         <div

@@ -58,6 +58,30 @@ export function DepoiiMark({ className, animated = false, title = "Depoii" }: { 
   );
 }
 
+export function DepoiiAiMark({ className, title = "Depoii AI" }: { className?: string; title?: string }) {
+  return (
+    <svg viewBox="-50 -50 100 100" role="img" aria-label={title} className={cn("shrink-0", className)}>
+      <g fill="currentColor">
+        {/* Altered Depoii spiral vortex tiles (outer vortex arms) */}
+        {SPIRAL_BLOCKS.filter((b) => b.step >= 1).map((b) => (
+          <rect
+            key={b.key}
+            x={-b.w / 2}
+            y={-b.h / 2}
+            width={b.w}
+            height={b.h}
+            rx={0.6}
+            transform={`translate(${b.x} ${b.y}) rotate(${b.angle})`}
+          />
+        ))}
+        {/* Central 4-point AI Star Core */}
+        <path d="M0 -16 C0 -4 4 0 16 0 C4 0 0 4 0 16 C0 4 -4 0 -16 0 C-4 0 0 -4 0 -16 Z" />
+        <circle cx="0" cy="0" r="2.8" fill="var(--background, #0c0c0e)" />
+      </g>
+    </svg>
+  );
+}
+
 export function DepoiiLogo({ className, collapsed = false }: { className?: string; collapsed?: boolean }) {
   return (
     <span className={cn("flex items-center gap-2.5", className)}>
