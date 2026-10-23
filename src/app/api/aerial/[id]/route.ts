@@ -1,4 +1,4 @@
-import { readFile } from "node:fs/promises";
+import { readFile, writeFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 import { queryOne } from "@/lib/pg";
 import zipcodes from "zipcodes";
@@ -86,24 +86,136 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     return new Response("Bad id", { status: 400 });
   }
 
-  const stripped = id.replace(/^DCAD-PARCEL-/i, "");
-  const prefixed = id.startsWith("DCAD-PARCEL-") ? id : `DCAD-PARCEL-${id}`;
+  const stripped = id
+    .replace(/^DCAD-PARCEL-/i, "")
+    .replace(/^TAD-PARCEL-/i, "")
+    .replace(/^NYC-PLUTO-/i, "");
+  const prefixedDcad = id.startsWith("DCAD-PARCEL-") ? id : `DCAD-PARCEL-${stripped}`;
+  const prefixedTad = id.startsWith("TAD-PARCEL-") ? id : `TAD-PARCEL-${stripped}`;
+  const prefixedPluto = id.startsWith("NYC-PLUTO-") ? id : `NYC-PLUTO-${stripped}`;
+
+  const candidates = Array.from(new Set([id, stripped, prefixedDcad, prefixedTad, prefixedPluto])).filter(Boolean);
 
   // 1. Try reading pre-rendered local file if on disk
-  for (const filename of [`thumb_${id}.png`, `thumb_${stripped}.png`, `thumb_${prefixed}.png`]) {
-    try {
-      const file = await readFile(path.join(DIR, filename));
-      return new Response(new Uint8Array(file), {
-        headers: { "Content-Type": "image/png", "Cache-Control": "public, max-age=604800, stale-while-revalidate=86400" },
-      });
-    } catch {
-      // Continue to database / on-the-fly resolution
+  for (const cand of candidates) {
+    for (const prefix of ["thumb_", ""]) {
+      for (const ext of [".png", ".jpg", ".jpeg", ".webp"]) {
+        const filePath = path.join(DIR, `${prefix}${cand}${ext}`);
+        try {
+          const file = await readFile(filePath);
+          const contentType = ext === ".png" ? "image/png" : ext === ".webp" ? "image/webp" : "image/jpeg";
+          return new Response(new Uint8Array(file), {
+            headers: {
+              "Content-Type": contentType,
+              "Cache-Control": "public, max-age=604800, stale-while-revalidate=86400",
+            },
+          });
+        } catch {
+          // not found on disk, continue
+        }
+      }
     }
   }
 
-  // 2. Query parcel coordinates & address from PostgreSQL database
+  // 2. Check warehouse.scored_parcel_leads for aerial_snapshot_url
+  let scoredAddress: string | undefined;
+  let scoredCity: string | undefined;
+  let scoredState: string | undefined;
+  let scoredZip: string | undefined;
+
   try {
-    const row = await queryOne<{
+    const scoredRow = await queryOne<{
+      aerial_snapshot_url?: string;
+      address?: string;
+      city?: string;
+      state?: string;
+      zip_code?: string;
+    }>(
+      `SELECT aerial_snapshot_url, address, city, state, zip_code
+       FROM warehouse.scored_parcel_leads
+       WHERE parcel_id = ANY($1::text[])
+       LIMIT 1`,
+      [candidates],
+    );
+
+    if (scoredRow) {
+      scoredAddress = scoredRow.address;
+      scoredCity = scoredRow.city;
+      scoredState = scoredRow.state;
+      scoredZip = scoredRow.zip_code;
+
+      if (scoredRow.aerial_snapshot_url) {
+        const urlStr = scoredRow.aerial_snapshot_url.trim();
+
+        // 2a. If file path on disk
+        if (urlStr.includes("/") || urlStr.includes("\\")) {
+          const resolvedPath = path.isAbsolute(urlStr) ? urlStr : path.join(process.cwd(), urlStr);
+          try {
+            const diskFile = await readFile(resolvedPath);
+            const ext = path.extname(resolvedPath).toLowerCase();
+            const ct = ext === ".jpg" || ext === ".jpeg" ? "image/jpeg" : ext === ".webp" ? "image/webp" : "image/png";
+            return new Response(new Uint8Array(diskFile), {
+              headers: {
+                "Content-Type": ct,
+                "Cache-Control": "public, max-age=604800, stale-while-revalidate=86400",
+              },
+            });
+          } catch {
+            // disk path in DB not present on this machine, fall through to live fetch
+          }
+        }
+
+        // 2b. If base64 data URI
+        if (urlStr.startsWith("data:image/")) {
+          const commaIdx = urlStr.indexOf(",");
+          if (commaIdx !== -1) {
+            const meta = urlStr.slice(5, commaIdx);
+            const ct = meta.split(";")[0] || "image/png";
+            const b64 = urlStr.slice(commaIdx + 1);
+            const buf = Buffer.from(b64, "base64");
+            return new Response(buf, {
+              headers: {
+                "Content-Type": ct,
+                "Cache-Control": "public, max-age=604800, stale-while-revalidate=86400",
+              },
+            });
+          }
+        }
+
+        // 2c. If remote HTTP URL
+        if (/^https?:\/\//i.test(urlStr)) {
+          try {
+            const remoteRes = await fetch(urlStr, { signal: AbortSignal.timeout(6000) });
+            if (remoteRes.ok) {
+              const remoteBuf = await remoteRes.arrayBuffer();
+              const ct = remoteRes.headers.get("content-type") || "image/png";
+              return new Response(remoteBuf, {
+                headers: {
+                  "Content-Type": ct,
+                  "Cache-Control": "public, max-age=604800, stale-while-revalidate=86400",
+                },
+              });
+            }
+          } catch {
+            // remote fetch failed, continue to coordinates
+          }
+        }
+      }
+    }
+  } catch (err) {
+    console.warn("[aerial] Error querying scored_parcel_leads:", err);
+  }
+
+  // 3. Query parcel coordinates from warehouse.parcels or warehouse.live_parcels
+  let lat: number = NaN;
+  let lng: number = NaN;
+  let address = scoredAddress;
+  let city = scoredCity || "Dallas";
+  let state = scoredState || "TX";
+  let zipCode = scoredZip;
+
+  try {
+    const parcelRow = await queryOne<{
       latitude: number | string;
       longitude: number | string;
       address?: string;
@@ -111,53 +223,80 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
       state?: string;
       zip_code?: string;
     }>(
-      `select latitude, longitude, address, city, state, zip_code from warehouse.parcels
-       where id = $1 or id = $2 or id = $3
-          or account_number = $1 or account_number = $2 or account_number = $3
-       union
-       select latitude, longitude, address, city, state, zip_code from warehouse.scored_parcel_leads
-       where parcel_id = $1 or parcel_id = $2 or parcel_id = $3
-       union
-       select lat as latitude, lng as longitude, address, city, state, '' as zip_code from warehouse.live_parcels
-       where account = $1 or account = $2 or account = $3 or id::text = $1 or id::text = $2
-       limit 1`,
-      [id, stripped, prefixed],
+      `SELECT latitude, longitude, address, city, state, zip_code
+       FROM warehouse.parcels
+       WHERE id = ANY($1::text[]) OR account_number = ANY($1::text[])
+       LIMIT 1`,
+      [candidates],
     );
 
-    let lat = Number(row?.latitude);
-    let lng = Number(row?.longitude);
+    if (parcelRow) {
+      lat = Number(parcelRow.latitude);
+      lng = Number(parcelRow.longitude);
+      if (parcelRow.address) address = parcelRow.address;
+      if (parcelRow.city) city = parcelRow.city;
+      if (parcelRow.state) state = parcelRow.state;
+      if (parcelRow.zip_code) zipCode = parcelRow.zip_code;
+    }
 
-    // If coordinates are missing from the DB, geocode the address
     if (!Number.isFinite(lat) || !Number.isFinite(lng) || lat === 0 || lng === 0) {
-      if (row?.address) {
-        const coords = await geocodeAddress(row.address, row.city || "Dallas", row.state || "TX");
-        if (coords) {
-          lat = coords.lat;
-          lng = coords.lng;
-        }
+      const liveRow = await queryOne<{ lat: number; lng: number; address?: string; city?: string }>(
+        `SELECT lat, lng, address, city
+         FROM warehouse.live_parcels
+         WHERE account = ANY($1::text[])
+         LIMIT 1`,
+        [candidates],
+      );
+      if (liveRow?.lat && liveRow?.lng) {
+        lat = Number(liveRow.lat);
+        lng = Number(liveRow.lng);
+        if (liveRow.address) address = liveRow.address;
+        if (liveRow.city) city = liveRow.city;
       }
     }
+  } catch (err) {
+    console.warn("[aerial] Error querying coordinates:", err);
+  }
 
-    // If still missing, check if we have a valid ZIP code
-    if (!Number.isFinite(lat) || !Number.isFinite(lng) || lat === 0 || lng === 0) {
-      if (row?.zip_code) {
-        const zipData = zipcodes.lookup(row.zip_code.slice(0, 5));
-        if (zipData?.latitude && zipData?.longitude) {
-          lat = Number(zipData.latitude);
-          lng = Number(zipData.longitude);
-        }
+  // 4. Geocode fallback if coordinates not found in DB
+  if (!Number.isFinite(lat) || !Number.isFinite(lng) || lat === 0 || lng === 0) {
+    if (address) {
+      const coords = await geocodeAddress(address, city, state);
+      if (coords) {
+        lat = coords.lat;
+        lng = coords.lng;
       }
     }
+  }
 
-    // Default to Dallas metro center coordinates if all else fails
-    if (!Number.isFinite(lat) || !Number.isFinite(lng) || lat === 0 || lng === 0) {
-      lat = 32.7838;
-      lng = -96.7824;
+  if (!Number.isFinite(lat) || !Number.isFinite(lng) || lat === 0 || lng === 0) {
+    if (zipCode) {
+      const zipData = zipcodes.lookup(zipCode.slice(0, 5));
+      if (zipData?.latitude && zipData?.longitude) {
+        lat = Number(zipData.latitude);
+        lng = Number(zipData.longitude);
+      }
     }
+  }
 
-    // 3. Fetch real satellite imagery from ESRI World Imagery
+  // Default to Dallas metro center coordinates if all else fails
+  if (!Number.isFinite(lat) || !Number.isFinite(lng) || lat === 0 || lng === 0) {
+    lat = 32.7838;
+    lng = -96.7824;
+  }
+
+  // 5. Fetch real satellite imagery from ESRI World Imagery
+  try {
     const satellite = await fetchEsriSatellite(lat, lng);
     if (satellite) {
+      // Opportunistically cache to local thumbnails folder
+      try {
+        await mkdir(DIR, { recursive: true });
+        await writeFile(path.join(DIR, `thumb_${id}.png`), Buffer.from(satellite.buffer));
+      } catch {
+        // Silently skip if disk caching is restricted or read-only
+      }
+
       return new Response(satellite.buffer, {
         headers: {
           "Content-Type": satellite.contentType,
@@ -165,23 +304,16 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
         },
       });
     }
-
-    // 4. SVG fallback only if ESRI network request completely failed
-    return new Response(fallbackSvg(id, row?.address), {
-      status: 200,
-      headers: {
-        "Content-Type": "image/svg+xml",
-        "Cache-Control": "public, max-age=86400",
-      },
-    });
   } catch (err) {
-    console.error(`[aerial] Error resolving aerial for ${id}:`, err);
-    return new Response(fallbackSvg(id), {
-      status: 200,
-      headers: {
-        "Content-Type": "image/svg+xml",
-        "Cache-Control": "public, max-age=3600",
-      },
-    });
+    console.error(`[aerial] Failed fetching ESRI satellite for ${id}:`, err);
   }
+
+  // 6. Clean SVG fallback only as absolute last resort
+  return new Response(fallbackSvg(id, address), {
+    status: 200,
+    headers: {
+      "Content-Type": "image/svg+xml",
+      "Cache-Control": "public, max-age=3600",
+    },
+  });
 }
