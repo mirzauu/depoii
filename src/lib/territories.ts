@@ -353,16 +353,22 @@ export async function hasActiveSubscription(orgId: string, territoryId: string):
 
 /** Find which territory a parcel belongs to (by ZIP code). */
 export async function findTerritoryForParcel(parcelId: string): Promise<string | null> {
+  const rawId = parcelId;
+  const strippedId = parcelId.replace(/^DCAD-PARCEL-/i, "");
+  const prefixedId = parcelId.startsWith("DCAD-PARCEL-") ? parcelId : `DCAD-PARCEL-${parcelId}`;
+
   const row = await queryOne<{ territory_id: string }>(
     `SELECT t.id AS territory_id
      FROM app.territories t
      JOIN (
-       SELECT parcel_id, zip_code FROM warehouse.scored_parcel_leads WHERE parcel_id = $1
+       SELECT parcel_id, zip_code FROM warehouse.scored_parcel_leads
+       WHERE parcel_id = $1 OR parcel_id = $2 OR parcel_id = $3
        UNION
-       SELECT id AS parcel_id, zip_code FROM warehouse.parcels WHERE id = $1
+       SELECT id AS parcel_id, zip_code FROM warehouse.parcels
+       WHERE id = $1 OR id = $2 OR id = $3 OR account_number = $1 OR account_number = $2 OR account_number = $3
      ) s ON substring(s.zip_code from 1 for 5) = ANY(t.zip_codes)
      LIMIT 1`,
-    [parcelId],
+    [rawId, strippedId, prefixedId],
   );
   return row?.territory_id || null;
 }
@@ -375,11 +381,16 @@ export async function canOrgAccessParcel(
 ): Promise<{ allowed: boolean; reason?: string; territoryId?: string }> {
   if (isSuperAdmin) return { allowed: true };
 
+  const rawId = parcelId;
+  const strippedId = parcelId.replace(/^DCAD-PARCEL-/i, "");
+  const prefixedId = parcelId.startsWith("DCAD-PARCEL-") ? parcelId : `DCAD-PARCEL-${parcelId}`;
+
   // 1. Is it currently claimed by this org?
   const claimRow = await queryOne<{ id: string }>(
     `SELECT id FROM app.property_claims
-     WHERE parcel_id = $1 AND claimed_by_org_id = $2 AND status = 'active'`,
-    [parcelId, orgId],
+     WHERE (parcel_id = $1 OR parcel_id = $2 OR parcel_id = $3)
+       AND claimed_by_org_id = $4 AND status = 'active'`,
+    [rawId, strippedId, prefixedId, orgId],
   );
   if (claimRow) return { allowed: true };
 

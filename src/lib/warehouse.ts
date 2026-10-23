@@ -437,9 +437,24 @@ export async function multiphase(q: Q) {
 }
 
 export async function permitsParcel(parcelId: string) {
-  const parcel = await queryOne(`select * from warehouse.parcels where id = $1 or account_number = $1`, [parcelId]);
+  const rawId = parcelId;
+  const strippedId = parcelId.replace(/^DCAD-PARCEL-/i, "");
+  const prefixedId = parcelId.startsWith("DCAD-PARCEL-") ? parcelId : `DCAD-PARCEL-${parcelId}`;
+
+  const parcel = await queryOne(
+    `select * from warehouse.parcels
+     where id = $1 or id = $2 or id = $3
+        or account_number = $1 or account_number = $2 or account_number = $3
+     limit 1`,
+    [rawId, strippedId, prefixedId]
+  );
   if (!parcel) return null;
-  const permits = await query(`select * from warehouse.normalized_permits where parcel_id = $1 order by issue_date desc nulls last`, [parcel.id]);
+  const permits = await query(
+    `select * from warehouse.normalized_permits
+     where parcel_id = $1 or parcel_id = $2 or parcel_id = $3
+     order by issue_date desc nulls last`,
+    [parcel.id, parcel.account_number || parcel.id, strippedId]
+  );
   const contact = await queryOne<{
     decision_maker_name: string;
     decision_maker_title: string;
