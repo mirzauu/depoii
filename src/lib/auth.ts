@@ -31,6 +31,7 @@ export type SessionUser = {
   orgName: string;
   role: string;
   platformRole: string;
+  contractorId?: string | null;
 };
 
 export type SignInResult = { user: SessionUser } | { error: string };
@@ -47,11 +48,12 @@ type AccountRow = {
   disabled: number;
   org_disabled: number;
   last_seen_at: string;
+  contractor_id?: string | null;
 };
 
 const ACCOUNT_SQL = `
   SELECT u.id, u.email, u.name, u.password_hash, u.platform_role, u.disabled, u.last_seen_at,
-    m.org_id, m.role, o.name AS org_name, o.disabled AS org_disabled
+    m.org_id, m.role, o.name AS org_name, o.disabled AS org_disabled, o.contractor_id
   FROM app.users u
   JOIN app.memberships m ON m.user_id = u.id
   JOIN app.orgs o ON o.id = m.org_id
@@ -87,6 +89,7 @@ function sessionFrom(row: AccountRow): SessionUser {
     orgName: row.org_name,
     role: row.role,
     platformRole: row.platform_role || "",
+    contractorId: row.contractor_id || null,
   };
 }
 

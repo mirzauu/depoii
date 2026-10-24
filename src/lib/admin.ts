@@ -2,6 +2,7 @@ import { randomBytes } from "node:crypto";
 import { recordActivity } from "@/lib/activity";
 import { createUser, loginLinkStatus, setUserPassword } from "@/lib/auth";
 import { query, queryOne } from "@/lib/pg";
+import { getOrgContractor } from "@/lib/contractor-intelligence";
 
 export class HttpError extends Error {
   status: number;
@@ -133,6 +134,13 @@ type OrgSql = {
   leads: number;
   outcomes: number;
   active_subscriptions: OrgSubscriptionItem[] | string | null;
+  contractor_id?: string | null;
+  contractor_verified_at?: string | null;
+  contractor_matched_via?: string | null;
+  contractor_name?: string | null;
+  contractor_permits?: number | string | null;
+  contractor_valuation?: number | null;
+  contractor_bbb_rating?: string | null;
 };
 
 function mapOrg(row: OrgSql) {
@@ -153,6 +161,13 @@ function mapOrg(row: OrgSql) {
     leads: Number(row.leads),
     outcomes: Number(row.outcomes),
     activeSubscriptions: activeSubs,
+    contractorId: row.contractor_id || null,
+    contractorName: row.contractor_name || null,
+    contractorPermits: row.contractor_permits ? Number(row.contractor_permits) : null,
+    contractorValuation: row.contractor_valuation ? Number(row.contractor_valuation) : null,
+    contractorBbbRating: row.contractor_bbb_rating || null,
+    contractorVerifiedAt: row.contractor_verified_at ? String(row.contractor_verified_at) : null,
+    contractorMatchedVia: row.contractor_matched_via || null,
   };
 }
 
@@ -173,8 +188,16 @@ const ORG_LIST_SQL = `
     FROM app.territory_subscriptions ts
     JOIN app.territories t ON t.id = ts.territory_id
     WHERE ts.org_id = o.id AND ts.status = 'active' AND (ts.ends_at IS NULL OR ts.ends_at > NOW())
-    ) AS active_subscriptions
+    ) AS active_subscriptions,
+    o.contractor_id,
+    o.contractor_verified_at,
+    o.contractor_matched_via,
+    c.canonical_name AS contractor_name,
+    c.total_permits AS contractor_permits,
+    c.total_valuation AS contractor_valuation,
+    c.bbb_rating AS contractor_bbb_rating
   FROM app.orgs o
+  LEFT JOIN warehouse.canonical_contractors c ON c.id = o.contractor_id
 `;
 
 export async function listOrgs() {
@@ -277,7 +300,11 @@ export async function createOrganization(actorId: string, input: { name?: string
   return mapOrg(await requireOrg(orgId));
 }
 
-export async function updateOrganization(actorId: string, id: string, input: { name?: string; disabled?: boolean }) {
+export async function updateOrganization(
+  actorId: string,
+  id: string,
+  input: { name?: string; disabled?: boolean; contractorId?: string | null },
+) {
   const current = await requireOrg(id);
   if (typeof input.name === "string") {
     const name = input.name.trim();
@@ -295,6 +322,36 @@ export async function updateOrganization(actorId: string, id: string, input: { n
       targetType: "org", targetId: id,
       detail: { name: typeof input.name === "string" && input.name.trim() ? input.name.trim() : current.name },
     });
+  }
+  if (input.contractorId !== undefined) {
+    if (input.contractorId) {
+      const contractor = await queryOne<{ id: string; canonical_name: string }>(
+        `select id, canonical_name from warehouse.canonical_contractors where id = $1`,
+        [input.contractorId],
+      );
+      if (!contractor) throw new HttpError(404, "Contractor profile not found.");
+      await query(
+        `update app.orgs set contractor_id = $1, contractor_verified_at = now(), contractor_matched_via = 'admin' where id = $2`,
+        [input.contractorId, id],
+      );
+      await recordActivity({
+        actorId, orgId: id,
+        action: "org.link_contractor",
+        targetType: "org", targetId: id,
+        detail: { contractorId: input.contractorId, contractorName: contractor.canonical_name },
+      });
+    } else {
+      await query(
+        `update app.orgs set contractor_id = null, contractor_verified_at = null, contractor_matched_via = null where id = $1`,
+        [id],
+      );
+      await recordActivity({
+        actorId, orgId: id,
+        action: "org.unlink_contractor",
+        targetType: "org", targetId: id,
+        detail: { previousContractorId: current.contractor_id },
+      });
+    }
   }
   return mapOrg(await requireOrg(id));
 }
@@ -324,6 +381,7 @@ type OutcomeSql = {
 
 export async function organizationDetail(id: string) {
   const org = mapOrg(await requireOrg(id));
+  const linkedContractor = await getOrgContractor(id);
   const members = (await query<UserSql>(`${USER_SQL} WHERE m.org_id = $1 ORDER BY lower(u.email)`, [id])).map(mapUser);
   const leads = (await query<LeadSql>(
     `select id, parcel_id, storm_id, address, city, stage, assignee, score, price, updated_at
@@ -339,7 +397,7 @@ export async function organizationDetail(id: string) {
     id: row.id, parcelId: row.parcel_id, stormId: row.storm_id, loggedAt: row.logged_at,
     predictedScore: Number(row.predicted_score), scope: row.scope, contractValue: Number(row.contract_value),
   }));
-  return { org, members, leads, outcomes, activity: await listActivity({ orgId: id, limit: 50 }) };
+  return { org, linkedContractor, members, leads, outcomes, activity: await listActivity({ orgId: id, limit: 50 }) };
 }
 
 export async function createMember(actorId: string, input: { email?: string; password?: string; name?: string; orgId?: string; role?: string }) {

@@ -7,7 +7,9 @@ import { useDepoiiState } from "@/components/depoii-provider";
 import { EngineLayout, EngineState, Filter, Kpis, Pager, ScopeFilter, filterField, useDebounced } from "@/components/engine-layout";
 import { useEngine } from "@/components/use-engine";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { mapJobsites, mapMultiphase, mapPermitSearch, mapStats } from "@/lib/engine-api";
+import { PermitDetailDrawer } from "@/components/permit-detail-drawer";
+import { ParcelDetailDrawer } from "@/components/parcel-detail-drawer";
+import { mapJobsites, mapMultiphase, mapPermitSearch, mapStats, type EnginePermit } from "@/lib/engine-api";
 import { num, shortDate, usd } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
@@ -22,6 +24,8 @@ function daysSince(iso: string) {
 export default function PermitsPage() {
   const { jurisdiction } = useDepoiiState();
   const [view, setView] = useState<"all" | "jobsites" | "phases">("all");
+  const [selectedPermit, setSelectedPermit] = useState<EnginePermit | null>(null);
+  const [selectedParcelId, setSelectedParcelId] = useState<string | null>(null);
   const [all, setAll] = useState(false);
   const [search, setSearch] = useState("");
   useEffect(() => {
@@ -237,6 +241,7 @@ export default function PermitsPage() {
                   <Filter label="Intelligence">
                     <select value={mode} onChange={(e) => reset(setMode)(e.target.value)} className={filterField}>
                       <option value="all">All permits</option>
+                      <option value="pre_permit">Pre-Permit / Bidding Open</option>
                       <option value="storm_matched">Storm matched</option>
                       <option value="unresolved_hail">Unresolved hail</option>
                       <option value="commercial_only">Commercial only</option>
@@ -331,10 +336,35 @@ export default function PermitsPage() {
               </TableHeader>
               <TableBody>
                 {jobs.data?.jobsites.map((j) => (
-                  <TableRow key={j.id}>
+                  <TableRow
+                    key={j.id}
+                    onClick={() => setSelectedPermit({
+                      id: j.id,
+                      permitNumber: j.permitNumber,
+                      jurisdiction: j.jurisdiction,
+                      address: j.address,
+                      city: "",
+                      state: "",
+                      zip: "",
+                      issued: j.issued,
+                      status: j.status || "Active",
+                      valuation: j.valuation,
+                      category: j.category || "Commercial Re-Roof",
+                      roofSystem: j.roofSystem,
+                      contractor: j.contractor,
+                      description: j.scope || "Active commercial roofing jobsite in progress.",
+                      sqft: 0,
+                      hailWindow: false,
+                      storm: "",
+                      parcelId: "",
+                      lat: j.lat,
+                      lng: j.lng,
+                    })}
+                    className="cursor-pointer hover:bg-neutral-500/10 dark:hover:bg-neutral-800/50 transition-colors"
+                  >
                     <TableCell className="pl-4"><span className="font-medium">{j.permitNumber}</span><span className="block text-xs text-muted-foreground">{j.issued ? shortDate(j.issued) : "Issue date blank"}</span></TableCell>
                     <TableCell className="max-w-72"><span className="block truncate">{j.address || "Address not published"}</span><span className="block text-xs text-muted-foreground">{j.jurisdiction}</span></TableCell>
-                    <TableCell className="hidden max-w-56 lg:table-cell"><ContractorLink name={j.contractor} /></TableCell>
+                    <TableCell className="hidden max-w-56 lg:table-cell" onClick={(e) => e.stopPropagation()}><ContractorLink name={j.contractor} /></TableCell>
                     <TableCell className="hidden text-right font-mono tabular-nums sm:table-cell">{daysSince(j.issued) ?? "—"}</TableCell>
                     <TableCell className="pr-4 text-right font-mono tabular-nums">{j.valuation ? usd(j.valuation, true) : "—"}</TableCell>
                   </TableRow>
@@ -400,19 +430,46 @@ export default function PermitsPage() {
           </TableHeader>
           <TableBody>
             {page.data?.permits.map((p) => (
-              <TableRow key={p.id}>
+              <TableRow
+                key={p.id}
+                onClick={() => setSelectedPermit(p)}
+                className="cursor-pointer hover:bg-neutral-500/10 dark:hover:bg-neutral-800/50 transition-colors"
+              >
                 <TableCell className="pl-4">
-                  <span className="font-medium">{p.permitNumber}</span>
-                  <span className="block text-xs text-muted-foreground">{p.issued ? shortDate(p.issued) : "Issue date blank"}{p.hailWindow ? " · storm window" : ""}</span>
+                  <span className="font-medium group-hover:text-primary transition-colors">{p.permitNumber}</span>
+                  <span className="block text-xs text-muted-foreground">
+                    {p.isPrePermit && p.appliedDate
+                      ? `Applied ${shortDate(p.appliedDate)}`
+                      : p.issued
+                      ? shortDate(p.issued)
+                      : "Issue date blank"}
+                    {p.hailWindow ? " · storm window" : ""}
+                  </span>
                 </TableCell>
                 <TableCell className="max-w-64">
                   <span className="block truncate">{p.address || "Address not published"}</span>
                   <span className="block text-xs text-muted-foreground">{p.jurisdiction || [p.city, p.state].filter(Boolean).join(", ")}</span>
                 </TableCell>
-                <TableCell className="hidden max-w-56 lg:table-cell"><ContractorLink name={p.contractor} /></TableCell>
+                <TableCell className="hidden max-w-56 lg:table-cell" onClick={(e) => e.stopPropagation()}>
+                  {p.isPrePermit && (!p.contractor || p.contractor.toLowerCase().includes("file") || p.contractor.toLowerCase().includes("licensed")) ? (
+                    <span className="text-xs text-muted-foreground italic">
+                      Contractor not selected
+                    </span>
+                  ) : (
+                    <ContractorLink name={p.contractor} />
+                  )}
+                </TableCell>
                 <TableCell className="hidden md:table-cell">{p.roofSystem || "—"}</TableCell>
                 <TableCell className="hidden xl:table-cell">{p.category}</TableCell>
-                <TableCell>{p.status || "—"}</TableCell>
+                <TableCell>
+                  {p.isPrePermit ? (
+                    <span className="inline-flex items-center rounded border border-[#B4E4D6]/40 bg-[#B4E4D6]/10 px-2 py-0.5 text-xs text-emerald-800 dark:text-[#B4E4D6]">
+                      {p.bidWindowStatus || p.status || "In Review"}
+                    </span>
+                  ) : (
+                    <span className="text-muted-foreground">{p.status || "—"}</span>
+                  )}
+                </TableCell>
                 <TableCell className="pr-4 text-right font-mono tabular-nums">{p.valuation ? usd(p.valuation, true) : "—"}</TableCell>
               </TableRow>
             ))}
@@ -422,6 +479,22 @@ export default function PermitsPage() {
       </EngineState>
       </>
       )}
+
+      {/* Permit Detail Half Window / Drawer */}
+      <PermitDetailDrawer
+        permit={selectedPermit}
+        onClose={() => setSelectedPermit(null)}
+        onViewParcel={(parcelId) => {
+          setSelectedPermit(null);
+          setSelectedParcelId(parcelId);
+        }}
+      />
+
+      {/* Connected Parcel Detail Drawer */}
+      <ParcelDetailDrawer
+        parcelId={selectedParcelId}
+        onClose={() => setSelectedParcelId(null)}
+      />
     </EngineLayout>
   );
 }

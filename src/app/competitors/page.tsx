@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { Bar, BarChart, CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { PageHeader } from "@/components/app-shell";
@@ -190,8 +191,9 @@ export default function CompetitorsPage() {
                     <TableCell className="text-right font-mono tabular-nums">{s.permits}</TableCell>
                     <TableCell className="text-right font-mono tabular-nums">{s.share > 0 ? pct(s.share, 1) : "—"}</TableCell>
                     <TableCell className="hidden text-right font-mono tabular-nums sm:table-cell">{usd(s.valuation, true)}</TableCell>
-                    <TableCell className="hidden text-right font-mono tabular-nums md:table-cell">—</TableCell>
-                    <TableCell className="pr-6 text-xs text-muted-foreground">Profile</TableCell>
+                    <TableCell className="pr-6 text-xs">
+                      <Link href={`/contractors/${encodeURIComponent(s.name)}`} className="text-primary hover:underline font-medium">Profile →</Link>
+                    </TableCell>
                   </TableRow>
                 ))}
                 {leaders == null && (

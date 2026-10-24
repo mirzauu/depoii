@@ -1,0 +1,1988 @@
+{
+  "total_contractors": 254,
+  "batch_size": 10,
+  "total_batches": 26,
+  "current_batch": 24,
+  "completed_batches": 23,
+  "last_run_at": "2026-10-24T04:24:07.410Z",
+  "batches": {
+    "1": {
+      "completed_at": "2026-10-24T02:33:40.719Z",
+      "count": 10,
+      "companies": [
+        {
+          "name": "Claudine Cooper",
+          "note": "Verified: Premier DFW Commercial Roofing Contractor, Accela Applicant",
+          "has_website": true,
+          "has_bbb": true,
+          "has_rcat": true,
+          "has_linkedin": true
+        },
+        {
+          "name": "Aston Sanderlin",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Luis Amezcia",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Casey Troxlair",
+          "note": "Verified: KPost Company Contract Manager filing commercial Accela permits",
+          "has_website": true,
+          "has_bbb": true,
+          "has_rcat": false,
+          "has_linkedin": true
+        },
+        {
+          "name": "Marty Brown",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Ryan Curtis",
+          "note": "Verified: Boyd Inc. VP of Commercial Roofing",
+          "has_website": true,
+          "has_bbb": true,
+          "has_rcat": false,
+          "has_linkedin": true
+        },
+        {
+          "name": "Bobby Foster",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Daniel Arenas",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Jennifer Jennings",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Esthela Sifuentes",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        }
+      ]
+    },
+    "2": {
+      "completed_at": "2026-10-24T02:34:18.623Z",
+      "count": 10,
+      "companies": [
+        {
+          "name": "Ray Villarreal",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "John Tucker",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Clayton Rogers",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Wade Casey",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "LSR Multifamily (Lone Star Roofing of Texas LLC)",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": true,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Donna Burnette",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Steven Needham",
+          "note": "OFFICIAL_RCAT_DIRECTORY (License 03-0645)",
+          "has_website": true,
+          "has_bbb": false,
+          "has_rcat": true,
+          "has_linkedin": true
+        },
+        {
+          "name": "Jason Armstrong",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Doug Meredith",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Anthony Melendez",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        }
+      ]
+    },
+    "3": {
+      "completed_at": "2026-10-24T02:39:31.361Z",
+      "count": 10,
+      "companies": [
+        {
+          "name": "Raymundo Cruz",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Jeff Riss",
+          "note": "Verified RCAT Member & BBB Accredited Roofer",
+          "has_website": true,
+          "has_bbb": true,
+          "has_rcat": true,
+          "has_linkedin": true
+        },
+        {
+          "name": "Greg Hiltz",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Jimmy Lancaster",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Doug Reader",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": true,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Hawk Sight Commercial Roofing",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": true
+        },
+        {
+          "name": "Samantha Stokes",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Melissa Stafford",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Alex Simon",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Brendon Fry",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        }
+      ]
+    },
+    "4": {
+      "completed_at": "2026-10-24T02:44:45.340Z",
+      "count": 10,
+      "companies": [
+        {
+          "name": "Mark Nelson",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": true,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Shawna Raborn",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Michael Gentile",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Matt Cook",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Marika Little",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": true,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Juan Nava",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Shannon Howell",
+          "note": "OFFICIAL_RCAT_DIRECTORY (License 03-0602)",
+          "has_website": true,
+          "has_bbb": false,
+          "has_rcat": true,
+          "has_linkedin": true
+        },
+        {
+          "name": "Frank Taylor",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Derek Scheler",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Rosa Robles",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        }
+      ]
+    },
+    "5": {
+      "completed_at": "2026-10-24T02:50:00.657Z",
+      "count": 10,
+      "companies": [
+        {
+          "name": "Matthew Kelley",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Pedro Parga",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Matt Jones",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Kevin Delgado",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Clayton Meis",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Kirk Scott",
+          "note": "OFFICIAL_RCAT_DIRECTORY (License 03-0369)",
+          "has_website": true,
+          "has_bbb": false,
+          "has_rcat": true,
+          "has_linkedin": true
+        },
+        {
+          "name": "Ricardo Giron",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Christopher Rios",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Marlon Swan",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": true,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Zac Pullar",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        }
+      ]
+    },
+    "6": {
+      "completed_at": "2026-10-24T02:55:15.422Z",
+      "count": 10,
+      "companies": [
+        {
+          "name": "Matthew Hines",
+          "note": "OFFICIAL_RCAT_DIRECTORY (License 03-0034)",
+          "has_website": true,
+          "has_bbb": false,
+          "has_rcat": true,
+          "has_linkedin": true
+        },
+        {
+          "name": "Zachary Herman",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Jason Keung",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Adib Alami",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Eric Rodriguez",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Erick Hernandez",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Everardo Moreno",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Raul Lopez",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Joseph Leray",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Rhonda Coates",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        }
+      ]
+    },
+    "7": {
+      "completed_at": "2026-10-24T03:00:28.428Z",
+      "count": 10,
+      "companies": [
+        {
+          "name": "Jake Hercamp",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Richard Haness",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Julie Mccutchan",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Carlos Talison",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Carlos Villalba",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Rufus Hampton",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Alexander Cruz",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Casey Smith",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Larry Skinner",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Dean Martin",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        }
+      ]
+    },
+    "8": {
+      "completed_at": "2026-10-24T03:05:41.155Z",
+      "count": 10,
+      "companies": [
+        {
+          "name": "Leeann Lopez",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Steven Kemper",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Lourdes Carvajal",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Matthew Ducker",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "John Wensinger",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Don Randles",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Erich Hieger",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Eberardo Romero",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Christine Scott",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Agustin Miranda",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        }
+      ]
+    },
+    "9": {
+      "completed_at": "2026-10-24T03:10:53.982Z",
+      "count": 10,
+      "companies": [
+        {
+          "name": "Amber Gonzalez",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Frolan Santibanez",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Mariah Rdz",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Fernando Terrones",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Kym Harris",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Josue Rangel",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Juan Salas",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Judith Tobias",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Justin Gould",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Kari Pizzini",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        }
+      ]
+    },
+    "10": {
+      "completed_at": "2026-10-24T03:16:06.765Z",
+      "count": 10,
+      "companies": [
+        {
+          "name": "Kayleigh Avants",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Khudijah Sarfaraz",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Kirk Swan",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Kyle Cahill",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Kyle Peterson",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Laura Colditz",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Laynie Terral",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Lebarron Williams",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Leon Munson",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Lesley Link",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        }
+      ]
+    },
+    "11": {
+      "completed_at": "2026-10-24T03:21:19.772Z",
+      "count": 10,
+      "companies": [
+        {
+          "name": "Lori Anderson-Stokes",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": true
+        },
+        {
+          "name": "Lori Mcdonald",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Lucy Marchan",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Major Williams",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Mark Farrell",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Mark Guinn",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Mark Scott Manning",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": true
+        },
+        {
+          "name": "Martin Pitts",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": true,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Mason Kennedy",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Matthew Gordon",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        }
+      ]
+    },
+    "12": {
+      "completed_at": "2026-10-24T03:26:32.392Z",
+      "count": 10,
+      "companies": [
+        {
+          "name": "Mcr Ruben Faz",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": true
+        },
+        {
+          "name": "Micah Fisher",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Micah Mullican",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Michael Gibson",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Michael Tobolka",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Michelle Anderson",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Miguel Adame",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Miguel Garza",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Miguel Soto",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Miles Miskelly",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        }
+      ]
+    },
+    "13": {
+      "completed_at": "2026-10-24T03:31:44.920Z",
+      "count": 10,
+      "companies": [
+        {
+          "name": "Mj Tenorio",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Nathan Mcquillan",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Nicholas Bass",
+          "note": "OFFICIAL_RCAT_DIRECTORY (License 03-0737)",
+          "has_website": true,
+          "has_bbb": false,
+          "has_rcat": true,
+          "has_linkedin": true
+        },
+        {
+          "name": "Nicholas Heruska",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Orozcos Inc",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Pablo Guzman",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Paul Bosco",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Paul Melbye",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Presley Tepe",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Qteam Benjamin Sauceda",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": true
+        }
+      ]
+    },
+    "14": {
+      "completed_at": "2026-10-24T03:36:53.628Z",
+      "count": 10,
+      "companies": [
+        {
+          "name": "Randy Sandvig",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Raul Rojas",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Remove Existing Tpo Roofing System. Install New Iso Board, And Tpo",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": true
+        },
+        {
+          "name": "Renae Maresh",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Rene Leon",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Reroof- Co-25-001620",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": true
+        },
+        {
+          "name": "Richard Bass",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Richard Romero",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Ricky Bryant",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Robert Mcfarland",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        }
+      ]
+    },
+    "15": {
+      "completed_at": "2026-10-24T03:42:11.143Z",
+      "count": 10,
+      "companies": [
+        {
+          "name": "Robert Stidger",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Roberto Castaneda",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Ron Ballard",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Ruben Faz",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Russell Willbanks",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Ryan Cummings",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Ryan Mccutchan",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Sam Patel",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Scott Anders",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Scott Manning",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        }
+      ]
+    },
+    "16": {
+      "completed_at": "2026-10-24T03:47:24.229Z",
+      "count": 10,
+      "companies": [
+        {
+          "name": "Scott Salinas",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Scott Warnick",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Shari Bailey",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Shawn Michael",
+          "note": "OFFICIAL_RCAT_DIRECTORY (License 03-0358)",
+          "has_website": true,
+          "has_bbb": true,
+          "has_rcat": true,
+          "has_linkedin": true
+        },
+        {
+          "name": "Steve Frady",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Steven Alfaro",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Steven Santana",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Susan Fye",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Tabatha Milliken",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Jose Alcantar Jr",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": true
+        }
+      ]
+    },
+    "17": {
+      "completed_at": "2026-10-24T03:52:34.872Z",
+      "count": 10,
+      "companies": [
+        {
+          "name": "Add New Layer Of Modified Bitumen Roofing Over Existing Layer",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": true
+        },
+        {
+          "name": "Adolfo Cabrera",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": true,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Adrian Merlan",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Aj Rodriguez",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Alberto Rodriguez",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Alejandro Call",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Alfredo Salazar",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Alicia Vera",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Amanda Delaney",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Amando Benitez",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        }
+      ]
+    },
+    "18": {
+      "completed_at": "2026-10-24T03:57:48.451Z",
+      "count": 10,
+      "companies": [
+        {
+          "name": "Andres Ortiz Sens",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": true
+        },
+        {
+          "name": "Andy Pitts",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": true,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Angel Flores",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Benjamin Douglas",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Betty Sullins",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Bhavin Patel",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Blake Silva",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Brad De Landro",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": true
+        },
+        {
+          "name": "Brian Bernard",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Bruce Smith",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": true,
+          "has_rcat": false,
+          "has_linkedin": false
+        }
+      ]
+    },
+    "19": {
+      "completed_at": "2026-10-24T04:03:02.150Z",
+      "count": 10,
+      "companies": [
+        {
+          "name": "Bryan Wozniak",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Caleb Hancock",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Carson Rivers",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Chloe Sintic",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Christopher Adibmand",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Christopher Weeldreyer",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Cindy Hearne",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Clint May",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Cody Welch",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Commercial Reroof",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": true,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        }
+      ]
+    },
+    "20": {
+      "completed_at": "2026-10-24T04:08:16.532Z",
+      "count": 10,
+      "companies": [
+        {
+          "name": "Dan Dickinson",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Daniel Askari",
+          "note": "OFFICIAL_RCAT_DIRECTORY (License 01-0459)",
+          "has_website": true,
+          "has_bbb": false,
+          "has_rcat": true,
+          "has_linkedin": true
+        },
+        {
+          "name": "Daniel Munoz",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Daniel Ramirez",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Danielle Harbeck",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "David Cervantes Vera",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": true
+        },
+        {
+          "name": "David Graham",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Derek Ring",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Devren Evans",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Dimitri Morris",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        }
+      ]
+    },
+    "21": {
+      "completed_at": "2026-10-24T04:13:34.520Z",
+      "count": 10,
+      "companies": [
+        {
+          "name": "Donnie Stribble",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Dsst- Disd- Truett Es",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": true
+        },
+        {
+          "name": "Dsst-Rem Disd Boude Storey",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": true
+        },
+        {
+          "name": "Dsst-Rem Disd Eb Comstock Es",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": true
+        },
+        {
+          "name": "Ec Commercial Reroof B Renovation",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": true
+        },
+        {
+          "name": "El Commerical Additiong Addition",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": true
+        },
+        {
+          "name": "Eric Fisher",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Eric Gonzales",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Ezequiel Guzman",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Fredi Garcia Martinez",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": true
+        }
+      ]
+    },
+    "22": {
+      "completed_at": "2026-10-24T04:18:47.539Z",
+      "count": 10,
+      "companies": [
+        {
+          "name": "Garrett Domingue",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Gayle Biemeret",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Gc Blackstone",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Greg Jennings",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Gregory Harvey",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Guillermo Medina",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Halle Bynum",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Henri Faucheux",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Henry Choi",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Hilda Dominguez",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        }
+      ]
+    },
+    "23": {
+      "completed_at": "2026-10-24T04:24:07.410Z",
+      "count": 10,
+      "companies": [
+        {
+          "name": "Hugh Pender",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Jack Coffey",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Jacob Dyer",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "James Allan",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "James Mcgee",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "James Pond",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "James Townsend",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Jan Taylor",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Jantzen Steves",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Jason Evans",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        }
+      ]
+    }
+  }
+}

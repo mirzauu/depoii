@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
-import { Sparkles, Clock, ShieldCheck, Trash2, ArrowUpRight } from "lucide-react";
+import { Sparkles, Clock, ShieldCheck, Trash2, ArrowUpRight, HardHat } from "lucide-react";
 import { PageHeader } from "@/components/app-shell";
 import { adminFetch, field, when, type AdminOrg } from "@/components/admin-ui";
+import { AdminContractorLinkDialog } from "@/components/admin/admin-contractor-link-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -32,6 +33,7 @@ export default function OrganizationsPage() {
 
   // Free Trial Modal State
   const [trialOrg, setTrialOrg] = useState<AdminOrg | null>(null);
+  const [linkingOrg, setLinkingOrg] = useState<AdminOrg | null>(null);
   const [territories, setTerritories] = useState<TerritoryOption[]>([]);
   const [trialZone, setTrialZone] = useState("dallas-central-uptown");
   const [trialDays, setTrialDays] = useState(14);
@@ -202,6 +204,7 @@ export default function OrganizationsPage() {
             <TableRow>
               <TableHead>Name</TableHead>
               <TableHead>Plan & Territory</TableHead>
+              <TableHead>Contractor Link</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Members</TableHead>
               <TableHead>Leads</TableHead>
@@ -249,6 +252,36 @@ export default function OrganizationsPage() {
                       <Badge variant="secondary" className="text-xs text-muted-foreground bg-muted/60">
                         Shared (No Territory)
                       </Badge>
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {org.contractorId ? (
+                      <button
+                        type="button"
+                        onClick={() => setLinkingOrg(org)}
+                        className="flex flex-col text-left group hover:opacity-85 transition-opacity"
+                        title="Click to view, change, or unlink contractor profile"
+                      >
+                        <Badge className="w-fit bg-[#B4E4D6]/20 text-[#1b7e65] dark:text-[#B4E4D6] border-[#B4E4D6]/40 text-xs gap-1 font-semibold">
+                          <HardHat className="size-3" />
+                          <span className="max-w-[130px] truncate">{org.contractorName || "Linked Contractor"}</span>
+                        </Badge>
+                        <span className="text-[11px] text-muted-foreground mt-0.5">
+                          {org.contractorPermits != null ? `${org.contractorPermits} permits` : ""}
+                          {org.contractorValuation ? ` · $${Math.trunc(org.contractorValuation).toLocaleString()}` : ""}
+                        </span>
+                      </button>
+                    ) : (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setLinkingOrg(org)}
+                        className="h-7 text-xs border-dashed gap-1 text-muted-foreground hover:text-foreground"
+                      >
+                        <HardHat className="size-3" />
+                        Link Profile
+                      </Button>
                     )}
                   </TableCell>
                   <TableCell>{org.disabled ? <Badge variant="destructive">Suspended</Badge> : <Badge variant="secondary">Active</Badge>}</TableCell>
@@ -438,6 +471,21 @@ export default function OrganizationsPage() {
           )}
         </DialogContent>
       </Dialog>
+
+      {linkingOrg && (
+        <AdminContractorLinkDialog
+          open={Boolean(linkingOrg)}
+          onOpenChange={(open) => { if (!open) setLinkingOrg(null); }}
+          orgId={linkingOrg.id}
+          orgName={linkingOrg.name}
+          currentContractorId={linkingOrg.contractorId}
+          currentContractorName={linkingOrg.contractorName}
+          onSuccess={() => {
+            load();
+            setLinkingOrg(null);
+          }}
+        />
+      )}
     </div>
   );
 }

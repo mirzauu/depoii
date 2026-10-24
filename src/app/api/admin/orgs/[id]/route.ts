@@ -17,7 +17,7 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
   try {
     const actor = await requireSuperAdmin();
     const { id } = await params;
-    const body = (await req.json()) as { name?: string; disabled?: boolean };
+    const body = (await req.json()) as { name?: string; disabled?: boolean; contractorId?: string | null };
     return Response.json(await updateOrganization(actor.id, id, body));
   } catch (error) {
     return adminResponse(error);

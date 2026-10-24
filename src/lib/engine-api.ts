@@ -64,6 +64,12 @@ export interface EnginePermit {
   parcelId: string;
   lat: number | null;
   lng: number | null;
+  isPrePermit?: boolean;
+  bidWindowStatus?: string | null;
+  appliedDate?: string | null;
+  architectName?: string | null;
+  designFirm?: string | null;
+  ownerPhone?: string | null;
 }
 
 export function mapPermit(row: Row): EnginePermit {
@@ -88,6 +94,12 @@ export function mapPermit(row: Row): EnginePermit {
     parcelId: str(row, ["parcelId", "parcel_id"]),
     lat: coord(row, ["latitude", "lat"]),
     lng: coord(row, ["longitude", "lng"]),
+    isPrePermit: Boolean(pick(row, ["isPrePermit", "is_pre_permit"])),
+    bidWindowStatus: (pick(row, ["bidWindowStatus", "bid_window_status"]) as string) || null,
+    appliedDate: str(row, ["appliedDate", "applied_date"]).slice(0, 10) || null,
+    architectName: (pick(row, ["architectName", "architect_name"]) as string) || null,
+    designFirm: (pick(row, ["designFirm", "design_firm"]) as string) || null,
+    ownerPhone: (pick(row, ["ownerPhone", "owner_phone"]) as string) || null,
   };
 }
 
@@ -217,8 +229,6 @@ export function mapLeaderboard(body: unknown) {
       if (/\bsq\s*ft\b|\bsf\s*-/i.test(n)) return false;
       if (/^commercial re-?roof/i.test(n)) return false;
       if (/municipal record|licensed commercial|unknown contractor/i.test(n)) return false;
-      // Accela often stores the permit contact (person) as contractor_name — drop those.
-      if (looksLikePersonName(n)) return false;
       return true;
     });
   return {
@@ -227,6 +237,14 @@ export function mapLeaderboard(body: unknown) {
     jurisdiction: str(b, ["jurisdiction_filter"]),
     contractors,
   };
+}
+
+export function mapContractorProfile(body: unknown): ContractorProfile | null {
+  const b = (body ?? {}) as Row;
+  const raw = b.contractor || (Array.isArray(b.leaderboard) ? b.leaderboard[0] : null) || (b.canonicalName ? b : null);
+  if (!raw || typeof raw !== "object") return null;
+  const list = mapLeaderboard({ leaderboard: [raw] }).contractors;
+  return list[0] ?? null;
 }
 
 export interface PermitStats {

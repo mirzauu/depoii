@@ -7,12 +7,12 @@ import { enqueueJob, getJob } from "@/lib/jobs";
 
 const READ_PATHS = [
   /^health$/,
-  /^permits\/(search|active-jobsites|roof-aging-alarm|multiphase-projects|stats|cities)$/,
+  /^permits\/(search|active-jobsites|roof-aging-alarm|multiphase-projects|stats|pre-permit-stats|cities)$/,
   /^permits\/parcels\/[^/]+$/,
   /^parcels(\/(search|dallas|tarrant|dark-market\/overdue|browse))?$/,
   /^parcels\/browse\/[^/]+$/,
   /^parcels\/[^/]+$/,
-  /^contractors\/(leaderboard|directory)$/,
+  /^contractors\/(leaderboard|directory|profile)$/,
   /^storms\/(active-swaths|live-alerts|hail-events)$/,
   /^intelligence\/unresolved-exposure$/,
   /^intelligence\/leads\/ranked$/,
@@ -44,6 +44,7 @@ async function localGet(path: string[], q: URLSearchParams, user?: AuthUser | nu
       return { status: "healthy", engine: "nextjs-warehouse", database: pgConfigured() ? "supabase" : "unset" };
     case "permits/search": return wh.permitsSearch(q);
     case "permits/stats": return wh.permitsStats();
+    case "permits/pre-permit-stats": return wh.prePermitStats(q);
     case "permits/cities": return wh.permitsCities();
     case "permits/active-jobsites": return wh.activeJobsites(q);
     case "permits/roof-aging-alarm": {
@@ -53,6 +54,7 @@ async function localGet(path: string[], q: URLSearchParams, user?: AuthUser | nu
     case "permits/multiphase-projects": return wh.multiphase(q);
     case "contractors/leaderboard":
     case "contractors/directory": return wh.contractors(q);
+    case "contractors/profile": return wh.contractorProfile(q);
     case "locations/hierarchy": return wh.locations("hierarchy");
     case "locations/states": return wh.locations("states");
     case "locations/cities": return wh.locations("cities");

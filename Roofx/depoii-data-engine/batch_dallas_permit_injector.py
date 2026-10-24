@@ -204,10 +204,10 @@ def normalize_and_save_batch(raw_records: list, conn: sqlite3.Connection) -> tup
         normalized_address = f"{address_raw}, Dallas, TX {zip_code}".strip(", ")
         
         # Dates
-        issue_date = parse_dallas_date(item.get("ISSUE_DATE")) or parse_dallas_date(item.get("CREATED_DATE"))
-        if not issue_date:
-            continue
+        issue_date = parse_dallas_date(item.get("ISSUE_DATE"))
         applied_date = parse_dallas_date(item.get("CREATED_DATE"))
+        if not issue_date and not applied_date:
+            continue
         
         # Valuation & Sqft
         val_raw = item.get("VALUE") or 0
@@ -257,7 +257,24 @@ def normalize_and_save_batch(raw_records: list, conn: sqlite3.Connection) -> tup
             except ValueError:
                 pass
                 
-        status_name = (item.get("STATUS_NAME") or "ISSUED").upper()
+        status_name = (item.get("STATUS_NAME") or ("ISSUED" if issue_date else "PLAN REVIEW")).upper()
+        is_pre_permit = 1 if status_name in [
+            'UNDER REVIEW', 'PLAN REVIEW', 'PAYMENT DUE', 'APPLICATION ACCEPTED',
+            'REVISIONS REQUIRED', 'ADDITIONAL INFO REQUIRED', 'NEW', 'DOCUMENT RECEIVED', 'PENDING'
+        ] or (applied_date and not issue_date) else 0
+
+        bid_window_status = None
+        if is_pre_permit:
+            if "PAYMENT" in status_name:
+                bid_window_status = "Payment Due (Final Window)"
+            elif "REVIEW" in status_name or "PLAN" in status_name:
+                bid_window_status = "Plan Review"
+            elif "REVISION" in status_name:
+                bid_window_status = "Revisions Requested"
+            elif "NEW" in status_name or "APPLICATION" in status_name:
+                bid_window_status = "Application Accepted"
+            else:
+                bid_window_status = status_name.title()
         
         try:
             c.execute("""
@@ -268,7 +285,8 @@ def normalize_and_save_batch(raw_records: list, conn: sqlite3.Connection) -> tup
                     valuation_formatted, category, probable_roof_system, raw_description,
                     square_footage, contractor_name, contractor_license, contractor_phone,
                     is_hail_storm_window, associated_storm_id, is_competitor_capture,
-                    confidence_score, latitude, longitude, normalized_at
+                    confidence_score, latitude, longitude, normalized_at,
+                    is_pre_permit, bid_window_status
                 ) VALUES (
                     ?, ?, ?, ?, ?,
                     ?, ?, ?, ?, ?, ?,
@@ -276,7 +294,8 @@ def normalize_and_save_batch(raw_records: list, conn: sqlite3.Connection) -> tup
                     ?, ?, ?, ?,
                     ?, ?, ?, ?,
                     ?, ?, ?,
-                    ?, ?, ?, ?
+                    ?, ?, ?, ?,
+                    ?, ?
                 )
             """, (
                 permit_id, str(permit_num), "TX-DALLAS", None, contractor_id,
@@ -285,7 +304,8 @@ def normalize_and_save_batch(raw_records: list, conn: sqlite3.Connection) -> tup
                 val_fmt, category, roof_sys, raw_desc,
                 sqft, clean_c_name, None, c_phone,
                 0, None, 1 if val >= 100000 else 0,
-                95, lat, lon, now_iso
+                95, lat, lon, now_iso,
+                is_pre_permit, bid_window_status
             ))
             inserted += 1
         except sqlite3.IntegrityError:

@@ -5,7 +5,8 @@ import { use } from "react";
 import { ContractorBody } from "@/components/contractor-dialog";
 import { EngineLayout, EngineState } from "@/components/engine-layout";
 import { useContractor } from "@/components/contractor-link";
-import type { ContractorProfile } from "@/lib/engine-api";
+import { mapContractorProfile, type ContractorProfile } from "@/lib/engine-api";
+import { useEngine } from "@/components/use-engine";
 
 function blank(name: string): ContractorProfile {
   return {
@@ -38,17 +39,23 @@ function blank(name: string): ContractorProfile {
 export default function ContractorPage({ params }: { params: Promise<{ name: string }> }) {
   const { name } = use(params);
   const decoded = decodeURIComponent(name);
-  const { contractor: indexed, loading } = useContractor(decoded);
-  const contractor = indexed ?? (loading ? null : blank(decoded));
+  const { contractor: indexed } = useContractor(decoded);
+  const profileQuery = useEngine(
+    "contractors/profile",
+    { name: decoded },
+    mapContractorProfile,
+    true,
+  );
+  const contractor = profileQuery.data ?? indexed ?? (profileQuery.loading ? null : blank(decoded));
 
   return (
     <EngineLayout
       title={decoded}
-      subtitle="Contractor profile from the data engine leaderboard, with the permits filed under this name."
+      subtitle="Contractor profile from the data engine, with verified external intelligence and permits filed under this name."
       actions={<Link href="/competitors" className="rounded-md border border-border px-3 py-1 text-xs hover:bg-muted">Leaderboard</Link>}
     >
       <div className="p-4">
-        <EngineState loading={!contractor} error={null} empty={false}>
+        <EngineState loading={!contractor && profileQuery.loading} error={profileQuery.error} empty={false} onRetry={profileQuery.retry}>
           {contractor && <ContractorBody contractor={contractor} hideTitle />}
         </EngineState>
       </div>

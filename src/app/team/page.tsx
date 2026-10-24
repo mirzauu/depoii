@@ -9,6 +9,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { Settings, Shield } from "lucide-react";
 import type { OrgRole } from "@/lib/roles";
+import { ContractorIdentityCard } from "@/components/organization/contractor-identity-card";
 
 type Member = { id: string; name: string; email: string; role: string; roleColor?: string };
 type Invite = {
@@ -153,6 +154,8 @@ export default function TeamPage() {
           </Link>
         )}
       </div>
+
+      <ContractorIdentityCard isOwner={isOwner} />
 
       {error && <p className="px-4 text-sm text-red-300 lg:px-8">{error}</p>}
 

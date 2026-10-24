@@ -4,7 +4,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useEffect, useState } from "react";
-import { engineGet, mapPermitSearch, type ContractorProfile, type EnginePermit } from "@/lib/engine-api";
+import { engineGet, mapPermitSearch, mapContractorProfile, type ContractorProfile, type EnginePermit } from "@/lib/engine-api";
 import { pct, shortDate, usd } from "@/lib/format";
 import { DepoiiLoader } from "@/components/depoii-logo";
 
@@ -23,7 +23,20 @@ export function ContractorDialog({ contractor, onClose }: { contractor: Contract
   );
 }
 
-export function ContractorBody({ contractor, hideTitle = false }: { contractor: ContractorProfile; hideTitle?: boolean }) {
+export function ContractorBody({ contractor: initial, hideTitle = false }: { contractor: ContractorProfile; hideTitle?: boolean }) {
+  const [profile, setProfile] = useState<ContractorProfile | null>(null);
+
+  useEffect(() => {
+    if (!initial.phone && !initial.website && !initial.rcatProfileUrl && !initial.bbbProfileUrl) {
+      const controller = new AbortController();
+      engineGet("contractors/profile", { name: initial.name || initial.id }, mapContractorProfile, controller.signal)
+        .then((res) => { if (res) setProfile(res); })
+        .catch(() => {});
+      return () => controller.abort();
+    }
+  }, [initial.name, initial.id, initial.phone, initial.website, initial.rcatProfileUrl, initial.bbbProfileUrl]);
+
+  const contractor = profile ?? initial;
   const [permits, setPermits] = useState<EnginePermit[] | null>(null);
   const [matched, setMatched] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -84,47 +97,11 @@ export function ContractorBody({ contractor, hideTitle = false }: { contractor: 
             {aliases.length > 0 && (
               <p className="text-xs text-muted-foreground">Also filed as {aliases.join(", ")}</p>
             )}
-            <Tabs defaultValue="permits">
+            <Tabs defaultValue="profile">
               <TabsList>
-                <TabsTrigger value="permits">All permits</TabsTrigger>
                 <TabsTrigger value="profile">Profile</TabsTrigger>
+                <TabsTrigger value="permits">All permits</TabsTrigger>
               </TabsList>
-              <TabsContent value="permits">
-                {permits == null && !error && <DepoiiLoader label={`Loading permits for ${contractor.name}…`} className="py-8" />}
-                {error && <p className="py-6 text-sm text-red-300">{error}</p>}
-                {permits && !permits.length && <p className="py-6 text-sm text-muted-foreground">No permits matched this contractor name or its aliases. The leaderboard name often differs from the name printed on the permit.</p>}
-                {matched && matched !== contractor.name && <p className="pb-2 text-xs text-muted-foreground">Matched permits filed as {matched}.</p>}
-                {!!permits?.length && (
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Permit</TableHead>
-                        <TableHead>Address</TableHead>
-                        <TableHead className="hidden md:table-cell">Scope</TableHead>
-                        <TableHead className="text-right">Value</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {permits.map((p) => (
-                        <TableRow key={p.id}>
-                          <TableCell>
-                            <span className="font-medium">{p.permitNumber}</span>
-                            <span className="block text-xs text-muted-foreground">{p.issued ? shortDate(p.issued) : "—"} · {p.status || p.category}</span>
-                          </TableCell>
-                          <TableCell className="max-w-48">
-                            <span className="block truncate">{p.address || "Address not published"}</span>
-                            {(p.address || (p.lat != null && p.lng != null)) && (
-                              <a href={mapsUrl(p.address, p.lat, p.lng)} target="_blank" rel="noreferrer" className="text-xs text-sky-400 hover:underline">Satellite</a>
-                            )}
-                          </TableCell>
-                          <TableCell className="hidden max-w-64 truncate md:table-cell" title={p.description}>{p.description || "—"}</TableCell>
-                          <TableCell className="text-right font-mono tabular-nums">{p.valuation ? usd(p.valuation, true) : "—"}</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                )}
-              </TabsContent>
               <TabsContent value="profile" className="space-y-4">
                 {(contractor.rcatProfileUrl || contractor.bbbProfileUrl || contractor.linkedinCompanyUrl) && (
                   <div className="rounded-lg border border-border/80 bg-muted/40 p-3">
@@ -203,6 +180,42 @@ export function ContractorBody({ contractor, hideTitle = false }: { contractor: 
                     </ul>
                   )}
                 </div>
+              </TabsContent>
+              <TabsContent value="permits">
+                {permits == null && !error && <DepoiiLoader label={`Loading permits for ${contractor.name}…`} className="py-8" />}
+                {error && <p className="py-6 text-sm text-red-300">{error}</p>}
+                {permits && !permits.length && <p className="py-6 text-sm text-muted-foreground">No permits matched this contractor name or its aliases. The leaderboard name often differs from the name printed on the permit.</p>}
+                {matched && matched !== contractor.name && <p className="pb-2 text-xs text-muted-foreground">Matched permits filed as {matched}.</p>}
+                {!!permits?.length && (
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Permit</TableHead>
+                        <TableHead>Address</TableHead>
+                        <TableHead className="hidden md:table-cell">Scope</TableHead>
+                        <TableHead className="text-right">Value</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {permits.map((p) => (
+                        <TableRow key={p.id}>
+                          <TableCell>
+                            <span className="font-medium">{p.permitNumber}</span>
+                            <span className="block text-xs text-muted-foreground">{p.issued ? shortDate(p.issued) : "—"} · {p.status || p.category}</span>
+                          </TableCell>
+                          <TableCell className="max-w-48">
+                            <span className="block truncate">{p.address || "Address not published"}</span>
+                            {(p.address || (p.lat != null && p.lng != null)) && (
+                              <a href={mapsUrl(p.address, p.lat, p.lng)} target="_blank" rel="noreferrer" className="text-xs text-sky-400 hover:underline">Satellite</a>
+                            )}
+                          </TableCell>
+                          <TableCell className="hidden max-w-64 truncate md:table-cell" title={p.description}>{p.description || "—"}</TableCell>
+                          <TableCell className="text-right font-mono tabular-nums">{p.valuation ? usd(p.valuation, true) : "—"}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                )}
               </TabsContent>
             </Tabs>
     </>

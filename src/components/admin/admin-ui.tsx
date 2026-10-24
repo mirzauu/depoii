@@ -26,6 +26,8 @@ export const ACTIONS: { id: string; label: string }[] = [
   { id: "org.rename", label: "Renamed organization" },
   { id: "org.suspend", label: "Suspended organization" },
   { id: "org.reactivate", label: "Reactivated organization" },
+  { id: "org.link_contractor", label: "Linked contractor profile" },
+  { id: "org.unlink_contractor", label: "Unlinked contractor profile" },
   { id: "user.create", label: "Created user" },
   { id: "user.role", label: "Changed role" },
   { id: "user.move", label: "Moved user" },
@@ -79,6 +81,13 @@ export type AdminOrg = {
   outcomes: number;
   subscriptionTier?: string;
   maxActiveClaims?: number;
+  contractorId?: string | null;
+  contractorName?: string | null;
+  contractorPermits?: number | null;
+  contractorValuation?: number | null;
+  contractorBbbRating?: string | null;
+  contractorVerifiedAt?: string | null;
+  contractorMatchedVia?: string | null;
   activeSubscriptions?: {
     territory_id: string;
     territory_name: string;

@@ -358,6 +358,25 @@ def process_batch(batch_def: dict) -> tuple:
             contractors_created += 1
             
         status = row.get("Status", "Active").strip() or "Active"
+        is_pre_permit = 1 if status in [
+            'Payment Due', 'Plan Review', 'Under Review', 'In Review',
+            'Application Accepted', 'Revisions Required', 'Additional Info Required',
+            'Document Received', 'Pending', 'NEW', 'New', 'APPRVD'
+        ] else 0
+        bid_window_status = None
+        if is_pre_permit:
+            if status == "Payment Due":
+                bid_window_status = "Payment Due (Final Window)"
+            elif status in ("Plan Review", "In Review", "Under Review"):
+                bid_window_status = "Plan Review"
+            elif status in ("Revisions Required", "Additional Info Required"):
+                bid_window_status = "Revisions Requested"
+            elif status in ("NEW", "New"):
+                bid_window_status = "Application Accepted"
+            elif status == "APPRVD":
+                bid_window_status = "Approved (Awaiting Issuance)"
+            else:
+                bid_window_status = status
         
         try:
             cur.execute("""
@@ -368,7 +387,8 @@ def process_batch(batch_def: dict) -> tuple:
                     valuation_formatted, category, probable_roof_system, raw_description,
                     square_footage, contractor_name, contractor_license, contractor_phone,
                     is_hail_storm_window, associated_storm_id, is_competitor_capture,
-                    confidence_score, latitude, longitude, normalized_at
+                    confidence_score, latitude, longitude, normalized_at,
+                    is_pre_permit, bid_window_status
                 ) VALUES (
                     ?, ?, ?, ?, ?,
                     ?, ?, ?, ?, ?, ?,
@@ -376,7 +396,8 @@ def process_batch(batch_def: dict) -> tuple:
                     ?, ?, ?, ?,
                     ?, ?, ?, ?,
                     ?, ?, ?,
-                    ?, ?, ?, ?
+                    ?, ?, ?, ?,
+                    ?, ?
                 )
             """, (
                 permit_id, raw_num, "TX-DALLAS", None, cid,
@@ -385,7 +406,8 @@ def process_batch(batch_def: dict) -> tuple:
                 val_fmt, "Commercial", roof_sys, full_desc,
                 sqft, cname, None, None,
                 0, None, 1 if val >= 100000 else 0,
-                95, lat, lon, now_iso
+                95, lat, lon, now_iso,
+                is_pre_permit, bid_window_status
             ))
             inserted += 1
         except Exception:

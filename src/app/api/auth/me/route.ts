@@ -15,6 +15,7 @@ export async function GET() {
       orgName: user.orgName,
       role: user.role,
       platformRole: user.platformRole,
+      contractorId: user.contractorId || null,
       permissions,
     });
   } catch {

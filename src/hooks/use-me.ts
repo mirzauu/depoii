@@ -10,6 +10,7 @@ export type Me = {
   orgName: string;
   role: string;
   platformRole: string;
+  contractorId?: string | null;
   permissions?: string[];
 };
 

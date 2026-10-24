@@ -1,6 +1,7 @@
 # Depoii Pilot Inbound Reply Playbook (DFW Launch Wave 1)
-> **Author:** Depoii Go-To-Market & Executive Operations  
-> **Effective Date:** October 20, 2026  
+
+> **Author:** Depoii Go-To-Market & Executive Operations
+> **Effective Date:** October 20, 2026
 > **Target Cohort:** Mike Gibson (New View Roofing) & Trevor Rodden (SR1 Roofing)
 
 ---
@@ -14,6 +15,7 @@ The pilot outreach sent on October 20 is not a marketing broadcast—it is a fou
 ## 2. Response Scenarios & Action Protocols
 
 ### Scenario A: Positive Reply ("YES" + Territory Stated)
+
 > **Goal:** Complete frictionless onboarding within 24 hours, provision access, secure a 15-minute orientation, and identify the lead commercial estimator for seat #2.
 
 * **Response SLA:** Under 2 hours during business hours; maximum 24 hours.
@@ -24,6 +26,7 @@ The pilot outreach sent on October 20 is not a marketing broadcast—it is a fou
   4. **Call Booking:** Propose two concrete times for a 15-minute screen share.
 
 #### Draft Response Template (Scenario A)
+
 ```text
 Subject: Re: [Original Subject]
 
@@ -44,6 +47,7 @@ hello@depoii.com | (Direct) [Phone]
 ---
 
 ### Scenario B: Questions or Objections (Data Queries, Entity Gaps, Pilot Terms)
+
 > **Goal:** Founder answers personally, grounds every response in verifiable public sources, and logs the feedback verbatim into our calibration engine.
 
 * **Response SLA:** Same business day (under 4 hours).
@@ -53,20 +57,22 @@ hello@depoii.com | (Direct) [Phone]
   * Record objection verbatim in `d:/Depoii_nextjs/Roofx/depoii-data-engine/calibration_log.json`.
 
 #### Example Responses:
-* **If they ask about cost:**  
-  *"The pilot is free while we run this initial evaluation batch and dial in the verification standard directly with DFW contractors. If you decide to keep using it after the pilot, commercial plans align with our standard Executive tier ($1,199/mo) for your exclusive territory. If the verified parcel data doesn't deliver clear pipeline value for your estimators, there is zero commitment to continue."*
-* **If they ask about exclusivity:**  
+
+* **If they ask about cost:***"The pilot is free while we run this initial evaluation batch and dial in the verification standard directly with DFW contractors. If you decide to keep using it after the pilot, commercial plans align with our standard Executive tier ($1,199/mo) for your exclusive territory. If the verified parcel data doesn't deliver clear pipeline value for your estimators, there is zero commitment to continue."*
+* **If they ask about exclusivity:**
   *"Every lead assigned to you is locked in our project registry. No competitor receives that building while it is in your queue, and we maintain a mandatory 7-day cooldown after expiration before any re-evaluation."*
 
 ---
 
 ### Scenario C: Silence at 72 Hours (Oct 23–24, 2026)
+
 > **Goal:** One single, high-signal, non-salesy bump referencing the specific asset. No generic "checking in."
 
 * **Timing:** Send between 8:30 AM – 10:00 AM CDT on Friday, October 23, 2026.
 * **Rule:** **Exactly ONE bump.** If no reply, do not send a second bump. The lead moves to `CONTACTED_NO_REPLY` at exclusivity expiration (Oct 27), and we proceed with Track B.
 
 #### Bump Draft: Mike Gibson (New View Roofing)
+
 ```text
 Subject: Re: 1133 S Madison: Owner resolution + corrected DCAD footprint (Pack B)
 
@@ -80,6 +86,7 @@ Ali
 ```
 
 #### Bump Draft: Trevor Rodden (SR1 Roofing)
+
 ```text
 Subject: Re: 3001 Meacham: Verification correction note
 

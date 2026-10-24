@@ -15,7 +15,7 @@ export function contractorKey(name: string) {
 export function ContractorIndex({ children }: { children: React.ReactNode }) {
   const path = usePathname();
   const needsLogos = /^\/(permits|jobsites|roof-aging|multiphase|competitors|capital|property|parcels|contractors)(\/|$)/.test(path);
-  const board = useEngine("contractors/leaderboard", { limit: 200 }, mapLeaderboard, needsLogos);
+  const board = useEngine("contractors/leaderboard", { limit: 500 }, mapLeaderboard, needsLogos);
   const index = useMemo(() => {
     const map = new Map<string, ContractorProfile>();
     for (const contractor of board.data?.contractors ?? []) {

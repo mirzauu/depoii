@@ -60,6 +60,15 @@ function permitFilters(q: Q, params: unknown[]): string {
   if (mode === "active") clauses.push(`p.status in ('Active','Issued')`);
   else if (mode === "aging") clauses.push(`p.issue_date is not null and p.issue_date >= date '1990-01-01' and (extract(year from current_date) - extract(year from p.issue_date)) >= 10 and p.date_quality = 'source'`);
   else if (mode === "hail") clauses.push(`p.is_hail_storm_window = true`);
+  else if (mode === "pre_permit") clauses.push(`(
+    p.is_pre_permit = true
+    or p.status in ('Under Review','Plan Review','Payment Due',
+                     'Application Accepted','Pre-Permit','Architect Registered',
+                     'In Review','INRVW','Inrvw','NEW','New','Revisions Required',
+                     'Additional Info Required','Document Received','Pending','APPRVD')
+    or (p.applied_date is not null and p.issue_date is null)
+    or p.source_system = 'TDLR_TABS'
+  )`);
   if (q.get("min_valuation") !== null) { params.push(num(q, "min_valuation", 0)); clauses.push(`p.valuation >= $${params.length}`); }
   if (q.get("max_valuation") !== null) { params.push(num(q, "max_valuation", 0)); clauses.push(`p.valuation <= $${params.length}`); }
   if (q.get("is_hail_storm_window") !== null) { params.push(q.get("is_hail_storm_window") === "true"); clauses.push(`p.is_hail_storm_window = $${params.length}`); }
@@ -71,19 +80,36 @@ function permitFilters(q: Q, params: unknown[]): string {
   return clauses.join(" and ");
 }
 
+const toIsoDate = (d: unknown): string | null => {
+  if (!d) return null;
+  if (d instanceof Date) return d.toISOString().slice(0, 10);
+  const s = String(d).trim();
+  if (/^\d{4}-\d{2}-\d{2}/.test(s)) return s.slice(0, 10);
+  const parsed = new Date(s);
+  return Number.isNaN(parsed.getTime()) ? s.slice(0, 10) : parsed.toISOString().slice(0, 10);
+};
+
 const permitRow = (r: Record<string, unknown>) => ({
   id: r.id, sourceSystem: r.source_system, rawPermitNumber: r.raw_permit_number, jurisdiction: r.jurisdiction,
-  state: r.state, county: null, issueDate: r.date_quality === "source" && r.issue_date ? String(r.issue_date).slice(0, 10) : null,
-  appliedDate: null, expirationDate: null, status: r.status || "Active", normalizedAddress: r.normalized_address,
+  state: r.state, county: null, issueDate: r.date_quality === "source" && r.issue_date ? toIsoDate(r.issue_date) : null,
+  appliedDate: toIsoDate(r.applied_date),
+  expirationDate: toIsoDate(r.expiration_date),
+  status: r.status || "Active", normalizedAddress: r.normalized_address,
   city: r.city, zipCode: r.zip_code || "", latitude: r.geo_quality === "source_point" || r.geo_quality === "geocoded" ? r.latitude : null,
   longitude: r.geo_quality === "source_point" || r.geo_quality === "geocoded" ? r.longitude : null,
   parcelId: r.geo_quality === "source_point" || r.geo_quality === "geocoded" ? r.parcel_id : null,
-  valuation: 0, valuationFormatted: "", category: r.category || "Commercial Re-Roof",
-  rawDescription: r.raw_description || "Commercial roofing work.", squareFootage: null,
+  valuation: r.valuation != null ? Number(r.valuation) : 0, valuationFormatted: (r.valuation_formatted as string) || "",
+  category: r.category || "Commercial Re-Roof",
+  rawDescription: r.raw_description || "Commercial roofing work.", squareFootage: r.square_footage != null ? Number(r.square_footage) : null,
   probableRoofSystem: r.probable_roof_system || "Unspecified", contractorName: r.contractor_name || "Contractor on File",
-  contractorLicense: null, contractorPhone: null, isHailStormWindow: Boolean(r.is_hail_storm_window),
+  contractorLicense: r.contractor_license || null, contractorPhone: r.contractor_phone || null, isHailStormWindow: Boolean(r.is_hail_storm_window),
   isCompetitorCapture: Boolean(r.is_competitor_capture), associatedStormEvent: r.associated_storm_id,
-  confidenceScore: r.confidence_score ?? 90, normalizedAt: r.normalized_at ? String(r.normalized_at) : "2026-10-07",
+  confidenceScore: r.confidence_score ?? 90, normalizedAt: toIsoDate(r.normalized_at) || "2026-10-07",
+  isPrePermit: Boolean(r.is_pre_permit),
+  bidWindowStatus: (r.bid_window_status as string) || null,
+  architectName: (r.architect_name as string) || null,
+  designFirm: (r.design_firm as string) || null,
+  ownerPhone: (r.owner_phone as string) || null,
 });
 
 export async function permitsSearch(q: Q) {
@@ -93,7 +119,7 @@ export async function permitsSearch(q: Q) {
   const agg = await queryOne<{ total: string; val: string }>(`select count(*)::text as total, coalesce(sum(valuation),0)::text as val from warehouse.normalized_permits p where ${where}`, params);
   const order = { valuation_asc: "p.valuation asc nulls last", date_desc: "p.issue_date desc nulls last", date_asc: "p.issue_date asc nulls last" }[str(q, "sort_by")] || "p.valuation desc nulls last";
   const rows = await query(`select p.* from warehouse.normalized_permits p where ${where} order by ${order} limit $${params.length + 1} offset $${params.length + 2}`, [...params, limit, offset]);
-  return { total: Number(agg?.total || 0), count: rows.length, offset, limit, total_valuation: 0, permits: rows.map(permitRow) };
+  return { total: Number(agg?.total || 0), count: rows.length, offset, limit, total_valuation: Number(agg?.val || 0), permits: rows.map(permitRow) };
 }
 
 export async function permitsStats() {
@@ -103,6 +129,47 @@ export async function permitsStats() {
   const jurs = await query<{ name: string; n: string }>(`select coalesce(p.jurisdiction,'Unknown') as name, count(*)::text as n from warehouse.normalized_permits p where ${BASE_WHERE} group by 1`);
   const toObj = (rows: { name: string; n: string }[]) => Object.fromEntries(rows.map((r) => [r.name, Number(r.n)]));
   return { total_permits: Number(totals?.n || 0), total_valuation_usd: Number(totals?.val || 0), by_category: toObj(cats), by_roof_system: toObj(systems), by_jurisdiction: toObj(jurs) };
+}
+
+export async function prePermitStats(q: Q) {
+  const params: unknown[] = [];
+  const prePermitCondition = `(
+    p.is_pre_permit = true
+    or p.status in ('Under Review','Plan Review','Payment Due','Application Accepted','Pre-Permit','Architect Registered','In Review','INRVW','Inrvw','NEW','New','Revisions Required','Additional Info Required','Document Received','Pending','APPRVD')
+    or (p.applied_date is not null and p.issue_date is null)
+    or p.source_system = 'TDLR_TABS'
+  )`;
+  const clauses = [BASE_WHERE, prePermitCondition];
+  const { city, state } = jurisdictionParts(q);
+  const cityParam = str(q, "city") || city;
+  const stateParam = (str(q, "state") || state || "").toUpperCase();
+  if (cityParam) { params.push(`%${cityParam.toLowerCase()}%`); clauses.push(`lower(p.city) like $${params.length}`); }
+  if (stateParam) { params.push(stateParam); clauses.push(`upper(p.state) = $${params.length}`); }
+  const where = clauses.join(" and ");
+
+  const agg = await queryOne<{ n: string; val: string }>(`
+    select count(*)::text as n, coalesce(sum(p.valuation),0)::text as val
+    from warehouse.normalized_permits p where ${where}
+  `, params);
+
+  const byStatus = await query<{ status: string; n: string }>(`
+    select coalesce(p.bid_window_status, p.status, 'Under Review') as status, count(*)::text as n
+    from warehouse.normalized_permits p where ${where}
+    group by 1 order by count(*) desc limit 10
+  `, params);
+
+  const bySource = await query<{ source: string; n: string }>(`
+    select coalesce(p.source_system, 'DallasNow') as source, count(*)::text as n
+    from warehouse.normalized_permits p where ${where}
+    group by 1 order by count(*) desc
+  `, params);
+
+  return {
+    total_pre_permit: Number(agg?.n || 0),
+    total_valuation: Number(agg?.val || 0),
+    by_status: Object.fromEntries(byStatus.map((r) => [r.status, Number(r.n)])),
+    by_source: Object.fromEntries(bySource.map((r) => [r.source, Number(r.n)])),
+  };
 }
 
 export async function permitsCities() {
@@ -566,15 +633,60 @@ function parcelRowBase(r: Record<string, unknown>) {
 
 export async function contractors(q: Q) {
   const params: unknown[] = [];
-  const clauses = [`lower(coalesce(p.contractor_name,'')) not like '%licensed%'`, `lower(coalesce(p.contractor_name,'')) not like '%unknown%'`, `coalesce(p.contractor_name,'') <> ''`, ROOFING_SQL];
+  const clauses = [
+    `lower(coalesce(p.contractor_name,'')) not like '%licensed%'`,
+    `lower(coalesce(p.contractor_name,'')) not like '%unknown%'`,
+    `lower(coalesce(p.contractor_name,'')) not like '%municipal record%'`,
+    `lower(coalesce(p.contractor_name,'')) not like 'pending %'`,
+    `lower(coalesce(p.contractor_name,'')) not like 'commercial re-roof%'`,
+    `lower(coalesce(p.contractor_name,'')) not like 'roof recover%'`,
+    `lower(coalesce(p.contractor_name,'')) not like 'tear off%'`,
+    `length(trim(p.contractor_name)) between 3 and 80`,
+    `coalesce(p.contractor_name,'') <> ''`,
+    ROOFING_SQL,
+  ];
   const { city, state } = jurisdictionParts(q);
   if (city) { params.push(`%${city.toLowerCase()}%`); clauses.push(`lower(p.city) like $${params.length}`); }
   if (state) { params.push(state); clauses.push(`upper(p.state) = $${params.length}`); }
   if (str(q, "search")) { params.push(`%${str(q, "search").toLowerCase()}%`); clauses.push(`lower(p.contractor_name) like $${params.length}`); }
+  if (str(q, "roof_system")) { params.push(`%${str(q, "roof_system").toLowerCase()}%`); clauses.push(`lower(coalesce(p.probable_roof_system,'')) like $${params.length}`); }
+
+  const havingClauses: string[] = [];
+  const minP = num(q, "min_permits", 0);
+  if (minP > 0) {
+    params.push(int(q, "min_permits", 0));
+    havingClauses.push(`count(*) >= $${params.length}`);
+  }
+  const minV = num(q, "min_valuation", 0);
+  if (minV > 0) {
+    params.push(minV);
+    havingClauses.push(`coalesce(sum(p.valuation),0) >= $${params.length}`);
+  }
+  const having = havingClauses.length ? `having ${havingClauses.join(" and ")}` : "";
+
   const where = clauses.join(" and ");
   const limit = int(q, "limit", 50), offset = int(q, "offset", 0);
-  const totals = await queryOne<{ n: string; val: string }>(`select count(distinct p.contractor_name)::text as n, coalesce(sum(p.valuation),0)::text as val from warehouse.normalized_permits p where ${where}`, params);
+  const hasContact = str(q, "has_contact") === "true";
+
+  const totalsSql = `
+    with base as (
+      select p.contractor_name, coalesce(sum(p.valuation),0) as val
+      from warehouse.normalized_permits p
+      ${hasContact ? "inner join warehouse.canonical_contractors c on lower(c.canonical_name) = lower(p.contractor_name) and ((c.phone_number is not null and trim(c.phone_number) <> '') or (c.website_url is not null and trim(c.website_url) <> ''))" : ""}
+      where ${where}
+      group by p.contractor_name
+      ${having}
+    )
+    select count(*)::text as n, coalesce(sum(val),0)::text as val from base
+  `;
+  const totals = await queryOne<{ n: string; val: string }>(totalsSql, params);
   const totalVal = Number(totals?.val || 0);
+
+  const sortBy = str(q, "sort_by");
+  let orderSql = "order by sum(p.valuation) desc nulls last";
+  if (sortBy === "permits_desc") orderSql = "order by count(*) desc, sum(p.valuation) desc nulls last";
+  else if (sortBy === "name_asc") orderSql = "order by p.contractor_name asc";
+
   const rows = await query(
     `with top_contractors as (
        select p.contractor_name as name,
@@ -586,8 +698,8 @@ export async function contractors(q: Q) {
        from warehouse.normalized_permits p
        where ${where}
        group by p.contractor_name
-       order by sum(p.valuation) desc
-       limit $${params.length + 1} offset $${params.length + 2}
+       ${having}
+       ${orderSql}
      )
      select tc.*,
             (select array_agg(p2.id) from (
@@ -601,8 +713,9 @@ export async function contractors(q: Q) {
             c.rcat_profile_url, c.rcat_license_number, c.rcat_license_type, c.rcat_member_since,
             c.bbb_profile_url, c.bbb_rating, c.bbb_accredited, c.linkedin_company_url
      from top_contractors tc
-     left join warehouse.canonical_contractors c on lower(c.canonical_name) = lower(tc.name)
-     order by tc.val::numeric desc`,
+     ${hasContact ? "inner" : "left"} join warehouse.canonical_contractors c on lower(c.canonical_name) = lower(tc.name)
+     ${hasContact ? "where ((c.phone_number is not null and trim(c.phone_number) <> '') or (c.website_url is not null and trim(c.website_url) <> ''))" : ""}
+     limit $${params.length + 1} offset $${params.length + 2}`,
     [...params, limit, offset],
   );
   const parse = (v: unknown) => { try { return typeof v === "string" ? JSON.parse(v) : v; } catch { return v; } };
@@ -627,6 +740,92 @@ export async function contractors(q: Q) {
       };
     }),
   };
+}
+
+export async function contractorProfile(q: Q) {
+  const target = str(q, "name") || str(q, "id");
+  if (!target) return { contractor: null };
+
+  const parse = (v: unknown) => { try { return typeof v === "string" ? JSON.parse(v) : v; } catch { return v; } };
+
+  // 1. Look up in canonical_contractors
+  const canonicalRow = await queryOne<Record<string, any>>(
+    `select c.*
+     from warehouse.canonical_contractors c
+     where lower(c.canonical_name) = lower($1)
+        or c.id = $1
+        or lower(c.canonical_name) like lower($1) || ' %'
+        or lower($1) like lower(c.canonical_name) || ' %'
+        or lower(c.canonical_name) like lower(split_part($1, ' (', 1)) || '%'
+     order by 
+       case 
+         when lower(c.canonical_name) = lower($1) then 0 
+         when c.id = $1 then 1
+         else 2 
+       end
+     limit 1`,
+    [target]
+  );
+
+  const matchedName = canonicalRow?.canonical_name || target;
+
+  // 2. Aggregate permits metrics for this contractor across permits
+  const pAgg = await queryOne<Record<string, any>>(
+    `select count(*)::text as permits,
+            coalesce(sum(p.valuation),0)::text as val,
+            (array_agg(p.probable_roof_system order by p.valuation desc))[1] as roof_system,
+            (array_agg(p.jurisdiction order by p.valuation desc))[1] as jurisdiction,
+            (array_agg(p.contractor_license))[1] as license,
+            (select array_agg(p2.id) from (
+               select id from warehouse.normalized_permits p2
+               where lower(p2.contractor_name) = lower($1)
+                  or lower(p2.contractor_name) = lower($2)
+                  or lower(p2.contractor_name) like lower(split_part($1, ' (', 1)) || '%'
+               order by p2.issue_date desc nulls last
+               limit 10
+            ) p2) as recent_ids
+     from warehouse.normalized_permits p
+     where lower(p.contractor_name) = lower($1)
+        or lower(p.contractor_name) = lower($2)
+        or lower(p.contractor_name) like lower(split_part($1, ' (', 1)) || '%'`,
+    [matchedName, target]
+  );
+
+  const val = Number(pAgg?.val || 0) || Number(canonicalRow?.total_valuation || 0);
+  const permitCount = Number(pAgg?.permits || 0) || Number(canonicalRow?.total_permits || 0);
+
+  const profile = {
+    canonicalId: canonicalRow?.id || target,
+    canonicalName: canonicalRow?.canonical_name || target,
+    licenseNumber: canonicalRow?.primary_license || pAgg?.license || "",
+    permitCount,
+    totalValuationUSD: val,
+    totalValuationFormatted: val >= 1e6 ? `$${(val / 1e6).toFixed(2)}M` : `$${Math.trunc(val).toLocaleString()}`,
+    marketSharePct: 0,
+    primaryRoofSystem: pAgg?.roof_system || canonicalRow?.primary_roof_system || "",
+    jurisdiction: pAgg?.jurisdiction || "Dallas, TX",
+    aliases: [],
+    recentPermitIds: (pAgg?.recent_ids || []).slice(0, 10),
+    websiteUrl: canonicalRow?.website_url || "",
+    logoUrl: "",
+    hqAddress: canonicalRow?.hq_address || (canonicalRow?.headquarters_city ? `${canonicalRow.headquarters_city}, ${canonicalRow.headquarters_state || "TX"}` : ""),
+    phoneNumber: canonicalRow?.phone_number || "",
+    yearFounded: canonicalRow?.year_founded ? String(canonicalRow.year_founded) : (canonicalRow?.founded || ""),
+    crewCapacityEstimate: canonicalRow?.crew_capacity_estimate || "",
+    manufacturerCertifications: parse(canonicalRow?.manufacturer_certifications) || [],
+    leadership: parse(canonicalRow?.leadership) || [],
+    mAndAProfile: parse(canonicalRow?.m_and_a_profile) || {},
+    rcatProfileUrl: canonicalRow?.rcat_profile_url || "",
+    rcatLicenseNumber: canonicalRow?.rcat_license_number || "",
+    rcatLicenseType: canonicalRow?.rcat_license_type || "",
+    rcatMemberSince: canonicalRow?.rcat_member_since || 0,
+    bbbProfileUrl: canonicalRow?.bbb_profile_url || "",
+    bbbRating: canonicalRow?.bbb_rating || "",
+    bbbAccredited: Boolean(canonicalRow?.bbb_accredited),
+    linkedinCompanyUrl: canonicalRow?.linkedin_company_url || "",
+  };
+
+  return { contractor: profile, leaderboard: [profile] };
 }
 
 export async function locations(kind: "hierarchy" | "states" | "cities") {
