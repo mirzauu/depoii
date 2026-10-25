@@ -37,9 +37,31 @@ const int = (q: Q, k: string, d: number) => {
   return q.get(k) !== null && Number.isFinite(v) ? Math.trunc(v) : d;
 };
 
-export async function unresolvedExposure(q: Q) {
+export async function unresolvedExposure(q: Q, user?: { orgId?: string; platformRole?: string }) {
+  const isSuperAdmin = user?.platformRole === "superadmin";
+  let allowedZips: string[] | null = null;
+  if (!isSuperAdmin && user?.orgId) {
+    const { getOrgTerritories } = await import("@/lib/territories");
+    const subs = await getOrgTerritories(user.orgId);
+    allowedZips = subs.flatMap((s) => s.zipCodes || []);
+    if (allowedZips.length === 0) {
+      return {
+        total_targets: 0,
+        total_unresolved_exposure: 0,
+        storm_name: "",
+        total_unresolved_valuation_mid: 0,
+        targets: [],
+        no_active_territory: true,
+      };
+    }
+  }
+
   const params: unknown[] = [];
   const clauses = [`coalesce(l.exposure_score,0) > 0`];
+  if (allowedZips && allowedZips.length > 0) {
+    params.push(allowedZips);
+    clauses.push(`substring(l.zip_code from 1 for 5) = ANY($${params.length})`);
+  }
   if (str(q, "storm_id")) { params.push(str(q, "storm_id")); clauses.push(`(l.storm_id = $${params.length} or l.event_date::text = $${params.length})`); }
   if (q.get("min_hail_inches")) { params.push(Number(q.get("min_hail_inches"))); clauses.push(`l.max_hail_inches >= $${params.length}`); }
   if (q.get("min_sqft")) { params.push(int(q, "min_sqft", 0)); clauses.push(`l.building_sqft >= $${params.length}`); }

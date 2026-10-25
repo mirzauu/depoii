@@ -12,7 +12,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { mapParcelDossier } from "@/lib/engine-api";
 import { num, shortDate, usd } from "@/lib/format";
 import { cn } from "@/lib/utils";
-import { ExternalLink, Building2, MapPin, Calendar, Layers, ShieldCheck, FileText, AlertCircle, Clock, CheckCircle2 } from "lucide-react";
+import { ExternalLink, Building2, MapPin, Calendar, Layers, ShieldCheck, FileText, AlertCircle, Clock, CheckCircle2, Lock } from "lucide-react";
 
 interface ParcelDetailDrawerProps {
   parcelId: string | null;
@@ -84,16 +84,39 @@ export function ParcelDetailDrawer({ parcelId, onClose, titlePrefix = "Roof & Le
           )}
 
           {parcel.error && (
-            <div className="rounded-lg border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-400">
-              <p className="font-semibold">Unable to load parcel details</p>
-              <p className="text-xs text-red-400/80 mt-1">{parcel.error}</p>
-              <button
-                type="button"
-                onClick={parcel.retry}
-                className="mt-3 rounded border border-red-500/30 px-2.5 py-1 text-xs hover:bg-red-500/20"
-              >
-                Try again
-              </button>
+            <div className="rounded-xl border border-amber-500/30 dark:border-amber-500/20 bg-amber-500/10 p-5 text-sm space-y-3">
+              <div className="flex items-start gap-3">
+                <div className="rounded-lg bg-amber-500/20 p-2 text-amber-600 dark:text-amber-400">
+                  <Lock className="size-5" />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="font-semibold text-neutral-900 dark:text-neutral-100">
+                    {parcel.error.toLowerCase().includes("territor") ? "Subscribed Territory Required" : "Unable to load parcel details"}
+                  </h3>
+                  <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                    {parcel.error}
+                  </p>
+                </div>
+              </div>
+              {parcel.error.toLowerCase().includes("territor") ? (
+                <div className="pt-1">
+                  <Link
+                    href="/territories"
+                    className="inline-flex items-center gap-1.5 rounded-lg bg-neutral-900 dark:bg-white px-3.5 py-1.5 text-xs font-semibold text-white dark:text-neutral-900 shadow hover:bg-neutral-800 dark:hover:bg-neutral-100 transition"
+                  >
+                    <span>Manage Territory Subscriptions</span>
+                    <ExternalLink className="size-3" />
+                  </Link>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={parcel.retry}
+                  className="mt-2 rounded border border-neutral-300 dark:border-neutral-700 px-2.5 py-1 text-xs hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                >
+                  Try again
+                </button>
+              )}
             </div>
           )}
 

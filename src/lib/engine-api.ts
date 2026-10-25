@@ -358,6 +358,9 @@ export interface AgingPage {
   approaching: number;
   jurisdictions: string[];
   roofs: AgingRoof[];
+  noActiveTerritory?: boolean;
+  unauthorizedZone?: boolean;
+  territoryMessage?: string;
 }
 
 export function mapAging(body: unknown): AgingPage {
@@ -369,6 +372,9 @@ export function mapAging(body: unknown): AgingPage {
     endOfWarranty: num(b, ["end_of_warranty_count"]),
     approaching: num(b, ["approaching_term_count"]),
     jurisdictions: Array.isArray(b.jurisdictions_available) ? b.jurisdictions_available.map(String) : [],
+    noActiveTerritory: Boolean(b.no_active_territory),
+    unauthorizedZone: Boolean(b.unauthorized_zone),
+    territoryMessage: str(b, ["territory_message"]),
     roofs: rows(body, ["leads", "items"]).map((row) => ({
       id: str(row, ["id"]),
       permitNumber: str(row, ["permit_number", "id"]),
@@ -431,6 +437,9 @@ export interface DarkMarketPage {
   pipelineUSD: number;
   pipelineFormatted: string;
   parcels: OverdueParcel[];
+  noActiveTerritory?: boolean;
+  unauthorizedZone?: boolean;
+  territoryMessage?: string;
 }
 
 export function mapDarkMarket(body: unknown): DarkMarketPage {
@@ -439,6 +448,9 @@ export function mapDarkMarket(body: unknown): DarkMarketPage {
     total: num(b, ["total"]),
     pipelineUSD: num(b, ["total_pipeline", "totalPipeline"]),
     pipelineFormatted: str(b, ["total_pipeline_formatted", "totalPipelineFormatted"], "$0"),
+    noActiveTerritory: Boolean(b.no_active_territory),
+    unauthorizedZone: Boolean(b.unauthorized_zone),
+    territoryMessage: str(b, ["territory_message"]),
     parcels: rows(body, ["overdueParcels", "items"]).map((row) => ({
       parcelId: str(row, ["parcelId", "parcel_id"]),
       address: str(row, ["address"]),

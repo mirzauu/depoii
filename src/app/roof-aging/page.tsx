@@ -361,6 +361,14 @@ function RoofAgingNeverSkeletonRows() {
   );
 }
 
+interface AvailableTerritory {
+  id: string;
+  name: string;
+  isSubscribed: boolean;
+  availableSlots: number;
+  maxSubscribers: number;
+}
+
 export default function RoofAgingPage() {
   const { jurisdiction, setJurisdiction } = useDepoiiState();
 
@@ -374,6 +382,38 @@ export default function RoofAgingPage() {
   const [minVal, setMinVal] = useState("");
   const [search, setSearch] = useState("");
   const [offset, setOffset] = useState(0);
+
+  // Territory and subscription state
+  const [territories, setTerritories] = useState<AvailableTerritory[]>([]);
+  const [territoriesLoaded, setTerritoriesLoaded] = useState(false);
+  const [userRole, setUserRole] = useState<string>("");
+
+  useEffect(() => {
+    Promise.all([
+      fetch("/api/territories?market=dallas").then((r) => (r.ok ? r.json() : { territories: [] })),
+      fetch("/api/auth/me").then((r) => (r.ok ? r.json() : ({} as { platformRole?: string }))),
+    ])
+      .then(([tData, meData]: [any, { platformRole?: string }]) => {
+        const isSuper = meData?.platformRole === "superadmin";
+        setUserRole(meData?.platformRole || "");
+        if (Array.isArray(tData.territories)) {
+          setTerritories(tData.territories);
+          const subscribed = tData.territories.filter((t: AvailableTerritory) => t.isSubscribed);
+          if (!isSuper) {
+            if (subscribed.length > 0) {
+              setZone((prev) => {
+                if (subscribed.some((t: AvailableTerritory) => t.id === prev)) return prev;
+                return subscribed[0].id;
+              });
+            } else {
+              setZone("none");
+            }
+          }
+        }
+        setTerritoriesLoaded(true);
+      })
+      .catch(() => setTerritoriesLoaded(true));
+  }, []);
 
   // Sorting
   const [sortBy, setSortBy] = useState<"default" | "age" | "cost" | "priority" | "sqft">("default");
@@ -493,8 +533,38 @@ export default function RoofAgingPage() {
     setOffset(0);
   };
 
+  // Territory subscription memo calculations
+  const isSuperAdmin = userRole === "superadmin";
+  const subscribedTerritories = useMemo(() => territories.filter((t) => t.isSubscribed), [territories]);
+  const selectedTerritory = useMemo(() => territories.find((t) => t.id === zone), [territories, zone]);
+
+  const isLocked = useMemo(() => {
+    if (isSuperAdmin) return false;
+    if (zone === "none") return true;
+    if (record === "aged") {
+      if (page.data?.noActiveTerritory || page.data?.unauthorizedZone) return true;
+    } else {
+      if (dark.data?.noActiveTerritory || dark.data?.unauthorizedZone) return true;
+    }
+    if (territoriesLoaded && zone !== "all") {
+      if (!subscribedTerritories.some((t) => t.id === zone)) return true;
+    }
+    if (territoriesLoaded && zone === "all" && subscribedTerritories.length === 0) return true;
+    return false;
+  }, [isSuperAdmin, zone, record, page.data, dark.data, territoriesLoaded, subscribedTerritories]);
+
+  const zoneNameDisplay = useMemo(() => {
+    if (zone === "all") return isSuperAdmin ? "All Dallas Metro ⭐" : "All Subscribed Zones";
+    if (zone === "none") return "No Active Zone 🔒";
+    const t = territories.find((item) => item.id === zone);
+    if (t) return `${t.name}${t.isSubscribed ? " ⭐" : " 🔒"}`;
+    if (zone === "dallas-central-uptown") return "Central / Uptown / CBD ⭐";
+    return zone;
+  }, [zone, isSuperAdmin, territories]);
+
   // Sorted data lists
   const sortedRoofs = useMemo(() => {
+    if (isLocked) return [];
     let list = [...(page.data?.roofs || [])];
     if (permitStatus === "permitted") {
       list = list.filter((r) => (r.permitCount && r.permitCount > 0) || r.permitStatus === "permitted");
@@ -505,21 +575,23 @@ export default function RoofAgingPage() {
     else if (sortBy === "cost") list.sort((a, b) => (b.replacementCost || 0) - (a.replacementCost || 0));
     else if (sortBy === "priority") list.sort((a, b) => (b.priority || 0) - (a.priority || 0));
     return list;
-  }, [page.data?.roofs, permitStatus, sortBy]);
+  }, [page.data?.roofs, permitStatus, sortBy, isLocked]);
 
   const sortedParcels = useMemo(() => {
+    if (isLocked) return [];
     const list = [...(dark.data?.parcels || [])];
     if (sortBy === "age") list.sort((a, b) => (b.age || 0) - (a.age || 0));
     else if (sortBy === "sqft") list.sort((a, b) => (b.sqft || 0) - (a.sqft || 0));
     else if (sortBy === "cost") list.sort((a, b) => (b.reroofValue || 0) - (a.reroofValue || 0));
     return list;
-  }, [dark.data?.parcels, sortBy]);
+  }, [dark.data?.parcels, sortBy, isLocked]);
 
   // Selection helpers
   const currentIds = useMemo(() => {
+    if (isLocked) return [];
     if (record === "aged") return sortedRoofs.map((r) => r.id);
     return sortedParcels.map((p) => p.parcelId);
-  }, [record, sortedRoofs, sortedParcels]);
+  }, [record, sortedRoofs, sortedParcels, isLocked]);
 
   const isAllSelected = currentIds.length > 0 && currentIds.every((id) => selectedIds.has(id));
 
@@ -542,6 +614,10 @@ export default function RoofAgingPage() {
 
   // CSV Export
   const exportCsv = () => {
+    if (isLocked) {
+      alert("Please subscribe to this territory in Territories to export lead data and contact intelligence.");
+      return;
+    }
     let csvContent = "";
     if (record === "aged") {
       const items =
@@ -641,6 +717,10 @@ export default function RoofAgingPage() {
   };
 
   const claimSelected = async () => {
+    if (isLocked) {
+      alert("Your organization does not have an active subscription for this territory. Subscribe to this zone in Territories first.");
+      return;
+    }
     const targetIds = Array.from(selectedIds);
     if (targetIds.length === 0) {
       alert("Please select one or more properties using the checkboxes.");
@@ -677,6 +757,10 @@ export default function RoofAgingPage() {
   };
 
   const claimOne = async (id: string, label: string) => {
+    if (isLocked) {
+      alert("Your organization does not have an active subscription for this territory. Subscribe to this zone in Territories first.");
+      return;
+    }
     try {
       const res = await fetch("/api/claims", {
         method: "POST",
@@ -730,27 +814,34 @@ export default function RoofAgingPage() {
                 {jurisdiction}
               </span>
               {jurisdiction.includes("Dallas") && zone && (
-                <span className="rounded-full bg-amber-500/10 border border-amber-500/30 px-2.5 py-0.5 text-[11px] font-medium text-amber-800 dark:text-amber-300 flex items-center gap-1">
+                <span className={cn(
+                  "rounded-full px-2.5 py-0.5 text-[11px] font-medium flex items-center gap-1 border",
+                  isLocked
+                    ? "bg-amber-500/10 border-amber-500/30 text-amber-800 dark:text-amber-300"
+                    : "bg-emerald-500/10 border-emerald-500/30 text-emerald-800 dark:text-emerald-300"
+                )}>
                   <span>Zone:</span>
                   <strong className="font-semibold">
-                    {zone === "dallas-central-uptown" ? "Central / Uptown / CBD ⭐" : zone}
+                    {zoneNameDisplay}
                   </strong>
                 </span>
               )}
               <span className={cn(
                 "rounded px-1.5 py-0.5 text-[11px] font-semibold border",
-                record === "aged"
+                isLocked
+                  ? "border-[#FFCA88]/50 bg-[#FFCA88]/15 text-amber-800 dark:text-[#FFCA88]"
+                  : record === "aged"
                   ? "border-[#B4E4D6]/50 bg-[#B4E4D6]/15 text-emerald-800 dark:text-[#B4E4D6]"
                   : "border-[#FFCA88]/50 bg-[#FFCA88]/15 text-amber-800 dark:text-[#FFCA88]"
               )}>
-                {zone === "dallas-central-uptown" ? "Scored Zone Pipeline" : record === "aged" ? "Permitted Cohort" : "Dark Market"}
+                {isLocked ? "Locked Zone" : record === "aged" ? "Permitted Cohort" : "Dark Market"}
               </span>
             </div>
             <p className="text-xs text-muted-foreground dark:text-neutral-400">
-              {zone === "dallas-central-uptown" && record === "aged"
-                ? `Central / Uptown / CBD territory · 100 commercial roofs 25+ years old · ${page.data?.pipeline ? usd(page.data.pipeline, true) : "$25.76M"} replacement pipeline`
+              {isLocked
+                ? "This territory requires an active subscription to access commercial roof aging alarms, verified owners, and contact intelligence."
                 : record === "never"
-                ? `${jurisdiction} territory${zone && zone !== "all" ? ` (${zone === "dallas-central-uptown" ? "Central / Uptown / CBD" : zone})` : ""} · commercial buildings ${minAge}+ years old with no roofing permit on record · ${dark.data?.pipelineFormatted || (dark.data?.pipelineUSD ? usd(dark.data.pipelineUSD, true) : "…")} reroof value`
+                ? `${jurisdiction} territory${zone && zone !== "all" ? ` (${zoneNameDisplay})` : ""} · commercial buildings ${minAge}+ years old with no roofing permit on record · ${dark.data?.pipelineFormatted || (dark.data?.pipelineUSD ? usd(dark.data.pipelineUSD, true) : "…")} reroof value`
                 : `${jurisdiction} territory · roofs whose last permitted install is ${minAge}+ years old · ${page.data ? usd(page.data.pipeline, true) : "…"} replacement pipeline`}
             </p>
           </div>
@@ -762,20 +853,20 @@ export default function RoofAgingPage() {
                 <>
                   <div className="rounded-md border border-border dark:border-neutral-800 bg-neutral-100/70 dark:bg-[#121319] px-2.5 py-1 text-center">
                     <span className="text-[10px] text-muted-foreground dark:text-neutral-400 uppercase font-medium">Aging Roofs</span>
-                    <p className="text-xs font-bold text-foreground dark:text-white">{page.data ? num(page.data.total) : "…"}</p>
+                    <p className="text-xs font-bold text-foreground dark:text-white">{page.data && !isLocked ? num(page.data.total) : "—"}</p>
                   </div>
                   <div className="rounded-md border border-border dark:border-neutral-800 bg-neutral-100/70 dark:bg-[#121319] px-2.5 py-1 text-center">
                     <span className="text-[10px] text-muted-foreground dark:text-neutral-400 uppercase font-medium">Expired 20y+</span>
                     <p className="text-xs font-bold text-neutral-800 dark:text-neutral-100 flex items-center justify-center gap-1.5">
                       <span className="size-1.5 rounded-full bg-[#DE7272]" />
-                      <span className="text-[#DE7272]">{page.data ? num(page.data.critical) : "…"}</span>
+                      <span className="text-[#DE7272]">{page.data && !isLocked ? num(page.data.critical) : "—"}</span>
                     </p>
                   </div>
                   <div className="rounded-md border border-border dark:border-neutral-800 bg-neutral-100/70 dark:bg-[#121319] px-2.5 py-1 text-center">
                     <span className="text-[10px] text-muted-foreground dark:text-neutral-400 uppercase font-medium">Approaching</span>
                     <p className="text-xs font-bold text-neutral-800 dark:text-neutral-100 flex items-center justify-center gap-1.5">
                       <span className="size-1.5 rounded-full bg-[#FFCA88]" />
-                      <span className="text-amber-700 dark:text-[#FFCA88]">{page.data ? num(page.data.approaching) : "…"}</span>
+                      <span className="text-amber-700 dark:text-[#FFCA88]">{page.data && !isLocked ? num(page.data.approaching) : "—"}</span>
                     </p>
                   </div>
                 </>
@@ -783,11 +874,11 @@ export default function RoofAgingPage() {
                 <>
                   <div className="rounded-md border border-border dark:border-neutral-800 bg-neutral-100/70 dark:bg-[#121319] px-2.5 py-1 text-center">
                     <span className="text-[10px] text-muted-foreground dark:text-neutral-400 uppercase font-medium">No Permit</span>
-                    <p className="text-xs font-bold text-amber-700 dark:text-[#FFCA88]">{dark.data ? num(dark.data.total) : "…"}</p>
+                    <p className="text-xs font-bold text-amber-700 dark:text-[#FFCA88]">{dark.data && !isLocked ? num(dark.data.total) : "—"}</p>
                   </div>
                   <div className="rounded-md border border-border dark:border-neutral-800 bg-neutral-100/70 dark:bg-[#121319] px-2.5 py-1 text-center">
                     <span className="text-[10px] text-muted-foreground dark:text-neutral-400 uppercase font-medium">Pipeline</span>
-                    <p className="text-xs font-bold text-emerald-700 dark:text-[#B4E4D6]">{dark.data?.pipelineFormatted || (dark.data?.pipelineUSD ? usd(dark.data.pipelineUSD, true) : "…")}</p>
+                    <p className="text-xs font-bold text-emerald-700 dark:text-[#B4E4D6]">{!isLocked && (dark.data?.pipelineFormatted || (dark.data?.pipelineUSD ? usd(dark.data.pipelineUSD, true) : "…")) || "—"}</p>
                   </div>
                   <div className="rounded-md border border-border dark:border-neutral-800 bg-neutral-100/70 dark:bg-[#121319] px-2.5 py-1 text-center">
                     <span className="text-[10px] text-muted-foreground dark:text-neutral-400 uppercase font-medium">Min Age</span>
@@ -800,8 +891,9 @@ export default function RoofAgingPage() {
             <Button
               variant="outline"
               size="sm"
+              disabled={isLocked || currentIds.length === 0}
               onClick={exportCsv}
-              className="h-8 border-border dark:border-neutral-700 bg-background dark:bg-neutral-900/90 text-xs font-medium text-foreground dark:text-neutral-200 hover:bg-muted dark:hover:bg-neutral-800 hover:text-foreground dark:hover:text-white"
+              className="h-8 border-border dark:border-neutral-700 bg-background dark:bg-neutral-900/90 text-xs font-medium text-foreground dark:text-neutral-200 hover:bg-muted dark:hover:bg-neutral-800 hover:text-foreground dark:hover:text-white disabled:opacity-40"
             >
               <Download className="mr-1.5 size-3.5 text-neutral-400" />
               Export {selectedIds.size > 0 ? `(${selectedIds.size})` : ""}
@@ -809,9 +901,9 @@ export default function RoofAgingPage() {
             <Button
               size="sm"
               variant="brand"
-              disabled={claimPending}
+              disabled={claimPending || isLocked || selectedIds.size === 0}
               onClick={claimSelected}
-              className="h-8 gap-1.5 px-3 text-xs"
+              className="h-8 gap-1.5 px-3 text-xs disabled:opacity-40"
             >
               <Lock className="size-3.5" />
               <span>{claimPending ? "Claiming..." : `Add to My Claims ${selectedIds.size > 0 ? `(${selectedIds.size})` : ""}`}</span>
@@ -1040,12 +1132,33 @@ export default function RoofAgingPage() {
                               }}
                               className="h-8 w-full appearance-none rounded-md border border-neutral-300 dark:border-neutral-800 bg-white dark:bg-[#0f1015] px-2.5 pr-7 text-xs text-neutral-900 dark:text-neutral-200 outline-none focus:border-neutral-500 dark:focus:border-neutral-700 cursor-pointer font-medium"
                             >
-                              <option value="dallas-central-uptown">⭐ Central / Uptown / CBD (100 Roofs)</option>
-                              <option value="all">All Dallas Metro</option>
-                              <option value="dallas-north-corridor">North Dallas Corridor</option>
-                              <option value="dallas-east-lakelands">East Dallas / Lake Highlands</option>
-                              <option value="dallas-south-industrial">South Dallas Industrial</option>
-                              <option value="dallas-northwest-suburbs">Northwest / DFW Suburbs</option>
+                              {territories.length > 0 ? (
+                                <>
+                                  {zone === "none" && (
+                                    <option value="none">🔒 No Active Territory Subscriptions</option>
+                                  )}
+                                  <option value="all">
+                                    {isSuperAdmin ? "⭐ All Dallas Metro (Super Admin)" : "All Subscribed Dallas Zones"}
+                                  </option>
+                                  {territories.map((t) => {
+                                    const isSub = t.isSubscribed || isSuperAdmin;
+                                    return (
+                                      <option key={t.id} value={t.id}>
+                                        {isSub ? `⭐ ${t.name} (Subscribed)` : `🔒 ${t.name} (Locked)`}
+                                      </option>
+                                    );
+                                  })}
+                                </>
+                              ) : (
+                                <>
+                                  <option value="dallas-central-uptown">⭐ Central / Uptown / CBD (100 Roofs)</option>
+                                  <option value="all">All Dallas Metro</option>
+                                  <option value="dallas-north-corridor">North Dallas Corridor</option>
+                                  <option value="dallas-east-lakelands">East Dallas / Lake Highlands</option>
+                                  <option value="dallas-south-industrial">South Dallas Industrial</option>
+                                  <option value="dallas-northwest-suburbs">Northwest / DFW Suburbs</option>
+                                </>
+                              )}
                             </select>
                             <ChevronDown className="pointer-events-none absolute right-2.5 top-1/2 size-3.5 -translate-y-1/2 text-neutral-500" />
                           </div>
@@ -1353,6 +1466,61 @@ export default function RoofAgingPage() {
                 >
                   Try again
                 </button>
+              </div>
+            ) : isLocked ? (
+              <div className="flex min-h-[460px] flex-col items-center justify-center p-8 text-center">
+                <div className="relative mb-5 flex size-16 items-center justify-center rounded-2xl border border-[#FFCA88]/40 bg-[#FFCA88]/15 dark:bg-[#FFCA88]/10 shadow-sm">
+                  <Lock className="size-8 text-amber-600 dark:text-[#FFCA88]" />
+                  <div className="absolute -bottom-1 -right-1 flex size-6 items-center justify-center rounded-full bg-[#DE7272] text-[10px] font-bold text-white shadow-sm">
+                    !
+                  </div>
+                </div>
+
+                <h3 className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
+                  {zone === "none"
+                    ? "No Active Territory Subscription"
+                    : `Territory Locked: ${selectedTerritory?.name || zoneNameDisplay}`}
+                </h3>
+                <p className="mt-2 max-w-md text-xs leading-relaxed text-muted-foreground dark:text-neutral-400">
+                  {zone === "none"
+                    ? "Your organization does not have an active territory subscription. Choose an available commercial territory to unlock 20+ year roof aging alarms, verified ownership records, and contractor replacement cycles."
+                    : `Access to commercial roof aging alarms, verified ownership dossiers, and direct phone/email intelligence in ${selectedTerritory?.name || "this zone"} requires an active territory subscription.`}
+                </p>
+
+                <div className="my-6 grid max-w-lg grid-cols-1 gap-2.5 sm:grid-cols-3 text-left">
+                  <div className="rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white/60 dark:bg-neutral-900/40 p-3">
+                    <span className="text-[11px] font-bold text-neutral-900 dark:text-neutral-200">100+ Commercial Roofs</span>
+                    <p className="mt-1 text-[10px] text-muted-foreground dark:text-neutral-400">20y+ aged roofs scored by risk tier & install history</p>
+                  </div>
+                  <div className="rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white/60 dark:bg-neutral-900/40 p-3">
+                    <span className="text-[11px] font-bold text-neutral-900 dark:text-neutral-200">Verified Direct Contacts</span>
+                    <p className="mt-1 text-[10px] text-muted-foreground dark:text-neutral-400">True property decision makers with phone & email</p>
+                  </div>
+                  <div className="rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white/60 dark:bg-neutral-900/40 p-3">
+                    <span className="text-[11px] font-bold text-neutral-900 dark:text-neutral-200">30-Day Exclusive Lock</span>
+                    <p className="mt-1 text-[10px] text-muted-foreground dark:text-neutral-400">Claim properties to protect them from competitors</p>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap items-center justify-center gap-3">
+                  <Link
+                    href="/territories"
+                    className="inline-flex h-9 items-center gap-2 rounded-md bg-neutral-900 dark:bg-white px-4 text-xs font-semibold text-white dark:text-neutral-900 shadow hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-colors"
+                  >
+                    <span>View Territory Subscriptions & Pricing</span>
+                    <ChevronRight className="size-3.5" />
+                  </Link>
+
+                  {subscribedTerritories.length > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => setZone(subscribedTerritories[0].id)}
+                      className="inline-flex h-9 items-center gap-1.5 rounded-md border border-border dark:border-neutral-700 bg-background dark:bg-neutral-900 px-3 text-xs font-medium text-foreground dark:text-neutral-200 hover:bg-muted dark:hover:bg-neutral-800 transition-colors"
+                    >
+                      <span>Switch to {subscribedTerritories[0].name}</span>
+                    </button>
+                  )}
+                </div>
               </div>
             ) : record === "aged" ? (
               /* AGED ROOFS TABLE */
@@ -1941,10 +2109,10 @@ export default function RoofAgingPage() {
               ) : (
                 <>
                   <span>
-                    {from}–{to} of {num(total)} roofs
+                    {isLocked ? "0 of 0 roofs" : `${from}–${to} of ${num(total)} roofs`}
                   </span>
                   <span className="text-muted-foreground/70 dark:text-neutral-500 ml-2 hidden sm:inline">
-                    · Territory: {jurisdiction}
+                    · Territory: {isLocked ? zoneNameDisplay : jurisdiction}
                   </span>
                 </>
               )}
@@ -1953,18 +2121,18 @@ export default function RoofAgingPage() {
             <div className="flex items-center gap-2">
               <button
                 type="button"
-                disabled={isLoading || pageIndex === 0}
+                disabled={isLoading || isLocked || pageIndex === 0}
                 onClick={() => setOffset(Math.max(0, offset - LIMIT))}
                 className="rounded border border-border dark:border-neutral-800 bg-background dark:bg-neutral-900 px-2.5 py-1 text-foreground dark:text-neutral-300 hover:bg-muted dark:hover:bg-neutral-800 disabled:opacity-40 transition-colors"
               >
                 Previous
               </button>
               <span className="px-1 text-foreground dark:text-neutral-400 font-medium">
-                {isLoading ? "..." : `${pageIndex + 1} / ${pageCount}`}
+                {isLoading ? "..." : isLocked ? "1 / 1" : `${pageIndex + 1} / ${pageCount}`}
               </span>
               <button
                 type="button"
-                disabled={isLoading || pageIndex >= pageCount - 1}
+                disabled={isLoading || isLocked || pageIndex >= pageCount - 1}
                 onClick={() => setOffset(offset + LIMIT)}
                 className="rounded border border-border dark:border-neutral-800 bg-background dark:bg-neutral-900 px-2.5 py-1 text-foreground dark:text-neutral-300 hover:bg-muted dark:hover:bg-neutral-800 disabled:opacity-40 transition-colors"
               >

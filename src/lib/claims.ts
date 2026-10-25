@@ -125,20 +125,14 @@ export async function claimProperty(
     territoryId = anyTerritory?.id || "dallas-north-corridor";
   }
 
-  // 3. Verify org has active subscription for this territory or auto-subscribe
-  let hasSub = await hasActiveSubscription(orgId, territoryId);
+  // 3. Verify org has active subscription for this territory
+  const hasSub = await hasActiveSubscription(orgId, territoryId);
   if (!hasSub) {
-    try {
-      await query(
-        `INSERT INTO app.territory_subscriptions (territory_id, org_id, tier, status)
-         VALUES ($1, $2, 'pro_territory', 'active')
-         ON CONFLICT (territory_id, org_id) DO UPDATE SET tier = 'pro_territory', status = 'active', starts_at = NOW()`,
-        [territoryId, orgId],
-      );
-      hasSub = true;
-    } catch {
-      hasSub = true;
-    }
+    return {
+      ok: false,
+      error: "Your organization does not have an active subscription for this territory. Subscribe to this zone in Territories before claiming properties.",
+      code: "NO_SUBSCRIPTION",
+    };
   }
 
   // 4. Check if property is already claimed by anyone

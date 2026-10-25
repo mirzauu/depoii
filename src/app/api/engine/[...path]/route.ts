@@ -49,7 +49,7 @@ async function localGet(path: string[], q: URLSearchParams, user?: AuthUser | nu
     case "permits/active-jobsites": return wh.activeJobsites(q);
     case "permits/roof-aging-alarm": {
       if (!q.get("jurisdiction")) q.set("jurisdiction", "Dallas, TX");
-      return wh.roofAging(q);
+      return wh.roofAging(q, user ?? undefined);
     }
     case "permits/multiphase-projects": return wh.multiphase(q);
     case "contractors/leaderboard":
@@ -69,18 +69,38 @@ async function localGet(path: string[], q: URLSearchParams, user?: AuthUser | nu
     case "parcels/browse": return wh.parcelsBrowse(q);
     case "parcels/dark-market/overdue": {
       if (!q.get("jurisdiction")) q.set("jurisdiction", "Dallas, TX");
-      return wh.darkMarket(q);
+      return wh.darkMarket(q, user ?? undefined);
     }
     case "storms/active-swaths": return intel.activeSwaths();
     case "storms/live-alerts": return intel.liveAlerts(q);
     case "storms/hail-events": return intel.hailEvents(q);
-    case "intelligence/unresolved-exposure": return intel.unresolvedExposure(q);
+    case "intelligence/unresolved-exposure": return intel.unresolvedExposure(q, user ?? undefined);
     case "intelligence/leads/ranked": return intel.rankedLeads(q, user ?? undefined);
     case "brief": return intel.mondayBrief(q, user ?? undefined);
     case "verifications/stats": return intel.verificationStats();
   }
-  if (path[0] === "permits" && path[1] === "parcels" && path[2]) return (await wh.permitsParcel(decodeURIComponent(path[2]))) ?? notFound();
-  if (path[0] === "parcels" && path[1] === "browse" && path[2]) return (await wh.parcelBrowseDetail(decodeURIComponent(path[2]))) ?? notFound();
+  if (path[0] === "permits" && path[1] === "parcels" && path[2]) {
+    const parcelId = decodeURIComponent(path[2]);
+    if (user && user.platformRole !== "superadmin") {
+      const { canOrgAccessParcel } = await import("@/lib/territories");
+      const access = await canOrgAccessParcel(user.orgId, parcelId, false);
+      if (!access.allowed) {
+        return { __status: 403, error: access.reason || "This property is outside your subscribed territories." };
+      }
+    }
+    return (await wh.permitsParcel(parcelId)) ?? notFound();
+  }
+  if (path[0] === "parcels" && path[1] === "browse" && path[2]) {
+    const parcelId = decodeURIComponent(path[2]);
+    if (user && user.platformRole !== "superadmin") {
+      const { canOrgAccessParcel } = await import("@/lib/territories");
+      const access = await canOrgAccessParcel(user.orgId, parcelId, false);
+      if (!access.allowed) {
+        return { __status: 403, error: access.reason || "This property is outside your subscribed territories." };
+      }
+    }
+    return (await wh.parcelBrowseDetail(parcelId)) ?? notFound();
+  }
   if (path[0] === "parcels" && path[1]) {
     const parcelId = decodeURIComponent(path[1]);
     if (user && user.platformRole !== "superadmin") {
@@ -103,7 +123,17 @@ async function localGet(path: string[], q: URLSearchParams, user?: AuthUser | nu
     }
     return (await intel.leadDossier(parcelId)) ?? notFound();
   }
-  if (path[0] === "verifications" && path[1] === "evidence-card" && path[2]) return (await intel.evidenceCard(decodeURIComponent(path[2]))) ?? notFound();
+  if (path[0] === "verifications" && path[1] === "evidence-card" && path[2]) {
+    const parcelId = decodeURIComponent(path[2]);
+    if (user && user.platformRole !== "superadmin") {
+      const { canOrgAccessParcel } = await import("@/lib/territories");
+      const access = await canOrgAccessParcel(user.orgId, parcelId, false);
+      if (!access.allowed) {
+        return { __status: 403, error: access.reason || "This property is outside your subscribed territories." };
+      }
+    }
+    return (await intel.evidenceCard(parcelId)) ?? notFound();
+  }
   if (path[0] === "verifications" && (path[1] === "jobs" || path[1] === "stream") && path[2]) {
     const orgId = user?.orgId || (await sessionOrg()).orgId;
     const job = await getJob(decodeURIComponent(path[2]), orgId);

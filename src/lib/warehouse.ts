@@ -211,7 +211,7 @@ export async function activeJobsites(q: Q) {
   };
 }
 
-export async function roofAging(q: Q) {
+export async function roofAging(q: Q, user?: { id?: string; orgId?: string; platformRole?: string }) {
   const zone = str(q, "zone");
   const limit = int(q, "limit", 100), offset = int(q, "offset", 0);
   const search = str(q, "search");
@@ -220,14 +220,69 @@ export async function roofAging(q: Q) {
   const minAgeParam = int(q, "min_age", 10);
   const minValParam = num(q, "min_valuation", 0);
 
+  const isSuperAdmin = user?.platformRole === "superadmin";
+  let allowedZips: string[] | null = null;
+  let subscribedTerritories: { id: string; name: string; zipCodes: string[] }[] = [];
+
+  if (!isSuperAdmin && user?.orgId) {
+    const { getOrgTerritories } = await import("@/lib/territories");
+    const subs = await getOrgTerritories(user.orgId);
+    subscribedTerritories = subs.map((s) => ({
+      id: s.id,
+      name: s.name,
+      zipCodes: s.zipCodes || [],
+    }));
+
+    if (subscribedTerritories.length === 0) {
+      return {
+        total_aging_roofs: 0,
+        total_replacement_pipeline_usd: 0,
+        total_replacement_pipeline_formatted: "$0",
+        critical_expired_count: 0,
+        end_of_warranty_count: 0,
+        approaching_term_count: 0,
+        jurisdictions_available: ["Dallas, TX", "Fort Worth, TX"],
+        no_active_territory: true,
+        unauthorized_zone: false,
+        territory_message: "Your organization does not have an active territory subscription. Subscribe to a zone in Territories to unlock lead intelligence.",
+        leads: [],
+      };
+    }
+
+    if (zone && zone !== "all") {
+      const match = subscribedTerritories.find((t) => t.id === zone);
+      if (!match) {
+        return {
+          total_aging_roofs: 0,
+          total_replacement_pipeline_usd: 0,
+          total_replacement_pipeline_formatted: "$0",
+          critical_expired_count: 0,
+          end_of_warranty_count: 0,
+          approaching_term_count: 0,
+          jurisdictions_available: ["Dallas, TX", "Fort Worth, TX"],
+          no_active_territory: false,
+          unauthorized_zone: true,
+          territory_message: `Your organization is not subscribed to ${zone}. Subscribe in Territories to access lead intelligence for this zone.`,
+          leads: [],
+        };
+      }
+    }
+
+    allowedZips = subscribedTerritories.flatMap((t) => t.zipCodes);
+  }
+
   // If a specific territory zone is selected (e.g. 'dallas-central-uptown' or any zone):
   if (zone && zone !== "all") {
     let zips: string[] = [];
-    if (zone === "dallas-central-uptown" || zone.includes("central") || zone.includes("uptown")) {
-      zips = ["75201", "75204", "75205", "75206", "75219", "75225"];
+    const match = subscribedTerritories.find((t) => t.id === zone);
+    if (match?.zipCodes?.length) {
+      zips = match.zipCodes;
     } else {
       const terr = await queryOne<{ zip_codes: string[] }>(`SELECT zip_codes FROM app.territories WHERE id = $1`, [zone]);
       if (terr?.zip_codes?.length) zips = terr.zip_codes;
+    }
+    if (zips.length === 0 && (zone === "dallas-central-uptown" || zone.includes("central") || zone.includes("uptown"))) {
+      zips = ["75201", "75204", "75205", "75206", "75219", "75225"];
     }
 
     if (zips.length > 0) {
@@ -326,6 +381,8 @@ export async function roofAging(q: Q) {
         end_of_warranty_count: Number(sum?.warranty || 0),
         approaching_term_count: Number(sum?.approaching || 0),
         jurisdictions_available: ["Dallas, TX", "Fort Worth, TX"],
+        no_active_territory: false,
+        unauthorized_zone: false,
         leads: rows.map((r: any) => {
           const a = Number(r.roof_age_years || 25);
           const status = a >= 20 ? "Expired Warranty (20+ Yrs)" : a >= 15 ? "Critical End-of-Life (15-19 Yrs)" : "Approaching Term (10-14 Yrs)";
@@ -388,6 +445,10 @@ export async function roofAging(q: Q) {
   const { city, state } = jurisdictionParts(q);
   if (city) { params.push(`%${city.toLowerCase()}%`); clauses.push(`lower(p.city) like $${params.length}`); }
   if (state) { params.push(state); clauses.push(`upper(p.state) = $${params.length}`); }
+  if (!isSuperAdmin && allowedZips && allowedZips.length > 0) {
+    params.push(allowedZips);
+    clauses.push(`p.zip_code = ANY($${params.length})`);
+  }
   if (tier === "critical") clauses.push(`${age} >= 20`);
   else if (tier === "high") clauses.push(`${age} between 15 and 19`);
   else if (tier === "approaching") clauses.push(`${age} between 10 and 14`);
@@ -423,6 +484,8 @@ export async function roofAging(q: Q) {
     total_aging_roofs: Number(sum?.total || 0), total_replacement_pipeline_usd: 0, total_replacement_pipeline_formatted: "$0",
     critical_expired_count: Number(sum?.critical || 0), end_of_warranty_count: Number(sum?.warranty || 0), approaching_term_count: Number(sum?.approaching || 0),
     jurisdictions_available: jurs.map((r) => r.jurisdiction),
+    no_active_territory: false,
+    unauthorized_zone: false,
     leads: rows.map((r: any) => {
       const a = Number(r.roof_age_years || 10);
       const status = a >= 20 ? "Expired Warranty (20+ Yrs)" : a >= 15 ? "Critical End-of-Life (15-19 Yrs)" : "Approaching Term (10-14 Yrs)";
@@ -918,12 +981,65 @@ export async function parcelBrowseDetail(id: string) {
   };
 }
 
-export async function darkMarket(q: Q) {
+export async function darkMarket(q: Q, user?: { id?: string; orgId?: string; platformRole?: string }) {
   const minAgeParam = int(q, "min_age", 15);
   const minSqftParam = int(q, "min_sqft", 0);
   const zone = str(q, "zone");
   const search = str(q, "search");
   const limit = int(q, "limit", 100), offset = int(q, "offset", 0);
+
+  const isSuperAdmin = user?.platformRole === "superadmin";
+  let allowedZips: string[] | null = null;
+  let subscribedTerritories: { id: string; name: string; zipCodes: string[] }[] = [];
+
+  if (!isSuperAdmin && user?.orgId) {
+    const { getOrgTerritories } = await import("@/lib/territories");
+    const subs = await getOrgTerritories(user.orgId);
+    subscribedTerritories = subs.map((s) => ({
+      id: s.id,
+      name: s.name,
+      zipCodes: s.zipCodes || [],
+    }));
+
+    if (subscribedTerritories.length === 0) {
+      return {
+        total: 0,
+        total_pipeline: 0,
+        total_pipeline_formatted: "$0",
+        count: 0,
+        minAge: minAgeParam,
+        minSqft: minSqftParam,
+        limit,
+        offset,
+        no_active_territory: true,
+        unauthorized_zone: false,
+        territory_message: "Your organization does not have an active territory subscription. Subscribe to a zone in Territories to unlock dark market lead intelligence.",
+        overdueParcels: [],
+      };
+    }
+
+    if (zone && zone !== "all") {
+      const match = subscribedTerritories.find((t) => t.id === zone);
+      if (!match) {
+        return {
+          total: 0,
+          total_pipeline: 0,
+          total_pipeline_formatted: "$0",
+          count: 0,
+          minAge: minAgeParam,
+          minSqft: minSqftParam,
+          limit,
+          offset,
+          no_active_territory: false,
+          unauthorized_zone: true,
+          territory_message: `Your organization is not subscribed to ${zone}. Subscribe in Territories to access lead intelligence for this zone.`,
+          overdueParcels: [],
+        };
+      }
+    }
+
+    allowedZips = subscribedTerritories.flatMap((t) => t.zipCodes);
+  }
 
   const params: unknown[] = [minAgeParam, minSqftParam];
   const clauses = [
@@ -937,16 +1053,23 @@ export async function darkMarket(q: Q) {
   // Zone filter
   if (zone && zone !== "all") {
     let zips: string[] = [];
-    if (zone === "dallas-central-uptown" || zone.includes("central") || zone.includes("uptown")) {
-      zips = ["75201", "75204", "75205", "75206", "75219", "75225"];
+    const match = subscribedTerritories.find((t) => t.id === zone);
+    if (match?.zipCodes?.length) {
+      zips = match.zipCodes;
     } else {
       const terr = await queryOne<{ zip_codes: string[] }>(`SELECT zip_codes FROM app.territories WHERE id = $1`, [zone]);
       if (terr?.zip_codes?.length) zips = terr.zip_codes;
+    }
+    if (zips.length === 0 && (zone === "dallas-central-uptown" || zone.includes("central") || zone.includes("uptown"))) {
+      zips = ["75201", "75204", "75205", "75206", "75219", "75225"];
     }
     if (zips.length > 0) {
       params.push(zips);
       clauses.push(`p.zip_code = ANY($${params.length})`);
     }
+  } else if (!isSuperAdmin && allowedZips && allowedZips.length > 0) {
+    params.push(allowedZips);
+    clauses.push(`p.zip_code = ANY($${params.length})`);
   }
 
   // Jurisdiction (city, state)
@@ -1011,6 +1134,8 @@ export async function darkMarket(q: Q) {
     minSqft: params[1],
     limit,
     offset,
+    no_active_territory: false,
+    unauthorized_zone: false,
     overdueParcels: rows.map((r: any) => {
       const age = new Date().getFullYear() - Number(r.year_built || 0);
       const repl = Number(r.estimated_replacement_cost_usd || (Number(r.building_sqft || 25000) * 14.5));

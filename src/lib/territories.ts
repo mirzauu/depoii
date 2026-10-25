@@ -396,37 +396,47 @@ export async function canOrgAccessParcel(
 
   // 2. Which territory does it belong to?
   const territoryId = await findTerritoryForParcel(parcelId);
-  if (!territoryId) {
-    // Property not in any partitioned market territory
-    return { allowed: true };
+
+  // 3. Get org's active subscriptions
+  const orgSubs = await getOrgTerritories(orgId);
+  if (orgSubs.length === 0) {
+    return {
+      allowed: false,
+      reason: "An active territory subscription is required to unlock parcel dossiers and contact intelligence.",
+      territoryId: territoryId || undefined,
+    };
   }
 
-  // 3. Does org have active subscription to this territory?
-  const subscribed = await hasActiveSubscription(orgId, territoryId);
-  if (subscribed) {
-    return { allowed: true, territoryId };
-  }
-
-  // Auto-subscribe pro/pilot orgs to unlock territory dossier
-  const orgTier = await getOrgTier(orgId);
-  if (orgTier && (orgTier.tier === "pro_territory" || orgTier.tier === "exclusive_zone")) {
-    try {
-      await query(
-        `INSERT INTO app.territory_subscriptions (territory_id, org_id, tier, status)
-         VALUES ($1, $2, 'pro_territory', 'active')
-         ON CONFLICT (territory_id, org_id) DO UPDATE SET tier = 'pro_territory', status = 'active', starts_at = NOW()`,
-        [territoryId, orgId],
-      );
-      return { allowed: true, territoryId };
-    } catch {
+  // 4. If parcel belongs to a partitioned territory, check if org is subscribed to it
+  if (territoryId) {
+    const subscribed = orgSubs.some((s) => s.id === territoryId);
+    if (subscribed) {
       return { allowed: true, territoryId };
     }
+    return {
+      allowed: false,
+      reason: "This property belongs to a territory your organization is not subscribed to. Subscribe to this zone in Territories to unlock the full dossier and contact intelligence.",
+      territoryId,
+    };
+  }
+
+  // 5. If parcel is not in a defined partitioned territory, check if parcel's zip is within any of org's subscribed territories
+  const parcelZipRow = await queryOne<{ zip_code: string }>(
+    `SELECT zip_code FROM warehouse.scored_parcel_leads WHERE parcel_id = $1 OR parcel_id = $2 OR parcel_id = $3
+     UNION
+     SELECT zip_code FROM warehouse.parcels WHERE id = $1 OR id = $2 OR id = $3 LIMIT 1`,
+    [rawId, strippedId, prefixedId],
+  );
+  const parcelZip = parcelZipRow?.zip_code?.slice(0, 5);
+  const allowedZips = new Set(orgSubs.flatMap((s) => s.zipCodes || []));
+
+  if (parcelZip && allowedZips.has(parcelZip)) {
+    return { allowed: true };
   }
 
   return {
     allowed: false,
-    reason: "This property belongs to a territory your organization is not subscribed to. Subscribe to this zone in Territories to unlock the full dossier and contact intelligence.",
-    territoryId,
+    reason: "This property is outside of your organization's subscribed territories. Subscribe to this zone in Territories to unlock lead contact intelligence.",
   };
 }
 
