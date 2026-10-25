@@ -387,6 +387,18 @@ export default function RoofAgingPage() {
   const [territories, setTerritories] = useState<AvailableTerritory[]>([]);
   const [territoriesLoaded, setTerritoriesLoaded] = useState(false);
   const [userRole, setUserRole] = useState<string>("");
+  const [turfZips, setTurfZips] = useState<string[]>([]);
+
+  useEffect(() => {
+    fetch("/api/organization/turf")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (data?.turf?.primaryZips && Array.isArray(data.turf.primaryZips)) {
+          setTurfZips(data.turf.primaryZips);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     Promise.all([
@@ -1600,14 +1612,25 @@ export default function RoofAgingPage() {
 
                           {/* Address (Sticky Left) */}
                           <td className="sticky left-0 z-10 bg-background dark:bg-[#0b0c10] group-hover:bg-neutral-50 dark:group-hover:bg-[#161722] px-3 py-3 font-medium transition-colors">
-                            <button
-                              type="button"
-                              onClick={() => setSelectedDrawerParcel(r.id)}
-                              className="text-foreground dark:text-white hover:underline block truncate max-w-[240px] text-left cursor-pointer font-medium"
-                              title={`${r.address} — click to view lead dossier & details`}
-                            >
-                              {r.address}
-                            </button>
+                            <div className="flex items-center gap-1.5 flex-wrap max-w-[260px]">
+                              <button
+                                type="button"
+                                onClick={() => setSelectedDrawerParcel(r.id)}
+                                className="text-foreground dark:text-white hover:underline block truncate max-w-[190px] text-left cursor-pointer font-medium"
+                                title={`${r.address} — click to view lead dossier & details`}
+                              >
+                                {r.address}
+                              </button>
+                              {Boolean(
+                                (r.zipCode && turfZips.includes(r.zipCode.slice(0, 5))) ||
+                                (r.address && turfZips.some((z) => r.address.includes(z)))
+                              ) && (
+                                <span className="inline-flex items-center gap-0.5 rounded border border-[#B4E4D6]/50 bg-[#B4E4D6]/15 px-1.5 py-0.5 text-[9px] font-semibold text-emerald-800 dark:text-[#B4E4D6] shrink-0">
+                                  <Shield className="size-2.5" />
+                                  Home Turf
+                                </span>
+                              )}
+                            </div>
                             <span className="block text-[11px] text-muted-foreground dark:text-neutral-400 truncate max-w-[240px]">
                               {r.jurisdiction} · {r.permitCount && r.permitCount > 0 ? (
                                 <span className="text-emerald-700 dark:text-emerald-400 font-medium font-mono">
@@ -1895,14 +1918,25 @@ export default function RoofAgingPage() {
 
                           {/* Address (Sticky Left) */}
                           <td className="sticky left-0 z-10 bg-background dark:bg-[#0b0c10] group-hover:bg-neutral-50 dark:group-hover:bg-[#161722] px-3 py-3 font-medium transition-colors">
-                            <button
-                              type="button"
-                              onClick={() => setSelectedDrawerParcel(p.parcelId)}
-                              className="text-foreground dark:text-white hover:underline block truncate max-w-[240px] text-left cursor-pointer font-medium"
-                              title={`${p.address || p.parcelId} — click to view lead dossier & details`}
-                            >
-                              {p.address || p.parcelId}
-                            </button>
+                            <div className="flex items-center gap-1.5 flex-wrap max-w-[260px]">
+                              <button
+                                type="button"
+                                onClick={() => setSelectedDrawerParcel(p.parcelId)}
+                                className="text-foreground dark:text-white hover:underline block truncate max-w-[190px] text-left cursor-pointer font-medium"
+                                title={`${p.address || p.parcelId} — click to view lead dossier & details`}
+                              >
+                                {p.address || p.parcelId}
+                              </button>
+                              {Boolean(
+                                (p.zipCode && turfZips.includes(p.zipCode.slice(0, 5))) ||
+                                (p.address && turfZips.some((z) => p.address.includes(z)))
+                              ) && (
+                                <span className="inline-flex items-center gap-0.5 rounded border border-[#B4E4D6]/50 bg-[#B4E4D6]/15 px-1.5 py-0.5 text-[9px] font-semibold text-emerald-800 dark:text-[#B4E4D6] shrink-0">
+                                  <Shield className="size-2.5" />
+                                  Home Turf
+                                </span>
+                              )}
+                            </div>
                             <span className="block text-[11px] text-muted-foreground dark:text-neutral-400 truncate max-w-[240px]">
                               {p.jurisdiction || [p.city, p.state].filter(Boolean).join(", ")} · {p.parcelId}
                             </span>

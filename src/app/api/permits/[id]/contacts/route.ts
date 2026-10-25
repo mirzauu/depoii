@@ -14,8 +14,8 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
     if (!decodedId) return Response.json({ error: "Permit ID is required." }, { status: 400 });
 
     if (user.platformRole !== "superadmin") {
-      const pRow = await queryOne<{ parcel_id: string }>(
-        `SELECT parcel_id FROM warehouse.normalized_permits WHERE id = $1 OR raw_permit_number = $1 LIMIT 1`,
+      const pRow = await queryOne<{ parcel_id: string; zip_code: string }>(
+        `SELECT parcel_id, zip_code FROM warehouse.normalized_permits WHERE id = $1 OR raw_permit_number = $1 LIMIT 1`,
         [decodedId]
       );
       if (pRow?.parcel_id) {
@@ -23,6 +23,16 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
         if (!access.allowed) {
           return Response.json(
             { error: access.reason || "This permit belongs to a property outside your subscribed territories." },
+            { status: 403 }
+          );
+        }
+      } else if (pRow?.zip_code) {
+        const { getOrgTerritories } = await import("@/lib/territories");
+        const subs = await getOrgTerritories(user.orgId);
+        const allowedZips = new Set(subs.flatMap((s) => s.zipCodes || []));
+        if (!allowedZips.has(pRow.zip_code.slice(0, 5))) {
+          return Response.json(
+            { error: "This permit belongs to a property outside your subscribed territories." },
             { status: 403 }
           );
         }

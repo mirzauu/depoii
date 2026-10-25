@@ -348,6 +348,7 @@ export interface AgingRoof {
   buildingSqft?: number;
   permitCount?: number;
   permitStatus?: "permitted" | "unpermitted";
+  zipCode?: string;
 }
 
 export interface AgingPage {
@@ -381,6 +382,7 @@ export function mapAging(body: unknown): AgingPage {
       address: str(row, ["address"]),
       city: str(row, ["city"]),
       state: str(row, ["state"]),
+      zipCode: str(row, ["zip_code", "zipCode", "zip"]),
       jurisdiction: str(row, ["jurisdiction"]),
       installed: str(row, ["install_date", "last_permit_date"]).slice(0, 10),
       age: num(row, ["roof_age_years"]),
@@ -430,6 +432,7 @@ export interface OverdueParcel {
   email?: string;
   websiteUrl?: string;
   logoUrl?: string;
+  zipCode?: string;
 }
 
 export interface DarkMarketPage {
@@ -456,6 +459,7 @@ export function mapDarkMarket(body: unknown): DarkMarketPage {
       address: str(row, ["address"]),
       city: str(row, ["city"]),
       state: str(row, ["state"]),
+      zipCode: str(row, ["zip_code", "zipCode", "zip"]),
       jurisdiction: str(row, ["jurisdiction"]),
       sqft: num(row, ["buildingSqft", "building_sqft"]),
       yearBuilt: num(row, ["yearBuilt", "year_built"]),

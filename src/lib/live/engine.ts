@@ -186,6 +186,7 @@ export interface EnginePermitRow {
   issued: string;
   address: string;
   city: string;
+  zipCode?: string;
   valuation: number;
   category: string;
   membrane: string;
@@ -257,6 +258,7 @@ export async function loadJurisdictionPermits(jurisdiction: string, fetchImpl: t
         issued: day(pick(row, ["issueDate", "issued"])),
         address: String(pick(row, ["normalizedAddress", "address"]) ?? ""),
         city: String(pick(row, ["city"]) ?? ""),
+        zipCode: String(pick(row, ["zipCode", "zip_code", "postalCode", "zip"]) ?? "").trim() || undefined,
         valuation: num(pick(row, ["valuation"])),
         category: String(pick(row, ["category"]) ?? ""),
         membrane: String(pick(row, ["probableRoofSystem"]) ?? ""),

@@ -119,10 +119,13 @@ export async function claimProperty(
   }
 
   // 2. Find which territory this parcel belongs to
-  let territoryId = await findTerritoryForParcel(parcelId);
+  const territoryId = await findTerritoryForParcel(parcelId);
   if (!territoryId) {
-    const anyTerritory = await queryOne<{ id: string }>(`SELECT id FROM app.territories WHERE status != 'retired' LIMIT 1`);
-    territoryId = anyTerritory?.id || "dallas-north-corridor";
+    return {
+      ok: false,
+      error: "This property is not located within any active territory zone.",
+      code: "NOT_FOUND",
+    };
   }
 
   // 3. Verify org has active subscription for this territory

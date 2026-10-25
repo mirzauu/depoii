@@ -822,6 +822,15 @@ export async function readSessionToken(token: string | undefined): Promise<Sessi
   }
 }
 
+export async function getSessionUser(): Promise<SessionUser | null> {
+  try {
+    const jar = await cookies();
+    return await readSessionToken(jar.get(COOKIE)?.value);
+  } catch {
+    return null;
+  }
+}
+
 export async function requireUser(): Promise<SessionUser> {
   const jar = await cookies();
   const user = await readSessionToken(jar.get(COOKIE)?.value);

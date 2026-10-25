@@ -24,7 +24,7 @@ export async function GET(req: Request) {
       }
     }
 
-    const body = account ? await accountCard(account, storm ?? undefined) : await stormCard(storm!);
+    const body = account ? await accountCard(account, storm ?? undefined) : await stormCard(storm!, user);
     if (!body) return Response.json({ error: "Nothing stored for that query yet. Open the app so a live pull can write the record." }, { status: 404 });
     return Response.json(body);
   } catch (error) {

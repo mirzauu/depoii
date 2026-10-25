@@ -16,23 +16,26 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
     const isPaidTier = orgTier && orgTier.tier !== "shared_intelligence";
 
     const isSuperAdmin = user.platformRole === "superadmin";
-    const canViewFull = isSuperAdmin || (Boolean(isPaidTier) && Boolean(isSubscribed));
+    if (!isSuperAdmin && !isSubscribed) {
+      return Response.json(
+        {
+          error: "Your organization does not have an active subscription for this territory zone. Subscribe in Territories to access lead data.",
+          territoryId,
+          isSubscribed: false,
+          total: 0,
+          leads: [],
+          no_active_territory: false,
+          unauthorized_zone: true,
+        },
+        { status: 403 }
+      );
+    }
 
     const limit = Math.min(parseInt(url.searchParams.get("limit") || "50"), 100);
     const offset = parseInt(url.searchParams.get("offset") || "0");
     const search = url.searchParams.get("search") || undefined;
 
     const result = await getLeadsForTerritory(territoryId, user.orgId, { limit, offset, search });
-
-    // Mask owner info if contractor is not actively subscribed to this zone
-    if (!canViewFull) {
-      result.leads = result.leads.map((lead) => ({
-        ...lead,
-        ownerName: null,
-        claimStatus: "available" as const,
-        claimExpiresAt: null,
-      }));
-    }
 
     return Response.json({
       territoryId,

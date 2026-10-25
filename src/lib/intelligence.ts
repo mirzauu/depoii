@@ -43,15 +43,30 @@ export async function accountCard(account: string, stormDate?: string) {
   };
 }
 
-export async function stormCard(stormDate: string) {
+export async function stormCard(stormDate: string, user?: { orgId?: string; platformRole?: string }) {
   const reports = await reportsForStorm(stormDate);
   const warnings = await warningCount(stormDate);
   const scores = await latestSnapshots(stormDate);
   if (!reports.length && !warnings && !scores.rows.length) return null;
   const largest = reports[0];
+  const isSuperAdmin = user?.platformRole === "superadmin";
+  let allowedZips: string[] | null = null;
+  if (!isSuperAdmin && user?.orgId) {
+    const { getOrgTerritories } = await import("@/lib/territories");
+    const territories = await getOrgTerritories(user.orgId);
+    allowedZips = territories.flatMap((t) => t.zipCodes || []);
+  }
+
   const buildings = [];
+  const zipSet = allowedZips ? new Set(allowedZips.map((z) => z.slice(0, 5))) : null;
+
   for (const row of scores.rows) {
     const parcel = await parcelByAccount(row.account);
+    if (!isSuperAdmin && zipSet) {
+      if (zipSet.size === 0) continue;
+      const m = parcel?.address?.match(/\b\d{5}\b/);
+      if (!m || !zipSet.has(m[0])) continue;
+    }
     buildings.push({
       account: row.account,
       address: parcel?.address ?? row.account,

@@ -45,7 +45,27 @@ const PILOT_ORG_ID = "19b8a9bce1316429";
 export async function GET() {
   try {
     const user = await requireUser();
-    const rows = await query<LeadRow>(`select * from app.leads where org_id = $1 order by updated_at desc`, [user.orgId]);
+    if (user.platformRole === "superadmin") {
+      const rows = await query<LeadRow>(`select * from app.leads where org_id = $1 order by updated_at desc`, [user.orgId]);
+      return Response.json(rows.map(mapLead));
+    }
+
+    const { getOrgTerritories } = await import("@/lib/territories");
+    const territories = await getOrgTerritories(user.orgId);
+    const allowedZips = territories.flatMap((t) => t.zipCodes || []);
+    if (allowedZips.length === 0) {
+      return Response.json([]);
+    }
+
+    const rows = await query<LeadRow>(
+      `select l.*
+       from app.leads l
+       left join warehouse.parcels p on (p.id = l.parcel_id or p.account_number = l.parcel_id)
+       where l.org_id = $1
+         and substring(coalesce(p.zip_code, '') from 1 for 5) = ANY($2)
+       order by l.updated_at desc`,
+      [user.orgId, allowedZips.map((z) => z.slice(0, 5))],
+    );
     return Response.json(rows.map(mapLead));
   } catch {
     return Response.json({ error: "Sign in required." }, { status: 401 });

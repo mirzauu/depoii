@@ -21,9 +21,10 @@ import type { LinkedContractorProfile, ContractorMatchCandidate } from "@/lib/co
 
 interface ContractorIdentityCardProps {
   isOwner?: boolean;
+  isSuperAdmin?: boolean;
 }
 
-export function ContractorIdentityCard({ isOwner }: ContractorIdentityCardProps) {
+export function ContractorIdentityCard({ isOwner, isSuperAdmin }: ContractorIdentityCardProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [linked, setLinked] = useState<LinkedContractorProfile | null>(null);
@@ -76,7 +77,7 @@ export function ContractorIdentityCard({ isOwner }: ContractorIdentityCardProps)
   };
 
   const handleUnlink = async () => {
-    if (!confirm("Are you sure you want to unlink this contractor profile from your organization?")) return;
+    if (!confirm("Are you sure you want to unlink this contractor profile from this organization?")) return;
     try {
       setLoading(true);
       setError("");
@@ -122,7 +123,7 @@ export function ContractorIdentityCard({ isOwner }: ContractorIdentityCardProps)
                 Verified Municipal Contractor Entity
               </span>
               {linked.bbbRating && (
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-medium bg-amber-500/10 text-amber-500 border border-amber-500/20">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-medium bg-[#FFCA88]/15 text-amber-800 dark:text-[#FFCA88] border border-[#FFCA88]/30">
                   <ShieldCheck className="size-3" />
                   BBB {linked.bbbRating}
                 </span>
@@ -169,16 +170,16 @@ export function ContractorIdentityCard({ isOwner }: ContractorIdentityCardProps)
               Public Profile
               <ArrowRight className="size-3" />
             </Link>
-            {isOwner && (
+            {isSuperAdmin && (
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={handleUnlink}
-                title="Unlink contractor identity"
+                title="Unlink contractor identity (Super Admin only)"
                 className="text-xs text-muted-foreground hover:text-red-400"
               >
                 <Unlink className="size-3.5 mr-1" />
-                Unlink
+                Unlink Profile
               </Button>
             )}
           </div>
@@ -224,45 +225,59 @@ export function ContractorIdentityCard({ isOwner }: ContractorIdentityCardProps)
             </div>
           </div>
         )}
+
+        {!isSuperAdmin && (
+          <div className="mt-3 pt-2 text-[11px] text-muted-foreground/80 flex items-center justify-between">
+            <span>Verified and linked by Depoii Super Admin.</span>
+            <span>To request changes or unlink, contact your Depoii account representative.</span>
+          </div>
+        )}
       </div>
     );
   }
 
-  // 2. STATE: UNLINKED WITH SUGGESTIONS
+  // 2. STATE: UNLINKED
   return (
-    <div className="mx-4 lg:mx-8 rounded-xl border border-dashed border-border/90 bg-card/30 p-5 space-y-4">
+    <div className="mx-4 lg:mx-8 rounded-xl border border-dashed border-border/80 bg-card/30 p-5 space-y-4">
       {error && <p className="text-xs text-red-400">{error}</p>}
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div>
-          <h3 className="text-sm font-semibold text-foreground flex items-center gap-1.5">
-            <Sparkles className="size-4 text-amber-400" />
-            Connect Your Contractor Profile
+        <div className="space-y-1">
+          <div className="flex items-center gap-2">
+            <span className="inline-flex items-center gap-1 rounded-full border border-[#FFCA88]/40 bg-[#FFCA88]/15 px-2.5 py-0.5 text-[11px] font-semibold text-amber-800 dark:text-[#FFCA88]">
+              <ShieldCheck className="size-3" />
+              Depoii Super Admin Verification Required
+            </span>
+          </div>
+          <h3 className="text-sm font-semibold text-foreground flex items-center gap-1.5 mt-1">
+            <HardHat className="size-4 text-muted-foreground" />
+            Municipal Contractor Profile Unlinked
           </h3>
-          <p className="text-xs text-muted-foreground mt-0.5">
-            Link your municipal contractor license to unlock auto-lead deduplication, social proof circle prospecting, and executive benchmarking.
+          <p className="text-xs text-muted-foreground max-w-xl">
+            Your organization is not yet linked to a verified municipal contractor profile. Only Depoii Super Admins can verify and link municipal contractor profiles to unlock automated Territory Defense, Competitor Encroachment Radars, and Stronghold Sector intelligence.
           </p>
         </div>
 
-        {/* Quick Search */}
-        <form onSubmit={handleSearch} className="flex items-center gap-2">
-          <input
-            type="text"
-            placeholder="Search contractor or DBA..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="h-8 w-48 rounded-md border border-border bg-background px-2.5 text-xs text-foreground placeholder:text-muted-foreground focus:outline-hidden"
-          />
-          <Button type="submit" size="sm" variant="outline" className="h-8 text-xs" disabled={searching}>
-            <Search className="size-3" />
-          </Button>
-        </form>
+        {isSuperAdmin && (
+          <form onSubmit={handleSearch} className="flex items-center gap-2 shrink-0">
+            <input
+              type="text"
+              placeholder="Admin search contractor..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="h-8 w-48 rounded-md border border-border bg-background px-2.5 text-xs text-foreground placeholder:text-muted-foreground focus:outline-hidden"
+            />
+            <Button type="submit" size="sm" variant="outline" className="h-8 text-xs" disabled={searching}>
+              <Search className="size-3" />
+            </Button>
+          </form>
+        )}
       </div>
 
-      {suggestions.length > 0 && (
+      {isSuperAdmin && suggestions.length > 0 && (
         <div className="space-y-2 pt-2 border-t border-border/50">
           <p className="text-xs font-medium text-foreground">
-            We found {suggestions.length} matching contractor record{suggestions.length > 1 ? "s" : ""} in Dallas municipal records:
+            Matching municipal records found ({suggestions.length}):
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
             {suggestions.map((candidate) => (
@@ -283,16 +298,14 @@ export function ContractorIdentityCard({ isOwner }: ContractorIdentityCardProps)
                     {candidate.totalPermits} permits · ${candidate.totalValuation.toLocaleString()} volume · {candidate.matchReason}
                   </p>
                 </div>
-                {isOwner && (
-                  <Button
-                    size="sm"
-                    className="h-7 text-xs shrink-0 bg-[#B4E4D6] hover:bg-[#9dd8c7] text-[#0f4e3e] font-semibold border-none"
-                    disabled={linkingId === candidate.id}
-                    onClick={() => handleLink(candidate.id, "auto")}
-                  >
-                    {linkingId === candidate.id ? "Linking..." : "Link Profile"}
-                  </Button>
-                )}
+                <Button
+                  size="sm"
+                  className="h-7 text-xs shrink-0 bg-[#B4E4D6] hover:bg-[#9dd8c7] text-[#0f4e3e] font-semibold border-none"
+                  disabled={linkingId === candidate.id}
+                  onClick={() => handleLink(candidate.id, "auto")}
+                >
+                  {linkingId === candidate.id ? "Linking..." : "Link Profile (Admin)"}
+                </Button>
               </div>
             ))}
           </div>

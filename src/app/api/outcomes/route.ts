@@ -22,7 +22,18 @@ export async function POST(req: Request) {
     if (outcomes.some((o) => !o?.parcelId || !o.stormId)) {
       return Response.json({ error: "Each outcome needs a parcelId and a stormId." }, { status: 400 });
     }
-    await await saveOutcomes(outcomes, user.orgId);
+
+    if (user.platformRole !== "superadmin") {
+      const { canOrgAccessParcel } = await import("@/lib/territories");
+      for (const outcome of outcomes) {
+        const access = await canOrgAccessParcel(user.orgId, outcome.parcelId, false);
+        if (!access.allowed) {
+          return Response.json({ error: access.reason || "This property is outside your subscribed territories." }, { status: 403 });
+        }
+      }
+    }
+
+    await saveOutcomes(outcomes, user.orgId);
     for (const outcome of outcomes) {
       recordActivity({
         actorId: user.id,

@@ -207,6 +207,10 @@ export async function linkOrgContractor(
     [contractorId, matchedVia, orgId],
   );
 
+  // Compute and cache turf profile immediately
+  const { computeOrgTurfProfile } = await import("@/lib/turf-profiler");
+  await computeOrgTurfProfile(orgId).catch(() => null);
+
   return { ok: true };
 }
 
@@ -222,6 +226,7 @@ export async function unlinkOrgContractor(orgId: string): Promise<{ ok: boolean 
      WHERE id = $1`,
     [orgId],
   );
+  await query(`DELETE FROM app.org_turf_profiles WHERE org_id = $1`, [orgId]).catch(() => null);
   return { ok: true };
 }
 

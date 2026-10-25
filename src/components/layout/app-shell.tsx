@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Building2, ChevronDown, CloudLightning, Search } from "lucide-react";
+import { Building2, ChevronDown, CloudLightning, MapPin, Search } from "lucide-react";
 import { cn } from "cn";
 import { allStateNames, searchUsCounties, SERVED_AREAS } from "@/lib/us-areas";
 import type { StormSummary } from "@/lib/types";
@@ -73,7 +73,7 @@ export function CitySelect({ className }: { className?: string }) {
 
   return (
     <div ref={root} data-tour="city-selector" className={cn("relative flex items-center gap-2 text-xs text-muted-foreground", className)}>
-      <Building2 className="size-4 shrink-0 text-sky-400" />
+      <MapPin className="size-4 shrink-0 text-muted-foreground" />
       <button
         type="button"
         aria-expanded={open}
@@ -294,6 +294,18 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 <DepoiiMark className="size-7 text-foreground" />
                 <span className="font-bold">Depoii</span>
               </Link>
+              {navReady && me?.orgName && (
+                <div
+                  className="flex items-center gap-1.5 rounded-md border border-border/70 bg-muted/40 px-2.5 py-1 text-xs select-none shrink-0"
+                  title={`Organization: ${me.orgName}`}
+                >
+                  <Building2 className="size-3.5 text-muted-foreground shrink-0" />
+                  <span className="size-1.5 rounded-full bg-[#B4E4D6] shrink-0" />
+                  <span className="font-medium text-foreground truncate max-w-[120px] sm:max-w-[200px] md:max-w-xs">
+                    {me.orgName}
+                  </span>
+                </div>
+              )}
               <CitySelect className="ml-auto w-full max-w-xs" />
               <HeaderTourButton />
               <ThemeToggle />

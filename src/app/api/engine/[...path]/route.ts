@@ -42,16 +42,16 @@ async function localGet(path: string[], q: URLSearchParams, user?: AuthUser | nu
   switch (joined) {
     case "health":
       return { status: "healthy", engine: "nextjs-warehouse", database: pgConfigured() ? "supabase" : "unset" };
-    case "permits/search": return wh.permitsSearch(q);
+    case "permits/search": return wh.permitsSearch(q, user ?? undefined);
     case "permits/stats": return wh.permitsStats();
-    case "permits/pre-permit-stats": return wh.prePermitStats(q);
+    case "permits/pre-permit-stats": return wh.prePermitStats(q, user ?? undefined);
     case "permits/cities": return wh.permitsCities();
-    case "permits/active-jobsites": return wh.activeJobsites(q);
+    case "permits/active-jobsites": return wh.activeJobsites(q, user ?? undefined);
     case "permits/roof-aging-alarm": {
       if (!q.get("jurisdiction")) q.set("jurisdiction", "Dallas, TX");
       return wh.roofAging(q, user ?? undefined);
     }
-    case "permits/multiphase-projects": return wh.multiphase(q);
+    case "permits/multiphase-projects": return wh.multiphase(q, user ?? undefined);
     case "contractors/leaderboard":
     case "contractors/directory": return wh.contractors(q);
     case "contractors/profile": return wh.contractorProfile(q);
@@ -64,9 +64,9 @@ async function localGet(path: string[], q: URLSearchParams, user?: AuthUser | nu
     case "parcels/tarrant": {
       if (joined === "parcels/dallas") q.set("city", "Dallas");
       if (joined === "parcels/tarrant") q.set("city", "Fort Worth");
-      return wh.parcelsSearch(q);
+      return wh.parcelsSearch(q, user ?? undefined);
     }
-    case "parcels/browse": return wh.parcelsBrowse(q);
+    case "parcels/browse": return wh.parcelsBrowse(q, user ?? undefined);
     case "parcels/dark-market/overdue": {
       if (!q.get("jurisdiction")) q.set("jurisdiction", "Dallas, TX");
       return wh.darkMarket(q, user ?? undefined);

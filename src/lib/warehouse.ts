@@ -112,9 +112,28 @@ const permitRow = (r: Record<string, unknown>) => ({
   ownerPhone: (r.owner_phone as string) || null,
 });
 
-export async function permitsSearch(q: Q) {
+export async function permitsSearch(q: Q, user?: { id?: string; orgId?: string; platformRole?: string }) {
+  const isSuperAdmin = user?.platformRole === "superadmin";
+  let allowedZips: string[] | null = null;
+  if (!isSuperAdmin && user?.orgId) {
+    const { getOrgTerritories } = await import("@/lib/territories");
+    const subs = await getOrgTerritories(user.orgId);
+    allowedZips = subs.flatMap((s) => s.zipCodes || []);
+    if (allowedZips.length === 0) {
+      const limit = int(q, "limit", 50), offset = int(q, "offset", 0);
+      return { total: 0, count: 0, offset, limit, total_valuation: 0, permits: [], no_active_territory: true };
+    }
+  }
+
   const params: unknown[] = [];
-  const where = permitFilters(q, params);
+  const whereClauses: string[] = [];
+  const baseWhere = permitFilters(q, params);
+  if (baseWhere) whereClauses.push(baseWhere);
+  if (!isSuperAdmin && allowedZips && allowedZips.length > 0) {
+    params.push(allowedZips.map((z) => z.slice(0, 5)));
+    whereClauses.push(`substring(coalesce(p.zip_code, '') from 1 for 5) = ANY($${params.length})`);
+  }
+  const where = whereClauses.join(" and ");
   const limit = int(q, "limit", 50), offset = int(q, "offset", 0);
   const agg = await queryOne<{ total: string; val: string }>(`select count(*)::text as total, coalesce(sum(valuation),0)::text as val from warehouse.normalized_permits p where ${where}`, params);
   const order = { valuation_asc: "p.valuation asc nulls last", date_desc: "p.issue_date desc nulls last", date_asc: "p.issue_date asc nulls last" }[str(q, "sort_by")] || "p.valuation desc nulls last";
@@ -131,7 +150,18 @@ export async function permitsStats() {
   return { total_permits: Number(totals?.n || 0), total_valuation_usd: Number(totals?.val || 0), by_category: toObj(cats), by_roof_system: toObj(systems), by_jurisdiction: toObj(jurs) };
 }
 
-export async function prePermitStats(q: Q) {
+export async function prePermitStats(q: Q, user?: { id?: string; orgId?: string; platformRole?: string }) {
+  const isSuperAdmin = user?.platformRole === "superadmin";
+  let allowedZips: string[] | null = null;
+  if (!isSuperAdmin && user?.orgId) {
+    const { getOrgTerritories } = await import("@/lib/territories");
+    const subs = await getOrgTerritories(user.orgId);
+    allowedZips = subs.flatMap((s) => s.zipCodes || []);
+    if (allowedZips.length === 0) {
+      return { total_pre_permit: 0, total_valuation: 0, by_status: {}, by_source: {}, no_active_territory: true };
+    }
+  }
+
   const params: unknown[] = [];
   const prePermitCondition = `(
     p.is_pre_permit = true
@@ -145,6 +175,10 @@ export async function prePermitStats(q: Q) {
   const stateParam = (str(q, "state") || state || "").toUpperCase();
   if (cityParam) { params.push(`%${cityParam.toLowerCase()}%`); clauses.push(`lower(p.city) like $${params.length}`); }
   if (stateParam) { params.push(stateParam); clauses.push(`upper(p.state) = $${params.length}`); }
+  if (!isSuperAdmin && allowedZips && allowedZips.length > 0) {
+    params.push(allowedZips.map((z) => z.slice(0, 5)));
+    clauses.push(`substring(coalesce(p.zip_code, '') from 1 for 5) = ANY($${params.length})`);
+  }
   const where = clauses.join(" and ");
 
   const agg = await queryOne<{ n: string; val: string }>(`
@@ -177,7 +211,27 @@ export async function permitsCities() {
   return { total_cities: rows.length, cities: rows.map((r) => r.city) };
 }
 
-export async function activeJobsites(q: Q) {
+export async function activeJobsites(q: Q, user?: { id?: string; orgId?: string; platformRole?: string }) {
+  const isSuperAdmin = user?.platformRole === "superadmin";
+  let allowedZips: string[] | null = null;
+  if (!isSuperAdmin && user?.orgId) {
+    const { getOrgTerritories } = await import("@/lib/territories");
+    const subs = await getOrgTerritories(user.orgId);
+    allowedZips = subs.flatMap((s) => s.zipCodes || []);
+    if (allowedZips.length === 0) {
+      return {
+        total_active_jobs: 0,
+        active_pipeline_valuation_usd: 0,
+        active_pipeline_valuation_formatted: "$0",
+        active_contractors_count: 0,
+        top_roof_systems: {},
+        jurisdictions_available: [],
+        jobsites: [],
+        no_active_territory: true,
+      };
+    }
+  }
+
   const params: unknown[] = [num(q, "min_valuation", 0)];
   const clauses = [`p.status in ('Active','Issued')`, `p.valuation >= $1`, `lower(p.contractor_name) not like '%licensed%'`, `lower(p.contractor_name) not like '%unknown%'`, `lower(p.contractor_name) not like '%self%contracted%'`, `coalesce(p.contractor_name,'') <> ''`];
   const { city, state } = jurisdictionParts(q);
@@ -186,6 +240,10 @@ export async function activeJobsites(q: Q) {
   if (str(q, "contractor")) { params.push(`%${str(q, "contractor").toLowerCase()}%`); clauses.push(`lower(p.contractor_name) like $${params.length}`); }
   if (str(q, "roof_system")) { params.push(`%${str(q, "roof_system").toLowerCase()}%`); clauses.push(`lower(p.probable_roof_system) like $${params.length}`); }
   if (str(q, "search")) { params.push(`%${str(q, "search").toLowerCase()}%`); const i = params.length; clauses.push(`(lower(p.normalized_address) like $${i} or lower(p.raw_permit_number) like $${i} or lower(p.contractor_name) like $${i} or lower(p.city) like $${i})`); }
+  if (!isSuperAdmin && allowedZips && allowedZips.length > 0) {
+    params.push(allowedZips.map(z => z.slice(0, 5)));
+    clauses.push(`substring(coalesce(p.zip_code, '') from 1 for 5) = ANY($${params.length})`);
+  }
   const where = clauses.join(" and ");
   const limit = int(q, "limit", 50), offset = int(q, "offset", 0);
   const agg = await queryOne<{ total: string; val: string; contractors: string }>(`select count(*)::text as total, coalesce(sum(valuation),0)::text as val, count(distinct contractor_name)::text as contractors from warehouse.normalized_permits p where ${where}`, params);
@@ -287,7 +345,7 @@ export async function roofAging(q: Q, user?: { id?: string; orgId?: string; plat
 
     if (zips.length > 0) {
       const zClauses = [
-        `s.zip_code = ANY($1)`,
+        `substring(coalesce(s.zip_code, p.zip_code, '') from 1 for 5) = ANY($1)`,
         `(2026 - coalesce(s.year_built, p.year_built, 1995)) >= $2`,
       ];
       const zParams: unknown[] = [zips, minAgeParam];
@@ -446,8 +504,8 @@ export async function roofAging(q: Q, user?: { id?: string; orgId?: string; plat
   if (city) { params.push(`%${city.toLowerCase()}%`); clauses.push(`lower(p.city) like $${params.length}`); }
   if (state) { params.push(state); clauses.push(`upper(p.state) = $${params.length}`); }
   if (!isSuperAdmin && allowedZips && allowedZips.length > 0) {
-    params.push(allowedZips);
-    clauses.push(`p.zip_code = ANY($${params.length})`);
+    params.push(allowedZips.map(z => z.slice(0, 5)));
+    clauses.push(`substring(coalesce(p.zip_code, '') from 1 for 5) = ANY($${params.length})`);
   }
   if (tier === "critical") clauses.push(`${age} >= 20`);
   else if (tier === "high") clauses.push(`${age} between 15 and 19`);
@@ -518,13 +576,36 @@ export async function roofAging(q: Q, user?: { id?: string; orgId?: string; plat
   };
 }
 
-export async function multiphase(q: Q) {
+export async function multiphase(q: Q, user?: { id?: string; orgId?: string; platformRole?: string }) {
+  const isSuperAdmin = user?.platformRole === "superadmin";
+  let allowedZips: string[] | null = null;
+  if (!isSuperAdmin && user?.orgId) {
+    const { getOrgTerritories } = await import("@/lib/territories");
+    const subs = await getOrgTerritories(user.orgId);
+    allowedZips = subs.flatMap((s) => s.zipCodes || []);
+    if (allowedZips.length === 0) {
+      return {
+        total_campuses: 0,
+        total_campus_pipeline_usd: 0,
+        total_campus_pipeline_formatted: "$0",
+        total_permits_across_campuses: 0,
+        jurisdictions_available: [],
+        campuses: [],
+        no_active_territory: true,
+      };
+    }
+  }
+
   const params: unknown[] = [int(q, "min_phases", 2), num(q, "min_valuation", 0)];
   const clauses = [`coalesce(p.normalized_address,'') <> ''`];
   const { city, state } = jurisdictionParts(q);
   if (city) { params.push(`%${city.toLowerCase()}%`); clauses.push(`lower(p.city) like $${params.length}`); }
   if (state) { params.push(state); clauses.push(`upper(p.state) = $${params.length}`); }
   if (str(q, "search")) { params.push(`%${str(q, "search").toLowerCase()}%`); const i = params.length; clauses.push(`(lower(p.normalized_address) like $${i} or lower(p.contractor_name) like $${i})`); }
+  if (!isSuperAdmin && allowedZips && allowedZips.length > 0) {
+    params.push(allowedZips.map(z => z.slice(0, 5)));
+    clauses.push(`substring(coalesce(p.zip_code, '') from 1 for 5) = ANY($${params.length})`);
+  }
   const where = clauses.join(" and ");
   const limit = int(q, "limit", 30), offset = int(q, "offset", 0);
   const groups = await query<{ key: string; address: string; city: string; state: string; zip_code: string; jurisdiction: string; phases: string; val: string; start: string; end: string; active: string; contractors: string[]; systems: string[] }>(
@@ -933,18 +1014,54 @@ function parcelFilters(q: Q, params: unknown[], alias = "p"): string {
   return clauses.join(" and ");
 }
 
-export async function parcelsSearch(q: Q) {
+export async function parcelsSearch(q: Q, user?: { id?: string; orgId?: string; platformRole?: string }) {
+  const isSuperAdmin = user?.platformRole === "superadmin";
+  let allowedZips: string[] | null = null;
+  if (!isSuperAdmin && user?.orgId) {
+    const { getOrgTerritories } = await import("@/lib/territories");
+    const subs = await getOrgTerritories(user.orgId);
+    allowedZips = subs.flatMap((s) => s.zipCodes || []);
+    if (allowedZips.length === 0) {
+      return { total: 0, source: "Depoii data engine", parcels: [], no_active_territory: true };
+    }
+  }
+
   const params: unknown[] = [];
-  const where = parcelFilters(q, params);
+  const baseWhere = parcelFilters(q, params);
+  const clauses = [baseWhere];
+  if (allowedZips && allowedZips.length > 0) {
+    params.push(allowedZips);
+    clauses.push(`substring(coalesce(p.zip_code,''), 1, 5) = ANY($${params.length})`);
+  }
+  const where = clauses.join(" and ");
+
   const limit = int(q, "limit", 50), offset = int(q, "offset", 0);
   const total = await queryOne<{ n: string }>(`select count(*)::text as n from warehouse.parcels p where ${where}`, params);
   const rows = await query(`select p.* from warehouse.parcels p where ${where} order by p.building_sqft desc nulls last limit $${params.length + 1} offset $${params.length + 2}`, [...params, limit, offset]);
-  return { total: Number(total?.n || 0), source: "Depoii data engine", parcels: rows.map(parcelRowBase) };
+  return { total: Number(total?.n || 0), source: "Depoii data engine", parcels: rows.map(parcelRowBase), no_active_territory: false };
 }
 
-export async function parcelsBrowse(q: Q) {
+export async function parcelsBrowse(q: Q, user?: { id?: string; orgId?: string; platformRole?: string }) {
+  const isSuperAdmin = user?.platformRole === "superadmin";
+  let allowedZips: string[] | null = null;
+  if (!isSuperAdmin && user?.orgId) {
+    const { getOrgTerritories } = await import("@/lib/territories");
+    const subs = await getOrgTerritories(user.orgId);
+    allowedZips = subs.flatMap((s) => s.zipCodes || []);
+    if (allowedZips.length === 0) {
+      return { total: 0, source: "Depoii data engine", parcels: [], no_active_territory: true };
+    }
+  }
+
   const params: unknown[] = [];
-  const where = parcelFilters(q, params);
+  const baseWhere = parcelFilters(q, params);
+  const clauses = [baseWhere];
+  if (allowedZips && allowedZips.length > 0) {
+    params.push(allowedZips);
+    clauses.push(`substring(coalesce(p.zip_code,''), 1, 5) = ANY($${params.length})`);
+  }
+  const where = clauses.join(" and ");
+
   const limit = int(q, "limit", 50), offset = int(q, "offset", 0);
   const total = await queryOne<{ n: string }>(`select count(*)::text as n from warehouse.parcels p where ${where}`, params);
   const rows = await query(
@@ -953,6 +1070,7 @@ export async function parcelsBrowse(q: Q) {
   return {
     total: Number(total?.n || 0), source: "Depoii data engine",
     parcels: rows.map((r) => ({ ...parcelRowBase(r), owner_address: r.owner_address || "", stories: Number(r.stories || 0), released: Boolean(r.released) })),
+    no_active_territory: false,
   };
 }
 
@@ -1145,6 +1263,8 @@ export async function darkMarket(q: Q, user?: { id?: string; orgId?: string; pla
         address: r.address,
         city: r.city,
         state: r.state,
+        zip_code: r.zip_code || "",
+        zipCode: r.zip_code || "",
         jurisdiction: r.jurisdiction || `${r.city}, ${r.state}`,
         buildingSqft: Number(r.building_sqft || 0),
         yearBuilt: Number(r.year_built || 0),

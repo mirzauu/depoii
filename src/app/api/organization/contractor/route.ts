@@ -37,8 +37,8 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   try {
     const user = await requireUser();
-    if (user.role !== "owner" && user.platformRole !== "superadmin") {
-      return Response.json({ error: "Only organization owners or admins can link a contractor profile." }, { status: 403 });
+    if (user.platformRole !== "superadmin") {
+      return Response.json({ error: "Only Depoii Super Admins can link or verify a contractor profile." }, { status: 403 });
     }
 
     const body = (await req.json()) as { contractorId?: string; matchedVia?: "auto" | "manual" };
@@ -63,8 +63,8 @@ export async function POST(req: Request) {
 export async function DELETE() {
   try {
     const user = await requireUser();
-    if (user.role !== "owner" && user.platformRole !== "superadmin") {
-      return Response.json({ error: "Only organization owners or admins can unlink a contractor profile." }, { status: 403 });
+    if (user.platformRole !== "superadmin") {
+      return Response.json({ error: "Only Depoii Super Admins can unlink a contractor profile." }, { status: 403 });
     }
 
     await unlinkOrgContractor(user.orgId);

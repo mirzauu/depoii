@@ -3,6 +3,7 @@ import { recordActivity } from "@/lib/activity";
 import { createUser, loginLinkStatus, setUserPassword } from "@/lib/auth";
 import { query, queryOne } from "@/lib/pg";
 import { getOrgContractor } from "@/lib/contractor-intelligence";
+import { computeOrgTurfProfile } from "@/lib/turf-profiler";
 
 export class HttpError extends Error {
   status: number;
@@ -334,6 +335,9 @@ export async function updateOrganization(
         `update app.orgs set contractor_id = $1, contractor_verified_at = now(), contractor_matched_via = 'admin' where id = $2`,
         [input.contractorId, id],
       );
+      computeOrgTurfProfile(id).catch((err) => {
+        console.error("[TurfProfiler] Admin link profile compute error:", err);
+      });
       await recordActivity({
         actorId, orgId: id,
         action: "org.link_contractor",
@@ -345,6 +349,7 @@ export async function updateOrganization(
         `update app.orgs set contractor_id = null, contractor_verified_at = null, contractor_matched_via = null where id = $1`,
         [id],
       );
+      await query(`delete from app.org_turf_profiles where org_id = $1`, [id]);
       await recordActivity({
         actorId, orgId: id,
         action: "org.unlink_contractor",

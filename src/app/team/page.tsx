@@ -133,6 +133,7 @@ export default function TeamPage() {
   };
 
   const isOwner = me?.role === "owner" || me?.platformRole === "superadmin";
+  const isSuperAdmin = me?.platformRole === "superadmin";
 
   return (
     <div className="space-y-4 pb-10">
@@ -155,7 +156,7 @@ export default function TeamPage() {
         )}
       </div>
 
-      <ContractorIdentityCard isOwner={isOwner} />
+      <ContractorIdentityCard isOwner={isOwner} isSuperAdmin={isSuperAdmin} />
 
       {error && <p className="px-4 text-sm text-red-300 lg:px-8">{error}</p>}
 

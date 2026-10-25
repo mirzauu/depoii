@@ -86,6 +86,26 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     return new Response("Bad id", { status: 400 });
   }
 
+  try {
+    const { requireUser } = await import("@/lib/auth");
+    const user = await requireUser();
+    if (user.platformRole !== "superadmin") {
+      const { canOrgAccessParcel } = await import("@/lib/territories");
+      const access = await canOrgAccessParcel(user.orgId, id, false);
+      if (!access.allowed) {
+        return new Response(fallbackSvg(id, "Restricted Territory"), {
+          headers: { "Content-Type": "image/svg+xml" },
+          status: 403,
+        });
+      }
+    }
+  } catch {
+    return new Response(fallbackSvg(id, "Sign In Required"), {
+      headers: { "Content-Type": "image/svg+xml" },
+      status: 401,
+    });
+  }
+
   const stripped = id
     .replace(/^DCAD-PARCEL-/i, "")
     .replace(/^TAD-PARCEL-/i, "")
