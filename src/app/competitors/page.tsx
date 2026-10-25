@@ -44,7 +44,7 @@ import { ContractorLink } from "@/components/contractor-link";
 import { DepoiiLoader } from "@/components/depoii-logo";
 import { useEngine } from "@/components/use-engine";
 import { useMe } from "@/hooks/use-me";
-import { looksLikePersonName, mapLeaderboard } from "@/lib/engine-api";
+import { mapLeaderboard } from "@/lib/engine-api";
 import { pct, usd } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import type { LocalizedRival, EncroachmentAlert, CounterStrikeTarget } from "@/lib/competitor-intelligence";
@@ -63,17 +63,205 @@ const tooltipStyle = {
   fontSize: 12,
 };
 
-interface RecentPermit {
-  id: string;
-  number: string;
-  issued: string;
-  address: string;
-  city: string;
-  valuation: number;
-  category: string;
-  contractor: string;
-  lat: number;
-  lng: number;
+const LEADERBOARD_SKELETON_ROWS = [
+  { nameW: "w-52", subW: "w-32", permitsW: "w-8", shareW: "w-14", valW: "w-20" },
+  { nameW: "w-64", subW: "w-28", permitsW: "w-7", shareW: "w-12", valW: "w-16" },
+  { nameW: "w-44", subW: "w-36", permitsW: "w-9", shareW: "w-14", valW: "w-24" },
+  { nameW: "w-56", subW: "w-24", permitsW: "w-6", shareW: "w-12", valW: "w-16" },
+  { nameW: "w-48", subW: "w-32", permitsW: "w-8", shareW: "w-14", valW: "w-18" },
+  { nameW: "w-60", subW: "w-40", permitsW: "w-6", shareW: "w-11", valW: "w-14" },
+  { nameW: "w-40", subW: "w-28", permitsW: "w-5", shareW: "w-10", valW: "w-16" },
+  { nameW: "w-52", subW: "w-30", permitsW: "w-7", shareW: "w-12", valW: "w-20" },
+];
+
+function LeaderboardTableSkeletonRows() {
+  return (
+    <>
+      {LEADERBOARD_SKELETON_ROWS.map((row, i) => {
+        const delay = `${i * 60}ms`;
+        return (
+          <TableRow
+            key={i}
+            className="border-b border-border/40 dark:border-neutral-800/40"
+            style={{ opacity: Math.max(0.35, 1 - i * 0.07) }}
+          >
+            <TableCell className="pl-6 py-3.5">
+              <div className="flex items-center gap-2">
+                <div
+                  style={{ animationDelay: delay }}
+                  className="size-5 rounded-full bg-neutral-200/80 dark:bg-neutral-800 animate-pulse shrink-0 flex items-center justify-center text-[10px] font-mono text-muted-foreground/30"
+                >
+                  {i + 1}
+                </div>
+                <div
+                  style={{ animationDelay: delay }}
+                  className={cn("h-4 rounded bg-neutral-200 dark:bg-neutral-800 animate-pulse", row.nameW)}
+                />
+              </div>
+              <div
+                style={{ animationDelay: delay }}
+                className={cn("h-3 rounded bg-neutral-200/50 dark:bg-neutral-800/50 animate-pulse mt-1.5 ml-7", row.subW)}
+              />
+            </TableCell>
+
+            <TableCell className="text-right py-3.5">
+              <div
+                style={{ animationDelay: delay }}
+                className={cn("h-4 rounded bg-neutral-200/80 dark:bg-neutral-800 animate-pulse ml-auto", row.permitsW)}
+              />
+            </TableCell>
+
+            <TableCell className="text-right py-3.5">
+              <div
+                style={{ animationDelay: delay }}
+                className={cn(
+                  "h-5 rounded border border-[#B4E4D6]/30 bg-[#B4E4D6]/10 animate-pulse ml-auto",
+                  row.shareW
+                )}
+              />
+            </TableCell>
+
+            <TableCell className="hidden text-right sm:table-cell py-3.5">
+              <div
+                style={{ animationDelay: delay }}
+                className={cn("h-4 rounded bg-neutral-200/80 dark:bg-neutral-800 animate-pulse ml-auto", row.valW)}
+              />
+            </TableCell>
+
+            <TableCell className="pr-6 py-3.5">
+              <div
+                style={{ animationDelay: delay }}
+                className="h-4 w-12 rounded bg-neutral-200/60 dark:bg-neutral-800/60 animate-pulse"
+              />
+            </TableCell>
+          </TableRow>
+        );
+      })}
+    </>
+  );
+}
+
+const SKELETON_BAR_WIDTHS = ["86%", "68%", "52%", "38%", "25%", "16%"];
+
+function EstimatedShareChartSkeleton() {
+  return (
+    <div className="h-full flex flex-col justify-between py-2 px-3">
+      <div className="space-y-3 flex-1 flex flex-col justify-center">
+        {SKELETON_BAR_WIDTHS.map((w, idx) => (
+          <div key={idx} className="flex items-center gap-3">
+            <div
+              style={{ animationDelay: `${idx * 60}ms` }}
+              className="w-28 shrink-0 h-3 rounded bg-neutral-200/70 dark:bg-neutral-800/80 animate-pulse"
+            />
+            <div className="flex-1 h-5 bg-neutral-100 dark:bg-neutral-900/60 rounded overflow-hidden">
+              <div
+                style={{ width: w, animationDelay: `${idx * 60}ms` }}
+                className="h-full rounded-r border-r-2 border-[#B4E4D6] bg-gradient-to-r from-[#B4E4D6]/10 to-[#B4E4D6]/30 animate-pulse"
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="pt-2 border-t border-border/40 dark:border-neutral-800/60 flex justify-between text-[10px] text-muted-foreground/40 font-mono">
+        <span>0%</span>
+        <span>5%</span>
+        <span>10%</span>
+        <span>15%</span>
+        <span>20%+</span>
+      </div>
+    </div>
+  );
+}
+
+function VelocityChartSkeleton() {
+  return (
+    <div className="h-full flex flex-col justify-between py-2 px-3">
+      <div className="flex-1 flex items-center justify-center relative overflow-hidden">
+        <div className="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-20 dark:opacity-10">
+          <div className="border-b border-neutral-400 w-full" />
+          <div className="border-b border-neutral-400 w-full" />
+          <div className="border-b border-neutral-400 w-full" />
+          <div className="border-b border-neutral-400 w-full" />
+        </div>
+        <div className="w-full flex items-end justify-between gap-2 h-32 px-4 z-10">
+          {[35, 55, 42, 70, 65, 85, 48, 92, 78, 60, 75, 88].map((h, i) => (
+            <div key={i} className="flex-1 flex flex-col items-center gap-1">
+              <div
+                style={{ height: `${h}%`, animationDelay: `${i * 50}ms` }}
+                className="w-full max-w-[14px] rounded-t bg-gradient-to-t from-neutral-200/40 dark:from-neutral-800/40 to-[#FFCA88]/30 dark:to-[#FFCA88]/25 border-t border-[#FFCA88]/50 animate-pulse"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="pt-2 border-t border-border/40 dark:border-neutral-800/60 flex justify-between text-[10px] text-muted-foreground/40 font-mono">
+        <span>Nov</span>
+        <span>Jan</span>
+        <span>Mar</span>
+        <span>May</span>
+        <span>Jul</span>
+        <span>Sep</span>
+      </div>
+    </div>
+  );
+}
+
+function TurfStripSkeleton() {
+  return (
+    <div className="rounded-lg border border-border dark:border-neutral-800 bg-card dark:bg-[#0e0f14] p-4 shadow-sm space-y-3">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border/60 dark:border-neutral-800/80 pb-3">
+        <div className="flex items-center gap-2">
+          <span className="flex size-2 rounded-full bg-[#B4E4D6] animate-ping" />
+          <div className="h-4 w-44 rounded bg-neutral-200 dark:bg-neutral-800 animate-pulse" />
+        </div>
+        <div className="flex items-center gap-1.5">
+          <div className="h-4 w-32 rounded bg-neutral-200/60 dark:bg-neutral-800/60 animate-pulse" />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 pt-1">
+        {[1, 2, 3, 4].map((i) => (
+          <div key={i} className="rounded-md border border-border/70 dark:border-neutral-800/80 bg-neutral-50/50 dark:bg-[#121319]/60 px-3 py-2 space-y-1.5">
+            <div className="h-3 w-20 rounded bg-neutral-200/70 dark:bg-neutral-800/70 animate-pulse" />
+            <div className="h-5 w-24 rounded bg-neutral-200 dark:bg-neutral-800 animate-pulse" />
+            <div className="h-2.5 w-28 rounded bg-neutral-200/50 dark:bg-neutral-800/50 animate-pulse" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function RivalsTableSkeletonRows() {
+  return (
+    <>
+      {[1, 2, 3, 4].map((i) => (
+        <TableRow key={i} className="border-b border-border/40 dark:border-neutral-800/40">
+          <TableCell className="pl-4 py-3">
+            <div className="h-4 w-36 rounded bg-neutral-200 dark:bg-neutral-800 animate-pulse" />
+          </TableCell>
+          <TableCell className="py-3">
+            <div className="h-5 w-24 rounded border border-[#FFCA88]/40 bg-[#FFCA88]/10 animate-pulse" />
+          </TableCell>
+          <TableCell className="text-right py-3">
+            <div className="h-4 w-8 rounded bg-neutral-200/70 dark:bg-neutral-800/70 animate-pulse ml-auto" />
+          </TableCell>
+          <TableCell className="text-right py-3">
+            <div className="h-4 w-16 rounded bg-neutral-200 dark:bg-neutral-800 animate-pulse ml-auto" />
+          </TableCell>
+          <TableCell className="text-right py-3">
+            <div className="h-4 w-10 rounded bg-neutral-200/70 dark:bg-neutral-800/70 animate-pulse ml-auto" />
+          </TableCell>
+          <TableCell className="text-right py-3">
+            <div className="h-4 w-14 rounded bg-neutral-200/70 dark:bg-neutral-800/70 animate-pulse ml-auto" />
+          </TableCell>
+          <TableCell className="pr-4 text-right py-3">
+            <div className="h-4 w-28 rounded bg-neutral-200/50 dark:bg-neutral-800/50 animate-pulse ml-auto" />
+          </TableCell>
+        </TableRow>
+      ))}
+    </>
+  );
 }
 
 export default function CompetitorsPage() {
@@ -98,7 +286,6 @@ export default function CompetitorsPage() {
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
   // City-wide leaderboard data
-  const [recent, setRecent] = useState<RecentPermit[]>([]);
   const board = useEngine("contractors/leaderboard", { jurisdiction, limit: 100 }, mapLeaderboard);
   const leaders = board.data?.contractors ?? null;
 
@@ -143,26 +330,6 @@ export default function CompetitorsPage() {
       })
       .catch(() => setCsLoading(false));
   };
-
-  // 3. City-wide permit history
-  useEffect(() => {
-    let cancelled = false;
-    const q = encodeURIComponent(jurisdiction);
-    setRecent([]);
-    fetch(`/api/permits?jurisdiction=${q}`)
-      .then((res) => (res.ok ? res.json() : null))
-      .then((jobs) => {
-        if (cancelled) return;
-        const rows = Array.isArray(jobs?.permits) ? (jobs.permits as RecentPermit[]) : [];
-        setRecent(rows.filter((p) => p.contractor && !looksLikePersonName(p.contractor)));
-      })
-      .catch(() => {
-        if (!cancelled) setRecent([]);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [jurisdiction]);
 
   const [today, setToday] = useState("2026-10-18");
   useEffect(() => setToday(new Date().toISOString().slice(0, 10)), []);
@@ -306,8 +473,11 @@ export default function CompetitorsPage() {
             </div>
           )}
 
+          {/* Turf Strip Loading Shadow */}
+          {turfLoading && <TurfStripSkeleton />}
+
           {/* Linked Contractor Turf Strip */}
-          {turf && (
+          {turf && !turfLoading && (
             <div className="rounded-lg border border-border dark:border-neutral-800 bg-card dark:bg-[#0e0f14] p-4 shadow-sm space-y-3">
               <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border/60 dark:border-neutral-800/80 pb-3">
                 <div className="flex items-center gap-2">
@@ -412,7 +582,19 @@ export default function CompetitorsPage() {
             </div>
 
             <div className="divide-y divide-border/60 dark:divide-neutral-800/60">
-              {encroachments.length === 0 ? (
+              {turfLoading ? (
+                <div className="p-4 space-y-3">
+                  {[1, 2].map((i) => (
+                    <div key={i} className="flex items-center justify-between p-3 rounded border border-border/40 dark:border-neutral-800/40 space-y-2">
+                      <div className="space-y-1.5">
+                        <div className="h-4 w-40 rounded bg-neutral-200 dark:bg-neutral-800 animate-pulse" />
+                        <div className="h-3 w-64 rounded bg-neutral-200/60 dark:bg-neutral-800/60 animate-pulse" />
+                      </div>
+                      <div className="h-7 w-28 rounded bg-neutral-200/50 dark:bg-neutral-800/50 animate-pulse" />
+                    </div>
+                  ))}
+                </div>
+              ) : encroachments.length === 0 ? (
                 <div className="py-12 text-center text-xs text-muted-foreground dark:text-neutral-400">
                   <Shield className="mx-auto size-8 text-neutral-400 dark:text-neutral-600 mb-2" />
                   <p className="font-medium text-foreground dark:text-neutral-300">
@@ -513,7 +695,9 @@ export default function CompetitorsPage() {
                 </TableRow>
               </TableHeader>
               <TableBody className="text-xs divide-y divide-border/40 dark:divide-neutral-800/60">
-                {rivals.length === 0 ? (
+                {turfLoading ? (
+                  <RivalsTableSkeletonRows />
+                ) : rivals.length === 0 ? (
                   <TableRow>
                     <TableCell colSpan={7} className="py-8 text-center text-muted-foreground">
                       No competitor permit data indexed for your core ZIPs yet.
@@ -586,7 +770,15 @@ export default function CompetitorsPage() {
           <Card className="border-border dark:border-neutral-800 bg-card dark:bg-[#0e0f14]">
             <CardHeader className="pb-2">
               <CardTitle className="text-xs font-semibold flex items-center justify-between gap-2">
-                <span>Estimated Permit Share</span>
+                <span className="flex items-center gap-2">
+                  <span>Estimated Permit Share</span>
+                  {board.loading && leaders && leaders.length > 0 && (
+                    <span className="inline-flex items-center gap-1 text-[10px] text-emerald-700 dark:text-[#B4E4D6] font-normal">
+                      <span className="size-1.5 rounded-full bg-[#B4E4D6] animate-ping" />
+                      Syncing...
+                    </span>
+                  )}
+                </span>
                 <ProvenanceBadge kind="depoii-modeled" />
               </CardTitle>
               <CardDescription className="text-xs">
@@ -595,11 +787,15 @@ export default function CompetitorsPage() {
                       leaders.reduce((s, c) => s + c.valuation, 0),
                       true
                     )} permitted value`
-                  : `${totalPermits} roofing permits · ${usd(totalValue, true)} city filing value`}
+                  : board.loading
+                    ? "Evaluating city permit share distribution..."
+                    : `${totalPermits} roofing permits · ${usd(totalValue, true)} city filing value`}
               </CardDescription>
             </CardHeader>
             <CardContent className="h-72">
-              {(leaders ?? active).length === 0 ? (
+              {board.loading && (!leaders || leaders.length === 0) ? (
+                <EstimatedShareChartSkeleton />
+              ) : (leaders ?? active).length === 0 ? (
                 <p className="grid h-full place-items-center text-xs text-muted-foreground">
                   No roofing permits in this window.
                 </p>
@@ -641,44 +837,66 @@ export default function CompetitorsPage() {
 
           <Card className="border-border dark:border-neutral-800 bg-card dark:bg-[#0e0f14]">
             <CardHeader className="pb-2">
-              <CardTitle className="text-xs font-semibold">Permit Velocity</CardTitle>
+              <CardTitle className="text-xs font-semibold flex items-center justify-between gap-2">
+                <span className="flex items-center gap-2">
+                  <span>Permit Velocity</span>
+                  {board.loading && leaders && leaders.length > 0 && (
+                    <span className="inline-flex items-center gap-1 text-[10px] text-emerald-700 dark:text-[#B4E4D6] font-normal">
+                      <span className="size-1.5 rounded-full bg-[#B4E4D6] animate-ping" />
+                      Syncing...
+                    </span>
+                  )}
+                </span>
+              </CardTitle>
               <CardDescription className="text-xs">
                 Monthly filings by contractor across {jurisdiction}.
               </CardDescription>
             </CardHeader>
             <CardContent className="h-72">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={velocity}>
-                  <CartesianGrid stroke="var(--border)" vertical={false} />
-                  <XAxis dataKey="month" stroke="var(--muted-foreground)" fontSize={11} minTickGap={24} />
-                  <YAxis allowDecimals={false} stroke="var(--muted-foreground)" fontSize={11} width={24} />
-                  <Tooltip contentStyle={tooltipStyle} />
-                  {stats
-                    .slice(0, 8)
-                    .map((s) => s.contractor)
-                    .map((c) => (
-                      <Line
-                        key={c.id}
-                        type="monotone"
-                        dataKey={c.id}
-                        name={c.name}
-                        stroke={c.color}
-                        dot={false}
-                        strokeWidth={1.75}
-                      />
-                    ))}
-                </LineChart>
-              </ResponsiveContainer>
+              {board.loading && (!leaders || leaders.length === 0) ? (
+                <VelocityChartSkeleton />
+              ) : (
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={velocity}>
+                    <CartesianGrid stroke="var(--border)" vertical={false} />
+                    <XAxis dataKey="month" stroke="var(--muted-foreground)" fontSize={11} minTickGap={24} />
+                    <YAxis allowDecimals={false} stroke="var(--muted-foreground)" fontSize={11} width={24} />
+                    <Tooltip contentStyle={tooltipStyle} />
+                    {stats
+                      .slice(0, 8)
+                      .map((s) => s.contractor)
+                      .map((c) => (
+                        <Line
+                          key={c.id}
+                          type="monotone"
+                          dataKey={c.id}
+                          name={c.name}
+                          stroke={c.color}
+                          dot={false}
+                          strokeWidth={1.75}
+                        />
+                      ))}
+                  </LineChart>
+                </ResponsiveContainer>
+              )}
             </CardContent>
           </Card>
 
           {/* Leaderboard Table */}
           <Card className="lg:col-span-2 border-border dark:border-neutral-800 bg-card dark:bg-[#0e0f14]">
             <CardHeader className="pb-2">
-              <CardTitle className="text-xs font-semibold">Dallas Metro Leaderboard</CardTitle>
+              <CardTitle className="text-xs font-semibold flex items-center justify-between">
+                <span>Dallas Metro Leaderboard</span>
+                {board.loading && leaders && leaders.length > 0 && (
+                  <span className="inline-flex items-center gap-1 text-[10px] font-normal text-emerald-700 dark:text-[#B4E4D6]">
+                    <span className="size-1.5 rounded-full bg-[#B4E4D6] animate-ping" />
+                    Refreshing live rankings...
+                  </span>
+                )}
+              </CardTitle>
               <CardDescription className="text-xs">
-                {leaders == null
-                  ? "Asking data engine..."
+                {leaders == null || (board.loading && (!leaders || leaders.length === 0))
+                  ? "Indexing top contractors across municipal records..."
                   : `${leaders.length} contractors in ${jurisdiction}, ranked by permitted valuation.`}
               </CardDescription>
             </CardHeader>
@@ -696,36 +914,40 @@ export default function CompetitorsPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody className="text-xs divide-y divide-border/40 dark:divide-neutral-800/60">
-                  {(leaders ?? []).map((s) => (
-                    <TableRow key={s.id} className="hover:bg-neutral-50 dark:hover:bg-[#121319]">
-                      <TableCell className="pl-6">
-                        <ContractorLink name={s.name} />
-                        <span className="block pl-7 text-[11px] text-muted-foreground">
-                          {s.roofSystem || "Roof system not stated"}
-                          {s.license ? ` · license ${s.license}` : ""}
-                        </span>
-                      </TableCell>
-                      <TableCell className="text-right font-mono tabular-nums">{s.permits}</TableCell>
-                      <TableCell className="text-right font-mono tabular-nums">
-                        {s.share > 0 ? pct(s.share, 1) : "—"}
-                      </TableCell>
-                      <TableCell className="hidden text-right font-mono tabular-nums sm:table-cell">
-                        {usd(s.valuation, true)}
-                      </TableCell>
-                      <TableCell className="pr-6 text-xs">
-                        <Link
-                          href={`/contractors/${encodeURIComponent(s.name)}`}
-                          className="text-primary hover:underline font-medium"
-                        >
-                          Profile →
-                        </Link>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                  {leaders == null && (
+                  {board.loading && (!leaders || leaders.length === 0) ? (
+                    <LeaderboardTableSkeletonRows />
+                  ) : (
+                    (leaders ?? []).map((s) => (
+                      <TableRow key={s.id} className="hover:bg-neutral-50 dark:hover:bg-[#121319]">
+                        <TableCell className="pl-6">
+                          <ContractorLink name={s.name} />
+                          <span className="block pl-7 text-[11px] text-muted-foreground">
+                            {s.roofSystem || "Roof system not stated"}
+                            {s.license ? ` · license ${s.license}` : ""}
+                          </span>
+                        </TableCell>
+                        <TableCell className="text-right font-mono tabular-nums">{s.permits}</TableCell>
+                        <TableCell className="text-right font-mono tabular-nums">
+                          {s.share > 0 ? pct(s.share, 1) : "—"}
+                        </TableCell>
+                        <TableCell className="hidden text-right font-mono tabular-nums sm:table-cell">
+                          {usd(s.valuation, true)}
+                        </TableCell>
+                        <TableCell className="pr-6 text-xs">
+                          <Link
+                            href={`/contractors/${encodeURIComponent(s.name)}`}
+                            className="text-primary hover:underline font-medium"
+                          >
+                            Profile →
+                          </Link>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  )}
+                  {!board.loading && leaders && leaders.length === 0 && (
                     <TableRow>
-                      <TableCell colSpan={5}>
-                        <DepoiiLoader label="Asking the data engine…" className="py-8" />
+                      <TableCell colSpan={5} className="py-8 text-center text-muted-foreground">
+                        No contractor leaderboard data indexed for {jurisdiction}.
                       </TableCell>
                     </TableRow>
                   )}

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
-import { Briefcase, ChevronDown, ChevronsLeft, ChevronsRight, House, Info, Layers, Search, Shield, Users, type LucideIcon } from "lucide-react";
+import { Briefcase, ChevronDown, ChevronUp, ChevronsLeft, ChevronsRight, House, Info, Layers, Search, Shield, Users, type LucideIcon } from "lucide-react";
 import { cn } from "cn";
 import { DepoiiAiMark, DepoiiMark } from "./depoii-logo";
 import { useMe } from "@/hooks/use-me";
@@ -94,9 +94,9 @@ function groupActive(path: string, group: NavGroup, fromParam?: string | null) {
   return group.items.some((i) => isActive(path, i, fromParam)) || (group.match ?? []).some((p) => path.startsWith(p));
 }
 
-const GROUPS_KEY = "depoii:nav-groups-v3";
+const GROUPS_KEY = "depoii:nav-groups-v4";
 const RAIL_KEY = "depoii:sidebar";
-const DEFAULT_OPEN = Object.fromEntries(GROUPS.map((group) => [group.id, true]));
+const DEFAULT_OPEN = Object.fromEntries(GROUPS.map((group) => [group.id, group.id !== "organization"]));
 
 export function AccountMenu({ collapsed = false }: { collapsed?: boolean }) {
   const preview = useContext(SidebarPreview);
@@ -223,14 +223,97 @@ export function Sidebar() {
     return me.permissions.includes(perm);
   };
 
+  const orgLabel = navReady && me?.orgName?.trim() ? me.orgName.trim() : "Organization";
+
   const visibleTop = TOP.filter((link) => canAccess(link.permission));
   const visibleGroups = GROUPS.map((group) => ({
     ...group,
+    label: group.id === "organization" ? orgLabel : group.label,
     items: group.items.filter((item) => canAccess(item.permission)),
   })).filter((group) => group.items.length > 0);
 
+  const mainGroups = visibleGroups.filter((g) => g.id !== "organization");
+  const orgGroup = visibleGroups.find((g) => g.id === "organization");
+
   const fade = cn("overflow-hidden whitespace-nowrap transition-opacity duration-150", collapsed ? "opacity-0" : "opacity-100");
   const row = "flex w-full items-center gap-2.5 overflow-hidden rounded-md px-3 py-2 text-sm whitespace-nowrap text-muted-foreground hover:bg-muted hover:text-foreground";
+
+  const renderGroup = (group: NavGroup, up = false) => {
+    const Icon = group.icon;
+    const expanded = !collapsed && !!open[group.id];
+    const here = groupActive(path, group, fromParam);
+    const Chevron = up ? ChevronUp : ChevronDown;
+
+    const itemsNode = (
+      <div className={cn("grid transition-[grid-template-rows] duration-200 ease-out", expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]")}>
+        <div className="overflow-hidden" inert={!expanded}>
+          <div className={cn("flex flex-col gap-0.5", up ? "pt-0.5 pb-1" : "py-0.5")}>
+            {group.items.map((item) =>
+              item.disabled ? (
+                <div
+                  key={item.label}
+                  title={`${item.label} (Coming Soon)`}
+                  aria-disabled="true"
+                  className="w-full rounded-md py-1.5 pr-3 pl-9 text-left text-sm whitespace-nowrap text-muted-foreground/60 cursor-not-allowed select-none flex items-center justify-between"
+                >
+                  <span>{item.label}</span>
+                  {item.badge && (
+                    <span className="rounded-full border border-current/30 bg-current/10 px-1.5 py-0.5 text-[10px] font-medium text-current">
+                      {item.badge}
+                    </span>
+                  )}
+                </div>
+              ) : (
+                <NavTo
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    "w-full rounded-md py-1.5 pr-3 pl-9 text-left text-sm whitespace-nowrap text-muted-foreground hover:bg-muted hover:text-foreground flex items-center justify-between",
+                    isActive(path, item, fromParam) && "bg-muted font-medium text-foreground",
+                  )}
+                >
+                  <span>{item.label}</span>
+                  {item.badge && (
+                    <span className="rounded-full border border-current/30 bg-current/10 px-1.5 py-0.5 text-[10px] font-medium text-current">
+                      {item.badge}
+                    </span>
+                  )}
+                </NavTo>
+              ),
+            )}
+          </div>
+        </div>
+      </div>
+    );
+
+    const buttonNode = (
+      <button
+        type="button"
+        onClick={() => onGroup(group.id)}
+        title={group.label}
+        aria-expanded={expanded}
+        className={cn(row, collapsed && here && "bg-muted text-foreground", !collapsed && here && "text-foreground")}
+      >
+        <Icon className="size-4 shrink-0" />
+        <span className={cn(fade, "flex-1 text-left truncate")}>{group.label}</span>
+        <Chevron
+          className={cn(
+            "size-3.5 shrink-0 transition-transform duration-200",
+            expanded ? "rotate-180" : "rotate-0",
+            collapsed && "opacity-0",
+          )}
+        />
+      </button>
+    );
+
+    return (
+      <div key={group.id} className="flex flex-col">
+        {up && itemsNode}
+        {buttonNode}
+        {!up && itemsNode}
+      </div>
+    );
+  };
 
   return (
     <aside className={cn("sticky top-0 z-40 hidden h-screen shrink-0 flex-col border-r border-border bg-card/40 transition-[width] duration-200 ease-out lg:flex print:hidden", preview && "flex! h-full", collapsed ? "w-16" : "w-60")}>
@@ -260,7 +343,7 @@ export function Sidebar() {
         </button>
       )}
 
-      <nav data-tour="sidebar-nav" className="flex min-h-0 flex-1 flex-col gap-0.5 overflow-x-hidden overflow-y-auto px-2 pb-4">
+      <nav data-tour="sidebar-nav" className="flex min-h-0 flex-1 flex-col gap-0.5 overflow-x-hidden overflow-y-auto px-2 pb-2">
         {visibleTop.map((link) => {
           const Icon = link.icon;
           if (link.disabled) {
@@ -291,61 +374,9 @@ export function Sidebar() {
           );
         })}
 
-        {visibleGroups.length > 0 && <div className="my-2 border-t border-border" />}
+        {mainGroups.length > 0 && <div className="my-2 border-t border-border" />}
 
-        {visibleGroups.map((group) => {
-          const Icon = group.icon;
-          const expanded = !collapsed && !!open[group.id];
-          const here = groupActive(path, group, fromParam);
-          return (
-            <div key={group.id}>
-              <button type="button" onClick={() => onGroup(group.id)} title={group.label} aria-expanded={expanded} className={cn(row, collapsed && here && "bg-muted text-foreground", !collapsed && here && "text-foreground")}>
-                <Icon className="size-4 shrink-0" />
-                <span className={cn(fade, "flex-1 text-left")}>{group.label}</span>
-                <ChevronDown className={cn("size-3.5 shrink-0 transition-transform duration-200", expanded && "rotate-180", collapsed && "opacity-0")} />
-              </button>
-              <div className={cn("grid transition-[grid-template-rows] duration-200", expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]")}>
-                <div className="overflow-hidden" inert={!expanded}>
-                  <div className="flex flex-col gap-0.5 py-0.5">
-                    {group.items.map((item) =>
-                      item.disabled ? (
-                        <div
-                          key={item.label}
-                          title={`${item.label} (Coming Soon)`}
-                          aria-disabled="true"
-                          className="w-full rounded-md py-1.5 pr-3 pl-9 text-left text-sm whitespace-nowrap text-muted-foreground/60 cursor-not-allowed select-none flex items-center justify-between"
-                        >
-                          <span>{item.label}</span>
-                          {item.badge && (
-                            <span className="rounded-full border border-current/30 bg-current/10 px-1.5 py-0.5 text-[10px] font-medium text-current">
-                              {item.badge}
-                            </span>
-                          )}
-                        </div>
-                      ) : (
-                        <NavTo
-                          key={item.href}
-                          href={item.href}
-                          className={cn(
-                            "w-full rounded-md py-1.5 pr-3 pl-9 text-left text-sm whitespace-nowrap text-muted-foreground hover:bg-muted hover:text-foreground flex items-center justify-between",
-                            isActive(path, item, fromParam) && "bg-muted font-medium text-foreground",
-                          )}
-                        >
-                          <span>{item.label}</span>
-                          {item.badge && (
-                            <span className="rounded-full border border-current/30 bg-current/10 px-1.5 py-0.5 text-[10px] font-medium text-current">
-                              {item.badge}
-                            </span>
-                          )}
-                        </NavTo>
-                      ),
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
-        })}
+        {mainGroups.map((g) => renderGroup(g))}
 
         {navReady && me?.platformRole === "superadmin" && (
           <div className="mt-auto border-t border-border pt-2">
@@ -356,7 +387,8 @@ export function Sidebar() {
           </div>
         )}
       </nav>
-      <div className="border-t border-border p-2">
+      <div className="border-t border-border p-2 flex flex-col gap-0.5">
+        {orgGroup && renderGroup(orgGroup, true)}
         <AccountMenu collapsed={collapsed} />
       </div>
     </aside>
