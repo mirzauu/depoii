@@ -26,8 +26,7 @@ export const GROUPS: NavGroup[] = [
       { href: "/pipeline", label: "Opportunity Pipeline", match: ["/parcels", "/property"], permission: "nav:pipeline" },
       { href: "/roof-aging", label: "Roof Aging Alarm", engine: true, permission: "nav:roof_aging" },
       { href: "/map", label: "Hail Map", engine: true, permission: "nav:map" },
-      { href: "/territory", label: "Territory Explorer", match: ["/territory"], permission: "nav:territory" },
-      { href: "/claims", label: "My Claims", match: ["/claims"], permission: "nav:claims" },
+      { href: "/competitors", label: "Leaderboard", engine: true, permission: "nav:competitors" },
     ],
   },
   {
@@ -38,7 +37,6 @@ export const GROUPS: NavGroup[] = [
       { href: "/permits", label: "Permit", engine: true, permission: "nav:permits" },
       { href: "/buildings", label: "Building", engine: true, permission: "nav:buildings" },
       { href: "/contractors", label: "Contractors", match: ["/contractors"], engine: true, permission: "nav:contractors" },
-      { href: "/competitors", label: "Leaderboard", engine: true, permission: "nav:competitors" },
     ],
   },
   {
@@ -46,6 +44,8 @@ export const GROUPS: NavGroup[] = [
     label: "Organization",
     icon: Users,
     items: [
+      { href: "/territory", label: "Territory Explorer", match: ["/territory"], permission: "nav:territory" },
+      { href: "/claims", label: "My Claims", match: ["/claims"], permission: "nav:claims" },
       { href: "/outcomes", label: "Field Outcomes", permission: "nav:outcomes" },
       { href: "/team", label: "Team", permission: "nav:team" },
       { href: "", label: "CRM", badge: "Soon", disabled: true, permission: "nav:crm" },

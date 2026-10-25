@@ -383,7 +383,6 @@ export default function CompetitorsPage() {
     <div className="space-y-5 pb-12">
       {/* Page Header */}
       <PageHeader
-        eyebrow="Decision 5 · Market Intelligence & Defense"
         title="Competitor War Room"
         description="Monitor rival contractor activity, track encroachment inside your core postal sectors, and launch immediate counter-strike campaigns."
         actions={
