@@ -84,17 +84,18 @@ function NavTo({ href, className, title, onClick, children }: { href: string; cl
 }
 
 export function isActive(path: string, link: NavLink, fromParam?: string | null) {
+  if (!link.href) return false;
   if (link.href === "/") return path === "/";
   if (link.href === "/pipeline" && fromParam === "roof-aging") return false;
   if (link.href === "/roof-aging" && fromParam === "roof-aging" && (path.startsWith("/parcels") || path.startsWith("/property"))) return true;
-  return [link.href, ...(link.match ?? [])].some((p) => path === p || path.startsWith(`${p}/`));
+  return [link.href, ...(link.match ?? [])].filter(Boolean).some((p) => path === p || path.startsWith(`${p}/`));
 }
 
 function groupActive(path: string, group: NavGroup, fromParam?: string | null) {
-  return group.items.some((i) => isActive(path, i, fromParam)) || (group.match ?? []).some((p) => path.startsWith(p));
+  return group.items.some((i) => isActive(path, i, fromParam)) || (group.match ?? []).filter(Boolean).some((p) => path.startsWith(p));
 }
 
-const GROUPS_KEY = "depoii:nav-groups-v4";
+const GROUPS_KEY = "depoii:nav-groups-v5";
 const RAIL_KEY = "depoii:sidebar";
 const DEFAULT_OPEN = Object.fromEntries(GROUPS.map((group) => [group.id, group.id !== "organization"]));
 
