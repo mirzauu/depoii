@@ -20,7 +20,7 @@ export function getPool(): Pool {
     if (!url) throw new Error("DATABASE_URL is not set.");
     globalThis.__depoiiPgPool = new Pool({
       connectionString: url,
-      max: Number(process.env.DEPOII_PG_POOL_MAX || 5),
+      max: Number(process.env.DEPOII_PG_POOL_MAX || 20),
       idleTimeoutMillis: 30_000,
       connectionTimeoutMillis: 10_000,
       ssl: /localhost|127\.0\.0\.1/.test(url) ? undefined : { rejectUnauthorized: false },

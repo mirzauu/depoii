@@ -15,6 +15,19 @@ const num = (q: Q, k: string, dflt: number) => {
 };
 const int = (q: Q, k: string, dflt: number) => Math.trunc(num(q, k, dflt));
 
+const memCache = new Map<string, { exp: number; val: unknown }>();
+
+function withCache<T>(key: string, ttlMs: number, fetcher: () => Promise<T>): Promise<T> {
+  const hit = memCache.get(key);
+  if (hit && hit.exp > Date.now()) {
+    return Promise.resolve(hit.val as T);
+  }
+  return fetcher().then((val) => {
+    memCache.set(key, { exp: Date.now() + ttlMs, val });
+    return val;
+  });
+}
+
 // Ported from app/science/lead_quality.py ROOFING_PERMIT_SQL (alias p).
 export const ROOFING_SQL = `(
   (lower(coalesce(p.raw_description,'')) like '%roof replacement%' or lower(coalesce(p.raw_description,'')) like '%roof repair%'
@@ -142,12 +155,22 @@ export async function permitsSearch(q: Q, user?: { id?: string; orgId?: string; 
 }
 
 export async function permitsStats() {
-  const totals = await queryOne<{ n: string; val: string }>(`select count(*)::text as n, coalesce(sum(p.valuation),0)::text as val from warehouse.normalized_permits p where ${BASE_WHERE}`);
-  const cats = await query<{ name: string; n: string }>(`select coalesce(p.category,'Unspecified') as name, count(*)::text as n from warehouse.normalized_permits p where ${BASE_WHERE} group by 1`);
-  const systems = await query<{ name: string; n: string }>(`select coalesce(nullif(p.probable_roof_system,''),'Unspecified') as name, count(*)::text as n from warehouse.normalized_permits p where ${BASE_WHERE} group by 1`);
-  const jurs = await query<{ name: string; n: string }>(`select coalesce(p.jurisdiction,'Unknown') as name, count(*)::text as n from warehouse.normalized_permits p where ${BASE_WHERE} group by 1`);
-  const toObj = (rows: { name: string; n: string }[]) => Object.fromEntries(rows.map((r) => [r.name, Number(r.n)]));
-  return { total_permits: Number(totals?.n || 0), total_valuation_usd: Number(totals?.val || 0), by_category: toObj(cats), by_roof_system: toObj(systems), by_jurisdiction: toObj(jurs) };
+  return withCache("permitsStats", 5 * 60 * 1000, async () => {
+    const [totals, cats, systems, jurs] = await Promise.all([
+      queryOne<{ n: string; val: string }>(`select count(*)::text as n, coalesce(sum(p.valuation),0)::text as val from warehouse.normalized_permits p where ${BASE_WHERE}`),
+      query<{ name: string; n: string }>(`select coalesce(p.category,'Unspecified') as name, count(*)::text as n from warehouse.normalized_permits p where ${BASE_WHERE} group by 1`),
+      query<{ name: string; n: string }>(`select coalesce(nullif(p.probable_roof_system,''),'Unspecified') as name, count(*)::text as n from warehouse.normalized_permits p where ${BASE_WHERE} group by 1`),
+      query<{ name: string; n: string }>(`select coalesce(p.jurisdiction,'Unknown') as name, count(*)::text as n from warehouse.normalized_permits p where ${BASE_WHERE} group by 1`),
+    ]);
+    const toObj = (rows: { name: string; n: string }[]) => Object.fromEntries(rows.map((r) => [r.name, Number(r.n)]));
+    return {
+      total_permits: Number(totals?.n || 0),
+      total_valuation_usd: Number(totals?.val || 0),
+      by_category: toObj(cats),
+      by_roof_system: toObj(systems),
+      by_jurisdiction: toObj(jurs),
+    };
+  });
 }
 
 export async function prePermitStats(q: Q, user?: { id?: string; orgId?: string; platformRole?: string }) {
@@ -345,8 +368,8 @@ export async function roofAging(q: Q, user?: { id?: string; orgId?: string; plat
 
     if (zips.length > 0) {
       const zClauses = [
-        `substring(coalesce(s.zip_code, p.zip_code, '') from 1 for 5) = ANY($1)`,
-        `(2026 - coalesce(s.year_built, p.year_built, 1995)) >= $2`,
+        `s.zip_code = ANY($1)`,
+        `(2026 - coalesce(s.year_built, 1995)) >= $2`,
       ];
       const zParams: unknown[] = [zips, minAgeParam];
 
@@ -358,15 +381,15 @@ export async function roofAging(q: Q, user?: { id?: string; orgId?: string; plat
 
       if (minValParam > 0) {
         zParams.push(minValParam);
-        zClauses.push(`coalesce(s.estimated_replacement_mid, (coalesce(s.building_sqft, p.footprint_sqft, 25000) * 14.5)::bigint) >= $${zParams.length}`);
+        zClauses.push(`coalesce(s.estimated_replacement_mid, (coalesce(s.building_sqft, 25000) * 14.5)::bigint) >= $${zParams.length}`);
       }
 
       if (tier === "critical") {
-        zClauses.push(`(2026 - coalesce(s.year_built, p.year_built, 1995)) >= 20`);
+        zClauses.push(`(2026 - coalesce(s.year_built, 1995)) >= 20`);
       } else if (tier === "high") {
-        zClauses.push(`(2026 - coalesce(s.year_built, p.year_built, 1995)) between 15 and 19`);
+        zClauses.push(`(2026 - coalesce(s.year_built, 1995)) between 15 and 19`);
       } else if (tier === "approaching") {
-        zClauses.push(`(2026 - coalesce(s.year_built, p.year_built, 1995)) between 10 and 14`);
+        zClauses.push(`(2026 - coalesce(s.year_built, 1995)) between 10 and 14`);
       }
 
       if (search) {
@@ -377,21 +400,30 @@ export async function roofAging(q: Q, user?: { id?: string; orgId?: string; plat
 
       const zWhere = zClauses.join(" and ");
 
-      const sum = await queryOne<{ total: string; pipeline: string; critical: string; warranty: string; approaching: string }>(
-        `SELECT
-           COUNT(*)::text AS total,
-           COALESCE(SUM(coalesce(s.estimated_replacement_mid, (coalesce(s.building_sqft, p.footprint_sqft, 25000) * 14.5)::bigint)), 0)::text AS pipeline,
-           COUNT(CASE WHEN (2026 - coalesce(s.year_built, p.year_built, 1995)) >= 20 THEN 1 END)::text AS critical,
-           COUNT(CASE WHEN (2026 - coalesce(s.year_built, p.year_built, 1995)) BETWEEN 15 AND 19 THEN 1 END)::text AS warranty,
-           COUNT(CASE WHEN (2026 - coalesce(s.year_built, p.year_built, 1995)) BETWEEN 10 AND 14 THEN 1 END)::text AS approaching
-         FROM warehouse.scored_parcel_leads s
-         LEFT JOIN warehouse.parcels p ON p.id = s.parcel_id
-         WHERE ${zWhere}`,
-        zParams
+      const sumKey = `roof_aging_sum_${JSON.stringify(zParams)}_${zWhere}`;
+      const sumPromise = withCache(sumKey, 60 * 1000, () =>
+        queryOne<{ total: string; pipeline: string; critical: string; warranty: string; approaching: string }>(
+          `SELECT
+             COUNT(*)::text AS total,
+             COALESCE(SUM(coalesce(s.estimated_replacement_mid, (coalesce(s.building_sqft, 25000) * 14.5)::bigint)), 0)::text AS pipeline,
+             COUNT(CASE WHEN (2026 - coalesce(s.year_built, 1995)) >= 20 THEN 1 END)::text AS critical,
+             COUNT(CASE WHEN (2026 - coalesce(s.year_built, 1995)) BETWEEN 15 AND 19 THEN 1 END)::text AS warranty,
+             COUNT(CASE WHEN (2026 - coalesce(s.year_built, 1995)) BETWEEN 10 AND 14 THEN 1 END)::text AS approaching
+           FROM warehouse.scored_parcel_leads s
+           WHERE ${zWhere}`,
+          zParams
+        )
       );
 
-      const rows = await query<any>(
-        `SELECT
+      const rowsPromise = query<any>(
+        `WITH top_leads AS (
+           SELECT s.*
+           FROM warehouse.scored_parcel_leads s
+           WHERE ${zWhere}
+           ORDER BY s.exposure_score DESC NULLS LAST, s.estimated_replacement_mid DESC NULLS LAST
+           LIMIT $${zParams.length + 1} OFFSET $${zParams.length + 2}
+         )
+         SELECT
            s.parcel_id as id,
            s.parcel_id as permit_number,
            s.address,
@@ -419,14 +451,13 @@ export async function roofAging(q: Q, user?: { id?: string; orgId?: string; plat
            lc.website_url,
            lc.logo_url,
            (SELECT COUNT(*) FROM warehouse.normalized_permits np WHERE np.parcel_id = s.parcel_id) AS permit_count
-         FROM warehouse.scored_parcel_leads s
+         FROM top_leads s
          LEFT JOIN warehouse.parcels p ON p.id = s.parcel_id
-         LEFT JOIN warehouse.lead_contacts lc ON lc.parcel_id = s.parcel_id
-         WHERE ${zWhere}
-         ORDER BY s.exposure_score DESC NULLS LAST, estimated_replacement_cost_usd DESC NULLS LAST
-         LIMIT $${zParams.length + 1} OFFSET $${zParams.length + 2}`,
+         LEFT JOIN warehouse.lead_contacts lc ON lc.parcel_id = s.parcel_id`,
         [...zParams, limit, offset]
       );
+
+      const [sum, rows] = await Promise.all([sumPromise, rowsPromise]);
 
       const totalPipe = Number(sum?.pipeline || 0);
       const fmtPipe = totalPipe >= 1e6 ? `$${(totalPipe / 1e6).toFixed(2)}M` : `$${Math.trunc(totalPipe).toLocaleString()}`;
@@ -812,18 +843,23 @@ export async function contractors(q: Q) {
   const limit = int(q, "limit", 50), offset = int(q, "offset", 0);
   const hasContact = str(q, "has_contact") === "true";
 
-  const totalsSql = `
-    with base as (
-      select p.contractor_name, coalesce(sum(p.valuation),0) as val
-      from warehouse.normalized_permits p
-      ${hasContact ? "inner join warehouse.canonical_contractors c on lower(c.canonical_name) = lower(p.contractor_name) and ((c.phone_number is not null and trim(c.phone_number) <> '') or (c.website_url is not null and trim(c.website_url) <> ''))" : ""}
-      where ${where}
-      group by p.contractor_name
-      ${having}
-    )
-    select count(*)::text as n, coalesce(sum(val),0)::text as val from base
-  `;
-  const totals = await queryOne<{ n: string; val: string }>(totalsSql, params);
+  const totalsSql = having || hasContact
+    ? `with base as (
+         select p.contractor_name, coalesce(sum(p.valuation),0) as val
+         from warehouse.normalized_permits p
+         ${hasContact ? "inner join warehouse.canonical_contractors c on lower(c.canonical_name) = lower(p.contractor_name) and ((c.phone_number is not null and trim(c.phone_number) <> '') or (c.website_url is not null and trim(c.website_url) <> ''))" : ""}
+         where ${where}
+         group by p.contractor_name
+         ${having}
+       )
+       select count(*)::text as n, coalesce(sum(val),0)::text as val from base`
+    : `select count(distinct p.contractor_name)::text as n, coalesce(sum(p.valuation),0)::text as val
+       from warehouse.normalized_permits p
+       where ${where}`;
+  const totalsKey = `contractors_totals_${JSON.stringify(params)}_${having}`;
+  const totals = await withCache(totalsKey, 3 * 60 * 1000, () =>
+    queryOne<{ n: string; val: string }>(totalsSql, params)
+  );
   const totalVal = Number(totals?.val || 0);
 
   const sortBy = str(q, "sort_by");
@@ -840,10 +876,12 @@ export async function contractors(q: Q) {
               (array_agg(p.jurisdiction order by p.valuation desc))[1] as jurisdiction,
               (array_agg(p.contractor_license))[1] as license
        from warehouse.normalized_permits p
+       ${hasContact ? "inner join warehouse.canonical_contractors c on lower(c.canonical_name) = lower(p.contractor_name) and ((c.phone_number is not null and trim(c.phone_number) <> '') or (c.website_url is not null and trim(c.website_url) <> ''))" : ""}
        where ${where}
        group by p.contractor_name
        ${having}
        ${orderSql}
+       limit $${params.length + 1} offset $${params.length + 2}
      )
      select tc.*,
             (select array_agg(p2.id) from (
@@ -857,9 +895,7 @@ export async function contractors(q: Q) {
             c.rcat_profile_url, c.rcat_license_number, c.rcat_license_type, c.rcat_member_since,
             c.bbb_profile_url, c.bbb_rating, c.bbb_accredited, c.linkedin_company_url
      from top_contractors tc
-     ${hasContact ? "inner" : "left"} join warehouse.canonical_contractors c on lower(c.canonical_name) = lower(tc.name)
-     ${hasContact ? "where ((c.phone_number is not null and trim(c.phone_number) <> '') or (c.website_url is not null and trim(c.website_url) <> ''))" : ""}
-     limit $${params.length + 1} offset $${params.length + 2}`,
+     ${hasContact ? "inner" : "left"} join warehouse.canonical_contractors c on lower(c.canonical_name) = lower(tc.name)`,
     [...params, limit, offset],
   );
   const parse = (v: unknown) => { try { return typeof v === "string" ? JSON.parse(v) : v; } catch { return v; } };
@@ -973,34 +1009,36 @@ export async function contractorProfile(q: Q) {
 }
 
 export async function locations(kind: "hierarchy" | "states" | "cities") {
-  const states = await query<{ state: string; n: string; val: string; cities: string }>(
-    `select upper(state) as state, count(*)::text as n, coalesce(sum(valuation),0)::text as val, count(distinct city)::text as cities from warehouse.normalized_permits group by upper(state) order by count(*) desc`);
-  const cityRows = await query<{ city: string; state: string; n: string; val: string; parcels: string }>(
-    `select p.city, upper(p.state) as state, count(*)::text as n, coalesce(sum(p.valuation),0)::text as val,
-            coalesce(pa.n, '0') as parcels
-     from warehouse.normalized_permits p
-     left join (select lower(city) as c, upper(state) as s, count(*)::text as n from warehouse.parcels group by lower(city), upper(state)) pa
-       on pa.c = lower(p.city) and pa.s = upper(p.state)
-     where coalesce(p.city,'') <> '' group by p.city, upper(p.state), pa.n order by count(*) desc`);
-  const stateNames: Record<string, string> = { TX: "Texas", OH: "Ohio", WA: "Washington", FL: "Florida", NY: "New York", CA: "California", IL: "Illinois", LA: "Louisiana", MA: "Massachusetts", MD: "Maryland" };
-  const cities = cityRows.map((r) => ({
-    city: r.city, state: r.state, permit_count: Number(r.n), total_valuation_usd: Number(r.val),
-    roof_categories: {}, top_contractors: [], parcel_coverage: Number(r.parcels) > 0,
-    parcel_source: Number(r.parcels) > 0 ? "County CAD" : "", storm_coverage: false,
-  }));
-  if (kind === "cities") return cities;
-  const stateList = states.map((s) => ({
-    state_code: s.state, state_name: stateNames[s.state] || s.state, total_permits: Number(s.n),
-    total_valuation_usd: Number(s.val), city_count: Number(s.cities),
-    has_parcel_coverage: cities.some((c) => c.state === s.state && c.parcel_coverage), has_active_storms: false,
-    cities: cities.filter((c) => c.state === s.state),
-  }));
-  if (kind === "states") return stateList;
-  return {
-    total_states: stateList.length, total_cities: cities.length,
-    total_permits: stateList.reduce((s, x) => s + x.total_permits, 0),
-    total_valuation_usd: stateList.reduce((s, x) => s + x.total_valuation_usd, 0), states: stateList,
-  };
+  return withCache(`locations_${kind}`, 10 * 60 * 1000, async () => {
+    const states = await query<{ state: string; n: string; val: string; cities: string }>(
+      `select upper(state) as state, count(*)::text as n, coalesce(sum(valuation),0)::text as val, count(distinct city)::text as cities from warehouse.normalized_permits group by upper(state) order by count(*) desc`);
+    const cityRows = await query<{ city: string; state: string; n: string; val: string; parcels: string }>(
+      `select p.city, upper(p.state) as state, count(*)::text as n, coalesce(sum(p.valuation),0)::text as val,
+              coalesce(pa.n, '0') as parcels
+       from warehouse.normalized_permits p
+       left join (select lower(city) as c, upper(state) as s, count(*)::text as n from warehouse.parcels group by lower(city), upper(state)) pa
+         on pa.c = lower(p.city) and pa.s = upper(p.state)
+       where coalesce(p.city,'') <> '' group by p.city, upper(p.state), pa.n order by count(*) desc`);
+    const stateNames: Record<string, string> = { TX: "Texas", OH: "Ohio", WA: "Washington", FL: "Florida", NY: "New York", CA: "California", IL: "Illinois", LA: "Louisiana", MA: "Massachusetts", MD: "Maryland" };
+    const cities = cityRows.map((r) => ({
+      city: r.city, state: r.state, permit_count: Number(r.n), total_valuation_usd: Number(r.val),
+      roof_categories: {}, top_contractors: [], parcel_coverage: Number(r.parcels) > 0,
+      parcel_source: Number(r.parcels) > 0 ? "County CAD" : "", storm_coverage: false,
+    }));
+    if (kind === "cities") return cities;
+    const stateList = states.map((s) => ({
+      state_code: s.state, state_name: stateNames[s.state] || s.state, total_permits: Number(s.n),
+      total_valuation_usd: Number(s.val), city_count: Number(s.cities),
+      has_parcel_coverage: cities.some((c) => c.state === s.state && c.parcel_coverage), has_active_storms: false,
+      cities: cities.filter((c) => c.state === s.state),
+    }));
+    if (kind === "states") return stateList;
+    return {
+      total_states: stateList.length, total_cities: cities.length,
+      total_permits: stateList.reduce((s, x) => s + x.total_permits, 0),
+      total_valuation_usd: stateList.reduce((s, x) => s + x.total_valuation_usd, 0), states: stateList,
+    };
+  });
 }
 
 function parcelFilters(q: Q, params: unknown[], alias = "p"): string {
