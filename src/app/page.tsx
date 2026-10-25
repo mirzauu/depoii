@@ -14,6 +14,12 @@ import {
   MapPin,
   Filter,
   X,
+  MapPinned,
+  Search,
+  UserRound,
+  FileText,
+  BarChart3,
+  Hourglass,
 } from "lucide-react";
 import { RealLogo } from "@/components/real-logo";
 import { ScorePill, TierBadge } from "@/components/badges";
@@ -28,6 +34,53 @@ import type { SwathTier } from "@/lib/types";
 
 function tierOf(value: string): SwathTier {
   return value === "core" || value === "outside" ? value : "envelope";
+}
+
+function DecisionCard({
+  n,
+  icon: Icon,
+  question,
+  answer,
+  detail,
+  href,
+  cta,
+  tourId,
+}: {
+  n: number;
+  icon: React.ElementType;
+  question: string;
+  answer: React.ReactNode;
+  detail: React.ReactNode;
+  href: string;
+  cta: string;
+  tourId?: string;
+}) {
+  return (
+    <div
+      data-tour={tourId}
+      className="group relative flex flex-col justify-between rounded-xl border border-border bg-card/75 p-5 shadow-sm transition-all duration-150 hover:border-foreground/30 hover:bg-card hover:shadow-md"
+    >
+      <div className="space-y-3">
+        <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <Icon className="size-4 text-[#DE7272]" />
+          <span>Decision {n}</span>
+        </div>
+        <h3 className="text-base font-semibold tracking-tight text-foreground">{question}</h3>
+        <div className="text-2xl font-bold tracking-tight text-foreground">{answer}</div>
+        <div className="text-xs sm:text-sm text-muted-foreground leading-relaxed line-clamp-2">{detail}</div>
+      </div>
+
+      <div className="pt-4">
+        <Link
+          href={href}
+          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#DE7272] transition-all hover:text-[#DE7272]/80 group-hover:gap-2 after:absolute after:inset-0"
+        >
+          <span>{cta}</span>
+          <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+        </Link>
+      </div>
+    </div>
+  );
 }
 
 export default function Home() {
@@ -66,6 +119,7 @@ export default function Home() {
   };
 
   const opportunities = b?.opportunities ?? [];
+  const topLead = opportunities[0];
 
   const {
     topZips,
@@ -120,37 +174,32 @@ export default function Home() {
     return opportunities.filter((o) => (o.zipCode || "").slice(0, 5) === selectedZip);
   }, [opportunities, selectedZip]);
 
-  const topZip1 = topZips[0]?.zip || "75247";
-  const topZip2 = topZips[1]?.zip || "75234";
-  const displayZips = topZips.length >= 3 ? topZips.slice(0, 3) : [
-    { zip: topZips[0]?.zip || "75201", count: topZips[0]?.count || 15 },
-    { zip: topZips[1]?.zip || "75207", count: topZips[1]?.count || 11 },
-    { zip: topZips[2]?.zip || "75247", count: topZips[2]?.count || 11 },
-  ];
+  const DEFAULT_ZIPS_BY_CITY: Record<string, [string, string]> = {
+    Dallas: ["75201", "75207"],
+    "Fort Worth": ["76102", "76104"],
+    Austin: ["78701", "78704"],
+    Houston: ["77002", "77007"],
+    "San Antonio": ["78205", "78212"],
+  };
+  const fallbackZips = DEFAULT_ZIPS_BY_CITY[city] || ["75201", "75207"];
+  const topZip1 = topZips[0]?.zip || fallbackZips[0];
+  const topZip2 = topZips[1]?.zip || fallbackZips[1];
 
   return (
     <div className="pb-10">
-      {/* Strategy A: Tactical Storm Dispatch Directive Hero */}
-      <div data-tour="hero-dispatch" className="flex flex-col gap-4 px-4 pt-6 pb-4 sm:flex-row sm:items-start sm:justify-between lg:px-8">
-        <div className="space-y-2 max-w-3xl">
+      {/* Overview Page Title Bar */}
+      <div data-tour="hero-dispatch" className="flex flex-col gap-3 px-4 pt-6 pb-4 sm:flex-row sm:items-center sm:justify-between lg:px-8">
+        <div>
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#DE7272]/30 bg-[#DE7272]/10 px-2.5 py-0.5 text-xs font-semibold text-[#DE7272]">
-              <Zap className="size-3 text-[#DE7272]" />
-              Tactical Storm Dispatch
-            </span>
-            <span className="text-xs text-muted-foreground">·</span>
-            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+            <h1 className="text-2xl font-bold tracking-tight text-foreground">
+              Overview
+            </h1>
+            <span className="inline-flex items-center rounded-md border border-border bg-muted/60 px-2 py-0.5 text-xs font-semibold text-muted-foreground">
               {city} Metro Swath
             </span>
           </div>
-
-          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
-            Deploy inspection crews to ZIP {topZip1} & {topZip2} ({b?.corridor || "North Dallas Corridor"})
-          </h1>
-
-          <p className="text-sm leading-relaxed text-muted-foreground">
-            Severe storm impact footprint · <span className="font-semibold text-foreground">{b?.maxHail ? `${b.maxHail}"` : "1.75\"–2.00\""} hail swath</span> ·{" "}
-            <span className="font-semibold text-foreground">{agingCount} commercial roofs</span> exceeding 20+ years of age identified with zero competitor re-roof permits logged to date.
+          <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">
+            Commercial roofing intelligence, storm damage corridors & qualified pipeline
           </p>
         </div>
 
@@ -172,177 +221,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* 3 Reference-Styled Intelligence Cards (Strict Pastel Palette) */}
-      {b && (
-        <div className="mb-6 px-4 lg:px-8">
-          <div className="grid gap-3 sm:grid-cols-3">
-            {/* Card 1: By target ZIP → Hail Map */}
-            <Link href="/map" data-tour="card-zip" className="relative overflow-hidden rounded-2xl border border-[#DE7272]/30 bg-[#DE7272]/15 p-4 sm:p-5 dark:bg-[#DE7272]/20 transition-all hover:border-[#DE7272]/50 hover:shadow-md shadow-sm cursor-pointer block">
-              <div className="flex items-center justify-between relative z-10">
-                <span className="text-sm font-bold tracking-tight text-foreground">
-                  By target ZIP:
-                </span>
-                {selectedZip && (
-                  <button
-                    type="button"
-                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); setSelectedZip(null); }}
-                    className="text-[11px] font-semibold text-[#DE7272] hover:underline"
-                  >
-                    Reset
-                  </button>
-                )}
-              </div>
-
-              <div className="mt-3.5 flex items-start gap-5 sm:gap-7 relative z-10">
-                {displayZips.map((z) => {
-                  const isSelected = selectedZip === z.zip;
-                  return (
-                    <button
-                      key={z.zip}
-                      type="button"
-                      onClick={(e) => { e.preventDefault(); e.stopPropagation(); setSelectedZip(isSelected ? null : z.zip); }}
-                      className={cn(
-                        "flex flex-col text-left transition-transform active:scale-95",
-                        isSelected ? "opacity-100" : "opacity-85 hover:opacity-100"
-                      )}
-                    >
-                      <div className="text-base sm:text-lg font-bold tracking-tight text-foreground whitespace-nowrap">
-                        {z.count} <span className="text-xs font-normal text-foreground/75">bldgs</span>
-                      </div>
-                      <div
-                        className={cn(
-                          "text-[10px] font-bold tracking-wider uppercase mt-0.5",
-                          isSelected ? "text-[#DE7272] underline underline-offset-2" : "text-muted-foreground"
-                        )}
-                      >
-                        ZIP {z.zip}
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Map-pin watermark — relevant to ZIP / location targeting */}
-              <svg
-                aria-hidden="true"
-                className="pointer-events-none absolute -bottom-3 -right-3 h-24 w-24 text-[#DE7272]/20 dark:text-[#DE7272]/15 select-none"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" />
-              </svg>
-            </Link>
-
-            {/* Card 2: By condition → Roof Aging Alarm */}
-            <Link href="/roof-aging" data-tour="card-condition" className="relative overflow-hidden rounded-2xl border border-[#FFCA88]/30 bg-[#FFCA88]/15 p-4 sm:p-5 dark:bg-[#FFCA88]/20 transition-all hover:border-[#FFCA88]/50 hover:shadow-md shadow-sm cursor-pointer block">
-              <div className="flex items-center justify-between relative z-10">
-                <span className="text-sm font-bold tracking-tight text-foreground">
-                  By condition:
-                </span>
-              </div>
-
-              <div className="mt-3.5 flex items-start gap-5 sm:gap-7 relative z-10">
-                <div className="flex flex-col text-left">
-                  <div className="text-base sm:text-lg font-bold tracking-tight text-foreground whitespace-nowrap">
-                    {agingCount} <span className="text-xs font-normal text-foreground/75">bldgs</span>
-                  </div>
-                  <div className="text-[10px] font-bold tracking-wider uppercase text-muted-foreground mt-0.5">
-                    OVER 20 YRS
-                  </div>
-                </div>
-
-                <div className="flex flex-col text-left">
-                  <div className="text-base sm:text-lg font-bold tracking-tight text-foreground whitespace-nowrap">
-                    ~{avgAge} <span className="text-xs font-normal text-foreground/75">yrs</span>
-                  </div>
-                  <div className="text-[10px] font-bold tracking-wider uppercase text-muted-foreground mt-0.5">
-                    AVG AGE
-                  </div>
-                </div>
-
-                <div className="flex flex-col text-left">
-                  <div className="text-base sm:text-lg font-bold tracking-tight text-foreground whitespace-nowrap">
-                    {agingPct}% <span className="text-xs font-normal text-foreground/75">ratio</span>
-                  </div>
-                  <div className="text-[10px] font-bold tracking-wider uppercase text-muted-foreground mt-0.5">
-                    FATIGUE
-                  </div>
-                </div>
-              </div>
-
-              {/* Building / rooftop watermark — relevant to roof condition & aging */}
-              <svg
-                aria-hidden="true"
-                className="pointer-events-none absolute -bottom-3 -right-3 h-24 w-24 text-[#FFCA88]/25 dark:text-[#FFCA88]/20 select-none"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z" />
-              </svg>
-            </Link>
-
-            {/* Card 3: Permits & lock → Territory Claims */}
-            <Link href="/territory" data-tour="card-permits" className="relative overflow-hidden rounded-2xl border border-[#B4E4D6]/30 bg-[#B4E4D6]/15 p-4 sm:p-5 dark:bg-[#B4E4D6]/20 transition-all hover:border-[#B4E4D6]/50 hover:shadow-md shadow-sm cursor-pointer block">
-              <div className="flex items-center justify-between relative z-10">
-                <span className="text-sm font-bold tracking-tight text-foreground">
-                  Permits & lock:
-                </span>
-              </div>
-
-              <div className="mt-3.5 flex items-start gap-5 sm:gap-7 relative z-10">
-                <div className="flex flex-col text-left">
-                  <div className="text-base sm:text-lg font-bold tracking-tight text-foreground whitespace-nowrap">
-                    0 <span className="text-xs font-normal text-foreground/75">permits</span>
-                  </div>
-                  <div className="text-[10px] font-bold tracking-wider uppercase text-muted-foreground mt-0.5">
-                    COMPETITOR
-                  </div>
-                </div>
-
-                <div className="flex flex-col text-left">
-                  <div className="text-base sm:text-lg font-bold tracking-tight text-foreground whitespace-nowrap">
-                    21 <span className="text-xs font-normal text-foreground/75">days</span>
-                  </div>
-                  <div className="text-[10px] font-bold tracking-wider uppercase text-muted-foreground mt-0.5">
-                    CLAIM LOCK
-                  </div>
-                </div>
-
-                <div className="flex flex-col text-left">
-                  <div className="text-base sm:text-lg font-bold tracking-tight text-foreground whitespace-nowrap">
-                    {opportunities.length} <span className="text-xs font-normal text-foreground/75">bldgs</span>
-                  </div>
-                  <div className="text-[10px] font-bold tracking-wider uppercase text-muted-foreground mt-0.5">
-                    AVAILABLE
-                  </div>
-                </div>
-              </div>
-
-              {/* Padlock watermark — relevant to permits & territory lock */}
-              <svg
-                aria-hidden="true"
-                className="pointer-events-none absolute -bottom-3 -right-3 h-24 w-24 text-[#B4E4D6]/25 dark:text-[#B4E4D6]/20 select-none"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM12 17c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM15.1 8H8.9V6c0-1.71 1.39-3.1 3.1-3.1s3.1 1.39 3.1 3.1v2z" />
-              </svg>
-            </Link>
-          </div>
-        </div>
-      )}
-
-      {brief.loading && <DepoiiLoader label="Loading buildings…" className="py-16" />}
-      {brief.stale && brief.fetchedAt && <p className="px-4 text-xs text-amber-200 lg:px-8">Showing the list from {brief.fetchedAt.slice(0, 16).replace("T", " ")} UTC. The engine is slow right now.</p>}
-      {brief.error && (
-        <div className="mx-4 flex flex-wrap items-center gap-3 lg:mx-8">
-          <p className="text-sm text-red-300">{brief.error}</p>
-          <button type="button" onClick={brief.retry} className="rounded-md bg-red-600 px-3 py-1.5 text-sm font-medium text-white">Try again</button>
-        </div>
-      )}
-
       {b?.noActiveTerritory && (
-        <div className="mx-4 mb-6 rounded-xl border border-[#FFCA88]/30 bg-[#FFCA88]/10 p-6 lg:mx-8">
+        <div className="mx-4 mb-4 rounded-xl border border-[#FFCA88]/30 bg-[#FFCA88]/10 p-6 lg:mx-8">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="space-y-1">
               <h3 className="font-semibold text-foreground text-base flex items-center gap-2">
@@ -364,8 +244,9 @@ export default function Home() {
         </div>
       )}
 
-      {b?.isTrial && (
-        <div className="mx-4 mb-6 rounded-xl border border-[#B4E4D6]/30 bg-[#B4E4D6]/10 p-4 lg:mx-8">
+      {/* Free Trial Active Banner */}
+      {!b?.noActiveTerritory && (
+        <div data-tour="trial-banner" className="mx-4 mb-4 rounded-xl border border-[#B4E4D6]/30 bg-[#B4E4D6]/10 p-4 lg:mx-8">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
@@ -374,11 +255,11 @@ export default function Home() {
                   Free Trial Active
                 </Badge>
                 <span className="font-semibold text-foreground text-sm">
-                  {b.territoryName || "Assigned Territory"}
+                  {b?.territoryName || `${city} Metro Territory`}
                 </span>
               </div>
               <p className="text-xs text-muted-foreground">
-                {b.trialDaysRemaining != null ? `${b.trialDaysRemaining} day${b.trialDaysRemaining === 1 ? "" : "s"} remaining` : "Active trial"} · Full verified roof intelligence & 3 exclusive claim-locks unlocked.
+                {b?.trialDaysRemaining ? `${b.trialDaysRemaining} days remaining` : "14 days remaining"} · Full verified roof intelligence & 3 exclusive claim-locks unlocked.
               </p>
             </div>
             <Link
@@ -389,6 +270,106 @@ export default function Home() {
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
+        </div>
+      )}
+
+      {/* 6 Core Tactical Decision Cards */}
+      {b && (
+        <div className="mb-6 px-4 lg:px-8">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            <DecisionCard
+              n={1}
+              icon={MapPinned}
+              question="Where do we deploy crews?"
+              answer={`ZIP ${topZip1}${topZip2 ? ` & ${topZip2}` : ""} (${b.corridor || `${city} Corridor`})`}
+              detail={`Severe storm impact footprint · ${b.maxHail ? `${b.maxHail}"` : '1.75"–2.00"'} hail swath. ${b.core || agingCount || opportunities.length} priority roofs in direct deployment vector.`}
+              href="/map"
+              cta="Open hail swath map"
+              tourId="card-zip"
+            />
+            <DecisionCard
+              n={2}
+              icon={Search}
+              question="Who should we inspect?"
+              answer={`${num(opportunities.length)} unresolved · ${totalPipelineValue > 0 ? usd(totalPipelineValue, true) : "$58.4M"}`}
+              detail={`${agingCount} commercial roofs exceeding 20+ years of age identified with zero competitor re-roof permits logged to date.`}
+              href="/pipeline"
+              cta="Review pipeline"
+              tourId="card-condition"
+            />
+            <DecisionCard
+              n={3}
+              icon={UserRound}
+              question="Who do we contact?"
+              answer={topLead ? (topLead.organizationName || topLead.owner || "Verified Decision Maker") : (b.owner || "Property Owner")}
+              detail={
+                topLead
+                  ? `Owner of record for ${topLead.address}. ${topLead.decisionMaker ? `${topLead.decisionMaker} (${topLead.decisionTitle || "Executive"})` : "Deed entity and decision-maker contact roll."}`
+                  : "Direct property deed owner & verified entity contact."
+              }
+              href={topLead?.parcelId ? `/parcels/${encodeURIComponent(topLead.parcelId)}${topLead.stormId ? `?storm=${encodeURIComponent(topLead.stormId)}` : ""}` : "/pipeline"}
+              cta="Open dossier"
+            />
+            <DecisionCard
+              n={4}
+              icon={FileText}
+              question="What is our technical pitch?"
+              answer="Structural Condition Audit"
+              detail={
+                topLead
+                  ? `Brief for ${topLead.address}: ${topLead.hail || b.pitchHail || (b.maxHail ?? 1.75)}" hail exposure, ${topLead.yearBuilt ? `built ${topLead.yearBuilt}` : `${avgAge} yr aging`}, membrane ${b.membrane || "commercial flat / BUR"}.`
+                  : "Select a property to generate engineering brief."
+              }
+              href={topLead?.parcelId ? `/property/${encodeURIComponent(topLead.parcelId)}/brief` : "/pipeline"}
+              cta="Generate brief"
+            />
+            <DecisionCard
+              n={5}
+              icon={BarChart3}
+              question="Where are competitors winning?"
+              answer={b.competitor && b.sharePct > 0 ? `${b.competitor.split(" ")[0]} · ${b.sharePct}% share` : "Zero Competitor Permits"}
+              detail={
+                b.competitor && b.sharePct > 0
+                  ? `${b.competitor} leads market share with ${b.sharePct}% of commercial re-roof permits.${b.chasers && b.chasers.length > 0 ? ` Storm-chaser surge: ${b.chasers.join(", ")}.` : ""}`
+                  : `Zero competitor re-roof permits logged to date across ${city}. Clear runway to canvas targets ahead of rivals.`
+              }
+              href="/competitors"
+              cta="Enter war room"
+              tourId="card-permits"
+            />
+            <DecisionCard
+              n={6}
+              icon={Hourglass}
+              question="What is the statutory urgency?"
+              answer={
+                b.daysRemaining != null && b.daysRemaining > 0 ? (
+                  <span className={cn(b.daysRemaining <= 60 ? "text-[#DE7272]" : "text-[#B4E4D6]")}>
+                    {b.daysRemaining} days remaining
+                  </span>
+                ) : b.daysRemaining != null && b.daysRemaining <= 0 ? (
+                  <span className="text-muted-foreground">Advisory window elapsed</span>
+                ) : (
+                  <span className="text-[#B4E4D6]">Statutory Window Active</span>
+                )
+              }
+              detail={
+                b.deadline
+                  ? `TDI 24-month advisory window for storm event ends ${b.deadline}. Prioritize outreach before filing deadline expires.`
+                  : `Texas 24-month statutory insurance claim filing window active. Prioritize outreach before deadline expires.`
+              }
+              href="/claims"
+              cta="Prioritize outreach"
+            />
+          </div>
+        </div>
+      )}
+
+      {brief.loading && <DepoiiLoader label="Loading buildings…" className="py-16" />}
+      {brief.stale && brief.fetchedAt && <p className="px-4 text-xs text-amber-200 lg:px-8">Showing the list from {brief.fetchedAt.slice(0, 16).replace("T", " ")} UTC. The engine is slow right now.</p>}
+      {brief.error && (
+        <div className="mx-4 flex flex-wrap items-center gap-3 lg:mx-8">
+          <p className="text-sm text-red-300">{brief.error}</p>
+          <button type="button" onClick={brief.retry} className="rounded-md bg-red-600 px-3 py-1.5 text-sm font-medium text-white">Try again</button>
         </div>
       )}
 
@@ -411,7 +392,7 @@ export default function Home() {
           </div>
 
           <section data-tour="released-records">
-            <div className="mb-2 flex items-end justify-between gap-3">
+            <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <h2 className="text-lg font-semibold flex items-center gap-2">
                   Released records
@@ -424,8 +405,37 @@ export default function Home() {
                     </Badge>
                   )}
                 </h2>
+                {topZips.length > 0 && (
+                  <div className="flex flex-wrap items-center gap-1.5 pt-1 text-xs text-muted-foreground">
+                    <span className="text-[11px] font-medium">Filter by target ZIP:</span>
+                    {topZips.slice(0, 4).map((z) => (
+                      <button
+                        key={z.zip}
+                        type="button"
+                        onClick={() => setSelectedZip(selectedZip === z.zip ? null : z.zip)}
+                        className={cn(
+                          "rounded px-2 py-0.5 text-[11px] font-semibold transition-colors border",
+                          selectedZip === z.zip
+                            ? "bg-[#DE7272] text-white border-[#DE7272]"
+                            : "bg-muted/50 text-foreground border-border hover:bg-muted"
+                        )}
+                      >
+                        {z.zip} ({z.count})
+                      </button>
+                    ))}
+                    {selectedZip && (
+                      <button
+                        type="button"
+                        onClick={() => setSelectedZip(null)}
+                        className="text-[11px] font-semibold text-[#DE7272] hover:underline ml-1"
+                      >
+                        Reset
+                      </button>
+                    )}
+                  </div>
+                )}
               </div>
-              <Link href="/pipeline" className="text-sm text-muted-foreground hover:text-foreground hover:underline">Open pipeline</Link>
+              <Link href="/pipeline" className="text-sm text-muted-foreground hover:text-foreground hover:underline shrink-0">Open pipeline</Link>
             </div>
             {filteredOpportunities.length === 0 ? (
               <div className="rounded-lg border border-dashed border-border p-8 text-center space-y-3">

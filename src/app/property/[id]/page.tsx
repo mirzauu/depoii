@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CheckCircle2 } from "lucide-react";
 import { PageHeader } from "@/components/app-shell";
 import { ContractorLink } from "@/components/contractor-link";
@@ -19,15 +19,25 @@ import { roofVulnerability } from "@/lib/engine/vulnerability";
 import { longDate, shortDate, usd } from "@/lib/format";
 import type { FieldOutcome } from "@/lib/types";
 
+import { useRouter } from "next/navigation";
+import { DepoiiLoader } from "@/components/depoii-logo";
+
 export default function PropertyPage() {
   const { id } = useParams<{ id: string }>();
+  const router = useRouter();
   const { opportunities, storm } = useDepoii();
   const o = opportunities.find((x) => x.parcel.id === id);
 
+  useEffect(() => {
+    if (!o && id) {
+      router.replace(`/parcels/${encodeURIComponent(id)}`);
+    }
+  }, [o, id, router]);
+
   if (!o) {
     return (
-      <div className="p-10 text-center text-sm text-muted-foreground">
-        <>No appraisal account {id} is in the Dallas–Fort Worth extract. <Link href="/pipeline" className="underline">Back to pipeline</Link></>
+      <div className="flex flex-col items-center justify-center p-16">
+        <DepoiiLoader label="Loading property record…" />
       </div>
     );
   }

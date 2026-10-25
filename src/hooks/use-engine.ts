@@ -59,9 +59,8 @@ export function useEngine<T>(path: string, params: Record<string, string | numbe
   const key = JSON.stringify([path, params]);
   const [state, setState] = useState<{ key: string; data: T | null; error: string | null; fetchedAt: string | null; stale: boolean }>(() => {
     if (!enabled) return { key: "", data: null, error: null, fetchedAt: null, stale: false };
-    const hit = cache.get(key) || getSessionEntry(key);
+    const hit = cache.get(key);
     if (hit) {
-      if (!cache.has(key)) cache.set(key, hit);
       return { key, data: hit.data as T, error: hit.error, fetchedAt: hit.fetchedAt, stale: hit.stale };
     }
     return { key: "", data: null, error: null, fetchedAt: null, stale: false };

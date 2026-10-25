@@ -36,9 +36,9 @@ export const PAGE_TOURS: Record<string, PageTourDefinition> = {
       {
         element: '[data-tour="hero-dispatch"]',
         popover: {
-          title: "Tactical Storm Dispatch",
+          title: "Market Overview",
           description:
-            "Your daily operational marching order. Depoii correlates radar hail size with commercial roof ages and public permit searches to direct your crews to the highest-yield ZIP codes.",
+            "Executive briefing for your market territory. Depoii correlates radar hail swaths with commercial roof ages and unpermitted property targets into 6 actionable decision cards.",
           side: "bottom",
           align: "start",
         },
@@ -46,9 +46,9 @@ export const PAGE_TOURS: Record<string, PageTourDefinition> = {
       {
         element: '[data-tour="card-zip"]',
         popover: {
-          title: "Target ZIP Intelligence",
+          title: "Decision 1: Crew Deployment",
           description:
-            "Highlights ZIP codes with high building density in the storm path. Click any ZIP to filter the lead table below, or click the card to open the interactive Hail Map.",
+            "Pins the primary storm damage corridor and highest-density ZIP codes where inspection crews can immediately canvas for hail-damaged roofs.",
           side: "bottom",
           align: "start",
         },
@@ -56,9 +56,9 @@ export const PAGE_TOURS: Record<string, PageTourDefinition> = {
       {
         element: '[data-tour="card-condition"]',
         popover: {
-          title: "Roof Aging & Fatigue",
+          title: "Decision 2: Inspection Pipeline",
           description:
-            "Identifies buildings with roofs over 20+ years old. Aged roofs under hail impact represent your highest-probability insurance replacement targets. Click to open Roof Aging.",
+            "Ranks commercial buildings by hail size, appraisal area, and roof age to calculate your total unpermitted pipeline value.",
           side: "bottom",
           align: "center",
         },
@@ -66,9 +66,9 @@ export const PAGE_TOURS: Record<string, PageTourDefinition> = {
       {
         element: '[data-tour="card-permits"]',
         popover: {
-          title: "Permits & Exclusive Lock",
+          title: "Decision 5: Competitor Radar",
           description:
-            "Zero competitor permits means a clear runway with no rivals canvassing yet. Click to claim territory and secure a 21-day exclusive lock on these buildings.",
+            "Tracks rival contractor permit velocity, market share, and detects out-of-state storm chaser surges in your territory.",
           side: "bottom",
           align: "end",
         },
