@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
-import { Briefcase, ChevronDown, ChevronUp, ChevronsLeft, ChevronsRight, House, Info, Layers, Search, Shield, Users, type LucideIcon } from "lucide-react";
+import { Briefcase, Building2, ChevronDown, ChevronUp, ChevronsLeft, ChevronsRight, House, Info, Layers, Search, Shield, type LucideIcon } from "lucide-react";
 import { cn } from "cn";
 import { DepoiiAiMark, DepoiiMark } from "./depoii-logo";
 import { useMe } from "@/hooks/use-me";
@@ -42,7 +42,7 @@ export const GROUPS: NavGroup[] = [
   {
     id: "organization",
     label: "Organization",
-    icon: Users,
+    icon: Building2,
     items: [
       { href: "/territory", label: "Territory Explorer", match: ["/territory"], permission: "nav:territory" },
       { href: "/claims", label: "My Claims", match: ["/claims"], permission: "nav:claims" },
