@@ -5,7 +5,6 @@ import {
   CircleHelp,
   Compass,
   Mail,
-  Send,
   CheckCircle2,
   ExternalLink,
 } from "lucide-react";
@@ -20,6 +19,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { DepoiiMark } from "@/components/depoii-logo";
 
 interface PageTourButtonProps {
   label?: string;
@@ -40,12 +40,13 @@ export function PageTourButton({
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const [isHelpOpen, setIsHelpOpen] = useState(false);
 
-  // Feedback form state
-  const [category, setCategory] = useState<"Feature Request" | "Bug Report" | "General">("Feature Request");
+  // Multi-step feedback state (Steps 1 to 5 matching Upwork reference)
+  const [feedbackStep, setFeedbackStep] = useState<1 | 2 | 3 | 4 | 5>(1);
+  const [rating, setRating] = useState<string>("");
+  const [category, setCategory] = useState<string>("Idea");
   const [feedbackText, setFeedbackText] = useState("");
   const [feedbackEmail, setFeedbackEmail] = useState("");
   const [feedbackSubmitting, setFeedbackSubmitting] = useState(false);
-  const [feedbackSent, setFeedbackSent] = useState(false);
 
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -74,8 +75,16 @@ export function PageTourButton({
     startTour(tourKey);
   };
 
-  const handleSendFeedback = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const openFeedbackModal = () => {
+    setIsMenuOpen(false);
+    setFeedbackStep(1);
+    setRating("");
+    setCategory("Idea");
+    setFeedbackText("");
+    setIsFeedbackOpen(true);
+  };
+
+  const handleSendFeedback = async () => {
     if (!feedbackText.trim() || feedbackSubmitting) return;
 
     setFeedbackSubmitting(true);
@@ -84,24 +93,15 @@ export function PageTourButton({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          category,
+          rating: rating || "Not specified",
+          category: category || "General",
           message: feedbackText.trim(),
           email: feedbackEmail.trim() || "anonymous@depoii.com",
         }),
       });
-      setFeedbackSent(true);
-      setTimeout(() => {
-        setIsFeedbackOpen(false);
-        setFeedbackSent(false);
-        setFeedbackText("");
-      }, 1500);
+      setFeedbackStep(5);
     } catch {
-      setFeedbackSent(true);
-      setTimeout(() => {
-        setIsFeedbackOpen(false);
-        setFeedbackSent(false);
-        setFeedbackText("");
-      }, 1500);
+      setFeedbackStep(5);
     } finally {
       setFeedbackSubmitting(false);
     }
@@ -137,7 +137,7 @@ export function PageTourButton({
             role="menu"
             className="absolute right-0 top-full z-50 mt-2 w-72 rounded-xl border border-border bg-popover/95 p-1.5 text-popover-foreground shadow-xl backdrop-blur-md animate-in fade-in-0 zoom-in-95"
           >
-            <div className="px-2.5 py-1.5 text-[10px] font-bold tracking-wider text-muted-foreground uppercase">
+            <div className="px-3 py-1.5 text-[10px] font-bold tracking-wider text-muted-foreground uppercase">
               Help & Resources
             </div>
 
@@ -168,10 +168,7 @@ export function PageTourButton({
             <button
               type="button"
               role="menuitem"
-              onClick={() => {
-                setIsMenuOpen(false);
-                setIsFeedbackOpen(true);
-              }}
+              onClick={openFeedbackModal}
               className="flex w-full flex-col items-start rounded-lg px-3 py-2 text-left text-sm transition-colors hover:bg-muted"
             >
               <div className="font-medium leading-none">Feedback</div>
@@ -199,85 +196,205 @@ export function PageTourButton({
         )}
       </div>
 
-      {/* Feedback Dialog */}
+      {/* Multi-step Feedback Dialog matching Upwork reference */}
       <Dialog open={isFeedbackOpen} onOpenChange={setIsFeedbackOpen}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>Send Feedback</DialogTitle>
-            <DialogDescription>
-              We read every message. Share what’s working, what feels clunky, or features you’d love to see.
-            </DialogDescription>
-          </DialogHeader>
-
-          {feedbackSent ? (
-            <div className="flex flex-col items-center justify-center py-6 text-center">
-              <CheckCircle2 className="size-10 text-emerald-500" />
-              <p className="mt-2 text-sm font-semibold">Thank you for your feedback!</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                Your thoughts help us sharpen Depoii for roofing teams.
-              </p>
+        <DialogContent className="sm:max-w-xl! p-6 sm:p-8 rounded-xl bg-background border border-border shadow-2xl">
+          {/* Centered Depoii Brand Header */}
+          <div className="flex flex-col items-center justify-center pt-1 pb-3">
+            <div className="flex items-center gap-2">
+              <DepoiiMark className="size-6 text-foreground" />
+              <span className="text-xl font-bold tracking-tight text-foreground">Depoii</span>
             </div>
-          ) : (
-            <form onSubmit={handleSendFeedback} className="space-y-3.5">
-              <div className="flex gap-1.5">
-                {(["Feature Request", "Bug Report", "General"] as const).map((cat) => (
+          </div>
+
+          {/* Step 1: Welcome & Overview (Image 1) */}
+          {feedbackStep === 1 && (
+            <div className="py-2 text-center">
+              <h2 className="text-base sm:text-lg font-semibold text-emerald-600 dark:text-emerald-400 leading-snug">
+                Have an idea, suggestion, or general feedback? Share it here!
+              </h2>
+              <p className="mt-3 text-xs sm:text-[13px] text-muted-foreground leading-relaxed max-w-md mx-auto">
+                We are unable to respond to support requests made through this form. Please reach out to our{" "}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsFeedbackOpen(false);
+                    setIsHelpOpen(true);
+                  }}
+                  className="text-emerald-600 dark:text-emerald-400 font-medium underline underline-offset-2 hover:opacity-80"
+                >
+                  support team
+                </button>{" "}
+                if you need assistance.
+              </p>
+
+              <div className="mt-7 flex justify-end">
+                <button
+                  type="button"
+                  onClick={() => setFeedbackStep(2)}
+                  className="rounded bg-[#108a00] hover:bg-[#14a800] text-white px-5 py-1.5 text-xs font-semibold shadow-sm transition-colors"
+                >
+                  Start
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Step 2: Rate Experience (Image 2) */}
+          {feedbackStep === 2 && (
+            <div className="py-2">
+              <p className="text-xs sm:text-sm font-medium text-foreground">
+                How would you rate your experience with Depoii today?
+              </p>
+
+              <div className="mt-4 grid grid-cols-2 sm:grid-cols-5 gap-2">
+                {["Very Poor", "Poor", "Fair", "Good", "Very Good"].map((option) => (
                   <button
-                    key={cat}
+                    key={option}
                     type="button"
-                    onClick={() => setCategory(cat)}
+                    onClick={() => setRating(option)}
                     className={cn(
-                      "rounded-full px-2.5 py-1 text-xs font-medium transition-colors",
-                      category === cat
-                        ? "bg-foreground text-background"
-                        : "border border-border bg-muted/50 text-muted-foreground hover:text-foreground"
+                      "rounded-md border p-3 text-center text-xs font-medium transition-all select-none",
+                      rating === option
+                        ? "border-emerald-600 bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 ring-2 ring-emerald-500/40"
+                        : "border-border bg-muted/40 hover:bg-muted text-muted-foreground hover:text-foreground"
                     )}
                   >
-                    {cat}
+                    {option}
                   </button>
                 ))}
               </div>
 
-              <div>
+              <div className="mt-8 flex items-center justify-between">
+                <button
+                  type="button"
+                  onClick={() => setFeedbackStep(1)}
+                  className="rounded bg-[#108a00] hover:bg-[#14a800] text-white px-4 py-1.5 text-xs font-semibold shadow-sm transition-colors"
+                >
+                  Back
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setFeedbackStep(3)}
+                  disabled={!rating}
+                  className="rounded bg-[#108a00] hover:bg-[#14a800] text-white px-5 py-1.5 text-xs font-semibold shadow-sm transition-colors disabled:opacity-40"
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Step 3: Type of Feedback (Image 3) */}
+          {feedbackStep === 3 && (
+            <div className="py-2">
+              <p className="text-xs sm:text-sm font-medium text-foreground">
+                What type of feedback would you like to share?
+              </p>
+
+              <div className="mt-4">
+                <select
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  className="w-full sm:w-64 h-9 rounded-md border border-border bg-background px-3 text-xs text-foreground focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
+                >
+                  <option value="Idea">Idea</option>
+                  <option value="Issue / Problem">Issue / Problem</option>
+                  <option value="General Feedback">General Feedback</option>
+                  <option value="Compliment">Compliment</option>
+                </select>
+              </div>
+
+              <div className="mt-8 flex items-center justify-between">
+                <button
+                  type="button"
+                  onClick={() => setFeedbackStep(2)}
+                  className="rounded bg-[#108a00] hover:bg-[#14a800] text-white px-4 py-1.5 text-xs font-semibold shadow-sm transition-colors"
+                >
+                  Back
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setFeedbackStep(4)}
+                  className="rounded bg-[#108a00] hover:bg-[#14a800] text-white px-5 py-1.5 text-xs font-semibold shadow-sm transition-colors"
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Step 4: Share with us Textarea (Image 4) */}
+          {feedbackStep === 4 && (
+            <div className="py-2">
+              <p className="text-xs sm:text-sm font-medium text-foreground">
+                What would you like to share with us?
+              </p>
+
+              <div className="mt-3 space-y-2.5">
                 <textarea
-                  required
                   rows={4}
                   value={feedbackText}
                   onChange={(e) => setFeedbackText(e.target.value)}
-                  placeholder="Tell us what you think..."
-                  className="w-full rounded-lg border border-border bg-background p-2.5 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                  placeholder="Type your feedback here..."
+                  className="w-full rounded-md border border-border bg-background p-3 text-xs text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
                 />
-              </div>
-
-              <div>
                 <input
                   type="email"
                   value={feedbackEmail}
                   onChange={(e) => setFeedbackEmail(e.target.value)}
-                  placeholder="Your email (optional, if you'd like a response)"
-                  className="h-8 w-full rounded-lg border border-border bg-background px-2.5 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                  placeholder="Your email (optional, if you'd like a direct reply)"
+                  className="w-full h-8 rounded-md border border-border bg-background px-3 text-xs text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
                 />
               </div>
 
-              <DialogFooter>
-                <Button
+              <div className="mt-6 flex items-center justify-between">
+                <button
                   type="button"
-                  variant="outline"
-                  size="sm"
+                  onClick={() => setFeedbackStep(3)}
+                  className="rounded bg-[#108a00] hover:bg-[#14a800] text-white px-4 py-1.5 text-xs font-semibold shadow-sm transition-colors"
+                >
+                  Back
+                </button>
+                <button
+                  type="button"
+                  onClick={handleSendFeedback}
+                  disabled={!feedbackText.trim() || feedbackSubmitting}
+                  className="rounded bg-[#108a00] hover:bg-[#14a800] text-white px-5 py-1.5 text-xs font-semibold shadow-sm transition-colors disabled:opacity-40"
+                >
+                  {feedbackSubmitting ? "Submitting..." : "Submit"}
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Step 5: Thank You Screen */}
+          {feedbackStep === 5 && (
+            <div className="py-6 text-center">
+              <CheckCircle2 className="size-10 text-emerald-500 mx-auto" />
+              <h3 className="mt-3 text-base font-semibold text-foreground">
+                Thank you for sharing your feedback with us!
+              </h3>
+              <p className="mt-1 text-xs text-muted-foreground max-w-sm mx-auto">
+                Your response has been sent to our team at mirzamailbox0@gmail.com and helps us sharpen Depoii.
+              </p>
+              <div className="mt-6">
+                <button
+                  type="button"
                   onClick={() => setIsFeedbackOpen(false)}
+                  className="rounded bg-[#108a00] hover:bg-[#14a800] text-white px-6 py-1.5 text-xs font-semibold shadow-sm transition-colors"
                 >
-                  Cancel
-                </Button>
-                <Button
-                  type="submit"
-                  size="sm"
-                  disabled={feedbackSubmitting || !feedbackText.trim()}
-                  className="gap-1.5 bg-foreground text-background hover:bg-foreground/90"
-                >
-                  <Send className="size-3.5" />
-                  {feedbackSubmitting ? "Sending..." : "Submit Feedback"}
-                </Button>
-              </DialogFooter>
-            </form>
+                  Done
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Subtle footer */}
+          {feedbackStep < 5 && (
+            <div className="text-center text-[10px] text-muted-foreground/60 pt-3">
+              Powered by Depoii Intelligence
+            </div>
           )}
         </DialogContent>
       </Dialog>
