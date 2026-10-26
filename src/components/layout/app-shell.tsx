@@ -90,7 +90,7 @@ export function CitySelect({ className }: { className?: string }) {
         <ChevronDown className="size-3.5 shrink-0 opacity-60" />
       </button>
       {open && (
-        <div className="absolute top-full right-0 z-50 mt-1 w-64 max-w-[90vw] rounded-md border border-border bg-background p-2 shadow-lg">
+        <div className="absolute top-full left-0 z-50 mt-1 w-64 max-w-[90vw] rounded-md border border-border bg-background p-2 shadow-lg">
           <label className="flex items-center gap-2 rounded-md border border-border px-2">
             <Search className="size-3.5 shrink-0" />
             <span className="sr-only">Search cities and counties</span>
@@ -294,11 +294,13 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 <DepoiiMark className="size-7 text-foreground" />
                 <span className="font-bold">Depoii</span>
               </Link>
-              <CitySelect className="ml-auto w-full max-w-xs" />
-              <HeaderTourButton />
-              <ThemeToggle />
-              <div className="lg:hidden">
-                <AccountMenu />
+              <CitySelect className="w-full max-w-xs" />
+              <div className="ml-auto flex items-center gap-3">
+                <HeaderTourButton />
+                <ThemeToggle />
+                <div className="lg:hidden">
+                  <AccountMenu />
+                </div>
               </div>
             </div>
           <nav className="flex gap-1 overflow-x-auto px-3 pb-2 lg:hidden">

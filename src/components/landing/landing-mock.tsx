@@ -153,7 +153,7 @@ export function LandingMock({ scene }: { scene: TourScene }) {
               <DepoiiMark className="size-5" />
               <span className="text-[13px] font-bold tracking-tight">Depoii</span>
             </div>
-            <div className={`relative ml-auto w-full max-w-xs rounded-md ${hlClass(highlight, "city")}`}>
+            <div className={`relative w-full max-w-xs rounded-md ${hlClass(highlight, "city")}`}>
               <button
                 type="button"
                 aria-expanded={cityOpen}
@@ -173,7 +173,7 @@ export function LandingMock({ scene }: { scene: TourScene }) {
                 <ChevronDown className="size-3.5 shrink-0 opacity-60" />
               </button>
               {cityOpen && (
-                <div className="absolute top-full right-0 z-30 mt-1 w-[min(20rem,calc(100vw-2rem))] max-lg:left-0 max-lg:right-0 max-lg:w-auto rounded-md border border-border bg-background p-2 shadow-lg">
+                <div className="absolute top-full left-0 z-30 mt-1 w-[min(20rem,calc(100vw-2rem))] max-lg:left-0 max-lg:right-0 max-lg:w-auto rounded-md border border-border bg-background p-2 shadow-lg">
                   <label className="flex items-center gap-2 rounded-md border border-border px-2">
                     <Search className="size-3.5 shrink-0 text-muted-foreground" />
                     <input
@@ -260,7 +260,7 @@ export function LandingMock({ scene }: { scene: TourScene }) {
               type="button"
               onClick={() => setDarkMock((v) => !v)}
               aria-label={darkMock ? "Switch mock to light mode" : "Switch mock to dark mode"}
-              className="inline-flex size-8 shrink-0 items-center justify-center rounded-md border border-border bg-background text-muted-foreground hover:text-foreground"
+              className="ml-auto inline-flex size-8 shrink-0 items-center justify-center rounded-md border border-border bg-background text-muted-foreground hover:text-foreground"
             >
               {darkMock ? <Sun className="size-4" /> : <Moon className="size-4" />}
             </button>
