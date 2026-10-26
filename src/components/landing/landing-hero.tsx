@@ -103,7 +103,7 @@ export function LandingHero() {
         setScene(next);
         setDock((prev) => (prev === next.dock ? prev : next.dock));
       } else if (!tourDone) {
-        setDock(0);
+        setDock(-1);
       }
     };
 

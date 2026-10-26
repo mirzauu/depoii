@@ -163,13 +163,14 @@ export function AccountMenu({ collapsed = false }: { collapsed?: boolean }) {
   );
 }
 
-export function Sidebar() {
+export function Sidebar({ defaultCollapsed }: { defaultCollapsed?: boolean } = {}) {
   const livePath = usePathname();
   const preview = useContext(SidebarPreview);
   const path = preview?.path ?? livePath;
   const me = useMe();
   const adminLink = { href: "/admin", label: "Super Admin", match: ["/admin"] };
-  const [collapsed, setCollapsed] = useState(false);
+  const initialCollapsed = defaultCollapsed ?? (preview ? true : false);
+  const [collapsed, setCollapsed] = useState(initialCollapsed);
   const [open, setOpen] = useState<Record<string, boolean>>(DEFAULT_OPEN);
   const [logoOn, setLogoOn] = useState(false);
   const [navReady, setNavReady] = useState(false);
@@ -186,12 +187,21 @@ export function Sidebar() {
 
   useEffect(() => {
     setNavReady(true);
-    setCollapsed(localStorage.getItem(RAIL_KEY) === "collapsed");
+    if (!preview) {
+      const saved = localStorage.getItem(RAIL_KEY);
+      if (saved) {
+        setCollapsed(saved === "collapsed");
+      } else if (defaultCollapsed !== undefined) {
+        setCollapsed(defaultCollapsed);
+      }
+    } else {
+      setCollapsed(defaultCollapsed !== undefined ? defaultCollapsed : true);
+    }
     try {
       const saved = JSON.parse(localStorage.getItem(GROUPS_KEY) || "null");
       if (saved && typeof saved === "object") setOpen((prev) => ({ ...prev, ...saved }));
     } catch {}
-  }, []);
+  }, [preview, defaultCollapsed]);
 
   useEffect(() => {
     const current = GROUPS.find((g) => groupActive(path, g, fromParam));
@@ -199,17 +209,23 @@ export function Sidebar() {
   }, [path, fromParam]);
 
   useEffect(() => {
-    localStorage.setItem(GROUPS_KEY, JSON.stringify(open));
-  }, [open]);
+    if (!preview) {
+      localStorage.setItem(GROUPS_KEY, JSON.stringify(open));
+    }
+  }, [open, preview]);
 
   const setRail = (value: boolean) => {
     setCollapsed(value);
-    localStorage.setItem(RAIL_KEY, value ? "collapsed" : "open");
+    if (!preview) {
+      localStorage.setItem(RAIL_KEY, value ? "collapsed" : "open");
+    }
   };
 
   const onGroup = (id: string) => {
     if (collapsed) {
-      setRail(false);
+      if (!preview) {
+        setRail(false);
+      }
       setOpen((o) => ({ ...o, [id]: true }));
     } else {
       setOpen((o) => ({ ...o, [id]: !o[id] }));

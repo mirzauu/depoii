@@ -16,6 +16,15 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://depoii.com/welcome",
   },
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico" },
+    ],
+    apple: [
+      { url: "/apple-icon", sizes: "180x180", type: "image/png" },
+    ],
+  },
   openGraph: {
     title: "Depoii | Commercial Intelligence — Know When, Where, and Why",
     description:

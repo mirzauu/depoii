@@ -24,7 +24,7 @@ export type TourStop = {
   scene: TourScene;
 };
 
-/** Four full-viewport stops: mock docks opposite the caption each time. */
+/** Four full-viewport stops: mock stays docked on the left, caption on the right. */
 export const TOUR_STOPS: TourStop[] = [
   {
     id: "tour-1",
@@ -67,7 +67,7 @@ export const TOUR_STOPS: TourStop[] = [
       city: "Dallas",
       openRecord: false,
       highlight: "map",
-      dock: 1,
+      dock: -1,
     },
   },
   {
@@ -81,7 +81,7 @@ export const TOUR_STOPS: TourStop[] = [
       city: "Dallas",
       openRecord: false,
       highlight: "aging",
-      dock: 1,
+      dock: -1,
     },
   },
 ];

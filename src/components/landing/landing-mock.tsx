@@ -144,7 +144,7 @@ export function LandingMock({ scene }: { scene: TourScene }) {
     <div className="flex h-full min-h-0 w-full flex-col">
       <div className="flex min-h-0 flex-1">
         <div className="hidden h-full lg:contents">
-          <Sidebar />
+          <Sidebar defaultCollapsed={true} />
         </div>
         <div className={`flex min-w-0 flex-1 flex-col ${isMap ? "text-sm" : "text-[13px]"}`}>
         <header className="border-b border-border bg-background">
