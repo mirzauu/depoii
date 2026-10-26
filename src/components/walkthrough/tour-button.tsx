@@ -3,10 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
   CircleHelp,
-  Compass,
-  Mail,
   CheckCircle2,
-  ExternalLink,
 } from "lucide-react";
 import { cn } from "cn";
 import { useWalkthrough } from "./walkthrough-provider";
@@ -20,6 +17,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { DepoiiMark } from "@/components/depoii-logo";
+import { useMe } from "@/hooks/use-me";
 
 interface PageTourButtonProps {
   label?: string;
@@ -35,6 +33,7 @@ export function PageTourButton({
   className,
 }: PageTourButtonProps) {
   const { startTour, hasTour, currentTour, isTourActive, hasCompletedCurrentTour } = useWalkthrough();
+  const me = useMe();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
@@ -81,6 +80,7 @@ export function PageTourButton({
     setRating("");
     setCategory("Idea");
     setFeedbackText("");
+    setFeedbackEmail(me?.email || "");
     setIsFeedbackOpen(true);
   };
 
@@ -96,7 +96,13 @@ export function PageTourButton({
           rating: rating || "Not specified",
           category: category || "General",
           message: feedbackText.trim(),
-          email: feedbackEmail.trim() || "anonymous@depoii.com",
+          email: feedbackEmail.trim() || me?.email || "anonymous@depoii.com",
+          userName: me?.name || "Anonymous User",
+          userEmail: me?.email || "",
+          orgName: me?.orgName || "No organization",
+          orgId: me?.orgId || "",
+          userRole: me?.role || "",
+          platformRole: me?.platformRole || "",
         }),
       });
       setFeedbackStep(5);
@@ -343,7 +349,7 @@ export function PageTourButton({
                   type="email"
                   value={feedbackEmail}
                   onChange={(e) => setFeedbackEmail(e.target.value)}
-                  placeholder="Your email (optional, if you'd like a direct reply)"
+                  placeholder={me?.email ? `Your email (${me.email})` : "Your email (optional, if you'd like a direct reply)"}
                   className="w-full h-8 rounded-md border border-border bg-background px-3 text-xs text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
                 />
               </div>
@@ -399,7 +405,7 @@ export function PageTourButton({
         </DialogContent>
       </Dialog>
 
-      {/* Help & Support Dialog */}
+      {/* Help & Support Dialog (without icons inside the window) */}
       <Dialog open={isHelpOpen} onOpenChange={setIsHelpOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
@@ -413,10 +419,7 @@ export function PageTourButton({
             {/* Quick Tour Option */}
             <div className="rounded-lg border border-border bg-muted/30 p-3">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Compass className="size-4 text-amber-500" />
-                  <span className="text-xs font-semibold">Interactive Walkthrough</span>
-                </div>
+                <span className="text-xs font-semibold text-foreground">Interactive Walkthrough</span>
                 <Button
                   size="sm"
                   variant="outline"
@@ -437,9 +440,8 @@ export function PageTourButton({
 
             {/* Direct Support Contact */}
             <div className="rounded-lg border border-border bg-muted/30 p-3">
-              <div className="flex items-center gap-2 text-xs font-semibold">
-                <Mail className="size-4 text-sky-500" />
-                <span>Contact Engineering & Data Team</span>
+              <div className="text-xs font-semibold text-foreground">
+                Contact Engineering & Data Team
               </div>
               <p className="mt-1 text-[11px] text-muted-foreground">
                 Need help with appraisal parcels, permit searches, or territory assignments?
@@ -448,10 +450,9 @@ export function PageTourButton({
                 <span className="text-xs font-mono text-foreground">hello@depoii.com</span>
                 <a
                   href="mailto:hello@depoii.com?subject=Depoii%20Support%20Inquiry"
-                  className="inline-flex items-center gap-1 rounded-md border border-border bg-background px-2.5 py-1 text-xs font-medium text-foreground hover:bg-muted"
+                  className="inline-flex items-center rounded-md border border-border bg-background px-2.5 py-1 text-xs font-medium text-foreground hover:bg-muted"
                 >
                   Email Us
-                  <ExternalLink className="size-3" />
                 </a>
               </div>
             </div>

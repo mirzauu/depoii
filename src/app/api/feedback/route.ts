@@ -1,4 +1,5 @@
 import { sendMail, smtpConfigured } from "@/lib/mail";
+import { getSessionUser } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
@@ -14,23 +15,40 @@ export async function POST(req: Request) {
       return Response.json({ error: "Feedback message cannot be empty." }, { status: 400 });
     }
 
-    console.log(`[feedback] Received (${category} / ${rating}) from ${email}:`, message);
+    const sessionUser = await getSessionUser();
+    const orgName = sessionUser?.orgName || body.orgName || "No Organization";
+    const orgId = sessionUser?.orgId || body.orgId || "N/A";
+    const userName = sessionUser?.name || body.userName || "Anonymous User";
+    const userEmail = sessionUser?.email || body.userEmail || email;
+    const userRole = sessionUser?.role || body.userRole || "User";
+    const platformRole = sessionUser?.platformRole || body.platformRole || "user";
+
+    console.log(`[feedback] Received (${category} / ${rating}) from ${userName} (${orgName}):`, message);
 
     const recipient = "mirzamailbox0@gmail.com";
     if (smtpConfigured()) {
       try {
         await sendMail({
           to: recipient,
-          replyTo: email.includes("@") ? email : undefined,
+          replyTo: userEmail.includes("@") ? userEmail : undefined,
           fromName: "Depoii Feedback",
-          subject: `[Depoii Feedback] ${category} - ${rating} from ${email}`,
+          subject: `[Depoii Feedback] ${orgName} - ${userName} (${category} / ${rating})`,
           text: [
             "New Depoii User Feedback",
             "===========================================",
-            `Rating:    ${rating}`,
-            `Category:  ${category}`,
-            `From:      ${email}`,
-            `Date:      ${new Date().toLocaleString("en-US", { timeZone: "America/Chicago" })} CT`,
+            "ORGANIZATION & USER DETAILS",
+            "-------------------------------------------",
+            `Organization:    ${orgName} (ID: ${orgId})`,
+            `User Name:       ${userName}`,
+            `Account Email:   ${userEmail}`,
+            `Role / Platform: ${userRole} / ${platformRole}`,
+            `Entered Email:   ${email}`,
+            `Submitted At:    ${new Date().toLocaleString("en-US", { timeZone: "America/Chicago" })} CT`,
+            "",
+            "FEEDBACK DETAILS",
+            "-------------------------------------------",
+            `Rating:          ${rating}`,
+            `Category:        ${category}`,
             "",
             "Message:",
             "-------------------------------------------",
@@ -42,7 +60,15 @@ export async function POST(req: Request) {
         console.error("[feedback] sendMail failed", mailErr);
       }
     } else {
-      console.warn(`[feedback] SMTP not configured; feedback logged for ${recipient}:`, { rating, category, email, message });
+      console.warn(`[feedback] SMTP not configured; feedback logged for ${recipient}:`, {
+        orgName,
+        orgId,
+        userName,
+        userEmail,
+        rating,
+        category,
+        message,
+      });
     }
 
     return Response.json({ ok: true });
