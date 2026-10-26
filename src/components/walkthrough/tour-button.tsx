@@ -4,8 +4,6 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   CircleHelp,
   Compass,
-  MessageSquareQuote,
-  LifeBuoy,
   Mail,
   Send,
   CheckCircle2,
@@ -149,26 +147,21 @@ export function PageTourButton({
               role="menuitem"
               onClick={handleStartTour}
               disabled={isTourActive || (!hasTour && !tourKey)}
-              className="flex w-full items-start gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-45"
+              className="flex w-full flex-col items-start rounded-lg px-3 py-2 text-left text-sm transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-45"
             >
-              <div className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-md bg-amber-500/10 text-amber-500">
-                <Compass className="size-3.5" />
+              <div className="flex w-full items-center justify-between font-medium leading-none">
+                <span>Page Tour</span>
+                {!hasCompletedCurrentTour && hasTour && (
+                  <span className="rounded bg-amber-400/20 px-1.5 py-0.5 text-[9px] font-bold text-amber-500 uppercase tracking-wider">
+                    New
+                  </span>
+                )}
               </div>
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-1.5 font-medium leading-none">
-                  <span>Page Tour</span>
-                  {!hasCompletedCurrentTour && hasTour && (
-                    <span className="rounded bg-amber-400/20 px-1 py-0.5 text-[9px] font-bold text-amber-500 uppercase">
-                      New
-                    </span>
-                  )}
-                </div>
-                <p className="mt-1 line-clamp-2 text-[11px] leading-snug text-muted-foreground">
-                  {currentTour
-                    ? `Interactive walkthrough of ${currentTour.title}`
-                    : "Interactive walkthrough of this view"}
-                </p>
-              </div>
+              <p className="mt-1 line-clamp-2 text-[11px] leading-snug text-muted-foreground">
+                {currentTour
+                  ? `Interactive walkthrough of ${currentTour.title}`
+                  : "Interactive walkthrough of this view"}
+              </p>
             </button>
 
             {/* 2. Feedback */}
@@ -179,17 +172,12 @@ export function PageTourButton({
                 setIsMenuOpen(false);
                 setIsFeedbackOpen(true);
               }}
-              className="flex w-full items-start gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm transition-colors hover:bg-muted"
+              className="flex w-full flex-col items-start rounded-lg px-3 py-2 text-left text-sm transition-colors hover:bg-muted"
             >
-              <div className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-md bg-sky-500/10 text-sky-500">
-                <MessageSquareQuote className="size-3.5" />
-              </div>
-              <div className="min-w-0 flex-1">
-                <div className="font-medium leading-none">Feedback</div>
-                <p className="mt-1 text-[11px] leading-snug text-muted-foreground">
-                  Share suggestions, ideas or report an issue
-                </p>
-              </div>
+              <div className="font-medium leading-none">Feedback</div>
+              <p className="mt-1 text-[11px] leading-snug text-muted-foreground">
+                Share suggestions, ideas or report an issue
+              </p>
             </button>
 
             {/* 3. Help & Support */}
@@ -200,17 +188,12 @@ export function PageTourButton({
                 setIsMenuOpen(false);
                 setIsHelpOpen(true);
               }}
-              className="flex w-full items-start gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm transition-colors hover:bg-muted"
+              className="flex w-full flex-col items-start rounded-lg px-3 py-2 text-left text-sm transition-colors hover:bg-muted"
             >
-              <div className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-md bg-emerald-500/10 text-emerald-500">
-                <LifeBuoy className="size-3.5" />
-              </div>
-              <div className="min-w-0 flex-1">
-                <div className="font-medium leading-none">Help & Support</div>
-                <p className="mt-1 text-[11px] leading-snug text-muted-foreground">
-                  Contact support, guides & coverage info
-                </p>
-              </div>
+              <div className="font-medium leading-none">Help & Support</div>
+              <p className="mt-1 text-[11px] leading-snug text-muted-foreground">
+                Contact support, guides & coverage info
+              </p>
             </button>
           </div>
         )}
