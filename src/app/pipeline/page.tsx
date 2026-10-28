@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import {
-  Download,
   ExternalLink,
   Lock,
   ShieldCheck,
@@ -498,51 +497,6 @@ export default function PipelinePage() {
     Boolean(searchQuery),
   ].filter(Boolean).length;
 
-  function csv(rows: (string | number)[][]): string {
-    return rows
-      .map((r) =>
-        r
-          .map((v) => {
-            const s = String(v ?? "").replace(/"/g, '""');
-            return `"${s}"`;
-          })
-          .join(",")
-      )
-      .join("\r\n");
-  }
-
-  const exportCsv = () => {
-    const target = selectedIds.size > 0 ? rows.filter((o) => selectedIds.has(o.parcelId)) : rows;
-    const body = [
-      ["Address", "Score", "Owner", "Contact / Decision maker", "Mailing address", "City", "Sq ft", "Year built", "Hail", "Warning", "Permit", "Est. Value", "Stage", "Rep", "Notes"],
-      ...target.map((o) => {
-        const record = shared.find((row) => row.parcelId === o.parcelId);
-        return [
-          o.address,
-          String(o.score),
-          o.owner,
-          o.decisionMaker || "",
-          o.ownerMail,
-          o.city,
-          String(o.sqft),
-          String(o.yearBuilt),
-          String(o.hail),
-          o.tier,
-          o.permitStatus || (o.unresolved ? "Unresolved" : "Roof permit filed"),
-          String(o.value),
-          record?.stage || "New",
-          record?.assignee || "",
-          record?.notes || "",
-        ];
-      }),
-    ];
-    const url = URL.createObjectURL(new Blob([csv(body)], { type: "text/csv" }));
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `depoii-pipeline-${jurisdiction.split(",")[0]}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
-  };
 
   const totalCount = brief.data?.totalOpportunities || leads.length;
   const unresolvedCount = leads.filter((l) => l.unresolved).length;
@@ -566,15 +520,6 @@ export default function PipelinePage() {
           </div>
 
           <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={exportCsv}
-              className="h-8 border-neutral-300 dark:border-neutral-700 bg-card dark:bg-neutral-900/90 text-xs font-medium text-foreground dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-foreground dark:hover:text-white"
-            >
-              <Download className="mr-1.5 size-3.5 text-muted-foreground dark:text-neutral-400" />
-              Export {selectedIds.size > 0 ? `(${selectedIds.size})` : "▾"}
-            </Button>
             <Button
               size="sm"
               variant="brand"

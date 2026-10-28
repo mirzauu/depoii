@@ -1131,7 +1131,7 @@ export async function parcelsBrowse(q: Q, user?: { id?: string; orgId?: string; 
   const rows = await query(
     `select p.*, owner_address, stories, 
             exists(select 1 from warehouse.released_leads r where r.parcel_id = p.id) as released,
-            exists(select 1 from warehouse.lead_contacts lc where lc.parcel_id = p.id or lc.account_number = p.account_number) as has_contact
+            exists(select 1 from warehouse.lead_contacts lc where (lc.parcel_id = p.id or lc.account_number = p.account_number) and lc.email_status = 'VERIFIED' and lc.confidence = 'HIGH') as has_contact
      from warehouse.parcels p where ${where} order by p.building_sqft desc nulls last limit $${params.length + 1} offset $${params.length + 2}`, [...params, limit, offset]);
   return {
     total: Number(total?.n || 0), source: "Depoii data engine",
@@ -1219,13 +1219,15 @@ export async function parcelBrowseDetail(id: string) {
       phone: contact.phone_number || "",
       phone_type: contact.phone_type || "Direct Desk / Corporate Main",
       email: contact.email_address || "",
-      email_status: contact.email_status || "VERIFIED",
+      email_status: contact.email_status || "UNVERIFIED",
       website: contact.website_url || "",
       facility: contact.tenant_or_facility_name || "",
       license: "",
       address: r.owner_address || "",
-      note: contact.source_system ? `Verified source: ${contact.source_system}` : "Verified Corporate Contact",
-      confidence: contact.confidence || "HIGH",
+      note: contact.email_status === "VERIFIED" 
+        ? (contact.source_system ? `Verified source: ${contact.source_system}` : "Verified Corporate Contact")
+        : "Staged Lead (Procedural record pending primary MX verification)",
+      confidence: contact.confidence || "UNVERIFIED",
     });
   }
 

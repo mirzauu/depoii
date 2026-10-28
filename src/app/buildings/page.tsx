@@ -360,10 +360,14 @@ export default function BuildingsPage() {
                                 </p>
                               )}
                             </div>
-                            {c.emailStatus === "VERIFIED" && (
+                            {c.emailStatus === "VERIFIED" ? (
                               <span className="inline-flex h-4 items-center gap-1 rounded-full border border-[#B4E4D6]/40 bg-[#B4E4D6]/15 dark:bg-[#B4E4D6]/10 px-1.5 text-[9.5px] font-medium leading-none text-[#1b7e65] dark:text-[#B4E4D6] shrink-0 select-none">
                                 <span className="size-1 rounded-full bg-[#B4E4D6]" />
                                 Verified
+                              </span>
+                            ) : (
+                              <span className="inline-flex h-4 items-center gap-1 rounded-full border border-neutral-400/30 bg-neutral-200/50 dark:bg-neutral-800/50 px-1.5 text-[9.5px] font-medium leading-none text-muted-foreground shrink-0 select-none" title="Procedural contact — domain unverified">
+                                Unverified
                               </span>
                             )}
                           </div>

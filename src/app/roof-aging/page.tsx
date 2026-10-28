@@ -7,7 +7,6 @@ import {
   Filter,
   ChevronDown,
   ChevronRight,
-  Download,
   Building2,
   Calendar,
   DollarSign,
@@ -430,7 +429,7 @@ export default function RoofAgingPage() {
   // Sorting
   const [sortBy, setSortBy] = useState<"default" | "age" | "cost" | "priority" | "sqft">("default");
 
-  // Selection for export & claiming
+  // Selection for claiming
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [unlockedPhones, setUnlockedPhones] = useState<Set<string>>(new Set());
   const [unlockedEmails, setUnlockedEmails] = useState<Set<string>>(new Set());
@@ -624,109 +623,6 @@ export default function RoofAgingPage() {
     });
   };
 
-  // CSV Export
-  const exportCsv = () => {
-    if (isLocked) {
-      alert("Please subscribe to this territory in Territories to export lead data and contact intelligence.");
-      return;
-    }
-    let csvContent = "";
-    if (record === "aged") {
-      const items =
-        selectedIds.size > 0
-          ? sortedRoofs.filter((r) => selectedIds.has(r.id))
-          : sortedRoofs;
-      const headers = [
-        "Address",
-        "Jurisdiction",
-        "Owner / Company",
-        "Decision Maker",
-        "Title",
-        "Phone Number",
-        "Email Address",
-        "Website",
-        "Owner Mailing Address",
-        "Installed Date",
-        "Age (Years)",
-        "Risk Level",
-        "Roof System",
-        "Last Contractor",
-        "Priority Score",
-        "Est Replacement USD",
-        "Permit Number",
-      ];
-      const rows = items.map((r) => [
-        `"${(r.address || "").replace(/"/g, '""')}"`,
-        `"${(r.jurisdiction || "").replace(/"/g, '""')}"`,
-        `"${(r.ownerName || "").replace(/"/g, '""')}"`,
-        `"${(r.decisionMaker || "").replace(/"/g, '""')}"`,
-        `"${(r.decisionMakerTitle || "").replace(/"/g, '""')}"`,
-        `"${(r.phone || "").replace(/"/g, '""')}"`,
-        `"${(r.email || "").replace(/"/g, '""')}"`,
-        `"${(r.websiteUrl || "").replace(/"/g, '""')}"`,
-        `"${(r.ownerMail || "").replace(/"/g, '""')}"`,
-        `"${r.installed || ""}"`,
-        r.age || 0,
-        `"${r.risk || ""}"`,
-        `"${(r.roofSystem || "").replace(/"/g, '""')}"`,
-        `"${(r.contractor || "").replace(/"/g, '""')}"`,
-        r.priority || 0,
-        r.replacementCost || 0,
-        `"${r.permitNumber || ""}"`,
-      ]);
-      csvContent = [headers.join(","), ...rows.map((row) => row.join(","))].join("\n");
-    } else {
-      const items =
-        selectedIds.size > 0
-          ? sortedParcels.filter((p) => selectedIds.has(p.parcelId))
-          : sortedParcels;
-      const headers = [
-        "Address",
-        "Jurisdiction",
-        "Owner / Company",
-        "Decision Maker",
-        "Title",
-        "Phone Number",
-        "Email Address",
-        "Website",
-        "Owner Mailing Address",
-        "Age (Years)",
-        "Building Sqft",
-        "Year Built",
-        "Property Type",
-        "Urgency",
-        "Est Replacement USD",
-        "Parcel ID",
-      ];
-      const rows = items.map((p) => [
-        `"${(p.address || "").replace(/"/g, '""')}"`,
-        `"${(p.jurisdiction || [p.city, p.state].filter(Boolean).join(", ")).replace(/"/g, '""')}"`,
-        `"${(p.owner || "").replace(/"/g, '""')}"`,
-        `"${(p.decisionMaker || "").replace(/"/g, '""')}"`,
-        `"${(p.decisionMakerTitle || "").replace(/"/g, '""')}"`,
-        `"${(p.phone || "").replace(/"/g, '""')}"`,
-        `"${(p.email || "").replace(/"/g, '""')}"`,
-        `"${(p.websiteUrl || "").replace(/"/g, '""')}"`,
-        `"${(p.ownerMail || "").replace(/"/g, '""')}"`,
-        p.age || 0,
-        p.sqft || 0,
-        p.yearBuilt || 0,
-        `"${(p.propertyType || "").replace(/"/g, '""')}"`,
-        `"${(p.urgency || "").replace(/"/g, '""')}"`,
-        p.reroofValue || 0,
-        `"${p.parcelId || ""}"`,
-      ]);
-      csvContent = [headers.join(","), ...rows.map((row) => row.join(","))].join("\n");
-    }
-
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `depoii-roof-aging-${record}-${new Date().toISOString().slice(0, 10)}.csv`;
-    link.click();
-    URL.revokeObjectURL(url);
-  };
 
   const claimSelected = async () => {
     if (isLocked) {
@@ -900,16 +796,6 @@ export default function RoofAgingPage() {
               )}
             </div>
 
-            <Button
-              variant="outline"
-              size="sm"
-              disabled={isLocked || currentIds.length === 0}
-              onClick={exportCsv}
-              className="h-8 border-border dark:border-neutral-700 bg-background dark:bg-neutral-900/90 text-xs font-medium text-foreground dark:text-neutral-200 hover:bg-muted dark:hover:bg-neutral-800 hover:text-foreground dark:hover:text-white disabled:opacity-40"
-            >
-              <Download className="mr-1.5 size-3.5 text-neutral-400" />
-              Export {selectedIds.size > 0 ? `(${selectedIds.size})` : ""}
-            </Button>
             <Button
               size="sm"
               variant="brand"
