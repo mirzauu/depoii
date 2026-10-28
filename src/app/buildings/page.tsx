@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState, type ReactNode } from "react";
-import { Search, X } from "lucide-react";
+import { Search, X, Phone, Mail, Globe, Building2, ShieldCheck } from "lucide-react";
 import { useDepoiiState } from "@/components/depoii-provider";
 import { EngineLayout, EngineState, Filter, Pager, filterField, useDebounced } from "@/components/engine-layout";
 import { useEngine } from "@/components/use-engine";
@@ -260,7 +260,17 @@ export default function BuildingsPage() {
                   onClick={() => setSelectedId(row.id)}
                 >
                   <TableCell>
-                    <p className="font-medium">{row.address || "—"}</p>
+                    <div className="flex items-center gap-1.5">
+                      <p className="font-medium">{row.address || "—"}</p>
+                      {row.hasContact && (
+                        <span
+                          title="Verified direct contact info available (phone & email)"
+                          className="inline-flex size-4 items-center justify-center rounded-full border border-[#B4E4D6]/40 bg-[#B4E4D6]/15 dark:bg-[#B4E4D6]/10 text-[#1b7e65] dark:text-[#B4E4D6] shrink-0"
+                        >
+                          <Phone className="size-2.5" />
+                        </span>
+                      )}
+                    </div>
                     <p className="text-xs text-muted-foreground">{row.city}{row.released ? " · In pipeline book" : ""}</p>
                   </TableCell>
                   <TableCell className="hidden max-w-56 truncate md:table-cell">{row.owner || "—"}</TableCell>
@@ -331,25 +341,87 @@ export default function BuildingsPage() {
                   </Section>
                 )}
 
-                <Section title="Contacts">
+                <Section title="Contacts & Decision Makers">
                   {detail.contacts?.length ? (
-                    <ul className="space-y-2 text-sm">
+                    <ul className="space-y-3 text-sm">
                       {detail.contacts.map((c, i) => (
-                        <li key={`${c.role}-${c.name}-${i}`} className="rounded-md border border-border/60 px-3 py-2">
-                          <p className="text-[11px] uppercase tracking-wider text-muted-foreground">{c.role}</p>
-                          <p className="font-medium">{c.name}</p>
-                          {c.address && <p className="text-xs text-muted-foreground">{c.address}</p>}
-                          {(c.phone || c.license) && (
-                            <p className="text-xs text-muted-foreground">
-                              {[c.phone, c.license ? `License ${c.license}` : null].filter(Boolean).join(" · ")}
+                        <li key={`${c.role}-${c.name}-${i}`} className="rounded-lg border border-border/70 bg-card/60 p-3.5 shadow-sm space-y-2">
+                          <div className="flex items-start justify-between gap-2">
+                            <div>
+                              <span className="inline-flex items-center gap-1 text-[11px] font-medium uppercase tracking-wider text-amber-800 dark:text-[#FFCA88]">
+                                <ShieldCheck className="h-3.5 w-3.5 text-[#FFCA88]" />
+                                {c.role || "Executive Contact"}
+                              </span>
+                              <h4 className="font-semibold text-foreground text-base leading-snug">{c.name}</h4>
+                              {c.organization && c.organization !== c.name && (
+                                <p className="text-xs font-medium text-muted-foreground flex items-center gap-1 mt-0.5">
+                                  <Building2 className="h-3 w-3" />
+                                  {c.organization}
+                                </p>
+                              )}
+                            </div>
+                            {c.emailStatus === "VERIFIED" && (
+                              <span className="inline-flex h-4 items-center gap-1 rounded-full border border-[#B4E4D6]/40 bg-[#B4E4D6]/15 dark:bg-[#B4E4D6]/10 px-1.5 text-[9.5px] font-medium leading-none text-[#1b7e65] dark:text-[#B4E4D6] shrink-0 select-none">
+                                <span className="size-1 rounded-full bg-[#B4E4D6]" />
+                                Verified
+                              </span>
+                            )}
+                          </div>
+
+                          {c.facility && (
+                            <div className="rounded border border-[#FFCA88]/30 bg-[#FFCA88]/10 px-2.5 py-1 text-xs text-amber-900 dark:text-[#FFCA88]/90">
+                              <span className="font-medium text-amber-950 dark:text-[#FFCA88]">Facility: </span>
+                              {c.facility}
+                            </div>
+                          )}
+
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 border-t border-border/40 text-xs">
+                            {c.phone && (
+                              <a
+                                href={`tel:${c.phone}`}
+                                className="inline-flex items-center gap-1.5 text-foreground hover:text-[#B4E4D6] transition-colors font-mono"
+                              >
+                                <Phone className="h-3.5 w-3.5 text-[#B4E4D6] shrink-0" />
+                                <span>{c.phone}</span>
+                              </a>
+                            )}
+                            {c.email && (
+                              <a
+                                href={`mailto:${c.email}`}
+                                className="inline-flex items-center gap-1.5 text-foreground hover:text-[#FFCA88] transition-colors truncate"
+                                title={c.email}
+                              >
+                                <Mail className="h-3.5 w-3.5 text-[#FFCA88] shrink-0" />
+                                <span className="truncate">{c.email}</span>
+                              </a>
+                            )}
+                            {c.website && (
+                              <a
+                                href={c.website}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors truncate col-span-full"
+                              >
+                                <Globe className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+                                <span className="truncate underline">{c.website}</span>
+                              </a>
+                            )}
+                          </div>
+
+                          {c.address && <p className="text-[11px] text-muted-foreground">{c.address}</p>}
+                          {c.note && (
+                            <p className="text-[10px] text-muted-foreground/80 italic pt-1 border-t border-border/30">
+                              {c.note}
                             </p>
                           )}
-                          {c.note && <p className="mt-1 text-[11px] text-muted-foreground">{c.note}</p>}
                         </li>
                       ))}
                     </ul>
                   ) : (
-                    <p className="text-sm text-muted-foreground">No owner or contractor contact on file for this parcel.</p>
+                    <div className="rounded-md border border-dashed border-border/60 p-4 text-center">
+                      <p className="text-sm text-muted-foreground">No verified corporate decision maker linked to this parcel yet.</p>
+                      <p className="text-xs text-muted-foreground/70 mt-1">Properties are progressively enriched in institutional order.</p>
+                    </div>
                   )}
                 </Section>
 

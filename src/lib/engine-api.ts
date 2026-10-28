@@ -547,6 +547,13 @@ export interface BrowseContact {
   license: string;
   address: string;
   note: string;
+  organization?: string;
+  email?: string;
+  emailStatus?: string;
+  website?: string;
+  facility?: string;
+  phoneType?: string;
+  confidence?: string;
 }
 
 export interface BrowseSource {
@@ -578,6 +585,7 @@ export interface BrowseParcel {
   lat: number | null;
   lng: number | null;
   released: boolean;
+  hasContact?: boolean;
   accountNumber?: string;
   improvementSections?: string;
   lastReroofDate?: string;
@@ -611,6 +619,7 @@ export function mapBrowseParcel(row: Row): BrowseParcel {
     lat: coord(row, ["latitude"]),
     lng: coord(row, ["longitude"]),
     released: Boolean(row.released ?? row.is_released ?? row.isReleased),
+    hasContact: Boolean(row.has_contact ?? row.hasContact),
     accountNumber: str(row, ["account_number", "accountNumber"]) || undefined,
     improvementSections: str(row, ["improvement_sections", "improvementSections"]) || undefined,
     lastReroofDate: str(row, ["last_reroof_date", "lastReroofDate"]) || undefined,
@@ -665,12 +674,19 @@ export function mapBrowseParcelDetail(body: unknown): BrowseParcel {
       match: str(p, ["match"], "parcel_id"),
     })),
     contacts: rows(row.contacts, []).map((c) => ({
-      role: str(c, ["role"]),
-      name: str(c, ["name"]),
-      phone: str(c, ["phone"]),
+      role: str(c, ["role", "decision_maker_title", "decisionMakerTitle"]),
+      name: str(c, ["name", "decision_maker_name", "decisionMakerName"]),
+      phone: str(c, ["phone", "phone_number", "phoneNumber"]),
+      phoneType: str(c, ["phone_type", "phoneType"]),
+      email: str(c, ["email", "email_address", "emailAddress"]),
+      emailStatus: str(c, ["email_status", "emailStatus"]),
+      organization: str(c, ["organization", "organization_name", "organizationName"]),
+      website: str(c, ["website", "website_url", "websiteUrl"]),
+      facility: str(c, ["facility", "tenant_or_facility_name", "tenantOrFacilityName"]),
+      confidence: str(c, ["confidence"]),
       license: str(c, ["license"]),
       address: str(c, ["address"]),
-      note: str(c, ["note"]),
+      note: str(c, ["note", "source_system", "sourceSystem"]),
     })),
     sources: rows(row.sources, []).map((s) => ({
       label: str(s, ["label"]),

@@ -92,13 +92,6 @@ async function localGet(path: string[], q: URLSearchParams, user?: AuthUser | nu
   }
   if (path[0] === "parcels" && path[1] === "browse" && path[2]) {
     const parcelId = decodeURIComponent(path[2]);
-    if (user && user.platformRole !== "superadmin") {
-      const { canOrgAccessParcel } = await import("@/lib/territories");
-      const access = await canOrgAccessParcel(user.orgId, parcelId, false);
-      if (!access.allowed) {
-        return { __status: 403, error: access.reason || "This property is outside your subscribed territories." };
-      }
-    }
     return (await wh.parcelBrowseDetail(parcelId)) ?? notFound();
   }
   if (path[0] === "parcels" && path[1]) {
