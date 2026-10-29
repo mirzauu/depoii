@@ -138,7 +138,7 @@ export function EngineLayout({
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border dark:border-neutral-800/80 bg-background dark:bg-[#0e0f12] px-5 py-3.5 z-10 shrink-0">
           <div>
             <h1 className="text-base font-bold tracking-tight text-foreground dark:text-white">{title}</h1>
-            {subtitle && <p className="text-[11px] text-muted-foreground dark:text-neutral-400 mt-0.5">{subtitle}</p>}
+            {subtitle && <p className="text-xs font-medium text-rose-600 dark:text-[#DE7272] mt-0.5">{subtitle}</p>}
           </div>
           {actions && <div className="flex items-center gap-2">{actions}</div>}
         </div>

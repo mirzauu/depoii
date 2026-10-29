@@ -509,13 +509,13 @@ export default function PipelinePage() {
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="space-y-0.5">
             <div className="flex items-center gap-3">
-              <h1 className="text-xl font-bold tracking-tight text-foreground dark:text-white">Opportunity pipeline</h1>
+              <h1 className="text-xl font-bold tracking-tight text-foreground dark:text-white">Hot Sheet</h1>
               <span className="rounded-full bg-neutral-100 dark:bg-neutral-800/80 px-2 py-0.5 text-[11px] font-medium text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700/50">
                 {jurisdiction}
               </span>
             </div>
-            <p className="text-xs text-muted-foreground dark:text-neutral-400">
-              {jurisdiction}{brief.data ? ` · ${brief.data.stormName}` : ""} · {usd(rows.reduce((s, o) => s + o.value, 0), true)} est. planning value
+            <p className="text-xs font-medium text-rose-600 dark:text-[#DE7272]">
+              Manage your claimed off-market commercial targets, track property owner outreach, and organize takeoff stages.
             </p>
           </div>
 

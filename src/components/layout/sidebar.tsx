@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
-import { Briefcase, Building2, ChevronDown, ChevronUp, ChevronsLeft, ChevronsRight, House, Info, Layers, Search, Shield, type LucideIcon } from "lucide-react";
+import { Briefcase, Building2, ChevronDown, ChevronsLeft, ChevronsRight, House, Info, Layers, Search, Shield, type LucideIcon } from "lucide-react";
 import { cn } from "cn";
 import { DepoiiAiMark, DepoiiMark } from "./depoii-logo";
 import { useMe } from "@/hooks/use-me";
@@ -20,11 +20,11 @@ export const TOP: (NavLink & { icon: NavIcon })[] = [
 export const GROUPS: NavGroup[] = [
   {
     id: "leads",
-    label: "Leads",
+    label: "Targets",
     icon: Briefcase,
     items: [
-      { href: "/pipeline", label: "Opportunity Pipeline", match: ["/parcels", "/property"], permission: "nav:pipeline" },
-      { href: "/roof-aging", label: "Roof Aging Alarm", engine: true, permission: "nav:roof_aging" },
+      { href: "/pipeline", label: "Hot Sheet", match: ["/parcels", "/property"], permission: "nav:pipeline" },
+      { href: "/roof-aging", label: "Aging Roof", engine: true, permission: "nav:roof_aging" },
       { href: "/map", label: "Hail Map", engine: true, permission: "nav:map" },
       { href: "/competitors", label: "Leaderboard", engine: true, permission: "nav:competitors" },
     ],
@@ -95,7 +95,7 @@ function groupActive(path: string, group: NavGroup, fromParam?: string | null) {
   return group.items.some((i) => isActive(path, i, fromParam)) || (group.match ?? []).filter(Boolean).some((p) => path.startsWith(p));
 }
 
-const GROUPS_KEY = "depoii:nav-groups-v5";
+const GROUPS_KEY = "depoii:nav-groups-v7";
 const RAIL_KEY = "depoii:sidebar";
 const DEFAULT_OPEN = Object.fromEntries(GROUPS.map((group) => [group.id, group.id !== "organization"]));
 
@@ -249,22 +249,18 @@ export function Sidebar({ defaultCollapsed }: { defaultCollapsed?: boolean } = {
     items: group.items.filter((item) => canAccess(item.permission)),
   })).filter((group) => group.items.length > 0);
 
-  const mainGroups = visibleGroups.filter((g) => g.id !== "organization");
-  const orgGroup = visibleGroups.find((g) => g.id === "organization");
-
   const fade = cn("overflow-hidden whitespace-nowrap transition-opacity duration-150", collapsed ? "opacity-0" : "opacity-100");
   const row = "flex w-full items-center gap-2.5 overflow-hidden rounded-md px-3 py-2 text-sm whitespace-nowrap text-muted-foreground hover:bg-muted hover:text-foreground";
 
-  const renderGroup = (group: NavGroup, up = false) => {
+  const renderGroup = (group: NavGroup) => {
     const Icon = group.icon;
     const expanded = !collapsed && !!open[group.id];
     const here = groupActive(path, group, fromParam);
-    const Chevron = up ? ChevronUp : ChevronDown;
 
     const itemsNode = (
       <div className={cn("grid transition-[grid-template-rows] duration-200 ease-out", expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]")}>
         <div className="overflow-hidden" inert={!expanded}>
-          <div className={cn("flex flex-col gap-0.5", up ? "pt-0.5 pb-1" : "py-0.5")}>
+          <div className="flex flex-col gap-0.5 py-0.5">
             {group.items.map((item) =>
               item.disabled ? (
                 <div
@@ -313,7 +309,7 @@ export function Sidebar({ defaultCollapsed }: { defaultCollapsed?: boolean } = {
       >
         <Icon className="size-4 shrink-0" />
         <span className={cn(fade, "flex-1 text-left truncate")}>{group.label}</span>
-        <Chevron
+        <ChevronDown
           className={cn(
             "size-3.5 shrink-0 transition-transform duration-200",
             expanded ? "rotate-180" : "rotate-0",
@@ -325,9 +321,8 @@ export function Sidebar({ defaultCollapsed }: { defaultCollapsed?: boolean } = {
 
     return (
       <div key={group.id} className="flex flex-col">
-        {up && itemsNode}
         {buttonNode}
-        {!up && itemsNode}
+        {itemsNode}
       </div>
     );
   };
@@ -391,9 +386,9 @@ export function Sidebar({ defaultCollapsed }: { defaultCollapsed?: boolean } = {
           );
         })}
 
-        {mainGroups.length > 0 && <div className="my-2 border-t border-border" />}
+        {visibleGroups.length > 0 && <div className="my-2 border-t border-border" />}
 
-        {mainGroups.map((g) => renderGroup(g))}
+        {visibleGroups.map((g) => renderGroup(g))}
 
         {navReady && me?.platformRole === "superadmin" && (
           <div className="mt-auto border-t border-border pt-2">
@@ -405,7 +400,6 @@ export function Sidebar({ defaultCollapsed }: { defaultCollapsed?: boolean } = {
         )}
       </nav>
       <div className="border-t border-border p-2 flex flex-col gap-0.5">
-        {orgGroup && renderGroup(orgGroup, true)}
         <AccountMenu collapsed={collapsed} />
       </div>
     </aside>

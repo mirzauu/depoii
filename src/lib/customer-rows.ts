@@ -31,7 +31,12 @@ export function keepCustomerLead(row: Row) {
   const id = normalizeParcelId(row.parcel_id ?? row.parcelId);
   if (!id || !RELEASED_NORMALIZED.has(id)) return false;
   const city = cityOf(row);
-  if (city && city !== "dallas" && city !== "fort worth") return false;
+  const DFW_CITIES = new Set([
+    "dallas", "fort worth", "farmers branch", "addison", "carrollton",
+    "irving", "coppell", "richardson", "garland", "rowlett", "mesquite",
+    "grand prairie", "duncanville", "university park", "highland park"
+  ]);
+  if (city && !DFW_CITIES.has(city)) return false;
   const miles = milesOf(row);
   if (miles != null && miles > MAX_HAIL_MILES) return false;
   return true;

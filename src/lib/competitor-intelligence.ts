@@ -119,9 +119,12 @@ export async function getTrueCompetitors(
     }
   }
 
+  const intersection = allowedZips
+    ? turf.primaryZips.filter((z) => allowedZips.map((az) => az.slice(0, 5)).includes(z.slice(0, 5)))
+    : [];
   const primaryZips = isSuperAdmin || !allowedZips
     ? turf.primaryZips
-    : turf.primaryZips.filter((z) => allowedZips.map((az) => az.slice(0, 5)).includes(z.slice(0, 5)));
+    : (intersection.length > 0 ? intersection : allowedZips.slice(0, 5));
 
   if (primaryZips.length === 0) {
     return {
@@ -246,7 +249,10 @@ export async function getTrueCompetitors(
   }
 
   return {
-    turf,
+    turf: {
+      ...turf,
+      primaryZips,
+    },
     totalMarketVolumeInTurf: totalMarketVolume,
     totalMarketJobsInTurf: totalMarketJobs,
     customerSharePct,
@@ -274,9 +280,12 @@ export async function detectAndGetEncroachments(
     if (allowedZips.length === 0) return [];
   }
 
+  const intersection = allowedZips
+    ? turf.primaryZips.filter((z) => allowedZips.map((az) => az.slice(0, 5)).includes(z.slice(0, 5)))
+    : [];
   const primaryZips = isSuperAdmin || !allowedZips
     ? turf.primaryZips
-    : turf.primaryZips.filter((z) => allowedZips.map((az) => az.slice(0, 5)).includes(z.slice(0, 5)));
+    : (intersection.length > 0 ? intersection : allowedZips.slice(0, 5));
 
   if (primaryZips.length === 0) return [];
 
@@ -317,7 +326,7 @@ export async function detectAndGetEncroachments(
        AND valuation >= 25000
      ORDER BY issue_date DESC NULLS LAST
      LIMIT 30`,
-    [turf.primaryZips, turf.contractorName, turf.contractorId],
+    [primaryZips, turf.contractorName, turf.contractorId],
   );
 
   const alerts: EncroachmentAlert[] = [];

@@ -716,7 +716,7 @@ export default function RoofAgingPage() {
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="space-y-0.5">
             <div className="flex items-center gap-3">
-              <h1 className="text-xl font-bold tracking-tight text-foreground dark:text-white">Roof aging alarm</h1>
+              <h1 className="text-xl font-bold tracking-tight text-foreground dark:text-white">Aging Roof</h1>
               <span className="rounded-full bg-neutral-100 dark:bg-neutral-800/80 px-2 py-0.5 text-[11px] font-medium text-neutral-700 dark:text-neutral-300 border border-neutral-300 dark:border-neutral-700/50 flex items-center gap-1.5">
                 <Shield className="size-3 text-sky-400" />
                 {jurisdiction}
@@ -745,12 +745,8 @@ export default function RoofAgingPage() {
                 {isLocked ? "Locked Zone" : record === "aged" ? "Permitted Cohort" : "Dark Market"}
               </span>
             </div>
-            <p className="text-xs text-muted-foreground dark:text-neutral-400">
-              {isLocked
-                ? "This territory requires an active subscription to access commercial roof aging alarms, verified owners, and contact intelligence."
-                : record === "never"
-                ? `${jurisdiction} territory${zone && zone !== "all" ? ` (${zoneNameDisplay})` : ""} · commercial buildings ${minAge}+ years old with no roofing permit on record · ${dark.data?.pipelineFormatted || (dark.data?.pipelineUSD ? usd(dark.data.pipelineUSD, true) : "…")} reroof value`
-                : `${jurisdiction} territory · roofs whose last permitted install is ${minAge}+ years old · ${page.data ? usd(page.data.pipeline, true) : "…"} replacement pipeline`}
+            <p className="text-xs font-medium text-rose-600 dark:text-[#DE7272]">
+              Identify commercial facilities with unreplaced membranes past 20–35+ years and verified historical hail exposure.
             </p>
           </div>
 

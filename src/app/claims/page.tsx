@@ -139,7 +139,7 @@ export default function ClaimsDashboardPage() {
                   Exclusive 21-Day Lock
                 </span>
               </div>
-              <p className="text-[11px] text-muted-foreground dark:text-neutral-400">
+              <p className="text-xs font-medium text-rose-600 dark:text-[#DE7272]">
                 Guaranteed exclusivity for your organization. Maintain activity every 7 days to preserve active locks.
               </p>
             </div>

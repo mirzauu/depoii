@@ -306,8 +306,8 @@ export async function mondayBrief(q: Q, user?: { orgId?: string; platformRole?: 
     `select count(*)::text as n
      from warehouse.released_leads r
      join warehouse.parcels p on p.id = r.parcel_id
-     where lower(p.city) = lower($1)
-       and ($2::text[] is null or substring(p.zip_code from 1 for 5) = ANY($2))`,
+     where ($2::text[] is not null and substring(p.zip_code from 1 for 5) = ANY($2))
+        or ($2::text[] is null and (lower(p.city) = lower($1) or lower(p.city) in ('farmers branch', 'addison', 'carrollton', 'irving', 'coppell', 'richardson')))`,
     [city, allowedZips]
   );
   const useReleased = Number(releasedCount?.n || 0) > 0;
@@ -356,8 +356,8 @@ export async function mondayBrief(q: Q, user?: { orgId?: string; platformRole?: 
        join warehouse.parcels p on p.id = r.parcel_id
        left join warehouse.lead_contacts lc on lc.parcel_id = r.parcel_id
        left join warehouse.scored_parcel_leads l on l.parcel_id = r.parcel_id
-       where lower(p.city) = lower($1)
-         and ($4::text[] is null or substring(p.zip_code from 1 for 5) = ANY($4))
+       where ($4::text[] is not null and substring(p.zip_code from 1 for 5) = ANY($4))
+          or ($4::text[] is null and (lower(p.city) = lower($1) or lower(p.city) in ('farmers branch', 'addison', 'carrollton', 'irving', 'coppell', 'richardson')))
        order by coalesce(l.exposure_score, 88) desc, r.parcel_id
        limit $2 offset $3`,
       [city, limit, offset, allowedZips]
@@ -368,8 +368,8 @@ export async function mondayBrief(q: Q, user?: { orgId?: string; platformRole?: 
       `select l.*, p.owner_address, p.owner_city, p.owner_state, p.owner_zip, p.latitude, p.longitude, p.footprint_sqft
        from warehouse.scored_parcel_leads l
        left join warehouse.parcels p on p.id = l.parcel_id
-       where lower(l.city) = lower($1)
-         and ($4::text[] is null or substring(coalesce(l.zip_code, p.zip_code) from 1 for 5) = ANY($4))
+       where ($4::text[] is not null and substring(coalesce(l.zip_code, p.zip_code) from 1 for 5) = ANY($4))
+          or ($4::text[] is null and (lower(l.city) = lower($1) or lower(l.city) in ('farmers branch', 'addison', 'carrollton', 'irving', 'coppell', 'richardson')))
        order by l.exposure_score desc limit $2 offset $3`,
       [city, limit, offset, allowedZips]
     );
@@ -377,8 +377,8 @@ export async function mondayBrief(q: Q, user?: { orgId?: string; platformRole?: 
       `select count(*)::text as n
        from warehouse.scored_parcel_leads l
        left join warehouse.parcels p on p.id = l.parcel_id
-       where lower(l.city) = lower($1)
-         and ($2::text[] is null or substring(coalesce(l.zip_code, p.zip_code) from 1 for 5) = ANY($2))`,
+       where ($2::text[] is not null and substring(coalesce(l.zip_code, p.zip_code) from 1 for 5) = ANY($2))
+          or ($2::text[] is null and (lower(l.city) = lower($1) or lower(l.city) in ('farmers branch', 'addison', 'carrollton', 'irving', 'coppell', 'richardson')))`,
       [city, allowedZips]
     );
     totalN = Number(total?.n || 0);

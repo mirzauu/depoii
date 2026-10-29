@@ -198,8 +198,8 @@ export default function Home() {
               {city} Metro Swath
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">
-            Commercial roofing intelligence, storm damage corridors & qualified pipeline
+          <p className="text-xs sm:text-sm font-medium text-rose-600 dark:text-[#DE7272] mt-0.5">
+            High-level commercial roof inventory, pipeline valuation, and active jobsite distribution across your licensed territory.
           </p>
         </div>
 

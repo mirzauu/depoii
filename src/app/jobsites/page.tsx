@@ -46,7 +46,7 @@ export default function JobsitesPage() {
   return (
     <EngineLayout
       title="Active jobsites"
-      subtitle={`${all ? "All locations" : jurisdiction} · commercial roofs with an open permit, issued in the last 90 to 180 days`}
+      subtitle="Track live commercial reroofing permits filed across DFW to monitor competitor crew activity and market movement."
       filters={
         <>
           <ScopeFilter jurisdiction={jurisdiction} all={all} onChange={reset(setAll)} />

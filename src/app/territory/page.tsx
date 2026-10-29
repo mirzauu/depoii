@@ -77,8 +77,8 @@ export default function TerritoryPage() {
                   Strict Max 2 Contractors / Zone
                 </span>
               </div>
-              <p className="text-[11px] text-muted-foreground dark:text-neutral-400">
-                Non-competing territory exclusivity. Claimed commercial roofs are protected exclusively for 21 days.
+              <p className="text-xs font-medium text-rose-600 dark:text-[#DE7272]">
+                Interactive satellite map with parcel boundaries, building footprints, and non-competing territory exclusivity.
               </p>
             </div>
           </div>

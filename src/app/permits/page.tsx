@@ -118,7 +118,7 @@ export default function PermitsPage() {
   return (
     <EngineLayout
       title="All permits"
-      subtitle={view === "jobsites" ? `${all ? "All locations" : jurisdiction} · open permits issued in the last 90 to 180 days` : view === "phases" ? "Campuses permitted in stages, with a later phase still open" : `${all ? "All locations" : jurisdiction} · commercial roofing permits from the data engine warehouse`}
+      subtitle="Search and audit 30-year municipal building and reroof histories sourced directly from city inspection portals."
       onResetFilters={clearAllFilters}
       activeFiltersCount={activeCount}
       filters={
