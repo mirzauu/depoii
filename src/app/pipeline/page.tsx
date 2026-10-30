@@ -283,7 +283,7 @@ export default function PipelinePage() {
   const [minScore, setMinScore] = useState(0);
   const [owner, setOwner] = useState("");
   const [page, setPage] = useState(0);
-  const [sortBy, setSortBy] = useState<"score" | "sqft" | "value" | "hail">("score");
+  const [sortBy, setSortBy] = useState<"score" | "sqft" | "value" | "hail">("sqft");
 
   // Accordion open/close state
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({
@@ -354,10 +354,10 @@ export default function PipelinePage() {
     });
 
     return list.sort((a, b) => {
-      if (sortBy === "sqft") return b.sqft - a.sqft;
-      if (sortBy === "value") return b.value - a.value;
-      if (sortBy === "hail") return b.hail - a.hail;
-      return b.score - a.score;
+      if (sortBy === "score") return (b.score - a.score) || (b.sqft - a.sqft);
+      if (sortBy === "value") return (b.value - a.value) || (b.sqft - a.sqft);
+      if (sortBy === "hail") return (b.hail - a.hail) || (b.sqft - a.sqft);
+      return (b.sqft - a.sqft) || (b.score - a.score);
     });
   }, [leads, activeTab, shared, stage, assigneeQuery, minSqft, minScore, ownerQuery, q, sortBy]);
 
@@ -1009,17 +1009,47 @@ export default function PipelinePage() {
                       />
                     </th>
                     <th className="sticky left-0 top-0 z-30 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap border-b border-border dark:border-neutral-800/80 shadow-[1px_1px_0_0_rgba(0,0,0,0.06)] dark:shadow-[1px_1px_0_0_rgba(255,255,255,0.06)]">Address</th>
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap border-b border-border dark:border-neutral-800/80">Score</th>
+                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap border-b border-border dark:border-neutral-800/80">
+                      <button
+                        type="button"
+                        onClick={() => { setSortBy(sortBy === "score" ? "sqft" : "score"); setPage(0); }}
+                        className="inline-flex items-center gap-1 hover:text-foreground dark:hover:text-white transition-colors"
+                        title="Click to sort by score"
+                      >
+                        <span>Score</span>
+                        {sortBy === "score" && <span className="text-[10px] text-amber-500">▼</span>}
+                      </button>
+                    </th>
                     <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap border-b border-border dark:border-neutral-800/80">Owner</th>
                     <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap border-b border-border dark:border-neutral-800/80">Contact / Decision maker</th>
                     <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap border-b border-border dark:border-neutral-800/80">Mailing address</th>
                     <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap border-b border-border dark:border-neutral-800/80">City</th>
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 text-right whitespace-nowrap border-b border-border dark:border-neutral-800/80">Sq ft</th>
+                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 text-right whitespace-nowrap border-b border-border dark:border-neutral-800/80">
+                      <button
+                        type="button"
+                        onClick={() => { setSortBy(sortBy === "sqft" ? "score" : "sqft"); setPage(0); }}
+                        className="inline-flex items-center gap-1 hover:text-foreground dark:hover:text-white transition-colors"
+                        title="Click to sort by square feet"
+                      >
+                        <span>Sq ft</span>
+                        {sortBy === "sqft" && <span className="text-[10px] text-amber-500">▼</span>}
+                      </button>
+                    </th>
                     <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 text-right whitespace-nowrap border-b border-border dark:border-neutral-800/80">Year built</th>
                     <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 text-right whitespace-nowrap border-b border-border dark:border-neutral-800/80">Hail</th>
                     <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap border-b border-border dark:border-neutral-800/80">Warning</th>
                     <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap border-b border-border dark:border-neutral-800/80">Permit</th>
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 text-right whitespace-nowrap border-b border-border dark:border-neutral-800/80">Est. Value</th>
+                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 text-right whitespace-nowrap border-b border-border dark:border-neutral-800/80">
+                      <button
+                        type="button"
+                        onClick={() => { setSortBy(sortBy === "value" ? "sqft" : "value"); setPage(0); }}
+                        className="inline-flex items-center gap-1 hover:text-foreground dark:hover:text-white transition-colors"
+                        title="Click to sort by estimated value"
+                      >
+                        <span>Est. Value</span>
+                        {sortBy === "value" && <span className="text-[10px] text-amber-500">▼</span>}
+                      </button>
+                    </th>
                     <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap border-b border-border dark:border-neutral-800/80">Stage</th>
                     <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 pr-4 text-right whitespace-nowrap border-b border-border dark:border-neutral-800/80" />
                   </tr>
