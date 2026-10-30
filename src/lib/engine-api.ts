@@ -1,4 +1,4 @@
-import type { HailReport, Storm, StormSummary, WarningPolygon } from "@/lib/types";
+import type { HailReport, Storm, StormSummary, WarningPolygon, SwathTier } from "@/lib/types";
 
 type Row = Record<string, unknown>;
 
@@ -1086,6 +1086,30 @@ export function mapHailEvents(body: unknown): HailEventsCatalog {
         : Array.isArray(selectedRow?.affectedZips)
           ? (selectedRow.affectedZips as unknown[]).map(String)
           : [],
+      zipBuildingCounts: (selectedRow?.zip_building_counts || selectedRow?.zipBuildingCounts || {}) as Record<string, { count: number; pipeline: number }>,
+      buildings: Array.isArray(selectedRow?.buildings)
+        ? (selectedRow.buildings as Row[]).map((b) => ({
+            parcelId: str(b, ["parcel_id", "parcelId"]),
+            address: str(b, ["address"]),
+            city: str(b, ["city"]),
+            state: str(b, ["state"]),
+            zipCode: str(b, ["zip_code", "zipCode"]),
+            owner: str(b, ["owner_name", "owner"]),
+            lat: num(b, ["lat", "latitude"]),
+            lng: num(b, ["lng", "longitude"]),
+            score: num(b, ["score", "exposure_score"]) || 85,
+            tier: (str(b, ["tier", "lead_tier"]) || "core") as SwathTier,
+            hail: num(b, ["hail", "max_hail_inches"]) || 1.75,
+            value: num(b, ["value", "estimated_replacement_mid"]),
+            unresolved: Boolean(
+              b.unresolved ??
+              (!str(b, ["permit_status", "muni_permit_status"]) ||
+                str(b, ["permit_status", "muni_permit_status"]).toUpperCase().includes("UNRESOLVED") ||
+                str(b, ["permit_status", "muni_permit_status"]).toUpperCase().includes("NO_POST"))
+            ),
+            permitStatus: str(b, ["permit_status", "muni_permit_status"]),
+          }))
+        : [],
     },
   };
 }

@@ -474,9 +474,24 @@ export async function activeSwaths() {
 }
 
 export async function hailEvents(q: Q) {
-  const events = await query(
+  const metro = str(q, "jurisdiction") || str(q, "metro");
+  const state = (str(q, "state") || (metro.match(/,\s*([A-Za-z]{2})/)?.[1] || "TX")).toUpperCase();
+
+  // Prefer local storms matching the active market/state when available
+  let events = await query<{ d: string; name: string; hail: string; n: string }>(
     `select event_date::text as d, max(storm_name) as name, max(max_hail_inches)::text as hail, count(*)::text as n
-     from warehouse.storm_swaths where event_date is not null group by event_date order by event_date desc limit 60`);
+     from warehouse.storm_swaths
+     where event_date is not null and (jurisdiction_id ilike $1 or jurisdiction_id ilike 'TX-%')
+     group by event_date order by event_date desc limit 60`,
+    [`%${state}%`]
+  );
+  if (events.length === 0) {
+    events = await query(
+      `select event_date::text as d, max(storm_name) as name, max(max_hail_inches)::text as hail, count(*)::text as n
+       from warehouse.storm_swaths where event_date is not null group by event_date order by event_date desc limit 60`
+    );
+  }
+
   const wanted = str(q, "date") || str(q, "event_date") || (events[0] ? String(events[0].d).slice(0, 10) : "");
   let selected = null;
   if (wanted) {
@@ -519,13 +534,121 @@ export async function hailEvents(q: Q) {
       extractCoordsZips(geom?.coordinates, stormZips);
     }
 
+    const arrZips = Array.from(stormZips);
+    const zipBuildingCounts: Record<string, { count: number; pipeline: number }> = {};
+    let dynamicBuildings: Array<{
+      parcel_id: string;
+      address: string;
+      city: string;
+      state: string;
+      zip_code: string;
+      owner_name: string;
+      lat: number;
+      lng: number;
+      score: number;
+      tier: string;
+      hail: number;
+      value: number;
+      unresolved: boolean;
+      permit_status: string;
+    }> = [];
+
     const ev = events.find((e) => String(e.d).slice(0, 10) === wanted);
-    if (ev || reports.length || warnings.length) {
+    const stormHail = Number(ev?.hail || 1.75);
+
+    if (arrZips.length > 0) {
+      const zipCountsQuery = await query<{ zip: string; building_count: string; pipeline_val: string }>(
+        `SELECT 
+           substring(p.zip_code from 1 for 5) as zip,
+           count(p.id)::int as building_count,
+           coalesce(sum(coalesce(p.footprint_sqft, p.building_sqft, 25000) * 14.5), 0)::bigint as pipeline_val
+         FROM warehouse.parcels p
+         WHERE substring(p.zip_code from 1 for 5) = ANY($1)
+         GROUP BY 1`,
+        [arrZips]
+      );
+      for (const row of zipCountsQuery) {
+        const count = Number(row.building_count || 0);
+        if (count > 0) {
+          zipBuildingCounts[row.zip] = {
+            count,
+            pipeline: Number(row.pipeline_val || 0),
+          };
+          stormZips.add(row.zip);
+        }
+      }
+
+      const buildingsQuery = await query<{
+        parcel_id: string;
+        address: string;
+        city: string;
+        state: string;
+        zip_code: string;
+        owner_name: string;
+        lat: string;
+        lng: string;
+        sqft: string;
+        exposure_score: string;
+        lead_tier: string;
+        max_hail_inches: string;
+        estimated_replacement_mid: string;
+        muni_permit_status: string;
+      }>(
+        `SELECT
+           p.id as parcel_id,
+           p.address,
+           p.city,
+           p.state,
+           p.zip_code,
+           p.owner_name,
+           p.latitude as lat,
+           p.longitude as lng,
+           coalesce(p.footprint_sqft, p.building_sqft, 15000)::int as sqft,
+           coalesce(l.exposure_score, 88) as exposure_score,
+           coalesce(l.lead_tier, 'core') as lead_tier,
+           coalesce(l.max_hail_inches, $2::numeric, 1.75) as max_hail_inches,
+           coalesce(l.estimated_replacement_mid, (coalesce(p.footprint_sqft, p.building_sqft, 15000) * 14.5)::bigint) as estimated_replacement_mid,
+           coalesce(l.muni_permit_status, 'UNRESOLVED_EXPOSURE') as muni_permit_status
+         FROM warehouse.parcels p
+         LEFT JOIN warehouse.scored_parcel_leads l ON l.parcel_id = p.id
+         WHERE substring(p.zip_code from 1 for 5) = ANY($1)
+           AND p.latitude IS NOT NULL AND p.longitude IS NOT NULL
+           AND p.latitude != 0 AND p.longitude != 0
+         ORDER BY coalesce(l.exposure_score, 80) DESC, p.total_valuation DESC NULLS LAST
+         LIMIT 600`,
+        [arrZips, stormHail]
+      );
+
+      dynamicBuildings = buildingsQuery.map((r) => ({
+        parcel_id: r.parcel_id,
+        address: r.address,
+        city: r.city,
+        state: r.state,
+        zip_code: r.zip_code,
+        owner_name: r.owner_name || "Owner of record",
+        lat: Number(r.lat),
+        lng: Number(r.lng),
+        score: Number(r.exposure_score || 85),
+        tier: r.lead_tier || "core",
+        hail: Number(r.max_hail_inches || stormHail),
+        value: Number(r.estimated_replacement_mid || 0),
+        unresolved: Boolean(
+          !r.muni_permit_status ||
+          r.muni_permit_status.toUpperCase().includes("UNRESOLVED") ||
+          r.muni_permit_status.toUpperCase().includes("NO_POST")
+        ),
+        permit_status: r.muni_permit_status || "UNRESOLVED_EXPOSURE",
+      }));
+    }
+
+    if (ev || reports.length || warnings.length || dynamicBuildings.length > 0) {
       selected = {
         id: wanted, event_date: wanted, name: ev?.name || wanted, short_name: wanted,
         max_hail_inches: Number(ev?.hail || 0), report_count: reports.length, max_warning_hail_inches: 0,
         center: reports[0] ? { latitude: Number(reports[0].lat), longitude: Number(reports[0].lng) } : { latitude: 32.78, longitude: -96.8 },
         affected_zips: Array.from(stormZips).sort(),
+        zip_building_counts: zipBuildingCounts,
+        buildings: dynamicBuildings,
         reports: reports.map((r) => ({
           id: r.id, valid: r.valid, latitude: Number(r.lat), longitude: Number(r.lng), hail_inches: Number(r.inches),
           qualifier: r.qualifier, city: r.city, county: r.county, source: r.source, remark: r.remark,

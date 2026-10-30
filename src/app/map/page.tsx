@@ -35,7 +35,7 @@ export default function MapPage() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [selectedZip, setSelectedZip] = useState<string | null>(null);
   const [showOutside, setShowOutside] = useState(false);
-  const [showEngine, setShowEngine] = useState(true);
+  const [showEngine, setShowEngine] = useState(false);
   const [panelOpen, setPanelOpen] = useState(true);
   /** null = engine default (newest qualifying Texas hail day). */
   const [eventDate, setEventDate] = useState<string | null>(null);
@@ -46,7 +46,7 @@ export default function MapPage() {
   const brief = useEngine("brief", { jurisdiction, limit: 500, offset: 0 }, mapBrief);
   const hail = useEngine(
     "storms/hail-events",
-    { state: "TX", since: "2024-03-01", min_hail_inches: 1.5, event_date: eventDate },
+    { state: "TX", jurisdiction, since: "2024-03-01", min_hail_inches: 1.5, event_date: eventDate },
     mapHailEvents,
   );
   const city = jurisdiction.split(",")[0];
@@ -102,8 +102,38 @@ export default function MapPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [brief.data?.opportunities]);
 
-  /** Released pilot book classified against the selected hail-day catalog storm. */
+  /** Released pilot book or real database parcels classified against the selected hail-day catalog storm. */
   const dayLeads: DayLead[] = useMemo(() => {
+    // 1. If the selected storm event returned real database buildings for its affected ZIPs, use them!
+    if (catalogStorm?.buildings && catalogStorm.buildings.length > 0) {
+      return catalogStorm.buildings
+        .map((b): DayLead => {
+          const lat = b.lat ?? 0;
+          const lng = b.lng ?? 0;
+          const exposure = dayExposure({ lat, lng }, catalogStorm);
+          return {
+            parcelId: b.parcelId,
+            address: b.address,
+            city: b.city,
+            zipCode: b.zipCode || "",
+            owner: b.owner,
+            lat,
+            lng,
+            hail: exposure.hailInches || b.hail,
+            tier: exposure.tier !== "outside" ? exposure.tier : (b.tier || "envelope"),
+            score: b.score,
+            value: b.value,
+            unresolved: b.unresolved,
+            permitStatus: b.permitStatus,
+          };
+        })
+        .sort((a, b) => {
+          const tierRank = (t: SwathTier) => (t === "core" ? 2 : t === "envelope" ? 1 : 0);
+          return tierRank(b.tier) - tierRank(a.tier) || b.score - a.score;
+        });
+    }
+
+    // 2. Fallback to brief opportunities if no dynamic storm buildings are loaded
     const ops = brief.data?.opportunities;
     if (!catalogStorm || !ops?.length) return [];
     return ops
@@ -133,7 +163,7 @@ export default function MapPage() {
       });
   }, [catalogStorm, brief.data?.opportunities]);
 
-  const coordsReady = briefOps.some((o) => o.lat != null && o.lng != null);
+  const coordsReady = (catalogStorm?.buildings?.length ?? 0) > 0 || briefOps.some((o) => o.lat != null && o.lng != null);
   const dayScoped = Boolean(catalogStorm && dayLeads.length && coordsReady);
   const dayExposed = useMemo(() => dayLeads.filter((o) => o.tier !== "outside"), [dayLeads]);
   const dayUnresolved = useMemo(() => dayExposed.filter((o) => o.unresolved), [dayExposed]);
@@ -142,7 +172,17 @@ export default function MapPage() {
   const affectedZips = useMemo(() => {
     const counts = new Map<string, number>();
 
-    // 1. Include all storm-level affected ZIP codes from warnings/reports/swaths (even if 0 pilot leads in Depoii)
+    // 1. If backend gave us exact building counts per ZIP from warehouse.parcels, prioritize those!
+    if (catalogStorm?.zipBuildingCounts) {
+      for (const [z, info] of Object.entries(catalogStorm.zipBuildingCounts)) {
+        const clean = z.trim().slice(0, 5);
+        if (clean && info.count > 0) {
+          counts.set(clean, info.count);
+        }
+      }
+    }
+
+    // 2. Include all storm-level affected ZIP codes (if any missing from counts)
     if (catalogStorm?.affectedZips?.length) {
       for (const z of catalogStorm.affectedZips) {
         const clean = z.trim().slice(0, 5);
@@ -152,10 +192,10 @@ export default function MapPage() {
       }
     }
 
-    // 2. Count buildings from exposed leads
+    // 3. Fallback to counted leads if not present in zipBuildingCounts
     for (const lead of dayExposed) {
       const z = (lead.zipCode || "").trim().slice(0, 5);
-      if (z) {
+      if (z && (!counts.has(z) || counts.get(z) === 0)) {
         counts.set(z, (counts.get(z) || 0) + 1);
       }
     }
@@ -164,10 +204,14 @@ export default function MapPage() {
     return Array.from(counts.entries())
       .map(([zip, count]) => ({ zip, count }))
       .sort((a, b) => b.count - a.count || a.zip.localeCompare(b.zip));
-  }, [catalogStorm?.affectedZips, dayExposed]);
+  }, [catalogStorm?.zipBuildingCounts, catalogStorm?.affectedZips, dayExposed]);
 
   /** Leads filtered by selected ZIP code (or all exposed if none selected) */
   const filteredDayLeads = useMemo(() => {
+    if (selectedZip) {
+      const zipMatches = dayLeads.filter((o) => (o.zipCode || "").trim().slice(0, 5) === selectedZip);
+      if (zipMatches.length > 0) return zipMatches;
+    }
     const base = showOutside ? dayLeads : dayExposed;
     if (!selectedZip) return base;
     return base.filter((o) => (o.zipCode || "").trim().slice(0, 5) === selectedZip);
@@ -483,8 +527,14 @@ export default function MapPage() {
                 ) : (
                   <>
                     <span className="font-semibold text-foreground">{dayExposed.length}</span> buildings across{" "}
-                    <span className="font-semibold text-foreground">{affectedZips.length}</span> affected ZIP codes (
-                    {affectedZips.map((z) => z.zip).join(", ")}) inside {longDate(catalogStorm.date)}.
+                    <span className="font-semibold text-foreground">{affectedZips.length}</span> affected ZIP codes
+                    {affectedZips.length > 0 && affectedZips.length <= 8 && (
+                      <> ({affectedZips.map((z) => z.zip).join(", ")})</>
+                    )}
+                    {affectedZips.length > 8 && (
+                      <> ({affectedZips.slice(0, 6).map((z) => z.zip).join(", ")}…)</>
+                    )}{" "}
+                    inside {longDate(catalogStorm.date)}.
                   </>
                 )
               ) : storm.date ? (

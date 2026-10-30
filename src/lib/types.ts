@@ -57,6 +57,23 @@ export interface Storm extends StormSummary {
   reports: HailReport[];
   warnings: WarningPolygon[];
   affectedZips?: string[];
+  zipBuildingCounts?: Record<string, { count: number; pipeline: number }>;
+  buildings?: Array<{
+    parcelId: string;
+    address: string;
+    city: string;
+    state?: string;
+    zipCode?: string;
+    owner: string;
+    lat: number;
+    lng: number;
+    score: number;
+    tier: SwathTier;
+    hail: number;
+    value: number;
+    unresolved: boolean;
+    permitStatus?: string;
+  }>;
 }
 
 export interface Parcel {

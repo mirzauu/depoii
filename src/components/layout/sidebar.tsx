@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
-import { Briefcase, Building2, ChevronDown, ChevronsLeft, ChevronsRight, House, Info, Layers, Search, Shield, type LucideIcon } from "lucide-react";
+import { Briefcase, Building2, ChevronDown, ChevronsLeft, ChevronsRight, House, Info, Layers, Search, Shield, Trophy, type LucideIcon } from "lucide-react";
 import { cn } from "cn";
 import { DepoiiAiMark, DepoiiMark } from "./depoii-logo";
 import { useMe } from "@/hooks/use-me";
@@ -14,6 +14,7 @@ type NavGroup = { id: string; label: string; icon: NavIcon; items: NavLink[]; ma
 
 export const TOP: (NavLink & { icon: NavIcon })[] = [
   { href: "/", label: "Overview", icon: House, permission: "nav:overview" },
+  { href: "/competitors", label: "Leaderboard", icon: Trophy, engine: true, permission: "nav:competitors" },
   { href: "", label: "AI Assistant", icon: DepoiiAiMark, badge: "Soon", disabled: true },
 ];
 
@@ -26,7 +27,6 @@ export const GROUPS: NavGroup[] = [
       { href: "/pipeline", label: "Hot Sheet", match: ["/parcels", "/property"], permission: "nav:pipeline" },
       { href: "/roof-aging", label: "Aging Roof", engine: true, permission: "nav:roof_aging" },
       { href: "/map", label: "Hail Map", engine: true, permission: "nav:map" },
-      { href: "/competitors", label: "Leaderboard", engine: true, permission: "nav:competitors" },
     ],
   },
   {
