@@ -12,6 +12,7 @@ import {
   Lock,
 } from "lucide-react";
 import { ContractorLink } from "@/components/contractor-link";
+import { RoofTimeline } from "@/components/roof-timeline";
 import { useEngine } from "@/components/use-engine";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { mapParcelDossier } from "@/lib/engine-api";
@@ -264,6 +265,9 @@ export function ParcelDetailDrawer({
                 </dl>
               </Section>
 
+              {/* 5-Year Roof Imagery Timeline */}
+              <RoofTimeline lat={p.lat} lng={p.lng} address={p.address} parcelId={p.id} />
+
               {/* Parcel & Building Specs */}
               <Section title="Parcel">
                 <dl>
@@ -448,6 +452,25 @@ export function ParcelDetailDrawer({
                         )}
                         {pm.scope && (
                           <p className="mt-1 text-xs text-muted-foreground line-clamp-4">{pm.scope}</p>
+                        )}
+                        {(pm.sourceUrl || pm.sourceSystem) && (
+                          <div className="mt-1.5 pt-1.5 border-t border-border/40 flex items-center justify-between text-xs">
+                            <span className="text-[11px] text-muted-foreground">Source:</span>
+                            {pm.sourceUrl ? (
+                              <a
+                                href={pm.sourceUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1 text-primary hover:underline font-medium text-[11px]"
+                                title={`Open official source record: ${pm.sourceSystem || pm.sourceUrl}`}
+                              >
+                                <span>{pm.sourceSystem || "Official Source"}</span>
+                                <ExternalLink className="size-3" />
+                              </a>
+                            ) : (
+                              <span className="text-[11px] text-muted-foreground">{pm.sourceSystem}</span>
+                            )}
+                          </div>
                         )}
                       </li>
                     ))}

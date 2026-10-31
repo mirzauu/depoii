@@ -90,3 +90,10 @@ htmlcov/
 
 # Nested git metadata (monorepo owns history)
 Roofx/depoii-data-engine/.git/
+
+# Local caches
+public/aerial_cache/
+Roofx/thumbnails/*.png
+data/permits_batch_*.json
+data/zone5_all_permits_audit.json
+data/remaining_40_leads.json

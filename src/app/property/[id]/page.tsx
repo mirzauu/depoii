@@ -9,6 +9,7 @@ import { ContractorLink } from "@/components/contractor-link";
 import { useDepoii } from "@/components/depoii-provider";
 import { ProvenanceBadge } from "@/components/badges";
 import { ProofCard } from "@/components/proof-card";
+import { RoofTimeline } from "@/components/roof-timeline";
 import { PermitContactsCard } from "@/components/permit-contacts-card";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -66,6 +67,9 @@ export default function PropertyPage() {
           </CardHeader>
           <CardContent>
             <ProofCard o={o} />
+            <div className="mt-4 border-t border-border/80 pt-4">
+              <RoofTimeline lat={parcel.lat} lng={parcel.lng} address={parcel.address} parcelId={parcel.id} />
+            </div>
           </CardContent>
         </Card>
 

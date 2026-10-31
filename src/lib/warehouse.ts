@@ -806,6 +806,8 @@ export async function permitsParcel(parcelId: string) {
       roofSystem: p.probable_roof_system || "",
       contractorName: p.contractor_name || "",
       scopeDescription: p.raw_description || "",
+      sourceSystem: p.source_system || p.data_source || "",
+      sourceUrl: p.source_url || "",
     })),
   };
 }
@@ -1272,6 +1274,7 @@ export async function parcelBrowseDetail(id: string) {
       contractor_name: p.contractor_name || "", contractor_phone: p.contractor_phone || "",
       contractor_license: p.contractor_license || "", roof_system: p.probable_roof_system || "",
       is_pure_reroof: Boolean(p.is_pure_reroof), source_system: p.source_system || "", match: "parcel_id",
+      source_url: p.source_url || "",
     })),
     contacts: contactsList, sources: Object.keys(ev).length ? [{ label: "Lead evidence", url: "", system: "Depoii" }] : [],
   };

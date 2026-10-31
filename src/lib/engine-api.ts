@@ -671,6 +671,7 @@ export function mapBrowseParcelDetail(body: unknown): BrowseParcel {
       roofSystem: str(p, ["roof_system", "roofSystem", "probable_roof_system"]),
       isPureReroof: Boolean(p.is_pure_reroof ?? p.isPureReroof),
       sourceSystem: str(p, ["source_system", "sourceSystem"]),
+      sourceUrl: str(p, ["source_url", "sourceUrl"]) || undefined,
       match: str(p, ["match"], "parcel_id"),
     })),
     contacts: rows(row.contacts, []).map((c) => ({
@@ -748,7 +749,7 @@ export interface ParcelDossier extends EngineParcel {
   improvementSections?: string;
   footprintSqft?: number;
   stories?: number;
-  permits: { id: string; permitNumber: string; issued: string; valuation: string; status: string; roofSystem: string; contractor: string; scope: string }[];
+  permits: { id: string; permitNumber: string; issued: string; valuation: string; status: string; roofSystem: string; contractor: string; scope: string; sourceSystem?: string; sourceUrl?: string }[];
 }
 
 export function mapParcelDossier(body: unknown): ParcelDossier {
@@ -811,6 +812,8 @@ export function mapParcelDossier(body: unknown): ParcelDossier {
       roofSystem: str(p, ["roofSystem", "roof_system"]),
       contractor: str(p, ["contractorName", "contractor_name"]),
       scope: str(p, ["scopeDescription", "description"]),
+      sourceSystem: str(p, ["sourceSystem", "source_system"]),
+      sourceUrl: str(p, ["sourceUrl", "source_url"]),
     })),
   };
 }
@@ -1342,13 +1345,53 @@ export async function engineGet<T>(path: string, params: Record<string, string |
   return map(body);
 }
 
+export function hailSizeLabel(inches: number): string {
+  if (inches >= 4.5) return "Grapefruit size";
+  if (inches >= 4.0) return "Softball size";
+  if (inches >= 3.0) return "Tea cup size";
+  if (inches >= 2.75) return "Baseball size";
+  if (inches >= 2.5) return "Tennis ball size";
+  if (inches >= 2.0) return "Hen egg size";
+  if (inches >= 1.75) return "Golf ball size";
+  if (inches >= 1.5) return "Ping pong ball size";
+  if (inches >= 1.25) return "Half dollar size";
+  if (inches >= 1.0) return "Quarter size";
+  if (inches >= 0.88) return "Nickel size";
+  if (inches >= 0.75) return "Dime size";
+  return "";
+}
+
+export function formatHailDate(isoOrDate: string): string {
+  if (!isoOrDate) return "";
+  const clean = isoOrDate.slice(0, 10);
+  const match = clean.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!match) return isoOrDate;
+  const d = new Date(`${clean}T12:00:00Z`);
+  if (isNaN(d.getTime())) return isoOrDate;
+  return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
+}
+
 export interface EvidenceCard {
   status: string;
   score: number;
   verifiedAt: string;
   reason: string;
   cad: { found: boolean; account: string; owner: string; sqft: number; yearBuilt: number; value: number; legal: string; url: string } | null;
-  hail: { miles: number; inches: number; location: string; inZone: boolean } | null;
+  hail: {
+    miles: number;
+    inches: number;
+    location: string;
+    inZone: boolean;
+    date: string;
+    formattedDate: string;
+    stormName: string;
+    timestamp: string;
+    source: string;
+    spcFile: string;
+    sizeLabel: string;
+    joules: number;
+    url: string;
+  } | null;
   permits: { status: string; found: number; postStorm: number; checked: string; url: string } | null;
   aerialDate: string;
   hasAerial: boolean;
@@ -1361,13 +1404,63 @@ export function mapEvidenceCard(body: unknown): EvidenceCard {
   const hail = full.hail_proximity as Row | undefined;
   const muni = full.municipal_permits as Row | undefined;
   const aerial = (full.aerial ?? {}) as Row;
+
+  let hailObj: EvidenceCard["hail"] = null;
+  if (hail) {
+    const rawDate = str(hail, ["date", "event_date", "storm_date"]) || str(b, ["event_date"]);
+    const inches = num(hail, ["hail_size_inches", "inches"]) || num(b, ["nearest_hail_size_in", "max_hail_inches"]);
+    const miles = num(hail, ["distance_miles", "miles"]) || num(b, ["nearest_hail_distance_mi"]);
+    const location = str(hail, ["report_location", "location"]) || str(b, ["nearest_hail_location"]);
+    const stormName = str(hail, ["storm_name"]) || str(b, ["storm_name"]) || str(full, ["storm_name"]);
+    const timestamp = str(hail, ["report_timestamp", "time"]);
+    const spcFile = str(hail, ["spc_file"]);
+    const source = str(hail, ["source"]) || (spcFile ? `NOAA Storm Prediction Center (${spcFile})` : "NOAA Storm Prediction Center");
+    const joules = num(hail, ["kinetic_energy_joules"]) || num(b, ["kinetic_energy_joules"]);
+    const inZone = hail.is_in_strike_zone != null ? Boolean(hail.is_in_strike_zone) : miles <= 3.0;
+    const label = hailSizeLabel(inches);
+    const sizeLabel = location.toLowerCase().includes("size") ? "" : label;
+
+    let date = rawDate;
+    if (!date && spcFile) {
+      const m = spcFile.match(/^(\d{2})(\d{2})(\d{2})/);
+      if (m) date = `20${m[1]}-${m[2]}-${m[3]}`;
+    }
+
+    let url = "";
+    if (date) {
+      const clean = date.slice(0, 10).replace(/-/g, "");
+      if (clean.length === 8) {
+        url = `https://www.spc.noaa.gov/climo/reports/${clean.slice(2)}_rpts.html`;
+      }
+    } else if (spcFile) {
+      const m = spcFile.match(/^(\d{6})/);
+      if (m) url = `https://www.spc.noaa.gov/climo/reports/${m[1]}_rpts.html`;
+    }
+
+    hailObj = {
+      miles,
+      inches,
+      location,
+      inZone,
+      date,
+      formattedDate: formatHailDate(date),
+      stormName,
+      timestamp,
+      source,
+      spcFile,
+      sizeLabel,
+      joules,
+      url,
+    };
+  }
+
   return {
     status: str(b, ["verification_status"], "UNVERIFIED"),
     score: num(b, ["verification_score"]),
     verifiedAt: str(full, ["verified_at"]).slice(0, 10),
     reason: str(full, ["disqualification_reason"]),
     cad: cad ? { found: Boolean(cad.found), account: str(cad, ["account"]), owner: str(cad, ["owner"]), sqft: 0, yearBuilt: 0, value: 0, legal: str(cad, ["legal"]), url: str(cad, ["cad_url"]) } : null,
-    hail: hail ? { miles: num(hail, ["distance_miles"]), inches: num(hail, ["hail_size_inches"]), location: str(hail, ["report_location"]), inZone: Boolean(hail.is_in_strike_zone) } : null,
+    hail: hailObj,
     permits: muni ? { status: str(muni, ["audit_status"]), found: num(muni, ["total_found"]), postStorm: num(muni, ["post_storm_count"]), checked: str(muni, ["portal_check_date"]), url: str(muni, ["portal_url"]) } : null,
     aerialDate: str(b, ["aerial_capture_date"]) || str(aerial, ["capture_date"]),
     hasAerial: Boolean(aerial.success || str(b, ["aerial_snapshot_url"])),

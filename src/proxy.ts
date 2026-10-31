@@ -13,7 +13,11 @@ function isPublicAsset(pathname: string) {
     pathname === "/apple-icon" ||
     pathname.startsWith("/manifest") ||
     pathname.startsWith("/landing/") ||
-    pathname.startsWith("/api/aerial")
+    pathname.startsWith("/api/aerial") ||
+    pathname.startsWith("/api/timeline-aerial") ||
+      pathname.startsWith("/api/parcel-boundary") ||
+    pathname.startsWith("/aerial_cache") ||
+    pathname.startsWith("/cesium")
   );
 }
 

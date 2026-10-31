@@ -62,7 +62,7 @@ function Check_({ pass, title, children, href }: { pass: boolean | null; title: 
             </a>
           )}
         </p>
-        <p className="text-muted-foreground">{children}</p>
+        <div className="text-muted-foreground">{children}</div>
       </div>
     </li>
   );
@@ -83,7 +83,17 @@ function AerialImage({ leadId, stamp }: { leadId: string; stamp: number }) {
   );
 }
 
-export function VerificationCard({ leadId }: { leadId: string }) {
+export function VerificationCard({
+  leadId,
+  className,
+  hideHeader = false,
+  hideImage = false,
+}: {
+  leadId: string;
+  className?: string;
+  hideHeader?: boolean;
+  hideImage?: boolean;
+}) {
   const card = useEngine(`verifications/evidence-card/${encodeURIComponent(leadId)}`, {}, mapEvidenceCard);
   const [busy, setBusy] = useState(false);
   const [fault, setFault] = useState<string | null>(null);
@@ -134,12 +144,13 @@ export function VerificationCard({ leadId }: { leadId: string }) {
   };
   const unchecked = view.status === "UNVERIFIED" && !view.cad && !view.hail && !view.permits;
   return (
-    <section className="border-b border-border p-4">
-      <div className="flex flex-wrap items-center gap-2">
-        <h2 className="text-sm font-semibold">Verification</h2>
-        <VerificationBadge status={view.status} score={view.score} />
-        {/* Verification button hidden for now */}
-      </div>
+    <section className={cn("p-4", className)}>
+      {!hideHeader && (
+        <div className="flex flex-wrap items-center gap-2 mb-2">
+          <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">5-Stage Verification Audit</h2>
+          <VerificationBadge status={view.status} score={view.score} />
+        </div>
+      )}
       {fault && <p className="mt-2 text-sm text-red-400">{fault}</p>}
       {card.error && !v && !fault && (
         <p className="mt-2 text-sm text-muted-foreground">No live check on file yet for appraisal, hail, permits, and satellite roof imagery for this parcel.</p>
@@ -155,8 +166,66 @@ export function VerificationCard({ leadId }: { leadId: string }) {
                 ? [`Account ${view.cad.account}`, view.cad.owner, view.cad.sqft ? `${num(view.cad.sqft)} sq ft` : "", view.cad.yearBuilt ? `built ${view.cad.yearBuilt}` : "", view.cad.value ? usd(view.cad.value, true) : ""].filter(Boolean).join(" · ")
                 : "No matching county record"}
             </Check_>
-            <Check_ pass={view.hail ? view.hail.inZone : null} title="Hail strike">
-              {view.hail ? `${view.hail.miles.toFixed(2)} mi from ${view.hail.inches.toFixed(2)}″ hail${view.hail.location ? ` (${view.hail.location})` : ""}` : "Not checked"}
+            <Check_ pass={view.hail ? view.hail.inZone : null} title="Hail strike" href={view.hail?.url}>
+              {view.hail ? (
+                <div className="mt-0.5 space-y-1">
+                  <div className="text-foreground">
+                    <span className="font-semibold text-foreground">{view.hail.inches.toFixed(2)}″ hail</span>
+                    {view.hail.sizeLabel ? (
+                      <span className="ml-1 text-xs text-muted-foreground">({view.hail.sizeLabel})</span>
+                    ) : null}
+                    {" · "}
+                    <span className="font-medium">{view.hail.miles.toFixed(2)} mi</span> from strike point
+                    {view.hail.location ? (
+                      <span className="text-muted-foreground"> ({view.hail.location})</span>
+                    ) : null}
+                  </div>
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
+                    {view.hail.formattedDate ? (
+                      <span className="inline-flex items-center gap-1">
+                        <span className="font-medium text-foreground/80">Strike date:</span>
+                        <span className="text-foreground/90 font-medium">{view.hail.formattedDate}</span>
+                        {view.hail.timestamp ? <span className="text-[11px] text-muted-foreground">({view.hail.timestamp})</span> : null}
+                      </span>
+                    ) : null}
+                    {view.hail.stormName ? (
+                      <>
+                        <span className="text-muted-foreground/40">·</span>
+                        <span className="inline-flex items-center gap-1">
+                          <span className="font-medium text-foreground/80">Storm:</span>
+                          <span className="text-foreground/90">{view.hail.stormName}</span>
+                        </span>
+                      </>
+                    ) : null}
+                    {view.hail.source ? (
+                      <>
+                        <span className="text-muted-foreground/40">·</span>
+                        <span className="inline-flex items-center gap-1">
+                          <span className="font-medium text-foreground/80">Source:</span>
+                          <span>{view.hail.source}</span>
+                        </span>
+                      </>
+                    ) : null}
+                    {view.hail.inZone ? (
+                      <>
+                        <span className="text-muted-foreground/40">·</span>
+                        <span className="inline-flex items-center rounded-sm bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium text-emerald-600 dark:text-emerald-400">
+                          Inside strike swath
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="text-muted-foreground/40">·</span>
+                        <span className="inline-flex items-center rounded-sm bg-amber-500/10 px-1.5 py-0.5 text-[10px] font-medium text-amber-600 dark:text-amber-400">
+                          Outside primary swath
+                        </span>
+                      </>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                "Not checked"
+              )}
             </Check_>
             <Check_ pass={view.permits ? (view.permits.status === "NO_POST_STORM_ROOF_PERMIT_FOUND" || view.permits.status === "NON_ROOF_PERMIT_DETECTED") : null} title="City permits since the storm" href={view.permits?.url}>
               {view.permits
@@ -171,7 +240,7 @@ export function VerificationCard({ leadId }: { leadId: string }) {
               {view.aerialDate || "No image on file"}
             </Check_>
           </ul>
-          {view.hasAerial && <AerialImage leadId={leadId} stamp={stamp} />}
+          {view.hasAerial && !hideImage && <AerialImage leadId={leadId} stamp={stamp} />}
         </>
       )}
     </section>

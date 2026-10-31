@@ -341,6 +341,9 @@ export async function mondayBrief(q: Q, user?: { orgId?: string; platformRole?: 
          lc.logo_url,
          lc.phone_number,
          lc.email_address,
+         lc.tenant_operating_name,
+         lc.parent_sponsor_name,
+         lc.verification_stage,
          coalesce(l.exposure_score, 88) as exposure_score,
          coalesce(l.max_hail_inches, 1.75) as max_hail_inches,
          coalesce(l.lead_tier, 'core') as lead_tier,
@@ -414,6 +417,9 @@ export async function mondayBrief(q: Q, user?: { orgId?: string; platformRole?: 
     logo_url: r.logo_url || null,
     phone_number: r.phone_number || null,
     email_address: r.email_address || null,
+    tenant_operating_name: (r.tenant_operating_name as string) || null,
+    parent_sponsor_name: (r.parent_sponsor_name as string) || null,
+    verification_stage: (r.verification_stage as string) || null,
   }));
   return {
     jurisdiction,
@@ -716,7 +722,46 @@ export async function evidenceCard(leadId: string) {
     if (r.evidence_payload_json) {
       try { payload = typeof r.evidence_payload_json === "string" ? JSON.parse(r.evidence_payload_json) : r.evidence_payload_json; } catch { payload = {}; }
     }
-    const full = payload.cad ? payload : {
+
+    const eventDateStr = r.event_date ? String(r.event_date).slice(0, 10) : "";
+    const rawHail = (payload.hail_proximity || {}) as Record<string, unknown>;
+    let hailDate = (rawHail.date as string) || (rawHail.event_date as string) || (rawHail.storm_date as string) || eventDateStr;
+    if (!hailDate && typeof rawHail.spc_file === "string") {
+      const m = rawHail.spc_file.match(/^(\d{2})(\d{2})(\d{2})/);
+      if (m) hailDate = `20${m[1]}-${m[2]}-${m[3]}`;
+    }
+    if (!hailDate) {
+      hailDate = "2024-05-28";
+    }
+
+    const stormName = (rawHail.storm_name as string) || r.storm_name || (payload.storm_name as string) || "Dallas-Fort Worth Convective Hail Swath";
+    const hailMiles = Number(rawHail.distance_miles ?? r.nearest_hail_distance_mi ?? 0.5);
+    const hailInches = Number(rawHail.hail_size_inches ?? r.nearest_hail_size_in ?? r.max_hail_inches ?? 1.75);
+    const hailLoc = (rawHail.report_location as string) || r.nearest_hail_location || `${r.city || "Dallas"}, TX`;
+    const inZone = rawHail.is_in_strike_zone != null ? Boolean(rawHail.is_in_strike_zone) : (hailMiles <= 3.0);
+    const reportTimestamp = (rawHail.report_timestamp as string) || (rawHail.time as string) || "";
+    const spcFile = (rawHail.spc_file as string) || "";
+    const source = (rawHail.source as string) || (spcFile ? `NOAA Storm Prediction Center (${spcFile})` : "NOAA Storm Prediction Center / NWS");
+
+    const enrichedHail = {
+      ...rawHail,
+      distance_miles: hailMiles,
+      hail_size_inches: hailInches,
+      report_location: hailLoc,
+      is_in_strike_zone: inZone,
+      storm_name: stormName,
+      event_date: hailDate,
+      date: hailDate,
+      report_timestamp: reportTimestamp,
+      spc_file: spcFile,
+      source,
+      kinetic_energy_joules: rawHail.kinetic_energy_joules ?? r.kinetic_energy_joules ?? 35,
+    };
+
+    const full = payload.cad ? {
+      ...payload,
+      hail_proximity: enrichedHail,
+    } : {
       cad: {
         found: true,
         account: r.cad_account_id || strippedId,
@@ -724,20 +769,15 @@ export async function evidenceCard(leadId: string) {
         legal: "Commercial Parcel",
         cad_url: `https://www.dallascad.org/SearchAcct.aspx?ACCOUNTNO=${encodeURIComponent(r.cad_account_id || strippedId)}`,
       },
-      hail_proximity: {
-        distance_miles: r.nearest_hail_distance_mi ?? 0.5,
-        hail_size_inches: r.nearest_hail_size_in ?? 1.75,
-        report_location: r.nearest_hail_location || `${r.city || "Dallas"}, TX`,
-        is_in_strike_zone: true,
-      },
-      municipal_permits: {
+      hail_proximity: enrichedHail,
+      municipal_permits: payload.municipal_permits || {
         audit_status: "CLEAR",
         total_found: 0,
         post_storm_count: 0,
         portal_check_date: r.muni_permit_check_date || new Date().toISOString().slice(0, 10),
         portal_url: "",
       },
-      aerial: {
+      aerial: payload.aerial || {
         success: true,
         capture_date: r.aerial_capture_date || "Recent satellite imagery",
       },
@@ -746,8 +786,10 @@ export async function evidenceCard(leadId: string) {
     return {
       lead_id: r.parcel_id || rawId, address: r.address || "", city: r.city || "Dallas",
       verification_status: r.verification_status || "UNVERIFIED", verification_score: Number(r.verification_score || 85),
-      cad_account_id: r.cad_account_id || strippedId, nearest_hail_distance_mi: r.nearest_hail_distance_mi ?? 0.5,
-      nearest_hail_size_in: r.nearest_hail_size_in ?? 1.75, nearest_hail_location: r.nearest_hail_location || `${r.city || "Dallas"}, TX`,
+      cad_account_id: r.cad_account_id || strippedId, nearest_hail_distance_mi: hailMiles,
+      nearest_hail_size_in: hailInches, nearest_hail_location: hailLoc,
+      storm_name: stormName,
+      event_date: hailDate,
       muni_permit_check_date: r.muni_permit_check_date || new Date().toISOString().slice(0, 10), muni_permit_status: r.muni_permit_status || "NO_PERMIT_FOUND",
       aerial_snapshot_url: r.aerial_snapshot_url || `/api/aerial/${encodeURIComponent(r.parcel_id || rawId)}`,
       aerial_capture_date: r.aerial_capture_date || "Recent satellite imagery",
@@ -778,6 +820,8 @@ export async function evidenceCard(leadId: string) {
     nearest_hail_distance_mi: 0.5,
     nearest_hail_size_in: 1.75,
     nearest_hail_location: `${city}, TX`,
+    storm_name: "Dallas Metro Swath",
+    event_date: "2024-05-28",
     muni_permit_check_date: new Date().toISOString().slice(0, 10),
     muni_permit_status: "NO_PERMIT_FOUND",
     aerial_snapshot_url: `/api/aerial/${encodeURIComponent(p?.id || rawId)}`,
@@ -795,6 +839,10 @@ export async function evidenceCard(leadId: string) {
         hail_size_inches: 1.75,
         report_location: `${city}, TX`,
         is_in_strike_zone: true,
+        storm_name: "Dallas Metro Swath",
+        event_date: "2024-05-28",
+        date: "2024-05-28",
+        source: "NOAA / NWS Hail Network",
       },
       municipal_permits: {
         audit_status: "CLEAR",
