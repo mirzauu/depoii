@@ -137,7 +137,7 @@ export function AccountMenu({ collapsed = false }: { collapsed?: boolean }) {
         title="Account"
         onClick={() => setOpen((value) => !value)}
         className={cn(
-          "flex items-center justify-center rounded-md text-muted-foreground hover:bg-muted hover:text-foreground",
+          "flex items-center justify-center rounded-md text-muted-foreground hover:bg-neutral-200/60 dark:hover:bg-muted hover:text-foreground transition-colors",
           collapsed ? "size-9" : "w-full gap-2.5 px-3 py-2 text-sm",
         )}
       >
@@ -250,7 +250,7 @@ export function Sidebar({ defaultCollapsed }: { defaultCollapsed?: boolean } = {
   })).filter((group) => group.items.length > 0);
 
   const fade = cn("overflow-hidden whitespace-nowrap transition-opacity duration-150", collapsed ? "opacity-0" : "opacity-100");
-  const row = "flex w-full items-center gap-2.5 overflow-hidden rounded-md px-3 py-2 text-sm whitespace-nowrap text-muted-foreground hover:bg-muted hover:text-foreground";
+  const row = "flex w-full items-center gap-2.5 overflow-hidden rounded-md px-3 py-2 text-sm whitespace-nowrap text-muted-foreground hover:bg-neutral-200/60 dark:hover:bg-muted hover:text-foreground transition-colors";
 
   const renderGroup = (group: NavGroup) => {
     const Icon = group.icon;
@@ -271,7 +271,7 @@ export function Sidebar({ defaultCollapsed }: { defaultCollapsed?: boolean } = {
                 >
                   <span>{item.label}</span>
                   {item.badge && (
-                    <span className="rounded-full border border-current/30 bg-current/10 px-1.5 py-0.5 text-[10px] font-medium text-current">
+                    <span className="rounded-full border border-current/30 bg-current/10 px-1.5 py-0.5 text-[11px] font-medium text-current">
                       {item.badge}
                     </span>
                   )}
@@ -282,12 +282,12 @@ export function Sidebar({ defaultCollapsed }: { defaultCollapsed?: boolean } = {
                   href={item.href}
                   className={cn(
                     "w-full rounded-md py-1.5 pr-3 pl-9 text-left text-sm whitespace-nowrap text-muted-foreground hover:bg-muted hover:text-foreground flex items-center justify-between",
-                    isActive(path, item, fromParam) && "bg-muted font-medium text-foreground",
+                    isActive(path, item, fromParam) && "bg-white dark:bg-muted font-semibold text-foreground shadow-xs border border-neutral-200/80 dark:border-transparent",
                   )}
                 >
                   <span>{item.label}</span>
                   {item.badge && (
-                    <span className="rounded-full border border-current/30 bg-current/10 px-1.5 py-0.5 text-[10px] font-medium text-current">
+                    <span className="rounded-full border border-current/30 bg-current/10 px-1.5 py-0.5 text-[11px] font-medium text-current">
                       {item.badge}
                     </span>
                   )}
@@ -305,7 +305,7 @@ export function Sidebar({ defaultCollapsed }: { defaultCollapsed?: boolean } = {
         onClick={() => onGroup(group.id)}
         title={group.label}
         aria-expanded={expanded}
-        className={cn(row, collapsed && here && "bg-muted text-foreground", !collapsed && here && "text-foreground")}
+        className={cn(row, collapsed && here && "bg-white dark:bg-muted font-semibold text-foreground shadow-xs border border-neutral-200/80 dark:border-transparent", !collapsed && here && "text-foreground font-medium")}
       >
         <Icon className="size-4 shrink-0" />
         <span className={cn(fade, "flex-1 text-left truncate")}>{group.label}</span>
@@ -328,7 +328,7 @@ export function Sidebar({ defaultCollapsed }: { defaultCollapsed?: boolean } = {
   };
 
   return (
-    <aside className={cn("sticky top-0 z-40 hidden h-screen shrink-0 flex-col border-r border-border bg-card/40 transition-[width] duration-200 ease-out lg:flex print:hidden", preview && "flex! h-full", collapsed ? "w-16" : "w-60")}>
+    <aside className={cn("sticky top-0 z-40 hidden h-screen shrink-0 flex-col border-r border-border bg-neutral-50 dark:bg-[#131310] transition-[width] duration-200 ease-out lg:flex print:hidden", preview && "flex! h-full", collapsed ? "w-16" : "w-60")}>
       <div className="flex items-center gap-2 px-4 py-4">
         <NavTo
           href="/"
@@ -341,16 +341,16 @@ export function Sidebar({ defaultCollapsed }: { defaultCollapsed?: boolean } = {
           }}
         >
           <DepoiiMark animated={logoOn} className="size-7 text-foreground" />
-          <span className={cn(fade, "text-lg font-bold tracking-tight")}>Depoii</span>
+          <span className={cn(fade, "text-lg font-bold tracking-tight text-foreground")}>Depoii</span>
         </NavTo>
         {!collapsed && (
-          <button type="button" onClick={() => setRail(true)} title="Collapse sidebar" className="ml-auto rounded-md p-1 text-muted-foreground hover:bg-muted hover:text-foreground">
+          <button type="button" onClick={() => setRail(true)} title="Collapse sidebar" className="ml-auto rounded-md p-1 text-muted-foreground hover:bg-neutral-200/60 dark:hover:bg-muted hover:text-foreground transition-colors cursor-pointer">
             <ChevronsLeft className="size-4" />
           </button>
         )}
       </div>
       {collapsed && (
-        <button type="button" onClick={() => setRail(false)} title="Expand sidebar" className="mx-auto mb-2 rounded-md p-1 text-muted-foreground hover:bg-muted hover:text-foreground">
+        <button type="button" onClick={() => setRail(false)} title="Expand sidebar" className="mx-auto mb-2 rounded-md p-1 text-muted-foreground hover:bg-neutral-200/60 dark:hover:bg-muted hover:text-foreground transition-colors cursor-pointer">
           <ChevronsRight className="size-4" />
         </button>
       )}
@@ -371,7 +371,7 @@ export function Sidebar({ defaultCollapsed }: { defaultCollapsed?: boolean } = {
                   <span className={fade}>{link.label}</span>
                 </div>
                 {link.badge && (
-                  <span className={cn(fade, "rounded-full border border-current/30 bg-current/10 px-1.5 py-0.5 text-[10px] font-medium text-current")}>
+                  <span className={cn(fade, "rounded-full border border-current/30 bg-current/10 px-1.5 py-0.5 text-[11px] font-medium text-current")}>
                     {link.badge}
                   </span>
                 )}
@@ -379,7 +379,7 @@ export function Sidebar({ defaultCollapsed }: { defaultCollapsed?: boolean } = {
             );
           }
           return (
-            <NavTo key={link.href} href={link.href} title={link.label} className={cn(row, isActive(path, link, fromParam) && "bg-muted font-medium text-foreground")}>
+            <NavTo key={link.href} href={link.href} title={link.label} className={cn(row, isActive(path, link, fromParam) && "bg-white dark:bg-muted font-semibold text-foreground shadow-xs border border-neutral-200/80 dark:border-transparent")}>
               <Icon className="size-4 shrink-0" />
               <span className={fade}>{link.label}</span>
             </NavTo>
@@ -392,7 +392,7 @@ export function Sidebar({ defaultCollapsed }: { defaultCollapsed?: boolean } = {
 
         {navReady && me?.platformRole === "superadmin" && (
           <div className="mt-auto border-t border-border pt-2">
-            <NavTo href={adminLink.href} title={adminLink.label} className={cn(row, isActive(path, adminLink, fromParam) && "bg-muted font-medium text-foreground")}>
+            <NavTo href={adminLink.href} title={adminLink.label} className={cn(row, isActive(path, adminLink, fromParam) && "bg-white dark:bg-muted font-semibold text-foreground shadow-xs border border-neutral-200/80 dark:border-transparent")}>
               <Shield className="size-4 shrink-0" />
               <span className={fade}>{adminLink.label}</span>
             </NavTo>

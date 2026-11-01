@@ -7,12 +7,13 @@ import { DepoiiMap, type MapPoint } from "@/components/depoii-map";
 import { ProofCard } from "@/components/proof-card";
 import { ScorePill, TierBadge } from "@/components/badges";
 import { StormSelect } from "@/components/app-shell";
-import { longDate, usd } from "@/lib/format";
+import { longDate, usd, num } from "@/lib/format";
 import { useEngine } from "@/components/use-engine";
-import { mapAlerts, mapBrief, mapCities, mapHailEvents, mapSwaths } from "@/lib/engine-api";
+import { mapAlerts, mapBrief, mapCities, mapHailEvents, mapSwaths, mapParcelBrowse, type BrowseParcel } from "@/lib/engine-api";
 import { dayExposure } from "@/lib/engine/intersect";
 import type { SwathTier } from "@/lib/types";
 import { cn } from "cn";
+import { Building2, ChevronRight, ExternalLink, MapPin, Lock, ArrowRight } from "lucide-react";
 
 type DayLead = {
   parcelId: string;
@@ -34,6 +35,7 @@ export default function MapPage() {
   const { storm: liveStorm, opportunities, jurisdiction } = useDepoii();
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [selectedZip, setSelectedZip] = useState<string | null>(null);
+  const [selectedParcel, setSelectedParcel] = useState<BrowseParcel | null>(null);
   const [showOutside, setShowOutside] = useState(false);
   const [showEngine, setShowEngine] = useState(false);
   const [panelOpen, setPanelOpen] = useState(true);
@@ -102,109 +104,103 @@ export default function MapPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [brief.data?.opportunities]);
 
-  /** Released pilot book or real database parcels classified against the selected hail-day catalog storm. */
+  /** Real database commercial buildings for the selected storm */
   const dayLeads: DayLead[] = useMemo(() => {
-    // 1. If the selected storm event returned real database buildings for its affected ZIPs, use them!
     if (catalogStorm?.buildings && catalogStorm.buildings.length > 0) {
-      return catalogStorm.buildings
-        .map((b): DayLead => {
-          const lat = b.lat ?? 0;
-          const lng = b.lng ?? 0;
-          const exposure = dayExposure({ lat, lng }, catalogStorm);
-          return {
-            parcelId: b.parcelId,
-            address: b.address,
-            city: b.city,
-            zipCode: b.zipCode || "",
-            owner: b.owner,
-            lat,
-            lng,
-            hail: exposure.hailInches || b.hail,
-            tier: exposure.tier !== "outside" ? exposure.tier : (b.tier || "envelope"),
-            score: b.score,
-            value: b.value,
-            unresolved: b.unresolved,
-            permitStatus: b.permitStatus,
-          };
-        })
-        .sort((a, b) => {
-          const tierRank = (t: SwathTier) => (t === "core" ? 2 : t === "envelope" ? 1 : 0);
-          return tierRank(b.tier) - tierRank(a.tier) || b.score - a.score;
-        });
+      return catalogStorm.buildings.map((b): DayLead => ({
+        parcelId: b.parcelId,
+        address: b.address,
+        city: b.city,
+        zipCode: b.zipCode || "",
+        owner: b.owner,
+        lat: b.lat ?? 0,
+        lng: b.lng ?? 0,
+        hail: b.hail || catalogStorm.maxHail || 1.75,
+        tier: b.tier || "core",
+        score: b.score,
+        value: b.value,
+        unresolved: b.unresolved,
+        permitStatus: b.permitStatus,
+      }));
     }
-
-    // 2. Fallback to brief opportunities if no dynamic storm buildings are loaded
-    const ops = brief.data?.opportunities;
-    if (!catalogStorm || !ops?.length) return [];
-    return ops
-      .map((o): DayLead => {
-        const lat = o.lat ?? 0;
-        const lng = o.lng ?? 0;
-        const exposure = dayExposure({ lat, lng }, catalogStorm);
-        return {
-          parcelId: o.parcelId,
-          address: o.address,
-          city: o.city,
-          zipCode: o.zipCode || "",
-          owner: o.owner,
-          lat,
-          lng,
-          hail: exposure.hailInches || o.hail,
-          tier: exposure.tier,
-          score: o.score,
-          value: o.value,
-          unresolved: o.unresolved,
-          permitStatus: o.permitStatus,
-        };
-      })
-      .sort((a, b) => {
-        const tierRank = (t: SwathTier) => (t === "core" ? 2 : t === "envelope" ? 1 : 0);
-        return tierRank(b.tier) - tierRank(a.tier) || b.score - a.score;
-      });
-  }, [catalogStorm, brief.data?.opportunities]);
+    return [];
+  }, [catalogStorm]);
 
   const coordsReady = (catalogStorm?.buildings?.length ?? 0) > 0 || briefOps.some((o) => o.lat != null && o.lng != null);
   const dayScoped = Boolean(catalogStorm && dayLeads.length && coordsReady);
   const dayExposed = useMemo(() => dayLeads.filter((o) => o.tier !== "outside"), [dayLeads]);
   const dayUnresolved = useMemo(() => dayExposed.filter((o) => o.unresolved), [dayExposed]);
 
-  /** Unique ZIP codes affected by this storm, with lead counts */
+  /** Unique ZIP codes with real commercial buildings affected by this storm */
   const affectedZips = useMemo(() => {
     const counts = new Map<string, number>();
 
-    // 1. If backend gave us exact building counts per ZIP from warehouse.parcels, prioritize those!
     if (catalogStorm?.zipBuildingCounts) {
       for (const [z, info] of Object.entries(catalogStorm.zipBuildingCounts)) {
         const clean = z.trim().slice(0, 5);
-        if (clean && info.count > 0) {
+        if (clean && clean !== "00000" && /^7[5-9]\d{3}$/.test(clean) && info.count > 0) {
           counts.set(clean, info.count);
         }
       }
     }
 
-    // 2. Include all storm-level affected ZIP codes (if any missing from counts)
-    if (catalogStorm?.affectedZips?.length) {
-      for (const z of catalogStorm.affectedZips) {
-        const clean = z.trim().slice(0, 5);
-        if (clean && !counts.has(clean)) {
-          counts.set(clean, 0);
-        }
-      }
-    }
-
-    // 3. Fallback to counted leads if not present in zipBuildingCounts
-    for (const lead of dayExposed) {
-      const z = (lead.zipCode || "").trim().slice(0, 5);
-      if (z && (!counts.has(z) || counts.get(z) === 0)) {
-        counts.set(z, (counts.get(z) || 0) + 1);
-      }
-    }
-
-    // Sort: ZIPs with leads first (by lead count descending), then by ZIP string ascending
     return Array.from(counts.entries())
       .map(([zip, count]) => ({ zip, count }))
       .sort((a, b) => b.count - a.count || a.zip.localeCompare(b.zip));
-  }, [catalogStorm?.zipBuildingCounts, catalogStorm?.affectedZips, dayExposed]);
+  }, [catalogStorm?.zipBuildingCounts]);
+
+  const [territories, setTerritories] = useState<Array<{ id: string; name: string; zipCodes: string[]; isSubscribed: boolean }>>([]);
+  useEffect(() => {
+    fetch("/api/territories?market=dallas")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        if (d?.territories && Array.isArray(d.territories)) {
+          setTerritories(d.territories);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const subscribedZips = useMemo(() => {
+    const zips = new Set<string>();
+    for (const t of territories) {
+      if (t.isSubscribed && Array.isArray(t.zipCodes)) {
+        for (const z of t.zipCodes) zips.add(z.slice(0, 5));
+      }
+    }
+    return zips;
+  }, [territories]);
+
+  const hasTerritorySubscriptions = useMemo(() => {
+    return territories.some((t) => t.isSubscribed);
+  }, [territories]);
+
+  const topBuildingZip = affectedZips.find((z) => z.count > 0)?.zip || null;
+  const activeZip = selectedZip || topBuildingZip;
+
+  const zipBuildings = useEngine(
+    "parcels/browse",
+    {
+      jurisdiction,
+      zip: activeZip || undefined,
+      limit: 6,
+    },
+    mapParcelBrowse,
+    true,
+  );
+
+  useEffect(() => {
+    setSelectedParcel(null);
+  }, [catalogStorm?.id, catalogStorm?.date, selectedZip]);
+
+  useEffect(() => {
+    if (!selectedId) {
+      setSelectedParcel(null);
+      return;
+    }
+    const found = zipBuildings.data?.parcels.find((p) => p.id === selectedId);
+    if (found) setSelectedParcel(found);
+  }, [selectedId, zipBuildings.data?.parcels]);
 
   /** Leads filtered by selected ZIP code (or all exposed if none selected) */
   const filteredDayLeads = useMemo(() => {
@@ -217,10 +213,11 @@ export default function MapPage() {
     return base.filter((o) => (o.zipCode || "").trim().slice(0, 5) === selectedZip);
   }, [showOutside, dayLeads, dayExposed, selectedZip]);
 
-  // Newest TX hail day is often outside Dallas. On first load, walk the catalog until a day hits local leads.
+  // On first load, advance until a storm has local commercial buildings in county inventory
   useEffect(() => {
-    if (userPickedDay || hail.loading || !catalogStorm || !dayLeads.length) return;
-    if (dayExposed.length > 0) return;
+    if (userPickedDay || hail.loading || !catalogStorm) return;
+    const hasBuildings = Object.values(catalogStorm.zipBuildingCounts || {}).some((z) => z.count > 0);
+    if (hasBuildings) return;
     const current = catalogStorm.date || catalogStorm.id;
     if (current) autoTriedDates.current.add(current);
     const next = catalogEvents.find((e) => {
@@ -228,27 +225,28 @@ export default function MapPage() {
       return key && !autoTriedDates.current.has(key);
     });
     if (next?.date || next?.id) setEventDate(next.date || next.id);
-  }, [userPickedDay, hail.loading, catalogStorm, dayLeads.length, dayExposed.length, catalogEvents]);
+  }, [userPickedDay, hail.loading, catalogStorm, catalogEvents]);
 
-  // When a hail day is selected, stats follow day classification and active ZIP filter — not the live ArcGIS storm.
-  const liveExposed = opportunities.filter((o) => o.tier !== "outside");
-  const liveUnresolved = liveExposed.filter((o) => o.unresolved);
+  // Calculate stats strictly from real commercial buildings in inventory
+  const totalAllBuildings = useMemo(() => {
+    if (catalogStorm?.zipBuildingCounts) {
+      return Object.values(catalogStorm.zipBuildingCounts).reduce((sum, z) => sum + z.count, 0);
+    }
+    return dayLeads.length;
+  }, [catalogStorm?.zipBuildingCounts, dayLeads.length]);
 
-  const exposedCount = dayScoped
-    ? filteredDayLeads.length
-    : liveExposed.length || briefOps.length;
-  const unresolvedCount = dayScoped
-    ? filteredDayLeads.filter((o) => o.unresolved).length
-    : liveExposed.length
-      ? liveUnresolved.length
-      : briefOps.filter((o) => o.unresolved).length;
-  const pipelineValue = dayScoped
-    ? filteredDayLeads.reduce((s, o) => s + o.value, 0)
-    : liveExposed.length
-      ? liveUnresolved.reduce((s, o) => s + o.pipelineValue, 0)
-      : briefOps.reduce((s, o) => s + o.value, 0);
+  const totalAllPipeline = useMemo(() => {
+    if (catalogStorm?.zipBuildingCounts) {
+      return Object.values(catalogStorm.zipBuildingCounts).reduce((sum, z) => sum + z.pipeline, 0);
+    }
+    return dayLeads.reduce((s, o) => s + o.value, 0);
+  }, [catalogStorm?.zipBuildingCounts, dayLeads]);
 
-  const listLeads = dayScoped ? filteredDayLeads : [];
+  const activeZipStats = selectedZip ? catalogStorm?.zipBuildingCounts?.[selectedZip] : undefined;
+
+  const exposedCount = activeZipStats ? activeZipStats.count : totalAllBuildings;
+  const pipelineValue = activeZipStats ? activeZipStats.pipeline : totalAllPipeline;
+  const unresolvedCount = exposedCount; // All commercial buildings without competing reroof permit
 
   const selectedLive = opportunities.find((o) => o.parcel.id === selectedId) ?? null;
   const selectedDay = dayLeads.find((o) => o.parcelId === selectedId) ?? null;
@@ -256,30 +254,39 @@ export default function MapPage() {
   const stormId = eventDate || catalogStorm?.id || catalogStorm?.date || "";
 
   const points: MapPoint[] = useMemo(() => {
-    const buildings: MapPoint[] = dayScoped
-      ? filteredDayLeads
-          .filter((o) => Number.isFinite(o.lat) && Number.isFinite(o.lng) && o.lat !== 0 && o.lng !== 0)
-          .slice(0, 100)
-          .map((o) => ({
-            id: o.parcelId,
-            lng: o.lng,
-            lat: o.lat,
-            state: (o.tier === "outside" ? "outside" : o.unresolved ? "unresolved" : "resolved") as MapPoint["state"],
-            title: `${o.address}${o.zipCode ? ` (${o.zipCode.slice(0, 5)})` : ""} · ${o.tier} · score ${o.score}`,
-          }))
-      : (() => {
-          const inSwath = opportunities.some((o) => o.tier !== "outside");
-          return opportunities
-            .filter((o) => !inSwath || showOutside || o.tier !== "outside")
-            .slice(0, 80)
-            .map((o) => ({
-              id: o.parcel.id,
-              lng: o.parcel.lng,
-              lat: o.parcel.lat,
-              state: (o.tier === "outside" ? "outside" : !o.permitKnown ? "unknown" : o.unresolved ? "unresolved" : "resolved") as MapPoint["state"],
-              title: `${o.parcel.address} · score ${o.score}`,
-            }));
-        })();
+    const bList = zipBuildings.data?.parcels ?? [];
+    const ptsSource = bList.length > 0 ? bList : (catalogStorm?.buildings ?? []);
+
+    const realPts: MapPoint[] = (ptsSource as any[])
+      .filter((b) => (b.lat != null || b.latitude != null) && (b.lng != null || b.longitude != null))
+      .slice(0, 100)
+      .map((b) => {
+        const lat = Number(b.lat ?? b.latitude);
+        const lng = Number(b.lng ?? b.longitude);
+        const zip = (b.zip || b.zipCode || b.zip_code || "").slice(0, 5);
+        const isLocked = hasTerritorySubscriptions && zip && !subscribedZips.has(zip);
+
+        if (isLocked) {
+          return {
+            id: b.id || b.parcelId,
+            lng,
+            lat,
+            state: "locked" as MapPoint["state"],
+            color: "#f59e0b",
+            title: `🔒 Commercial Property · ZIP ${zip || "Locked"} (Subscribed Territory Required)`,
+          };
+        }
+
+        const addr = b.address || "Commercial Building";
+        return {
+          id: b.id || b.parcelId,
+          lng,
+          lat,
+          state: (b.hasContact ? "resolved" : "unresolved") as MapPoint["state"],
+          title: `${addr}${zip ? ` (${zip})` : ""} · ${b.propertyType || "Commercial"} · ${usd(b.valuation || b.value || 0, true)}`,
+        };
+      });
+
     const reports = storm.reports.map((r) => ({
       id: r.id,
       lng: r.lng,
@@ -288,8 +295,8 @@ export default function MapPage() {
       color: "#38bdf8",
       title: `${r.inches}" ${r.qualifier === "M" ? "measured" : r.qualifier === "E" ? "estimated" : "reported"} hail · ${r.city} · ${r.source}`,
     }));
-    return [...buildings, ...reports];
-  }, [dayScoped, filteredDayLeads, showOutside, opportunities, storm]);
+    return [...realPts, ...reports];
+  }, [zipBuildings.data?.parcels, catalogStorm?.buildings, storm.reports, hasTerritorySubscriptions, subscribedZips]);
 
   const classifyBasis = catalogStorm
     ? catalogStorm.warnings.length || catalogStorm.reports.length
@@ -300,7 +307,26 @@ export default function MapPage() {
   return (
     <div data-tour="map-container" className="flex flex-col lg:h-[calc(100vh-53px)] lg:flex-row">
       <div className="relative h-[60vh] lg:h-auto lg:flex-1">
-        <DepoiiMap storm={storm} focus={focus} engineSwaths={showEngine ? swaths.data ?? [] : []} points={points} selectedId={selectedId} onSelect={setSelectedId} className="absolute inset-0" />
+        <DepoiiMap
+          storm={storm}
+          focus={focus}
+          engineSwaths={showEngine ? swaths.data ?? [] : []}
+          points={points}
+          selectedId={selectedId}
+          onSelect={(id) => {
+            const clickedLead = (catalogStorm?.buildings ?? []).find((b: any) => (b.parcelId || b.id) === id);
+            const zip = clickedLead ? (((clickedLead as any).zipCode || (clickedLead as any).zip || "") as string).slice(0, 5) : "";
+            const isLocked = hasTerritorySubscriptions && zip && !subscribedZips.has(zip);
+            if (isLocked) {
+              if (zip) setSelectedZip(zip);
+              setSelectedParcel(null);
+              setSelectedId(null);
+              return;
+            }
+            setSelectedId(id);
+          }}
+          className="absolute inset-0"
+        />
         <div className="pointer-events-none absolute top-3 left-3 right-14 z-10 max-w-sm">
           <div className="pointer-events-auto space-y-3 rounded-lg border border-border bg-background/90 p-3 shadow-xl backdrop-blur">
             <div className="flex items-start gap-2">
@@ -314,11 +340,7 @@ export default function MapPage() {
             </div>
             {panelOpen && <>
             <p className="text-[11px] text-muted-foreground">
-              {catalogStorm
-                ? `${storm.reportCount} hail reports · largest ${storm.maxHail}" · warning tag ${storm.maxHailTag || "none"}".`
-                : liveReady
-                  ? `${storm.reportCount} hail reports. Largest warning hail tag: ${storm.maxHailTag || "none"}".`
-                  : `${bookTotal || exposedCount} released pilot buildings · ${storm.maxHail ? `${storm.maxHail}" nearest SPC hail` : "aging / roof cohort"}.`}
+              {storm.maxHail ? `${storm.maxHail}" max hail recorded · ${storm.reportCount} SPC storm reports.` : "Commercial roof hail impact zone."}
             </p>
             <StormSelect
               storms={catalogEvents}
@@ -333,14 +355,11 @@ export default function MapPage() {
                 setSelectedId(null);
               }}
             />
-            {dayScoped && (
-              <p className="text-[11px] text-muted-foreground">
-                {selectedZip
-                  ? `${exposedCount} released leads inside ZIP ${selectedZip} for ${catalogStorm?.date ? longDate(catalogStorm.date) : "this day"}`
-                  : `${exposedCount} of ${bookTotal || dayLeads.length} released leads inside ${catalogStorm?.date ? longDate(catalogStorm.date) : "this day"}`}
-                {classifyBasis ? ` · ${classifyBasis}` : ""}.
-              </p>
-            )}
+            <p className="text-[11px] text-muted-foreground">
+              {selectedZip
+                ? `${num(exposedCount)} commercial buildings in ZIP ${selectedZip} · ${storm.maxHail}" hail impact.`
+                : `${num(exposedCount)} commercial buildings across ${affectedZips.length} impact ZIPs for ${catalogStorm?.date ? longDate(catalogStorm.date) : "this storm"}.`}
+            </p>
             {!stormReady && !hail.loading && briefOps.length > 0 && (
               <p className="text-[11px] text-muted-foreground">
                 Building list is the released pilot book until a hail day loads.
@@ -355,75 +374,13 @@ export default function MapPage() {
               <Stat label="Pipeline" value={usd(pipelineValue, true)} />
             </div>
 
-            {/* Affected ZIP codes section */}
-            {dayScoped && (
-              <div className="space-y-1.5 border-t border-border pt-2.5">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1.5">
-                    <span className="size-2 rounded-full bg-emerald-400" />
-                    <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-                      Affected ZIP Codes ({affectedZips.length})
-                    </p>
-                  </div>
-                  {selectedZip && (
-                    <button
-                      type="button"
-                      onClick={() => setSelectedZip(null)}
-                      className="text-[10px] text-sky-400 hover:text-sky-300 hover:underline"
-                    >
-                      Clear filter
-                    </button>
-                  )}
-                </div>
-
-                {affectedZips.length > 0 ? (
-                  <div className="flex flex-wrap gap-1 max-h-28 overflow-y-auto pr-1">
-                    <button
-                      type="button"
-                      onClick={() => setSelectedZip(null)}
-                      className={cn(
-                        "rounded px-2 py-0.5 text-xs font-mono transition-colors",
-                        selectedZip === null
-                          ? "bg-primary text-primary-foreground font-semibold shadow-xs"
-                          : "bg-muted/70 text-muted-foreground hover:bg-muted hover:text-foreground border border-border/40"
-                      )}
-                    >
-                      All ({dayExposed.length})
-                    </button>
-                    {affectedZips.map(({ zip, count }) => (
-                      <button
-                        key={zip}
-                        type="button"
-                        onClick={() => setSelectedZip((curr) => (curr === zip ? null : zip))}
-                        className={cn(
-                          "rounded px-2 py-0.5 text-xs font-mono transition-colors flex items-center gap-1 border",
-                          selectedZip === zip
-                            ? "bg-sky-500 text-white font-semibold border-sky-400 shadow-xs"
-                            : "bg-muted/70 text-foreground border-border/60 hover:bg-muted hover:border-border"
-                        )}
-                        title={count > 0 ? `${zip}: ${count} pilot buildings exposed` : `${zip}: storm impact area (0 pilot buildings seeded)`}
-                      >
-                        <span>{zip}</span>
-                        <span className={cn("text-[10px]", selectedZip === zip ? "text-sky-100" : "text-muted-foreground")}>
-                          ({count})
-                        </span>
-                      </button>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="rounded border border-border/50 bg-muted/30 p-2 text-xs text-muted-foreground">
-                    Storm corridor tracked. No localized ZIP centroids mapped for this event.
-                  </p>
-                )}
-              </div>
-            )}
-
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-muted-foreground">
               <Legend cls="bg-amber-500/50 border-amber-500" label="NWS warning" />
               <Legend cls="bg-red-600/60 border-red-500" label={'Warning with 2"+ hail'} />
               <Legend cls="bg-sky-400 rounded-full" label="Hail report" />
               <Legend cls="bg-red-500 rounded-full" label="No roof permit since" />
               <Legend cls="bg-slate-500 rounded-full" label="Permit filed" />
+              {hasTerritorySubscriptions && <Legend cls="bg-amber-500 rounded-full" label="Locked territory" />}
             </div>
             <label className="flex items-center gap-2 text-xs text-muted-foreground">
               <input type="checkbox" checked={showOutside} onChange={(e) => setShowOutside(e.target.checked)} className="accent-red-500" />
@@ -448,192 +405,347 @@ export default function MapPage() {
         </div>
       </div>
 
-      <aside className="w-full border-t border-border bg-card/30 lg:w-[400px] lg:overflow-y-auto lg:border-t-0 lg:border-l">
-        {selectedLive ? (
-          <div className="space-y-3 p-4">
-            <button onClick={() => setSelectedId(null)} className="text-xs text-muted-foreground hover:text-foreground">
-              ← All exposed properties
+      <aside className="w-full border-t border-border bg-card/30 lg:w-[420px] lg:overflow-y-auto lg:border-t-0 lg:border-l [scrollbar-width:thin]">
+        {selectedParcel ? (
+          <div className="space-y-4 p-4">
+            <button
+              type="button"
+              onClick={() => {
+                setSelectedParcel(null);
+                setSelectedId(null);
+              }}
+              className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground font-medium transition-colors cursor-pointer"
+            >
+              ← Back to {activeZip ? `ZIP ${activeZip}` : "buildings"}
             </button>
-            <ProofCard o={selectedLive} />
-          </div>
-        ) : selectedDay ? (
-          <div className="space-y-3 p-4">
-            <button onClick={() => setSelectedId(null)} className="text-xs text-muted-foreground hover:text-foreground">
-              ← All exposed properties
-            </button>
-            <div className="rounded-md border border-border p-3">
+
+            <div className="rounded-lg border border-border bg-card dark:bg-[#121319] p-4 shadow-xs">
               <div className="flex items-start justify-between gap-2">
                 <div>
-                  <p className="text-sm font-semibold">{selectedDay.address}</p>
-                  <p className="mt-0.5 text-xs text-muted-foreground">
-                    {selectedDay.city ? `${selectedDay.city}, TX` : ""}{selectedDay.zipCode ? ` ${selectedDay.zipCode.slice(0, 5)}` : ""}
+                  <p className="text-base font-bold text-foreground leading-snug">{selectedParcel.address}</p>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    {selectedParcel.city}, {selectedParcel.state} {selectedParcel.zip || activeZip}
                   </p>
                 </div>
-                {selectedDay.zipCode && (
-                  <span className="shrink-0 rounded bg-sky-500/20 border border-sky-500/30 px-2 py-0.5 text-xs font-mono font-medium text-sky-300">
-                    ZIP {selectedDay.zipCode.slice(0, 5)}
+                {selectedParcel.propertyType && (
+                  <span className="shrink-0 rounded bg-sky-500/10 dark:bg-sky-500/20 text-sky-700 dark:text-sky-300 border border-sky-300 dark:border-sky-500/30 px-2 py-0.5 text-xs font-medium uppercase">
+                    {selectedParcel.propertyType.replace(/_/g, " ")}
                   </span>
                 )}
               </div>
-              <p className="mt-2 text-xs text-muted-foreground">
-                {selectedDay.owner || "Owner not on record"} · {selectedDay.tier} · {selectedDay.hail}&quot; hail
-              </p>
-              <p className="mt-1 text-xs text-muted-foreground">{usd(selectedDay.value, true)} pipeline</p>
-              {selectedDay.parcelId && (
-                <Link href={`/parcels/${encodeURIComponent(selectedDay.parcelId)}`} className="mt-3 inline-block text-xs underline hover:text-foreground">
-                  Open parcel dossier
+
+              <div className="mt-3.5 space-y-2 border-t border-border/70 dark:border-neutral-800/80 pt-3 text-xs">
+                <div className="flex justify-between py-1 border-b border-border/40 dark:border-neutral-800/40">
+                  <span className="text-muted-foreground">Owner</span>
+                  <span className="font-medium text-foreground text-right">{selectedParcel.owner || "Owner not on record"}</span>
+                </div>
+                {selectedParcel.ownerAddress && (
+                  <div className="flex justify-between py-1 border-b border-border/40 dark:border-neutral-800/40">
+                    <span className="text-muted-foreground">Mailing Address</span>
+                    <span className="text-foreground text-right">{selectedParcel.ownerAddress}</span>
+                  </div>
+                )}
+                <div className="flex justify-between py-1 border-b border-border/40 dark:border-neutral-800/40">
+                  <span className="text-muted-foreground">Building Sq Ft</span>
+                  <span className="font-mono font-medium text-foreground">{selectedParcel.sqft ? `${num(selectedParcel.sqft)} sq ft` : "N/A"}</span>
+                </div>
+                <div className="flex justify-between py-1 border-b border-border/40 dark:border-neutral-800/40">
+                  <span className="text-muted-foreground">Year Built</span>
+                  <span className="font-mono font-medium text-foreground">{selectedParcel.yearBuilt || "N/A"}</span>
+                </div>
+                <div className="flex justify-between py-1 border-b border-border/40 dark:border-neutral-800/40">
+                  <span className="text-muted-foreground">Appraisal Valuation</span>
+                  <span className="font-mono font-semibold text-foreground">{selectedParcel.valuation > 0 ? usd(selectedParcel.valuation, true) : "—"}</span>
+                </div>
+                <div className="flex justify-between py-1">
+                  <span className="text-muted-foreground">Appraisal ID</span>
+                  <span className="font-mono text-[11px] text-muted-foreground truncate max-w-[200px]">{selectedParcel.id}</span>
+                </div>
+              </div>
+
+              <div className="mt-4 flex flex-col gap-2 pt-2">
+                <Link
+                  href={`/parcels/${encodeURIComponent(selectedParcel.id)}${stormId ? `?storm=${encodeURIComponent(stormId)}` : ""}`}
+                  className="flex items-center justify-center gap-1.5 w-full rounded-md bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 py-2 px-3 text-xs font-semibold shadow-xs hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-colors"
+                >
+                  <span>Open full parcel dossier</span>
+                  <ChevronRight className="size-3.5" />
                 </Link>
-              )}
+
+                {activeZip && (
+                  <Link
+                    href={`/buildings?zip=${encodeURIComponent(activeZip)}`}
+                    className="flex items-center justify-center gap-1.5 w-full rounded-md border border-border bg-muted/40 hover:bg-muted py-2 px-3 text-xs font-medium text-foreground transition-colors"
+                  >
+                    <span>View all {num(zipBuildings.data?.total || 0)} buildings in ZIP {activeZip}</span>
+                    <ExternalLink className="size-3 text-muted-foreground" />
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
         ) : (
           <div className="p-4">
+            {/* Header */}
             <div className="flex items-center justify-between mb-1">
-              <p className="text-sm font-semibold">Buildings hit</p>
-              {selectedZip ? (
-                <span className="rounded-full bg-sky-500/20 border border-sky-500/40 text-sky-300 px-2 py-0.5 text-xs font-mono font-medium flex items-center gap-1">
-                  ZIP {selectedZip}
-                  <button
-                    type="button"
-                    onClick={() => setSelectedZip(null)}
-                    className="ml-1 text-muted-foreground hover:text-foreground"
-                    title="Clear ZIP filter"
-                  >
-                    ×
-                  </button>
+              <div>
+                <h2 className="text-sm font-bold text-foreground">Commercial Buildings</h2>
+                <p className="text-[11px] text-muted-foreground">
+                  Real appraisal inventory in hail impact zone · {city}
+                </p>
+              </div>
+              {activeZip && (
+                <span className="rounded-full bg-sky-500/15 dark:bg-sky-500/20 border border-sky-400/40 text-sky-700 dark:text-sky-300 px-2.5 py-0.5 text-xs font-mono font-bold flex items-center gap-1.5">
+                  <MapPin className="size-3" />
+                  ZIP {activeZip}
                 </span>
-              ) : dayScoped && affectedZips.length > 0 ? (
-                <span className="rounded-full bg-muted border border-border px-2 py-0.5 text-[11px] font-mono text-muted-foreground">
-                  {affectedZips.length} affected ZIPs
-                </span>
-              ) : null}
+              )}
             </div>
 
-            <p className="mb-3 text-xs text-muted-foreground">
-              {dayScoped && catalogStorm?.date ? (
-                selectedZip ? (
-                  <>
-                    Showing <span className="font-semibold text-foreground">{listLeads.length}</span> buildings in ZIP{" "}
-                    <span className="font-mono font-semibold text-sky-400">{selectedZip}</span> hit by{" "}
-                    {longDate(catalogStorm.date)}.{" "}
-                    <button
-                      type="button"
-                      onClick={() => setSelectedZip(null)}
-                      className="text-sky-400 underline hover:text-sky-300 ml-1"
-                    >
-                      Show all {dayExposed.length} buildings
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <span className="font-semibold text-foreground">{dayExposed.length}</span> buildings across{" "}
-                    <span className="font-semibold text-foreground">{affectedZips.length}</span> affected ZIP codes
-                    {affectedZips.length > 0 && affectedZips.length <= 8 && (
-                      <> ({affectedZips.map((z) => z.zip).join(", ")})</>
-                    )}
-                    {affectedZips.length > 8 && (
-                      <> ({affectedZips.slice(0, 6).map((z) => z.zip).join(", ")}…)</>
-                    )}{" "}
-                    inside {longDate(catalogStorm.date)}.
-                  </>
-                )
-              ) : storm.date ? (
-                `${city} buildings inside the ${longDate(storm.date)} warning areas, highest score first.`
-              ) : (
-                `${city} buildings from the released pilot book, highest score first.`
-              )}
-            </p>
+            {/* Affected ZIP Code Pill Selector */}
+            <div className="mt-3 space-y-1.5 border-t border-border/70 dark:border-neutral-800 pt-2.5">
+              <div className="flex items-center justify-between">
+                <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                  Storm Affected ZIP Codes ({affectedZips.length})
+                </p>
+                {selectedZip && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedZip(null);
+                      setSelectedParcel(null);
+                      setSelectedId(null);
+                    }}
+                    className="text-[10px] text-sky-600 dark:text-sky-400 hover:underline cursor-pointer"
+                  >
+                    Reset to top ZIP
+                  </button>
+                )}
+              </div>
 
-            {dayScoped ? (
-              listLeads.length ? (
-                <ul className="space-y-1.5">
-                  {listLeads.slice(0, 100).map((o) => (
-                    <li key={o.parcelId || o.address}>
+              {affectedZips.length > 0 ? (
+                <div className="flex flex-wrap gap-1 max-h-24 overflow-y-auto pr-1 [scrollbar-width:thin]">
+                  {affectedZips.map(({ zip, count }) => {
+                    const isCurrent = activeZip === zip;
+                    const isLocked = hasTerritorySubscriptions && !subscribedZips.has(zip);
+                    return (
                       <button
+                        key={zip}
                         type="button"
-                        onClick={() => setSelectedId(o.parcelId)}
+                        onClick={() => {
+                          setSelectedZip(zip);
+                          setSelectedParcel(null);
+                          setSelectedId(null);
+                        }}
                         className={cn(
-                          "flex w-full items-center gap-3 rounded-md border border-border/60 p-2.5 text-left hover:bg-muted transition-colors",
-                          o.tier === "outside" && "opacity-60",
+                          "rounded px-2 py-0.5 text-xs font-mono transition-colors flex items-center gap-1 border cursor-pointer",
+                          isCurrent
+                            ? isLocked
+                              ? "bg-amber-500 text-black font-semibold border-amber-400 shadow-xs"
+                              : "bg-sky-500 text-white font-semibold border-sky-400 shadow-xs"
+                            : isLocked
+                              ? "bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/30 hover:bg-amber-500/20"
+                              : "bg-muted/70 dark:bg-[#15161c] text-foreground dark:text-neutral-300 border-border/60 dark:border-neutral-800 hover:bg-muted dark:hover:bg-[#1e2028]"
                         )}
                       >
-                        <ScorePill score={o.score} />
-                        <span className="min-w-0 flex-1">
-                          <span className="flex items-center gap-2">
-                            <span className="block truncate text-sm font-medium">{o.address}</span>
-                            {o.zipCode && (
-                              <span className={cn(
-                                "shrink-0 rounded px-1.5 py-0.2 text-[10px] font-mono border",
-                                selectedZip === o.zipCode.slice(0, 5)
-                                  ? "bg-sky-500/20 text-sky-300 border-sky-500/40"
-                                  : "bg-muted text-muted-foreground border-border/80"
-                              )}>
-                                {o.zipCode.slice(0, 5)}
+                        {isLocked && <Lock className="size-2.5 shrink-0" />}
+                        <span>{zip}</span>
+                        {count > 0 && (
+                          <span
+                            className={cn(
+                              "text-[10px]",
+                              isCurrent
+                                ? isLocked
+                                  ? "text-black/80"
+                                  : "text-sky-100"
+                                : isLocked
+                                  ? "text-amber-700/80 dark:text-amber-300/80"
+                                  : "text-muted-foreground"
+                            )}
+                          >
+                            ({count})
+                          </span>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              ) : (
+                <p className="text-xs text-muted-foreground">No specific ZIP centroids for this storm.</p>
+              )}
+            </div>
+
+            {/* List of a few real buildings */}
+            <div className="mt-3">
+              {zipBuildings.loading || (hail.loading && !zipBuildings.data) ? (
+                <div className="space-y-2">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="h-24 rounded-lg border border-border/50 bg-muted/30 animate-pulse" />
+                  ))}
+                </div>
+              ) : zipBuildings.data?.territoryLocked ? (
+                <div className="rounded-xl border border-amber-500/30 bg-amber-500/[0.04] dark:bg-amber-500/[0.08] p-4 space-y-3.5 mt-2">
+                  <div className="flex items-start gap-3">
+                    <div className="size-8 rounded-lg bg-amber-500/15 text-amber-700 dark:text-amber-400 flex items-center justify-center shrink-0 border border-amber-500/30">
+                      <Lock className="size-4" />
+                    </div>
+                    <div className="min-w-0">
+                      <h4 className="text-xs font-bold text-foreground flex items-center gap-1.5">
+                        <span>ZIP {activeZip} is in another zone</span>
+                        <span className="rounded bg-amber-500/20 text-amber-800 dark:text-amber-300 text-[9px] px-1.5 py-0.2 font-semibold uppercase tracking-wider">
+                          Locked
+                        </span>
+                      </h4>
+                      <p className="text-[11px] text-muted-foreground mt-0.5">
+                        {zipBuildings.data.targetZone?.name
+                          ? `Assigned to: ${zipBuildings.data.targetZone.name}`
+                          : "Outside your subscribed coverage area"}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Stat Callouts */}
+                  <div className="grid grid-cols-2 gap-2 rounded-lg border border-amber-500/20 bg-background/60 p-2.5">
+                    <div>
+                      <div className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">
+                        Commercial Buildings
+                      </div>
+                      <div className="text-base font-bold text-foreground font-mono">
+                        {num(zipBuildings.data.total || activeZipStats?.count || 0)}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">
+                        Storm Pipeline
+                      </div>
+                      <div className="text-base font-bold text-foreground font-mono">
+                        {usd(activeZipStats?.pipeline || 0)}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Explanatory Message */}
+                  <div className="text-xs text-neutral-600 dark:text-neutral-300 space-y-1.5 leading-relaxed">
+                    <p>
+                      There are <strong className="text-foreground">{num(zipBuildings.data.total || activeZipStats?.count || 0)} commercial buildings</strong> in ZIP {activeZip} impacted by this hail event.
+                    </p>
+                    <p className="text-[11px] text-muted-foreground">
+                      Your organization is subscribed to{" "}
+                      <strong className="text-foreground">
+                        {zipBuildings.data.subscribedZones?.map((z) => z.name).join(", ") || "a different zone"}
+                      </strong>
+                      . To access property records, verified decision-maker contacts, and full dossiers for this ZIP, subscribe to {zipBuildings.data.targetZone?.name || "this territory"}.
+                    </p>
+                  </div>
+
+                  {/* CTA Button */}
+                  <div className="pt-1">
+                    <Link
+                      href={zipBuildings.data.targetZone ? `/territory/${encodeURIComponent(zipBuildings.data.targetZone.id)}` : "/territory"}
+                      className="w-full flex items-center justify-center gap-1.5 rounded-md bg-amber-500 hover:bg-amber-400 text-black py-2 px-3 text-xs font-semibold shadow-xs transition-colors"
+                    >
+                      <Lock className="size-3.5" />
+                      <span>{zipBuildings.data.targetZone ? `Unlock ${zipBuildings.data.targetZone.name}` : "View Territory Subscriptions"}</span>
+                      <ArrowRight className="size-3.5 ml-1" />
+                    </Link>
+                    <p className="text-center text-[10px] text-muted-foreground mt-1.5">
+                      Expand your exclusive territory to claim and contact buildings in this zone.
+                    </p>
+                  </div>
+                </div>
+              ) : zipBuildings.data?.parcels && zipBuildings.data.parcels.length > 0 ? (
+                <div className="space-y-2">
+                  <p className="text-[11px] font-medium text-muted-foreground flex items-center justify-between">
+                    <span>Showing {Math.min(5, zipBuildings.data.parcels.length)} preview buildings:</span>
+                    <span className="text-[10px]">Click building for details</span>
+                  </p>
+                  <ul className="space-y-2">
+                    {zipBuildings.data.parcels.slice(0, 5).map((b) => (
+                      <li key={b.id}>
+                        <div
+                          onClick={() => {
+                            setSelectedParcel(b);
+                            setSelectedId(b.id);
+                          }}
+                          className="group rounded-lg border border-border/70 dark:border-neutral-800 bg-card dark:bg-[#121319] p-3 text-left transition-all hover:border-neutral-400 dark:hover:border-neutral-600 hover:shadow-xs cursor-pointer"
+                        >
+                          <div className="flex items-start justify-between gap-2">
+                            <div className="min-w-0 flex-1">
+                              <p className="truncate text-xs font-semibold text-foreground dark:text-neutral-100 group-hover:text-sky-500 transition-colors">
+                                {b.address}
+                              </p>
+                              <p className="text-[11px] text-muted-foreground truncate mt-0.5">
+                                {b.city}, {b.state} {b.zip || activeZip}
+                              </p>
+                            </div>
+                            {b.propertyType && (
+                              <span className="shrink-0 rounded bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 text-[10px] font-medium text-neutral-600 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700/60 uppercase">
+                                {b.propertyType.replace(/_/g, " ")}
                               </span>
                             )}
-                          </span>
-                          <span className="block truncate text-[11px] text-muted-foreground mt-0.5">
-                            {o.owner || "Owner not on record"} · {o.hail}&quot; hail · {usd(o.value, true)}
-                          </span>
-                        </span>
-                        <TierBadge tier={o.tier} />
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p className="rounded-md border border-dashed border-border p-6 text-center text-sm text-muted-foreground">
-                  {brief.loading || hail.loading
-                    ? "Classifying buildings for this hail day…"
-                    : selectedZip
-                      ? `Storm impacted ZIP ${selectedZip}. No Depoii pilot buildings are currently seeded in this ZIP code.`
-                      : `No ${city} pilot buildings sit inside this storm swath.`}
-                </p>
-              )
-            ) : liveExposed.length ? (
-              <ul className="space-y-1.5">
-                {liveExposed.slice(0, 80).map((o) => (
-                  <li key={o.parcel.id}>
-                    <button
-                      type="button"
-                      onClick={() => setSelectedId(o.parcel.id)}
-                      className={cn("flex w-full items-center gap-3 rounded-md border border-border/60 p-2.5 text-left hover:bg-muted", !o.unresolved && "opacity-60")}
+                          </div>
+
+                          <div className="mt-2 text-xs text-muted-foreground truncate">
+                            <span className="font-medium text-foreground/80 dark:text-neutral-300">Owner:</span> {b.owner || "Owner not on record"}
+                          </div>
+
+                          <div className="mt-2.5 flex items-center justify-between border-t border-border/50 dark:border-neutral-800/60 pt-2 text-[11px] font-mono">
+                            <span className="text-muted-foreground">
+                              {b.sqft ? `${num(b.sqft)} sq ft` : "Sqft N/A"} · {b.yearBuilt ? `Built ${b.yearBuilt}` : "Year N/A"}
+                            </span>
+                            <span className="font-semibold text-foreground dark:text-neutral-200">
+                              {b.valuation > 0 ? usd(b.valuation, true) : "—"}
+                            </span>
+                          </div>
+
+                          <div className="mt-2 flex items-center justify-between pt-1 text-[11px]">
+                            <span className="text-[10px] text-muted-foreground">Appraisal parcel</span>
+                            <Link
+                              href={`/parcels/${encodeURIComponent(b.id)}${stormId ? `?storm=${encodeURIComponent(stormId)}` : ""}`}
+                              onClick={(e) => e.stopPropagation()}
+                              className="font-medium text-sky-600 dark:text-sky-400 hover:underline flex items-center gap-1"
+                            >
+                              <span>Dossier</span>
+                              <ChevronRight className="size-3" />
+                            </Link>
+                          </div>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Prominent View All Button */}
+                  <div className="mt-4 pt-1">
+                    <Link
+                      href={activeZip ? `/buildings?zip=${encodeURIComponent(activeZip)}` : "/buildings"}
+                      className="flex items-center justify-center gap-2 w-full rounded-md bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 py-2.5 px-4 text-xs font-semibold shadow-xs hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-colors"
                     >
-                      <ScorePill score={o.score} />
-                      <span className="min-w-0 flex-1">
-                        <span className="block truncate text-sm font-medium">{o.parcel.address}</span>
-                        <span className="block truncate text-[11px] text-muted-foreground">
-                          {o.parcel.city} · {!o.permitKnown ? "Permit record not retrieved" : o.unresolved ? "Unresolved" : "Permit filed"} · {usd(o.pipelineValue, true)}
-                        </span>
-                      </span>
-                      <TierBadge tier={o.tier} />
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            ) : shuffledBriefOps.length ? (
-              <>
-                <p className="mb-2 text-xs text-muted-foreground">
-                  Hail day not loaded yet. Showing the full released pilot book
-                  {brief.data?.stormName ? ` (${brief.data.stormName})` : ""} (shuffled).
-                </p>
-                <ul className="space-y-1.5">
-                  {shuffledBriefOps.map((o) => (
-                    <li key={o.parcelId || o.address}>
-                      <Link href={o.parcelId ? `/parcels/${encodeURIComponent(o.parcelId)}` : "/pipeline"} className="flex items-center gap-3 rounded-md border border-border/60 p-2.5 hover:bg-muted">
-                        <ScorePill score={o.score} />
-                        <span className="min-w-0 flex-1">
-                          <span className="block truncate text-sm font-medium">{o.address}</span>
-                          <span className="block truncate text-[11px] text-muted-foreground">{o.owner || "Owner not on record"} · {o.hail}&quot; hail · {usd(o.value, true)}</span>
-                        </span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </>
-            ) : (
-              <p className="rounded-md border border-dashed border-border p-6 text-center text-sm text-muted-foreground">{brief.loading ? "Loading buildings…" : `No ${city} buildings sit inside this storm.`}</p>
-            )}
+                      <span>View all {num(zipBuildings.data?.total || 0)} buildings {activeZip ? `in ZIP ${activeZip}` : `in ${city}`}</span>
+                      <ChevronRight className="size-3.5" />
+                    </Link>
+                    <p className="text-center text-[10px] text-muted-foreground mt-1.5">
+                      {activeZip ? `Opens Building Browse with ZIP ${activeZip} filter applied` : `Opens Building Browse for ${city} commercial inventory`}
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <div className="rounded-md border border-dashed border-border p-6 text-center space-y-2 mt-2">
+                  <Building2 className="mx-auto size-6 text-muted-foreground" />
+                  <p className="text-xs text-muted-foreground">
+                    {activeZip
+                      ? `No commercial buildings currently indexed in ZIP ${activeZip}.`
+                      : "Select an affected ZIP code above to view commercial buildings."}
+                  </p>
+                  <Link
+                    href="/buildings"
+                    className="inline-flex items-center gap-1 text-xs font-medium text-sky-500 hover:underline"
+                  >
+                    <span>Browse all {city} commercial buildings</span>
+                    <ChevronRight className="size-3" />
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
         )}
       </aside>

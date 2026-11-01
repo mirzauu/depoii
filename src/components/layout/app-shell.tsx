@@ -288,7 +288,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <Sidebar />
 
         <div className="flex min-w-0 flex-1 flex-col">
-          <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur print:hidden">
+          <header data-ui className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur print:hidden">
             <div className="flex items-center gap-3 px-4 py-2.5 lg:px-6">
               <Link href="/" className="flex items-center gap-2 lg:hidden" suppressHydrationWarning>
                 <DepoiiMark className="size-7 text-foreground" />
@@ -303,7 +303,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 </div>
               </div>
             </div>
-          <nav className="flex gap-1 overflow-x-auto px-3 pb-2 lg:hidden">
+          <nav className="flex gap-1.5 overflow-x-auto px-4 pb-2 lg:hidden after:content-[''] after:w-4 after:shrink-0">
             {mobileNav.map((link) => {
               const fromParam = typeof window !== "undefined" ? new URLSearchParams(window.location.search).get("from") : null;
               if (link.disabled) {

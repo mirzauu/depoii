@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import math
 import re
 from typing import Any, Dict, Optional, Tuple
 
@@ -173,21 +174,46 @@ def exposure_score(
     roof_age_years: Optional[int],
     roof_sqft: int,
 ) -> int:
-    """0-100 score that moves with hail, swath position, roof age, and roof size."""
+    """Calibrated 0-100 score based on kinetic impact, distance decay, failure-window age, and commercial scale."""
     hail = max(0.0, float(hail_inches or 0))
-    severity = min(35.0, (hail / 2.75) * 35.0)
+    # 1. Kinetic energy curve (threshold at 1.25", benchmark 1.75" = 18 pts, max 35 pts at 2.5"+)
+    severity = min(35.0, ((hail / 1.75) ** 2.4) * 18.0) if hail >= 1.0 else (hail * 5.0)
+
+    # 2. Smooth exponential distance decay (no 6-mile cliff)
+    tier_clean = str(tier or "core").strip().lower()
+    is_core = tier_clean in ("core", "priority_1", "priority_2", "swath")
     if distance_miles is None:
-        proximity = 12.0 if tier == "core" else 6.0 if tier == "envelope" else 0.0
+        proximity = 14.0 if is_core else 6.0
     else:
-        proximity = max(0.0, 18.0 - float(distance_miles) * 3.0)
-    position = 12.0 if tier == "core" else 4.0 if tier == "envelope" else 0.0
-    age = 0.0
-    if roof_age_years is not None:
-        age = min(16.0, max(0.0, roof_age_years * 0.35))
-    size = 0.0
-    if roof_sqft and roof_sqft > 0:
-        size = min(24.0, roof_sqft / 20_000.0)
-    return int(max(0, min(100, round(severity + proximity + position + age + size))))
+        proximity = 18.0 * math.exp(-0.22 * max(0.0, float(distance_miles)))
+
+    # 3. Swath position credit
+    position = 10.0 if is_core else (4.0 if tier_clean == "envelope" else 0.0)
+
+    # 4. Membrane Failure Window (15 - 25 years sweet spot)
+    age_pts = 0.0
+    if roof_age_years is not None and roof_age_years > 0:
+        a = float(roof_age_years)
+        if a < 10:
+            age_pts = a * 0.3              # Resilient young membrane
+        elif a < 18:
+            age_pts = 3.0 + (a - 10) * 0.7  # Aging single-ply
+        elif a <= 26:
+            age_pts = 8.6 + (a - 18) * 1.15 # Prime failure / insurance replacement window
+        else:
+            age_pts = 18.0                 # Depleted / fully oxidized (capped to avoid ACV wear penalty)
+    age_pts = min(18.0, age_pts)
+
+    # 5. Logarithmic Commercial Footprint Scale (sweet spot: 25k - 150k sq ft)
+    size_pts = 0.0
+    s = float(roof_sqft or 0)
+    if s >= 5000:
+        size_pts = min(19.0, max(2.0, 7.5 * math.log10(s / 2500.0)))
+    elif s > 0:
+        size_pts = 1.0
+
+    raw = severity + proximity + position + age_pts + size_pts
+    return int(max(0, min(100, round(raw))))
 
 
 def replacement_cost(

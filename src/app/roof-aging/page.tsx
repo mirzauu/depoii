@@ -1473,7 +1473,7 @@ export default function RoofAgingPage() {
                         <tr
                           key={r.id}
                           className={cn(
-                            "group border-b border-border dark:border-neutral-800/60 hover:bg-neutral-50 dark:hover:bg-[#161722]/80 transition-colors",
+                            "group border-b border-border dark:border-neutral-800/60 hover:bg-[#FAF5EE] dark:hover:bg-[#1C1A17] transition-colors",
                             isSelected && "bg-neutral-100/80 dark:bg-white/[0.03] border-l-2 border-[#B4E4D6]"
                           )}
                         >
@@ -1493,7 +1493,7 @@ export default function RoofAgingPage() {
                           </td>
 
                           {/* Address (Sticky Left) */}
-                          <td className="sticky left-0 z-10 bg-background dark:bg-[#0b0c10] group-hover:bg-neutral-50 dark:group-hover:bg-[#161722] px-3 py-3 font-medium transition-colors">
+                          <td className="sticky left-0 z-10 bg-background dark:bg-[#0b0c10] group-hover:bg-[#FAF5EE] dark:group-hover:bg-[#1C1A17] transition-all duration-150 group-hover:shadow-[inset_3px_0_0_0_#D99B26] dark:group-hover:shadow-[inset_3px_0_0_0_#E9B63B] px-3 py-3 font-medium">
                             <div className="flex items-center gap-1.5 flex-wrap max-w-[260px]">
                               <button
                                 type="button"
@@ -1779,7 +1779,7 @@ export default function RoofAgingPage() {
                         <tr
                           key={p.parcelId}
                           className={cn(
-                            "group border-b border-border dark:border-neutral-800/60 hover:bg-neutral-50 dark:hover:bg-[#161722]/80 transition-colors",
+                            "group border-b border-border dark:border-neutral-800/60 hover:bg-[#FAF5EE] dark:hover:bg-[#1C1A17] transition-colors",
                             isSelected && "bg-neutral-100/80 dark:bg-white/[0.03] border-l-2 border-[#FFCA88]"
                           )}
                         >
@@ -1799,7 +1799,7 @@ export default function RoofAgingPage() {
                           </td>
 
                           {/* Address (Sticky Left) */}
-                          <td className="sticky left-0 z-10 bg-background dark:bg-[#0b0c10] group-hover:bg-neutral-50 dark:group-hover:bg-[#161722] px-3 py-3 font-medium transition-colors">
+                          <td className="sticky left-0 z-10 bg-background dark:bg-[#0b0c10] group-hover:bg-[#FAF5EE] dark:group-hover:bg-[#1C1A17] transition-all duration-150 group-hover:shadow-[inset_3px_0_0_0_#D99B26] dark:group-hover:shadow-[inset_3px_0_0_0_#E9B63B] px-3 py-3 font-medium">
                             <div className="flex items-center gap-1.5 flex-wrap max-w-[260px]">
                               <button
                                 type="button"

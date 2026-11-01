@@ -33,7 +33,7 @@ export async function POST(req: Request) {
       return Response.json({ error: "parcelId is required." }, { status: 400 });
     }
 
-    const result = await claimProperty(user.orgId, parcelId, user.id);
+    const result = await claimProperty(user.orgId, parcelId, user.id, user.platformRole === "superadmin");
 
     if (!result.ok) {
       const status =

@@ -1074,12 +1074,14 @@ export default function PipelinePage() {
                       <tr
                         key={o.parcelId || o.address}
                         className={cn(
-                          "group transition-colors hover:bg-neutral-50 dark:hover:bg-[#12141a]/80",
-                          isSelected ? "bg-blue-50/50 dark:bg-[#141822]" : "bg-transparent"
+                          "group transition-colors duration-150 cursor-pointer",
+                          isSelected
+                            ? "bg-[#F5EADB]/70 hover:bg-[#ECD5BC]/70 dark:bg-[#201C17] dark:hover:bg-[#2A241E]"
+                            : "bg-transparent hover:bg-[#FAF5EE] dark:hover:bg-[#1C1A17]"
                         )}
                       >
-                        {/* Checkbox */}
-                        <td className="w-10 px-3 py-3 text-center">
+                        {/* Checkbox with active row indicator */}
+                        <td className="w-10 px-3 py-3 text-center transition-all group-hover:shadow-[inset_3px_0_0_0_#D99B26] dark:group-hover:shadow-[inset_3px_0_0_0_#E9B63B]">
                           <input
                             type="checkbox"
                             checked={isSelected}
@@ -1090,11 +1092,16 @@ export default function PipelinePage() {
 
                         {/* 1. Address - Sticky Left */}
                         <td className={cn(
-                          "sticky left-0 z-10 px-3 py-3 font-medium whitespace-nowrap shadow-[1px_0_0_0_rgba(0,0,0,0.06)] dark:shadow-[1px_0_0_0_rgba(255,255,255,0.06)] transition-colors",
-                          isSelected ? "bg-blue-50 dark:bg-[#141822]" : "bg-background dark:bg-[#0a0b0d] group-hover:bg-neutral-50 dark:group-hover:bg-[#12141a]"
+                          "sticky left-0 z-10 px-3 py-3 font-medium whitespace-nowrap shadow-[1px_0_0_0_rgba(0,0,0,0.06)] dark:shadow-[1px_0_0_0_rgba(255,255,255,0.06)] transition-colors duration-150",
+                          isSelected
+                            ? "bg-[#F5EADB]/80 group-hover:bg-[#ECD5BC]/80 dark:bg-[#201C17] dark:group-hover:bg-[#2A241E]"
+                            : "bg-background dark:bg-[#0a0b0d] group-hover:bg-[#FAF5EE] dark:group-hover:bg-[#1C1A17]"
                         )}>
                           <div className="flex items-center gap-2">
-                            <Link href={href} className="font-semibold text-neutral-900 dark:text-neutral-100 hover:text-primary dark:hover:text-white/80 hover:underline transition-colors">
+                            <Link
+                              href={href}
+                              className="font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-amber-800 dark:group-hover:text-amber-300 hover:underline transition-colors"
+                            >
                               {o.address}
                             </Link>
                             {hasClaim && (
@@ -1118,7 +1125,7 @@ export default function PipelinePage() {
                               <RealLogo url={o.logoUrl} alt={o.organizationName || o.owner} size={20} />
                             ) : null}
                             <div className="flex flex-col min-w-0">
-                              <span className="truncate font-medium text-neutral-900 dark:text-neutral-200">
+                              <span className="truncate font-medium text-neutral-900 dark:text-neutral-200 group-hover:text-neutral-950 dark:group-hover:text-white transition-colors">
                                 {o.organizationName || o.owner || "—"}
                               </span>
                               {o.websiteUrl ? (
@@ -1143,7 +1150,7 @@ export default function PipelinePage() {
                         <td className="px-3 py-3 max-w-60 whitespace-nowrap">
                           {o.decisionMaker || o.phone || o.email ? (
                             <div className="flex flex-col text-xs leading-tight gap-1">
-                              <span className="font-medium text-neutral-900 dark:text-neutral-200 truncate">
+                              <span className="font-medium text-neutral-900 dark:text-neutral-200 group-hover:text-neutral-950 dark:group-hover:text-white transition-colors truncate">
                                 {o.decisionMaker || "Decision Maker"}
                               </span>
                               <div className="flex items-center gap-1.5">
@@ -1285,7 +1292,7 @@ export default function PipelinePage() {
                             </button>
                             <Link
                               href={href}
-                              className="inline-flex h-7 items-center rounded-md border border-neutral-300 dark:border-neutral-700/80 bg-white dark:bg-neutral-900 px-2 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white"
+                              className="inline-flex h-7 items-center rounded-md border border-neutral-300 dark:border-neutral-700/80 bg-white dark:bg-neutral-900 px-2 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white group-hover:border-neutral-400 dark:group-hover:border-neutral-600 transition-colors"
                             >
                               Open dossier
                             </Link>

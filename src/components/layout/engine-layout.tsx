@@ -19,7 +19,7 @@ export function ScopeFilter({ jurisdiction, all, onChange }: { jurisdiction: str
   const city = jurisdiction.split(",")[0];
   return (
     <Filter label="Location">
-      <div className="grid grid-cols-2 gap-1 rounded-lg border border-neutral-300 dark:border-neutral-800 bg-neutral-100 dark:bg-[#111217] p-1">
+      <div className="grid grid-cols-2 gap-1 rounded-lg border border-neutral-300 border-border bg-neutral-100 dark:bg-[#171714] p-1">
         <button
           type="button"
           onClick={() => onChange(false)}
@@ -51,7 +51,7 @@ export function ScopeFilter({ jurisdiction, all, onChange }: { jurisdiction: str
 }
 
 export const filterField =
-  "h-8 w-full rounded-md border border-neutral-300 dark:border-neutral-800 bg-white dark:bg-[#14151c] px-2.5 text-xs text-neutral-900 dark:text-neutral-200 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 outline-none transition-colors focus:border-neutral-400 dark:focus:border-neutral-700 hover:border-neutral-400/80 dark:hover:border-neutral-700/80";
+  "h-8 w-full rounded-md border border-neutral-300 border-border bg-white dark:bg-[#171714] px-2.5 text-xs text-neutral-900 dark:text-neutral-200 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 outline-none transition-colors focus:border-neutral-400 dark:focus:border-neutral-700 hover:border-neutral-400/80 dark:hover:border-neutral-700/80";
 
 export function FilterRail({
   children,
@@ -65,13 +65,13 @@ export function FilterRail({
   activeCount?: number;
 }) {
   return (
-    <aside className="w-full shrink-0 border-b border-border dark:border-neutral-800/80 bg-neutral-50/80 dark:bg-[#0d0e12] p-3.5 text-xs lg:w-64 lg:border-r lg:border-b-0 lg:sticky lg:top-0 lg:h-[calc(100vh-3.5rem)] lg:overflow-y-auto z-10 flex flex-col">
-      <div className="sticky top-0 bg-neutral-50 dark:bg-[#0d0e12] z-20 flex items-center justify-between pb-2.5 mb-3 border-b border-border dark:border-neutral-800/80 shrink-0 -mt-3.5 pt-3.5">
+    <aside className="w-full shrink-0 border-b border-border border-border bg-neutral-50/80 dark:bg-[#131310] p-3.5 text-xs lg:w-64 lg:border-r lg:border-b-0 lg:sticky lg:top-0 lg:h-[calc(100vh-3.5rem)] lg:overflow-y-auto z-10 flex flex-col">
+      <div className="sticky top-0 bg-neutral-50 dark:bg-[#131310] z-20 flex items-center justify-between pb-2.5 mb-3 border-b border-border border-border shrink-0 -mt-3.5 pt-3.5">
         <div className="flex items-center gap-1.5 font-semibold text-neutral-800 dark:text-neutral-200 text-xs">
           <FilterIcon className="size-3.5 text-neutral-500 dark:text-neutral-400" />
           <span>{title}</span>
           {activeCount && activeCount > 0 ? (
-            <span className="rounded-full bg-neutral-200 dark:bg-white/10 px-1.5 py-0.2 text-[10px] font-semibold text-neutral-800 dark:text-white">
+            <span className="rounded-full bg-neutral-200 dark:bg-white/10 px-1.5 py-0.2 text-[11px] font-semibold text-neutral-800 dark:text-white">
               {activeCount}
             </span>
           ) : null}
@@ -102,7 +102,7 @@ export function Filter({
 }) {
   return (
     <div className={cn("space-y-1.5", className)}>
-      <label className="text-[10px] font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider block">
+      <label className="text-[11px] font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider block">
         {label}
       </label>
       {children}
@@ -111,38 +111,44 @@ export function Filter({
 }
 
 export function EngineLayout({
-  title,
+  title = "Property Intelligence",
   subtitle,
   actions,
   filters,
   children,
   onResetFilters,
   activeFiltersCount,
+  hideHeader = false,
+  fullHeight = false,
 }: {
-  title: string;
+  title?: string;
   subtitle?: React.ReactNode;
   actions?: React.ReactNode;
   filters?: React.ReactNode;
   children: React.ReactNode;
   onResetFilters?: () => void;
   activeFiltersCount?: number;
+  hideHeader?: boolean;
+  fullHeight?: boolean;
 }) {
   return (
-    <div className="flex min-h-[calc(100vh-3.5rem)] flex-col lg:flex-row bg-background dark:bg-[#0b0c10] text-foreground dark:text-neutral-200 antialiased font-sans">
+    <div className={cn("flex flex-col lg:flex-row bg-background dark:bg-[#131310] text-foreground dark:text-neutral-200 antialiased font-sans", fullHeight ? "h-[calc(100vh-3.5rem)] overflow-hidden" : "min-h-[calc(100vh-3.5rem)]")}>
       {filters && (
         <FilterRail onReset={onResetFilters} activeCount={activeFiltersCount}>
           {filters}
         </FilterRail>
       )}
-      <section className="min-w-0 flex-1 flex flex-col">
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border dark:border-neutral-800/80 bg-background dark:bg-[#0e0f12] px-5 py-3.5 z-10 shrink-0">
-          <div>
-            <h1 className="text-base font-bold tracking-tight text-foreground dark:text-white">{title}</h1>
-            {subtitle && <p className="text-xs font-medium text-rose-600 dark:text-[#DE7272] mt-0.5">{subtitle}</p>}
+      <section className={cn("min-w-0 flex-1 flex flex-col", fullHeight && "h-full overflow-hidden")}>
+        {!hideHeader && (
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border border-border bg-background dark:bg-[#171714] px-5 py-3.5 z-10 shrink-0">
+            <div>
+              <div className="text-sm font-semibold tracking-tight text-foreground dark:text-white">{title}</div>
+              {subtitle && <p className="text-xs font-medium text-rose-600 dark:text-[#DE7272] mt-0.5">{subtitle}</p>}
+            </div>
+            {actions && <div className="flex items-center gap-2">{actions}</div>}
           </div>
-          {actions && <div className="flex items-center gap-2">{actions}</div>}
-        </div>
-        <div className="flex-1 min-w-0">{children}</div>
+        )}
+        <div className={cn("flex-1 min-w-0", fullHeight && "h-full min-h-0 overflow-hidden")}>{children}</div>
       </section>
     </div>
   );

@@ -17,6 +17,18 @@ function lookupZip(lat: number, lng: number): string | undefined {
   return undefined;
 }
 
+
+function extractCoordsBbox(coords: unknown, cb: (lat: number, lng: number) => void) {
+  if (!Array.isArray(coords)) return;
+  if (typeof coords[0] === "number" && typeof coords[1] === "number") {
+    cb(Number(coords[1]), Number(coords[0]));
+    return;
+  }
+  for (const c of coords) {
+    extractCoordsBbox(c, cb);
+  }
+}
+
 function extractCoordsZips(coords: unknown, zips: Set<string>, maxCount = 40) {
   if (!Array.isArray(coords) || zips.size >= maxCount) return;
   if (typeof coords[0] === "number" && typeof coords[1] === "number") {
@@ -361,7 +373,7 @@ export async function mondayBrief(q: Q, user?: { orgId?: string; platformRole?: 
        left join warehouse.scored_parcel_leads l on l.parcel_id = r.parcel_id
        where ($4::text[] is not null and substring(p.zip_code from 1 for 5) = ANY($4))
           or ($4::text[] is null and (lower(p.city) = lower($1) or lower(p.city) in ('farmers branch', 'addison', 'carrollton', 'irving', 'coppell', 'richardson')))
-       order by coalesce(p.footprint_sqft, p.building_sqft, 0) desc, coalesce(l.exposure_score, 88) desc, r.parcel_id
+       order by coalesce(l.exposure_score, 75) desc, coalesce(p.footprint_sqft, p.building_sqft, 0) desc, r.parcel_id
        limit $2 offset $3`,
       [city, limit, offset, allowedZips]
     );
@@ -373,7 +385,7 @@ export async function mondayBrief(q: Q, user?: { orgId?: string; platformRole?: 
        left join warehouse.parcels p on p.id = l.parcel_id
        where ($4::text[] is not null and substring(coalesce(l.zip_code, p.zip_code) from 1 for 5) = ANY($4))
           or ($4::text[] is null and (lower(l.city) = lower($1) or lower(l.city) in ('farmers branch', 'addison', 'carrollton', 'irving', 'coppell', 'richardson')))
-       order by coalesce(p.footprint_sqft, p.building_sqft, l.roof_sqft, 0) desc, l.exposure_score desc limit $2 offset $3`,
+       order by l.exposure_score desc, coalesce(p.footprint_sqft, p.building_sqft, l.roof_sqft, 0) desc limit $2 offset $3`,
       [city, limit, offset, allowedZips]
     );
     const total = await queryOne<{ n: string }>(
@@ -487,7 +499,7 @@ export async function hailEvents(q: Q) {
   let events = await query<{ d: string; name: string; hail: string; n: string }>(
     `select event_date::text as d, max(storm_name) as name, max(max_hail_inches)::text as hail, count(*)::text as n
      from warehouse.storm_swaths
-     where event_date is not null and (jurisdiction_id ilike $1 or jurisdiction_id ilike 'TX-%')
+     where event_date is not null and (jurisdiction_id ilike $1 or jurisdiction_id ilike 'TX-%' or id ilike '%DFW%' or id ilike '%TX%')
      group by event_date order by event_date desc limit 60`,
     [`%${state}%`]
   );
@@ -508,8 +520,9 @@ export async function hailEvents(q: Q) {
         `select id, storm_name, max_hail_inches::text as hail, properties->'polygon' as polygon
          from warehouse.storm_swaths
          where (event_date::text = $1 or id = $1) and properties->'polygon' is not null
+         order by case when jurisdiction_id ilike $2 or id ilike '%DFW%' or id ilike '%TX%' then 0 else 1 end
          limit 5`,
-        [wanted]
+        [wanted, `%${state}%`]
       );
       for (const sw of swaths) {
         if (sw.polygon) {
@@ -527,10 +540,16 @@ export async function hailEvents(q: Q) {
     }
 
     const stormZips = new Set<string>();
+    let minLng = Infinity, maxLng = -Infinity, minLat = Infinity, maxLat = -Infinity;
+
     for (const r of reports) {
       const lat = Number(r.lat);
       const lng = Number(r.lng);
       if (Number.isFinite(lat) && Number.isFinite(lng) && lat !== 0 && lng !== 0) {
+        minLat = Math.min(minLat, lat - 0.2);
+        maxLat = Math.max(maxLat, lat + 0.2);
+        minLng = Math.min(minLng, lng - 0.2);
+        maxLng = Math.max(maxLng, lng + 0.2);
         const z = lookupZip(lat, lng);
         if (z) stormZips.add(z);
       }
@@ -538,9 +557,33 @@ export async function hailEvents(q: Q) {
     for (const w of warnings) {
       const geom = typeof w.geometry === "string" ? JSON.parse(w.geometry) : w.geometry;
       extractCoordsZips(geom?.coordinates, stormZips);
+      extractCoordsBbox(geom?.coordinates, (lat, lng) => {
+        minLat = Math.min(minLat, lat);
+        maxLat = Math.max(maxLat, lat);
+        minLng = Math.min(minLng, lng);
+        maxLng = Math.max(maxLng, lng);
+      });
     }
 
-    const arrZips = Array.from(stormZips);
+    // Query real commercial buildings inside the storm swath bounding box
+    if (minLat < maxLat && minLng < maxLng) {
+      const bboxZips = await query<{ zip: string }>(
+        `SELECT DISTINCT substring(p.zip_code from 1 for 5) as zip
+         FROM warehouse.parcels p
+         WHERE p.latitude BETWEEN $1 AND $2
+           AND p.longitude BETWEEN $3 AND $4
+           AND coalesce(p.is_mock,false) = false
+           AND p.building_sqft > 0
+           AND (upper(p.state) = $5 OR $5 = '') AND substring(p.zip_code from 1 for 5) ~ '^7[5-9]'
+         LIMIT 50`,
+        [minLat, maxLat, minLng, maxLng, state]
+      );
+      for (const row of bboxZips) {
+        if (row.zip) stormZips.add(row.zip);
+      }
+    }
+
+    let arrZips = Array.from(stormZips);
     const zipBuildingCounts: Record<string, { count: number; pipeline: number }> = {};
     let dynamicBuildings: Array<{
       parcel_id: string;
@@ -562,6 +605,20 @@ export async function hailEvents(q: Q) {
     const ev = events.find((e) => String(e.d).slice(0, 10) === wanted);
     const stormHail = Number(ev?.hail || 1.75);
 
+    // If no specific ZIPs from swath/reports, fall back to top commercial ZIPs in active market
+    if (arrZips.length === 0) {
+      const marketZips = await query<{ zip: string }>(
+        `SELECT substring(p.zip_code from 1 for 5) as zip
+         FROM warehouse.parcels p
+         WHERE coalesce(p.is_mock,false) = false
+           AND p.building_sqft > 0
+           AND (lower(p.city) like '%dallas%' or lower(p.city) in ('farmers branch', 'addison', 'carrollton', 'irving', 'coppell', 'richardson', 'garland', 'mesquite'))
+         GROUP BY 1 ORDER BY count(*) DESC LIMIT 20`
+      );
+      for (const r of marketZips) if (r.zip) stormZips.add(r.zip);
+      arrZips = Array.from(stormZips);
+    }
+
     if (arrZips.length > 0) {
       const zipCountsQuery = await query<{ zip: string; building_count: string; pipeline_val: string }>(
         `SELECT 
@@ -570,6 +627,8 @@ export async function hailEvents(q: Q) {
            coalesce(sum(coalesce(p.footprint_sqft, p.building_sqft, 25000) * 14.5), 0)::bigint as pipeline_val
          FROM warehouse.parcels p
          WHERE substring(p.zip_code from 1 for 5) = ANY($1)
+           AND coalesce(p.is_mock,false) = false
+           AND p.building_sqft > 0
          GROUP BY 1`,
         [arrZips]
       );
@@ -618,10 +677,12 @@ export async function hailEvents(q: Q) {
          FROM warehouse.parcels p
          LEFT JOIN warehouse.scored_parcel_leads l ON l.parcel_id = p.id
          WHERE substring(p.zip_code from 1 for 5) = ANY($1)
+           AND coalesce(p.is_mock,false) = false
+           AND p.building_sqft > 0
            AND p.latitude IS NOT NULL AND p.longitude IS NOT NULL
            AND p.latitude != 0 AND p.longitude != 0
-         ORDER BY coalesce(l.exposure_score, 80) DESC, p.total_valuation DESC NULLS LAST
-         LIMIT 600`,
+         ORDER BY p.building_sqft DESC NULLS LAST
+         LIMIT 500`,
         [arrZips, stormHail]
       );
 

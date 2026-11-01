@@ -101,8 +101,12 @@ def main():
                 if pm_parts[0] != pr_parts[0]:
                     continue  # Mismatch: e.g. N vs S -> REJECT
             elif pm_has_dir != pr_has_dir:
-                # One has directional, other does not -> conservative skip
-                continue
+                # One has directional, other does not (e.g. 13592 N Central vs 13592 Central)
+                # Allow match ONLY IF core street names match exactly (len >= 4) and cities match
+                pm_temp = " ".join(pm_parts[1:]) if pm_has_dir else pm_street
+                pr_temp = " ".join(pr_parts[1:]) if pr_has_dir else pr_street
+                if pm_temp != pr_temp or len(pm_temp) < 4 or pm_city.strip().upper() != cand["city"].strip().upper():
+                    continue
 
             # Check core street name match
             pm_core = " ".join(pm_parts[1:]) if pm_has_dir else pm_street

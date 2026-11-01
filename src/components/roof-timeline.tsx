@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import { ChevronLeft, ChevronRight, Layers } from "lucide-react";
+import { ChevronLeft, ChevronRight, Layers, ZoomIn } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Roof3DButton } from "@/components/roof-3d-button";
 
@@ -101,6 +101,9 @@ export function RoofTimeline({ lat, lng, address, parcelId, className }: RoofTim
   const [hasError, setHasError] = useState(false);
   const [showBoundary, setShowBoundary] = useState(true);
   const [boundary, setBoundary] = useState<BoundaryData | null>(null);
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [zoomPos, setZoomPos] = useState({ x: 50, y: 50 });
+  const [zoomFactor, setZoomFactor] = useState(2.5);
 
   if (!lat || !lng || isNaN(lat) || isNaN(lng)) {
     return null;
@@ -122,6 +125,7 @@ export function RoofTimeline({ lat, lng, address, parcelId, className }: RoofTim
     setActiveSrc(preferredSrc);
     setIsLoading(true);
     setHasError(false);
+    setIsZoomed(false);
   }, [preferredSrc, index]);
 
   // Preload all years in background for instant switching
@@ -160,31 +164,70 @@ export function RoofTimeline({ lat, lng, address, parcelId, className }: RoofTim
   const prev = () => setIndex((i) => Math.max(0, i - 1));
   const next = () => setIndex((i) => Math.min(TIMELINE_YEARS.length - 1, i + 1));
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isLoading || hasError) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+    const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
+    setZoomPos({ x, y });
+  };
+
+  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isLoading || hasError) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    if (rect.width && rect.height) {
+      const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+      const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
+      setZoomPos({ x, y });
+    }
+    setIsZoomed(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsZoomed(false);
+  };
+
+  const cycleZoom = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setZoomFactor((prev) => (prev === 2 ? 2.5 : prev === 2.5 ? 3.5 : 2));
+  };
+
   return (
     <div className={cn("w-full", className)}>
-      {/* Minimal Header */}
-      <div className="flex items-center justify-between pb-2 text-xs">
-        <span className="font-medium text-foreground tracking-tight">Roof History</span>
+      {/* Controls Bar */}
+      <div className="flex items-center justify-between gap-2 pb-2 text-xs">
+        {/* Minimal Year Tabs */}
+        <div className="flex items-center rounded-md border border-border/60 bg-neutral-100 dark:bg-[#171714] p-0.5">
+          {TIMELINE_YEARS.map((t, idx) => (
+            <button
+              key={t.year}
+              type="button"
+              onClick={() => setIndex(idx)}
+              className={cn(
+                "rounded px-2 py-0.5 font-mono text-[11px] transition-colors cursor-pointer select-none",
+                idx === index
+                  ? "bg-white dark:bg-[#232320] text-foreground font-semibold shadow-xs border border-border/60"
+                  : "text-muted-foreground hover:text-foreground hover:bg-neutral-200 dark:hover:bg-[#20201c]"
+              )}
+            >
+              {t.year}
+            </button>
+          ))}
+        </div>
 
+        {/* Inspection Tools */}
         <div className="flex items-center gap-1.5">
-          {/* Minimal Year Tabs */}
-          <div className="flex items-center rounded-md border border-border/60 bg-muted/30 p-0.5">
-            {TIMELINE_YEARS.map((t, idx) => (
-              <button
-                key={t.year}
-                type="button"
-                onClick={() => setIndex(idx)}
-                className={cn(
-                  "rounded px-1.5 py-0.5 font-mono text-[11px] transition-colors cursor-pointer",
-                  idx === index
-                    ? "bg-background text-foreground font-semibold shadow-xs"
-                    : "text-muted-foreground hover:text-foreground"
-                )}
-              >
-                {t.year}
-              </button>
-            ))}
-          </div>
+          {/* Zoom Magnification Selector */}
+          <button
+            type="button"
+            onClick={cycleZoom}
+            title={`Inspection Zoom: ${zoomFactor}x. Click to cycle (2x, 2.5x, 3.5x)`}
+            className="flex items-center gap-1 rounded border border-border/60 bg-neutral-100 dark:bg-[#171714] px-1.5 py-0.5 text-[11px] font-mono text-muted-foreground hover:text-foreground transition cursor-pointer"
+          >
+            <ZoomIn className="size-3" />
+            <span>{zoomFactor}x</span>
+          </button>
 
           {/* Boundary Line Toggle Button */}
           {boundary && (
@@ -196,7 +239,7 @@ export function RoofTimeline({ lat, lng, address, parcelId, className }: RoofTim
                 "flex items-center justify-center size-6 rounded border transition cursor-pointer",
                 showBoundary
                   ? "border-red-500/40 bg-red-500/10 text-red-500"
-                  : "border-transparent text-muted-foreground/50 hover:text-muted-foreground"
+                  : "border-border/60 bg-neutral-100 dark:bg-[#171714] text-muted-foreground hover:text-foreground"
               )}
             >
               <Layers className="size-3" />
@@ -208,11 +251,29 @@ export function RoofTimeline({ lat, lng, address, parcelId, className }: RoofTim
         </div>
       </div>
 
-      {/* Viewport: Clean, borderless chrome, pure image */}
-      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-md border border-border bg-neutral-950 select-none">
+      {/* Viewport: Clean, borderless chrome, ecommerce hover-zoom interactive view */}
+      <div
+        className={cn(
+          "relative aspect-[4/3] w-full overflow-hidden rounded-md border border-border bg-neutral-950 select-none",
+          !isLoading && !hasError && (isZoomed ? "cursor-crosshair" : "cursor-zoom-in")
+        )}
+        onMouseEnter={handleMouseEnter}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        onClick={(e) => {
+          if (isLoading || hasError) return;
+          const rect = e.currentTarget.getBoundingClientRect();
+          if (rect.width && rect.height) {
+            const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+            const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
+            setZoomPos({ x, y });
+          }
+          setIsZoomed((prev) => !prev);
+        }}
+      >
         {/* Loading Spinner */}
         {isLoading && !hasError && (
-          <div className="absolute inset-0 z-10 flex items-center justify-center bg-background/30 backdrop-blur-xs">
+          <div className="absolute inset-0 z-30 flex items-center justify-center bg-background/30 backdrop-blur-xs pointer-events-none">
             <span className="size-4 animate-spin rounded-full border border-foreground/30 border-t-foreground" />
           </div>
         )}
@@ -222,49 +283,62 @@ export function RoofTimeline({ lat, lng, address, parcelId, className }: RoofTim
             Image unavailable
           </div>
         ) : (
-          <img
-            key={activeSrc}
-            src={activeSrc}
-            alt={`Aerial capture ${current.vintage} for ${address || "property"}`}
-            className="size-full object-cover"
-            onLoad={() => setIsLoading(false)}
-            onError={() => {
-              if (activeSrc !== wmtsTileUrl) {
-                setActiveSrc(wmtsTileUrl);
-              } else {
-                setIsLoading(false);
-                setHasError(true);
-              }
+          /* Zooming Layer: Scales both the aerial image AND the SVG legal parcel boundary synchronously */
+          <div
+            className="relative size-full will-change-transform"
+            style={{
+              transformOrigin: `${zoomPos.x}% ${zoomPos.y}%`,
+              transform: isZoomed ? `scale(${zoomFactor})` : "scale(1)",
+              transition: isZoomed ? "transform 0.15s cubic-bezier(0.16, 1, 0.3, 1)" : "transform 0.22s ease-out",
             }}
-          />
-        )}
-
-        {/* Boundary Overlay: Bold Red Border around Footprint / Lot */}
-        {showBoundary && boundaryPoints.length > 2 && (
-          <svg
-            viewBox="0 0 800 600"
-            className="pointer-events-none absolute inset-0 size-full z-10"
-            preserveAspectRatio="none"
           >
-            <defs>
-              <filter id="red-line-shadow" x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx="0" dy="0" stdDeviation="1.5" floodColor="#000000" floodOpacity="0.9" />
-              </filter>
-            </defs>
-            <polygon
-              points={boundaryPoints.map(([px, py]) => `${px},${py}`).join(" ")}
-              fill="none"
-              stroke="#ef4444"
-              strokeWidth={3}
-              filter="url(#red-line-shadow)"
+            <img
+              key={activeSrc}
+              src={activeSrc}
+              alt={`Aerial capture ${current.vintage} for ${address || "property"}`}
+              className="size-full object-cover pointer-events-none"
+              onLoad={() => setIsLoading(false)}
+              onError={() => {
+                if (activeSrc !== wmtsTileUrl) {
+                  setActiveSrc(wmtsTileUrl);
+                } else {
+                  setIsLoading(false);
+                  setHasError(true);
+                }
+              }}
             />
-          </svg>
+
+            {/* Boundary Overlay: Bold Red Border around Footprint / Lot */}
+            {showBoundary && boundaryPoints.length > 2 && (
+              <svg
+                viewBox="0 0 800 600"
+                className="pointer-events-none absolute inset-0 size-full z-10"
+                preserveAspectRatio="none"
+              >
+                <defs>
+                  <filter id="red-line-shadow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="0" stdDeviation="1.5" floodColor="#000000" floodOpacity="0.9" />
+                  </filter>
+                </defs>
+                <polygon
+                  points={boundaryPoints.map(([px, py]) => `${px},${py}`).join(" ")}
+                  fill="none"
+                  stroke="#ef4444"
+                  strokeWidth={3}
+                  filter="url(#red-line-shadow)"
+                />
+              </svg>
+            )}
+          </div>
         )}
 
         {/* Navigation Arrows */}
         <button
           type="button"
-          onClick={prev}
+          onClick={(e) => {
+            e.stopPropagation();
+            prev();
+          }}
           disabled={index === 0}
           aria-label="Previous year"
           className={cn(
@@ -276,7 +350,10 @@ export function RoofTimeline({ lat, lng, address, parcelId, className }: RoofTim
 
         <button
           type="button"
-          onClick={next}
+          onClick={(e) => {
+            e.stopPropagation();
+            next();
+          }}
           disabled={index === TIMELINE_YEARS.length - 1}
           aria-label="Next year"
           className={cn(
@@ -286,8 +363,33 @@ export function RoofTimeline({ lat, lng, address, parcelId, className }: RoofTim
           <ChevronRight className="size-4" />
         </button>
 
-        {/* Subtle date stamp bottom right */}
-        <span className="pointer-events-none absolute bottom-1.5 right-2 text-[10px] font-mono text-white/60 drop-shadow-xs">
+        {/* Active Zoom Badge with Interactive Magnification Pill */}
+        {isZoomed && !isLoading && !hasError && (
+          <div className="absolute top-2 left-2 z-20 flex items-center gap-1.5 rounded-full bg-black/80 px-2.5 py-1 text-[11px] font-medium text-white shadow-md backdrop-blur-xs animate-in fade-in duration-150">
+            <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <button
+              type="button"
+              onClick={cycleZoom}
+              title="Click to cycle zoom level (2x, 2.5x, 3.5x)"
+              className="hover:underline font-mono cursor-pointer"
+            >
+              {zoomFactor}x
+            </button>
+            <span className="text-white/40">·</span>
+            <span className="text-white/75 text-[11px]">Move cursor to inspect</span>
+          </div>
+        )}
+
+        {/* Subtle Idle Hover Hint */}
+        {!isZoomed && !isLoading && !hasError && (
+          <div className="pointer-events-none absolute bottom-1.5 left-2 z-20 flex items-center gap-1 rounded bg-black/55 px-1.5 py-0.5 text-[11px] text-white/80 backdrop-blur-xs">
+            <ZoomIn className="size-2.5 opacity-80" />
+            <span>Hover to zoom</span>
+          </div>
+        )}
+
+        {/* Subtle Date Stamp Bottom Right */}
+        <span className="pointer-events-none absolute bottom-1.5 right-2 z-20 text-[11px] font-mono text-white/80 drop-shadow-xs bg-black/50 px-1.5 py-0.5 rounded backdrop-blur-xs">
           {current.vintage}
         </span>
       </div>

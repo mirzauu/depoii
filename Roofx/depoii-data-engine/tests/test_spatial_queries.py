@@ -21,20 +21,22 @@ def test_estimate_nrca_replacement_cost():
 
 
 def test_calculate_exposure_score():
-    score = calculate_exposure_score(
+    score_1995 = calculate_exposure_score(
         hail_inches=2.50,
         building_sqft=200000,
         months_unrepaired=28,
         year_built=1995,
     )
-    other_year = calculate_exposure_score(
+    score_2015 = calculate_exposure_score(
         hail_inches=2.50,
         building_sqft=200000,
         months_unrepaired=28,
         year_built=2015,
     )
-    assert score == other_year
-    assert score == 52
+    # 1995 roof (31 yrs old) has an aging, more vulnerable membrane than a 2015 roof (11 yrs old)
+    assert score_1995 > score_2015
+    assert score_1995 == 77
+    assert score_2015 == 63
 
 
 def test_postgis_sql_template():

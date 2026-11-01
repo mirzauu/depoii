@@ -1071,24 +1071,104 @@ export async function locations(kind: "hierarchy" | "states" | "cities") {
 
 function parcelFilters(q: Q, params: unknown[], alias = "p"): string {
   const clauses = [`coalesce(${alias}.is_mock,false) = false`];
-  const city = str(q, "city"), state = str(q, "state");
-  if (city) { params.push(`%${city.toLowerCase()}%`); clauses.push(`lower(${alias}.city) like $${params.length}`); }
+  const jp = jurisdictionParts(q);
+  const zip = str(q, "zip") || str(q, "zipcode") || str(q, "zip_code");
+  const search = str(q, "search");
+  const city = str(q, "city") || (!zip && !search ? jp.city : ""), state = str(q, "state") || jp.state;
+  if (city) {
+    if (city.toLowerCase() === "dallas") {
+      clauses.push(`(lower(${alias}.city) like '%dallas%' or lower(${alias}.city) in ('farmers branch', 'addison', 'carrollton', 'irving', 'coppell', 'richardson', 'garland', 'mesquite'))`);
+    } else {
+      params.push(`%${city.toLowerCase()}%`);
+      clauses.push(`lower(${alias}.city) like $${params.length}`);
+    }
+  }
   if (state) { params.push(state.toUpperCase()); clauses.push(`upper(${alias}.state) = $${params.length}`); }
-  if (str(q, "search")) { params.push(`%${str(q, "search").toLowerCase()}%`); const i = params.length; clauses.push(`(lower(${alias}.address) like $${i} or lower(${alias}.owner_name) like $${i} or lower(${alias}.id) like $${i} or lower(coalesce(${alias}.account_number,'')) like $${i})`); }
+  if (str(q, "search")) {
+    params.push(`%${str(q, "search").toLowerCase()}%`);
+    const i = params.length;
+    clauses.push(`(lower(${alias}.address) like $${i} or lower(${alias}.owner_name) like $${i} or lower(${alias}.id) like $${i} or lower(coalesce(${alias}.account_number,'')) like $${i})`);
+  }
+  if (str(q, "owner")) {
+    params.push(`%${str(q, "owner").toLowerCase()}%`);
+    clauses.push(`lower(${alias}.owner_name) like $${params.length}`);
+  }
   if (q.get("min_sqft")) { params.push(int(q, "min_sqft", 0)); clauses.push(`${alias}.building_sqft >= $${params.length}`); }
   if (q.get("min_age")) { params.push(int(q, "min_age", 0)); clauses.push(`${alias}.year_built > 0 and (extract(year from current_date) - ${alias}.year_built) >= $${params.length}`); }
+  if (q.get("min_year")) { params.push(int(q, "min_year", 0)); clauses.push(`${alias}.year_built >= $${params.length}`); }
+  if (zip) {
+    const zipList = zip
+      .split(/[,\s]+/)
+      .map((z) => z.trim().slice(0, 5))
+      .filter((z) => /^\d{5}$/.test(z));
+    if (zipList.length === 1) {
+      params.push(`${zipList[0]}%`);
+      clauses.push(`${alias}.zip_code like ${params.length}`);
+    } else if (zipList.length > 1) {
+      params.push(zipList);
+      clauses.push(`substring(coalesce(${alias}.zip_code,''), 1, 5) = ANY(${params.length})`);
+    } else {
+      const cleanZip = zip.trim().slice(0, 5);
+      if (cleanZip) {
+        params.push(`${cleanZip}%`);
+        clauses.push(`${alias}.zip_code like ${params.length}`);
+      }
+    }
+  }
+  if (q.get("has_contact") === "true") {
+    clauses.push(`exists(select 1 from warehouse.lead_contacts lc where (lc.parcel_id = ${alias}.id or lc.account_number = ${alias}.account_number) and lc.email_status = 'VERIFIED' and lc.confidence = 'HIGH')`);
+  }
+  if (q.get("released") === "true") {
+    clauses.push(`exists(select 1 from warehouse.released_leads r where r.parcel_id = ${alias}.id)`);
+  }
+  const propClass = str(q, "property_class");
+  if (propClass && propClass !== "all") {
+    params.push(`%${propClass.toLowerCase()}%`);
+    clauses.push(`lower(coalesce(${alias}.property_type,'')) like $${params.length}`);
+  }
   return clauses.join(" and ");
 }
 
 export async function parcelsSearch(q: Q, user?: { id?: string; orgId?: string; platformRole?: string }) {
   const isSuperAdmin = user?.platformRole === "superadmin";
   let allowedZips: string[] | null = null;
+  let userSubs: Array<{ id: string; name: string }> = [];
   if (!isSuperAdmin && user?.orgId) {
     const { getOrgTerritories } = await import("@/lib/territories");
     const subs = await getOrgTerritories(user.orgId);
     allowedZips = subs.flatMap((s) => s.zipCodes || []);
+    userSubs = subs.map((s) => ({ id: s.id, name: s.name }));
     if (allowedZips.length === 0) {
-      return { total: 0, source: "Depoii data engine", parcels: [], no_active_territory: true };
+      return { total: 0, source: "Depoii data engine", parcels: [], no_active_territory: true, territory_locked: false, target_zone: null, subscribed_zones: [] };
+    }
+  }
+
+  const rawZip = str(q, "zip") || str(q, "zipcode") || str(q, "zip_code");
+  const requestedZips = rawZip
+    ? rawZip.split(/[,\s]+/).map((z) => z.trim().slice(0, 5)).filter((z) => /^\d{5}$/.test(z))
+    : [];
+
+  if (!isSuperAdmin && allowedZips && allowedZips.length > 0 && requestedZips.length > 0) {
+    const disallowed = requestedZips.filter((rz) => !allowedZips.some((az) => az.slice(0, 5) === rz));
+    if (disallowed.length === requestedZips.length) {
+      const firstDisallowed = disallowed[0];
+      const cntRow = await queryOne<{ cnt: string }>(
+        `select count(*)::text as cnt from warehouse.parcels p where coalesce(p.is_mock,false) = false and p.building_sqft > 0 and substring(p.zip_code from 1 for 5) = $1`,
+        [firstDisallowed]
+      );
+      const targetTerritory = await queryOne<{ id: string; name: string }>(
+        `select id, name from app.territories where $1 = ANY(zip_codes) limit 1`,
+        [firstDisallowed]
+      );
+      return {
+        total: Number(cntRow?.cnt || 0),
+        source: "Depoii data engine",
+        parcels: [],
+        territory_locked: true,
+        target_zone: targetTerritory ? { id: targetTerritory.id, name: targetTerritory.name } : null,
+        subscribed_zones: userSubs,
+        no_active_territory: false,
+      };
     }
   }
 
@@ -1101,21 +1181,60 @@ export async function parcelsSearch(q: Q, user?: { id?: string; orgId?: string; 
   }
   const where = clauses.join(" and ");
 
+  let orderBy = "p.building_sqft desc nulls last";
+  const sortBy = str(q, "sort_by");
+  if (sortBy === "sqft_asc") orderBy = "p.building_sqft asc nulls last";
+  else if (sortBy === "year_asc") orderBy = "p.year_built asc nulls last";
+  else if (sortBy === "year_desc") orderBy = "p.year_built desc nulls last";
+  else if (sortBy === "address_asc") orderBy = "p.address asc nulls last";
+  else if (sortBy === "val_desc") orderBy = "p.total_valuation desc nulls last";
+
   const limit = int(q, "limit", 50), offset = int(q, "offset", 0);
   const total = await queryOne<{ n: string }>(`select count(*)::text as n from warehouse.parcels p where ${where}`, params);
-  const rows = await query(`select p.* from warehouse.parcels p where ${where} order by p.building_sqft desc nulls last limit $${params.length + 1} offset $${params.length + 2}`, [...params, limit, offset]);
+  const rows = await query(
+    `select p.*, owner_address, stories, 
+            exists(select 1 from warehouse.released_leads r where r.parcel_id = p.id) as released,
+            exists(select 1 from warehouse.lead_contacts lc where (lc.parcel_id = p.id or lc.account_number = p.account_number) and lc.email_status = 'VERIFIED' and lc.confidence = 'HIGH') as has_contact
+     from warehouse.parcels p where ${where} order by ${orderBy} limit $${params.length + 1} offset $${params.length + 2}`, [...params, limit, offset]);
   return { total: Number(total?.n || 0), source: "Depoii data engine", parcels: rows.map(parcelRowBase), no_active_territory: false };
 }
 
 export async function parcelsBrowse(q: Q, user?: { id?: string; orgId?: string; platformRole?: string }) {
   const isSuperAdmin = user?.platformRole === "superadmin";
   let allowedZips: string[] | null = null;
+  let userSubs: Array<{ id: string; name: string }> = [];
   if (!isSuperAdmin && user?.orgId) {
     const { getOrgTerritories } = await import("@/lib/territories");
     const subs = await getOrgTerritories(user.orgId);
     allowedZips = subs.flatMap((s) => s.zipCodes || []);
+    userSubs = subs.map((s) => ({ id: s.id, name: s.name }));
     if (allowedZips.length === 0) {
-      return { total: 0, source: "Depoii data engine", parcels: [], no_active_territory: true };
+      return { total: 0, source: "Depoii data engine", parcels: [], no_active_territory: true, territory_locked: false, target_zone: null, subscribed_zones: [] };
+    }
+  }
+
+  const rawZip = str(q, "zip") || str(q, "zipcode") || str(q, "zip_code");
+  const cleanRequestedZip = rawZip ? rawZip.trim().slice(0, 5) : "";
+  if (!isSuperAdmin && allowedZips && allowedZips.length > 0 && cleanRequestedZip) {
+    const isAllowed = allowedZips.some((z) => z.slice(0, 5) === cleanRequestedZip);
+    if (!isAllowed) {
+      const cntRow = await queryOne<{ cnt: string }>(
+        `select count(*)::text as cnt from warehouse.parcels p where coalesce(p.is_mock,false) = false and p.building_sqft > 0 and substring(p.zip_code from 1 for 5) = $1`,
+        [cleanRequestedZip]
+      );
+      const targetTerritory = await queryOne<{ id: string; name: string }>(
+        `select id, name from app.territories where $1 = ANY(zip_codes) limit 1`,
+        [cleanRequestedZip]
+      );
+      return {
+        total: Number(cntRow?.cnt || 0),
+        source: "Depoii data engine",
+        parcels: [],
+        territory_locked: true,
+        target_zone: targetTerritory ? { id: targetTerritory.id, name: targetTerritory.name } : null,
+        subscribed_zones: userSubs,
+        no_active_territory: false,
+      };
     }
   }
 
@@ -1151,7 +1270,7 @@ export async function parcelsBrowse(q: Q, user?: { id?: string; orgId?: string; 
 export async function parcelBrowseDetail(id: string) {
   const r = await queryOne(`select p.*, exists(select 1 from warehouse.released_leads rl where rl.parcel_id = p.id) as released from warehouse.parcels p where p.id = $1 or p.account_number = $1`, [id]);
   if (!r) return null;
-  const permits = await query(`select * from warehouse.normalized_permits where parcel_id = $1 order by issue_date desc nulls last`, [r.id]);
+  const permits = await query(`select * from warehouse.normalized_permits where parcel_id = $1 or (coalesce($2,'') <> '' and lower(trim(normalized_address)) = lower(trim($2)) and ($3 = '' or lower(trim(coalesce(city,''))) = lower(trim($3)))) order by issue_date desc nulls last limit 50`, [r.id, r.address || "", r.city || ""]);
   const evidence = await query<{ field_name: string; stored_value: string }>(`select field_name, stored_value from warehouse.lead_evidence where parcel_id = $1`, [r.id]);
   const ev = Object.fromEntries(evidence.map((e) => [e.field_name, e.stored_value]));
 

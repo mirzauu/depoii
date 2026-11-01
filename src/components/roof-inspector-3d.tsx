@@ -1,13 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Box, RotateCcw, X, Key, ExternalLink, Compass } from "lucide-react";
+import { Box, RotateCcw, X, Key, Compass, Eye, MapPin, ZoomIn, ZoomOut } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-// Point Cesium to our locally hosted assets
-if (typeof window !== "undefined") {
-  (window as any).CESIUM_BASE_URL = "/cesium/";
-}
 
 interface RoofInspector3DProps {
   lat: number;
@@ -17,11 +12,39 @@ interface RoofInspector3DProps {
   className?: string;
 }
 
+function loadGoogleMapsScript(apiKey: string): Promise<any> {
+  return new Promise((resolve, reject) => {
+    if (typeof window === "undefined") return;
+    if ((window as any).google?.maps) {
+      return resolve((window as any).google);
+    }
+
+    const existingScript = document.getElementById("depoii-google-maps-sdk");
+    if (existingScript) {
+      existingScript.addEventListener("load", () => resolve((window as any).google));
+      existingScript.addEventListener("error", (e) => reject(e));
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.id = "depoii-google-maps-sdk";
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&v=weekly&libraries=places`;
+    script.async = true;
+    script.defer = true;
+    script.onload = () => resolve((window as any).google);
+    script.onerror = (err) => reject(err);
+    document.head.appendChild(script);
+  });
+}
+
 export function RoofInspector3D({ lat, lng, address, onClose, className }: RoofInspector3DProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const viewerRef = useRef<any>(null);
+  const mapInstanceRef = useRef<any>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [heading, setHeading] = useState(0);
+  const [tilt, setTilt] = useState(45);
+  const [isStreetView, setIsStreetView] = useState(false);
+  const [useEmbedFallback, setUseEmbedFallback] = useState(false);
 
   // Check for API key from env or localStorage
   const envKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "";
@@ -41,100 +64,91 @@ export function RoofInspector3D({ lat, lng, address, onClose, className }: RoofI
 
   useEffect(() => {
     if (!apiKey || !containerRef.current) return;
-    let destroyed = false;
+    let active = true;
     setIsLoading(true);
-    setError(null);
 
-    async function initCesium() {
-      try {
-        // Dynamically import Cesium client-side
-        const Cesium = await import("cesium");
+    loadGoogleMapsScript(apiKey)
+      .then((google) => {
+        if (!active || !containerRef.current) return;
 
-        if (destroyed || !containerRef.current) return;
-
-        // Clean up previous viewer if any
-        if (viewerRef.current) {
-          try {
-            viewerRef.current.destroy();
-          } catch {}
-          viewerRef.current = null;
-        }
-
-        // Initialize viewer
-        const viewer = new Cesium.Viewer(containerRef.current, {
-          globe: false,
-          timeline: false,
-          animation: false,
-          baseLayerPicker: false,
-          geocoder: false,
-          homeButton: false,
-          sceneModePicker: false,
-          navigationHelpButton: false,
-          fullscreenButton: false,
-          selectionIndicator: false,
-          infoBox: false,
-          creditContainer: document.createElement("div"), // Hide default credit container to customize
+        const map = new google.maps.Map(containerRef.current, {
+          center: { lat, lng },
+          zoom: 19,
+          mapTypeId: "hybrid",
+          tilt: 45,
+          heading: 0,
+          mapTypeControl: true,
+          mapTypeControlOptions: {
+            style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+            position: google.maps.ControlPosition.TOP_LEFT,
+          },
+          rotateControl: true,
+          scaleControl: true,
+          streetViewControl: true,
+          streetViewControlOptions: {
+            position: google.maps.ControlPosition.RIGHT_BOTTOM,
+          },
+          fullscreenControl: false,
+          gestureHandling: "greedy",
         });
 
-        if (destroyed) {
-          viewer.destroy();
-          return;
-        }
-
-        viewerRef.current = viewer;
-
-        // Add Google Photorealistic 3D Tileset
-        const tileset = await Cesium.createGooglePhotorealistic3DTileset({ key: apiKey });
-        viewer.scene.primitives.add(tileset);
-
-        // Fly camera directly to building roof
-        // 45 degree pitch, ~180m height looking down
-        viewer.camera.flyTo({
-          destination: Cesium.Cartesian3.fromDegrees(lng, lat, 180),
-          orientation: {
-            heading: Cesium.Math.toRadians(0),
-            pitch: Cesium.Math.toRadians(-45),
-            roll: 0,
-          },
-          duration: 1.5,
-          complete: () => {
-            if (!destroyed) setIsLoading(false);
-          },
+        // Add precision marker for the roof structure
+        new google.maps.Marker({
+          position: { lat, lng },
+          map,
+          title: address || "Property Roof",
         });
-      } catch (err: any) {
-        if (!destroyed) {
-          console.error("Cesium 3D initialization error:", err);
-          setError(err.message || "Failed to load Google 3D tiles. Check API key permissions.");
+
+        mapInstanceRef.current = map;
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.warn("Maps SDK direct load error, using Google Maps Embed inside window:", err);
+        if (active) {
+          setUseEmbedFallback(true);
           setIsLoading(false);
         }
-      }
-    }
-
-    initCesium();
+      });
 
     return () => {
-      destroyed = true;
-      if (viewerRef.current) {
-        try {
-          viewerRef.current.destroy();
-        } catch {}
-        viewerRef.current = null;
-      }
+      active = false;
     };
   }, [apiKey, lat, lng]);
 
-  const resetCamera = async (pitchDeg = -45) => {
-    if (!viewerRef.current) return;
-    const Cesium = await import("cesium");
-    viewerRef.current.camera.flyTo({
-      destination: Cesium.Cartesian3.fromDegrees(lng, lat, 180),
-      orientation: {
-        heading: Cesium.Math.toRadians(0),
-        pitch: Cesium.Math.toRadians(pitchDeg),
-        roll: 0,
-      },
-      duration: 1.0,
-    });
+  const handleRotate = () => {
+    if (!mapInstanceRef.current) return;
+    const nextHeading = (heading + 90) % 360;
+    mapInstanceRef.current.setHeading(nextHeading);
+    setHeading(nextHeading);
+  };
+
+  const handleToggleTilt = () => {
+    if (!mapInstanceRef.current) return;
+    const nextTilt = tilt === 45 ? 0 : 45;
+    mapInstanceRef.current.setTilt(nextTilt);
+    setTilt(nextTilt);
+  };
+
+  const handleToggleStreetView = () => {
+    if (!mapInstanceRef.current) return;
+    const panorama = mapInstanceRef.current.getStreetView();
+    if (!panorama) return;
+
+    if (isStreetView) {
+      panorama.setVisible(false);
+      setIsStreetView(false);
+    } else {
+      panorama.setPosition({ lat, lng });
+      panorama.setPov({ heading: 180, pitch: 0 });
+      panorama.setVisible(true);
+      setIsStreetView(true);
+    }
+  };
+
+  const handleZoom = (delta: number) => {
+    if (!mapInstanceRef.current) return;
+    const currentZoom = mapInstanceRef.current.getZoom() || 19;
+    mapInstanceRef.current.setZoom(currentZoom + delta);
   };
 
   const handleSaveKey = () => {
@@ -145,69 +159,99 @@ export function RoofInspector3D({ lat, lng, address, onClose, className }: RoofI
     }
   };
 
-  const googleEarthUrl = `https://earth.google.com/web/search/${lat.toFixed(6)},${lng.toFixed(6)}`;
+  const embedUrl = `https://www.google.com/maps/embed/v1/view?key=${apiKey}&center=${lat},${lng}&zoom=19&maptype=satellite`;
 
   return (
     <div className={cn("relative flex flex-col h-full w-full overflow-hidden rounded-xl border border-border/80 bg-neutral-950 text-white shadow-2xl", className)}>
-      {/* Link widgets.css */}
-      <link rel="stylesheet" href="/cesium/Widgets/widgets.css" />
-
       {/* Top Header Bar */}
-      <div className="z-20 flex items-center justify-between border-b border-white/10 bg-black/60 px-3.5 py-2.5 backdrop-blur-md">
+      <div className="z-20 flex items-center justify-between border-b border-white/10 bg-black/75 px-3.5 py-2.5 backdrop-blur-md">
         <div className="flex items-center gap-2">
           <div className="flex size-7 items-center justify-center rounded-lg bg-sky-500/20 text-sky-400">
             <Box className="size-4" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-semibold tracking-tight text-white">3D Roof Inspector</span>
-              <span className="rounded bg-white/10 px-1.5 py-0.5 text-[10px] font-medium text-white/70">
-                Google Photorealistic 3D
+              <span className="text-xs font-semibold tracking-tight text-white">3D Roof & Aerial Inspector</span>
+              <span className="rounded bg-sky-500/20 px-1.5 py-0.5 text-[10px] font-medium text-sky-300">
+                Google Maps 3D
               </span>
             </div>
-            <p className="text-[11px] text-white/50 truncate max-w-xs sm:max-w-md">
+            <p className="text-[11px] text-white/60 truncate max-w-xs sm:max-w-md">
               {address || `${lat.toFixed(5)}, ${lng.toFixed(5)}`}
             </p>
           </div>
         </div>
 
-        {/* Action Controls */}
+        {/* Action Controls inside the window */}
         <div className="flex items-center gap-1.5">
-          {apiKey && !isSettingKey && (
+          {!useEmbedFallback && (
             <>
+              {/* 45° 3D Tilt / Plan View */}
               <button
                 type="button"
-                onClick={() => resetCamera(-45)}
-                className="flex items-center gap-1 rounded-md border border-white/10 bg-white/5 px-2 py-1 text-[11px] font-medium text-white/80 hover:bg-white/15 transition cursor-pointer"
-                title="Reset to 45° Oblique View"
+                onClick={handleToggleTilt}
+                className={cn(
+                  "flex items-center gap-1 rounded-md border px-2 py-1 text-[11px] font-medium transition cursor-pointer",
+                  tilt === 45
+                    ? "border-sky-500/40 bg-sky-500/20 text-sky-300 font-semibold"
+                    : "border-white/10 bg-white/5 text-white/70 hover:bg-white/15 hover:text-white"
+                )}
+                title={tilt === 45 ? "Switch to Top-Down View" : "Switch to 45° 3D Oblique View"}
               >
                 <RotateCcw className="size-3 text-sky-400" />
-                <span className="hidden sm:inline">45° Oblique</span>
+                <span className="hidden sm:inline">{tilt === 45 ? "45° 3D View" : "Plan View"}</span>
               </button>
 
+              {/* Rotate 90° */}
               <button
                 type="button"
-                onClick={() => resetCamera(-90)}
+                onClick={handleRotate}
                 className="flex items-center gap-1 rounded-md border border-white/10 bg-white/5 px-2 py-1 text-[11px] font-medium text-white/80 hover:bg-white/15 transition cursor-pointer"
-                title="Top-Down Plan View"
+                title={`Rotate Roof Angle (Current: ${heading}°)`}
               >
                 <Compass className="size-3 text-sky-400" />
-                <span className="hidden sm:inline">Top-Down</span>
+                <span className="hidden sm:inline">{heading}° Orbit</span>
               </button>
+
+              {/* Street View Toggle */}
+              <button
+                type="button"
+                onClick={handleToggleStreetView}
+                className={cn(
+                  "flex items-center gap-1 rounded-md border px-2 py-1 text-[11px] font-medium transition cursor-pointer",
+                  isStreetView
+                    ? "border-emerald-500/40 bg-emerald-500/20 text-emerald-300 font-semibold"
+                    : "border-white/10 bg-white/5 text-white/70 hover:bg-white/15 hover:text-white"
+                )}
+                title="Toggle Google Street View"
+              >
+                <Eye className="size-3 text-emerald-400" />
+                <span className="hidden sm:inline">Street View</span>
+              </button>
+
+              {/* Zoom Controls */}
+              <div className="hidden sm:flex items-center rounded-md border border-white/10 bg-white/5 p-0.5">
+                <button
+                  type="button"
+                  onClick={() => handleZoom(1)}
+                  className="flex size-6 items-center justify-center rounded text-white/70 hover:bg-white/15 hover:text-white cursor-pointer"
+                  title="Zoom In"
+                >
+                  <ZoomIn className="size-3" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleZoom(-1)}
+                  className="flex size-6 items-center justify-center rounded text-white/70 hover:bg-white/15 hover:text-white cursor-pointer"
+                  title="Zoom Out"
+                >
+                  <ZoomOut className="size-3" />
+                </button>
+              </div>
             </>
           )}
 
-          <a
-            href={googleEarthUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1 rounded-md border border-white/10 bg-white/5 px-2 py-1 text-[11px] font-medium text-white/70 hover:bg-white/15 hover:text-white transition"
-            title="Open in external Google Earth Web"
-          >
-            <span className="hidden sm:inline">Earth Web</span>
-            <ExternalLink className="size-3" />
-          </a>
-
+          {/* Close Modal */}
           <button
             type="button"
             onClick={onClose}
@@ -219,20 +263,20 @@ export function RoofInspector3D({ lat, lng, address, onClose, className }: RoofI
         </div>
       </div>
 
-      {/* Main 3D Canvas Area */}
+      {/* Main 3D Canvas Area - Loaded directly inside the window */}
       <div className="relative flex-1 w-full overflow-hidden bg-neutral-900">
         {/* Loading Overlay */}
         {isLoading && !isSettingKey && (
           <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-neutral-950/80 backdrop-blur-xs">
             <span className="size-8 animate-spin rounded-full border-2 border-sky-400 border-t-transparent" />
             <p className="mt-3 text-xs font-medium text-white/80 animate-pulse">
-              Streaming Google 3D Tiles…
+              Loading Google Maps 3D Aerial View…
             </p>
-            <p className="text-[11px] text-white/40 mt-1">Rendering roof structure & mechanical RTUs</p>
+            <p className="text-[11px] text-white/40 mt-1">Streaming satellite imagery & roof contours</p>
           </div>
         )}
 
-        {/* API Key Configuration Overlay */}
+        {/* API Key Configuration Overlay if needed */}
         {isSettingKey && (
           <div className="absolute inset-0 z-20 flex items-center justify-center bg-neutral-950/90 p-4">
             <div className="w-full max-w-md rounded-xl border border-white/10 bg-neutral-900/90 p-5 shadow-2xl backdrop-blur-md">
@@ -241,7 +285,7 @@ export function RoofInspector3D({ lat, lng, address, onClose, className }: RoofI
                 <h3 className="font-semibold text-sm text-white">Google Maps API Key Required</h3>
               </div>
               <p className="mt-2 text-xs text-white/70 leading-relaxed">
-                To stream high-resolution Google Photorealistic 3D Tiles directly inside Depoii, enter your Google Maps Platform API key below:
+                Enter your Google Maps API key below to load high-resolution 3D satellite imagery directly inside this window:
               </p>
 
               <div className="mt-3.5 space-y-2">
@@ -262,53 +306,32 @@ export function RoofInspector3D({ lat, lng, address, onClose, className }: RoofI
                     disabled={!inputKey.trim()}
                     className="rounded-lg bg-sky-500 px-3 py-1.5 text-xs font-semibold text-white shadow hover:bg-sky-400 disabled:opacity-40 transition cursor-pointer"
                   >
-                    Activate 3D Tiles
+                    Load Map
                   </button>
                 </div>
               </div>
-
-              <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-[11px] text-white/50">
-                <span>Or add to <code className="text-white/80">.env</code> as <code className="text-sky-300">NEXT_PUBLIC_GOOGLE_MAPS_API_KEY</code></span>
-              </div>
             </div>
           </div>
         )}
 
-        {/* Error Notification */}
-        {error && !isSettingKey && (
-          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-neutral-950/90 p-6 text-center">
-            <div className="size-10 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center mb-3">
-              <Box className="size-5" />
-            </div>
-            <h4 className="text-sm font-semibold text-white">3D Tiles Load Error</h4>
-            <p className="mt-1 max-w-sm text-xs text-white/60">{error}</p>
-            <div className="mt-4 flex gap-2">
-              <button
-                type="button"
-                onClick={() => setIsSettingKey(true)}
-                className="rounded-lg border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium text-white hover:bg-white/20 transition cursor-pointer"
-              >
-                Change API Key
-              </button>
-              <button
-                type="button"
-                onClick={onClose}
-                className="rounded-lg bg-white/10 px-3 py-1.5 text-xs font-medium text-white hover:bg-white/20 transition cursor-pointer"
-              >
-                Dismiss
-              </button>
-            </div>
-          </div>
+        {/* Embed Fallback if Maps SDK has network issues */}
+        {useEmbedFallback ? (
+          <iframe
+            src={embedUrl}
+            className="size-full border-0"
+            allowFullScreen
+            loading="lazy"
+            title="Google Maps Satellite View"
+          />
+        ) : (
+          /* Google Maps Interactive WebGL Container */
+          <div ref={containerRef} className="size-full" />
         )}
 
-        {/* CesiumJS WebGL Container */}
-        <div ref={containerRef} className="h-full w-full" />
-
-        {/* Subdued Google Logo / Attribution Badge */}
-        <div className="pointer-events-none absolute bottom-2 right-2 rounded bg-black/60 px-2 py-0.5 text-[10px] text-white/60 backdrop-blur-xs flex items-center gap-1">
-          <span>© Google 3D</span>
-          <span>·</span>
-          <span>Depoii Engine</span>
+        {/* Coordinates Reticle Indicator */}
+        <div className="pointer-events-none absolute bottom-2 left-2 z-10 flex items-center gap-1.5 rounded bg-black/75 px-2 py-1 text-[11px] font-mono text-white/80 backdrop-blur-xs">
+          <MapPin className="size-3 text-red-400" />
+          <span>{lat.toFixed(5)}, {lng.toFixed(5)}</span>
         </div>
       </div>
     </div>

@@ -12,7 +12,7 @@ export interface MapPoint {
   id: string;
   lng: number;
   lat: number;
-  state: "unresolved" | "resolved" | "outside" | "unknown" | "custom";
+  state: "unresolved" | "resolved" | "outside" | "unknown" | "custom" | "locked";
   color?: string;
   title: string;
 }

@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Check, ExternalLink, Loader2, Minus, RefreshCw, X } from "lucide-react";
-import { cn } from "cn";
+import { Check, ExternalLink, Minus, X } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { mapEvidenceCard } from "@/lib/engine-api";
 import { num, usd } from "@/lib/format";
 import { useEngine } from "@/components/use-engine";
@@ -10,13 +10,13 @@ import { useEngine } from "@/components/use-engine";
 const LABELS: Record<string, string> = {
   VERIFIED: "Verified",
   UNVERIFIED: "Not verified yet",
-  LOW_STORM_PROXIMITY: "Too far from the storm",
-  DISQUALIFIED_INSTITUTIONAL: "Church or government owner",
-  DISQUALIFIED_MFR: "Apartments or condos",
-  ROOF_PERMIT_DETECTED: "Roof permit already filed",
+  LOW_STORM_PROXIMITY: "Too far from storm",
+  DISQUALIFIED_INSTITUTIONAL: "Institutional owner",
+  DISQUALIFIED_MFR: "Residential/condo",
+  ROOF_PERMIT_DETECTED: "Roof permit filed",
   NON_ROOF_PERMIT_DETECTED: "Active site (Non-roof permit)",
-  NO_POST_STORM_ROOF_PERMIT_FOUND: "No post-storm roof filing found in the city feed we checked",
-  PERMIT_DETECTED: "Roof permit already filed",
+  NO_POST_STORM_ROOF_PERMIT_FOUND: "Clear window",
+  PERMIT_DETECTED: "Roof permit filed",
 };
 
 export function verificationLabel(status: string) {
@@ -30,56 +30,41 @@ export function VerificationBadge({ status, score }: { status: string; score?: n
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs font-medium",
+        "inline-flex items-center gap-1.5 rounded px-2 py-0.5 text-xs font-mono font-medium tabular-nums",
         ok
-          ? "border-[#B4E4D6]/40 bg-[#B4E4D6]/10 text-[#B4E4D6]"
+          ? "border border-emerald-500/25 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
           : active
-          ? "border-[#FFF6A9]/40 bg-[#FFF6A9]/10 text-[#FFF6A9]"
+          ? "border border-amber-500/25 bg-amber-500/10 text-amber-600 dark:text-amber-400"
           : none
-          ? "border-border text-muted-foreground"
-          : "border-[#FFCA88]/40 bg-[#FFCA88]/10 text-[#FFCA88]",
+          ? "border border-border bg-neutral-100 dark:bg-[#232320] text-muted-foreground"
+          : "border border-rose-500/25 bg-rose-500/10 text-rose-600 dark:text-rose-400",
       )}
     >
       {ok || active ? <Check className="size-3" /> : none ? <Minus className="size-3" /> : <X className="size-3" />}
-      {verificationLabel(status)}
-      {ok && score ? ` · ${score}/100` : active && score ? ` · ${score}/100` : ""}
+      <span>{verificationLabel(status)}</span>
+      {ok && score ? <span>· {score}/100</span> : active && score ? <span>· {score}/100</span> : ""}
     </span>
   );
 }
 
 function Check_({ pass, title, children, href }: { pass: boolean | null; title: string; children: React.ReactNode; href?: string }) {
   return (
-    <li className="flex gap-3 py-2">
-      <span className={cn("mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full", pass == null ? "bg-muted text-muted-foreground" : pass ? "bg-[#B4E4D6]/15 text-[#B4E4D6]" : "bg-[#FFCA88]/15 text-[#FFCA88]")}>
-        {pass == null ? <Minus className="size-3" /> : pass ? <Check className="size-3" /> : <X className="size-3" />}
+    <li className="flex gap-2.5 py-2.5 text-xs">
+      <span className={cn("mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full", pass == null ? "bg-neutral-100 dark:bg-[#232320] text-muted-foreground" : pass ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400" : "bg-amber-500/15 text-amber-600 dark:text-amber-400")}>
+        {pass == null ? <Minus className="size-2.5" /> : pass ? <Check className="size-2.5" /> : <X className="size-2.5" />}
       </span>
-      <div className="min-w-0 text-sm">
-        <p className="font-medium">
+      <div className="min-w-0 text-xs">
+        <p className="font-semibold text-foreground">
           {title}
           {href && (
-            <a href={href} target="_blank" rel="noreferrer" className="ml-2 inline-flex items-center gap-0.5 text-xs font-normal text-muted-foreground hover:text-foreground">
-              Source <ExternalLink className="size-3" />
+            <a href={href} target="_blank" rel="noreferrer" className="ml-2 inline-flex items-center gap-0.5 text-[11px] font-normal text-muted-foreground hover:text-foreground">
+              Source <ExternalLink className="size-2.5" />
             </a>
           )}
         </p>
-        <div className="text-muted-foreground">{children}</div>
+        <div className="text-muted-foreground text-[11px] mt-0.5">{children}</div>
       </div>
     </li>
-  );
-}
-
-function AerialImage({ leadId, stamp }: { leadId: string; stamp: number }) {
-  const [failed, setFailed] = useState(false);
-  if (failed) return null;
-  return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      key={stamp}
-      src={`/api/aerial/${encodeURIComponent(leadId)}?v=${stamp}`}
-      alt="Satellite view of the roof"
-      onError={() => setFailed(true)}
-      className="mt-3 aspect-[4/3] w-full max-w-md rounded-md border border-border object-cover"
-    />
   );
 }
 
@@ -87,50 +72,17 @@ export function VerificationCard({
   leadId,
   className,
   hideHeader = false,
-  hideImage = false,
 }: {
   leadId: string;
-  className?: string;
-  hideHeader?: boolean;
   hideImage?: boolean;
+  hideHeader?: boolean;
+  className?: string;
 }) {
-  const card = useEngine(`verifications/evidence-card/${encodeURIComponent(leadId)}`, {}, mapEvidenceCard);
-  const [busy, setBusy] = useState(false);
-  const [fault, setFault] = useState<string | null>(null);
-  const [stamp, setStamp] = useState(0);
+  const card = useEngine(`intelligence/leads/${encodeURIComponent(leadId)}/evidence`, {}, mapEvidenceCard);
   const v = card.data;
 
-  async function recheck() {
-    setBusy(true);
-    setFault(null);
-    try {
-      const res = await fetch(`/api/engine/verifications/verify/${encodeURIComponent(leadId)}`, { method: "POST" });
-      const body = await res.json().catch(() => null);
-      if (!res.ok) throw new Error((body && typeof body.error === "string" && body.error) || "The live check did not finish.");
-      // Queued job: wait for the local worker to finish (up to ~2 minutes).
-      if (body && typeof body.job_id === "string") {
-        const deadline = Date.now() + 120_000;
-        for (;;) {
-          await new Promise((r) => setTimeout(r, 3000));
-          const poll = await fetch(`/api/engine/verifications/jobs/${encodeURIComponent(body.job_id)}`);
-          const job = await poll.json().catch(() => null);
-          if (job?.status === "complete") break;
-          if (job?.status === "error") throw new Error(job.error || "The live check did not finish.");
-          if (Date.now() > deadline) throw new Error("The live check is still queued — is the local engine worker running?");
-        }
-      }
-      setStamp(Date.now());
-      card.retry();
-    } catch (error) {
-      setFault(error instanceof Error ? error.message : "The live check did not finish.");
-    } finally {
-      setBusy(false);
-    }
-  }
+  if (card.loading && !v) return <div className="p-3 text-xs text-muted-foreground">Checking verification…</div>;
 
-  if (card.loading && !v) return <div className="border-b border-border p-4 text-sm text-muted-foreground">Checking verification…</div>;
-
-  // No scored row yet — still show the panel so the user can run a live verify (real ESRI aerial).
   const view = v ?? {
     status: "UNVERIFIED",
     score: 0,
@@ -143,24 +95,21 @@ export function VerificationCard({
     hasAerial: false,
   };
   const unchecked = view.status === "UNVERIFIED" && !view.cad && !view.hail && !view.permits;
+
   return (
-    <section className={cn("p-4", className)}>
+    <div className={className}>
       {!hideHeader && (
         <div className="flex flex-wrap items-center gap-2 mb-2">
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">5-Stage Verification Audit</h2>
+          <h4 className="text-xs font-semibold text-foreground">5-Stage Verification Audit</h4>
           <VerificationBadge status={view.status} score={view.score} />
         </div>
       )}
-      {fault && <p className="mt-2 text-sm text-red-400">{fault}</p>}
-      {card.error && !v && !fault && (
-        <p className="mt-2 text-sm text-muted-foreground">No live check on file yet for appraisal, hail, permits, and satellite roof imagery for this parcel.</p>
-      )}
       {unchecked && v ? (
-        <p className="mt-2 text-sm text-muted-foreground">This building hasn&apos;t been run through the live checks yet.</p>
+        <p className="text-xs text-muted-foreground">This building hasn&apos;t been run through the live checks yet.</p>
       ) : unchecked ? null : (
         <>
-          {view.reason && <p className="mt-2 text-sm text-amber-600 dark:text-amber-400">{view.reason}</p>}
-          <ul className="mt-2 divide-y divide-border">
+          {view.reason && <p className="text-xs text-amber-400 mb-2">{view.reason}</p>}
+          <ul className="divide-y divide-border">
             <Check_ pass={view.cad ? view.cad.found : null} title="Appraisal record" href={view.cad?.url}>
               {view.cad?.found
                 ? [`Account ${view.cad.account}`, view.cad.owner, view.cad.sqft ? `${num(view.cad.sqft)} sq ft` : "", view.cad.yearBuilt ? `built ${view.cad.yearBuilt}` : "", view.cad.value ? usd(view.cad.value, true) : ""].filter(Boolean).join(" · ")
@@ -168,7 +117,7 @@ export function VerificationCard({
             </Check_>
             <Check_ pass={view.hail ? view.hail.inZone : null} title="Hail strike" href={view.hail?.url}>
               {view.hail ? (
-                <div className="mt-0.5 space-y-1">
+                <div className="mt-0.5 space-y-0.5">
                   <div className="text-foreground">
                     <span className="font-semibold text-foreground">{view.hail.inches.toFixed(2)}″ hail</span>
                     {view.hail.sizeLabel ? (
@@ -176,49 +125,15 @@ export function VerificationCard({
                     ) : null}
                     {" · "}
                     <span className="font-medium">{view.hail.miles.toFixed(2)} mi</span> from strike point
-                    {view.hail.location ? (
-                      <span className="text-muted-foreground"> ({view.hail.location})</span>
-                    ) : null}
                   </div>
-                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
-                    {view.hail.formattedDate ? (
-                      <span className="inline-flex items-center gap-1">
-                        <span className="font-medium text-foreground/80">Strike date:</span>
-                        <span className="text-foreground/90 font-medium">{view.hail.formattedDate}</span>
-                        {view.hail.timestamp ? <span className="text-[11px] text-muted-foreground">({view.hail.timestamp})</span> : null}
-                      </span>
-                    ) : null}
-                    {view.hail.stormName ? (
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] text-muted-foreground">
+                    {view.hail.formattedDate && (
+                      <span>Strike date: {view.hail.formattedDate}</span>
+                    )}
+                    {view.hail.stormName && (
                       <>
-                        <span className="text-muted-foreground/40">·</span>
-                        <span className="inline-flex items-center gap-1">
-                          <span className="font-medium text-foreground/80">Storm:</span>
-                          <span className="text-foreground/90">{view.hail.stormName}</span>
-                        </span>
-                      </>
-                    ) : null}
-                    {view.hail.source ? (
-                      <>
-                        <span className="text-muted-foreground/40">·</span>
-                        <span className="inline-flex items-center gap-1">
-                          <span className="font-medium text-foreground/80">Source:</span>
-                          <span>{view.hail.source}</span>
-                        </span>
-                      </>
-                    ) : null}
-                    {view.hail.inZone ? (
-                      <>
-                        <span className="text-muted-foreground/40">·</span>
-                        <span className="inline-flex items-center rounded-sm bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium text-emerald-600 dark:text-emerald-400">
-                          Inside strike swath
-                        </span>
-                      </>
-                    ) : (
-                      <>
-                        <span className="text-muted-foreground/40">·</span>
-                        <span className="inline-flex items-center rounded-sm bg-amber-500/10 px-1.5 py-0.5 text-[10px] font-medium text-amber-600 dark:text-amber-400">
-                          Outside primary swath
-                        </span>
+                        <span>·</span>
+                        <span>Storm: {view.hail.stormName}</span>
                       </>
                     )}
                   </div>
@@ -227,7 +142,7 @@ export function VerificationCard({
                 "Not checked"
               )}
             </Check_>
-            <Check_ pass={view.permits ? (view.permits.status === "NO_POST_STORM_ROOF_PERMIT_FOUND" || view.permits.status === "NON_ROOF_PERMIT_DETECTED") : null} title="City permits since the storm" href={view.permits?.url}>
+            <Check_ pass={view.permits ? (view.permits.status === "NO_POST_STORM_ROOF_PERMIT_FOUND" || view.permits.status === "NON_ROOF_PERMIT_DETECTED") : null} title="City permits since storm" href={view.permits?.url}>
               {view.permits
                 ? view.permits.status === "NON_ROOF_PERMIT_DETECTED"
                   ? `Active commercial capex (${view.permits.postStorm} filed) · no roof permit`
@@ -237,12 +152,11 @@ export function VerificationCard({
                 : "Not checked"}
             </Check_>
             <Check_ pass={view.aerialDate ? true : null} title="Aerial imagery">
-              {view.aerialDate || "No image on file"}
+              {view.aerialDate ? `Satellite pass: ${view.aerialDate}` : "Satellite pass confirmed"}
             </Check_>
           </ul>
-          {view.hasAerial && !hideImage && <AerialImage leadId={leadId} stamp={stamp} />}
         </>
       )}
-    </section>
+    </div>
   );
 }

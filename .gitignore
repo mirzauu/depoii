@@ -97,3 +97,5 @@ Roofx/thumbnails/*.png
 data/permits_batch_*.json
 data/zone5_all_permits_audit.json
 data/remaining_40_leads.json
+
+.taste-skill/

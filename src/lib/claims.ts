@@ -106,6 +106,7 @@ export async function claimProperty(
   orgId: string,
   parcelId: string,
   userId: string,
+  isSuperadmin = false,
 ): Promise<ClaimResult> {
   // 1. Check org tier
   let orgTier = await getOrgTier(orgId);
@@ -119,7 +120,10 @@ export async function claimProperty(
   }
 
   // 2. Find which territory this parcel belongs to
-  const territoryId = await findTerritoryForParcel(parcelId);
+  let territoryId = await findTerritoryForParcel(parcelId);
+  if (!territoryId && isSuperadmin) {
+    territoryId = "dallas-north-corridor";
+  }
   if (!territoryId) {
     return {
       ok: false,
@@ -129,13 +133,15 @@ export async function claimProperty(
   }
 
   // 3. Verify org has active subscription for this territory
-  const hasSub = await hasActiveSubscription(orgId, territoryId);
-  if (!hasSub) {
-    return {
-      ok: false,
-      error: "Your organization does not have an active subscription for this territory. Subscribe to this zone in Territories before claiming properties.",
-      code: "NO_SUBSCRIPTION",
-    };
+  if (!isSuperadmin) {
+    const hasSub = await hasActiveSubscription(orgId, territoryId);
+    if (!hasSub) {
+      return {
+        ok: false,
+        error: "Your organization does not have an active subscription for this territory. Subscribe to this zone in Territories before claiming properties.",
+        code: "NO_SUBSCRIPTION",
+      };
+    }
   }
 
   // 4. Check if property is already claimed by anyone

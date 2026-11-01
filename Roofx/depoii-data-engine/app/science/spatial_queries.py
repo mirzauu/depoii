@@ -55,8 +55,12 @@ def calculate_exposure_score(
     """Shared 0-100 score. building_sqft is used only when the caller passes a measured roof size."""
     from app.science.lead_quality import exposure_score
 
-    _ = year_built
     _ = months_unrepaired
+    if roof_age_years is None and year_built is not None:
+        try:
+            roof_age_years = max(0, 2026 - int(year_built))
+        except (ValueError, TypeError):
+            roof_age_years = None
     roof_sqft = int(building_sqft or 0)
     return exposure_score(hail_inches, distance_miles, tier, roof_age_years, roof_sqft)
 

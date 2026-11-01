@@ -55,7 +55,7 @@ def clean_address_components(raw_addr: str) -> tuple:
     # Strip unit/suite/ste/#
     clean = re.sub(r",?\s*(?:ste|suite|apt|unit|bldg|fl|floor|#)\s*[:#]?\s*[\w\-]+.*$", "", raw_addr, flags=re.IGNORECASE)
     # Strip city/state suffix
-    clean = re.split(r",\s*(?:Dallas|Fort Worth|New York|Brooklyn|Queens|Bronx|Manhattan|Staten Island|TX|NY)\b", clean, flags=re.IGNORECASE)[0].strip()
+    clean = re.split(r",\s*(?:Dallas|Fort Worth|Addison|Farmers Branch|Coppell|Carrollton|Irving|Richardson|Plano|Garland|Rowlett|Mesquite|New York|Brooklyn|Queens|Bronx|Manhattan|Staten Island|TX|NY)\b", clean, flags=re.IGNORECASE)[0].strip()
     
     m = re.match(r"^(\d+)\s+([A-Za-z0-9\s\.\-]+)$", clean)
     if m:

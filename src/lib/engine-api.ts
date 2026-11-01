@@ -632,6 +632,10 @@ export function mapParcelBrowse(body: unknown) {
   return {
     total: num(b, ["total"]),
     source: str(b, ["source"]),
+    territoryLocked: Boolean(b.territory_locked || b.territoryLocked),
+    targetZone: (b.target_zone || b.targetZone) as { id: string; name: string } | null | undefined,
+    subscribedZones: ((b.subscribed_zones || b.subscribedZones) as Array<{ id: string; name: string }>) || [],
+    noActiveTerritory: Boolean(b.no_active_territory || b.noActiveTerritory),
     parcels: rows(body, ["parcels", "items"]).map(mapBrowseParcel).filter((p) => p.id),
   };
 }
