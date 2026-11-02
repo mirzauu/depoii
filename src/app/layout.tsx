@@ -4,6 +4,7 @@ import { Inter, Geist, Geist_Mono } from "next/font/google";
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 import { AppShell } from "@/components/app-shell";
 import { DepoiiProvider } from "@/components/depoii-provider";
+import { VisitorTracker } from "@/components/visitor-tracker";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "./globals.css";
 
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
       <body className="min-h-full font-sans" suppressHydrationWarning>
+        <VisitorTracker />
         <DepoiiProvider>
           <AppShell>{children}</AppShell>
         </DepoiiProvider>

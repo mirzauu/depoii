@@ -2,20 +2,32 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
+  ArrowRight,
+  BarChart3,
   Briefcase,
   Building2,
   Check,
   ChevronDown,
   ClipboardList,
+  ExternalLink,
+  FileText,
+  Hourglass,
   House,
   Map as MapIcon,
+  MapPin,
+  MapPinned,
   Moon,
   Ruler,
   Search,
+  ShieldCheck,
+  Sparkles,
   Sun,
+  UserRound,
   X,
   type LucideIcon,
 } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { RealLogo } from "@/components/real-logo";
 import { PageHeader } from "@/components/app-shell";
 import { ScorePill, TierBadge } from "@/components/badges";
 import { DepoiiMap, type MapPoint } from "@/components/depoii-map";
@@ -284,6 +296,7 @@ export function LandingMock({ scene }: { scene: TourScene }) {
               onAdd={addToPipeline}
               onOpenMap={() => go("/map")}
               onOpenPipeline={() => go("/pipeline")}
+              onNavigate={go}
             />
           )}
           {path === "/pipeline" && (
@@ -411,6 +424,54 @@ function scrollChildIntoMock(parent: HTMLElement, child: HTMLElement) {
   parent.scrollTo({ top: Math.max(0, next), behavior: "smooth" });
 }
 
+function DecisionCard({
+  n,
+  icon: Icon,
+  question,
+  answer,
+  detail,
+  onAction,
+  cta,
+  tourId,
+}: {
+  n: number;
+  icon: React.ElementType;
+  question: string;
+  answer: React.ReactNode;
+  detail: React.ReactNode;
+  onAction: () => void;
+  cta: string;
+  tourId?: string;
+}) {
+  return (
+    <div
+      data-tour={tourId}
+      className="group relative flex flex-col justify-between rounded-xl border border-border bg-card/75 p-4 sm:p-5 shadow-sm transition-all duration-150 hover:border-foreground/30 hover:bg-card hover:shadow-md"
+    >
+      <div className="space-y-3">
+        <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <Icon className="size-4 text-[#DE7272]" />
+          <span>Decision {n}</span>
+        </div>
+        <h3 className="text-sm sm:text-base font-semibold tracking-tight text-foreground">{question}</h3>
+        <div className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">{answer}</div>
+        <div className="text-xs sm:text-sm text-muted-foreground leading-relaxed line-clamp-2">{detail}</div>
+      </div>
+
+      <div className="pt-4">
+        <button
+          type="button"
+          onClick={onAction}
+          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#DE7272] transition-all hover:text-[#DE7272]/80 group-hover:gap-2 text-left"
+        >
+          <span>{cta}</span>
+          <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+        </button>
+      </div>
+    </div>
+  );
+}
+
 function MockHome({
   city,
   leads,
@@ -423,6 +484,7 @@ function MockHome({
   onAdd,
   onOpenMap,
   onOpenPipeline,
+  onNavigate,
 }: {
   city: MockCity;
   leads: MockLead[];
@@ -435,10 +497,72 @@ function MockHome({
   onAdd: (id: string) => void;
   onOpenMap: () => void;
   onOpenPipeline: () => void;
+  onNavigate: (href: string) => void;
 }) {
   const selected = leadById(selectedId);
   const recordRef = useRef<HTMLDivElement>(null);
   const leadRef = useRef<HTMLLIElement>(null);
+  const [selectedZip, setSelectedZip] = useState<string | null>(null);
+
+  const topLead = leads[0];
+
+  const {
+    topZips,
+    agingCount,
+    avgAge,
+    totalPipelineValue,
+    totalRoofSqft,
+  } = useMemo(() => {
+    const currentYear = 2026;
+    let pipeVal = 0;
+    let roofSq = 0;
+    let aged = 0;
+    let totalYears = 0;
+    let yearCount = 0;
+    const zipMap = new Map<string, number>();
+
+    for (const o of leads) {
+      pipeVal += o.value || 0;
+      roofSq += o.roofSqft || 0;
+      if (o.yearBuilt && o.yearBuilt > 1900 && o.yearBuilt <= currentYear) {
+        const age = currentYear - o.yearBuilt;
+        totalYears += age;
+        yearCount++;
+        if (age >= 20) aged++;
+      }
+      if (o.zipCode) {
+        const zip5 = o.zipCode.slice(0, 5);
+        zipMap.set(zip5, (zipMap.get(zip5) || 0) + 1);
+      }
+    }
+
+    const sortedZips = Array.from(zipMap.entries())
+      .sort((a, b) => b[1] - a[1])
+      .map(([zip, count]) => ({ zip, count }));
+
+    const avg = yearCount > 0 ? Math.round(totalYears / yearCount) : 23;
+
+    return {
+      topZips: sortedZips,
+      agingCount: aged || leads.length,
+      avgAge: avg,
+      totalPipelineValue: pipeVal,
+      totalRoofSqft: roofSq,
+    };
+  }, [leads]);
+
+  const filteredLeads = useMemo(() => {
+    if (!selectedZip) return leads;
+    return leads.filter((o) => (o.zipCode || "").slice(0, 5) === selectedZip);
+  }, [leads, selectedZip]);
+
+  const DEFAULT_ZIPS_BY_CITY: Record<string, [string, string]> = {
+    Dallas: ["75248", "75244"],
+    "Fort Worth": ["76102", "76132"],
+  };
+  const fallbackZips = DEFAULT_ZIPS_BY_CITY[city] || ["75248", "75244"];
+  const topZip1 = topZips[0]?.zip || fallbackZips[0];
+  const topZip2 = topZips[1]?.zip || fallbackZips[1];
 
   // Tour: scroll the highlighted target to the top of the mock viewport
   useEffect(() => {
@@ -463,82 +587,275 @@ function MockHome({
   }, [highlight, selected?.id, scrollParentRef]);
 
   return (
-    <div className="pb-4">
-      <PageHeader
-        eyebrow={city}
-        title={
-          leads.length
-            ? `${num(leads.length)} released ${city} lead${leads.length === 1 ? "" : "s"}`
-            : "Released leads"
-        }
-        description={
-          leads.length
-            ? `${num(leads.length)} ${city} buildings have a county roof size, a Texas SPC point report, and a logged permit search. A point report is not a measurement on the roof.`
-            : `${city} uses the local appraisal district and city permit feed. No ${city} row is released in this mock yet.`
-        }
-        actions={
+    <div className="pb-10">
+      {/* Overview Page Title Bar */}
+      <div data-tour="hero-dispatch" className="flex flex-col gap-3 px-4 pt-5 pb-3 sm:flex-row sm:items-center sm:justify-between lg:px-6">
+        <div>
           <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={onOpenMap}
-              className="rounded-md border border-border px-3 py-1.5 text-sm hover:bg-muted"
-            >
-              Open hail map
-            </button>
+            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">
+              Overview
+            </h1>
+            <span className="inline-flex items-center rounded-md border border-border bg-muted/60 px-2 py-0.5 text-xs font-semibold text-muted-foreground">
+              {city} Metro Swath
+            </span>
           </div>
-        }
-      />
-
-      <div className="space-y-5 px-4 lg:px-6">
-        <div className="grid gap-3 sm:grid-cols-3">
-          <Stat label="Released leads" value={num(leads.length)} />
-          <Stat
-            label="Roof size shown"
-            value={leads[0] ? `${num(leads[0].roofSqft)} sq ft` : "—"}
-          />
-          <Stat label="SPC reports" value={num(MOCK_HAIL.length)} />
+          <p className="text-xs sm:text-sm font-medium text-rose-600 dark:text-[#DE7272] mt-0.5">
+            High-level commercial roof inventory, pipeline valuation, and active jobsite distribution across your licensed territory.
+          </p>
         </div>
 
-        <section>
-          <div className="mb-2 flex items-end justify-between gap-3">
-            <h2 className="text-lg font-semibold">Released records</h2>
+        <div className="flex flex-wrap items-center gap-2 shrink-0">
+          <button
+            type="button"
+            onClick={onOpenMap}
+            className="inline-flex items-center gap-1.5 rounded-md border border-border bg-card dark:bg-[#111216] px-3 py-1.5 text-xs sm:text-sm font-medium text-foreground hover:bg-muted transition-colors shadow-sm"
+          >
+            <MapPin className="size-4 text-muted-foreground" />
+            Open hail map
+          </button>
+          <button
+            type="button"
+            onClick={() => onNavigate("/territory")}
+            className="inline-flex items-center gap-1.5 rounded-md border border-[#B4E4D6]/30 bg-[#B4E4D6]/10 px-3 py-1.5 text-xs sm:text-sm font-semibold text-[#B4E4D6] hover:bg-[#B4E4D6]/20 transition-colors shadow-sm"
+          >
+            <ShieldCheck className="size-4 text-[#B4E4D6]" />
+            Territory Claims
+          </button>
+        </div>
+      </div>
+
+      {/* Free Trial Active Banner */}
+      <div data-tour="trial-banner" className="mx-4 mb-4 rounded-xl border border-[#B4E4D6]/30 bg-[#B4E4D6]/10 p-3.5 sm:p-4 lg:mx-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <Badge className="bg-[#B4E4D6] text-neutral-950 font-semibold text-xs gap-1 border-0">
+                <Sparkles className="h-3 w-3" />
+                Free Trial Active
+              </Badge>
+              <span className="font-semibold text-foreground text-sm">
+                {city} Metro Territory
+              </span>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              14 days remaining · Full verified roof intelligence & 3 exclusive claim-locks unlocked.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => onNavigate("/territory")}
+            className="inline-flex items-center gap-1 text-xs font-semibold text-[#B4E4D6] hover:underline shrink-0"
+          >
+            Manage Territory Claims
+            <ArrowRight className="h-3.5 w-3.5" />
+          </button>
+        </div>
+      </div>
+
+      {/* 6 Core Tactical Decision Cards */}
+      <div className="mb-6 px-4 lg:px-6">
+        <div className="grid gap-3.5 md:grid-cols-2 xl:grid-cols-3">
+          <DecisionCard
+            n={1}
+            icon={MapPinned}
+            question="Where do we deploy crews?"
+            answer={`ZIP ${topZip1}${topZip2 ? ` & ${topZip2}` : ""} (${city} Corridor)`}
+            detail={`Severe storm impact footprint · 1.75"–2.00" hail swath. ${agingCount || leads.length} priority roofs in direct deployment vector.`}
+            onAction={onOpenMap}
+            cta="Open hail swath map"
+            tourId="card-zip"
+          />
+          <DecisionCard
+            n={2}
+            icon={Search}
+            question="Who should we inspect?"
+            answer={`${num(leads.length)} unresolved · ${totalPipelineValue > 0 ? usd(totalPipelineValue, true) : "$17.7M"}`}
+            detail={`${agingCount} commercial roofs exceeding 20+ years of age identified with zero competitor re-roof permits logged to date.`}
+            onAction={onOpenPipeline}
+            cta="Review pipeline"
+            tourId="card-condition"
+          />
+          <DecisionCard
+            n={3}
+            icon={UserRound}
+            question="Who do we contact?"
+            answer={topLead ? (topLead.organizationName || topLead.owner) : "Verified Decision Maker"}
+            detail={
+              topLead
+                ? `Owner of record for ${topLead.address}. ${topLead.decisionMaker ? `${topLead.decisionMaker} (${topLead.decisionTitle || "Executive"})` : "Deed entity and decision-maker contact roll."}`
+                : "Direct property deed owner & verified entity contact."
+            }
+            onAction={() => topLead && onOpen(topLead.id)}
+            cta="Open dossier"
+          />
+          <DecisionCard
+            n={4}
+            icon={FileText}
+            question="What is our technical pitch?"
+            answer="Structural Condition Audit"
+            detail={
+              topLead
+                ? `Brief for ${topLead.address}: ${topLead.hailInches}" hail exposure, ${2026 - topLead.yearBuilt} yr aging, membrane commercial flat / BUR.`
+                : "Select a property to generate engineering brief."
+            }
+            onAction={() => topLead && onOpen(topLead.id)}
+            cta="Generate brief"
+          />
+          <DecisionCard
+            n={5}
+            icon={BarChart3}
+            question="Where are competitors winning?"
+            answer="Apex Roofing · 34% share"
+            detail={`Apex Roofing leads market share with 34% of commercial re-roof permits across ${city}. Storm-chaser surge: Elite Roofing, Texas Direct.`}
+            onAction={() => onNavigate("/competitors")}
+            cta="Enter war room"
+            tourId="card-permits"
+          />
+          <DecisionCard
+            n={6}
+            icon={Hourglass}
+            question="What is the statutory urgency?"
+            answer={<span className="text-[#B4E4D6]">412 days remaining</span>}
+            detail="TDI 24-month advisory window for storm event ends May 14, 2026. Prioritize outreach before filing deadline expires."
+            onAction={onOpenPipeline}
+            cta="Prioritize outreach"
+          />
+        </div>
+      </div>
+
+      <div className="space-y-6 px-4 lg:px-6">
+        {/* Tactical Pipeline & Roofing Stats */}
+        <div data-tour="overview-stats" className="grid gap-3 sm:grid-cols-3">
+          <Stat
+            label="Target Pipeline Value"
+            value={totalPipelineValue > 0 ? usd(totalPipelineValue, true) : "$17.7M"}
+          />
+          <Stat
+            label="Commercial Roof Area"
+            value={totalRoofSqft > 0 ? `${num(totalRoofSqft)} sq ft` : "104,194 sq ft"}
+          />
+          <Stat
+            label={selectedZip ? `Active Leads (ZIP ${selectedZip})` : "Active Unpermitted Leads"}
+            value={num(filteredLeads.length)}
+          />
+        </div>
+
+        <section data-tour="released-records">
+          <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h2 className="text-lg font-semibold flex items-center gap-2">
+                Released records
+                {selectedZip && (
+                  <Badge variant="outline" className="text-xs gap-1 font-normal text-[#DE7272] border-[#DE7272]/30 bg-[#DE7272]/10">
+                    Filtered: ZIP {selectedZip}
+                    <button type="button" onClick={() => setSelectedZip(null)} className="hover:text-foreground">
+                      <X className="size-3" />
+                    </button>
+                  </Badge>
+                )}
+              </h2>
+              {topZips.length > 0 && (
+                <div className="flex flex-wrap items-center gap-1.5 pt-1 text-xs text-muted-foreground">
+                  <span className="text-[11px] font-medium">Filter by target ZIP:</span>
+                  {topZips.slice(0, 4).map((z) => (
+                    <button
+                      key={z.zip}
+                      type="button"
+                      onClick={() => setSelectedZip(selectedZip === z.zip ? null : z.zip)}
+                      className={cn(
+                        "rounded px-2 py-0.5 text-[11px] font-semibold transition-colors border",
+                        selectedZip === z.zip
+                          ? "bg-[#DE7272] text-white border-[#DE7272]"
+                          : "bg-muted/50 text-foreground border-border hover:bg-muted"
+                      )}
+                    >
+                      {z.zip} ({z.count})
+                    </button>
+                  ))}
+                  {selectedZip && (
+                    <button
+                      type="button"
+                      onClick={() => setSelectedZip(null)}
+                      className="text-[11px] font-semibold text-[#DE7272] hover:underline ml-1"
+                    >
+                      Reset
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
             <button
               type="button"
               onClick={onOpenPipeline}
-              className="text-sm text-muted-foreground hover:text-foreground hover:underline"
+              className="text-sm text-muted-foreground hover:text-foreground hover:underline shrink-0"
             >
               Open pipeline
             </button>
           </div>
 
-          {leads.length === 0 ? (
-            <p className="rounded-md border border-dashed border-border p-6 text-center text-sm text-muted-foreground">
-              No released leads in {city}.
-            </p>
+          {filteredLeads.length === 0 ? (
+            <div className="rounded-lg border border-dashed border-border p-8 text-center space-y-3">
+              <p className="text-sm text-muted-foreground">
+                No released leads in {city} for the selected filter.
+              </p>
+              {selectedZip && (
+                <button
+                  type="button"
+                  onClick={() => setSelectedZip(null)}
+                  className="text-xs font-semibold text-[#DE7272] hover:underline"
+                >
+                  Clear ZIP filter
+                </button>
+              )}
+            </div>
           ) : (
             <ul className="divide-y divide-border rounded-lg border border-border">
-              {leads.map((lead, index) => {
+              {filteredLeads.map((lead, index) => {
                 const ringFirst = highlight === "leads" && index === 0;
+                const added = inPipeline(lead.id);
                 return (
                   <li
                     key={lead.id}
                     ref={index === 0 ? leadRef : undefined}
-                    className={`flex flex-wrap items-center gap-3 px-3 py-3 ${
-                      selectedId === lead.id ? "bg-muted/60" : ""
-                    } ${ringFirst ? hlClass(highlight, "leads") : ""}`}
+                    className={cn(
+                      "flex flex-wrap items-center gap-3 px-3 py-3 transition-colors",
+                      selectedId === lead.id ? "bg-muted/60" : "",
+                      ringFirst ? hlClass(highlight, "leads") : ""
+                    )}
                   >
                     <ScorePill score={lead.score} />
+                    {lead.logoUrl ? (
+                      <RealLogo url={lead.logoUrl} alt={lead.organizationName || lead.owner} size={24} />
+                    ) : (
+                      <span className="flex size-6 shrink-0 items-center justify-center rounded bg-muted text-[10px] font-bold text-muted-foreground border border-border/40">
+                        {(lead.organizationName || lead.owner || "C").slice(0, 2).toUpperCase()}
+                      </span>
+                    )}
                     <span className="min-w-0 flex-1">
-                      <button
-                        type="button"
-                        onClick={() => onOpen(lead.id)}
-                        className="block truncate text-left font-medium hover:underline"
-                      >
-                        {lead.address}, {lead.city}
-                      </button>
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => onOpen(lead.id)}
+                          className="block truncate text-left font-medium hover:underline"
+                        >
+                          {lead.address}, {lead.city}
+                        </button>
+                        {lead.websiteUrl && (
+                          <a
+                            href={lead.websiteUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-[10px] text-muted-foreground hover:text-foreground hover:underline inline-flex items-center gap-0.5 shrink-0"
+                            title={lead.websiteUrl}
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <span>Website</span>
+                            <ExternalLink className="size-2.5 opacity-60" />
+                          </a>
+                        )}
+                      </div>
                       <span className="block truncate text-xs text-muted-foreground">
-                        {lead.owner} · {num(lead.roofSqft)} sq ft · nearest SPC {lead.hailInches}&quot; ·{" "}
-                        {lead.permitStatus}
+                        {lead.organizationName || lead.owner || "Owner not on record"} · {num(lead.roofSqft)} sq ft · nearest SPC {lead.hailInches}&quot; · {lead.permitStatus}
                       </span>
                     </span>
                     <span className="hidden sm:block">
@@ -548,17 +865,22 @@ function MockHome({
                       <button
                         type="button"
                         onClick={() => onOpen(lead.id)}
-                        className="inline-flex h-8 items-center rounded-md border border-border px-2.5 text-xs hover:bg-muted"
+                        className="inline-flex h-8 items-center rounded-md border border-border px-2.5 text-xs hover:bg-muted transition-colors"
                       >
                         Open dossier
                       </button>
                       <button
                         type="button"
-                        disabled={inPipeline(lead.id)}
+                        disabled={added}
                         onClick={() => onAdd(lead.id)}
-                        className="inline-flex h-8 items-center rounded-md bg-red-600 px-2.5 text-xs font-medium text-white disabled:opacity-50"
+                        className={cn(
+                          "inline-flex h-8 items-center rounded-md px-2.5 text-xs font-semibold transition-colors disabled:opacity-50",
+                          added
+                            ? "border border-[#B4E4D6]/30 bg-[#B4E4D6]/10 text-[#B4E4D6]"
+                            : "bg-white text-neutral-950 hover:bg-neutral-100"
+                        )}
                       >
-                        {inPipeline(lead.id) ? "In pipeline" : "Add to pipeline"}
+                        {added ? "In pipeline" : "Add to pipeline"}
                       </button>
                     </span>
                   </li>
@@ -573,6 +895,17 @@ function MockHome({
             <MockDossier lead={selected} onClose={onCloseRecord} onAdd={onAdd} inPipeline={inPipeline(selected.id)} />
           </div>
         )}
+
+        <p className="text-sm text-muted-foreground pt-1">
+          <button
+            type="button"
+            onClick={() => onNavigate("/competitors")}
+            className="font-medium text-foreground hover:underline"
+          >
+            Apex Roofing
+          </button>{" "}
+          pulled 34% of permits here.
+        </p>
       </div>
     </div>
   );
@@ -590,18 +923,37 @@ function MockDossier({
   inPipeline: boolean;
 }) {
   return (
-    <div className="overflow-hidden rounded-lg border border-border">
+    <div className="overflow-hidden rounded-lg border border-border bg-card">
       <div className="flex items-start justify-between gap-3 border-b border-border px-4 py-3">
         <div>
           <p className="text-xs text-muted-foreground">
-            Record · Dallas Central Appraisal District · {lead.account}
+            Record · {lead.city === "Dallas" ? "Dallas Central Appraisal District" : "Tarrant Appraisal District"} · {lead.account}
           </p>
-          <h3 className="text-base font-semibold sm:text-lg">{lead.address}</h3>
+          <div className="flex items-center gap-2 mt-0.5">
+            <h3 className="text-base font-semibold sm:text-lg">{lead.address}</h3>
+            {lead.websiteUrl && (
+              <a
+                href={lead.websiteUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="text-xs text-muted-foreground hover:text-foreground inline-flex items-center gap-0.5"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <span>Website</span>
+                <ExternalLink className="size-3 opacity-60" />
+              </a>
+            )}
+          </div>
           <p className="text-sm text-muted-foreground">
             {lead.city}, TX · {lead.stories} stor{lead.stories === 1 ? "y" : "ies"} · {lead.propertyType}
           </p>
         </div>
-        <button type="button" onClick={onClose} className="text-muted-foreground hover:text-foreground" aria-label="Close">
+        <button
+          type="button"
+          onClick={onClose}
+          className="rounded p-1 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+          aria-label="Close"
+        >
           <X className="size-4" />
         </button>
       </div>
@@ -618,41 +970,61 @@ function MockDossier({
             Satellite aerial · {lead.aerialDate} · not a damage claim
           </p>
         </div>
-        <div className="p-4">
-          <div className="mb-3 flex flex-wrap items-center gap-2">
+        <div className="p-4 space-y-4">
+          <div className="flex flex-wrap items-center gap-2">
             <ScorePill score={lead.score} />
             <TierBadge tier={lead.tier} hail={lead.hailInches} />
             <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-2 py-0.5 text-[11px] font-medium text-emerald-600 dark:text-emerald-400">
               <Check className="size-3" /> Verified checks
             </span>
           </div>
+
+          {lead.decisionMaker && (
+            <div className="rounded-md border border-border bg-muted/30 p-2.5">
+              <p className="text-xs font-semibold text-foreground flex items-center gap-1.5">
+                <UserRound className="size-3.5 text-[#DE7272]" />
+                Decision Maker: {lead.decisionMaker}
+              </p>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                {lead.decisionTitle || "Owner"} · {lead.organizationName || lead.owner}
+              </p>
+            </div>
+          )}
+
           <dl className="grid gap-3 text-sm sm:grid-cols-2">
             <Item label="Owner of record" value={lead.owner} />
             <Item label="Mailing address" value={lead.ownerMail} />
             <Item label="Year built" value={String(lead.yearBuilt)} />
             <Item label="Market value" value={usd(lead.value)} />
             <Item label="Roof size" value={`${num(lead.roofSqft)} sq ft`} />
-            <Item label="Permit" value={lead.permitStatus} />
+            <Item label="Permit status" value={lead.permitStatus} />
           </dl>
-          <div className="mt-4 rounded-md border border-border bg-muted/40 px-3 py-2.5 text-sm">
+
+          <div className="rounded-md border border-border bg-muted/40 px-3 py-2 text-sm">
             <p className="text-xs font-medium text-muted-foreground">Nearest hail report</p>
             <p className="mt-0.5 font-medium">
               {lead.hailInches}&quot; SPC · {lead.hailMiles} mi · {lead.hailDate}
             </p>
           </div>
-          <div className="mt-4 flex flex-wrap gap-2">
+
+          <div className="flex flex-wrap gap-2 pt-1">
             <button
               type="button"
               disabled={inPipeline}
               onClick={() => onAdd(lead.id)}
-              className="inline-flex h-8 items-center rounded-md bg-red-600 px-3 text-xs font-medium text-white disabled:opacity-50"
+              className={cn(
+                "inline-flex h-8 items-center rounded-md px-3 text-xs font-semibold transition-colors disabled:opacity-50",
+                inPipeline
+                  ? "border border-[#B4E4D6]/30 bg-[#B4E4D6]/10 text-[#B4E4D6]"
+                  : "bg-white text-neutral-950 hover:bg-neutral-100"
+              )}
             >
               {inPipeline ? "In pipeline" : "Add to pipeline"}
             </button>
             <button
               type="button"
               onClick={onClose}
-              className="inline-flex h-8 items-center rounded-md border border-border px-3 text-xs hover:bg-muted"
+              className="inline-flex h-8 items-center rounded-md border border-border px-3 text-xs hover:bg-muted transition-colors"
             >
               Close
             </button>

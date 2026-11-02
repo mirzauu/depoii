@@ -9,6 +9,12 @@ export type MockLead = {
   address: string;
   city: MockCity;
   owner: string;
+  organizationName?: string;
+  decisionMaker?: string;
+  decisionTitle?: string;
+  websiteUrl?: string;
+  logoUrl?: string;
+  zipCode?: string;
   ownerMail: string;
   yearBuilt: number;
   stories: number;
@@ -113,7 +119,12 @@ export const MOCK_LEADS: MockLead[] = [
     id: "dcad-16850",
     address: "16850 DALLAS PKWY",
     city: "Dallas",
+    zipCode: "75248",
     owner: "JC & CB HERNANDEZ HOLDINGS LLC",
+    organizationName: "Hernandez Commercial Properties",
+    decisionMaker: "Carlos Hernandez",
+    decisionTitle: "Managing Principal",
+    websiteUrl: "https://hernandezholdings.com",
     ownerMail: "PO BOX 802047, DALLAS TX 75380",
     yearBuilt: 1979,
     stories: 1,
@@ -136,7 +147,12 @@ export const MOCK_LEADS: MockLead[] = [
     id: "dcad-4100",
     address: "4100 Alpha Rd",
     city: "Dallas",
+    zipCode: "75244",
     owner: "NORTHSTAR INDUSTRIAL LLC",
+    organizationName: "Northstar Logistics Center",
+    decisionMaker: "Robert Vance",
+    decisionTitle: "VP Asset Management",
+    websiteUrl: "https://northstarindustrial.com",
     ownerMail: "4100 ALPHA RD STE 100, DALLAS TX 75244",
     yearBuilt: 1988,
     stories: 1,
@@ -159,7 +175,12 @@ export const MOCK_LEADS: MockLead[] = [
     id: "dcad-12221",
     address: "12221 Merit Dr",
     city: "Dallas",
+    zipCode: "75251",
     owner: "MERIT OFFICE PARTNERS LP",
+    organizationName: "Merit Tower Management",
+    decisionMaker: "Elena Morales",
+    decisionTitle: "Director of Facilities",
+    websiteUrl: "https://meritofficepartners.com",
     ownerMail: "12221 MERIT DR, DALLAS TX 75251",
     yearBuilt: 1995,
     stories: 4,
@@ -182,7 +203,12 @@ export const MOCK_LEADS: MockLead[] = [
     id: "dcad-2501",
     address: "2501 Oak Lawn Ave",
     city: "Dallas",
+    zipCode: "75219",
     owner: "OAK LAWN RETAIL TRUST",
+    organizationName: "Oak Lawn Plaza",
+    decisionMaker: "Marcus Sterling",
+    decisionTitle: "Portfolio Manager",
+    websiteUrl: "https://oaklawnretail.com",
     ownerMail: "2501 OAK LAWN AVE, DALLAS TX 75219",
     yearBuilt: 2001,
     stories: 2,
@@ -208,7 +234,12 @@ export const MOCK_FW_LEADS: MockLead[] = [
     id: "tad-1200",
     address: "1200 Summit Ave",
     city: "Fort Worth",
+    zipCode: "76102",
     owner: "SUMMIT COMMERCIAL PARTNERS LLC",
+    organizationName: "Summit Tower LLC",
+    decisionMaker: "David Sterling",
+    decisionTitle: "VP Operations",
+    websiteUrl: "https://summitfortworth.com",
     ownerMail: "1200 SUMMIT AVE, FORT WORTH TX 76102",
     yearBuilt: 1982,
     stories: 2,
@@ -231,7 +262,12 @@ export const MOCK_FW_LEADS: MockLead[] = [
     id: "tad-4801",
     address: "4801 Bryant Irvin Rd",
     city: "Fort Worth",
+    zipCode: "76132",
     owner: "SOUTHWEST FLEX PROPERTIES LP",
+    organizationName: "Bryant Irvin Industrial",
+    decisionMaker: "Sarah Jenkins",
+    decisionTitle: "Asset Manager",
+    websiteUrl: "https://southwestflex.com",
     ownerMail: "4801 BRYANT IRVIN RD, FORT WORTH TX 76132",
     yearBuilt: 1994,
     stories: 1,
@@ -254,7 +290,12 @@ export const MOCK_FW_LEADS: MockLead[] = [
     id: "tad-301",
     address: "301 Commerce St",
     city: "Fort Worth",
+    zipCode: "76102",
     owner: "SUNDANCE SQUARE HOLDINGS",
+    organizationName: "Sundance Square Center",
+    decisionMaker: "Arthur Vance",
+    decisionTitle: "Executive Managing Director",
+    websiteUrl: "https://sundancesquare.com",
     ownerMail: "301 COMMERCE ST, FORT WORTH TX 76102",
     yearBuilt: 2008,
     stories: 6,
