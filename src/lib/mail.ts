@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
 
 export function smtpConfigured() {
-  return Boolean(process.env.SMTP_USER && process.env.SMTP_PASS);
+  return Boolean(process.env.SMTP_USER && process.env.SMTP_PASS && process.env.SMTP_HOST);
 }
 
 export async function sendMail(input: {
@@ -12,16 +12,17 @@ export async function sendMail(input: {
   replyTo?: string;
   fromName?: string;
 }) {
+  const smtpHost = process.env.SMTP_HOST;
   const smtpUser = process.env.SMTP_USER;
   const smtpPass = process.env.SMTP_PASS;
-  if (!smtpUser || !smtpPass) {
-    throw new Error("Email is not configured. Set SMTP_USER and SMTP_PASS.");
+  if (!smtpHost || !smtpUser || !smtpPass) {
+    throw new Error("Email is not configured. Set SMTP_HOST, SMTP_USER, and SMTP_PASS.");
   }
 
   const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST || "smtp.hostinger.com",
+    host: smtpHost,
     port: Number(process.env.SMTP_PORT || 465),
-    secure: true,
+    secure: Number(process.env.SMTP_PORT || 465) === 465,
     auth: { user: smtpUser, pass: smtpPass },
   });
 
