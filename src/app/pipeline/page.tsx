@@ -28,6 +28,8 @@ import { RealLogo } from "@/components/real-logo";
 import { Badge } from "@/components/ui/badge";
 import { useDepoiiState } from "@/components/depoii-provider";
 import { useEngine } from "@/components/use-engine";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { ParcelDossierView } from "@/components/parcel-dossier-view";
 import { Button } from "@/components/ui/button";
 import { SERVED_AREAS } from "@/lib/us-areas";
 import { mapBrief, type MondayBrief } from "@/lib/engine-api";
@@ -209,7 +211,7 @@ function PipelineSkeletonRows() {
             <td className="px-3 py-3 whitespace-nowrap">
               <div
                 style={{ animationDelay: delay }}
-                className="h-7 w-28 rounded-md border border-neutral-300 dark:border-neutral-800 bg-neutral-100 dark:bg-[#14151b] animate-pulse"
+                onClick={(e) => e.stopPropagation()} className="h-7 w-28 rounded-md border border-neutral-300 dark:border-neutral-800 bg-neutral-100 dark:bg-[#14151b] animate-pulse"
               />
             </td>
 
@@ -284,6 +286,10 @@ export default function PipelinePage() {
   const [owner, setOwner] = useState("");
   const [page, setPage] = useState(0);
   const [sortBy, setSortBy] = useState<"score" | "sqft" | "value" | "hail">("sqft");
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [selectedStormId, setSelectedStormId] = useState<string | null>(null);
+  const [fullDetailId, setFullDetailId] = useState<string | null>(null);
+  const [fullDetailStormId, setFullDetailStormId] = useState<string | null>(null);
 
   // Accordion open/close state
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({
@@ -501,6 +507,22 @@ export default function PipelinePage() {
   const totalCount = brief.data?.totalOpportunities || leads.length;
   const unresolvedCount = leads.filter((l) => l.unresolved).length;
   const savedCount = shared.length;
+
+  if (fullDetailId) {
+    return (
+      <div className="flex h-[calc(100dvh-53px)] max-h-[calc(100dvh-53px)] flex-col bg-background dark:bg-[#0b0c0e] text-foreground dark:text-neutral-100 antialiased font-sans overflow-hidden">
+        <ParcelDossierView
+          parcelId={fullDetailId}
+          stormId={fullDetailStormId || undefined}
+          onBack={() => {
+            setFullDetailId(null);
+            setFullDetailStormId(null);
+          }}
+          backLabel="Back to Hot Sheet"
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-[calc(100dvh-53px)] max-h-[calc(100dvh-53px)] flex-col bg-background dark:bg-[#0b0c0e] text-foreground dark:text-neutral-100 antialiased font-sans overflow-hidden">
@@ -1073,6 +1095,12 @@ export default function PipelinePage() {
                     return (
                       <tr
                         key={o.parcelId || o.address}
+                        onClick={() => {
+                          if (o.parcelId) {
+                            setSelectedId(o.parcelId);
+                            setSelectedStormId(o.stormId || null);
+                          }
+                        }}
                         className={cn(
                           "group transition-colors duration-150 cursor-pointer",
                           isSelected
@@ -1081,7 +1109,10 @@ export default function PipelinePage() {
                         )}
                       >
                         {/* Checkbox with active row indicator */}
-                        <td className="w-10 px-3 py-3 text-center transition-all group-hover:shadow-[inset_3px_0_0_0_#D99B26] dark:group-hover:shadow-[inset_3px_0_0_0_#E9B63B]">
+                        <td
+                          className="w-10 px-3 py-3 text-center transition-all group-hover:shadow-[inset_3px_0_0_0_#D99B26] dark:group-hover:shadow-[inset_3px_0_0_0_#E9B63B]"
+                          onClick={(e) => e.stopPropagation()}
+                        >
                           <input
                             type="checkbox"
                             checked={isSelected}
@@ -1098,12 +1129,19 @@ export default function PipelinePage() {
                             : "bg-background dark:bg-[#0a0b0d] group-hover:bg-[#FAF5EE] dark:group-hover:bg-[#1C1A17]"
                         )}>
                           <div className="flex items-center gap-2">
-                            <Link
-                              href={href}
-                              className="font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-amber-800 dark:group-hover:text-amber-300 hover:underline transition-colors"
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                if (o.parcelId) {
+                                  setSelectedId(o.parcelId);
+                                  setSelectedStormId(o.stormId || null);
+                                }
+                              }}
+                              className="font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-amber-800 dark:group-hover:text-amber-300 hover:underline transition-colors text-left cursor-pointer"
                             >
                               {o.address}
-                            </Link>
+                            </button>
                             {hasClaim && (
                               <span className="inline-flex items-center gap-1 rounded border border-[#B4E4D6]/50 bg-[#B4E4D6]/20 px-1.5 py-0.5 text-[10px] font-mono text-emerald-800 dark:text-[#B4E4D6] shrink-0">
                                 <Lock className="size-2.5 text-emerald-700 dark:text-[#B4E4D6]" />
@@ -1160,7 +1198,7 @@ export default function PipelinePage() {
                                   ) : (
                                     <button
                                       type="button"
-                                      onClick={() => unlockPhone(o.parcelId)}
+                                      onClick={(e) => { e.stopPropagation(); unlockPhone(o.parcelId); }}
                                       className="inline-flex items-center gap-1 rounded bg-neutral-100 dark:bg-[#16171d] border border-neutral-300 dark:border-neutral-700/80 px-1.5 py-0.5 text-[10px] text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white"
                                     >
                                       <Phone className="size-2.5" />
@@ -1175,7 +1213,7 @@ export default function PipelinePage() {
                                   ) : (
                                     <button
                                       type="button"
-                                      onClick={() => unlockEmail(o.parcelId)}
+                                      onClick={(e) => { e.stopPropagation(); unlockEmail(o.parcelId); }}
                                       className="inline-flex items-center gap-1 rounded bg-neutral-100 dark:bg-[#16171d] border border-neutral-300 dark:border-neutral-700/80 px-1.5 py-0.5 text-[10px] text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white"
                                     >
                                       <Mail className="size-2.5" />
@@ -1276,7 +1314,7 @@ export default function PipelinePage() {
                               <button
                                 type="button"
                                 title="Add to My Claims (21d Lock)"
-                                onClick={() => claimOne(o)}
+                                onClick={(e) => { e.stopPropagation(); claimOne(o); }}
                                 className="p-1 hover:text-foreground dark:hover:text-white text-muted-foreground dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded transition-colors"
                               >
                                 <Lock className="size-3.5" />
@@ -1285,17 +1323,24 @@ export default function PipelinePage() {
                             <button
                               type="button"
                               title={isSaved ? "Saved" : "Save lead"}
-                              onClick={() => saveLead(o, { stage: record?.stage || "New" })}
+                              onClick={(e) => { e.stopPropagation(); saveLead(o, { stage: record?.stage || "New" }); }}
                               className="p-1 hover:text-neutral-700 dark:hover:text-neutral-200 text-neutral-400 dark:text-neutral-500 transition-colors"
                             >
                               {isSaved ? <BookmarkCheck className="size-3.5 text-neutral-800 dark:text-neutral-200" /> : <Bookmark className="size-3.5" />}
                             </button>
-                            <Link
-                              href={href}
-                              className="inline-flex h-7 items-center rounded-md border border-neutral-300 dark:border-neutral-700/80 bg-white dark:bg-neutral-900 px-2 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white group-hover:border-neutral-400 dark:group-hover:border-neutral-600 transition-colors"
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                if (o.parcelId) {
+                                  setSelectedId(o.parcelId);
+                                  setSelectedStormId(o.stormId || null);
+                                }
+                              }}
+                              className="inline-flex h-7 items-center rounded-md border border-neutral-300 dark:border-neutral-700/80 bg-white dark:bg-neutral-900 px-2 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white group-hover:border-neutral-400 dark:group-hover:border-neutral-600 transition-colors cursor-pointer"
                             >
                               Open dossier
-                            </Link>
+                            </button>
                           </div>
                         </td>
                       </tr>
@@ -1353,6 +1398,38 @@ export default function PipelinePage() {
           </div>
         </main>
       </div>
+
+      {/* Hot Sheet Inspection Card (Right Sheet Drawer - Full Dossier Parity) */}
+      <Sheet open={!!selectedId} onOpenChange={(open) => { if (!open) { setSelectedId(null); setSelectedStormId(null); } }}>
+        <SheetContent
+          side="right"
+          showCloseButton={false}
+          className="w-full sm:w-[90vw] md:w-[80vw] lg:w-[65vw] xl:w-[60vw] 2xl:w-[55vw] min-w-[50vw] sm:max-w-none p-0 flex flex-col h-full overflow-hidden border-l border-border dark:border-neutral-800 shadow-2xl bg-background"
+        >
+          <SheetHeader className="sr-only">
+            <SheetTitle>Opportunity Intelligence Dossier</SheetTitle>
+            <SheetDescription>Comprehensive hail ground truth, municipal permits, and decision-maker dossier.</SheetDescription>
+          </SheetHeader>
+          {selectedId && (
+            <ParcelDossierView
+              parcelId={selectedId}
+              stormId={selectedStormId || undefined}
+              onBack={() => {
+                setSelectedId(null);
+                setSelectedStormId(null);
+              }}
+              onExpand={() => {
+                setFullDetailId(selectedId);
+                setFullDetailStormId(selectedStormId);
+                setSelectedId(null);
+                setSelectedStormId(null);
+              }}
+              backLabel="Close"
+              isDrawer={true}
+            />
+          )}
+        </SheetContent>
+      </Sheet>
 
       {/* Outcome Form Modal */}
       {outcomeFor && (

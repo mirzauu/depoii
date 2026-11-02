@@ -197,11 +197,11 @@ async function processBuilding(p: any): Promise<{
           INSERT INTO warehouse.normalized_permits (
             id, parcel_id, raw_permit_number, normalized_address, city, state, zip_code,
             issue_date, valuation, valuation_formatted, category, contractor_name,
-            raw_description, probable_roof_system, status, data_source, created_at, updated_at
+            raw_description, probable_roof_system, status, data_source, retrieved_at, normalized_at
           ) VALUES (
-            gen_random_uuid(), $1, $2, $3, $4, 'TX', $5,
+            gen_random_uuid()::text, $1, $2, $3, $4, 'TX', $5,
             $6, $7, $8, $9, $10,
-            $11, $12, 'Issued', 'dallas_open_data_socrata', NOW(), NOW()
+            $11, $12, 'Issued', 'dallas_open_data_socrata', NOW()::text, NOW()::text
           )
         `, [
           p.id, permitNo, p.address, p.city || 'Dallas', p.zip_code || '',

@@ -20,11 +20,13 @@ import {
   CheckCircle2,
   Lock,
   ArrowRight,
+  ExternalLink,
 } from "lucide-react";
 import { useDepoiiState } from "@/components/depoii-provider";
 import { useDebounced } from "@/components/engine-layout";
 import { useEngine } from "@/components/use-engine";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { ParcelDossierView } from "@/components/parcel-dossier-view";
 import { engineGet, mapBrowseParcelDetail, mapParcelBrowse, type BrowseParcel } from "@/lib/engine-api";
 import { num, usd } from "@/lib/format";
 import { cn } from "@/lib/utils";
@@ -123,6 +125,7 @@ export default function BuildingsPage() {
   };
 
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [fullDetailId, setFullDetailId] = useState<string | null>(null);
   const [selectedRowIds, setSelectedRowIds] = useState<Set<string>>(new Set());
   const [detail, setDetail] = useState<BrowseParcel | null>(null);
   const [detailError, setDetailError] = useState<string | null>(null);
@@ -241,6 +244,19 @@ export default function BuildingsPage() {
   const from = total === 0 ? 0 : offset + 1;
   const to = Math.min(total, offset + LIMIT);
   const pageCount = Math.max(1, Math.ceil(total / LIMIT));
+
+  if (fullDetailId) {
+    return (
+      <div className="flex h-[calc(100dvh-53px)] max-h-[calc(100dvh-53px)] flex-col bg-background dark:bg-[#0b0c0e] text-foreground dark:text-neutral-100 antialiased font-sans overflow-hidden">
+        <ParcelDossierView
+          parcelId={fullDetailId}
+          onBack={() => setFullDetailId(null)}
+          backLabel="Back to buildings table"
+          rawBuilding={true}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-[calc(100dvh-53px)] max-h-[calc(100dvh-53px)] flex-col bg-background dark:bg-[#0b0c0e] text-foreground dark:text-neutral-100 antialiased font-sans overflow-hidden">
@@ -1079,212 +1095,30 @@ export default function BuildingsPage() {
         </main>
       </div>
 
-      {/* Building Directory Inspection Card (Right Sheet Drawer) */}
+      {/* Building Directory Inspection Card (Right Sheet Drawer - Full Hot Sheet Dossier Parity) */}
       <Sheet open={!!selectedId} onOpenChange={(open) => { if (!open) setSelectedId(null); }}>
-        <SheetContent side="right" className="w-full overflow-y-auto sm:max-w-lg">
-          <SheetHeader>
-            <SheetTitle>{detail?.address || (detailLoading ? "Loading…" : "Building directory")}</SheetTitle>
-            <SheetDescription>
-              City building directory card from county CAD and linked permits. Not a damage claim or verified roof lead.
-            </SheetDescription>
+        <SheetContent
+          side="right"
+          showCloseButton={false}
+          className="w-full sm:w-[90vw] md:w-[80vw] lg:w-[65vw] xl:w-[60vw] 2xl:w-[55vw] min-w-[50vw] sm:max-w-none p-0 flex flex-col h-full overflow-hidden border-l border-border dark:border-neutral-800 shadow-2xl bg-background"
+        >
+          <SheetHeader className="sr-only">
+            <SheetTitle>Building Intelligence Dossier</SheetTitle>
+            <SheetDescription>Comprehensive building appraisal, municipal permits, and decision-maker dossier.</SheetDescription>
           </SheetHeader>
-          <div className="px-4 pb-8">
-            {detailLoading && <p className="py-6 text-sm text-muted-foreground">Loading directory card…</p>}
-            {detailError && <p className="py-6 text-sm text-red-300">{detailError}</p>}
-            {detail && !detailLoading && (
-              <>
-                <Section title="Parcel">
-                  <dl>
-                    <DetailRow label="Address" value={[detail.address, detail.city, detail.state, detail.zip].filter(Boolean).join(", ")} />
-                    <DetailRow label="County" value={detail.county} />
-                    <DetailRow label="Type" value={detail.propertyType} />
-                    <DetailRow label="Building sq ft" value={detail.sqft ? num(detail.sqft) : null} />
-                    <DetailRow label="Land sq ft" value={detail.landSqft ? num(detail.landSqft) : null} />
-                    <DetailRow label="Year built" value={detail.yearBuilt || null} />
-                    <DetailRow label="Stories" value={detail.stories || null} />
-                    <DetailRow label="CAD value" value={detail.valuation ? usd(detail.valuation) : null} />
-                    <DetailRow label="Improvements" value={detail.improvementValuation ? usd(detail.improvementValuation) : null} />
-                    <DetailRow label="Account" value={detail.accountNumber || detail.id} />
-                    <DetailRow label="Parcel ID" value={detail.id} />
-                    <DetailRow label="CAD source" value={detail.source} />
-                    <DetailRow
-                      label="Last reroof"
-                      value={detail.lastReroofDate ? `${detail.lastReroofDate}${detail.lastReroofPermitNo ? ` · #${detail.lastReroofPermitNo}` : ""}` : null}
-                    />
-                    <DetailRow
-                      label="Coords"
-                      value={detail.lat != null && detail.lng != null ? `${detail.lat.toFixed(5)}, ${detail.lng.toFixed(5)}` : null}
-                    />
-                  </dl>
-                </Section>
-
-                {sections.length > 0 && (
-                  <Section title="Improvement sections">
-                    <ul className="space-y-2 text-sm">
-                      {sections.map((section, i) => (
-                        <li key={i} className="rounded-md border border-border/60 px-3 py-2">
-                          <p className="font-medium">{section.description || "Section"}</p>
-                          <p className="text-xs text-muted-foreground">
-                            {[section.area_sqft ? `${num(section.area_sqft)} sq ft` : null, section.year_built ? `built ${section.year_built}` : null, section.stories != null ? `${section.stories} stories` : null]
-                              .filter(Boolean)
-                              .join(" · ")}
-                          </p>
-                        </li>
-                      ))}
-                    </ul>
-                  </Section>
-                )}
-
-                <Section title="Contacts & Decision Makers">
-                  {detail.contacts?.length ? (
-                    <ul className="space-y-3 text-sm">
-                      {detail.contacts.map((c, i) => (
-                        <li key={`${c.role}-${c.name}-${i}`} className="rounded-lg border border-border/70 bg-card/60 p-3.5 shadow-sm space-y-2">
-                          <div className="flex items-start justify-between gap-2">
-                            <div>
-                              <span className="inline-flex items-center gap-1 text-[11px] font-medium uppercase tracking-wider text-amber-800 dark:text-[#FFCA88]">
-                                <ShieldCheck className="h-3.5 w-3.5 text-[#FFCA88]" />
-                                {c.role || "Executive Contact"}
-                              </span>
-                              <h4 className="font-semibold text-foreground text-base leading-snug">{c.name}</h4>
-                              {c.organization && c.organization !== c.name && (
-                                <p className="text-xs font-medium text-muted-foreground flex items-center gap-1 mt-0.5">
-                                  <Building2 className="h-3 w-3" />
-                                  {c.organization}
-                                </p>
-                              )}
-                            </div>
-                            {c.emailStatus === "VERIFIED" ? (
-                              <span className="inline-flex h-4 items-center gap-1 rounded-full border border-[#B4E4D6]/40 bg-[#B4E4D6]/15 dark:bg-[#B4E4D6]/10 px-1.5 text-[9.5px] font-medium leading-none text-[#1b7e65] dark:text-[#B4E4D6] shrink-0 select-none">
-                                <span className="size-1 rounded-full bg-[#B4E4D6]" />
-                                Verified
-                              </span>
-                            ) : (
-                              <span className="inline-flex h-4 items-center gap-1 rounded-full border border-neutral-400/30 bg-neutral-200/50 dark:bg-neutral-800/50 px-1.5 text-[9.5px] font-medium leading-none text-muted-foreground shrink-0 select-none" title="Procedural contact — domain unverified">
-                                Unverified
-                              </span>
-                            )}
-                          </div>
-
-                          {c.facility && (
-                            <div className="rounded border border-[#FFCA88]/30 bg-[#FFCA88]/10 px-2.5 py-1 text-xs text-amber-900 dark:text-[#FFCA88]/90">
-                              <span className="font-medium text-amber-950 dark:text-[#FFCA88]">Facility: </span>
-                              {c.facility}
-                            </div>
-                          )}
-
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 border-t border-border/40 text-xs">
-                            {c.phone && (
-                              <a
-                                href={`tel:${c.phone}`}
-                                className="inline-flex items-center gap-1.5 text-foreground hover:text-[#B4E4D6] transition-colors font-mono"
-                              >
-                                <Phone className="h-3.5 w-3.5 text-[#B4E4D6] shrink-0" />
-                                <span>{c.phone}</span>
-                              </a>
-                            )}
-                            {c.email && (
-                              <a
-                                href={`mailto:${c.email}`}
-                                className="inline-flex items-center gap-1.5 text-foreground hover:text-[#FFCA88] transition-colors truncate"
-                                title={c.email}
-                              >
-                                <Mail className="h-3.5 w-3.5 text-[#FFCA88] shrink-0" />
-                                <span className="truncate">{c.email}</span>
-                              </a>
-                            )}
-                            {c.website && (
-                              <a
-                                href={c.website}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors truncate col-span-full"
-                              >
-                                <Globe className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
-                                <span className="truncate underline">{c.website}</span>
-                              </a>
-                            )}
-                          </div>
-
-                          {c.address && <p className="text-[11px] text-muted-foreground">{c.address}</p>}
-                          {c.note && (
-                            <p className="text-[10px] text-muted-foreground/80 italic pt-1 border-t border-border/30">
-                              {c.note}
-                            </p>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <div className="rounded-md border border-dashed border-border/60 p-4 text-center">
-                      <p className="text-sm text-muted-foreground">No verified corporate decision maker linked to this parcel yet.</p>
-                      <p className="text-xs text-muted-foreground/70 mt-1">Properties are progressively enriched in institutional order.</p>
-                    </div>
-                  )}
-                </Section>
-
-                <Section title={`Permits${detail.permitCount ? ` (${detail.permitCount})` : ""}`}>
-                  {detail.permits?.length ? (
-                    <ul className="space-y-3 text-sm">
-                      {detail.permits.map((p) => (
-                        <li key={p.id || p.permitNumber} className="rounded-md border border-border/60 px-3 py-2">
-                          <div className="flex flex-wrap items-baseline justify-between gap-2">
-                            <p className="font-medium">{p.permitNumber || "Permit"}</p>
-                            <p className="text-xs text-muted-foreground">{[p.issueDate, p.status].filter(Boolean).join(" · ")}</p>
-                          </div>
-                          <p className="text-xs text-muted-foreground">
-                            {[p.category, p.isPureReroof ? "reroof" : null, p.valuationFormatted || (p.valuation ? usd(p.valuation) : null), p.roofSystem]
-                              .filter(Boolean)
-                              .join(" · ")}
-                          </p>
-                          {p.contractorName && (
-                            <p className="mt-1 text-xs">
-                              Contractor: {p.contractorName}
-                              {p.contractorPhone ? ` · ${p.contractorPhone}` : ""}
-                            </p>
-                          )}
-                          {p.description && <p className="mt-1 text-xs text-muted-foreground line-clamp-4">{p.description}</p>}
-                          {p.match === "address" && (
-                            <p className="mt-1 text-[11px] text-amber-200/90">Matched by address (no parcel ID on the permit row).</p>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p className="text-sm text-muted-foreground">
-                      No permits linked to this parcel ID in the warehouse. That does not prove no permit was filed — many Dallas filings have no parcel join yet.
-                    </p>
-                  )}
-                </Section>
-
-                <Section title="Source links">
-                  {detail.sources?.length ? (
-                    <ul className="space-y-2 text-sm">
-                      {detail.sources.map((s) => (
-                        <li key={s.url}>
-                          <a href={s.url} target="_blank" rel="noreferrer" className="underline hover:text-foreground">
-                            {s.label}
-                          </a>
-                          {s.system && <span className="text-xs text-muted-foreground"> · {s.system}</span>}
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p className="text-sm text-muted-foreground">No external source links available.</p>
-                  )}
-                </Section>
-
-                {detail.released && (
-                  <p className="mt-5 text-sm">
-                    <Link href={`/parcels/${encodeURIComponent(detail.id)}`} className="underline hover:text-foreground">
-                      Open lead dossier
-                    </Link>
-                    <span className="text-muted-foreground"> — this parcel is also on the released pipeline book.</span>
-                  </p>
-                )}
-              </>
-            )}
-          </div>
+          {selectedId && (
+            <ParcelDossierView
+              parcelId={selectedId}
+              onBack={() => setSelectedId(null)}
+              onExpand={() => {
+                setFullDetailId(selectedId);
+                setSelectedId(null);
+              }}
+              backLabel="Close"
+              isDrawer={true}
+              rawBuilding={true}
+            />
+          )}
         </SheetContent>
       </Sheet>
     </div>
