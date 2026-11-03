@@ -247,7 +247,7 @@ export default function BuildingsPage() {
 
   if (fullDetailId) {
     return (
-      <div className="flex h-[calc(100dvh-53px)] max-h-[calc(100dvh-53px)] flex-col bg-background dark:bg-[#0b0c0e] text-foreground dark:text-neutral-100 antialiased font-sans overflow-hidden">
+      <div className="flex h-[calc(100dvh-53px)] max-h-[calc(100dvh-53px)] flex-col bg-[#171714] text-[#FAFAF8] antialiased font-sans overflow-hidden">
         <ParcelDossierView
           parcelId={fullDetailId}
           onBack={() => setFullDetailId(null)}
@@ -259,9 +259,9 @@ export default function BuildingsPage() {
   }
 
   return (
-    <div className="flex h-[calc(100dvh-53px)] max-h-[calc(100dvh-53px)] flex-col bg-background dark:bg-[#0b0c0e] text-foreground dark:text-neutral-100 antialiased font-sans overflow-hidden">
+    <div className="flex h-[calc(100dvh-53px)] max-h-[calc(100dvh-53px)] flex-col bg-[#171714] text-[#FAFAF8] antialiased font-sans overflow-hidden">
       {/* Top Header Row - Fixed */}
-      <div className="shrink-0 border-b border-border dark:border-neutral-800/80 bg-background dark:bg-[#0e0f12] px-5 py-3.5 z-20">
+      <div className="shrink-0 border-b border-[rgba(250,250,248,0.08)] bg-[#171714] px-5 py-3.5 z-20 text-[#FAFAF8]">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="space-y-0.5">
             <div className="flex items-center gap-3">
@@ -270,7 +270,7 @@ export default function BuildingsPage() {
                 {jurisdiction}
               </span>
             </div>
-            <p className="text-xs font-medium text-muted-foreground dark:text-neutral-400">
+            <p className="text-xs font-medium text-rose-600 dark:text-[#DE7272]">
               County appraisal inventory for {city}{selectedZips.length > 0 ? ` · ZIP ${selectedZips.join(", ")}` : ""} ({num(total)} commercial properties). Includes all qualified Opportunity Pipeline buildings.
             </p>
           </div>
@@ -284,7 +284,7 @@ export default function BuildingsPage() {
       </div>
 
       {/* Action & Filter Sub-Bar - Fixed */}
-      <div className="shrink-0 flex flex-wrap items-center justify-between gap-3 border-b border-border dark:border-neutral-800/80 bg-neutral-50 dark:bg-[#111216] px-5 py-2.5 text-xs z-20">
+      <div className="shrink-0 flex flex-wrap items-center justify-between gap-3 border-b border-[rgba(250,250,248,0.08)] bg-[#171714] px-5 py-2.5 text-xs z-20 shrink-0 text-[#FAFAF8]">
         {/* Left Side: Toggle Sidebar & Search */}
         <div className="flex items-center gap-2.5">
           <button
@@ -362,10 +362,10 @@ export default function BuildingsPage() {
       <div className="flex flex-1 min-h-0 overflow-hidden">
         {/* Left Filter Sidebar - Hot Sheet Layout & Style */}
         {!hideFilters && (
-          <aside className="w-64 shrink-0 border-r border-border dark:border-neutral-800/80 bg-neutral-50/70 dark:bg-[#0d0e12] p-3 text-xs flex flex-col justify-between overflow-y-auto h-full z-10 [scrollbar-width:thin]">
-            <div className="space-y-4">
+          <aside className="w-80 shrink-0 border-r border-[rgba(250,250,248,0.08)] bg-[#171714] text-[#B9B9B2] flex flex-col justify-between overflow-hidden">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 [scrollbar-width:thin]">
               {/* Segmented Count Tabs: All, Commercial, Industrial */}
-              <div className="grid grid-cols-3 gap-1 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-200/50 dark:bg-[#13141a] p-1 text-center">
+              <div className="grid grid-cols-3 gap-1 rounded-lg border border-[rgba(250,250,248,0.08)] bg-[#1F1F1B] p-0.5 text-center">
                 <button
                   type="button"
                   onClick={() => {
@@ -421,7 +421,7 @@ export default function BuildingsPage() {
               {/* Accordion Filter Cards with Hot Sheet Headings */}
               <div className="space-y-2.5">
                 {/* 1. Jurisdiction */}
-                <div className="rounded-md border border-neutral-200 dark:border-neutral-800/80 bg-white dark:bg-[#121319] p-2.5">
+                <div className="rounded-lg border border-[rgba(250,250,248,0.04)] bg-[#1C1C18]/60 p-2.5">
                   <button
                     type="button"
                     onClick={() => toggleSection("jurisdiction")}
@@ -478,7 +478,7 @@ export default function BuildingsPage() {
                 </div>
 
                 {/* 2. Zip Code */}
-                <div className="rounded-md border border-neutral-200 dark:border-neutral-800/80 bg-white dark:bg-[#121319] p-2.5">
+                <div className="rounded-lg border border-[rgba(250,250,248,0.04)] bg-[#1C1C18]/60 p-2.5">
                   <button
                     type="button"
                     onClick={() => toggleSection("zipcode")}
@@ -567,7 +567,7 @@ export default function BuildingsPage() {
                 </div>
 
                 {/* 3. Square feet */}
-                <div className="rounded-md border border-neutral-200 dark:border-neutral-800/80 bg-white dark:bg-[#121319] p-2.5">
+                <div className="rounded-lg border border-[rgba(250,250,248,0.04)] bg-[#1C1C18]/60 p-2.5">
                   <button
                     type="button"
                     onClick={() => toggleSection("sqft")}
@@ -625,7 +625,7 @@ export default function BuildingsPage() {
                 </div>
 
                 {/* 3. Property Class */}
-                <div className="rounded-md border border-neutral-200 dark:border-neutral-800/80 bg-white dark:bg-[#121319] p-2.5">
+                <div className="rounded-lg border border-[rgba(250,250,248,0.04)] bg-[#1C1C18]/60 p-2.5">
                   <button
                     type="button"
                     onClick={() => toggleSection("propertyClass")}
@@ -670,7 +670,7 @@ export default function BuildingsPage() {
                 </div>
 
                 {/* 4. Year Built */}
-                <div className="rounded-md border border-neutral-200 dark:border-neutral-800/80 bg-white dark:bg-[#121319] p-2.5">
+                <div className="rounded-lg border border-[rgba(250,250,248,0.04)] bg-[#1C1C18]/60 p-2.5">
                   <button
                     type="button"
                     onClick={() => toggleSection("year")}
@@ -715,7 +715,7 @@ export default function BuildingsPage() {
                 </div>
 
                 {/* 5. Owner */}
-                <div className="rounded-md border border-neutral-200 dark:border-neutral-800/80 bg-white dark:bg-[#121319] p-2.5">
+                <div className="rounded-lg border border-[rgba(250,250,248,0.04)] bg-[#1C1C18]/60 p-2.5">
                   <button
                     type="button"
                     onClick={() => toggleSection("owner")}
@@ -745,7 +745,7 @@ export default function BuildingsPage() {
                 </div>
 
                 {/* 6. Verification & Pipeline */}
-                <div className="rounded-md border border-neutral-200 dark:border-neutral-800/80 bg-white dark:bg-[#121319] p-2.5">
+                <div className="rounded-lg border border-[rgba(250,250,248,0.04)] bg-[#1C1C18]/60 p-2.5">
                   <button
                     type="button"
                     onClick={() => toggleSection("verification")}
@@ -806,20 +806,20 @@ export default function BuildingsPage() {
             </div>
 
             {/* Bottom Actions */}
-            <div className="pt-3 border-t border-border dark:border-neutral-800/80 flex items-center justify-between text-xs text-muted-foreground dark:text-neutral-400">
+            <div className="border-t border-[rgba(250,250,248,0.08)] p-3 bg-[#171714]">
               <button
                 type="button"
                 onClick={clearAllFilters}
-                className="hover:text-foreground dark:hover:text-white underline decoration-neutral-300 dark:decoration-neutral-600 transition-colors cursor-pointer"
+                className="w-full rounded-md border border-[rgba(250,250,248,0.12)] bg-[#1C1C18] px-3 py-2 text-xs font-medium text-[#FAFAF8] hover:bg-[#23231E] transition-colors cursor-pointer select-none"
               >
-                Reset filters {activeFiltersCount > 0 ? `(${activeFiltersCount})` : ""}
+                Clear All Filters
               </button>
             </div>
           </aside>
         )}
 
         {/* Right Table Container */}
-        <main className="min-w-0 flex-1 flex flex-col justify-between overflow-x-auto bg-background dark:bg-[#0a0b0d]">
+        <main className="min-w-0 flex-1 flex flex-col justify-between overflow-x-auto bg-[#171714] text-[#FAFAF8]">
 
           {/* Table Scroll Area */}
           <div className="min-w-0 flex-1 overflow-auto relative">
@@ -886,10 +886,10 @@ export default function BuildingsPage() {
                 </button>
               </div>
             ) : (
-              <table className="w-full text-left text-xs border-collapse">
-                <thead className="sticky top-0 z-20">
-                  <tr className="border-b border-border dark:border-neutral-800/80 bg-neutral-100 dark:bg-[#0e0f14] text-[11px] font-semibold tracking-wider text-neutral-600 dark:text-neutral-400">
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] w-10 px-3 py-3 text-center border-b border-border dark:border-neutral-800/80">
+              <table className="w-full min-w-max text-left text-xs border-collapse">
+                <thead className="sticky top-0 z-20 bg-[#171714]">
+                  <tr className="apollo-th h-[39px] border-b border-[rgba(250,250,248,0.08)] bg-[#171714] text-[11px] font-medium uppercase tracking-wider text-[#B9B9B2]">
+                    <th className="sticky top-0 z-20 bg-[#171714] border-b border-[rgba(250,250,248,0.08)] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider w-12 px-4 py-2.5 text-center">
                       <input
                         type="checkbox"
                         checked={allSelected}
@@ -899,16 +899,16 @@ export default function BuildingsPage() {
                         className="size-3.5 rounded border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-foreground dark:text-white focus:ring-0 cursor-pointer disabled:opacity-40"
                       />
                     </th>
-                    <th className="sticky left-0 top-0 z-30 bg-neutral-100 dark:bg-[#0e0f14] px-4 py-3 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap border-b border-border dark:border-neutral-800/80 shadow-[1px_1px_0_0_rgba(0,0,0,0.06)] dark:shadow-[1px_1px_0_0_rgba(255,255,255,0.06)]">
+                    <th className="sticky left-12 top-0 z-30 bg-[#171714] px-4 py-2.5 font-medium text-[#B9B9B2] whitespace-nowrap border-b border-[rgba(250,250,248,0.08)] uppercase text-[11px] tracking-wider min-w-[300px]">
                       Address
                     </th>
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-4 py-3 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap border-b border-border dark:border-neutral-800/80">
+                    <th className="sticky top-0 z-20 bg-[#171714] border-b border-[rgba(250,250,248,0.08)] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider px-4 py-2.5 whitespace-nowrap min-w-[280px]">
                       Owner
                     </th>
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-4 py-3 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap border-b border-border dark:border-neutral-800/80">
+                    <th className="sticky top-0 z-20 bg-[#171714] border-b border-[rgba(250,250,248,0.08)] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider px-4 py-2.5 whitespace-nowrap min-w-[260px]">
                       Type
                     </th>
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-4 py-3 font-semibold text-neutral-800 dark:text-neutral-300 text-right whitespace-nowrap border-b border-border dark:border-neutral-800/80">
+                    <th className="sticky top-0 z-20 bg-[#171714] border-b border-[rgba(250,250,248,0.08)] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider px-4 py-2.5 text-right whitespace-nowrap min-w-[140px]">
                       <button
                         type="button"
                         onClick={() => setSort(sort === "sqft_desc" ? "sqft_asc" : "sqft_desc")}
@@ -921,7 +921,7 @@ export default function BuildingsPage() {
                         )}
                       </button>
                     </th>
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-4 py-3 font-semibold text-neutral-800 dark:text-neutral-300 text-right whitespace-nowrap border-b border-border dark:border-neutral-800/80">
+                    <th className="sticky top-0 z-20 bg-[#171714] border-b border-[rgba(250,250,248,0.08)] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider px-4 py-2.5 text-right whitespace-nowrap min-w-[110px]">
                       <button
                         type="button"
                         onClick={() => setSort(sort === "year_desc" ? "year_asc" : "year_desc")}
@@ -934,10 +934,10 @@ export default function BuildingsPage() {
                         )}
                       </button>
                     </th>
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-4 py-3 font-semibold text-neutral-800 dark:text-neutral-300 text-right whitespace-nowrap border-b border-border dark:border-neutral-800/80">
+                    <th className="sticky top-0 z-20 bg-[#171714] border-b border-[rgba(250,250,248,0.08)] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider px-4 py-2.5 text-right whitespace-nowrap min-w-[100px]">
                       Stories
                     </th>
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-4 py-3 pr-4 text-right whitespace-nowrap border-b border-border dark:border-neutral-800/80">
+                    <th className="sticky top-0 z-20 bg-[#171714] border-b border-[rgba(250,250,248,0.08)] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider px-4 py-2.5 pr-4 text-right whitespace-nowrap min-w-[160px]">
                       Actions
                     </th>
                   </tr>
@@ -954,14 +954,14 @@ export default function BuildingsPage() {
                         key={row.id}
                         onClick={() => setSelectedId(row.id)}
                         className={cn(
-                          "group transition-colors duration-150 cursor-pointer",
+                          "apollo-row h-14 group transition-colors duration-150 cursor-pointer border-b border-[rgba(250,250,248,0.06)]",
                           isHighlighted
-                            ? "bg-[#F5EADB]/70 hover:bg-[#ECD5BC]/70 dark:bg-[#201C17] dark:hover:bg-[#2A241E]"
-                            : "bg-transparent hover:bg-[#FAF5EE] dark:hover:bg-[#1C1A17]"
+                            ? "bg-[rgba(242,247,100,0.08)] hover:bg-[rgba(242,247,100,0.12)] text-[#FAFAF8]"
+                            : "bg-[#171714] hover:bg-[rgb(35,35,30)] text-[#FAFAF8]"
                         )}
                       >
                         {/* Checkbox with active row indicator */}
-                        <td className="w-10 px-3 py-3 text-center transition-all group-hover:shadow-[inset_3px_0_0_0_#D99B26] dark:group-hover:shadow-[inset_3px_0_0_0_#E9B63B]">
+                        <td className="w-12 px-4 py-0 text-center sticky left-0 z-10 bg-[#171714] group-hover:bg-[rgb(35,35,30)]">
                           <input
                             type="checkbox"
                             checked={isRowSelected}
@@ -977,14 +977,14 @@ export default function BuildingsPage() {
                         {/* Address Sticky Left with Left Active Indicator */}
                         <td
                           className={cn(
-                            "sticky left-0 z-10 px-4 py-3 font-medium whitespace-nowrap shadow-[1px_0_0_0_rgba(0,0,0,0.06)] dark:shadow-[1px_0_0_0_rgba(255,255,255,0.06)] transition-all duration-150",
+                            "sticky left-12 z-10 px-4 py-2 h-14 align-middle text-[12px] font-medium whitespace-nowrap min-w-[300px] transition-colors duration-150",
                             isHighlighted
-                              ? "bg-[#F5EADB]/80 group-hover:bg-[#ECD5BC]/80 dark:bg-[#201C17] dark:group-hover:bg-[#2A241E]"
-                              : "bg-background dark:bg-[#0a0b0d] group-hover:bg-[#FAF5EE] dark:group-hover:bg-[#1C1A17]"
+                              ? "bg-[rgba(242,247,100,0.08)] group-hover:bg-[rgba(242,247,100,0.12)] text-[#FAFAF8]"
+                              : "bg-[#171714] group-hover:bg-[rgb(35,35,30)] text-[#FAFAF8]"
                           )}
                         >
                         <div className="flex items-center gap-2">
-                          <span className="font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-amber-800 dark:group-hover:text-amber-300 transition-colors">
+                          <span className="font-semibold text-[#FAFAF8] group-hover:text-amber-300 transition-colors">
                             {row.address || "—"}
                           </span>
                           {row.hasContact && (
@@ -997,49 +997,49 @@ export default function BuildingsPage() {
                           )}
 
                         </div>
-                        <p className="text-[11px] text-muted-foreground">{row.city || city}</p>
+                        <p className="text-[11px] text-[#B9B9B2]">{row.city || city}</p>
                       </td>
 
                       {/* Owner */}
-                      <td className="px-4 py-3 max-w-56 truncate whitespace-nowrap">
-                        <span className="text-neutral-800 dark:text-neutral-200 group-hover:text-neutral-950 dark:group-hover:text-white transition-colors">
+                      <td className="px-4 py-2 h-14 align-middle text-[12px] min-w-[280px] whitespace-nowrap">
+                        <span className="font-medium text-[#FAFAF8] group-hover:text-white transition-colors">
                           {row.owner || "—"}
                         </span>
                       </td>
 
                       {/* Property Type */}
-                      <td className="px-4 py-3 max-w-48 truncate text-xs text-muted-foreground whitespace-nowrap">
+                      <td className="px-4 py-2 h-14 align-middle text-[12px] min-w-[260px] whitespace-nowrap text-[#B9B9B2]">
                         {row.propertyType || "—"}
                       </td>
 
                       {/* Sq ft */}
-                      <td className="px-4 py-3 text-right font-mono tabular-nums whitespace-nowrap text-neutral-700 dark:text-neutral-300">
+                      <td className="px-4 py-2 h-14 align-middle text-[12px] min-w-[140px] text-right font-mono tabular-nums whitespace-nowrap text-[#FAFAF8]">
                         {row.sqft ? num(row.sqft) : "—"}
                       </td>
 
                       {/* Year */}
-                      <td className="px-4 py-3 text-right font-mono tabular-nums whitespace-nowrap text-neutral-700 dark:text-neutral-300">
+                      <td className="px-4 py-2 h-14 align-middle text-[12px] min-w-[110px] text-right font-mono tabular-nums whitespace-nowrap text-[#FAFAF8]">
                         {row.yearBuilt || "—"}
                       </td>
 
                       {/* Stories */}
-                      <td className="px-4 py-3 text-right font-mono tabular-nums whitespace-nowrap text-neutral-700 dark:text-neutral-300">
+                      <td className="px-4 py-2 h-14 align-middle text-[12px] min-w-[100px] text-right font-mono tabular-nums whitespace-nowrap text-[#FAFAF8]">
                         {row.stories || "—"}
                       </td>
 
                       {/* Action buttons */}
-                      <td className="px-4 py-3 text-right whitespace-nowrap pr-4">
+                      <td className="px-4 py-2 h-14 align-middle text-[12px] min-w-[160px] text-right whitespace-nowrap pr-4">
                         <div className="inline-flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
                           <button
                             type="button"
                             onClick={() => setSelectedId(row.id)}
-                            className="inline-flex h-7 items-center rounded-md border border-neutral-300 dark:border-neutral-700/80 bg-white dark:bg-neutral-900 px-2 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white group-hover:border-neutral-400 dark:group-hover:border-neutral-600 transition-colors cursor-pointer"
+                            className="inline-flex h-7 items-center rounded-md border border-[rgba(250,250,248,0.12)] bg-[#1C1C18] px-2.5 text-xs font-medium text-[#FAFAF8] hover:bg-[#262621] hover:border-[rgba(250,250,248,0.25)] transition-colors cursor-pointer"
                           >
                             Inspect
                           </button>
                           <Link
                             href={`/parcels/${encodeURIComponent(row.id)}`}
-                            className="inline-flex h-7 items-center rounded-md border border-neutral-300 dark:border-neutral-700/80 bg-white dark:bg-neutral-900 px-2 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white group-hover:border-neutral-400 dark:group-hover:border-neutral-600 transition-colors"
+                            className="inline-flex h-7 items-center rounded-md border border-[rgba(250,250,248,0.12)] bg-[#1C1C18] px-2.5 text-xs font-medium text-[#FAFAF8] hover:bg-[#262621] hover:border-[rgba(250,250,248,0.25)] transition-colors"
                           >
                             Dossier →
                           </Link>
@@ -1055,29 +1055,29 @@ export default function BuildingsPage() {
 
           {/* Bottom Fixed Pagination Bar */}
           {!page.data?.territoryLocked && (
-            <div className="shrink-0 flex items-center justify-between border-t border-border dark:border-neutral-800/80 bg-neutral-50 dark:bg-[#0e0f14] px-5 py-3 text-xs text-muted-foreground dark:text-neutral-400 z-10">
+            <div className="shrink-0 flex items-center justify-between border-t border-[rgba(250,250,248,0.08)] bg-[#171714] px-5 py-3 text-xs text-[#B9B9B2] z-10">
             <div>
               {page.loading ? (
-                <div className="flex items-center gap-2 text-foreground dark:text-neutral-200">
+                <div className="flex items-center gap-2 text-[#FAFAF8]">
                   <span className="size-2 rounded-full bg-[#B4E4D6] animate-ping" />
                   <span className="font-medium text-xs">Querying {city} CAD records...</span>
                 </div>
               ) : (
                 <span>
-                  Showing <strong className="text-foreground dark:text-white font-medium">{from}–{to}</strong> of <strong className="text-foreground dark:text-white font-medium">{num(total)}</strong> buildings{selectedRowIds.size > 0 && <span className="ml-2 text-amber-700 dark:text-amber-400 font-semibold">· {selectedRowIds.size} selected</span>}
+                  Showing <strong className="text-[#FAFAF8] font-medium">{from}–{to}</strong> of <strong className="text-[#FAFAF8] font-medium">{num(total)}</strong> buildings{selectedRowIds.size > 0 && <span className="ml-2 text-amber-400 font-semibold">· {selectedRowIds.size} selected</span>}
                 </span>
               )}
             </div>
 
             <div className="flex items-center gap-2">
-              <span className="text-muted-foreground dark:text-neutral-500 mr-2">
+              <span className="text-[#B9B9B2] mr-2">
                 Page {pageIndex + 1} of {pageCount}
               </span>
               <button
                 type="button"
                 disabled={offset === 0 || page.loading}
                 onClick={() => setOffset(Math.max(0, offset - LIMIT))}
-                className="rounded border border-neutral-300 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-2.5 py-1 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 disabled:opacity-40 cursor-pointer select-none"
+                className="rounded border border-[rgba(250,250,248,0.12)] bg-[#1C1C18] px-2.5 py-1 text-[#FAFAF8] hover:bg-[#23231E] disabled:opacity-30 cursor-pointer select-none transition-colors"
               >
                 Previous
               </button>
@@ -1085,7 +1085,7 @@ export default function BuildingsPage() {
                 type="button"
                 disabled={offset + LIMIT >= total || page.loading}
                 onClick={() => setOffset(offset + LIMIT)}
-                className="rounded border border-neutral-300 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-2.5 py-1 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 disabled:opacity-40 cursor-pointer select-none"
+                className="rounded border border-[rgba(250,250,248,0.12)] bg-[#1C1C18] px-2.5 py-1 text-[#FAFAF8] hover:bg-[#23231E] disabled:opacity-30 cursor-pointer select-none transition-colors"
               >
                 Next
               </button>

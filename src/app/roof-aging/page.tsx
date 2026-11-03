@@ -28,7 +28,8 @@ import {
 } from "lucide-react";
 import { ContractorLink } from "@/components/contractor-link";
 import { RealLogo } from "@/components/real-logo";
-import { ParcelDetailDrawer } from "@/components/parcel-detail-drawer";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { ParcelDossierView } from "@/components/parcel-dossier-view";
 import { useDepoiiState } from "@/components/depoii-provider";
 import { RiskBadge, useDebounced } from "@/components/layout/engine-layout";
 import { useEngine } from "@/components/use-engine";
@@ -84,7 +85,7 @@ function RoofAgingAgedSkeletonRows() {
             }}
           >
             {/* Checkbox */}
-            <td className="w-10 px-3 py-3 text-center">
+            <td className="w-12 px-4 py-0 text-center sticky left-0 z-10 bg-[#171714] group-hover:bg-[rgb(35,35,30)]">
               <div
                 style={{ animationDelay: delay }}
                 className="size-3.5 mx-auto rounded border border-neutral-300 dark:border-neutral-700 bg-neutral-200/70 dark:bg-neutral-800/80 animate-pulse"
@@ -92,23 +93,15 @@ function RoofAgingAgedSkeletonRows() {
             </td>
 
             {/* Address (Sticky Left) */}
-            <td className="sticky left-0 z-10 bg-background dark:bg-[#0b0c10] px-3 py-3 whitespace-nowrap shadow-[1px_0_0_0_rgba(0,0,0,0.06)] dark:shadow-[1px_0_0_0_rgba(255,255,255,0.06)]">
+            <td className="sticky left-12 z-10 bg-[#171714] px-4 py-2 h-14 align-middle whitespace-nowrap min-w-[300px]">
               <div
                 style={{ animationDelay: delay }}
                 className={`h-4 rounded bg-neutral-200 dark:bg-neutral-800/90 animate-pulse ${row.addrW}`}
               />
             </td>
 
-            {/* Risk Tier */}
-            <td className="px-3 py-3 whitespace-nowrap">
-              <div
-                style={{ animationDelay: delay }}
-                className={`h-5 w-20 rounded border ${row.riskTone} animate-pulse`}
-              />
-            </td>
-
             {/* Age */}
-            <td className="px-3 py-3 text-right whitespace-nowrap">
+            <td className="px-4 py-2 h-14 align-middle text-right whitespace-nowrap min-w-[90px]">
               <div
                 style={{ animationDelay: delay }}
                 className={`h-3.5 rounded bg-neutral-200/80 dark:bg-neutral-800/70 ml-auto animate-pulse ${row.ageW}`}
@@ -116,7 +109,7 @@ function RoofAgingAgedSkeletonRows() {
             </td>
 
             {/* Owner / Entity */}
-            <td className="px-3 py-3 whitespace-nowrap">
+            <td className="px-4 py-2 h-14 align-middle whitespace-nowrap min-w-[260px]">
               <div
                 style={{ animationDelay: delay }}
                 className={`h-3.5 rounded bg-neutral-200 dark:bg-neutral-800/90 animate-pulse ${row.ownerW}`}
@@ -124,7 +117,7 @@ function RoofAgingAgedSkeletonRows() {
             </td>
 
             {/* Contact / Phone / Email */}
-            <td className="px-3 py-3 whitespace-nowrap">
+            <td className="px-4 py-2 h-14 align-middle whitespace-nowrap min-w-[280px]">
               <div className="space-y-1.5">
                 <div
                   style={{ animationDelay: delay }}
@@ -137,40 +130,40 @@ function RoofAgingAgedSkeletonRows() {
               </div>
             </td>
 
-            {/* Mailing Address */}
-            <td className="px-3 py-3 whitespace-nowrap">
-              <div
-                style={{ animationDelay: delay }}
-                className={`h-3 rounded bg-neutral-200/70 dark:bg-neutral-800/60 animate-pulse ${row.mailW}`}
-              />
-            </td>
-
-            {/* Installed */}
-            <td className="px-3 py-3 whitespace-nowrap">
-              <div
-                style={{ animationDelay: delay }}
-                className="h-3.5 w-12 rounded bg-neutral-200/80 dark:bg-neutral-800/70 animate-pulse"
-              />
-            </td>
-
-            {/* Roof System */}
-            <td className="px-3 py-3 whitespace-nowrap">
-              <div
-                style={{ animationDelay: delay }}
-                className={`h-3.5 rounded bg-neutral-200/80 dark:bg-neutral-800/70 animate-pulse ${row.sysW}`}
-              />
-            </td>
-
             {/* Last Contractor */}
-            <td className="px-3 py-3 whitespace-nowrap">
+            <td className="px-4 py-2 h-14 align-middle whitespace-nowrap min-w-[220px]">
               <div
                 style={{ animationDelay: delay }}
                 className={`h-3.5 rounded bg-neutral-200/80 dark:bg-neutral-800/70 animate-pulse ${row.contrW}`}
               />
             </td>
 
+            {/* Installed */}
+            <td className="px-4 py-2 h-14 align-middle whitespace-nowrap min-w-[130px]">
+              <div
+                style={{ animationDelay: delay }}
+                className="h-3.5 w-12 rounded bg-neutral-200/80 dark:bg-neutral-800/70 animate-pulse"
+              />
+            </td>
+
+            {/* Mailing Address */}
+            <td className="px-4 py-2 h-14 align-middle whitespace-nowrap min-w-[240px]">
+              <div
+                style={{ animationDelay: delay }}
+                className={`h-3 rounded bg-neutral-200/70 dark:bg-neutral-800/60 animate-pulse ${row.mailW}`}
+              />
+            </td>
+
+            {/* Roof System */}
+            <td className="px-4 py-2 h-14 align-middle text-[12px] whitespace-nowrap min-w-[200px]">
+              <div
+                style={{ animationDelay: delay }}
+                className={`h-3.5 rounded bg-neutral-200/80 dark:bg-neutral-800/70 animate-pulse ${row.sysW}`}
+              />
+            </td>
+
             {/* Priority */}
-            <td className="px-3 py-3 text-right whitespace-nowrap">
+            <td className="px-3 py-2 h-14 align-middle text-[12px] text-right whitespace-nowrap">
               <div
                 style={{ animationDelay: delay }}
                 className="h-4 w-8 rounded ml-auto bg-neutral-200 dark:bg-neutral-800/90 animate-pulse"
@@ -178,7 +171,7 @@ function RoofAgingAgedSkeletonRows() {
             </td>
 
             {/* Est. Replacement */}
-            <td className="px-3 py-3 text-right whitespace-nowrap">
+            <td className="px-3 py-2 h-14 align-middle text-[12px] text-right whitespace-nowrap">
               <div
                 style={{ animationDelay: delay }}
                 className={`h-3.5 rounded bg-neutral-200 dark:bg-neutral-800/90 ml-auto animate-pulse ${row.costW}`}
@@ -186,7 +179,7 @@ function RoofAgingAgedSkeletonRows() {
             </td>
 
             {/* Jurisdiction */}
-            <td className="px-3 py-3 whitespace-nowrap">
+            <td className="px-3 py-2 h-14 align-middle text-[12px] whitespace-nowrap">
               <div
                 style={{ animationDelay: delay }}
                 className="h-3.5 w-16 rounded bg-neutral-200/80 dark:bg-neutral-800/70 animate-pulse"
@@ -194,7 +187,7 @@ function RoofAgingAgedSkeletonRows() {
             </td>
 
             {/* Actions */}
-            <td className="px-3 py-3 pr-4 text-right whitespace-nowrap">
+            <td className="px-3 py-2 h-14 align-middle text-[12px] pr-4 text-right whitespace-nowrap">
               <div className="inline-flex items-center gap-1.5 ml-auto">
                 <div
                   style={{ animationDelay: delay }}
@@ -253,7 +246,7 @@ function RoofAgingNeverSkeletonRows() {
             </td>
 
             {/* Owner */}
-            <td className="px-3 py-3 whitespace-nowrap">
+            <td className="px-3 py-2 h-14 align-middle text-[12px] whitespace-nowrap">
               <div
                 style={{ animationDelay: delay }}
                 className={`h-3.5 rounded bg-neutral-200 dark:bg-neutral-800/90 animate-pulse ${row.ownerW}`}
@@ -261,7 +254,7 @@ function RoofAgingNeverSkeletonRows() {
             </td>
 
             {/* Contact / Phone / Email */}
-            <td className="px-3 py-3 whitespace-nowrap">
+            <td className="px-3 py-2 h-14 align-middle text-[12px] whitespace-nowrap">
               <div className="space-y-1.5">
                 <div
                   style={{ animationDelay: delay }}
@@ -275,7 +268,7 @@ function RoofAgingNeverSkeletonRows() {
             </td>
 
             {/* Mailing Address */}
-            <td className="px-3 py-3 whitespace-nowrap">
+            <td className="px-3 py-2 h-14 align-middle text-[12px] whitespace-nowrap">
               <div
                 style={{ animationDelay: delay }}
                 className={`h-3 rounded bg-neutral-200/70 dark:bg-neutral-800/60 animate-pulse ${row.mailW}`}
@@ -283,7 +276,7 @@ function RoofAgingNeverSkeletonRows() {
             </td>
 
             {/* Age */}
-            <td className="px-3 py-3 text-right whitespace-nowrap">
+            <td className="px-3 py-2 h-14 align-middle text-[12px] text-right whitespace-nowrap">
               <div
                 style={{ animationDelay: delay }}
                 className={`h-3.5 rounded bg-neutral-200/80 dark:bg-neutral-800/70 ml-auto animate-pulse ${row.ageW}`}
@@ -291,7 +284,7 @@ function RoofAgingNeverSkeletonRows() {
             </td>
 
             {/* Sq ft */}
-            <td className="px-3 py-3 text-right whitespace-nowrap">
+            <td className="px-3 py-2 h-14 align-middle text-[12px] text-right whitespace-nowrap">
               <div
                 style={{ animationDelay: delay }}
                 className={`h-3.5 rounded bg-neutral-200/80 dark:bg-neutral-800/70 ml-auto animate-pulse ${row.sqftW}`}
@@ -299,7 +292,7 @@ function RoofAgingNeverSkeletonRows() {
             </td>
 
             {/* Year Built */}
-            <td className="px-3 py-3 text-right whitespace-nowrap">
+            <td className="px-3 py-2 h-14 align-middle text-[12px] text-right whitespace-nowrap">
               <div
                 style={{ animationDelay: delay }}
                 className={`h-3.5 rounded bg-neutral-200/80 dark:bg-neutral-800/70 ml-auto animate-pulse ${row.yrW}`}
@@ -307,7 +300,7 @@ function RoofAgingNeverSkeletonRows() {
             </td>
 
             {/* Status */}
-            <td className="px-3 py-3 whitespace-nowrap">
+            <td className="px-3 py-2 h-14 align-middle text-[12px] whitespace-nowrap">
               <div
                 style={{ animationDelay: delay }}
                 className="h-5 w-24 rounded border border-[#FFCA88]/50 bg-[#FFCA88]/20 animate-pulse"
@@ -315,7 +308,7 @@ function RoofAgingNeverSkeletonRows() {
             </td>
 
             {/* Est. Replacement */}
-            <td className="px-3 py-3 text-right whitespace-nowrap">
+            <td className="px-3 py-2 h-14 align-middle text-[12px] text-right whitespace-nowrap">
               <div
                 style={{ animationDelay: delay }}
                 className={`h-3.5 rounded bg-neutral-200 dark:bg-neutral-800/90 ml-auto animate-pulse ${row.costW}`}
@@ -323,7 +316,7 @@ function RoofAgingNeverSkeletonRows() {
             </td>
 
             {/* Jurisdiction */}
-            <td className="px-3 py-3 whitespace-nowrap">
+            <td className="px-3 py-2 h-14 align-middle text-[12px] whitespace-nowrap">
               <div
                 style={{ animationDelay: delay }}
                 className="h-3.5 w-16 rounded bg-neutral-200/80 dark:bg-neutral-800/70 animate-pulse"
@@ -331,7 +324,7 @@ function RoofAgingNeverSkeletonRows() {
             </td>
 
             {/* Actions */}
-            <td className="px-3 py-3 pr-4 text-right whitespace-nowrap">
+            <td className="px-3 py-2 h-14 align-middle text-[12px] pr-4 text-right whitespace-nowrap">
               <div className="inline-flex items-center gap-1.5 ml-auto">
                 <div
                   style={{ animationDelay: delay }}
@@ -434,6 +427,7 @@ export default function RoofAgingPage() {
   const [unlockedPhones, setUnlockedPhones] = useState<Set<string>>(new Set());
   const [unlockedEmails, setUnlockedEmails] = useState<Set<string>>(new Set());
   const [selectedDrawerParcel, setSelectedDrawerParcel] = useState<string | null>(null);
+  const [fullDetailId, setFullDetailId] = useState<string | null>(null);
 
   const unlockPhone = (id: string) => {
     setUnlockedPhones((prev) => new Set(prev).add(id));
@@ -498,7 +492,7 @@ export default function RoofAgingPage() {
       offset,
     },
     mapAging,
-    record === "aged"
+    record === "aged" && territoriesLoaded
   );
 
   const dark = useEngine(
@@ -513,7 +507,7 @@ export default function RoofAgingPage() {
       include_public: includePublic,
     },
     mapDarkMarket,
-    record === "never"
+    record === "never" && territoriesLoaded
   );
 
   // Filter count
@@ -550,6 +544,7 @@ export default function RoofAgingPage() {
   const selectedTerritory = useMemo(() => territories.find((t) => t.id === zone), [territories, zone]);
 
   const isLocked = useMemo(() => {
+    if (!territoriesLoaded) return false;
     if (isSuperAdmin) return false;
     if (zone === "none") return true;
     if (record === "aged") {
@@ -557,10 +552,10 @@ export default function RoofAgingPage() {
     } else {
       if (dark.data?.noActiveTerritory || dark.data?.unauthorizedZone) return true;
     }
-    if (territoriesLoaded && zone !== "all") {
+    if (zone !== "all") {
       if (!subscribedTerritories.some((t) => t.id === zone)) return true;
     }
-    if (territoriesLoaded && zone === "all" && subscribedTerritories.length === 0) return true;
+    if (zone === "all" && subscribedTerritories.length === 0) return true;
     return false;
   }, [isSuperAdmin, zone, record, page.data, dark.data, territoriesLoaded, subscribedTerritories]);
 
@@ -706,13 +701,25 @@ export default function RoofAgingPage() {
   }, []);
 
   const isDataLoading = record === "aged" ? page.loading : dark.loading;
-  const isLoading = isDataLoading || previewSkeleton;
+  const isLoading = !territoriesLoaded || isDataLoading || previewSkeleton;
   const isError = record === "aged" ? page.error : dark.error;
 
+  if (fullDetailId) {
+    return (
+      <div className="flex h-[calc(100dvh-53px)] max-h-[calc(100dvh-53px)] flex-col bg-background dark:bg-[#0b0c0e] text-foreground dark:text-neutral-100 antialiased font-sans overflow-hidden">
+        <ParcelDossierView
+          parcelId={fullDetailId}
+          onBack={() => setFullDetailId(null)}
+          backLabel="Back to Aging Roofs"
+        />
+      </div>
+    );
+  }
+
   return (
-    <div data-tour="roof-aging-container" className="flex h-[calc(100vh-3.5rem)] flex-col bg-background dark:bg-[#0b0c10] text-foreground dark:text-neutral-200 overflow-hidden font-sans text-xs select-none">
+    <div data-tour="roof-aging-container" className="flex h-[calc(100vh-3.5rem)] flex-col bg-[#171714] text-[#FAFAF8] overflow-hidden font-sans text-xs select-none">
       {/* Top Header Section - Fixed */}
-      <div className="shrink-0 border-b border-border dark:border-neutral-800/80 bg-background dark:bg-[#0e0f12] px-5 py-3.5 z-20">
+      <div className="shrink-0 border-b border-[rgba(250,250,248,0.08)] bg-[#171714] px-5 py-3.5 z-20 text-[#FAFAF8]">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="space-y-0.5">
             <div className="flex items-center gap-3">
@@ -721,29 +728,6 @@ export default function RoofAgingPage() {
                 <Shield className="size-3 text-sky-400" />
                 {jurisdiction}
               </span>
-              {jurisdiction.includes("Dallas") && zone && (
-                <span className={cn(
-                  "rounded-full px-2.5 py-0.5 text-[11px] font-medium flex items-center gap-1 border",
-                  isLocked
-                    ? "bg-amber-500/10 border-amber-500/30 text-amber-800 dark:text-amber-300"
-                    : "bg-emerald-500/10 border-emerald-500/30 text-emerald-800 dark:text-emerald-300"
-                )}>
-                  <span>Zone:</span>
-                  <strong className="font-semibold">
-                    {zoneNameDisplay}
-                  </strong>
-                </span>
-              )}
-              <span className={cn(
-                "rounded px-1.5 py-0.5 text-[11px] font-semibold border",
-                isLocked
-                  ? "border-[#FFCA88]/50 bg-[#FFCA88]/15 text-amber-800 dark:text-[#FFCA88]"
-                  : record === "aged"
-                  ? "border-[#B4E4D6]/50 bg-[#B4E4D6]/15 text-emerald-800 dark:text-[#B4E4D6]"
-                  : "border-[#FFCA88]/50 bg-[#FFCA88]/15 text-amber-800 dark:text-[#FFCA88]"
-              )}>
-                {isLocked ? "Locked Zone" : record === "aged" ? "Permitted Cohort" : "Dark Market"}
-              </span>
             </div>
             <p className="text-xs font-medium text-rose-600 dark:text-[#DE7272]">
               Identify commercial facilities with unreplaced membranes past 20–35+ years and verified historical hail exposure.
@@ -751,47 +735,6 @@ export default function RoofAgingPage() {
           </div>
 
           <div className="flex items-center gap-2">
-            {/* Quick KPI stats pills */}
-            <div className="hidden md:flex items-center gap-2 mr-2">
-              {record === "aged" ? (
-                <>
-                  <div className="rounded-md border border-border dark:border-neutral-800 bg-neutral-100/70 dark:bg-[#121319] px-2.5 py-1 text-center">
-                    <span className="text-[10px] text-muted-foreground dark:text-neutral-400 uppercase font-medium">Aging Roofs</span>
-                    <p className="text-xs font-bold text-foreground dark:text-white">{page.data && !isLocked ? num(page.data.total) : "—"}</p>
-                  </div>
-                  <div className="rounded-md border border-border dark:border-neutral-800 bg-neutral-100/70 dark:bg-[#121319] px-2.5 py-1 text-center">
-                    <span className="text-[10px] text-muted-foreground dark:text-neutral-400 uppercase font-medium">Expired 20y+</span>
-                    <p className="text-xs font-bold text-neutral-800 dark:text-neutral-100 flex items-center justify-center gap-1.5">
-                      <span className="size-1.5 rounded-full bg-[#DE7272]" />
-                      <span className="text-[#DE7272]">{page.data && !isLocked ? num(page.data.critical) : "—"}</span>
-                    </p>
-                  </div>
-                  <div className="rounded-md border border-border dark:border-neutral-800 bg-neutral-100/70 dark:bg-[#121319] px-2.5 py-1 text-center">
-                    <span className="text-[10px] text-muted-foreground dark:text-neutral-400 uppercase font-medium">Approaching</span>
-                    <p className="text-xs font-bold text-neutral-800 dark:text-neutral-100 flex items-center justify-center gap-1.5">
-                      <span className="size-1.5 rounded-full bg-[#FFCA88]" />
-                      <span className="text-amber-700 dark:text-[#FFCA88]">{page.data && !isLocked ? num(page.data.approaching) : "—"}</span>
-                    </p>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="rounded-md border border-border dark:border-neutral-800 bg-neutral-100/70 dark:bg-[#121319] px-2.5 py-1 text-center">
-                    <span className="text-[10px] text-muted-foreground dark:text-neutral-400 uppercase font-medium">No Permit</span>
-                    <p className="text-xs font-bold text-amber-700 dark:text-[#FFCA88]">{dark.data && !isLocked ? num(dark.data.total) : "—"}</p>
-                  </div>
-                  <div className="rounded-md border border-border dark:border-neutral-800 bg-neutral-100/70 dark:bg-[#121319] px-2.5 py-1 text-center">
-                    <span className="text-[10px] text-muted-foreground dark:text-neutral-400 uppercase font-medium">Pipeline</span>
-                    <p className="text-xs font-bold text-emerald-700 dark:text-[#B4E4D6]">{!isLocked && (dark.data?.pipelineFormatted || (dark.data?.pipelineUSD ? usd(dark.data.pipelineUSD, true) : "…")) || "—"}</p>
-                  </div>
-                  <div className="rounded-md border border-border dark:border-neutral-800 bg-neutral-100/70 dark:bg-[#121319] px-2.5 py-1 text-center">
-                    <span className="text-[10px] text-muted-foreground dark:text-neutral-400 uppercase font-medium">Min Age</span>
-                    <p className="text-xs font-bold text-amber-600 dark:text-[#FFF6A9]">{minAge} yrs</p>
-                  </div>
-                </>
-              )}
-            </div>
-
             <Button
               size="sm"
               variant="brand"
@@ -833,7 +776,7 @@ export default function RoofAgingPage() {
       )}
 
       {/* Action & Filter Sub-Bar - Fixed */}
-      <div className="shrink-0 flex flex-wrap items-center justify-between gap-3 border-b border-border dark:border-neutral-800/80 bg-neutral-50/80 dark:bg-[#111216] px-5 py-2.5 text-xs z-20">
+      <div className="shrink-0 flex flex-wrap items-center justify-between gap-3 border-b border-[rgba(250,250,248,0.08)] bg-[#171714] px-5 py-2.5 text-xs z-20 text-[#FAFAF8]">
         {/* Left Side: Toggle Sidebar & Search */}
         <div className="flex items-center gap-2.5">
           <button
@@ -903,10 +846,10 @@ export default function RoofAgingPage() {
       <div className="flex flex-1 min-h-0 overflow-hidden">
         {/* Left Filter Sidebar - Fixed */}
         {!hideFilters && (
-          <aside className="w-64 shrink-0 border-r border-border dark:border-neutral-800/80 bg-neutral-50/80 dark:bg-[#0d0e12] p-3 text-xs flex flex-col justify-between overflow-y-auto h-full z-10">
-            <div className="space-y-4">
+          <aside className="w-80 shrink-0 border-r border-[rgba(250,250,248,0.08)] bg-[#171714] text-[#B9B9B2] flex flex-col justify-between overflow-hidden">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 [scrollbar-width:thin]">
               {/* Segmented Count Tabs: Aged vs Never */}
-              <div className="grid grid-cols-2 gap-1 rounded-lg border border-neutral-300 dark:border-neutral-800 bg-neutral-100 dark:bg-[#13141a] p-1 text-center">
+              <div className="grid grid-cols-2 gap-1 rounded-lg border border-[rgba(250,250,248,0.08)] bg-[#1F1F1B] p-0.5 text-center">
                 <button
                   type="button"
                   onClick={() => {
@@ -945,7 +888,7 @@ export default function RoofAgingPage() {
               {/* Accordion Filter Items */}
               <div className="space-y-2.5">
                 {/* 1. Jurisdiction / Location */}
-                <div className="rounded-md border border-neutral-200 dark:border-neutral-800/80 bg-white dark:bg-[#121319] p-2.5">
+                <div className="rounded-lg border border-[rgba(250,250,248,0.04)] bg-[#1C1C18]/60 p-2.5">
                   <button
                     type="button"
                     onClick={() => toggleSection("jurisdiction")}
@@ -1063,7 +1006,7 @@ export default function RoofAgingPage() {
                 </div>
 
                 {/* 2. Permit History Filter (Permit vs No Permit) */}
-                <div className="rounded-md border border-neutral-200 dark:border-neutral-800/80 bg-white dark:bg-[#121319] p-2.5">
+                <div className="rounded-lg border border-[rgba(250,250,248,0.04)] bg-[#1C1C18]/60 p-2.5">
                   <button
                     type="button"
                     onClick={() => toggleSection("permit")}
@@ -1123,7 +1066,7 @@ export default function RoofAgingPage() {
                 </div>
 
                 {/* 3. Minimum Roof Age */}
-                <div className="rounded-md border border-neutral-200 dark:border-neutral-800/80 bg-white dark:bg-[#121319] p-2.5">
+                <div className="rounded-lg border border-[rgba(250,250,248,0.04)] bg-[#1C1C18]/60 p-2.5">
                   <button
                     type="button"
                     onClick={() => toggleSection("age")}
@@ -1171,7 +1114,7 @@ export default function RoofAgingPage() {
 
                 {/* 3. Risk Tier (Aged Cohort Only) */}
                 {record === "aged" && (
-                  <div className="rounded-md border border-neutral-200 dark:border-neutral-800/80 bg-white dark:bg-[#121319] p-2.5">
+                  <div className="rounded-lg border border-[rgba(250,250,248,0.04)] bg-[#1C1C18]/60 p-2.5">
                     <button
                       type="button"
                       onClick={() => toggleSection("risk")}
@@ -1224,7 +1167,7 @@ export default function RoofAgingPage() {
 
                 {/* 4. Min Historical Value (Aged Cohort Only) */}
                 {record === "aged" && (
-                  <div className="rounded-md border border-neutral-200 dark:border-neutral-800/80 bg-white dark:bg-[#121319] p-2.5">
+                  <div className="rounded-lg border border-[rgba(250,250,248,0.04)] bg-[#1C1C18]/60 p-2.5">
                     <button
                       type="button"
                       onClick={() => toggleSection("value")}
@@ -1266,7 +1209,7 @@ export default function RoofAgingPage() {
 
                 {/* 5. Owner Scope (Dark Market / Never Only) */}
                 {record === "never" && (
-                  <div className="rounded-md border border-neutral-200 dark:border-neutral-800/80 bg-white dark:bg-[#121319] p-2.5">
+                  <div className="rounded-lg border border-[rgba(250,250,248,0.04)] bg-[#1C1C18]/60 p-2.5">
                     <button
                       type="button"
                       onClick={() => toggleSection("owner")}
@@ -1324,17 +1267,16 @@ export default function RoofAgingPage() {
               </div>
             </div>
 
-            {/* Sidebar Bottom Reset */}
-            {activeFiltersCount > 0 && (
+            {/* Bottom Actions */}
+            <div className="border-t border-[rgba(250,250,248,0.08)] p-3 bg-[#171714]">
               <button
                 type="button"
                 onClick={clearAllFilters}
-                className="mt-4 flex w-full items-center justify-center gap-1.5 rounded-md border border-neutral-300 dark:border-neutral-800 bg-white dark:bg-[#14151b] py-2 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white transition-colors"
+                className="w-full rounded-md border border-[rgba(250,250,248,0.12)] bg-[#1C1C18] px-3 py-2 text-xs font-medium text-[#FAFAF8] hover:bg-[#23231E] transition-colors cursor-pointer select-none"
               >
-                <RotateCcw className="size-3" />
-                <span>Reset all filters</span>
+                Clear All Filters
               </button>
-            )}
+            </div>
           </aside>
         )}
 
@@ -1361,7 +1303,7 @@ export default function RoofAgingPage() {
                   Try again
                 </button>
               </div>
-            ) : isLocked ? (
+            ) : !isLoading && isLocked ? (
               <div className="flex min-h-[460px] flex-col items-center justify-center p-8 text-center">
                 <div className="relative mb-5 flex size-16 items-center justify-center rounded-2xl border border-[#FFCA88]/40 bg-[#FFCA88]/15 dark:bg-[#FFCA88]/10 shadow-sm">
                   <Lock className="size-8 text-amber-600 dark:text-[#FFCA88]" />
@@ -1425,11 +1367,11 @@ export default function RoofAgingPage() {
                   <p className="text-xs text-muted-foreground dark:text-neutral-500">Try broadening your minimum age or clearing active filters.</p>
                 </div>
               ) : (
-                <table className="w-full border-collapse text-left text-xs">
+                <table className="w-full min-w-max border-collapse text-left text-xs">
                   {/* Sticky Table Header */}
-                  <thead className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#12131a] text-neutral-700 dark:text-neutral-300 font-semibold text-[11px] uppercase tracking-wider border-b border-border dark:border-neutral-800">
+                  <thead className="apollo-th sticky top-0 z-20 bg-[#171714] text-[#B9B9B2] font-medium text-[11px] uppercase tracking-wider border-b border-[rgba(250,250,248,0.08)]">
                     <tr>
-                      <th className="w-10 px-3 py-2.5 text-center">
+                      <th className="w-12 px-4 py-2.5 text-center sticky left-0 z-20 bg-[#171714]">
                         <button
                           type="button"
                           onClick={toggleSelectAll}
@@ -1444,21 +1386,20 @@ export default function RoofAgingPage() {
                           )}
                         </button>
                       </th>
-                      <th className="sticky left-0 z-10 bg-neutral-100 dark:bg-[#12131a] px-3 py-2.5 min-w-[220px]">
+                      <th className="sticky left-12 z-20 bg-[#171714] px-4 py-2.5 min-w-[300px] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider">
                         Address
                       </th>
-                      <th className="px-3 py-2.5 min-w-[90px]">Risk</th>
-                      <th className="px-3 py-2.5 text-right min-w-[70px]">Age</th>
-                      <th className="px-3 py-2.5 min-w-[200px]">Owner / Entity</th>
-                      <th className="px-3 py-2.5 min-w-[220px]">Contact & Phone / Email</th>
-                      <th className="px-3 py-2.5 min-w-[180px]">Mailing Address</th>
-                      <th className="px-3 py-2.5 min-w-[100px]">Installed</th>
-                      <th className="px-3 py-2.5 min-w-[140px]">Roof System</th>
-                      <th className="px-3 py-2.5 min-w-[160px]">Last Contractor</th>
-                      <th className="px-3 py-2.5 text-right min-w-[80px]">Priority</th>
-                      <th className="px-3 py-2.5 text-right min-w-[130px]">Est. Replacement</th>
-                      <th className="px-3 py-2.5 min-w-[100px]">Jurisdiction</th>
-                      <th className="px-3 py-2.5 pr-4 text-right min-w-[110px]">Actions</th>
+                      <th className="px-4 py-2.5 text-right min-w-[90px]">Age</th>
+                      <th className="px-4 py-2.5 min-w-[260px]">Owner / Entity</th>
+                      <th className="px-4 py-2.5 min-w-[280px]">Contact & Phone / Email</th>
+                      <th className="px-4 py-2.5 min-w-[220px]">Last Contractor</th>
+                      <th className="px-4 py-2.5 min-w-[130px]">Installed</th>
+                      <th className="px-4 py-2.5 min-w-[240px]">Mailing Address</th>
+                      <th className="px-4 py-2.5 min-w-[200px]">Roof System</th>
+                      <th className="px-4 py-2.5 text-right min-w-[110px]">Priority</th>
+                      <th className="px-4 py-2.5 text-right min-w-[150px]">Est. Replacement</th>
+                      <th className="px-4 py-2.5 min-w-[130px]">Jurisdiction</th>
+                      <th className="px-4 py-2.5 pr-4 text-right min-w-[150px]">Actions</th>
                     </tr>
                   </thead>
 
@@ -1473,12 +1414,14 @@ export default function RoofAgingPage() {
                         <tr
                           key={r.id}
                           className={cn(
-                            "group border-b border-border dark:border-neutral-800/60 hover:bg-[#FAF5EE] dark:hover:bg-[#1C1A17] transition-colors",
-                            isSelected && "bg-neutral-100/80 dark:bg-white/[0.03] border-l-2 border-[#B4E4D6]"
+                            "apollo-row h-14 group border-b border-[rgba(250,250,248,0.06)] transition-colors cursor-pointer",
+                            isSelected
+                              ? "bg-[rgba(242,247,100,0.08)] hover:bg-[rgba(242,247,100,0.12)] text-[#FAFAF8]"
+                              : "bg-[#171714] hover:bg-[rgb(35,35,30)] text-[#FAFAF8]"
                           )}
                         >
                           {/* Selection Checkbox */}
-                          <td className="w-10 px-3 py-3 text-center">
+                          <td className="w-12 px-4 py-0 text-center sticky left-0 z-10 bg-[#171714] group-hover:bg-[rgb(35,35,30)]">
                             <button
                               type="button"
                               onClick={() => toggleSelectOne(r.id)}
@@ -1493,7 +1436,7 @@ export default function RoofAgingPage() {
                           </td>
 
                           {/* Address (Sticky Left) */}
-                          <td className="sticky left-0 z-10 bg-background dark:bg-[#0b0c10] group-hover:bg-[#FAF5EE] dark:group-hover:bg-[#1C1A17] transition-all duration-150 group-hover:shadow-[inset_3px_0_0_0_#D99B26] dark:group-hover:shadow-[inset_3px_0_0_0_#E9B63B] px-3 py-3 font-medium">
+                          <td className="sticky left-12 z-10 bg-[#171714] group-hover:bg-[rgb(35,35,30)] px-4 py-2 h-14 align-middle text-[12px] font-medium min-w-[300px] text-[#FAFAF8]">
                             <div className="flex items-center gap-1.5 flex-wrap max-w-[260px]">
                               <button
                                 type="button"
@@ -1527,11 +1470,6 @@ export default function RoofAgingPage() {
                             </span>
                           </td>
 
-                          {/* Risk */}
-                          <td className="px-3 py-3 whitespace-nowrap">
-                            <RiskBadge value={r.risk} />
-                          </td>
-
                           {/* Age */}
                           <td className={cn(
                             "px-3 py-3 text-right font-mono tabular-nums whitespace-nowrap font-medium",
@@ -1541,7 +1479,7 @@ export default function RoofAgingPage() {
                           </td>
 
                           {/* Owner / Entity */}
-                          <td className="px-3 py-3 max-w-64 whitespace-nowrap">
+                          <td className="px-3 py-2 h-14 align-middle text-[12px] max-w-64 whitespace-nowrap">
                             <div className="flex items-center gap-2">
                               {r.logoUrl ? (
                                 <RealLogo url={r.logoUrl} alt={r.ownerName || "Entity"} size={20} />
@@ -1566,131 +1504,102 @@ export default function RoofAgingPage() {
                             </div>
                           </td>
 
-                          {/* Contact & Phone / Email (Opportunity Pipeline style) */}
-                          <td className="px-3 py-3 max-w-64 whitespace-nowrap">
-                            {r.decisionMaker || r.phone || r.email ? (
-                              <div className="flex flex-col text-xs leading-tight gap-1">
-                                <div className="flex items-center gap-1.5">
-                                  <span className="font-medium text-neutral-900 dark:text-neutral-200 truncate">
-                                    {r.decisionMaker || "Decision Maker"}
-                                  </span>
-                                  {r.decisionMakerTitle ? (
-                                    <span className="text-[10px] text-muted-foreground dark:text-neutral-400 truncate max-w-28 font-normal">
-                                      · {r.decisionMakerTitle}
-                                    </span>
-                                  ) : null}
-                                </div>
-                                <div className="flex items-center gap-1.5 flex-wrap">
-                                  {r.phone ? (
-                                    unlockedPhones.has(r.id) ? (
-                                      <a
-                                        href={`tel:${r.phone}`}
-                                        className="font-mono text-[11px] text-emerald-700 dark:text-emerald-400 font-medium hover:underline inline-flex items-center gap-1"
-                                        title="Click to call"
-                                      >
-                                        <Phone className="size-2.5" />
-                                        <span>{r.phone}</span>
-                                      </a>
-                                    ) : (
-                                      <button
-                                        type="button"
-                                        onClick={() => unlockPhone(r.id)}
-                                        className="inline-flex items-center gap-1 rounded bg-neutral-100 dark:bg-[#16171d] border border-neutral-300 dark:border-neutral-700/80 px-1.5 py-0.5 text-[10px] text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white"
-                                        title="Reveal direct phone number"
-                                      >
-                                        <Phone className="size-2.5" />
-                                        <span>Access phone</span>
-                                      </button>
-                                    )
-                                  ) : null}
-
-                                  {r.email ? (
-                                    unlockedEmails.has(r.id) ? (
-                                      <a
-                                        href={`mailto:${r.email}`}
-                                        className="font-mono text-[11px] text-sky-700 dark:text-sky-400 font-medium hover:underline inline-flex items-center gap-1"
-                                        title="Click to email"
-                                      >
-                                        <Mail className="size-2.5" />
-                                        <span>{r.email}</span>
-                                      </a>
-                                    ) : (
-                                      <button
-                                        type="button"
-                                        onClick={() => unlockEmail(r.id)}
-                                        className="inline-flex items-center gap-1 rounded bg-neutral-100 dark:bg-[#16171d] border border-neutral-300 dark:border-neutral-700/80 px-1.5 py-0.5 text-[10px] text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white"
-                                        title="Reveal direct email address"
-                                      >
-                                        <Mail className="size-2.5" />
-                                        <span>Access email</span>
-                                      </button>
-                                    )
-                                  ) : (
-                                    <a
-                                      href={`https://www.linkedin.com/search/results/all/?keywords=${encodeURIComponent([r.decisionMaker, r.ownerName, "Dallas TX"].filter(Boolean).join(" "))}`}
-                                      target="_blank"
-                                      rel="noreferrer"
-                                      className="text-[10px] text-sky-600 dark:text-sky-400 hover:underline inline-flex items-center gap-1 font-medium"
-                                    >
-                                      <span>Find on LinkedIn</span>
-                                      <ExternalLink className="size-2.5 opacity-70" />
-                                    </a>
-                                  )}
-                                </div>
-                              </div>
-                            ) : (
+                          {/* Contact & Phone / Email */}
+                          <td className="px-3 py-2 h-14 align-middle text-[12px] max-w-64 whitespace-nowrap">
+                            <div className="flex flex-col text-xs leading-tight gap-1.5">
                               <div className="flex items-center gap-1.5">
-                                <a
-                                  href={`https://www.linkedin.com/search/results/all/?keywords=${encodeURIComponent([r.ownerName, r.address, "Dallas TX"].filter(Boolean).join(" "))}`}
-                                  target="_blank"
-                                  rel="noreferrer"
-                                  className="text-[10px] text-neutral-400 dark:text-neutral-500 hover:text-sky-500 dark:hover:text-sky-400 inline-flex items-center gap-1"
-                                  title="Search LinkedIn for property management/owner"
-                                >
-                                  <span>Lookup LinkedIn</span>
-                                  <ExternalLink className="size-2.5 opacity-60" />
-                                </a>
+                                <span className="font-medium text-neutral-900 dark:text-neutral-200 truncate">
+                                  {r.decisionMaker || "Property Contact"}
+                                </span>
+                                {r.decisionMakerTitle ? (
+                                  <span className="text-[10px] text-muted-foreground dark:text-neutral-400 truncate max-w-28 font-normal">
+                                    · {r.decisionMakerTitle}
+                                  </span>
+                                ) : null}
                               </div>
-                            )}
-                          </td>
+                              <div className="flex items-center gap-1.5 flex-wrap">
+                                {/* Phone Access / Display */}
+                                {unlockedPhones.has(r.id) ? (
+                                  <a
+                                    href={`tel:${r.phone || ""}`}
+                                    className="font-mono text-[11px] text-emerald-700 dark:text-emerald-400 font-medium hover:underline inline-flex items-center gap-1"
+                                    title="Click to call"
+                                  >
+                                    <Phone className="size-2.5" />
+                                    <span>{r.phone || "Available on request"}</span>
+                                  </a>
+                                ) : (
+                                  <button
+                                    type="button"
+                                    onClick={() => unlockPhone(r.id)}
+                                    className="inline-flex size-6 items-center justify-center rounded bg-neutral-100 dark:bg-[#16171d] border border-neutral-300 dark:border-neutral-700/80 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white transition-colors"
+                                    title="Access phone number"
+                                  >
+                                    <Phone className="size-3" />
+                                  </button>
+                                )}
 
-                          {/* Mailing Address */}
-                          <td className="px-3 py-3 max-w-60 truncate whitespace-nowrap text-muted-foreground dark:text-neutral-400" title={r.ownerMail || "No mailing address on record"}>
-                            {r.ownerMail || "—"}
-                          </td>
-
-                          {/* Installed */}
-                          <td className="px-3 py-3 whitespace-nowrap text-muted-foreground dark:text-neutral-300">
-                            {r.installed ? shortDate(r.installed) : "—"}
-                          </td>
-
-                          {/* Roof System */}
-                          <td className="px-3 py-3 whitespace-nowrap text-muted-foreground dark:text-neutral-300">
-                            {r.roofSystem || "—"}
+                                {/* Email Access / Display */}
+                                {unlockedEmails.has(r.id) ? (
+                                  <a
+                                    href={`mailto:${r.email || ""}`}
+                                    className="font-mono text-[11px] text-sky-700 dark:text-sky-400 font-medium hover:underline inline-flex items-center gap-1"
+                                    title="Click to email"
+                                  >
+                                    <Mail className="size-2.5" />
+                                    <span>{r.email || "Available on request"}</span>
+                                  </a>
+                                ) : (
+                                  <button
+                                    type="button"
+                                    onClick={() => unlockEmail(r.id)}
+                                    className="inline-flex size-6 items-center justify-center rounded bg-neutral-100 dark:bg-[#16171d] border border-neutral-300 dark:border-neutral-700/80 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white transition-colors"
+                                    title="Access email address"
+                                  >
+                                    <Mail className="size-3" />
+                                  </button>
+                                )}
+                              </div>
+                            </div>
                           </td>
 
                           {/* Last Contractor */}
-                          <td className="px-3 py-3 whitespace-nowrap max-w-56 truncate">
-                            <ContractorLink name={r.contractor} />
+                          <td className="px-3 py-2 h-14 align-middle text-[12px] whitespace-nowrap max-w-56 truncate">
+                            <ContractorLink name={r.contractor} logoUrl={r.contractorLogoUrl} />
+                          </td>
+
+                          {/* Installed */}
+                          <td className="px-3 py-2 h-14 align-middle text-[12px] whitespace-nowrap text-muted-foreground dark:text-neutral-300">
+                            {r.installed ? shortDate(r.installed) : "—"}
+                          </td>
+
+                          {/* Mailing Address */}
+                          <td className="px-3 py-2 h-14 align-middle text-[12px] max-w-60 truncate whitespace-nowrap text-muted-foreground dark:text-neutral-400" title={r.ownerMail || "No mailing address on record"}>
+                            {r.ownerMail || "—"}
+                          </td>
+
+                          {/* Roof System */}
+                          <td className="px-3 py-2 h-14 align-middle text-[12px] whitespace-nowrap text-muted-foreground dark:text-neutral-300">
+                            {r.roofSystem || "—"}
                           </td>
 
                           {/* Priority */}
-                          <td className="px-3 py-3 text-right font-mono tabular-nums whitespace-nowrap text-muted-foreground dark:text-neutral-300">
+                          <td className="px-3 py-2 h-14 align-middle text-[12px] text-right font-mono tabular-nums whitespace-nowrap text-muted-foreground dark:text-neutral-300">
                             {r.priority || "—"}
                           </td>
 
                           {/* Est. Replacement */}
-                          <td className="px-3 py-3 text-right font-mono tabular-nums whitespace-nowrap text-foreground dark:text-neutral-100 font-medium">
+                          <td className="px-3 py-2 h-14 align-middle text-[12px] text-right font-mono tabular-nums whitespace-nowrap text-foreground dark:text-neutral-100 font-medium">
                             {r.replacementCost ? usd(r.replacementCost, true) : "—"}
                           </td>
 
                           {/* Jurisdiction */}
-                          <td className="px-3 py-3 whitespace-nowrap text-muted-foreground dark:text-neutral-400">
+                          <td className="px-3 py-2 h-14 align-middle text-[12px] whitespace-nowrap text-muted-foreground dark:text-neutral-400">
                             {r.jurisdiction}
                           </td>
 
                           {/* Actions */}
-                          <td className="px-3 py-3 pr-4 text-right whitespace-nowrap">
+                          <td className="px-3 py-2 h-14 align-middle text-[12px] pr-4 text-right whitespace-nowrap">
                             <div className="inline-flex items-center gap-1.5">
                               {claims.has(r.id) ? (
                                 <span className="inline-flex h-7 items-center gap-1.5 rounded-md border border-[#B4E4D6]/50 bg-[#B4E4D6]/20 px-2 text-[11px] font-medium text-emerald-800 dark:text-[#B4E4D6]" title={`Claimed (${claims.get(r.id)?.daysRemaining}d remaining)`}>
@@ -1733,11 +1642,11 @@ export default function RoofAgingPage() {
                   <p className="text-xs text-muted-foreground dark:text-neutral-500">Try adjusting minimum building age or owner scope.</p>
                 </div>
               ) : (
-                <table className="w-full border-collapse text-left text-xs">
+                <table className="w-full min-w-max border-collapse text-left text-xs">
                   {/* Sticky Table Header */}
-                  <thead className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#12131a] text-neutral-700 dark:text-neutral-300 font-semibold text-[11px] uppercase tracking-wider border-b border-border dark:border-neutral-800">
+                  <thead className="apollo-th sticky top-0 z-20 bg-[#171714] text-[#B9B9B2] font-medium text-[11px] uppercase tracking-wider border-b border-[rgba(250,250,248,0.08)]">
                     <tr>
-                      <th className="w-10 px-3 py-2.5 text-center">
+                      <th className="w-12 px-4 py-2.5 text-center sticky left-0 z-20 bg-[#171714]">
                         <button
                           type="button"
                           onClick={toggleSelectAll}
@@ -1752,19 +1661,19 @@ export default function RoofAgingPage() {
                           )}
                         </button>
                       </th>
-                      <th className="sticky left-0 z-10 bg-neutral-100 dark:bg-[#12131a] px-3 py-2.5 min-w-[220px]">
+                      <th className="sticky left-12 z-20 bg-[#171714] px-4 py-2.5 min-w-[300px] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider">
                         Address
                       </th>
-                      <th className="px-3 py-2.5 min-w-[180px]">Owner / Entity</th>
-                      <th className="px-3 py-2.5 min-w-[220px]">Contact & Phone / Email</th>
-                      <th className="px-3 py-2.5 min-w-[180px]">Mailing Address</th>
-                      <th className="px-3 py-2.5 text-right min-w-[70px]">Age</th>
-                      <th className="px-3 py-2.5 text-right min-w-[80px]">Sq ft</th>
-                      <th className="px-3 py-2.5 text-right min-w-[80px]">Year Built</th>
-                      <th className="px-3 py-2.5 min-w-[120px]">Status</th>
-                      <th className="px-3 py-2.5 text-right min-w-[130px]">Est. Replacement</th>
-                      <th className="px-3 py-2.5 min-w-[100px]">Jurisdiction</th>
-                      <th className="px-3 py-2.5 pr-4 text-right min-w-[120px]">Actions</th>
+                      <th className="px-4 py-2.5 min-w-[260px]">Owner / Entity</th>
+                      <th className="px-4 py-2.5 min-w-[280px]">Contact & Phone / Email</th>
+                      <th className="px-4 py-2.5 min-w-[240px]">Mailing Address</th>
+                      <th className="px-4 py-2.5 text-right min-w-[90px]">Age</th>
+                      <th className="px-4 py-2.5 text-right min-w-[120px]">Sq ft</th>
+                      <th className="px-4 py-2.5 text-right min-w-[110px]">Year Built</th>
+                      <th className="px-4 py-2.5 min-w-[130px]">Status</th>
+                      <th className="px-4 py-2.5 text-right min-w-[150px]">Est. Replacement</th>
+                      <th className="px-4 py-2.5 min-w-[130px]">Jurisdiction</th>
+                      <th className="px-4 py-2.5 pr-4 text-right min-w-[150px]">Actions</th>
                     </tr>
                   </thead>
 
@@ -1779,12 +1688,14 @@ export default function RoofAgingPage() {
                         <tr
                           key={p.parcelId}
                           className={cn(
-                            "group border-b border-border dark:border-neutral-800/60 hover:bg-[#FAF5EE] dark:hover:bg-[#1C1A17] transition-colors",
-                            isSelected && "bg-neutral-100/80 dark:bg-white/[0.03] border-l-2 border-[#FFCA88]"
+                            "apollo-row h-14 group border-b border-[rgba(250,250,248,0.06)] transition-colors cursor-pointer",
+                            isSelected
+                              ? "bg-[rgba(242,247,100,0.08)] hover:bg-[rgba(242,247,100,0.12)] text-[#FAFAF8]"
+                              : "bg-[#171714] hover:bg-[rgb(35,35,30)] text-[#FAFAF8]"
                           )}
                         >
                           {/* Selection Checkbox */}
-                          <td className="w-10 px-3 py-3 text-center">
+                          <td className="w-12 px-4 py-0 text-center sticky left-0 z-10 bg-[#171714] group-hover:bg-[rgb(35,35,30)]">
                             <button
                               type="button"
                               onClick={() => toggleSelectOne(p.parcelId)}
@@ -1799,7 +1710,7 @@ export default function RoofAgingPage() {
                           </td>
 
                           {/* Address (Sticky Left) */}
-                          <td className="sticky left-0 z-10 bg-background dark:bg-[#0b0c10] group-hover:bg-[#FAF5EE] dark:group-hover:bg-[#1C1A17] transition-all duration-150 group-hover:shadow-[inset_3px_0_0_0_#D99B26] dark:group-hover:shadow-[inset_3px_0_0_0_#E9B63B] px-3 py-3 font-medium">
+                          <td className="sticky left-12 z-10 bg-[#171714] group-hover:bg-[rgb(35,35,30)] px-4 py-2 h-14 align-middle text-[12px] font-medium min-w-[300px] text-[#FAFAF8]">
                             <div className="flex items-center gap-1.5 flex-wrap max-w-[260px]">
                               <button
                                 type="button"
@@ -1825,7 +1736,7 @@ export default function RoofAgingPage() {
                           </td>
 
                           {/* Owner / Entity */}
-                          <td className="px-3 py-3 max-w-64 whitespace-nowrap">
+                          <td className="px-3 py-2 h-14 align-middle text-[12px] max-w-64 whitespace-nowrap">
                             <div className="flex items-center gap-2">
                               {p.logoUrl ? (
                                 <RealLogo url={p.logoUrl} alt={p.owner || "Entity"} size={20} />
@@ -1850,77 +1761,67 @@ export default function RoofAgingPage() {
                             </div>
                           </td>
 
-                          {/* Contact & Phone / Email (Opportunity Pipeline style) */}
-                          <td className="px-3 py-3 max-w-64 whitespace-nowrap">
-                            {p.decisionMaker || p.phone || p.email ? (
-                              <div className="flex flex-col text-xs leading-tight gap-1">
-                                <div className="flex items-center gap-1.5">
-                                  <span className="font-medium text-neutral-900 dark:text-neutral-200 truncate">
-                                    {p.decisionMaker || "Decision Maker"}
+                          {/* Contact & Phone / Email */}
+                          <td className="px-3 py-2 h-14 align-middle text-[12px] max-w-64 whitespace-nowrap">
+                            <div className="flex flex-col text-xs leading-tight gap-1.5">
+                              <div className="flex items-center gap-1.5">
+                                <span className="font-medium text-neutral-900 dark:text-neutral-200 truncate">
+                                  {p.decisionMaker || "Property Contact"}
+                                </span>
+                                {p.decisionMakerTitle ? (
+                                  <span className="text-[10px] text-muted-foreground dark:text-neutral-400 truncate max-w-28 font-normal">
+                                    · {p.decisionMakerTitle}
                                   </span>
-                                  {p.decisionMakerTitle ? (
-                                    <span className="text-[10px] text-muted-foreground dark:text-neutral-400 truncate max-w-28 font-normal">
-                                      · {p.decisionMakerTitle}
-                                    </span>
-                                  ) : null}
-                                </div>
-                                <div className="flex items-center gap-1.5 flex-wrap">
-                                  {p.phone ? (
-                                    unlockedPhones.has(p.parcelId) ? (
-                                      <a
-                                        href={`tel:${p.phone}`}
-                                        className="font-mono text-[11px] text-emerald-700 dark:text-emerald-400 font-medium hover:underline inline-flex items-center gap-1"
-                                        title="Click to call"
-                                      >
-                                        <Phone className="size-2.5" />
-                                        <span>{p.phone}</span>
-                                      </a>
-                                    ) : (
-                                      <button
-                                        type="button"
-                                        onClick={() => unlockPhone(p.parcelId)}
-                                        className="inline-flex items-center gap-1 rounded bg-neutral-100 dark:bg-[#16171d] border border-neutral-300 dark:border-neutral-700/80 px-1.5 py-0.5 text-[10px] text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white"
-                                        title="Reveal direct phone number"
-                                      >
-                                        <Phone className="size-2.5" />
-                                        <span>Access phone</span>
-                                      </button>
-                                    )
-                                  ) : null}
-
-                                  {p.email ? (
-                                    unlockedEmails.has(p.parcelId) ? (
-                                      <a
-                                        href={`mailto:${p.email}`}
-                                        className="font-mono text-[11px] text-sky-700 dark:text-sky-400 font-medium hover:underline inline-flex items-center gap-1"
-                                        title="Click to email"
-                                      >
-                                        <Mail className="size-2.5" />
-                                        <span>{p.email}</span>
-                                      </a>
-                                    ) : (
-                                      <button
-                                        type="button"
-                                        onClick={() => unlockEmail(p.parcelId)}
-                                        className="inline-flex items-center gap-1 rounded bg-neutral-100 dark:bg-[#16171d] border border-neutral-300 dark:border-neutral-700/80 px-1.5 py-0.5 text-[10px] text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white"
-                                        title="Reveal direct email address"
-                                      >
-                                        <Mail className="size-2.5" />
-                                        <span>Access email</span>
-                                      </button>
-                                    )
-                                  ) : null}
-                                </div>
+                                ) : null}
                               </div>
-                            ) : (
-                              <span className="text-[11px] text-muted-foreground dark:text-neutral-500 italic">
-                                Enriching contact…
-                              </span>
-                            )}
+                              <div className="flex items-center gap-1.5 flex-wrap">
+                                {/* Phone Access / Display */}
+                                {unlockedPhones.has(p.parcelId) ? (
+                                  <a
+                                    href={`tel:${p.phone || ""}`}
+                                    className="font-mono text-[11px] text-emerald-700 dark:text-emerald-400 font-medium hover:underline inline-flex items-center gap-1"
+                                    title="Click to call"
+                                  >
+                                    <Phone className="size-2.5" />
+                                    <span>{p.phone || "Available on request"}</span>
+                                  </a>
+                                ) : (
+                                  <button
+                                    type="button"
+                                    onClick={() => unlockPhone(p.parcelId)}
+                                    className="inline-flex size-6 items-center justify-center rounded bg-neutral-100 dark:bg-[#16171d] border border-neutral-300 dark:border-neutral-700/80 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white transition-colors"
+                                    title="Access phone number"
+                                  >
+                                    <Phone className="size-3" />
+                                  </button>
+                                )}
+
+                                {/* Email Access / Display */}
+                                {unlockedEmails.has(p.parcelId) ? (
+                                  <a
+                                    href={`mailto:${p.email || ""}`}
+                                    className="font-mono text-[11px] text-sky-700 dark:text-sky-400 font-medium hover:underline inline-flex items-center gap-1"
+                                    title="Click to email"
+                                  >
+                                    <Mail className="size-2.5" />
+                                    <span>{p.email || "Available on request"}</span>
+                                  </a>
+                                ) : (
+                                  <button
+                                    type="button"
+                                    onClick={() => unlockEmail(p.parcelId)}
+                                    className="inline-flex size-6 items-center justify-center rounded bg-neutral-100 dark:bg-[#16171d] border border-neutral-300 dark:border-neutral-700/80 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white transition-colors"
+                                    title="Access email address"
+                                  >
+                                    <Mail className="size-3" />
+                                  </button>
+                                )}
+                              </div>
+                            </div>
                           </td>
 
                           {/* Mailing Address */}
-                          <td className="px-3 py-3 max-w-56 truncate whitespace-nowrap text-muted-foreground dark:text-neutral-400" title={p.ownerMail || "No mailing address on record"}>
+                          <td className="px-3 py-2 h-14 align-middle text-[12px] max-w-56 truncate whitespace-nowrap text-muted-foreground dark:text-neutral-400" title={p.ownerMail || "No mailing address on record"}>
                             {p.ownerMail || "—"}
                           </td>
 
@@ -1933,17 +1834,17 @@ export default function RoofAgingPage() {
                           </td>
 
                           {/* Sq ft */}
-                          <td className="px-3 py-3 text-right font-mono tabular-nums whitespace-nowrap text-foreground dark:text-neutral-300">
+                          <td className="px-3 py-2 h-14 align-middle text-[12px] text-right font-mono tabular-nums whitespace-nowrap text-foreground dark:text-neutral-300">
                             {p.sqft ? num(p.sqft) : "—"}
                           </td>
 
                           {/* Year Built */}
-                          <td className="px-3 py-3 text-right font-mono tabular-nums whitespace-nowrap text-foreground dark:text-neutral-300">
+                          <td className="px-3 py-2 h-14 align-middle text-[12px] text-right font-mono tabular-nums whitespace-nowrap text-foreground dark:text-neutral-300">
                             {p.yearBuilt || "—"}
                           </td>
 
                           {/* Status */}
-                          <td className="px-3 py-3 whitespace-nowrap">
+                          <td className="px-3 py-2 h-14 align-middle text-[12px] whitespace-nowrap">
                             {(() => {
                               const u = (p.urgency || "").toUpperCase();
                               const isCrit = u.includes("CRITICAL") || u.includes("URGENT") || (p.age && p.age >= 25);
@@ -1967,17 +1868,17 @@ export default function RoofAgingPage() {
                           </td>
 
                           {/* Est. Replacement */}
-                          <td className="px-3 py-3 text-right font-mono tabular-nums whitespace-nowrap text-foreground dark:text-neutral-100 font-medium">
+                          <td className="px-3 py-2 h-14 align-middle text-[12px] text-right font-mono tabular-nums whitespace-nowrap text-foreground dark:text-neutral-100 font-medium">
                             {p.reroofValueFormatted || (p.reroofValue ? usd(p.reroofValue, true) : "—")}
                           </td>
 
                           {/* Jurisdiction */}
-                          <td className="px-3 py-3 whitespace-nowrap text-muted-foreground dark:text-neutral-400">
+                          <td className="px-3 py-2 h-14 align-middle text-[12px] whitespace-nowrap text-muted-foreground dark:text-neutral-400">
                             {p.jurisdiction || [p.city, p.state].filter(Boolean).join(", ")}
                           </td>
 
                           {/* Actions */}
-                          <td className="px-3 py-3 pr-4 text-right whitespace-nowrap">
+                          <td className="px-3 py-2 h-14 align-middle text-[12px] pr-4 text-right whitespace-nowrap">
                             <div className="inline-flex items-center gap-1.5">
                               {claims.has(p.parcelId) ? (
                                 <span className="inline-flex h-7 items-center gap-1.5 rounded-md border border-[#B4E4D6]/50 bg-[#B4E4D6]/20 px-2 text-[11px] font-medium text-emerald-800 dark:text-[#B4E4D6]" title={`Claimed (${claims.get(p.parcelId)?.daysRemaining}d remaining)`}>
@@ -2015,10 +1916,10 @@ export default function RoofAgingPage() {
           </div>
 
           {/* Bottom Pagination Bar - Fixed */}
-          <div className="shrink-0 flex items-center justify-between border-t border-border dark:border-neutral-800/80 bg-background dark:bg-[#0e0f14] px-5 py-3 text-xs text-muted-foreground dark:text-neutral-400 z-10">
+          <div className="shrink-0 flex items-center justify-between border-t border-[rgba(250,250,248,0.08)] bg-[#171714] px-5 py-3 text-xs text-[#B9B9B2] z-10">
             <div>
               {isLoading ? (
-                <div className="flex items-center gap-2 text-foreground dark:text-neutral-200">
+                <div className="flex items-center gap-2 text-[#FAFAF8]">
                   <span className="size-2 rounded-full bg-[#B4E4D6] animate-ping" />
                   <span className="font-medium text-xs">Streaming {jurisdiction} roof aging alarms...</span>
                 </div>
@@ -2027,7 +1928,7 @@ export default function RoofAgingPage() {
                   <span>
                     {isLocked ? "0 of 0 roofs" : `${from}–${to} of ${num(total)} roofs`}
                   </span>
-                  <span className="text-muted-foreground/70 dark:text-neutral-500 ml-2 hidden sm:inline">
+                  <span className="text-[#B9B9B2] ml-2 hidden sm:inline">
                     · Territory: {isLocked ? zoneNameDisplay : jurisdiction}
                   </span>
                 </>
@@ -2035,22 +1936,22 @@ export default function RoofAgingPage() {
             </div>
 
             <div className="flex items-center gap-2">
+              <span className="text-[#B9B9B2] mr-2">
+                {isLoading ? "..." : isLocked ? "1 / 1" : `Page ${pageIndex + 1} of ${pageCount}`}
+              </span>
               <button
                 type="button"
                 disabled={isLoading || isLocked || pageIndex === 0}
                 onClick={() => setOffset(Math.max(0, offset - LIMIT))}
-                className="rounded border border-border dark:border-neutral-800 bg-background dark:bg-neutral-900 px-2.5 py-1 text-foreground dark:text-neutral-300 hover:bg-muted dark:hover:bg-neutral-800 disabled:opacity-40 transition-colors"
+                className="rounded border border-[rgba(250,250,248,0.12)] bg-[#1C1C18] px-2.5 py-1 text-[#FAFAF8] hover:bg-[#23231E] disabled:opacity-30 transition-colors cursor-pointer select-none"
               >
                 Previous
               </button>
-              <span className="px-1 text-foreground dark:text-neutral-400 font-medium">
-                {isLoading ? "..." : isLocked ? "1 / 1" : `${pageIndex + 1} / ${pageCount}`}
-              </span>
               <button
                 type="button"
                 disabled={isLoading || isLocked || pageIndex >= pageCount - 1}
                 onClick={() => setOffset(offset + LIMIT)}
-                className="rounded border border-border dark:border-neutral-800 bg-background dark:bg-neutral-900 px-2.5 py-1 text-foreground dark:text-neutral-300 hover:bg-muted dark:hover:bg-neutral-800 disabled:opacity-40 transition-colors"
+                className="rounded border border-[rgba(250,250,248,0.12)] bg-[#1C1C18] px-2.5 py-1 text-[#FAFAF8] hover:bg-[#23231E] disabled:opacity-30 transition-colors cursor-pointer select-none"
               >
                 Next
               </button>
@@ -2059,12 +1960,31 @@ export default function RoofAgingPage() {
         </main>
       </div>
 
-      {/* Property & Lead Detailed Dossier Drawer */}
-      <ParcelDetailDrawer
-        parcelId={selectedDrawerParcel}
-        onClose={() => setSelectedDrawerParcel(null)}
-        titlePrefix="Roof Aging Lead Dossier"
-      />
+      {/* Property & Lead Detailed Dossier (Right Sheet Drawer - Hot Sheet Parity) */}
+      <Sheet open={!!selectedDrawerParcel} onOpenChange={(open) => { if (!open) setSelectedDrawerParcel(null); }}>
+        <SheetContent
+          side="right"
+          showCloseButton={false}
+          className="w-full sm:w-[90vw] md:w-[80vw] lg:w-[65vw] xl:w-[60vw] 2xl:w-[55vw] min-w-[50vw] sm:max-w-none p-0 flex flex-col h-full overflow-hidden border-l border-border dark:border-neutral-800 shadow-2xl bg-background"
+        >
+          <SheetHeader className="sr-only">
+            <SheetTitle>Roof Aging Intelligence Dossier</SheetTitle>
+            <SheetDescription>Comprehensive roof aging profile, aerial evidence, and verified ownership dossier.</SheetDescription>
+          </SheetHeader>
+          {selectedDrawerParcel && (
+            <ParcelDossierView
+              parcelId={selectedDrawerParcel}
+              onBack={() => setSelectedDrawerParcel(null)}
+              onExpand={() => {
+                setFullDetailId(selectedDrawerParcel);
+                setSelectedDrawerParcel(null);
+              }}
+              backLabel="Close"
+              isDrawer={true}
+            />
+          )}
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }

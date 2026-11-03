@@ -153,6 +153,7 @@ export interface ContractorProfile {
 }
 
 function logoSrc(logoUrl: string, website: string) {
+  if (logoUrl && !logoUrl.includes("logo.dev")) return logoUrl;
   const fromLogo = logoUrl.match(/logo\.dev\/([^/?]+)/)?.[1];
   let host = fromLogo || "";
   if (!host && website) {
@@ -345,6 +346,7 @@ export interface AgingRoof {
   email?: string;
   websiteUrl?: string;
   logoUrl?: string;
+  contractorLogoUrl?: string;
   buildingSqft?: number;
   permitCount?: number;
   permitStatus?: "permitted" | "unpermitted";
@@ -401,6 +403,7 @@ export function mapAging(body: unknown): AgingPage {
       email: str(row, ["email_address", "email"]),
       websiteUrl: str(row, ["website_url", "website"]),
       logoUrl: str(row, ["logo_url"]),
+      contractorLogoUrl: str(row, ["contractor_logo_url", "contractorLogoUrl"]),
       buildingSqft: num(row, ["building_sqft"]),
       permitCount: num(row, ["permit_count", "subsequent_permits_count"]),
       permitStatus: (str(row, ["permit_status"]) || (num(row, ["permit_count", "subsequent_permits_count"]) > 0 ? "permitted" : "unpermitted")) as "permitted" | "unpermitted",

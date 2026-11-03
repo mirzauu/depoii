@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Box, RotateCcw, X, Key, Compass, Eye, MapPin, ZoomIn, ZoomOut } from "lucide-react";
+import { X, Key, ZoomIn, ZoomOut, Layers, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface RoofInspector3DProps {
@@ -41,9 +41,6 @@ export function RoofInspector3D({ lat, lng, address, onClose, className }: RoofI
   const containerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<any>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [heading, setHeading] = useState(0);
-  const [tilt, setTilt] = useState(45);
-  const [isStreetView, setIsStreetView] = useState(false);
   const [useEmbedFallback, setUseEmbedFallback] = useState(false);
 
   // Check for API key from env or localStorage
@@ -75,7 +72,7 @@ export function RoofInspector3D({ lat, lng, address, onClose, className }: RoofI
           center: { lat, lng },
           zoom: 19,
           mapTypeId: "hybrid",
-          tilt: 45,
+          tilt: 0,
           heading: 0,
           mapTypeControl: true,
           mapTypeControlOptions: {
@@ -84,10 +81,7 @@ export function RoofInspector3D({ lat, lng, address, onClose, className }: RoofI
           },
           rotateControl: true,
           scaleControl: true,
-          streetViewControl: true,
-          streetViewControlOptions: {
-            position: google.maps.ControlPosition.RIGHT_BOTTOM,
-          },
+          streetViewControl: false,
           fullscreenControl: false,
           gestureHandling: "greedy",
         });
@@ -115,36 +109,6 @@ export function RoofInspector3D({ lat, lng, address, onClose, className }: RoofI
     };
   }, [apiKey, lat, lng]);
 
-  const handleRotate = () => {
-    if (!mapInstanceRef.current) return;
-    const nextHeading = (heading + 90) % 360;
-    mapInstanceRef.current.setHeading(nextHeading);
-    setHeading(nextHeading);
-  };
-
-  const handleToggleTilt = () => {
-    if (!mapInstanceRef.current) return;
-    const nextTilt = tilt === 45 ? 0 : 45;
-    mapInstanceRef.current.setTilt(nextTilt);
-    setTilt(nextTilt);
-  };
-
-  const handleToggleStreetView = () => {
-    if (!mapInstanceRef.current) return;
-    const panorama = mapInstanceRef.current.getStreetView();
-    if (!panorama) return;
-
-    if (isStreetView) {
-      panorama.setVisible(false);
-      setIsStreetView(false);
-    } else {
-      panorama.setPosition({ lat, lng });
-      panorama.setPov({ heading: 180, pitch: 0 });
-      panorama.setVisible(true);
-      setIsStreetView(true);
-    }
-  };
-
   const handleZoom = (delta: number) => {
     if (!mapInstanceRef.current) return;
     const currentZoom = mapInstanceRef.current.getZoom() || 19;
@@ -166,16 +130,11 @@ export function RoofInspector3D({ lat, lng, address, onClose, className }: RoofI
       {/* Top Header Bar */}
       <div className="z-20 flex items-center justify-between border-b border-white/10 bg-black/75 px-3.5 py-2.5 backdrop-blur-md">
         <div className="flex items-center gap-2">
-          <div className="flex size-7 items-center justify-center rounded-lg bg-sky-500/20 text-sky-400">
-            <Box className="size-4" />
+          <div className="flex size-7 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white/80">
+            <Layers className="size-4" />
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-semibold tracking-tight text-white">3D Roof & Aerial Inspector</span>
-              <span className="rounded bg-sky-500/20 px-1.5 py-0.5 text-[10px] font-medium text-sky-300">
-                Google Maps 3D
-              </span>
-            </div>
+            <span className="text-xs font-semibold tracking-tight text-white">Latest Aerial Imagery</span>
             <p className="text-[11px] text-white/60 truncate max-w-xs sm:max-w-md">
               {address || `${lat.toFixed(5)}, ${lng.toFixed(5)}`}
             </p>
@@ -185,70 +144,24 @@ export function RoofInspector3D({ lat, lng, address, onClose, className }: RoofI
         {/* Action Controls inside the window */}
         <div className="flex items-center gap-1.5">
           {!useEmbedFallback && (
-            <>
-              {/* 45° 3D Tilt / Plan View */}
+            <div className="hidden sm:flex items-center rounded-md border border-white/10 bg-white/5 p-0.5">
               <button
                 type="button"
-                onClick={handleToggleTilt}
-                className={cn(
-                  "flex items-center gap-1 rounded-md border px-2 py-1 text-[11px] font-medium transition cursor-pointer",
-                  tilt === 45
-                    ? "border-sky-500/40 bg-sky-500/20 text-sky-300 font-semibold"
-                    : "border-white/10 bg-white/5 text-white/70 hover:bg-white/15 hover:text-white"
-                )}
-                title={tilt === 45 ? "Switch to Top-Down View" : "Switch to 45° 3D Oblique View"}
+                onClick={() => handleZoom(1)}
+                className="flex size-6 items-center justify-center rounded text-white/70 hover:bg-white/15 hover:text-white cursor-pointer"
+                title="Zoom In"
               >
-                <RotateCcw className="size-3 text-sky-400" />
-                <span className="hidden sm:inline">{tilt === 45 ? "45° 3D View" : "Plan View"}</span>
+                <ZoomIn className="size-3" />
               </button>
-
-              {/* Rotate 90° */}
               <button
                 type="button"
-                onClick={handleRotate}
-                className="flex items-center gap-1 rounded-md border border-white/10 bg-white/5 px-2 py-1 text-[11px] font-medium text-white/80 hover:bg-white/15 transition cursor-pointer"
-                title={`Rotate Roof Angle (Current: ${heading}°)`}
+                onClick={() => handleZoom(-1)}
+                className="flex size-6 items-center justify-center rounded text-white/70 hover:bg-white/15 hover:text-white cursor-pointer"
+                title="Zoom Out"
               >
-                <Compass className="size-3 text-sky-400" />
-                <span className="hidden sm:inline">{heading}° Orbit</span>
+                <ZoomOut className="size-3" />
               </button>
-
-              {/* Street View Toggle */}
-              <button
-                type="button"
-                onClick={handleToggleStreetView}
-                className={cn(
-                  "flex items-center gap-1 rounded-md border px-2 py-1 text-[11px] font-medium transition cursor-pointer",
-                  isStreetView
-                    ? "border-emerald-500/40 bg-emerald-500/20 text-emerald-300 font-semibold"
-                    : "border-white/10 bg-white/5 text-white/70 hover:bg-white/15 hover:text-white"
-                )}
-                title="Toggle Google Street View"
-              >
-                <Eye className="size-3 text-emerald-400" />
-                <span className="hidden sm:inline">Street View</span>
-              </button>
-
-              {/* Zoom Controls */}
-              <div className="hidden sm:flex items-center rounded-md border border-white/10 bg-white/5 p-0.5">
-                <button
-                  type="button"
-                  onClick={() => handleZoom(1)}
-                  className="flex size-6 items-center justify-center rounded text-white/70 hover:bg-white/15 hover:text-white cursor-pointer"
-                  title="Zoom In"
-                >
-                  <ZoomIn className="size-3" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleZoom(-1)}
-                  className="flex size-6 items-center justify-center rounded text-white/70 hover:bg-white/15 hover:text-white cursor-pointer"
-                  title="Zoom Out"
-                >
-                  <ZoomOut className="size-3" />
-                </button>
-              </div>
-            </>
+            </div>
           )}
 
           {/* Close Modal */}
@@ -256,23 +169,23 @@ export function RoofInspector3D({ lat, lng, address, onClose, className }: RoofI
             type="button"
             onClick={onClose}
             className="flex size-7 items-center justify-center rounded-md bg-white/10 text-white/80 hover:bg-red-500/80 hover:text-white transition cursor-pointer ml-1"
-            title="Close 3D View"
+            title="Close Aerial View"
           >
             <X className="size-4" />
           </button>
         </div>
       </div>
 
-      {/* Main 3D Canvas Area - Loaded directly inside the window */}
+      {/* Main Canvas Area - Loaded directly inside the window */}
       <div className="relative flex-1 w-full overflow-hidden bg-neutral-900">
         {/* Loading Overlay */}
         {isLoading && !isSettingKey && (
           <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-neutral-950/80 backdrop-blur-xs">
-            <span className="size-8 animate-spin rounded-full border-2 border-sky-400 border-t-transparent" />
+            <span className="size-8 animate-spin rounded-full border-2 border-white/40 border-t-white" />
             <p className="mt-3 text-xs font-medium text-white/80 animate-pulse">
-              Loading Google Maps 3D Aerial View…
+              Loading Latest Aerial Imagery…
             </p>
-            <p className="text-[11px] text-white/40 mt-1">Streaming satellite imagery & roof contours</p>
+            <p className="text-[11px] text-white/40 mt-1">Streaming high-resolution satellite imagery</p>
           </div>
         )}
 
@@ -285,7 +198,7 @@ export function RoofInspector3D({ lat, lng, address, onClose, className }: RoofI
                 <h3 className="font-semibold text-sm text-white">Google Maps API Key Required</h3>
               </div>
               <p className="mt-2 text-xs text-white/70 leading-relaxed">
-                Enter your Google Maps API key below to load high-resolution 3D satellite imagery directly inside this window:
+                Enter your Google Maps API key below to load high-resolution satellite imagery directly inside this window:
               </p>
 
               <div className="mt-3.5 space-y-2">
@@ -294,7 +207,7 @@ export function RoofInspector3D({ lat, lng, address, onClose, className }: RoofI
                   value={inputKey}
                   onChange={(e) => setInputKey(e.target.value)}
                   placeholder="AIzaSy..."
-                  className="w-full rounded-lg border border-white/20 bg-black/50 px-3 py-2 text-xs text-white placeholder-white/30 focus:border-sky-400 focus:outline-none"
+                  className="w-full rounded-lg border border-white/20 bg-black/50 px-3 py-2 text-xs text-white placeholder-white/30 focus:border-white/50 focus:outline-none"
                 />
                 <div className="flex items-center justify-between pt-1">
                   <p className="text-[10px] text-white/40">
@@ -304,7 +217,7 @@ export function RoofInspector3D({ lat, lng, address, onClose, className }: RoofI
                     type="button"
                     onClick={handleSaveKey}
                     disabled={!inputKey.trim()}
-                    className="rounded-lg bg-sky-500 px-3 py-1.5 text-xs font-semibold text-white shadow hover:bg-sky-400 disabled:opacity-40 transition cursor-pointer"
+                    className="rounded-lg bg-neutral-100 hover:bg-white px-3 py-1.5 text-xs font-semibold text-neutral-900 shadow disabled:opacity-40 transition cursor-pointer"
                   >
                     Load Map
                   </button>

@@ -2,9 +2,9 @@
   "total_contractors": 254,
   "batch_size": 10,
   "total_batches": 26,
-  "current_batch": 24,
-  "completed_batches": 23,
-  "last_run_at": "2026-10-24T04:24:07.410Z",
+  "current_batch": 27,
+  "completed_batches": 26,
+  "last_run_at": "2026-11-03T09:51:46.995Z",
   "batches": {
     "1": {
       "completed_at": "2026-10-24T02:33:40.719Z",
@@ -1981,6 +1981,248 @@
           "has_bbb": false,
           "has_rcat": false,
           "has_linkedin": false
+        }
+      ]
+    },
+    "24": {
+      "completed_at": "2026-11-03T09:49:24.354Z",
+      "count": 10,
+      "companies": [
+        {
+          "name": "Jeff Nix",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Jefferey Cady",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Jeffrey Cady",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Jeffrey Prowell",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Jeremy Hoffman",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Jeremy You",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Jesse Hernandez",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Joel Dulworth",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Jose Alcantar",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Jose Alcantar Jr",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": true
+        }
+      ]
+    },
+    "25": {
+      "completed_at": "2026-11-03T09:51:08.477Z",
+      "count": 10,
+      "companies": [
+        {
+          "name": "Jose Ornelas",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Jose Pena - Osorio",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": true
+        },
+        {
+          "name": "Jose Perez",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": true,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Jose Servin",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Josue Rangel",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Juan Salas",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Judith Tobias",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Justin Gould",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Tiffany Snow",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Todd Davenport",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        }
+      ]
+    },
+    "26": {
+      "completed_at": "2026-11-03T09:51:46.993Z",
+      "count": 8,
+      "companies": [
+        {
+          "name": "Wesley Swindell",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Yehuda Izmagristo",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Yisroel Katz",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "William Milligan",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": true,
+          "has_bbb": true,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Tad Bush",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Ali Safi",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "John Arrington",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": false
+        },
+        {
+          "name": "Dsst -Coll Dcc El Centro Full Roof Replacement",
+          "note": "ACCELA_NAMED_FILER",
+          "has_website": false,
+          "has_bbb": false,
+          "has_rcat": false,
+          "has_linkedin": true
         }
       ]
     }

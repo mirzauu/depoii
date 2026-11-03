@@ -218,17 +218,6 @@ export function RoofTimeline({ lat, lng, address, parcelId, className }: RoofTim
 
         {/* Inspection Tools */}
         <div className="flex items-center gap-1.5">
-          {/* Zoom Magnification Selector */}
-          <button
-            type="button"
-            onClick={cycleZoom}
-            title={`Inspection Zoom: ${zoomFactor}x. Click to cycle (2x, 2.5x, 3.5x)`}
-            className="flex items-center gap-1 rounded border border-border/60 bg-neutral-100 dark:bg-[#171714] px-1.5 py-0.5 text-[11px] font-mono text-muted-foreground hover:text-foreground transition cursor-pointer"
-          >
-            <ZoomIn className="size-3" />
-            <span>{zoomFactor}x</span>
-          </button>
-
           {/* Boundary Line Toggle Button */}
           {boundary && (
             <button

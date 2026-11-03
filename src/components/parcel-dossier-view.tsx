@@ -780,6 +780,7 @@ export function ParcelDossierView({
                       entity={p.entity}
                       ownerName={p.owner}
                       ownerAddress={p.ownerAddress}
+                      parcelId={parcelId}
                     />
                   </div>
                 )}

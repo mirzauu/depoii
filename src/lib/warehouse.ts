@@ -140,8 +140,9 @@ const permitRow = (r: Record<string, unknown>) => ({
 
 export async function permitsSearch(q: Q, user?: { id?: string; orgId?: string; platformRole?: string }) {
   const isSuperAdmin = user?.platformRole === "superadmin";
+  const isContractorSpecific = Boolean(str(q, "contractor"));
   let allowedZips: string[] | null = null;
-  if (!isSuperAdmin && user?.orgId) {
+  if (!isSuperAdmin && user?.orgId && !isContractorSpecific) {
     const { getOrgTerritories } = await import("@/lib/territories");
     const subs = await getOrgTerritories(user.orgId);
     allowedZips = subs.flatMap((s) => s.zipCodes || []);
@@ -155,7 +156,7 @@ export async function permitsSearch(q: Q, user?: { id?: string; orgId?: string; 
   const whereClauses: string[] = [];
   const baseWhere = permitFilters(q, params);
   if (baseWhere) whereClauses.push(baseWhere);
-  if (!isSuperAdmin && allowedZips && allowedZips.length > 0) {
+  if (!isSuperAdmin && allowedZips && allowedZips.length > 0 && !isContractorSpecific) {
     params.push(allowedZips.map((z) => z.slice(0, 5)));
     whereClauses.push(`substring(coalesce(p.zip_code, '') from 1 for 5) = ANY($${params.length})`);
   }
@@ -463,6 +464,8 @@ export async function roofAging(q: Q, user?: { id?: string; orgId?: string; plat
            lc.email_address,
            lc.website_url,
            lc.logo_url,
+           (SELECT np.contractor_name FROM warehouse.normalized_permits np WHERE np.parcel_id = s.parcel_id AND np.contractor_name IS NOT NULL AND lower(np.contractor_name) NOT LIKE '%owner%' AND lower(np.contractor_name) NOT LIKE '%not listed%' AND lower(np.contractor_name) NOT LIKE '%unknown%' AND lower(np.contractor_name) NOT LIKE '%licensed%' ORDER BY np.issue_date DESC NULLS LAST LIMIT 1) AS last_contractor,
+           (SELECT c.logo_url FROM warehouse.normalized_permits np LEFT JOIN warehouse.canonical_contractors c ON lower(c.canonical_name) = lower(np.contractor_name) OR lower(c.canonical_name) = lower(split_part(np.contractor_name, ' (', 1)) OR lower(split_part(c.canonical_name, ' (', 1)) = lower(np.contractor_name) OR lower(c.canonical_name) LIKE lower(np.contractor_name) || ' %' WHERE np.parcel_id = s.parcel_id AND np.contractor_name IS NOT NULL AND lower(np.contractor_name) NOT LIKE '%owner%' AND lower(np.contractor_name) NOT LIKE '%not listed%' AND lower(np.contractor_name) NOT LIKE '%unknown%' AND lower(np.contractor_name) NOT LIKE '%licensed%' ORDER BY np.issue_date DESC NULLS LAST LIMIT 1) AS last_contractor_logo,
            (SELECT COUNT(*) FROM warehouse.normalized_permits np WHERE np.parcel_id = s.parcel_id) AS permit_count
          FROM top_leads s
          LEFT JOIN warehouse.parcels p ON p.id = s.parcel_id
@@ -504,7 +507,8 @@ export async function roofAging(q: Q, user?: { id?: string; orgId?: string; plat
             roof_age_years: a,
             warranty_status: status,
             risk_level: risk,
-            historical_contractor: r.owner_name || "Commercial Building Owner",
+            historical_contractor: r.last_contractor || r.owner_name || "Commercial Building Owner",
+            contractor_logo_url: r.last_contractor_logo || (r.last_contractor ? null : r.logo_url) || null,
             historical_contractor_phone: r.phone_number || null,
             historical_valuation: repl,
             historical_valuation_formatted: fmt(repl),
@@ -913,12 +917,29 @@ export async function contractors(q: Q) {
                  order by p2.issue_date desc nulls last
                  limit 10
               ) p2) as recent_ids,
-              c.id as cid, c.website_url, c.hq_address, c.phone_number, c.year_founded::text as founded,
+              c.id as cid, c.website_url, c.logo_url, c.hq_address, c.phone_number, c.year_founded::text as founded,
               c.crew_capacity_estimate, c.manufacturer_certifications, c.leadership, c.m_and_a_profile,
               c.rcat_profile_url, c.rcat_license_number, c.rcat_license_type, c.rcat_member_since,
               c.bbb_profile_url, c.bbb_rating, c.bbb_accredited, c.linkedin_company_url
        from top_contractors tc
-       ${hasContact ? "inner" : "left"} join warehouse.canonical_contractors c on lower(c.canonical_name) = lower(tc.name)`,
+       left join lateral (
+         select c.*
+         from warehouse.canonical_contractors c
+         where lower(c.canonical_name) = lower(tc.name)
+            or lower(c.canonical_name) = lower(split_part(tc.name, ' (', 1))
+            or lower(split_part(c.canonical_name, ' (', 1)) = lower(tc.name)
+            or lower(c.canonical_name) like lower(tc.name) || ' %'
+            or lower(tc.name) like lower(c.canonical_name) || ' %'
+            or (lower(tc.name) = 'claudine cooper' and (lower(c.canonical_name) like '%empire roofing%' or lower(c.canonical_name) = 'claudine cooper'))
+         order by
+           case
+             when lower(c.canonical_name) = lower(tc.name) then 0
+             when lower(split_part(c.canonical_name, ' (', 1)) = lower(tc.name) then 1
+             else 2
+           end
+         limit 1
+       ) c on true
+       ${hasContact ? "where ((c.phone_number is not null and trim(c.phone_number) <> '') or (c.website_url is not null and trim(c.website_url) <> ''))" : ""}`,
       [...params, limit, offset],
     );
 
@@ -936,8 +957,10 @@ export async function contractors(q: Q) {
           permitCount: Number(r.permits || 0), totalValuationUSD: val,
           totalValuationFormatted: val >= 1e6 ? `$${(val / 1e6).toFixed(2)}M` : `$${Math.trunc(val).toLocaleString()}`,
           marketSharePct: totalVal > 0 ? (val / totalVal) * 100 : 0, primaryRoofSystem: r.roof_system || "",
-          jurisdiction: r.jurisdiction || "", aliases: [], recentPermitIds: (r.recent_ids || []).slice(0, 10),
-          websiteUrl: r.website_url || "", logoUrl: "", hqAddress: r.hq_address || "", phoneNumber: r.phone_number || "",
+          jurisdiction: r.jurisdiction || "",
+          aliases: r.name?.toLowerCase() === "claudine cooper" ? ["Empire Roofing, Inc.", "Empire Roofing"] : [],
+          recentPermitIds: (r.recent_ids || []).slice(0, 10),
+          websiteUrl: r.website_url || "", logoUrl: r.logo_url || "", hqAddress: r.hq_address || "", phoneNumber: r.phone_number || "",
           yearFounded: r.founded || "", crewCapacityEstimate: r.crew_capacity_estimate || "",
           manufacturerCertifications: parse(r.manufacturer_certifications) || [], leadership: parse(r.leadership) || [],
           mAndAProfile: parse(r.m_and_a_profile) || {}, rcatProfileUrl: r.rcat_profile_url || "",
@@ -1012,10 +1035,12 @@ export async function contractorProfile(q: Q) {
     marketSharePct: 0,
     primaryRoofSystem: pAgg?.roof_system || canonicalRow?.primary_roof_system || "",
     jurisdiction: pAgg?.jurisdiction || "Dallas, TX",
-    aliases: [],
+    aliases: (canonicalRow?.canonical_name?.toLowerCase() === "claudine cooper" || target.toLowerCase() === "claudine cooper")
+      ? ["Empire Roofing, Inc.", "Empire Roofing"]
+      : [],
     recentPermitIds: (pAgg?.recent_ids || []).slice(0, 10),
     websiteUrl: canonicalRow?.website_url || "",
-    logoUrl: "",
+    logoUrl: canonicalRow?.logo_url || "",
     hqAddress: canonicalRow?.hq_address || (canonicalRow?.headquarters_city ? `${canonicalRow.headquarters_city}, ${canonicalRow.headquarters_state || "TX"}` : ""),
     phoneNumber: canonicalRow?.phone_number || "",
     yearFounded: canonicalRow?.year_founded ? String(canonicalRow.year_founded) : (canonicalRow?.founded || ""),

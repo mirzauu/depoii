@@ -25,6 +25,7 @@ import { useEngine } from "@/components/use-engine";
 import { mapLeaderboard } from "@/lib/engine-api";
 import { num, pct, usd } from "@/lib/format";
 import { cn } from "@/lib/utils";
+import { RealLogo } from "@/components/real-logo";
 
 const LIMIT = 50;
 
@@ -129,9 +130,9 @@ export default function ContractorsBrowsePage() {
   const pageCount = Math.max(1, Math.ceil(total / LIMIT));
 
   return (
-    <div className="flex h-[calc(100dvh-53px)] max-h-[calc(100dvh-53px)] flex-col bg-background dark:bg-[#0b0c0e] text-foreground dark:text-neutral-100 antialiased font-sans overflow-hidden">
+    <div className="flex h-[calc(100dvh-53px)] max-h-[calc(100dvh-53px)] flex-col bg-[#171714] text-[#FAFAF8] antialiased font-sans overflow-hidden">
       {/* Top Header Row - Fixed */}
-      <div className="shrink-0 border-b border-border dark:border-neutral-800/80 bg-background dark:bg-[#0e0f12] px-5 py-3.5 z-20">
+      <div className="shrink-0 border-b border-[rgba(250,250,248,0.08)] bg-[#171714] px-5 py-3 z-20 shrink-0 text-[#FAFAF8]">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="space-y-0.5">
             <div className="flex items-center gap-3">
@@ -154,7 +155,7 @@ export default function ContractorsBrowsePage() {
       </div>
 
       {/* Action & Filter Sub-Bar - Fixed */}
-      <div className="shrink-0 flex flex-wrap items-center justify-between gap-3 border-b border-border dark:border-neutral-800/80 bg-neutral-50 dark:bg-[#111216] px-5 py-2.5 text-xs z-20">
+      <div className="shrink-0 flex flex-wrap items-center justify-between gap-3 border-b border-[rgba(250,250,248,0.08)] bg-[#171714] px-5 py-2.5 text-xs z-20 shrink-0 text-[#FAFAF8]">
         {/* Left Side: Toggle Sidebar & Search */}
         <div className="flex items-center gap-2.5">
           <button
@@ -229,10 +230,10 @@ export default function ContractorsBrowsePage() {
       <div className="flex flex-1 min-h-0 overflow-hidden relative">
         {/* Left Filter Sidebar */}
         {!hideFilters && (
-          <aside className="w-80 shrink-0 border-r border-border dark:border-neutral-800/80 bg-neutral-50/50 dark:bg-[#0e0f14] flex flex-col justify-between overflow-hidden">
+          <aside className="w-80 shrink-0 border-r border-[rgba(250,250,248,0.08)] bg-[#171714] text-[#B9B9B2] flex flex-col justify-between overflow-hidden">
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
               {/* Segmented Filter Pills */}
-              <div className="flex rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-[#121318] p-1 text-xs">
+              <div className="flex rounded-lg border border-[rgba(250,250,248,0.08)] bg-[#1F1F1B] p-1 text-xs">
                 <button
                   type="button"
                   onClick={() => {
@@ -284,7 +285,7 @@ export default function ContractorsBrowsePage() {
               {/* Accordion Filter Cards */}
               <div className="space-y-2 text-xs">
                 {/* 1. Jurisdiction */}
-                <div className="rounded-md border border-neutral-200 dark:border-neutral-800/80 bg-white dark:bg-[#121319] p-2.5">
+                <div className="rounded-lg border border-[rgba(250,250,248,0.04)] bg-[#1C1C18]/60 p-2.5">
                   <button
                     type="button"
                     onClick={() => toggleSection("jurisdiction")}
@@ -343,7 +344,7 @@ export default function ContractorsBrowsePage() {
                 </div>
 
                 {/* 2. Roof System */}
-                <div className="rounded-md border border-neutral-200 dark:border-neutral-800/80 bg-white dark:bg-[#121319] p-2.5">
+                <div className="rounded-lg border border-[rgba(250,250,248,0.04)] bg-[#1C1C18]/60 p-2.5">
                   <button
                     type="button"
                     onClick={() => toggleSection("roof")}
@@ -379,7 +380,7 @@ export default function ContractorsBrowsePage() {
                 </div>
 
                 {/* 3. Min Permits */}
-                <div className="rounded-md border border-neutral-200 dark:border-neutral-800/80 bg-white dark:bg-[#121319] p-2.5">
+                <div className="rounded-lg border border-[rgba(250,250,248,0.04)] bg-[#1C1C18]/60 p-2.5">
                   <button
                     type="button"
                     onClick={() => toggleSection("permits")}
@@ -426,7 +427,7 @@ export default function ContractorsBrowsePage() {
                 </div>
 
                 {/* 4. Min Valuation */}
-                <div className="rounded-md border border-neutral-200 dark:border-neutral-800/80 bg-white dark:bg-[#121319] p-2.5">
+                <div className="rounded-lg border border-[rgba(250,250,248,0.04)] bg-[#1C1C18]/60 p-2.5">
                   <button
                     type="button"
                     onClick={() => toggleSection("volume")}
@@ -473,7 +474,7 @@ export default function ContractorsBrowsePage() {
                 </div>
 
                 {/* 5. Contact Details */}
-                <div className="rounded-md border border-neutral-200 dark:border-neutral-800/80 bg-white dark:bg-[#121319] p-2.5">
+                <div className="rounded-lg border border-[rgba(250,250,248,0.04)] bg-[#1C1C18]/60 p-2.5">
                   <button
                     type="button"
                     onClick={() => toggleSection("contact")}
@@ -529,11 +530,11 @@ export default function ContractorsBrowsePage() {
             </div>
 
             {/* Bottom Actions */}
-            <div className="border-t border-border dark:border-neutral-800/80 p-3 bg-neutral-50 dark:bg-[#111216]">
+            <div className="border-t border-[rgba(250,250,248,0.08)] p-3 bg-[#171714]">
               <button
                 type="button"
                 onClick={clearAllFilters}
-                className="w-full rounded-md border border-neutral-300 dark:border-neutral-800 bg-white dark:bg-[#16171d] px-3 py-2 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer select-none"
+                className="w-full rounded-md border border-[rgba(250,250,248,0.12)] bg-[#1C1C18] px-3 py-2 text-xs font-medium text-[#FAFAF8] hover:bg-[#23231E] transition-colors cursor-pointer select-none"
               >
                 Clear All Filters
               </button>
@@ -542,50 +543,7 @@ export default function ContractorsBrowsePage() {
         )}
 
         {/* Right Table Container */}
-        <main className="min-w-0 flex-1 flex flex-col justify-between overflow-x-auto bg-background dark:bg-[#0a0b0d]">
-          {/* Calibration Notice Banner */}
-          <div className="border-b border-amber-500/30 bg-amber-500/10 px-4 py-2.5 dark:border-amber-500/20 dark:bg-amber-500/5 shrink-0">
-            <div className="flex items-start gap-2.5">
-              <div className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full bg-amber-500/20 text-amber-700 dark:text-[#FFCA88]">
-                <Info className="size-3" />
-              </div>
-              <div className="min-w-0 flex-1 space-y-0.5">
-                <div className="flex flex-wrap items-center gap-2">
-                  <p className="text-xs font-semibold text-amber-900 dark:text-[#FFCA88]">
-                    Contractor Data Updates Underway
-                  </p>
-                  <span className="inline-flex items-center rounded-full border border-amber-500/30 bg-amber-500/15 px-2 py-0.5 text-[10px] font-medium text-amber-800 dark:text-[#FFCA88]">
-                    100% Verified by Nov 5
-                  </span>
-                </div>
-                <p className="text-[11px] text-amber-900/80 dark:text-[#FFCA88]/80 leading-relaxed">
-                  We are currently validating and cross-referencing all contractor permit volumes and contact records across North Texas. For ranked market share, use{" "}
-                  <Link href="/competitors" className="underline hover:text-foreground font-medium">Leaderboard</Link>.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Executive KPI Summary Strip */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-px border-b border-border dark:border-neutral-800/80 bg-border/40 shrink-0 text-xs">
-            <div className="bg-background dark:bg-[#0e0f14] px-4 py-2.5">
-              <span className="text-[10px] uppercase font-semibold text-muted-foreground tracking-wider block">Contractors</span>
-              <span className="font-semibold text-foreground dark:text-white tabular-nums">{page.data ? num(total) : "…"}</span>
-            </div>
-            <div className="bg-background dark:bg-[#0e0f14] px-4 py-2.5">
-              <span className="text-[10px] uppercase font-semibold text-muted-foreground tracking-wider block">Permitted volume</span>
-              <span className="font-semibold text-foreground dark:text-white tabular-nums">{page.data ? usd(page.data.valuation, true) : "…"}</span>
-            </div>
-            <div className="bg-background dark:bg-[#0e0f14] px-4 py-2.5">
-              <span className="text-[10px] uppercase font-semibold text-muted-foreground tracking-wider block">Regional Scope</span>
-              <span className="font-semibold text-foreground dark:text-white truncate block">{place}</span>
-            </div>
-            <div className="bg-background dark:bg-[#0e0f14] px-4 py-2.5">
-              <span className="text-[10px] uppercase font-semibold text-muted-foreground tracking-wider block">Showing</span>
-              <span className="font-semibold text-foreground dark:text-white tabular-nums">{rows.length ? `${num(from)}–${num(to)}` : "—"}</span>
-            </div>
-          </div>
-
+        <main className="min-w-0 flex-1 flex flex-col justify-between overflow-x-auto bg-[#171714] text-[#FAFAF8]">
           {/* Table Scroll Area */}
           <div className="min-w-0 flex-1 overflow-auto relative">
             {page.loading && !page.data ? (
@@ -607,10 +565,10 @@ export default function ContractorsBrowsePage() {
                 </button>
               </div>
             ) : (
-              <table className="w-full text-left text-xs border-collapse">
-                <thead className="sticky top-0 z-20">
-                  <tr className="border-b border-border dark:border-neutral-800/80 bg-neutral-100 dark:bg-[#0e0f14] text-[11px] font-semibold tracking-wider text-neutral-600 dark:text-neutral-400">
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] w-10 px-3 py-3 text-center border-b border-border dark:border-neutral-800/80">
+              <table className="w-full min-w-max text-left text-xs border-collapse">
+                <thead className="sticky top-0 z-20 bg-[#171714]">
+                  <tr className="apollo-th h-[39px] border-b border-[rgba(250,250,248,0.08)] bg-[#171714] text-[11px] font-medium uppercase tracking-wider text-[#B9B9B2]">
+                    <th className="sticky top-0 z-20 bg-[#171714] border-b border-[rgba(250,250,248,0.08)] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider w-12 px-4 py-2.5 text-center">
                       <input
                         type="checkbox"
                         checked={allSelected}
@@ -620,19 +578,19 @@ export default function ContractorsBrowsePage() {
                         className="size-3.5 rounded border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-foreground dark:text-white focus:ring-0 cursor-pointer disabled:opacity-40"
                       />
                     </th>
-                    <th className="sticky left-0 top-0 z-30 bg-neutral-100 dark:bg-[#0e0f14] px-4 py-3 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap border-b border-border dark:border-neutral-800/80 shadow-[1px_1px_0_0_rgba(0,0,0,0.06)] dark:shadow-[1px_1px_0_0_rgba(255,255,255,0.06)]">
+                    <th className="sticky left-12 top-0 z-30 bg-[#171714] px-4 py-2.5 font-medium text-[#B9B9B2] whitespace-nowrap border-b border-[rgba(250,250,248,0.08)] uppercase text-[11px] tracking-wider min-w-[340px]">
                       Contractor
                     </th>
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-4 py-3 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap border-b border-border dark:border-neutral-800/80">
+                    <th className="sticky top-0 z-20 bg-[#171714] border-b border-[rgba(250,250,248,0.08)] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider px-4 py-2.5 whitespace-nowrap min-w-[260px]">
                       Roof System
                     </th>
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-4 py-3 font-semibold text-neutral-800 dark:text-neutral-300 text-right whitespace-nowrap border-b border-border dark:border-neutral-800/80">
+                    <th className="sticky top-0 z-20 bg-[#171714] border-b border-[rgba(250,250,248,0.08)] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider px-4 py-2.5 text-right whitespace-nowrap min-w-[130px]">
                       Permits
                     </th>
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-4 py-3 font-semibold text-neutral-800 dark:text-neutral-300 text-right whitespace-nowrap border-b border-border dark:border-neutral-800/80">
+                    <th className="sticky top-0 z-20 bg-[#171714] border-b border-[rgba(250,250,248,0.08)] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider px-4 py-2.5 text-right whitespace-nowrap min-w-[150px]">
                       Market Share
                     </th>
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-4 py-3 pr-4 font-semibold text-neutral-800 dark:text-neutral-300 text-right whitespace-nowrap border-b border-border dark:border-neutral-800/80">
+                    <th className="sticky top-0 z-20 bg-[#171714] border-b border-[rgba(250,250,248,0.08)] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider px-4 py-2.5 pr-4 text-right whitespace-nowrap min-w-[160px]">
                       Total Volume
                     </th>
                   </tr>
@@ -645,14 +603,14 @@ export default function ContractorsBrowsePage() {
                         key={c.id}
                         onClick={() => router.push(`/contractors/${encodeURIComponent(c.name)}`)}
                         className={cn(
-                          "group transition-colors duration-150 cursor-pointer",
+                          "apollo-row h-14 group transition-colors duration-150 cursor-pointer border-b border-[rgba(250,250,248,0.06)]",
                           isRowSelected
-                            ? "bg-[#F5EADB]/70 hover:bg-[#ECD5BC]/70 dark:bg-[#201C17] dark:hover:bg-[#2A241E]"
-                            : "bg-transparent hover:bg-[#FAF5EE] dark:hover:bg-[#1C1A17]"
+                            ? "bg-[rgba(242,247,100,0.08)] hover:bg-[rgba(242,247,100,0.12)] text-[#FAFAF8]"
+                            : "bg-[#171714] hover:bg-[rgb(35,35,30)] text-[#FAFAF8]"
                         )}
                       >
                         {/* Checkbox with active row indicator */}
-                        <td className="w-10 px-3 py-3 text-center transition-all group-hover:shadow-[inset_3px_0_0_0_#D99B26] dark:group-hover:shadow-[inset_3px_0_0_0_#E9B63B]">
+                        <td className="w-12 px-4 py-0 text-center sticky left-0 z-10 bg-[#171714] group-hover:bg-[rgb(35,35,30)]">
                           <input
                             type="checkbox"
                             checked={isRowSelected}
@@ -665,32 +623,45 @@ export default function ContractorsBrowsePage() {
                           />
                         </td>
                         <td className={cn(
-                          "sticky left-0 z-10 px-4 py-3 font-medium whitespace-nowrap shadow-[1px_0_0_0_rgba(0,0,0,0.06)] dark:shadow-[1px_0_0_0_rgba(255,255,255,0.06)] transition-all duration-150",
+                          "sticky left-12 z-10 px-4 py-2 h-14 align-middle text-[12px] font-medium whitespace-nowrap min-w-[340px] transition-colors duration-150",
                           isRowSelected
-                            ? "bg-[#F5EADB]/80 group-hover:bg-[#ECD5BC]/80 dark:bg-[#201C17] dark:group-hover:bg-[#2A241E]"
-                            : "bg-background dark:bg-[#0a0b0d] group-hover:bg-[#FAF5EE] dark:group-hover:bg-[#1C1A17]"
+                            ? "bg-[rgba(242,247,100,0.08)] group-hover:bg-[rgba(242,247,100,0.12)] text-[#FAFAF8]"
+                            : "bg-[#171714] group-hover:bg-[rgb(35,35,30)] text-[#FAFAF8]"
                         )}>
-                        <div className="flex items-center gap-2">
-                          <span className="font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-amber-800 dark:group-hover:text-amber-300 transition-colors">
-                            {c.name}
-                          </span>
+                        <div className="flex items-center gap-2.5">
+                          <RealLogo
+                            url={c.logoUrl}
+                            alt={c.name}
+                            size={28}
+                            className="rounded-md bg-white dark:bg-neutral-900 object-contain p-0.5 border border-neutral-200 dark:border-neutral-800 shadow-sm shrink-0"
+                            fallback={
+                              <span className="grid size-7 shrink-0 place-items-center rounded-md bg-neutral-100 dark:bg-neutral-800/80 text-[10px] font-bold text-neutral-600 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700/60 uppercase">
+                                {c.name.slice(0, 2)}
+                              </span>
+                            }
+                          />
+                          <div className="min-w-0">
+                            <span className="font-semibold text-[#FAFAF8] group-hover:text-amber-300 transition-colors block truncate">
+                              {c.name}
+                            </span>
+                            {(c.phone || c.hq) && (
+                              <p className="mt-0.5 max-w-sm truncate text-[11px] text-[#B9B9B2]">
+                                {[c.phone, c.hq].filter(Boolean).join(" · ")}
+                              </p>
+                            )}
+                          </div>
                         </div>
-                        {(c.phone || c.hq) && (
-                          <p className="mt-0.5 max-w-sm truncate text-[11px] text-muted-foreground">
-                            {[c.phone, c.hq].filter(Boolean).join(" · ")}
-                          </p>
-                        )}
                       </td>
-                      <td className="px-4 py-3 max-w-44 truncate text-xs text-muted-foreground whitespace-nowrap">
+                      <td className="px-4 py-2 h-14 align-middle text-[12px] min-w-[260px] whitespace-nowrap text-[#FAFAF8]">
                         {c.roofSystem || "—"}
                       </td>
-                      <td className="px-4 py-3 text-right font-mono tabular-nums whitespace-nowrap font-medium text-neutral-900 dark:text-white">
+                      <td className="px-4 py-2 h-14 align-middle text-[12px] min-w-[130px] text-right font-mono tabular-nums whitespace-nowrap font-medium text-[#FAFAF8]">
                         {num(c.permits)}
                       </td>
-                      <td className="px-4 py-3 text-right font-mono tabular-nums whitespace-nowrap text-muted-foreground">
+                      <td className="px-4 py-2 h-14 align-middle text-[12px] min-w-[150px] text-right font-mono tabular-nums whitespace-nowrap text-[#B9B9B2]">
                         {c.share > 0 ? pct(c.share, 1) : "—"}
                       </td>
-                      <td className="px-4 py-3 pr-4 text-right font-mono tabular-nums whitespace-nowrap font-semibold text-neutral-900 dark:text-white">
+                      <td className="px-4 py-2 h-14 align-middle text-[12px] min-w-[160px] pr-4 text-right font-mono tabular-nums whitespace-nowrap font-semibold text-[#FAFAF8]">
                         {c.valuationLabel || (c.valuation ? usd(c.valuation, true) : "—")}
                       </td>
                     </tr>
@@ -702,22 +673,22 @@ export default function ContractorsBrowsePage() {
           </div>
 
           {/* Bottom Fixed Pagination Bar */}
-          <div className="shrink-0 flex items-center justify-between border-t border-border dark:border-neutral-800/80 bg-neutral-50 dark:bg-[#0e0f14] px-5 py-3 text-xs text-muted-foreground dark:text-neutral-400 z-10">
+          <div className="shrink-0 flex items-center justify-between border-t border-[rgba(250,250,248,0.08)] bg-[#171714] px-5 py-3 text-xs text-[#B9B9B2] z-10">
             <div>
               <span>
-                Showing <strong className="text-foreground dark:text-white font-medium">{from}–{to}</strong> of <strong className="text-foreground dark:text-white font-medium">{num(total)}</strong> records
+                Showing <strong className="text-[#FAFAF8] font-medium">{from}–{to}</strong> of <strong className="text-[#FAFAF8] font-medium">{num(total)}</strong> records
               </span>
             </div>
 
             <div className="flex items-center gap-2">
-              <span className="text-muted-foreground dark:text-neutral-500 mr-2">
+              <span className="text-[#B9B9B2] mr-2">
                 Page {pageIndex + 1} of {pageCount}
               </span>
               <button
                 type="button"
                 disabled={offset === 0}
                 onClick={() => setOffset(Math.max(0, offset - LIMIT))}
-                className="rounded border border-neutral-300 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-2.5 py-1 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 disabled:opacity-40 cursor-pointer select-none"
+                className="rounded border border-[rgba(250,250,248,0.12)] bg-[#1C1C18] px-2.5 py-1 text-[#FAFAF8] hover:bg-[#23231E] disabled:opacity-30 cursor-pointer select-none transition-colors"
               >
                 Previous
               </button>
@@ -725,7 +696,7 @@ export default function ContractorsBrowsePage() {
                 type="button"
                 disabled={offset + LIMIT >= total}
                 onClick={() => setOffset(offset + LIMIT)}
-                className="rounded border border-neutral-300 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-2.5 py-1 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 disabled:opacity-40 cursor-pointer select-none"
+                className="rounded border border-[rgba(250,250,248,0.12)] bg-[#1C1C18] px-2.5 py-1 text-[#FAFAF8] hover:bg-[#23231E] disabled:opacity-30 cursor-pointer select-none transition-colors"
               >
                 Next
               </button>

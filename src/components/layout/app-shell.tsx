@@ -14,6 +14,7 @@ import { AccountMenu, ENGINE_PATHS, FLAT_NAV, Sidebar, isActive } from "./sideba
 import { useMe } from "@/hooks/use-me";
 import { ThemeToggle } from "./theme-toggle";
 import { WalkthroughProvider, HeaderTourButton } from "@/components/walkthrough";
+import { GlobalHeader } from "./global-header";
 
 const selectClass = "h-8 w-full min-w-0 rounded-md border border-border bg-background px-2 text-sm text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring";
 
@@ -284,50 +285,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   if (path === "/login" || path === "/welcome") return <main className="min-h-screen">{children}</main>;
   return (
     <WalkthroughProvider>
-      <div className="flex min-h-screen print:block">
+      <div className="flex min-h-screen bg-[#171714] text-[#FAFAF8] print:block">
         <Sidebar />
 
         <div className="flex min-w-0 flex-1 flex-col">
-          <header data-ui className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur print:hidden">
-            <div className="flex items-center gap-3 px-4 py-2.5 lg:px-6">
-              <Link href="/" className="flex items-center gap-2 lg:hidden" suppressHydrationWarning>
-                <DepoiiMark className="size-7 text-foreground" />
-                <span className="font-bold">Depoii</span>
-              </Link>
-              <CitySelect className="w-full max-w-xs" />
-              <div className="ml-auto flex items-center gap-3">
-                <HeaderTourButton />
-                <ThemeToggle />
-                <div className="lg:hidden">
-                  <AccountMenu />
-                </div>
-              </div>
-            </div>
-          <nav className="flex gap-1.5 overflow-x-auto px-4 pb-2 lg:hidden after:content-[''] after:w-4 after:shrink-0">
-            {mobileNav.map((link) => {
-              const fromParam = typeof window !== "undefined" ? new URLSearchParams(window.location.search).get("from") : null;
-              if (link.disabled) {
-                return (
-                  <span
-                    key={link.label}
-                    className="shrink-0 rounded-full border border-border/50 px-3 py-1 text-xs text-muted-foreground/60 cursor-not-allowed select-none"
-                  >
-                    {link.label}{link.badge ? ` (${link.badge})` : ""}
-                  </span>
-                );
-              }
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={cn("shrink-0 rounded-full border border-border px-3 py-1 text-xs text-muted-foreground", isActive(path, link, fromParam) && "border-foreground/30 bg-muted text-foreground")}
-                >
-                  {link.label}
-                </Link>
-              );
-            })}
-          </nav>
-        </header>
+          <GlobalHeader />
         <main className="flex-1">
           <ContractorIndex>
             <DataGate>{children}</DataGate>

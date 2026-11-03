@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Box } from "lucide-react";
+import { RotateCcw } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { RoofInspector3D } from "@/components/roof-inspector-3d";
 
@@ -25,17 +25,17 @@ export function Roof3DButton({ lat, lng, address, variant = "pill", className }:
       <button
         type="button"
         onClick={() => setOpen(true)}
-        title="Inspect Roof in Photorealistic 3D (Google 3D Tiles)"
+        title="Inspect latest high-resolution aerial imagery"
         className={cn(
           "inline-flex items-center gap-1 font-mono transition cursor-pointer select-none",
           variant === "pill"
-            ? "rounded border border-sky-500/30 bg-sky-500/10 px-1.5 py-0.5 text-[11px] font-medium text-sky-400 hover:bg-sky-500/20 hover:text-sky-300"
-            : "rounded-md border border-sky-500/30 bg-sky-500/10 px-2.5 py-1 text-xs font-medium text-sky-400 hover:bg-sky-500/20 hover:text-sky-300 shadow-xs",
+            ? "rounded border border-border/60 bg-neutral-100 hover:bg-neutral-200 dark:bg-[#171714] dark:hover:bg-[#20201c] px-1.5 py-0.5 text-[11px] text-muted-foreground hover:text-foreground"
+            : "rounded-md border border-border/60 bg-neutral-100 hover:bg-neutral-200 dark:bg-[#171714] dark:hover:bg-[#20201c] px-2.5 py-1 text-xs text-muted-foreground hover:text-foreground shadow-xs",
           className
         )}
       >
-        <Box className="size-3 shrink-0" />
-        <span>3D</span>
+        <RotateCcw className="size-3 shrink-0" />
+        <span>Latest</span>
       </button>
 
       {open && (

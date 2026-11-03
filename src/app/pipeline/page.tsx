@@ -80,7 +80,7 @@ function PipelineSkeletonRows() {
             </td>
 
             {/* 1. Address - Sticky Left Skeleton */}
-            <td className="sticky left-0 z-10 px-3 py-3 font-medium whitespace-nowrap shadow-[1px_0_0_0_rgba(0,0,0,0.06)] dark:shadow-[1px_0_0_0_rgba(255,255,255,0.06)] bg-background dark:bg-[#0a0b0d]">
+            <td className="sticky left-10 z-10 px-3 py-0 text-[12px] font-medium whitespace-nowrap bg-[#171714] group-hover:bg-[rgb(35,35,30)] text-[#FAFAF8]">
               <div className="flex items-center gap-2">
                 <div
                   style={{ animationDelay: delay }}
@@ -96,7 +96,7 @@ function PipelineSkeletonRows() {
             </td>
 
             {/* 2. Score Skeleton */}
-            <td className="px-3 py-3 whitespace-nowrap">
+            <td className="px-4 py-2 h-14 align-middle text-[12px] min-w-[90px] whitespace-nowrap text-center">
               <div
                 style={{ animationDelay: delay }}
                 className={`h-6 w-8 rounded-md ${row.scoreTone} animate-pulse`}
@@ -104,7 +104,7 @@ function PipelineSkeletonRows() {
             </td>
 
             {/* 3. Owner Skeleton */}
-            <td className="px-3 py-3 max-w-64 whitespace-nowrap">
+            <td className="px-4 py-2 h-14 align-middle text-[12px] min-w-[260px] whitespace-nowrap">
               <div className="flex items-center gap-2">
                 <div
                   style={{ animationDelay: delay }}
@@ -124,7 +124,7 @@ function PipelineSkeletonRows() {
             </td>
 
             {/* 4. Contact / Decision maker Skeleton */}
-            <td className="px-3 py-3 max-w-60 whitespace-nowrap">
+            <td className="px-4 py-2 h-14 align-middle text-[12px] min-w-[280px] whitespace-nowrap">
               <div className="flex flex-col gap-1.5">
                 <div
                   style={{ animationDelay: delay }}
@@ -144,7 +144,7 @@ function PipelineSkeletonRows() {
             </td>
 
             {/* 5. Mailing address Skeleton */}
-            <td className="px-3 py-3 max-w-64 truncate whitespace-nowrap">
+            <td className="px-3 py-2 h-14 align-middle text-[12px] max-w-64 truncate whitespace-nowrap">
               <div
                 style={{ animationDelay: delay }}
                 className={`h-3.5 rounded bg-neutral-200/80 dark:bg-neutral-800/70 animate-pulse ${row.mailW}`}
@@ -152,7 +152,7 @@ function PipelineSkeletonRows() {
             </td>
 
             {/* 6. City Skeleton */}
-            <td className="px-3 py-3 whitespace-nowrap">
+            <td className="px-4 py-2 h-14 align-middle text-[12px] min-w-[90px] whitespace-nowrap text-center">
               <div
                 style={{ animationDelay: delay }}
                 className="h-3.5 w-14 rounded bg-neutral-200/80 dark:bg-neutral-800/70 animate-pulse"
@@ -160,7 +160,7 @@ function PipelineSkeletonRows() {
             </td>
 
             {/* 7. Sq ft Skeleton */}
-            <td className="px-3 py-3 text-right whitespace-nowrap">
+            <td className="px-3 py-2 h-14 align-middle text-[12px] text-right whitespace-nowrap">
               <div
                 style={{ animationDelay: delay }}
                 className={`h-3.5 rounded bg-neutral-200/80 dark:bg-neutral-800/70 ml-auto animate-pulse ${row.sqftW}`}
@@ -168,7 +168,7 @@ function PipelineSkeletonRows() {
             </td>
 
             {/* 8. Year built Skeleton */}
-            <td className="px-3 py-3 text-right whitespace-nowrap">
+            <td className="px-3 py-2 h-14 align-middle text-[12px] text-right whitespace-nowrap">
               <div
                 style={{ animationDelay: delay }}
                 className="h-3.5 w-10 rounded bg-neutral-200/80 dark:bg-neutral-800/70 ml-auto animate-pulse"
@@ -176,7 +176,7 @@ function PipelineSkeletonRows() {
             </td>
 
             {/* 9. Hail Skeleton */}
-            <td className="px-3 py-3 text-right whitespace-nowrap">
+            <td className="px-3 py-2 h-14 align-middle text-[12px] text-right whitespace-nowrap">
               <div
                 style={{ animationDelay: delay }}
                 className="h-3.5 w-10 rounded bg-neutral-200/80 dark:bg-neutral-800/70 ml-auto animate-pulse"
@@ -184,7 +184,7 @@ function PipelineSkeletonRows() {
             </td>
 
             {/* 10. Warning Tier Skeleton */}
-            <td className="px-3 py-3 whitespace-nowrap">
+            <td className="px-4 py-2 h-14 align-middle text-[12px] min-w-[90px] whitespace-nowrap text-center">
               <div
                 style={{ animationDelay: delay }}
                 className="h-4 w-14 rounded-full bg-neutral-200/80 dark:bg-neutral-800/70 animate-pulse"
@@ -192,7 +192,7 @@ function PipelineSkeletonRows() {
             </td>
 
             {/* 11. Permit Status Skeleton */}
-            <td className="px-3 py-3 whitespace-nowrap">
+            <td className="px-4 py-2 h-14 align-middle text-[12px] min-w-[90px] whitespace-nowrap text-center">
               <div
                 style={{ animationDelay: delay }}
                 className="h-5 w-20 rounded-full border border-neutral-300 dark:border-neutral-700/70 bg-neutral-200/70 dark:bg-neutral-800/70 animate-pulse"
@@ -200,7 +200,7 @@ function PipelineSkeletonRows() {
             </td>
 
             {/* 12. Est. Value Skeleton */}
-            <td className="px-3 py-3 text-right whitespace-nowrap">
+            <td className="px-3 py-2 h-14 align-middle text-[12px] text-right whitespace-nowrap">
               <div
                 style={{ animationDelay: delay }}
                 className={`h-3.5 rounded bg-neutral-200 dark:bg-neutral-800/90 ml-auto animate-pulse ${row.valW}`}
@@ -208,7 +208,7 @@ function PipelineSkeletonRows() {
             </td>
 
             {/* 13. Stage Skeleton */}
-            <td className="px-3 py-3 whitespace-nowrap">
+            <td className="px-4 py-2 h-14 align-middle text-[12px] min-w-[90px] whitespace-nowrap text-center">
               <div
                 style={{ animationDelay: delay }}
                 onClick={(e) => e.stopPropagation()} className="h-7 w-28 rounded-md border border-neutral-300 dark:border-neutral-800 bg-neutral-100 dark:bg-[#14151b] animate-pulse"
@@ -216,7 +216,7 @@ function PipelineSkeletonRows() {
             </td>
 
             {/* 14. Actions Skeleton */}
-            <td className="px-3 py-3 pr-4 text-right whitespace-nowrap">
+            <td className="px-3 py-2 h-14 align-middle text-[12px] pr-4 text-right whitespace-nowrap">
               <div className="inline-flex items-center gap-1.5 ml-auto">
                 <div
                   style={{ animationDelay: delay }}
@@ -525,9 +525,9 @@ export default function PipelinePage() {
   }
 
   return (
-    <div className="flex h-[calc(100dvh-53px)] max-h-[calc(100dvh-53px)] flex-col bg-background dark:bg-[#0b0c0e] text-foreground dark:text-neutral-100 antialiased font-sans overflow-hidden">
+    <div className="flex h-[calc(100dvh-53px)] max-h-[calc(100dvh-53px)] flex-col bg-[#171714] text-[#FAFAF8] antialiased font-sans overflow-hidden">
       {/* Top Header Row - Fixed */}
-      <div data-tour="pipeline-header" className="shrink-0 border-b border-border dark:border-neutral-800/80 bg-background dark:bg-[#0e0f12] px-5 py-3.5 z-20">
+      <div data-tour="pipeline-header" className="shrink-0 border-b border-[rgba(250,250,248,0.08)] bg-[#171714] px-5 py-3.5 z-20 text-[#FAFAF8]">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="space-y-0.5">
             <div className="flex items-center gap-3">
@@ -579,7 +579,7 @@ export default function PipelinePage() {
       )}
 
       {/* Action & Filter Sub-Bar - Fixed */}
-      <div className="shrink-0 flex flex-wrap items-center justify-between gap-3 border-b border-border dark:border-neutral-800/80 bg-neutral-50 dark:bg-[#111216] px-5 py-2.5 text-xs z-20">
+      <div className="shrink-0 flex flex-wrap items-center justify-between gap-3 border-b border-[rgba(250,250,248,0.08)] bg-[#171714] px-5 py-2.5 text-xs z-20 text-[#FAFAF8]">
         {/* Left Side: Toggle Sidebar & Search */}
         <div className="flex items-center gap-2.5">
           <button
@@ -648,10 +648,10 @@ export default function PipelinePage() {
       <div data-tour="pipeline-content" className="flex flex-1 min-h-0 overflow-hidden">
         {/* Left Filter Sidebar - Fixed */}
         {!hideFilters && (
-          <aside className="w-64 shrink-0 border-r border-border dark:border-neutral-800/80 bg-neutral-50/70 dark:bg-[#0d0e12] p-3 text-xs flex flex-col justify-between overflow-y-auto h-full z-10">
-            <div className="space-y-4">
+          <aside className="w-80 shrink-0 border-r border-[rgba(250,250,248,0.08)] bg-[#171714] text-[#B9B9B2] flex flex-col justify-between overflow-hidden">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4">
               {/* Segmented Count Tabs (Original Titles: All, Unresolved, Saved) */}
-              <div className="grid grid-cols-3 gap-1 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-200/50 dark:bg-[#13141a] p-1 text-center">
+              <div className="grid grid-cols-3 gap-1 rounded-lg border border-[rgba(250,250,248,0.08)] bg-[#1F1F1B] p-0.5 text-center">
                 <button
                   type="button"
                   onClick={() => {
@@ -707,7 +707,7 @@ export default function PipelinePage() {
               {/* Accordion Filter Items with Exact Original Headings */}
               <div className="space-y-2.5">
                 {/* 1. Jurisdiction */}
-                <div className="rounded-md border border-neutral-200 dark:border-neutral-800/80 bg-white dark:bg-[#121319] p-2.5">
+                <div className="rounded-lg border border-[rgba(250,250,248,0.04)] bg-[#1C1C18]/60 p-2.5">
                   <button
                     type="button"
                     onClick={() => toggleSection("jurisdiction")}
@@ -764,7 +764,7 @@ export default function PipelinePage() {
                 </div>
 
                 {/* 2. Square feet */}
-                <div className="rounded-md border border-neutral-200 dark:border-neutral-800/80 bg-white dark:bg-[#121319] p-2.5">
+                <div className="rounded-lg border border-[rgba(250,250,248,0.04)] bg-[#1C1C18]/60 p-2.5">
                   <button
                     type="button"
                     onClick={() => toggleSection("sqft")}
@@ -807,7 +807,7 @@ export default function PipelinePage() {
                 </div>
 
                 {/* 3. Score */}
-                <div className="rounded-md border border-neutral-200 dark:border-neutral-800/80 bg-white dark:bg-[#121319] p-2.5">
+                <div className="rounded-lg border border-[rgba(250,250,248,0.04)] bg-[#1C1C18]/60 p-2.5">
                   <button
                     type="button"
                     onClick={() => toggleSection("score")}
@@ -855,7 +855,7 @@ export default function PipelinePage() {
                 </div>
 
                 {/* 4. Owner */}
-                <div className="rounded-md border border-neutral-200 dark:border-neutral-800/80 bg-white dark:bg-[#121319] p-2.5">
+                <div className="rounded-lg border border-[rgba(250,250,248,0.04)] bg-[#1C1C18]/60 p-2.5">
                   <button
                     type="button"
                     onClick={() => toggleSection("owner")}
@@ -885,7 +885,7 @@ export default function PipelinePage() {
                 </div>
 
                 {/* 5. Stage */}
-                <div className="rounded-md border border-neutral-200 dark:border-neutral-800/80 bg-white dark:bg-[#121319] p-2.5">
+                <div className="rounded-lg border border-[rgba(250,250,248,0.04)] bg-[#1C1C18]/60 p-2.5">
                   <button
                     type="button"
                     onClick={() => toggleSection("stage")}
@@ -939,7 +939,7 @@ export default function PipelinePage() {
                 </div>
 
                 {/* 6. Assignee */}
-                <div className="rounded-md border border-neutral-200 dark:border-neutral-800/80 bg-white dark:bg-[#121319] p-2.5">
+                <div className="rounded-lg border border-[rgba(250,250,248,0.04)] bg-[#1C1C18]/60 p-2.5">
                   <button
                     type="button"
                     onClick={() => toggleSection("assignee")}
@@ -968,20 +968,20 @@ export default function PipelinePage() {
             </div>
 
             {/* Bottom Actions */}
-            <div className="pt-3 border-t border-border dark:border-neutral-800/80 flex items-center justify-between text-xs text-muted-foreground dark:text-neutral-400">
+            <div className="border-t border-[rgba(250,250,248,0.08)] p-3 bg-[#171714]">
               <button
                 type="button"
                 onClick={clearAllFilters}
-                className="hover:text-foreground dark:hover:text-white underline decoration-neutral-300 dark:decoration-neutral-600 transition-colors"
+                className="w-full rounded-md border border-[rgba(250,250,248,0.12)] bg-[#1C1C18] px-3 py-2 text-xs font-medium text-[#FAFAF8] hover:bg-[#23231E] transition-colors cursor-pointer select-none"
               >
-                Reset filters {activeFiltersCount > 0 ? `(${activeFiltersCount})` : ""}
+                Clear All Filters
               </button>
             </div>
           </aside>
         )}
 
         {/* Right Table Container with EXACT Original Column Titles */}
-        <main className="min-w-0 flex-1 flex flex-col justify-between overflow-x-auto bg-background dark:bg-[#0a0b0d]">
+        <main className="min-w-0 flex-1 flex flex-col justify-between overflow-x-auto bg-[#171714] text-[#FAFAF8]">
           {/* Territory Alert */}
           {brief.data?.noActiveTerritory && (
             <div className="m-3 rounded-lg border border-amber-500/40 dark:border-[#FFCA88]/30 bg-amber-500/10 dark:bg-[#FFCA88]/10 p-3 text-xs flex items-center justify-between">
@@ -1017,11 +1017,11 @@ export default function PipelinePage() {
                 </button>
               </div>
             ) : (
-              <table className="w-full text-left text-xs border-collapse">
-                <thead className="sticky top-0 z-20">
+              <table className="w-full min-w-max text-left text-xs border-collapse">
+                <thead className="sticky top-0 z-20 bg-[#171714]">
                   {/* EXACT ORIGINAL COLUMN HEADERS - Sticky Top */}
-                  <tr className="border-b border-border dark:border-neutral-800/80 bg-neutral-100 dark:bg-[#0e0f14] text-[11px] font-semibold tracking-wider text-neutral-600 dark:text-neutral-400">
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] w-10 px-3 py-3 text-center border-b border-border dark:border-neutral-800/80">
+                  <tr className="apollo-th h-[39px] border-b border-[rgba(250,250,248,0.08)] bg-[#171714] text-[11px] font-medium uppercase tracking-wider text-[#B9B9B2]">
+                    <th className="sticky top-0 z-20 bg-[#171714] border-b border-[rgba(250,250,248,0.08)] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider w-12 px-4 py-2.5 text-center">
                       <input
                         type="checkbox"
                         checked={allSelected}
@@ -1030,8 +1030,8 @@ export default function PipelinePage() {
                         className="size-3.5 rounded border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-sky-500 focus:ring-0 cursor-pointer disabled:opacity-40"
                       />
                     </th>
-                    <th className="sticky left-0 top-0 z-30 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap border-b border-border dark:border-neutral-800/80 shadow-[1px_1px_0_0_rgba(0,0,0,0.06)] dark:shadow-[1px_1px_0_0_rgba(255,255,255,0.06)]">Address</th>
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap border-b border-border dark:border-neutral-800/80">
+                    <th className="sticky left-12 top-0 z-30 bg-[#171714] px-4 py-2.5 font-medium text-[#B9B9B2] whitespace-nowrap border-b border-[rgba(250,250,248,0.08)] uppercase text-[11px] tracking-wider min-w-[280px]">Address</th>
+                    <th className="sticky top-0 z-20 bg-[#171714] border-b border-[rgba(250,250,248,0.08)] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider px-4 py-2.5 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap min-w-[90px] text-center">
                       <button
                         type="button"
                         onClick={() => { setSortBy(sortBy === "score" ? "sqft" : "score"); setPage(0); }}
@@ -1042,11 +1042,11 @@ export default function PipelinePage() {
                         {sortBy === "score" && <span className="text-[10px] text-amber-500">▼</span>}
                       </button>
                     </th>
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap border-b border-border dark:border-neutral-800/80">Owner</th>
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap border-b border-border dark:border-neutral-800/80">Contact / Decision maker</th>
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap border-b border-border dark:border-neutral-800/80">Mailing address</th>
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap border-b border-border dark:border-neutral-800/80">City</th>
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 text-right whitespace-nowrap border-b border-border dark:border-neutral-800/80">
+                    <th className="sticky top-0 z-20 bg-[#171714] border-b border-[rgba(250,250,248,0.08)] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider px-4 py-2.5 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap min-w-[260px]">Owner</th>
+                    <th className="sticky top-0 z-20 bg-[#171714] border-b border-[rgba(250,250,248,0.08)] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider px-4 py-2.5 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap min-w-[280px]">Contact / Decision maker</th>
+                    <th className="sticky top-0 z-20 bg-[#171714] border-b border-[rgba(250,250,248,0.08)] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider px-4 py-2.5 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap min-w-[240px]">Mailing address</th>
+                    <th className="sticky top-0 z-20 bg-[#171714] border-b border-[rgba(250,250,248,0.08)] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider px-4 py-2.5 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap min-w-[130px]">City</th>
+                    <th className="sticky top-0 z-20 bg-[#171714] border-b border-[rgba(250,250,248,0.08)] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider px-4 py-2.5 font-semibold text-neutral-800 dark:text-neutral-300 text-right whitespace-nowrap min-w-[120px]">
                       <button
                         type="button"
                         onClick={() => { setSortBy(sortBy === "sqft" ? "score" : "sqft"); setPage(0); }}
@@ -1057,11 +1057,11 @@ export default function PipelinePage() {
                         {sortBy === "sqft" && <span className="text-[10px] text-amber-500">▼</span>}
                       </button>
                     </th>
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 text-right whitespace-nowrap border-b border-border dark:border-neutral-800/80">Year built</th>
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 text-right whitespace-nowrap border-b border-border dark:border-neutral-800/80">Hail</th>
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap border-b border-border dark:border-neutral-800/80">Warning</th>
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap border-b border-border dark:border-neutral-800/80">Permit</th>
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 text-right whitespace-nowrap border-b border-border dark:border-neutral-800/80">
+                    <th className="sticky top-0 z-20 bg-[#171714] border-b border-[rgba(250,250,248,0.08)] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider px-4 py-2.5 font-semibold text-neutral-800 dark:text-neutral-300 text-right whitespace-nowrap min-w-[110px]">Year built</th>
+                    <th className="sticky top-0 z-20 bg-[#171714] border-b border-[rgba(250,250,248,0.08)] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider px-4 py-2.5 font-semibold text-neutral-800 dark:text-neutral-300 text-right whitespace-nowrap min-w-[100px]">Hail</th>
+                    <th className="sticky top-0 z-20 bg-[#171714] border-b border-[rgba(250,250,248,0.08)] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider px-4 py-2.5 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap min-w-[120px]">Warning</th>
+                    <th className="sticky top-0 z-20 bg-[#171714] border-b border-[rgba(250,250,248,0.08)] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider px-4 py-2.5 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap min-w-[130px]">Permit</th>
+                    <th className="sticky top-0 z-20 bg-[#171714] border-b border-[rgba(250,250,248,0.08)] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider px-4 py-2.5 font-semibold text-neutral-800 dark:text-neutral-300 text-right whitespace-nowrap min-w-[140px]">
                       <button
                         type="button"
                         onClick={() => { setSortBy(sortBy === "value" ? "sqft" : "value"); setPage(0); }}
@@ -1072,8 +1072,8 @@ export default function PipelinePage() {
                         {sortBy === "value" && <span className="text-[10px] text-amber-500">▼</span>}
                       </button>
                     </th>
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap border-b border-border dark:border-neutral-800/80">Stage</th>
-                    <th className="sticky top-0 z-20 bg-neutral-100 dark:bg-[#0e0f14] px-3 py-3 pr-4 text-right whitespace-nowrap border-b border-border dark:border-neutral-800/80" />
+                    <th className="sticky top-0 z-20 bg-[#171714] border-b border-[rgba(250,250,248,0.08)] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider px-4 py-2.5 font-semibold text-neutral-800 dark:text-neutral-300 whitespace-nowrap min-w-[120px]">Stage</th>
+                    <th className="sticky top-0 z-20 bg-[#171714] border-b border-[rgba(250,250,248,0.08)] text-[#B9B9B2] uppercase text-[11px] font-medium tracking-wider px-4 py-2.5 pr-4 text-right whitespace-nowrap min-w-[160px]" />
                   </tr>
                 </thead>
 
@@ -1102,15 +1102,15 @@ export default function PipelinePage() {
                           }
                         }}
                         className={cn(
-                          "group transition-colors duration-150 cursor-pointer",
+                          "apollo-row h-14 group transition-colors duration-150 cursor-pointer border-b border-[rgba(250,250,248,0.06)]",
                           isSelected
-                            ? "bg-[#F5EADB]/70 hover:bg-[#ECD5BC]/70 dark:bg-[#201C17] dark:hover:bg-[#2A241E]"
-                            : "bg-transparent hover:bg-[#FAF5EE] dark:hover:bg-[#1C1A17]"
+                            ? "bg-[rgba(242,247,100,0.08)] hover:bg-[rgba(242,247,100,0.12)] text-[#FAFAF8]"
+                            : "bg-[#171714] hover:bg-[rgb(35,35,30)] text-[#FAFAF8]"
                         )}
                       >
                         {/* Checkbox with active row indicator */}
                         <td
-                          className="w-10 px-3 py-3 text-center transition-all group-hover:shadow-[inset_3px_0_0_0_#D99B26] dark:group-hover:shadow-[inset_3px_0_0_0_#E9B63B]"
+                          className="w-12 px-4 py-0 text-center sticky left-0 z-10 bg-[#171714] group-hover:bg-[rgb(35,35,30)]"
                           onClick={(e) => e.stopPropagation()}
                         >
                           <input
@@ -1123,10 +1123,10 @@ export default function PipelinePage() {
 
                         {/* 1. Address - Sticky Left */}
                         <td className={cn(
-                          "sticky left-0 z-10 px-3 py-3 font-medium whitespace-nowrap shadow-[1px_0_0_0_rgba(0,0,0,0.06)] dark:shadow-[1px_0_0_0_rgba(255,255,255,0.06)] transition-colors duration-150",
+                          "sticky left-12 z-10 px-4 py-2 h-14 align-middle text-[12px] font-medium whitespace-nowrap min-w-[280px] transition-colors duration-150",
                           isSelected
-                            ? "bg-[#F5EADB]/80 group-hover:bg-[#ECD5BC]/80 dark:bg-[#201C17] dark:group-hover:bg-[#2A241E]"
-                            : "bg-background dark:bg-[#0a0b0d] group-hover:bg-[#FAF5EE] dark:group-hover:bg-[#1C1A17]"
+                            ? "bg-[rgba(242,247,100,0.08)] group-hover:bg-[rgba(242,247,100,0.12)] text-[#FAFAF8]"
+                            : "bg-[#171714] group-hover:bg-[rgb(35,35,30)] text-[#FAFAF8]"
                         )}>
                           <div className="flex items-center gap-2">
                             <button
@@ -1152,12 +1152,12 @@ export default function PipelinePage() {
                         </td>
 
                         {/* 2. Score */}
-                        <td className="px-3 py-3 whitespace-nowrap">
+                        <td className="px-4 py-2 h-14 align-middle text-[12px] min-w-[90px] whitespace-nowrap text-center">
                           <ScorePill score={o.score} />
                         </td>
 
                         {/* 3. Owner */}
-                        <td className="px-3 py-3 max-w-64 whitespace-nowrap">
+                        <td className="px-4 py-2 h-14 align-middle text-[12px] min-w-[260px] whitespace-nowrap">
                           <div className="flex items-center gap-2">
                             {o.logoUrl ? (
                               <RealLogo url={o.logoUrl} alt={o.organizationName || o.owner} size={20} />
@@ -1185,7 +1185,7 @@ export default function PipelinePage() {
                         </td>
 
                         {/* 4. Contact / Decision maker */}
-                        <td className="px-3 py-3 max-w-60 whitespace-nowrap">
+                        <td className="px-4 py-2 h-14 align-middle text-[12px] min-w-[280px] whitespace-nowrap">
                           {o.decisionMaker || o.phone || o.email ? (
                             <div className="flex flex-col text-xs leading-tight gap-1">
                               <span className="font-medium text-neutral-900 dark:text-neutral-200 group-hover:text-neutral-950 dark:group-hover:text-white transition-colors truncate">
@@ -1239,37 +1239,37 @@ export default function PipelinePage() {
                         </td>
 
                         {/* 5. Mailing address */}
-                        <td className="px-3 py-3 max-w-64 truncate whitespace-nowrap text-muted-foreground dark:text-neutral-400" title={o.ownerMail || "No mailing address"}>
+                        <td className="px-4 py-2 h-14 align-middle text-[12px] min-w-[240px] truncate whitespace-nowrap text-muted-foreground dark:text-neutral-400" title={o.ownerMail || "No mailing address"}>
                           {o.ownerMail || "—"}
                         </td>
 
                         {/* 6. City */}
-                        <td className="px-3 py-3 whitespace-nowrap text-neutral-700 dark:text-neutral-300">
+                        <td className="px-4 py-2 h-14 align-middle text-[12px] min-w-[130px] whitespace-nowrap text-neutral-700 dark:text-neutral-300">
                           {o.city}
                         </td>
 
                         {/* 7. Sq ft */}
-                        <td className="px-3 py-3 text-right font-mono tabular-nums whitespace-nowrap text-neutral-700 dark:text-neutral-300">
+                        <td className="px-3 py-2 h-14 align-middle text-[12px] text-right font-mono tabular-nums whitespace-nowrap text-neutral-700 dark:text-neutral-300">
                           {o.sqft ? num(o.sqft) : "—"}
                         </td>
 
                         {/* 8. Year built */}
-                        <td className="px-3 py-3 text-right font-mono tabular-nums whitespace-nowrap text-neutral-700 dark:text-neutral-300">
+                        <td className="px-3 py-2 h-14 align-middle text-[12px] text-right font-mono tabular-nums whitespace-nowrap text-neutral-700 dark:text-neutral-300">
                           {o.yearBuilt || "—"}
                         </td>
 
                         {/* 9. Hail */}
-                        <td className="px-3 py-3 text-right font-mono tabular-nums whitespace-nowrap text-neutral-900 dark:text-neutral-200 font-medium">
+                        <td className="px-3 py-2 h-14 align-middle text-[12px] text-right font-mono tabular-nums whitespace-nowrap text-neutral-900 dark:text-neutral-200 font-medium">
                           {o.hail ? `${o.hail}"` : "—"}
                         </td>
 
                         {/* 10. Warning */}
-                        <td className="px-3 py-3 whitespace-nowrap capitalize text-neutral-700 dark:text-neutral-300">
+                        <td className="px-3 py-2 h-14 align-middle text-[12px] whitespace-nowrap capitalize text-neutral-700 dark:text-neutral-300">
                           {o.tier || "—"}
                         </td>
 
                         {/* 11. Permit */}
-                        <td className="px-3 py-3 whitespace-nowrap">
+                        <td className="px-4 py-2 h-14 align-middle text-[12px] min-w-[90px] whitespace-nowrap text-center">
                           {o.permitStatus === "NON_ROOF_PERMIT_DETECTED" ? (
                             <span className="inline-flex items-center gap-1 rounded-full border border-yellow-500/40 dark:border-[#FFF6A9]/30 bg-yellow-500/15 dark:bg-[#FFF6A9]/10 px-2 py-0.5 text-[11px] font-medium text-yellow-800 dark:text-[#FFF6A9]" title={o.recentActivity || "Active site with non-roof tenant improvements"}>
                               <span className="size-1.5 rounded-full bg-yellow-600 dark:bg-[#FFF6A9] shrink-0" />
@@ -1286,12 +1286,12 @@ export default function PipelinePage() {
                         </td>
 
                         {/* 12. Est. Value */}
-                        <td className="px-3 py-3 text-right font-mono tabular-nums whitespace-nowrap text-neutral-900 dark:text-neutral-100 font-medium">
+                        <td className="px-3 py-2 h-14 align-middle text-[12px] text-right font-mono tabular-nums whitespace-nowrap text-neutral-900 dark:text-neutral-100 font-medium">
                           {o.valueLow && o.valueHigh ? `${usd(o.valueLow, true)}–${usd(o.valueHigh, true)}` : usd(o.value, true)}{o.priceFlagged ? " *" : ""}
                         </td>
 
                         {/* 13. Stage */}
-                        <td className="px-3 py-3 whitespace-nowrap">
+                        <td className="px-4 py-2 h-14 align-middle text-[12px] min-w-[90px] whitespace-nowrap text-center">
                           <select
                             value={record?.stage || "New"}
                             onChange={(e) => saveLead(o, { stage: e.target.value })}
@@ -1304,7 +1304,7 @@ export default function PipelinePage() {
                         </td>
 
                         {/* 14. Actions */}
-                        <td className="px-3 py-3 pr-4 text-right whitespace-nowrap">
+                        <td className="px-3 py-2 h-14 align-middle text-[12px] pr-4 text-right whitespace-nowrap">
                           <div className="inline-flex items-center gap-1.5">
                             {claims.has(o.parcelId) ? (
                               <span className="inline-flex items-center gap-1 rounded border border-[#B4E4D6]/50 bg-[#B4E4D6]/20 px-1.5 py-0.5 text-[10px] font-medium text-emerald-800 dark:text-[#B4E4D6]" title={`Claimed (${claims.get(o.parcelId)?.daysRemaining}d left)`}>
@@ -1353,20 +1353,20 @@ export default function PipelinePage() {
           </div>
 
           {/* Bottom Pagination Bar - Fixed */}
-          <div className="shrink-0 flex items-center justify-between border-t border-border dark:border-neutral-800/80 bg-neutral-50 dark:bg-[#0e0f14] px-5 py-3 text-xs text-muted-foreground dark:text-neutral-400 z-10">
+          <div className="shrink-0 flex items-center justify-between border-t border-[rgba(250,250,248,0.08)] bg-[#171714] px-5 py-3 text-xs text-[#B9B9B2] z-10">
             <div>
               {isLoading ? (
-                <div className="flex items-center gap-2 text-foreground dark:text-neutral-200">
+                <div className="flex items-center gap-2 text-[#FAFAF8]">
                   <span className="size-2 rounded-full bg-[#B4E4D6] animate-ping" />
                   <span className="font-medium text-xs">Streaming {jurisdiction} commercial pipeline opportunities...</span>
                 </div>
               ) : (
                 <>
                   <span>
-                    {from}–{to} of {rows.length}
+                    Showing <strong className="text-[#FAFAF8] font-medium">{from}–{to}</strong> of <strong className="text-[#FAFAF8] font-medium">{rows.length}</strong>
                   </span>
                   {brief.data && brief.data.totalOpportunities > rows.length && (
-                    <span className="text-neutral-400 dark:text-neutral-500 ml-2">
+                    <span className="text-[#B9B9B2] ml-2">
                       · {num(brief.data.totalOpportunities)} in this storm
                     </span>
                   )}
@@ -1375,22 +1375,22 @@ export default function PipelinePage() {
             </div>
 
             <div className="flex items-center gap-2">
+              <span className="text-[#B9B9B2] mr-2">
+                Page {pageIndex + 1} of {pageCount}
+              </span>
               <button
                 type="button"
                 disabled={isLoading || pageIndex === 0}
                 onClick={() => setPage(pageIndex - 1)}
-                className="rounded border border-neutral-300 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-2.5 py-1 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 disabled:opacity-40"
+                className="rounded border border-[rgba(250,250,248,0.12)] bg-[#1C1C18] px-2.5 py-1 text-[#FAFAF8] hover:bg-[#23231E] disabled:opacity-30 cursor-pointer select-none transition-colors"
               >
                 Previous
               </button>
-              <span className="px-1 text-neutral-600 dark:text-neutral-400 font-medium">
-                {isLoading ? "..." : `${pageIndex + 1} / ${pageCount}`}
-              </span>
               <button
                 type="button"
                 disabled={isLoading || pageIndex >= pageCount - 1}
                 onClick={() => setPage(pageIndex + 1)}
-                className="rounded border border-neutral-300 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-2.5 py-1 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 disabled:opacity-40"
+                className="rounded border border-[rgba(250,250,248,0.12)] bg-[#1C1C18] px-2.5 py-1 text-[#FAFAF8] hover:bg-[#23231E] disabled:opacity-30 cursor-pointer select-none transition-colors"
               >
                 Next
               </button>
