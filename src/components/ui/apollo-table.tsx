@@ -105,7 +105,7 @@ export function ApolloTable({
         <div className="flex items-center gap-2 shrink-0">
           <button
             type="button"
-            className="h-7 px-3 rounded-md bg-[#F2F764] hover:bg-[#F6FA88] text-[#1C1C18] text-[12px] font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+            className="h-7 px-3 rounded-md bg-[#FAFAF8] hover:bg-neutral-200 text-[#1C1C18] text-[12px] font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
           >
             <Sparkles className="size-3 text-[#1C1C18]" />
             <span>Research with AI</span>
@@ -122,7 +122,7 @@ export function ApolloTable({
 
       {/* Bulk Action Toolbar (Apollo Floating Overlay Banner) */}
       {isAnySelected && (
-        <div className="h-10 px-4 bg-[#262621] border-b border-[#F2F764]/20 flex items-center justify-between text-xs animate-in slide-in-from-top-1 duration-150 shrink-0">
+        <div className="h-10 px-4 bg-[#262621] border-b border-white/20 flex items-center justify-between text-xs animate-in slide-in-from-top-1 duration-150 shrink-0">
           <div className="flex items-center gap-3">
             <span className="font-semibold text-[#FAFAF8]">
               {selectedIds.size} {selectedIds.size === 1 ? "record" : "records"} selected
@@ -131,7 +131,7 @@ export function ApolloTable({
             <button
               type="button"
               onClick={() => handleSelectAll(true)}
-              className="text-[#F2F764] hover:underline cursor-pointer"
+              className="text-[#FAFAF8] hover:underline cursor-pointer"
             >
               Select all {totalCount} records
             </button>
@@ -139,7 +139,7 @@ export function ApolloTable({
           <div className="flex items-center gap-2">
             <button
               type="button"
-              className="h-7 px-2.5 rounded-md bg-[#F2F764] text-[#1C1C18] font-semibold text-[11px] flex items-center gap-1 hover:bg-[#F6FA88] transition-colors cursor-pointer"
+              className="h-7 px-2.5 rounded-md bg-[#FAFAF8] text-[#1C1C18] font-semibold text-[11px] flex items-center gap-1 hover:bg-neutral-200 transition-colors cursor-pointer"
             >
               <Check className="size-3" />
               Claim Selected
@@ -173,7 +173,7 @@ export function ApolloTable({
                   checked={isAllSelected}
                   onChange={(e) => handleSelectAll(e.target.checked)}
                   aria-label="Select all rows"
-                  className="size-3.5 rounded border-[rgba(250,250,248,0.2)] bg-[#1F1F1B] accent-[#F2F764] cursor-pointer"
+                  className="size-3.5 rounded border-[rgba(250,250,248,0.2)] bg-[#1F1F1B] accent-[#FAFAF8] cursor-pointer"
                 />
               </th>
 
@@ -212,7 +212,7 @@ export function ApolloTable({
                       type="checkbox"
                       checked={isSelected}
                       onChange={() => {}}
-                      className="size-3.5 rounded border-[rgba(250,250,248,0.2)] bg-[#1F1F1B] accent-[#F2F764] cursor-pointer"
+                      className="size-3.5 rounded border-[rgba(250,250,248,0.2)] bg-[#1F1F1B] accent-[#FAFAF8] cursor-pointer"
                     />
                   </td>
 
@@ -220,10 +220,10 @@ export function ApolloTable({
                   <td className="apollo-td sticky left-10 z-10 bg-[#171714] group-hover:bg-[rgb(35,35,30)]">
                     <div className="flex items-center gap-2">
                       <div className="size-6 shrink-0 rounded bg-[#262621] text-[#FAFAF8] flex items-center justify-center border border-white/10">
-                        <Building2 className="size-3.5 text-[#F2F764]" />
+                        <Building2 className="size-3.5 text-[#FAFAF8]" />
                       </div>
                       <div className="truncate">
-                        <span className="font-semibold text-[#FAFAF8] group-hover:text-[#F2F764] transition-colors">
+                        <span className="font-semibold text-[#FAFAF8] group-hover:text-[#FAFAF8] transition-colors">
                           {rec.address}
                         </span>
                         <span className="text-[11px] text-[#7D7D75] ml-1.5">
@@ -286,7 +286,7 @@ export function ApolloTable({
                         <button
                           type="button"
                           onClick={() => onClaim?.(rec.id)}
-                          className="h-6 px-2 rounded bg-[#F2F764] hover:bg-[#F6FA88] text-[#1C1C18] text-[11px] font-semibold transition-colors cursor-pointer"
+                          className="h-6 px-2 rounded bg-[#FAFAF8] hover:bg-neutral-200 text-[#1C1C18] text-[11px] font-semibold transition-colors cursor-pointer"
                         >
                           Claim
                         </button>

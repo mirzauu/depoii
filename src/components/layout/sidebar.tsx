@@ -179,7 +179,7 @@ export function AccountMenu({ collapsed = false }: { collapsed?: boolean }) {
               </div>
             </div>
             {me?.platformRole && (
-              <span className="inline-block mt-1 rounded bg-[#F2F764]/10 text-[#F2F764] text-[9px] font-semibold px-1.5 py-0.5 border border-[#F2F764]/20 uppercase tracking-wider">
+              <span className="inline-block mt-1 rounded bg-[#FAFAF8]/10 text-[#FAFAF8] text-[9px] font-semibold px-1.5 py-0.5 border border-white/20 uppercase tracking-wider">
                 {me.platformRole}
               </span>
             )}
@@ -307,7 +307,7 @@ export function Sidebar({ defaultCollapsed }: { defaultCollapsed?: boolean } = {
   
   // Apollo item row styling: 28px height (h-7), 13px font, subtle hover, left accent pill on active
   const rowBase = "group flex w-full items-center gap-2.5 h-7 px-2.5 overflow-hidden rounded-md text-[13px] font-medium whitespace-nowrap text-[#B9B9B2] hover:bg-white/[0.04] hover:text-[#FAFAF8] transition-colors relative";
-  const rowActive = "bg-white/[0.08] text-[#FAFAF8] font-medium shadow-xs before:absolute before:left-0 before:top-1.5 before:bottom-1.5 before:w-[2.5px] before:bg-[#F2F764] before:rounded-r";
+  const rowActive = "bg-white/[0.08] text-[#FAFAF8] font-medium shadow-xs before:absolute before:left-0 before:top-1.5 before:bottom-1.5 before:w-[2.5px] before:bg-[#FAFAF8] before:rounded-r";
 
   const renderGroup = (group: NavGroup) => {
     const Icon = group.icon;
@@ -339,7 +339,7 @@ export function Sidebar({ defaultCollapsed }: { defaultCollapsed?: boolean } = {
                   href={item.href}
                   className={cn(
                     "w-full h-7 px-2.5 rounded-md text-left text-[13px] font-medium whitespace-nowrap text-[#B9B9B2] hover:bg-white/[0.04] hover:text-[#FAFAF8] flex items-center justify-between transition-colors relative",
-                    isActive(path, item, fromParam) && "bg-white/[0.08] text-[#FAFAF8] font-medium shadow-xs before:absolute before:left-0 before:top-1.5 before:bottom-1.5 before:w-[2.5px] before:bg-[#F2F764] before:rounded-r",
+                    isActive(path, item, fromParam) && "bg-white/[0.08] text-[#FAFAF8] font-medium shadow-xs before:absolute before:left-0 before:top-1.5 before:bottom-1.5 before:w-[2.5px] before:bg-[#FAFAF8] before:rounded-r",
                   )}
                 >
                   <span className="truncate">{item.label}</span>
@@ -417,8 +417,10 @@ export function Sidebar({ defaultCollapsed }: { defaultCollapsed?: boolean } = {
         </button>
       )}
 
-      <nav data-tour="sidebar-nav" className="flex min-h-0 flex-1 flex-col gap-0.5 overflow-x-hidden overflow-y-auto px-2 py-2">
-        {visibleTop.map((link) => {
+      <nav data-tour="sidebar-nav" className="flex min-h-0 flex-1 flex-col overflow-x-hidden overflow-y-auto px-2 py-2 [scrollbar-width:thin] [scrollbar-color:#292925_transparent]">
+        {/* Top items (Overview, Leaderboard, AI Assistant) with increased spacing */}
+        <div className="flex flex-col gap-2.5">
+          {visibleTop.map((link) => {
           const Icon = link.icon;
           if (link.disabled) {
             return (
@@ -429,7 +431,7 @@ export function Sidebar({ defaultCollapsed }: { defaultCollapsed?: boolean } = {
                 className={cn(rowBase, "cursor-not-allowed select-none text-[#7D7D75] hover:bg-transparent hover:text-[#7D7D75] justify-between")}
               >
                 <div className="flex items-center gap-2.5 min-w-0">
-                  <Icon className="size-4 shrink-0 text-[#7D7D75]" />
+                  <Icon className={cn("size-4 shrink-0", link.label === "AI Assistant" ? "text-[#EE6983]" : "text-[#7D7D75]")} />
                   <span className={fade}>{link.label}</span>
                 </div>
                 {link.badge && (
@@ -447,6 +449,7 @@ export function Sidebar({ defaultCollapsed }: { defaultCollapsed?: boolean } = {
             </NavTo>
           );
         })}
+        </div>
 
         {visibleGroups.length > 0 && <div className="my-2 border-t border-[rgba(250,250,248,0.06)]" />}
 

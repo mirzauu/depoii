@@ -605,7 +605,7 @@ export default function ContractorsBrowsePage() {
                         className={cn(
                           "apollo-row h-14 group transition-colors duration-150 cursor-pointer border-b border-[rgba(250,250,248,0.06)]",
                           isRowSelected
-                            ? "bg-[rgba(242,247,100,0.08)] hover:bg-[rgba(242,247,100,0.12)] text-[#FAFAF8]"
+                            ? "bg-[rgba(255,255,255,0.06)] hover:bg-[rgba(255,255,255,0.10)] text-[#FAFAF8]"
                             : "bg-[#171714] hover:bg-[rgb(35,35,30)] text-[#FAFAF8]"
                         )}
                       >
@@ -625,7 +625,7 @@ export default function ContractorsBrowsePage() {
                         <td className={cn(
                           "sticky left-12 z-10 px-4 py-2 h-14 align-middle text-[12px] font-medium whitespace-nowrap min-w-[340px] transition-colors duration-150",
                           isRowSelected
-                            ? "bg-[rgba(242,247,100,0.08)] group-hover:bg-[rgba(242,247,100,0.12)] text-[#FAFAF8]"
+                            ? "bg-[rgba(255,255,255,0.06)] group-hover:bg-[rgba(255,255,255,0.10)] text-[#FAFAF8]"
                             : "bg-[#171714] group-hover:bg-[rgb(35,35,30)] text-[#FAFAF8]"
                         )}>
                         <div className="flex items-center gap-2.5">

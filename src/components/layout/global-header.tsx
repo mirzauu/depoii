@@ -111,7 +111,7 @@ export function GlobalHeader() {
                 className="w-full px-2.5 py-2 rounded-lg flex items-center justify-between text-left text-xs text-[#B9B9B2] hover:bg-white/[0.06] hover:text-[#FAFAF8] transition-colors cursor-pointer"
               >
                 <div className="flex items-center gap-2">
-                  <Building2 className="size-3.5 text-[#F2F764]" />
+                  <Building2 className="size-3.5 text-[#FAFAF8]" />
                   <span>Commercial Buildings Opportunity Search</span>
                 </div>
                 <span className="text-[10px] text-[#7D7D75]">/buildings</span>

@@ -1104,7 +1104,7 @@ export default function PipelinePage() {
                         className={cn(
                           "apollo-row h-14 group transition-colors duration-150 cursor-pointer border-b border-[rgba(250,250,248,0.06)]",
                           isSelected
-                            ? "bg-[rgba(242,247,100,0.08)] hover:bg-[rgba(242,247,100,0.12)] text-[#FAFAF8]"
+                            ? "bg-[rgba(255,255,255,0.06)] hover:bg-[rgba(255,255,255,0.10)] text-[#FAFAF8]"
                             : "bg-[#171714] hover:bg-[rgb(35,35,30)] text-[#FAFAF8]"
                         )}
                       >
@@ -1125,7 +1125,7 @@ export default function PipelinePage() {
                         <td className={cn(
                           "sticky left-12 z-10 px-4 py-2 h-14 align-middle text-[12px] font-medium whitespace-nowrap min-w-[280px] transition-colors duration-150",
                           isSelected
-                            ? "bg-[rgba(242,247,100,0.08)] group-hover:bg-[rgba(242,247,100,0.12)] text-[#FAFAF8]"
+                            ? "bg-[rgba(255,255,255,0.06)] group-hover:bg-[rgba(255,255,255,0.10)] text-[#FAFAF8]"
                             : "bg-[#171714] group-hover:bg-[rgb(35,35,30)] text-[#FAFAF8]"
                         )}>
                           <div className="flex items-center gap-2">
@@ -1186,56 +1186,58 @@ export default function PipelinePage() {
 
                         {/* 4. Contact / Decision maker */}
                         <td className="px-4 py-2 h-14 align-middle text-[12px] min-w-[280px] whitespace-nowrap">
-                          {o.decisionMaker || o.phone || o.email ? (
-                            <div className="flex flex-col text-xs leading-tight gap-1">
+                          <div className="flex flex-col text-xs leading-tight gap-1.5">
+                            <div className="flex items-center gap-1.5">
                               <span className="font-medium text-neutral-900 dark:text-neutral-200 group-hover:text-neutral-950 dark:group-hover:text-white transition-colors truncate">
-                                {o.decisionMaker || "Decision Maker"}
+                                {o.decisionMaker || "Property Contact"}
                               </span>
-                              <div className="flex items-center gap-1.5">
-                                {o.phone ? (
-                                  isPhoneUnlocked ? (
-                                    <span className="font-mono text-[11px] text-emerald-700 dark:text-emerald-400 font-medium">{o.phone}</span>
-                                  ) : (
-                                    <button
-                                      type="button"
-                                      onClick={(e) => { e.stopPropagation(); unlockPhone(o.parcelId); }}
-                                      className="inline-flex items-center gap-1 rounded bg-neutral-100 dark:bg-[#16171d] border border-neutral-300 dark:border-neutral-700/80 px-1.5 py-0.5 text-[10px] text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white"
-                                    >
-                                      <Phone className="size-2.5" />
-                                      <span>Access phone</span>
-                                    </button>
-                                  )
-                                ) : null}
-
-                                {o.email ? (
-                                  isEmailUnlocked ? (
-                                    <span className="font-mono text-[11px] text-sky-700 dark:text-sky-400 font-medium">{o.email}</span>
-                                  ) : (
-                                    <button
-                                      type="button"
-                                      onClick={(e) => { e.stopPropagation(); unlockEmail(o.parcelId); }}
-                                      className="inline-flex items-center gap-1 rounded bg-neutral-100 dark:bg-[#16171d] border border-neutral-300 dark:border-neutral-700/80 px-1.5 py-0.5 text-[10px] text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white"
-                                    >
-                                      <Mail className="size-2.5" />
-                                      <span>Access email</span>
-                                    </button>
-                                  )
-                                ) : (
-                                  <a
-                                    href={`https://www.linkedin.com/search/results/all/?keywords=${encodeURIComponent([o.decisionMaker, o.owner, "Dallas TX"].filter(Boolean).join(" "))}`}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="text-[10px] text-sky-600 dark:text-sky-400 hover:underline inline-flex items-center gap-1 font-medium"
-                                  >
-                                    <span>Find on LinkedIn</span>
-                                    <ExternalLink className="size-2.5 opacity-70" />
-                                  </a>
-                                )}
-                              </div>
                             </div>
-                          ) : (
-                            <span className="text-xs text-neutral-400 dark:text-neutral-500">—</span>
-                          )}
+                            <div className="flex items-center gap-1.5 flex-wrap">
+                              {/* Phone Access / Display */}
+                              {isPhoneUnlocked ? (
+                                <a
+                                  href={`tel:${o.phone || ""}`}
+                                  onClick={(e) => e.stopPropagation()}
+                                  className="font-mono text-[11px] text-emerald-700 dark:text-emerald-400 font-medium hover:underline inline-flex items-center gap-1"
+                                  title="Click to call"
+                                >
+                                  <Phone className="size-2.5" />
+                                  <span>{o.phone || "Available on request"}</span>
+                                </a>
+                              ) : (
+                                <button
+                                  type="button"
+                                  onClick={(e) => { e.stopPropagation(); unlockPhone(o.parcelId); }}
+                                  className="inline-flex size-6 items-center justify-center rounded bg-neutral-100 dark:bg-[#16171d] border border-neutral-300 dark:border-neutral-700/80 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white transition-colors"
+                                  title="Access phone number"
+                                >
+                                  <Phone className="size-3" />
+                                </button>
+                              )}
+
+                              {/* Email Access / Display */}
+                              {isEmailUnlocked ? (
+                                <a
+                                  href={`mailto:${o.email || ""}`}
+                                  onClick={(e) => e.stopPropagation()}
+                                  className="font-mono text-[11px] text-sky-700 dark:text-sky-400 font-medium hover:underline inline-flex items-center gap-1"
+                                  title="Click to email"
+                                >
+                                  <Mail className="size-2.5" />
+                                  <span>{o.email || "Available on request"}</span>
+                                </a>
+                              ) : (
+                                <button
+                                  type="button"
+                                  onClick={(e) => { e.stopPropagation(); unlockEmail(o.parcelId); }}
+                                  className="inline-flex size-6 items-center justify-center rounded bg-neutral-100 dark:bg-[#16171d] border border-neutral-300 dark:border-neutral-700/80 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white transition-colors"
+                                  title="Access email address"
+                                >
+                                  <Mail className="size-3" />
+                                </button>
+                              )}
+                            </div>
+                          </div>
                         </td>
 
                         {/* 5. Mailing address */}

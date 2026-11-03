@@ -148,7 +148,7 @@ export function ApolloFilterDrawer({
             value={filterSearch}
             onChange={(e) => setFilterSearch(e.target.value)}
             placeholder="Search filters..."
-            className="w-full h-7 pl-8 pr-2.5 bg-[#1F1F1B] rounded-md border border-[rgba(250,250,248,0.08)] text-[12px] text-[#FAFAF8] placeholder-[#7D7D75] outline-none focus:border-[#F2F764]/40"
+            className="w-full h-7 pl-8 pr-2.5 bg-[#1F1F1B] rounded-md border border-[rgba(250,250,248,0.08)] text-[12px] text-[#FAFAF8] placeholder-[#7D7D75] outline-none focus:border-white/40"
           />
         </div>
       </div>
@@ -162,7 +162,7 @@ export function ApolloFilterDrawer({
           <button
             type="button"
             onClick={clearAllFilters}
-            className="text-[11px] text-[#F2F764] hover:underline cursor-pointer"
+            className="text-[11px] text-[#FAFAF8] hover:underline cursor-pointer"
           >
             Clear all
           </button>
@@ -179,10 +179,10 @@ export function ApolloFilterDrawer({
             className="w-full h-8 px-2.5 flex items-center justify-between text-[12px] font-semibold text-[#FAFAF8] hover:bg-white/[0.04] transition-colors cursor-pointer"
           >
             <div className="flex items-center gap-2">
-              <Clock className="size-3.5 text-[#F2F764]" />
+              <Clock className="size-3.5 text-[#FAFAF8]" />
               <span>Roof Age</span>
               {filters.roofAge.length > 0 && (
-                <span className="size-4 rounded-full bg-[#F2F764] text-[#1C1C18] font-bold text-[10px] flex items-center justify-center">
+                <span className="size-4 rounded-full bg-[#FAFAF8] text-[#1C1C18] font-bold text-[10px] flex items-center justify-center">
                   {filters.roofAge.length}
                 </span>
               )}
@@ -204,7 +204,7 @@ export function ApolloFilterDrawer({
                       type="checkbox"
                       checked={checked}
                       onChange={() => toggleFilterItem("roofAge", opt.value)}
-                      className="size-3.5 rounded border-[rgba(250,250,248,0.2)] bg-[#1F1F1B] accent-[#F2F764]"
+                      className="size-3.5 rounded border-[rgba(250,250,248,0.2)] bg-[#1F1F1B] accent-[#FAFAF8]"
                     />
                     <span className="truncate">{opt.label}</span>
                   </label>
@@ -225,7 +225,7 @@ export function ApolloFilterDrawer({
               <ShieldAlert className="size-3.5 text-amber-400" />
               <span>Storm Impact</span>
               {filters.stormImpact.length > 0 && (
-                <span className="size-4 rounded-full bg-[#F2F764] text-[#1C1C18] font-bold text-[10px] flex items-center justify-center">
+                <span className="size-4 rounded-full bg-[#FAFAF8] text-[#1C1C18] font-bold text-[10px] flex items-center justify-center">
                   {filters.stormImpact.length}
                 </span>
               )}
@@ -247,7 +247,7 @@ export function ApolloFilterDrawer({
                       type="checkbox"
                       checked={checked}
                       onChange={() => toggleFilterItem("stormImpact", opt.value)}
-                      className="size-3.5 rounded border-[rgba(250,250,248,0.2)] bg-[#1F1F1B] accent-[#F2F764]"
+                      className="size-3.5 rounded border-[rgba(250,250,248,0.2)] bg-[#1F1F1B] accent-[#FAFAF8]"
                     />
                     <span className="truncate">{opt.label}</span>
                   </label>
@@ -268,7 +268,7 @@ export function ApolloFilterDrawer({
               <Layers className="size-3.5 text-blue-400" />
               <span>Building Sq Ft</span>
               {filters.sqftRange.length > 0 && (
-                <span className="size-4 rounded-full bg-[#F2F764] text-[#1C1C18] font-bold text-[10px] flex items-center justify-center">
+                <span className="size-4 rounded-full bg-[#FAFAF8] text-[#1C1C18] font-bold text-[10px] flex items-center justify-center">
                   {filters.sqftRange.length}
                 </span>
               )}
@@ -290,7 +290,7 @@ export function ApolloFilterDrawer({
                       type="checkbox"
                       checked={checked}
                       onChange={() => toggleFilterItem("sqftRange", opt.value)}
-                      className="size-3.5 rounded border-[rgba(250,250,248,0.2)] bg-[#1F1F1B] accent-[#F2F764]"
+                      className="size-3.5 rounded border-[rgba(250,250,248,0.2)] bg-[#1F1F1B] accent-[#FAFAF8]"
                     />
                     <span className="truncate">{opt.label}</span>
                   </label>
@@ -326,7 +326,7 @@ export function ApolloFilterDrawer({
                       type="checkbox"
                       checked={checked}
                       onChange={() => toggleFilterItem("permitStatus", opt.value)}
-                      className="size-3.5 rounded border-[rgba(250,250,248,0.2)] bg-[#1F1F1B] accent-[#F2F764]"
+                      className="size-3.5 rounded border-[rgba(250,250,248,0.2)] bg-[#1F1F1B] accent-[#FAFAF8]"
                     />
                     <span className="truncate">{opt.label}</span>
                   </label>
@@ -364,7 +364,7 @@ export function ApolloFilterDrawer({
                       type="checkbox"
                       checked={checked}
                       onChange={() => toggleFilterItem("propertyType", opt.value)}
-                      className="size-3.5 rounded border-[rgba(250,250,248,0.2)] bg-[#1F1F1B] accent-[#F2F764]"
+                      className="size-3.5 rounded border-[rgba(250,250,248,0.2)] bg-[#1F1F1B] accent-[#FAFAF8]"
                     />
                     <span className="truncate">{opt.label}</span>
                   </label>

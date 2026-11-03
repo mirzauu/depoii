@@ -1416,7 +1416,7 @@ export default function RoofAgingPage() {
                           className={cn(
                             "apollo-row h-14 group border-b border-[rgba(250,250,248,0.06)] transition-colors cursor-pointer",
                             isSelected
-                              ? "bg-[rgba(242,247,100,0.08)] hover:bg-[rgba(242,247,100,0.12)] text-[#FAFAF8]"
+                              ? "bg-[rgba(255,255,255,0.06)] hover:bg-[rgba(255,255,255,0.10)] text-[#FAFAF8]"
                               : "bg-[#171714] hover:bg-[rgb(35,35,30)] text-[#FAFAF8]"
                           )}
                         >
@@ -1690,7 +1690,7 @@ export default function RoofAgingPage() {
                           className={cn(
                             "apollo-row h-14 group border-b border-[rgba(250,250,248,0.06)] transition-colors cursor-pointer",
                             isSelected
-                              ? "bg-[rgba(242,247,100,0.08)] hover:bg-[rgba(242,247,100,0.12)] text-[#FAFAF8]"
+                              ? "bg-[rgba(255,255,255,0.06)] hover:bg-[rgba(255,255,255,0.10)] text-[#FAFAF8]"
                               : "bg-[#171714] hover:bg-[rgb(35,35,30)] text-[#FAFAF8]"
                           )}
                         >
