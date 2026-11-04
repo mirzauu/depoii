@@ -23,7 +23,7 @@ export function computeLandingDesktopLayout(vw: number): LandingDesktopLayout {
 
   if (mockW > mockMax) {
     mockW = mockMax;
-    captionW = available - mockW - gap;
+    captionW = Math.min(captionMax, Math.max(captionMin, available - mockW - gap));
   }
   if (mockW < mockMin) {
     mockW = mockMin;

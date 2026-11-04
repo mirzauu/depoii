@@ -178,7 +178,7 @@ export function LandingHero() {
             </nav>
             <a
               href="#pilot"
-              className="inline-flex h-9 items-center rounded-full bg-[#c8f000] px-4 text-[13px] font-semibold text-neutral-900 transition hover:bg-[#d4ff2e]"
+              className="inline-flex h-9 items-center rounded-full bg-neutral-950 px-4 text-[13px] font-semibold text-white shadow-sm transition hover:bg-neutral-800"
             >
               Get started
             </a>
@@ -191,20 +191,23 @@ export function LandingHero() {
             <p className="text-sm font-medium tracking-wide text-neutral-700">
               For Dallas–Fort Worth commercial roofers
             </p>
-            <h1 className="mt-3 max-w-[18ch] text-[2.15rem] leading-[1.08] font-bold tracking-tight text-neutral-950 sm:text-[3.1rem] md:text-[3.4rem]">
-              Commercial Intelligence — know when, where, and why
+            <h1 className="mt-3 max-w-[24ch] text-[2.15rem] leading-[1.08] font-bold tracking-tight text-neutral-950 sm:text-[3.1rem] md:text-[3.4rem]">
+              Find every $250k+ commercial roof replacement before competitors spot the leak.
             </h1>
-            <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-neutral-700 sm:text-base">
-              Hail reports, county appraisal records, and city permit searches for DFW — each fact with
-              its source — so your crew checks the short list before you roll a truck.
-            </p>
+            
             <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
               <a
                 href="#pilot"
-                className="inline-flex h-11 items-center gap-1.5 rounded-full bg-[#c8f000] px-5 text-sm font-semibold text-neutral-900 transition hover:bg-[#d4ff2e]"
+                className="inline-flex h-11 items-center gap-2 rounded-full bg-neutral-950 px-6 text-sm font-semibold text-white shadow-sm transition hover:bg-neutral-800"
               >
-                Join the free pilot
+                Claim your territory
                 <span aria-hidden>→</span>
+              </a>
+              <a
+                href="#how"
+                className="inline-flex h-11 items-center gap-1.5 rounded-full border border-neutral-300 bg-white/80 px-5 text-sm font-medium text-neutral-800 backdrop-blur-sm transition hover:bg-white hover:border-neutral-400"
+              >
+                How it works
               </a>
             </div>
             <p className="mt-8 text-xs font-medium tracking-wide text-neutral-600 uppercase lg:hidden">

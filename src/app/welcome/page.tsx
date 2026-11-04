@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { LandingPage } from "@/components/landing-page";
 
 export const metadata: Metadata = {
-  title: "Depoii | Commercial Intelligence — Know When, Where, and Why",
+  title: "Depoii | Find Every $250k+ Commercial Roof Replacement in DFW",
   description:
-    "Commercial roof intelligence for Dallas–Fort Worth roofing contractors and estimators. Hail swath reports, county appraisal parcels, and municipal permit searches.",
+    "Find high-value commercial roof replacements before competitors spot the leak. Cross-referencing satellite roof aging, Doppler hail swaths, and true building owner records for North Texas contractors.",
   keywords: [
     "commercial roofing leads",
     "commercial roof intelligence",

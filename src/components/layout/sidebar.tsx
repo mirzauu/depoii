@@ -431,7 +431,7 @@ export function Sidebar({ defaultCollapsed }: { defaultCollapsed?: boolean } = {
                 className={cn(rowBase, "cursor-not-allowed select-none text-[#7D7D75] hover:bg-transparent hover:text-[#7D7D75] justify-between")}
               >
                 <div className="flex items-center gap-2.5 min-w-0">
-                  <Icon className={cn("size-4 shrink-0", link.label === "AI Assistant" ? "text-[#EE6983]" : "text-[#7D7D75]")} />
+                  <Icon className={cn("size-4 shrink-0", link.label === "AI Assistant" ? "text-[#FF9C6D]" : "text-[#7D7D75]")} />
                   <span className={fade}>{link.label}</span>
                 </div>
                 {link.badge && (

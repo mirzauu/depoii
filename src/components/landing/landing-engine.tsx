@@ -84,7 +84,7 @@ export function LandingEngine() {
         reduceMotion && "landing-engine-static",
       )}
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_35%,rgba(200,240,0,0.14),transparent_55%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_35%,rgba(255,156,109,0.12),transparent_55%)]" />
 
       {/* —— Desktop hub —— */}
       <div className="relative mx-auto hidden min-h-[90dvh] max-w-6xl px-4 py-12 lg:block lg:px-8">
@@ -96,15 +96,15 @@ export function LandingEngine() {
         >
           <defs>
             <linearGradient id="engine-path" x1="0" y1="1" x2="0" y2="0">
-              <stop offset="0%" stopColor="#84a000" stopOpacity="0.2" />
-              <stop offset="100%" stopColor="#84a000" stopOpacity="0.65" />
+              <stop offset="0%" stopColor="#FF9C6D" stopOpacity="0.2" />
+              <stop offset="100%" stopColor="#FF9C6D" stopOpacity="0.65" />
             </linearGradient>
           </defs>
 
           <path
             d={`M ${CX - 70} ${CY} C 360 200, 280 200, 220 210`}
             fill="none"
-            stroke="#84a000"
+            stroke="#FF9C6D"
             strokeWidth="1.5"
             strokeDasharray="6 6"
             opacity="0.45"
@@ -114,7 +114,7 @@ export function LandingEngine() {
           <path
             d={`M ${CX + 70} ${CY} C 640 200, 720 200, 780 210`}
             fill="none"
-            stroke="#84a000"
+            stroke="#FF9C6D"
             strokeWidth="1.5"
             strokeDasharray="6 6"
             opacity="0.45"
@@ -131,7 +131,7 @@ export function LandingEngine() {
                 opacity="0.75"
               />
               {run && (
-                <circle r="3.5" fill="#84a000" className="landing-engine-pulse-dot">
+                <circle r="3.5" fill="#FF9C6D" className="landing-engine-pulse-dot">
                   <animateMotion
                     dur="7s"
                     repeatCount="indefinite"
@@ -163,8 +163,8 @@ export function LandingEngine() {
         <div className="absolute top-[12%] left-1/2 z-10 flex w-56 -translate-x-1/2 flex-col items-center text-center">
           <DepoiiMark animated className="size-28 text-neutral-950" />
           <h3 className="mt-5 text-3xl font-bold tracking-tight text-neutral-950">Depoii</h3>
-          <p className="mt-1 text-[11px] font-semibold tracking-[0.22em] text-sky-800 uppercase">
-            AI Engine
+          <p className="mt-1 text-[11px] font-semibold tracking-[0.22em] text-[#FF9C6D] uppercase">
+            Commercial Intelligence Engine
           </p>
         </div>
 
@@ -209,7 +209,7 @@ export function LandingEngine() {
 
 function ActionBrief() {
   return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-[0_16px_40px_-20px_rgba(15,23,42,0.25)] ring-1 ring-[#c8f000]/25">
+    <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-[0_16px_40px_-20px_rgba(15,23,42,0.25)] ring-1 ring-neutral-200">
       <p className="px-3 pt-3 text-[10px] font-semibold tracking-[0.18em] text-sky-800 uppercase">
         Do this next
       </p>
@@ -227,7 +227,7 @@ function ActionBrief() {
           </div>
         </li>
         <li className="flex gap-3 px-3 py-3">
-          <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-lg bg-[#c8f000]/25 text-neutral-900">
+          <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-700">
             <Users className="size-4" />
           </span>
           <div className="min-w-0">
@@ -285,7 +285,7 @@ function SourceModule({
 
 function LeadCard() {
   return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-[0_16px_40px_-20px_rgba(15,23,42,0.25)] ring-1 ring-[#c8f000]/25">
+    <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-[0_16px_40px_-20px_rgba(15,23,42,0.25)] ring-1 ring-neutral-200">
       <p className="px-3 pt-3 text-[10px] font-semibold tracking-[0.18em] text-sky-800 uppercase">
         Top lead
       </p>

@@ -115,10 +115,9 @@ function PilotForm({ mode }: { mode: FormMode }) {
   return (
     <section id="pilot" className="scroll-mt-16 border-t border-border bg-muted/40">
       <div className="mx-auto max-w-lg px-6 py-14 sm:py-16">
-        <h2 className="text-2xl font-semibold tracking-tight">Join the free pilot</h2>
+        <h2 className="text-2xl font-semibold tracking-tight">Claim your territory — founding contractor cohort</h2>
         <p className="mt-2 text-base leading-relaxed text-muted-foreground">
-          Tell us your territory and the roof sizes you bid. Workspace signup stays invite-only until the list is short
-          enough to trust.
+          To protect lead quality and contractor margins, Depoii caps workspace access to a maximum of 2 commercial contractors per DFW territory. Submit your bidding area to check availability.
         </p>
         {sent ? (
           <p className="mt-6 text-base">Saved. We will reply to the email you entered.</p>
@@ -146,8 +145,8 @@ function PilotForm({ mode }: { mode: FormMode }) {
             <Field name="email" label="Email" type="email" />
             <Field name="territory" label="Territory" placeholder="Dallas, Fort Worth, both" />
             <Field name="sizeRange" label="Roof sizes you bid" placeholder="e.g. 50,000 sq ft and up" />
-            <Button type="submit" className="h-11 w-full bg-[#c8f000] text-neutral-900 hover:bg-[#d4ff2e] lg:w-auto">
-              Request a pilot
+            <Button type="submit" className="h-11 w-full bg-neutral-950 text-white shadow-sm hover:bg-neutral-800 font-semibold lg:w-auto px-6">
+              Check territory availability & request access →
             </Button>
             {error && <p className="text-sm text-red-700">{error}</p>}
           </form>

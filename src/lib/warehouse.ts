@@ -911,12 +911,6 @@ export async function contractors(q: Q) {
          limit $${params.length + 1} offset $${params.length + 2}
        )
        select tc.*,
-              (select array_agg(p2.id) from (
-                 select id from warehouse.normalized_permits p2
-                 where p2.contractor_name = tc.name
-                 order by p2.issue_date desc nulls last
-                 limit 10
-              ) p2) as recent_ids,
               c.id as cid, c.website_url, c.logo_url, c.hq_address, c.phone_number, c.year_founded::text as founded,
               c.crew_capacity_estimate, c.manufacturer_certifications, c.leadership, c.m_and_a_profile,
               c.rcat_profile_url, c.rcat_license_number, c.rcat_license_type, c.rcat_member_since,
@@ -927,15 +921,11 @@ export async function contractors(q: Q) {
          from warehouse.canonical_contractors c
          where lower(c.canonical_name) = lower(tc.name)
             or lower(c.canonical_name) = lower(split_part(tc.name, ' (', 1))
-            or lower(split_part(c.canonical_name, ' (', 1)) = lower(tc.name)
-            or lower(c.canonical_name) like lower(tc.name) || ' %'
-            or lower(tc.name) like lower(c.canonical_name) || ' %'
-            or (lower(tc.name) = 'claudine cooper' and (lower(c.canonical_name) like '%empire roofing%' or lower(c.canonical_name) = 'claudine cooper'))
+            or (lower(tc.name) = 'claudine cooper' and lower(c.canonical_name) = 'empire roofing')
          order by
            case
              when lower(c.canonical_name) = lower(tc.name) then 0
-             when lower(split_part(c.canonical_name, ' (', 1)) = lower(tc.name) then 1
-             else 2
+             else 1
            end
          limit 1
        ) c on true

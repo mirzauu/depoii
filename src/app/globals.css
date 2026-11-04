@@ -7,7 +7,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter), var(--font-geist-sans), sans-serif;
+  --font-sans: var(--font-plus-jakarta), var(--font-inter), sans-serif;
+  --font-heading: var(--font-plus-jakarta), sans-serif;
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
