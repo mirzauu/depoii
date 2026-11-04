@@ -8,6 +8,7 @@ import { DepoiiMark } from "@/components/depoii-logo";
 import { LandingEngine } from "@/components/landing-engine";
 import { LandingHero } from "@/components/landing-hero";
 import { LandingTour } from "@/components/landing-tour";
+import { LandingLeadModal } from "./landing-modal";
 
 const FOOTER_NAV = [
   { label: "Product", href: "#tour-1" },
@@ -31,6 +32,8 @@ export function LandingPage({ formMode = "api" }: { formMode?: FormMode }) {
           <PilotForm mode={formMode} />
         </div>
       </main>
+
+      <LandingLeadModal formMode={formMode} />
 
       <footer className="relative z-50 border-t border-border bg-background">
         <div className="mx-auto flex max-w-5xl flex-col gap-8 px-6 py-12 sm:flex-row sm:items-start sm:justify-between sm:gap-10">
